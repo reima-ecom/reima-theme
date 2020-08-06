@@ -1,11 +1,3 @@
-.sidebar > * > * > :first-child {
-  margin-top: 0;
-}
-
-.sidebar > * > * > :last-child {
-  margin-bottom: 0;
-}
-
 @media (min-width: 992px) {
   .sidebar {
     display: grid;
@@ -16,33 +8,31 @@
     padding: var(--block-padding);
     margin: var(--block-margin);
     max-width: var(--block-width);
+    --inner-spacing: 1.5rem;
   }
   
   hr {
-    margin-left: 1.5rem;
+    margin-left: var(--inner-spacing);
   }
   
-  .sidebar > * {
-    --block-padding: 0 0 0 1.5rem;
-    --block-margin: 1.5rem auto;
-  }
-
   .sidebar__banner {
     grid-area: banner;
   }
-
+  
   .sidebar__sidebar {
+    --block-padding: 0 var(--inner-spacing) 0 0;
     grid-area: sidebar;
   }
-
+  
   .sidebar__main {
+    --block-padding: 0 0 0 var(--inner-spacing);
     grid-area: content;
   }
+}
 
-  .sidebar .category-list {
-    border: none;
-    margin: 0;
-  }
+.category-list {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
 }
 
 /* normalize ul */
@@ -107,11 +97,6 @@
 
 .categories + ul li li {
   font-weight: 400;
-}
-
-/* purposes: add margin to put border in the middle of whitespace */
-.purposes {
-  margin-top: 1.5rem;
 }
 
 @media (min-width: 992px) {

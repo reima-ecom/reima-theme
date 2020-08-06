@@ -1,3 +1,9 @@
+.module-image-links {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+  max-width: var(--block-width);
+}
+
 .module-image-links > div {
   display: grid;
   gap: 1rem;

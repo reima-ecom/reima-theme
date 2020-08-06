@@ -36,13 +36,13 @@
     {{ end }}
   </div>
   <div class="sidebar__sidebar">
-    <div class="border-top border-bottom category-list">
+    <div class="category-list">
       <input type="checkbox" id="categories-opener">
       <label for="categories-opener" class="categories">
-        <h2 class="h6">Shop by category <span></span></h2>
+        <h2>Shop by category <span></span></h2>
       </label>
       {{ template "categories" .Params.categories }}
-      <h2 class="h6 border-top purposes">Shop by purpose</h2>
+      <h2>Shop by purpose</h2>
       {{ template "categories" .Params.purposes }}
     </div>
   </div>

@@ -1,6 +1,7 @@
 .module-content {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
   max-width: 720px;
-  margin: auto;
 }
 
 .module-content h2 {
