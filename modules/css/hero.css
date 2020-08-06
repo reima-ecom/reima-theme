@@ -1,53 +1,62 @@
-/* make image edge-to-edge */
-.module-hero {
+.hero {
+  color: var(--color-text);
+  max-width: var(--content-max-width);
   padding: 0;
 }
 
-.module-hero h1 {
-  font-size: 1.5rem;
-  letter-spacing: -.02rem;
-  margin-bottom: 0.5rem;
+.hero > div > div {
+  margin: var(--content-padding);
 }
 
-.module-hero p {
+.hero > div > div > :first-child {
   margin-top: 0;
 }
 
-@media (min-width: 992px) {
-  .module-hero {
+.hero p {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    --h1-font-size: var(--h0-font-size);
     position: relative;
+    padding: var(--block-padding);
+    margin: var(--block-margin);
+  }  
+  
+  .hero > div {
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: inherit;
   }
 
-  .module-hero img {
-    padding: 2rem 2rem 0;
-    max-width: 100%;
-    box-sizing: border-box;
+  
+  .hero--overlay-right > div {
+    justify-content: flex-end;
   }
   
-  .module-hero > div {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1.5rem;
-    text-align: center;
+  .hero--overlay-right > div > div,
+  .hero--overlay-left > div > div {
+    max-width: 50%;
   }
+  
+  .hero--overlay-small > div > div {
+    max-width: 33%;
+  }
+  
+  .hero--overlay-invert {
+    --color-text: white;
+    --color-bg: var(--color-fg);
+  }
+}
 
-  .module-hero h1 {
-    font-size: 3.5rem;
-  }
-
-  .module-hero .text-invert {
-    color: white;
-  }
-
-  .module-hero .text-invert a {
-    color: white;
-    border-color: white;
-  }
-
-  .module-hero .text-invert a:hover {
-    background-color: #fff;
-    color: #38383b;
-  }
+.hero--overlay-small {
+  --h1-font-size: var(--h4-font-size);
 }

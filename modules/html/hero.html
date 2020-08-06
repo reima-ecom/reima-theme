@@ -1,10 +1,20 @@
-<div class="module-hero">
+{{ $class := "hero" }}
+{{ with .overlayhorizontal }}
+{{ $class = printf "%s hero--overlay-%s" $class . }}
+{{ end }}
+{{ if .overlaysmall }}
+{{ $class = printf "%s hero--overlay-small" $class }}
+{{ end }}
+{{ if .overlayinvert }}
+{{ $class = printf "%s hero--overlay-invert" $class }}
+{{ end }}
+<div class="{{$class}}">
   {{- $mobile := partial "helpers/get-image" .imagemobile }}
   {{- with partial "helpers/get-image" .image }}
   {{- $params := (dict "image" . "widths" "1080,768") }}
   {{- $default := .Resize "1060x" -}}
   <picture>
-    <source media="(min-width: 992px)" srcset="{{partial "srcset" $params}}">
+    <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}">
     {{- if $mobile }}
     <source srcset="{{partial "srcset" (dict "image" $mobile "widths" "1080,768")}}">
     {{- else }}
@@ -23,7 +33,13 @@
     </noscript>
   </picture>
   {{- end }}
-  <div class="container {{with .textlinks}}{{.}}-links{{end}} {{if .colorinvert}}text-invert{{end}}">
-    {{ .text | markdownify }}
+  <div>
+    <div>
+      {{ with .heading }}<h1>{{.}}</h1>{{ end }}
+      {{ with .text }}<p>{{. | markdownify}}</p>{{ end }}
+      {{ if .link }}
+      <a href="{{.link}}" class="btn">{{.linktext}}</a>
+      {{ end }}
+    </div>
   </div>
 </div>

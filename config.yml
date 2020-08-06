@@ -17,6 +17,10 @@ module:
       target: assets
     - source: layouts-client/src
       target: static
+    - source: assets
+      target: assets
+    - source: assets
+      target: static
     # js entry points
     - source: layouts-client/public
       target: assets

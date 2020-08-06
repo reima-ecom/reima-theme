@@ -1,3 +1,50 @@
+.sidebar > * > * > :first-child {
+  margin-top: 0;
+}
+
+.sidebar > * > * > :last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    grid-template-areas:
+      "banner banner"
+      "sidebar content";
+    padding: var(--block-padding);
+    margin: var(--block-margin);
+    max-width: var(--block-width);
+  }
+  
+  hr {
+    margin-left: 1.5rem;
+  }
+  
+  .sidebar > * {
+    --block-padding: 0 0 0 1.5rem;
+    --block-margin: 1.5rem auto;
+  }
+
+  .sidebar__banner {
+    grid-area: banner;
+  }
+
+  .sidebar__sidebar {
+    grid-area: sidebar;
+  }
+
+  .sidebar__main {
+    grid-area: content;
+  }
+
+  .sidebar .category-list {
+    border: none;
+    margin: 0;
+  }
+}
+
 /* normalize ul */
 .category-list ul {
   list-style: none;

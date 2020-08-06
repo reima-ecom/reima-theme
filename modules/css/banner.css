@@ -1,5 +1,5 @@
 .module-banner {
-  padding: 1rem;
+  padding: var(--content-padding);
   background: #38383b;
   color: white;
   letter-spacing: normal;
@@ -13,27 +13,27 @@
   max-width: 480px;
 }
 
-.module-banner .h3 {
+.module-banner h3 {
   margin: 0;
 }
 
-.module-banner .h3 em {
+.module-banner h3 em {
   font-style: normal;
   color: #ffc72c;
 }
 
 @media (min-width: 768px) {
   .module-banner {
-    padding: 1.5rem;
+    /* padding: 1.5rem; */
   }
 
-  .module-banner .h3 {
+  .module-banner h3 {
     margin-bottom: 0.625rem;
   }
 }
 
 @media (min-width: 992px) {
   .module-banner {
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
   }
 }
