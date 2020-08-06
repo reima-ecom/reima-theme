@@ -1,0 +1,36 @@
+<!-- 
+  Inserts html code for a modal if not already inserted.
+
+  Expects a slice with the modal name followed by the page.
+
+  Usage example:
+  {{/*
+  {{partial "modal" (slice "delivery-info" $)}}
+  */}}
+ -->
+{{- $modal := index . 0 }}
+{{- $root := index . 1 }}
+{{- $inserted := false }}
+{{- with $root.Scratch.Get "inserted-modals" }}
+{{- if (index . $modal) }}
+{{- $inserted = true }}
+{{- end }}
+{{- end }}
+{{- if not $inserted }}
+{{- $partialPath := printf "modals/%s.html" $modal }}
+{{- if templates.Exists ( printf "partials/%s" $partialPath ) }}
+<div class="modal" id="{{$modal}}">
+  <div>
+    <button class="icon" close>
+      <svg>
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </button>
+    {{partial $partialPath $root}}
+  </div>
+</div>
+{{- else }}
+{{ warnf "Could not find modal %s" $modal }}
+{{- end }}
+{{- $root.Scratch.SetInMap "inserted-modals" $modal true }}
+{{- end }}

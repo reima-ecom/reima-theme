@@ -1,0 +1,3 @@
+<div class="page-width md airy {{if .Params.narrow}}page-width--narrow{{end}} {{if .Params.center}}text-center{{end}} {{if .Params.emphasis}}text-emphasis{{end}}">
+  {{.Params.content | markdownify}}
+</div>

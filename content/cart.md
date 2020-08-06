@@ -1,0 +1,4 @@
+---
+layout: cart
+noindex: true
+---

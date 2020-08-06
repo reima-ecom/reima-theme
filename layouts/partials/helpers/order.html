@@ -1,0 +1,26 @@
+<!-- 
+  Order an array based on another array.
+
+  Example 1:
+  We have an array [c a d] (array) that we want to order.
+  The expected order is [a b c d] (order).
+  This partial will return [a c d].
+
+  Example 2:
+  We have an array [d c a f] (array) that we want to order.
+  The expected order is [a b c] (order).
+  Note that the array contains items not in our ordering array,
+  these we expect to be at the end of the returned array in the original order.
+  This partial will return [a c d f]
+
+  Expected input:
+  
+  - order
+    Array with the expected order
+    
+  - array
+    Original array to order accordingly
+ -->
+{{ $ordered := intersect .order .array }}
+{{ $notordered := .array | complement $ordered }}
+{{ return ($ordered | append $notordered) }}

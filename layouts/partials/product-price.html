@@ -1,0 +1,17 @@
+<!-- 
+  Output display prices for a particular product.
+
+  Expected parameter:
+  Product page parameters or variant
+
+  Dependencies:
+  typography.css
+ -->
+
+{{- if .priceHasRange -}}
+from
+{{- end -}}
+<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}">
+  {{partial "price" .price}}
+</span>
+<span class="price price--was">{{partial "price" .compareAtPrice}}</span>

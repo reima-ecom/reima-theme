@@ -1,0 +1,15 @@
+<!-- 
+  Gets an image resource from the media folder.
+
+  Expected input
+
+  - image filename
+
+ -->
+{{- $headless := site.GetPage "images" -}}
+{{- $path := trim . "/" }}
+{{- $img := $headless.Resources.GetMatch $path }}
+{{- if not $img }}
+{{- warnf "Could not find image %s" $path }}
+{{- end }}
+{{- return $img -}}

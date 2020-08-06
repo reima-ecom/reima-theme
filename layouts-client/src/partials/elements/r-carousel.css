@@ -1,0 +1,63 @@
+r-carousel {
+  max-width: 100%;
+  position: relative;
+  display: block;
+}
+
+r-carousel > div {
+  display: flex;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+  align-items: flex-start;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+r-carousel > div::-webkit-scrollbar {
+  display: none;
+}
+
+r-carousel > button {
+  display: none;
+}
+
+r-carousel > div > *:not(button) {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+
+r-carousel > button {
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 1rem;
+  color: white;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  text-shadow: 0 0 8px #96969c;
+  font-family: 'Apple Symbols', 'Segoe UI Symbol';
+}
+
+r-carousel > button[prev] {
+  left: 0;
+}
+
+r-carousel > button[prev]::before {
+  content: '\25C0';
+}
+
+r-carousel > button[next] {
+  right: 0;
+}
+
+r-carousel > button[next]::before {
+  content: '\25B6';
+}

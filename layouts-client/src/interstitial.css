@@ -1,0 +1,82 @@
+/* normalize ul */
+.category-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* make links discreet */
+.category-list ul a {
+  color: #38383b;
+  text-decoration: none;
+  display: block;
+  padding: .25rem 0;
+}
+
+/* hide checkbox */
+#categories-opener {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+}
+
+/* categories label */
+.categories {
+  cursor: pointer;
+}
+
+.categories > h2 {
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.categories > h2 span::before {
+  content: '+';
+}
+
+/* hide categories by default */
+.categories + ul {
+  display: none;
+}
+
+/* do this when categories checked (open) */
+#categories-opener:checked + label + ul {
+  display: block;
+}
+
+#categories-opener:checked + label h2 span::before {
+  content: '-';
+}
+
+/* categories: add margins and adjust font weight at different levels */
+.categories + ul > li {
+  margin-top: 1rem;
+}
+
+.categories + ul {
+  font-weight: 700;  
+}
+
+.categories + ul li li {
+  font-weight: 400;
+}
+
+/* purposes: add margin to put border in the middle of whitespace */
+.purposes {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .categories {
+    cursor: default;
+  }
+
+  .categories span {
+    display: none;
+  }
+
+  .categories + ul {
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="module-image-links border-top">
+  <h2 class="h4 margin-bottom-base">{{.heading}}</h2>
+  <div>
+    {{ range .cards }}
+    <div>
+      {{partial "img" (dict "image" .image "widths" "375,768,1080")}}
+      <div>
+        <h3 class="h4 margin-bottom-xs">{{.heading}}</h3>
+        <div class="margin-bottom-sm">{{.text}}</div>
+        {{ if .linktext }}
+        <a class="btn btn--sm" href="{{.link}}">{{.linktext}}</a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>

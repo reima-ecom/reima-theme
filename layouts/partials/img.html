@@ -1,0 +1,20 @@
+<!-- 
+  Create an image from the media folder using the image partial
+
+  Parameters expected (as a `dict`):
+
+  - image
+    Image resource to output.
+
+  - widths
+    Comma-separated string of widths for srcset. The first
+    width in the list is used for the default src.    
+
+ -->
+
+{{- $imgpath := trim .image "/" }}
+{{- with partial "helpers/get-image" $imgpath }}
+{{- partial "image" (dict "image" . "widths" $.widths) }}
+{{- else }}
+{{- warnf "Could not find image %s (%s)" $imgpath .image }}
+{{- end }}

@@ -1,0 +1,11 @@
+.module-heading {
+  margin: 0.5rem auto;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .module-heading {
+    text-align: left;
+    margin: 0;
+  }
+}

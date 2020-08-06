@@ -1,0 +1,21 @@
+.testimonials {
+  font-size: 1.25rem;
+}
+
+.testimonials > *:not(:first-child) {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .testimonials {
+    display: flex;
+  }
+
+  .testimonials > * {
+    flex: 0 0 50%;
+  }
+
+  .testimonials > *:not(:first-child) {
+    display: block;
+  }
+}

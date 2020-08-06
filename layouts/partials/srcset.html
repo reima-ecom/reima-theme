@@ -1,0 +1,26 @@
+<!-- 
+  Get srcset attribute for an image resource.
+  Resizes the images for you.
+
+  Parameters expected:
+
+  - image
+    Image resource to resize
+
+  - widths
+    Comma-separated string of widths for srcset.
+
+  - [background]
+    Convert to jpeg and set this background color (hex)
+ -->
+{{- with .image -}}
+{{- $widths := split $.widths "," -}}
+{{- $params := "" -}}
+{{- with $.background -}}
+{{- $params = printf " jpg %s" . -}}
+{{- end -}}
+{{- $len := len $widths -}}
+{{- range $i, $w := $widths -}}
+{{($.image.Resize (printf "%sx%s" $w $params)).RelPermalink}} {{$w}}w{{if ne (add $i 1) $len}}, {{end}}
+{{- end -}}
+{{- end -}}

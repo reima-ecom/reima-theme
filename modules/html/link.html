@@ -1,0 +1,18 @@
+{{ $url := "" }}
+{{ with .link }}
+{{ $url = .slug }}
+{{ $types := dict "page" "pages" "collectionLink" "collections" "productLink" "products" }}
+{{ with index $types .type }}
+{{ $page := printf "/%s/%s" . $url }}
+{{ with $.root.GetPage $page }}
+{{ $url = partial "link" .RelPermalink }}
+{{ else }}
+{{ warnf "Could not find page %s" $page }}
+{{ $url = $page }}
+{{ end }}
+{{ end }}
+{{ else }}
+{{ warnf "No link provided, page %v" $.root.Title }}
+{{ end }}
+
+{{ return $url }}

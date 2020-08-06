@@ -1,0 +1,27 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "js/r-account" }}
+{{ $.Scratch.Add "js-async" "js/r-account.js" }}
+{{ end }}
+
+{{ define "main" }}
+<div class="page-width airy">
+  <h1>
+    My Account
+  </h1>
+  <r-account status="loading">
+    <div loading>
+      Loading...
+    </div>
+    <form login>
+      <input name="email" type="text" placeholder="Email">
+      <input name="pass" type="password" placeholder="Password">
+      <button type="submit" class="button">Log in</button>
+    </form>
+    <div info>
+      <h2 display-name>Name...</h2>
+      <p display-email>email...</p>
+      <button class="button" logout>Logout</button>
+    </div>
+  </r-account>
+</div>
+{{ end }}

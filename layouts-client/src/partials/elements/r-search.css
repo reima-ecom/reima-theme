@@ -1,0 +1,79 @@
+r-search #searchbox {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+r-search button[close] {
+  margin-right: 1rem;
+}
+
+r-search .ais-SearchBox {
+  background: white;
+  padding: 1rem;
+  flex: 1;
+}
+
+r-search .ais-SearchBox-form {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+}
+
+r-search .ais-SearchBox-input {
+  flex: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+r-search .ais-SearchBox-form button {
+  background: none;
+  padding: 0.5rem;
+  border: 1px solid #bfbfbf;
+  border-radius: 2px;
+  margin-left: 0.25rem;
+}
+
+r-search #hits {
+  overflow: auto;
+  max-height: 80vh;
+  padding: 0 1rem;
+}
+
+r-search ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-width: 500px;
+  margin: auto;
+}
+
+r-search li {
+  padding: 0.5rem 0;
+}
+
+r-search .hit {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+}
+
+r-search .hit > img {
+  width: 20%;
+  height: auto;
+}
+
+r-search .hit > div {
+  flex: 1;
+  margin-left: 0.5rem;
+}
+
+r-search .hit-name {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+r-search .ais-Hits--empty {
+  padding: 2rem 0;
+}

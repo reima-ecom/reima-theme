@@ -1,0 +1,11 @@
+{{- $dependency := index . 0 }}
+{{- $root := index . 1 }}
+
+{{- $dependencySlice := split $dependency ":" }}
+{{- $type := index $dependencySlice 0 }}
+{{- $name := index $dependencySlice 1 }}
+
+{{- $registeredDependencies := $root.Scratch.Get $type }}
+{{- if not (in $registeredDependencies $name) }}
+{{- warnf "%s not in css %s" . $registeredDependencies }}
+{{- end }}

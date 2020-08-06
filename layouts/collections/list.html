@@ -1,0 +1,119 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "collections" }}
+{{ $.Scratch.Add "js-async" "collections.js" }}
+{{ end }}
+
+{{ define "main" }}
+
+{{ $first := "" }}
+{{ $after := "" }}
+{{ with .Content }}
+{{ $content := split . "[first_paragraph]"}}
+{{ $first = index $content 1 }}
+{{ $after = index $content 0 }}
+{{ end }}
+
+{{ if site.Data.announcements.collectionPageBannerEnabled }}
+<div class="page-width">
+  <div class="sales-banner">
+    <h2>{{site.Data.announcements.collectionPageBannerTitle}}</h2>
+    {{site.Data.announcements.collectionPageBannerText | markdownify}}
+  </div>
+</div>
+{{ end }}
+
+<div class="page-width collection">
+  <div class="first-paragraph md">
+    <h1>{{.Title}}</h1>
+    {{$first | safeHTML}}
+  </div>
+
+  <!-- get all available options in child (product) pages -->
+  {{- range .Pages }}
+  {{- $handle := "" }}
+  {{- with .File }}
+  {{- $handle = .ContentBaseName}}
+  {{- end }}
+  {{- with .GetPage (printf "/products/%s" $handle) }}
+  {{- range $key, $value := .Params.filtering }}
+  {{- if not ($.Scratch.Get "options") }}
+  {{- $.Scratch.Set "options" dict }}
+  {{- end }}
+  {{- $current := index ($.Scratch.Get "options") $key }}
+  {{- if not $current }}
+  {{- $current = slice }}
+  {{- end }}
+  {{- $.Scratch.SetInMap "options" $key ($current | append $value | uniq) }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
+
+  {{- $options := $.Scratch.Get "options" }}
+  {{- if not $options }}
+  {{- $options = dict }}
+  {{- end }}
+
+  <div id="filters" class="filters">
+    <button class="button button--secondary" openid="parent">Filter Selection</button>
+    <a href="#" id="clear" class="text-link">Remove selections</a>
+    {{ range $.Site.Data.features.order }}
+    {{ $name := lower . }}
+    {{ with index $options . }}
+    {{ $values := . }}
+    <div>
+      <a openid="parent" href="#">
+        {{ with T (printf "Product feature: %s" $name) }}
+        {{.}}
+        {{ else }}
+        {{$name}}
+        {{ end }}
+      </a>
+      {{ $order := index $.Site.Data.features $name }}
+      {{ range partial "helpers/order" (dict "array" $values "order" $order) }}
+      <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="{{$name}}-{{.}}">
+      <label for="{{$name}}-{{.}}">
+        {{ if eq $name "color" }}
+        <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
+        {{ end }}
+        {{ with T (printf "Product feature description: %s" $name) . }}
+        {{.}}
+        {{ else }}
+        {{.}}
+        {{ end }}
+      </label>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+
+  <!-- 
+    only try to create product list for actual collection pages,
+    not the implicit /collections page (which has no file currently)
+   -->
+  {{ if .File }}
+  <div class="product-list">
+    {{ range .Pages }}
+    {{partial "product-card" .}}
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ with $after }}
+  <div class="after md">
+    {{. | safeHTML}}
+  </div>
+  {{ end }}
+
+</div>
+
+<script id="colors" type="application/json">
+{{ $.Site.Data.colors }}
+</script>
+{{ with .File }}
+<script>
+  collection = '{{path.Base .Dir}}';
+</script>
+{{ end }}
+
+{{ end }}

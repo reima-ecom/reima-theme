@@ -1,0 +1,26 @@
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.article {
+  margin: 1rem 0 2rem;
+  width: 400px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.article time {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  display: block;
+}
+
+.article p {
+  margin: 0.25rem 0;
+  border: none;
+  display: block;
+  font-size: 1.25em;
+}

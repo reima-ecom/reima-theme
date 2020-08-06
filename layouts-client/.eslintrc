@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "prefer-spread": "off",
+    "prefer-object-spread": "off"
+  }
+}

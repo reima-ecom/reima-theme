@@ -1,0 +1,27 @@
+.module-image-links > div {
+  display: grid;
+  gap: 1rem;
+}
+
+.module-image-links > div > div {
+  position: relative;
+}
+
+.module-image-links > div > div > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 45%;
+  padding: 1rem;
+}
+
+.module-image-links > div > div > div > :first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 992px) {
+  .module-image-links > div {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

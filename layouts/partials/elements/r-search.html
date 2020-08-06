@@ -1,0 +1,12 @@
+{{- partial "check-deps" (slice "css-base:partials/elements/r-search" $) -}}
+
+<r-search>
+  <div id="searchbox">
+    <button class="icon" close>
+      <svg>
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </button>
+  </div>
+  <div id="hits"></div>
+</r-search>

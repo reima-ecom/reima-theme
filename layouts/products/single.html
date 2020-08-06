@@ -1,0 +1,35 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "breadcrumb" }}
+{{ $.Scratch.Add "css-critical" "modal-critical" }}
+{{ $.Scratch.Add "css-critical" "partials/elements/r-carousel" }}
+{{ $.Scratch.Add "css-critical" "partials/elements/r-thumbnails" }}
+{{ $.Scratch.Add "css-critical" "product" }}
+{{ $.Scratch.Add "css-critical" "reviews" }}
+{{ $.Scratch.Add "css-async" "modal" }}
+{{ $.Scratch.Add "js-async" "product.js" }}
+{{ end }}
+
+{{ define "canonical" }}
+{{ $product := . }}
+{{ if eq .Section "products"}}
+{{ else }}
+{{ $product = .GetPage (printf "/products/%s" .File.ContentBaseName) }}
+{{ end }}
+
+<link rel="canonical" href="{{partial "link" $product.Permalink}}">
+{{ end }}
+
+{{ define "main" }}
+<section class="page-width airy">
+  {{partial "breadcrumb" $}}
+  {{partialCached "product" $ .File.ContentBaseName}}
+</section>
+{{ end }}
+
+{{ define "analytics" }}
+<script>
+  ga('ec:addProduct', gaProduct);
+  ga('ec:setAction', 'detail');
+  fbq('track', 'ViewContent', fbProduct);
+</script>
+{{ end }}

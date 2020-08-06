@@ -1,0 +1,15 @@
+r-account > * {
+  display: none;
+}
+
+r-account[status=loading] > [loading] {
+  display: block;
+}
+
+r-account[status=login] > [login] {
+  display: block;
+}
+
+r-account[status=info] > [info] {
+  display: block;
+}

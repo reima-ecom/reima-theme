@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+  {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
+</ol>
+{{ define "breadcrumbnav" }}
+{{ if .p1.Parent }}
+{{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }}
+{{ else if not .p1.IsHome }}
+{{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
+{{ end }}
+{{ if and .p1.File (not .p1.Params.noindex) }}
+<li {{ if eq .p1 .p2 }}class="active" {{ end }}>
+  <a href="{{ partial "link" .p1.RelPermalink }}">
+    {{ with .p1.Title }}
+    {{.}}
+    {{ else }}
+    <!-- Assume this is a product link -->
+    {{ with .p1.GetPage (printf "/products/%s" .p1.File.ContentBaseName) }}
+    {{.Title}}
+    {{ else }}
+    {{ warnf "Cannot get title for %+v" .p1 }}
+    {{ end }}
+    {{ end }}
+  </a>
+</li>
+{{ end }}
+{{ end }}

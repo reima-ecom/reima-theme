@@ -1,0 +1,18 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "modules/index" }}
+{{ range .Params.modules }}
+{{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="modules">
+  <div class="content-container">
+    {{ range .Params.modules }}
+    {{ partial (printf "modules/%s" .template) . }}
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}

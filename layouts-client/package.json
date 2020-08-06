@@ -1,0 +1,28 @@
+{
+  "name": "layouts-client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "rollup -c rollup-config.js -w",
+    "build": "rollup -c rollup-config.js",
+    "test": "run-tests --no-unit"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.2.0",
+    "dynamic-import-polyfill": "^0.1.1",
+    "element-qsa-scope": "^1.1.0",
+    "instantsearch.js": "^4.4.0",
+    "intersection-observer": "^0.11.0",
+    "smoothscroll-polyfill": "^0.4.4",
+    "web-vitals": "^0.2.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "glob": "^7.1.6",
+    "glob-promise": "^3.4.0",
+    "rollup": "^2.8.2"
+  }
+}

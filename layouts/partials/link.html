@@ -1,0 +1,10 @@
+<!-- 
+  Get a Hugo permalink url without the trailing slash
+ -->
+{{ $link := . }}
+{{ $url := urls.Parse . }}
+<!-- trim trailing slash if this is not a link to the root -->
+{{ if ne $url.Path "/" }}
+{{ $link = strings.TrimSuffix "/" . }}
+{{ end }}
+{{ return $link }}

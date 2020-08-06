@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<section class="page-width page-width--narrow md airy">
+  <h1>Blog posts</h1>
+  <ul>
+    {{ range .Pages }}
+    <li>
+      <a href="{{partial "link" .RelPermalink}}">{{.Title | safeHTML}}</a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+
+{{ end }}

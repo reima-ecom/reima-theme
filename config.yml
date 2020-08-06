@@ -1,0 +1,32 @@
+module:
+  mounts:
+    # default mounts
+    - source: layouts
+      target: layouts
+    - source: static
+      target: static
+    - source: data
+      target: data
+    - source: content
+      target: content
+    # images headless
+    - source: ../../images
+      target: content/images
+    # css files used here
+    - source: layouts-client/src
+      target: assets
+    - source: layouts-client/src
+      target: static
+    # js entry points
+    - source: layouts-client/public
+      target: assets
+    # js chunks
+    - source: layouts-client/public
+      target: static
+    # layout modules
+    - source: modules/html
+      target: layouts/partials/modules
+    - source: modules/css
+      target: assets/modules
+    - source: modules/css
+      target: static/modules

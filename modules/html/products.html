@@ -1,0 +1,40 @@
+<section class="module-products border-top">
+  {{ $title := .title }}
+  {{ with site.GetPage (printf "collections/%s" .collection) }}
+  <h2 class="h4 margin-bottom-base">
+    {{default .Title $title}}
+  </h2>
+  <ul>
+    {{ range .Pages | first 10 }}
+    {{ $link := partial "link" .RelPermalink }}
+    {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
+    <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}">
+      {{ with .Resources.ByType "image" | first 1 }}
+      {{partial "image" (dict "image" (index . 0) "widths" "200,400")}}
+      {{ end }}
+      <div class="color-dots">
+        {{ range (apply (apply .Params.variants "index" "." "options") "index" "." "Color") | uniq }}
+        {{ with . }}
+        {{ with (index site.Data.colors (. | lower)) }}
+        <div style="background-color: {{.}};"></div>
+        {{ else }}
+        {{ warnf "Could not find color %s" .}}
+        {{ end }}
+        {{ end }}
+        {{ end }}
+      </div>
+      <h2 class="h2">
+        <a class="silent-link stretched-link" href="{{$link}}">{{.Title}}</a>
+      </h2>
+      <div class="text-center">
+        {{partial "product-price" .Params}}
+      </div>
+      <div class="sold-out-tag">Sold Out</div>
+    </li>
+    {{ else }}
+    {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .Dir .Kind .Type }}
+    {{ end }}
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>

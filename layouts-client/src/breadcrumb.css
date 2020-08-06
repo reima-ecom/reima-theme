@@ -1,0 +1,25 @@
+.breadcrumb {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .breadcrumb {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+  }
+  
+  .breadcrumb > * {
+    display: inline;
+  }
+  
+  .breadcrumb > * + *::before {
+    content: ' / ';
+  }
+  
+  .breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

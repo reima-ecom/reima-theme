@@ -1,0 +1,24 @@
+<!-- 
+  This is for articles from the Reima World space
+ -->
+
+{{ if .Params.image }}
+<section class="content-block-image airy md">
+  {{ with .Page.Resources.GetMatch .Params.image }}
+  {{ if eq .MediaType.SubType "jpeg" }}
+  {{partial "image" (dict "image" . "widths" "400,360,200" "class" "responsive-img")}}
+  {{ else }}
+  <img src="{{partial "link" .RelPermalink}}" alt="">
+  {{ end }}
+  {{ end }}
+  <h3>
+    {{ .Params.imageCaption | safeHTML }}
+  </h3>
+</section>
+{{ end }}
+
+{{ with .Params.body }}
+<section class="md page-width page-width--narrow">
+  {{ . | markdownify }}
+</section>
+{{ end }}

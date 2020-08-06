@@ -1,0 +1,21 @@
+{{- $pages := where .Site.RegularPages "Section" "products" -}}
+[
+  {{- $last := add (len $pages) -1 -}}
+  {{- range $i, $p := $pages -}}
+  {
+    "title": "{{.Title}}",
+    "price": {{.Params.price}},
+    "categories": {
+      "lvl0": "Kids",
+      "lvl1": "Outdoor",
+      "lvl2": "Overalls"
+    },
+    "collections": {{ .Params.collections | jsonify }},
+    "filtering": {{ .Params.filtering | jsonify }},
+    "colors": {{ (apply (apply .Params.variants "index" "." "options") "index" "." "Color") | uniq | jsonify }},
+    "sizes": {{ (apply (apply .Params.variants "index" "." "options") "index" "." "Size") | uniq | jsonify }},
+    "imageSrc": "{{with .Resources.ByType "image"}}{{((index . 0).Resize "375x").RelPermalink}}{{end}}",
+    "objectID": "{{.File.ContentBaseName}}"
+  }{{ if ne $i $last }},{{ end }}
+  {{- end -}}
+]

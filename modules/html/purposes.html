@@ -1,0 +1,13 @@
+<div class="module-purposes border-top">
+  <h2 class="h4 margin-bottom-base">
+    Shop by purpose
+  </h2>
+  <div>
+    {{ range . }}
+    <a href="/collections/{{.collection}}/" class="silent-link text-sm">
+      {{partial "img" (dict "image" .image "widths" "150,300" "class" "responsive-img")}}
+      {{.heading}}
+    </a>
+    {{ end }}
+  </div>
+</div>

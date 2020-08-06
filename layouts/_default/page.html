@@ -1,0 +1,15 @@
+{{ define "dependencies" }}
+{{ with .Params.css }}
+{{ range . }}
+{{ $.Scratch.Add "css-critical" . }}
+{{ end }}
+{{ end }}
+{{ $.Scratch.Add "css-critical" "partials/elements/r-carousel" }}
+{{ end }}
+
+{{ define "main" }}
+
+{{partial "hero" $}}
+{{partial "modules/index" $}}
+
+{{ end }}

@@ -1,0 +1,17 @@
+<section class="boxes airy page">
+  {{ $img := .Page.Resources.GetMatch .Params.image }}
+  {{ if not $img }}
+  {{ $img = partial "helpers/get-image" .Params.image }}
+  {{ end}}
+  {{ with $img }}
+  {{partial "image" (dict "image" . "widths" "400,800,360,200" "class" "responsive-img")}}
+  {{ end }}
+  <div class="md">
+    {{ .Params.content | markdownify }}
+    {{ with .Params.button }}
+    <p>
+      <a href="{{partial "modules/link" (dict "link" .link "root" $.Page)}}" class="button">{{.text}}</a>
+    </p>
+    {{ end }}
+  </div>
+</section>

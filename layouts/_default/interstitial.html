@@ -1,0 +1,62 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "modules/index" }}
+{{ $.Scratch.Add "css-critical" "interstitial" }}
+{{ range .Params.main }}
+{{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
+{{ end }}
+{{ range .Params.banner }}
+{{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+
+<div class="modules">
+  <div class="content-container">
+    {{ range .Params.banner }}
+    {{ partial (printf "modules/%s" .template) . }}
+    {{ end }}
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar__main">
+      {{ range .Params.main }}
+
+      {{ if eq .template "categories" }}
+      {{ partial (printf "modules/%s" .template) $.Params.categories }}
+      {{ else if eq .template "purposes" }}
+      {{ partial (printf "modules/%s" .template) $.Params.purposes }}
+      {{ else }}
+      {{ partial (printf "modules/%s" .template) . }}
+      {{ end }}
+
+      {{ end }}
+    </div>
+    <div class="sidebar__sidebar">
+      <div class="border-top border-bottom category-list">
+        <input type="checkbox" id="categories-opener">
+        <label for="categories-opener" class="categories">
+          <h2 class="h6">Shop by category <span></span></h2>
+        </label>
+        {{ template "categories" .Params.categories }}
+        <h2 class="h6 border-top purposes">Shop by purpose</h2>
+        {{ template "categories" .Params.purposes }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ end }}
+
+{{ define "categories" }}
+{{ with . }}
+<ul>
+  {{ range . }}
+  <li>
+    <a href="/collections/{{.collection}}">{{ .heading }}</a>
+    {{ template "categories" .categories }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

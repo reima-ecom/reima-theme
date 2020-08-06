@@ -1,0 +1,78 @@
+.product-card {
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  position: relative;
+}
+
+.product-card h2 {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1em;
+  margin: 0.25rem 0;
+}
+
+.product-card .color-dots {
+  display: flex;
+  justify-content: center;
+}
+
+.product-card .color-dots > div {
+  margin: 0.125rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #bfbfbf;
+}
+
+.product-card .sold-out-tag {
+  display: none;
+}
+
+.product-card.sold-out .sold-out-tag {
+  display: block;
+  position: absolute;
+  padding: 0.25rem 0.5rem;
+  top: 0;
+  right: 0;
+  background: #d2092d;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.product-card.sold-out img {
+  opacity: 0.4;
+}
+
+.product-slider {
+  display: flex;
+  overflow-x: auto;
+  margin: 0 -20px;
+  padding-bottom: 1rem;
+}
+
+.product-slider > * {
+  flex: 0 0 200px;
+  margin: 20px;
+}
+
+.collection-list > h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collection-list > h1 a {
+  font-size: 1rem;
+  font-weight: normal;
+  justify-content: flex-end;
+}
+
+@media (min-width: 1024px) {
+  .product-slider {
+    overflow-x: unset;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,23 @@
+{{ define "dependencies" }}
+
+{{ with .Params.css }}
+{{ range . }}
+{{ $.Scratch.Add "css-critical" (printf "partials/%s" .) }}
+{{ end }}
+{{ end }}
+{{ $.Scratch.Add "css-critical" "modules/contentBlock" }}
+{{ $.Scratch.Add "css-critical" "hero" }}
+
+{{ end }}
+
+{{ define "main" }}
+
+{{partial "hero" $}}
+
+<section class="page-width page-width--narrow md airy">
+  {{.Content | markdownify}}
+</section>
+
+{{partial "modules/index" $}}
+
+{{ end }}

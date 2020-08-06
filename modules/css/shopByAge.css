@@ -1,0 +1,29 @@
+.categories {
+  display: flex;
+  margin: 0 -1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categories > * {
+  margin: 1rem;
+  position: relative;
+  flex: 0 1 auto;
+}
+
+@media (min-width: 1340px) {
+  .categories > * {
+    width: calc((1300px - 4rem) / 3);
+  }
+}
+
+.categories > * > h2 {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+}

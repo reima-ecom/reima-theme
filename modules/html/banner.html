@@ -1,0 +1,11 @@
+<div class="module-banner">
+  <div>
+    <div class="h3">{{.heading | markdownify}}</div>
+    <div>{{.text}}</div>
+  </div>
+  {{ if .linktext }}
+  <div>
+    <a class="btn btn--sm btn--inv" href="{{.link}}">{{.linktext}}</a>
+  </div>
+  {{ end }}
+</div>

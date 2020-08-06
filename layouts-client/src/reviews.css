@@ -1,0 +1,112 @@
+.reviews > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.reviews > div > *:first-child {
+  flex: 1;
+}
+
+.reviews > div form,
+.reviews > div .thank-you {
+  display: none;
+}
+
+.reviews > div.open form,
+.reviews > div.thank-you .thank-you {
+  display: block;
+  flex-basis: 100%;
+  margin-bottom: 2rem;
+}
+
+.reviews form > *:first-child {
+  margin-top: 0;
+}
+
+.reviews form > * {
+  display: block;
+  max-width: 500px;
+  margin: 1rem auto;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.reviews form textarea,
+.reviews form input {
+  display: block;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reviews form .stars {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  font-size: 1.75rem;
+  margin-right: auto;
+  position: relative;
+}
+
+.reviews .stars input {
+  width: unset;
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  opacity: 0;
+}
+
+.reviews .stars label::before {
+  content: '★';
+  color: #bfbfbf;
+}
+
+
+.reviews .stars input:checked + label::before,
+.reviews .stars input:checked ~ label::before {
+  color: #ff5c38;
+}
+
+.reviews div .stars:hover label::before {
+  color: #bfbfbf;
+}
+
+.reviews div .stars label:hover::before,
+.reviews .stars label:hover ~ label::before {
+  color: #ff5c38;
+}
+
+.reviews blockquote {
+  margin: 0;
+  font-size: 1rem;
+  padding: 2rem 0;
+  border-top: 1px solid #bfbfbf;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.reviews blockquote + blockquote {
+  border-top: none;
+}
+
+.reviews blockquote h3 {
+  margin: 0.5rem 0;
+}
+
+.reviews blockquote p {
+  margin: 0;
+}
+
+.reviews blockquote .name {
+  font-weight: 700;
+}
+
+.reviews blockquote .date {
+  float: right;
+}
+
+.reviews blockquote .stars {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0.5rem auto;
+}

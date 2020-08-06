@@ -1,0 +1,20 @@
+{{- range . | uniq -}}
+
+{{- if eq hugo.Environment "development" -}}
+<script async defer src="/{{.}}" type="module"></script>
+{{- else -}}
+
+<!-- get main js -->
+{{- with resources.Get (printf "%s" .) }}
+{{- $js := . | fingerprint -}}
+<script async defer src="{{$js.RelPermalink}}" type="module"></script>
+{{- else -}}
+{{ warnf "Could not find js %s" . }}
+{{- end -}}
+
+{{- end -}}
+{{- end -}}
+
+<script>
+  loaded = {{.}}
+</script>

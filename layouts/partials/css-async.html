@@ -1,0 +1,24 @@
+{{- if eq hugo.Environment "development" -}}
+
+{{- range . | uniq }}
+<link rel="stylesheet" href="/{{.}}.css">
+{{- end }}
+
+{{- else }}
+
+{{- $slice := slice -}}
+{{- range . | uniq }}
+{{- with resources.Get (printf "%s.css" .) }}
+{{- $slice = $slice | append . }}
+{{- else }}
+{{- warnf "Could not find css file %s" . }}
+{{- end }}
+{{- end }}
+
+{{- if gt (len $slice) 0}}
+{{- $bundle := $slice | resources.Concat (printf "%s.css" (delimit . "-")) | minify | fingerprint }}
+<link rel="stylesheet" href="{{$bundle.RelPermalink}}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{$bundle.RelPermalink}}"></noscript>
+{{- end }}
+
+{{- end }}

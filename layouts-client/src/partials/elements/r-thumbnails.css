@@ -1,0 +1,34 @@
+r-thumbnails {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  position: relative;
+  align-items: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+r-thumbnails > * {
+  cursor: pointer;
+  border: 1px solid transparent;
+  flex: 0 0 15%;
+  width: 15%;
+}
+
+r-thumbnails > * + * {
+  margin-left: 0.5rem;
+}
+
+r-thumbnails > *.active {
+  border-color: inherit;
+}
+
+r-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+r-carousel + r-thumbnails {
+  margin-top: 2rem;
+}

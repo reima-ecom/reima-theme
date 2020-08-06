@@ -1,0 +1,35 @@
+{{- partial "check-deps" (slice "css-base:partials/elements/r-cart" $) -}}
+
+<r-cart loading>
+  <h1>
+    {{T "Cart Title"}}
+    <button class="icon" close>
+      <svg>
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </button>
+  </h1>
+  <div class="items">{{T "Cart Loading Message"}}</div>
+  <div class="empty">{{T "Cart Empty Message"}}</div>
+  <div class="summary">
+    <h2>{{T "Cart Subtotal"}} <span class="price"></span></h2>
+    <a href="#" class="button checkout">{{T "Cart Checkout Button"}}</a>
+  </div>
+  <template id="item">
+    <div>
+      <img src="" alt="">
+      <div>
+        <h2></h2>
+        <h3></h3>
+        <div class="subtotal">
+          <div class="quantity">
+            <button step="-1">-</button>
+            <input type="number" min="0">
+            <button step="+1">+</button>
+          </div>
+          <div class="price"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+</r-cart>

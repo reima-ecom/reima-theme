@@ -1,0 +1,17 @@
+{{- if eq hugo.Environment "development" -}}
+{{- range . | uniq -}}
+<link rel="stylesheet" href="/{{.}}.css">
+{{- end -}}
+{{- else -}}
+
+<style>
+{{- range . | uniq -}}
+{{- with resources.Get (printf "%s.css" .) -}}
+{{- (. | minify).Content | safeCSS -}}
+{{- else -}}
+{{- warnf "Could not find css file %s" . -}}
+{{- end -}}
+{{- end -}}
+</style>
+
+{{- end -}}

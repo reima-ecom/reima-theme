@@ -1,0 +1,25 @@
+[items] > div {
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+}
+
+[items] > div > * + * {
+  margin-left: 1rem;
+}
+
+[items] > div > div {
+  flex: 1;
+}
+
+[items] img {
+  width: 150px;
+}
+
+[items] h2 {
+  margin: 0;
+}
+
+[items] h3 {
+  margin-top: 0.5rem;
+}

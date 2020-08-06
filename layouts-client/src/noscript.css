@@ -1,0 +1,16 @@
+/* these elements require js */
+img.lazyload,
+[openid="search"],
+.newsletter,
+r-carousel > button,
+#filters {
+  display: none;
+}
+
+/* 
+revert from grid layout to block
+(b/c filters are hidden)
+*/
+.collection {
+  display: block;
+}
