@@ -22,10 +22,10 @@ module:
     - source: assets
       target: static
     # js entry points
-    - source: layouts-client/public
+    - source: layouts-client/dist
       target: assets
     # js chunks
-    - source: layouts-client/public
+    - source: layouts-client/dist
       target: static
     # layout modules
     - source: modules/html

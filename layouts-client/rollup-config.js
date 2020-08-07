@@ -6,7 +6,7 @@ import { promises as fs } from 'fs';
 import __import__ from './rollup-plugin-dynamic-import.js';
 
 const SOURCE = 'src';
-const OUTPUT = 'public';
+const OUTPUT = 'dist';
 
 const cleanOutputAndGetConfig = async (srcDir, outputDir) => {
   await fs.rmdir(outputDir, { recursive: true });
