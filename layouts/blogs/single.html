@@ -1,4 +1,10 @@
 {{ define "dependencies" }}
+<!-- USE OLD CSS HERE! -->
+{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
+{{ end }}
+
+
+{{ define "dependencies" }}
 
 {{ with .Params.css }}
 {{ range . }}

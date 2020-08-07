@@ -10,7 +10,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}} | Reima US{{else}}Clothing For Active
     Kids | Reima US{{end}}</title>
-  {{ $.Scratch.Set "css-critical" (slice "header-critical") }}
+  {{ $.Scratch.Set "css-critical" (slice "index" "header-critical") }}
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
   {{ $.Scratch.Set "js-async" (slice "app.js") }}

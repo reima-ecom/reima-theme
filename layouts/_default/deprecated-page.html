@@ -1,4 +1,6 @@
 {{ define "dependencies" }}
+<!-- USE OLD CSS HERE! -->
+{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
 {{ range .Params.sections }}
 {{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
 {{ end }}

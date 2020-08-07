@@ -33,6 +33,9 @@
   </div>
 
   <!-- find first available variant options -->
+  {{ if not .Params.variants }}
+  {{ errorf "%s has no variants" .File.ContentBaseName }}
+  {{ end }}
   {{ $firstAvailableVariant := index (where .Params.variants "available" true | first 1) 0 }}
   {{ $firstAvailableOptions := $firstAvailableVariant.options }}
 

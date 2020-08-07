@@ -1,5 +1,4 @@
 {{ define "dependencies" }}
-{{ $.Scratch.Add "css-critical" "index" }}
 {{ range .Params.main }}
 {{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
 {{ end }}

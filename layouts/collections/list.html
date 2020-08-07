@@ -1,4 +1,6 @@
 {{ define "dependencies" }}
+<!-- USE OLD CSS HERE! -->
+{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
 {{ $.Scratch.Add "css-critical" "collections" }}
 {{ $.Scratch.Add "js-async" "collections.js" }}
 {{ end }}
