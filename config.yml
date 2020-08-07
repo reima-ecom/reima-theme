@@ -9,6 +9,8 @@ module:
       target: data
     - source: content
       target: content
+    - source: i18n
+      target: i18n
     # images headless
     - source: ../../images
       target: content/images
