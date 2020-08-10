@@ -15,7 +15,11 @@
   {{partial "image" (dict "image" (index . 0) "widths" "200,400")}}
   {{ end }}
   <div class="color-dots">
-    {{ range (apply (apply .Params.variants "index" "." "options") "index" "." "Color") | uniq }}
+    {{ $coloroption := "Color" }}
+    {{ with site.Params.coloroption }}
+    {{ $coloroption = . }}
+    {{ end }}
+    {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
     {{ with . }}
     {{ with (index $.Site.Data.colors (. | lower)) }}
     <div style="background-color: {{.}};"></div>
