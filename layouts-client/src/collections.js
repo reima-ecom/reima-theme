@@ -40,7 +40,7 @@ const searchAndRender = async () => {
       element.style.display = 'none';
     } else {
       element.style.display = '';
-      element.href = `products/${hit.objectID}`;
+      element.href = `/collections/${window.collection}/products/${hit.objectID}`;
       /** @type {HTMLImageElement} */
       const img = element.querySelector('img');
       img.dataset.src = '';

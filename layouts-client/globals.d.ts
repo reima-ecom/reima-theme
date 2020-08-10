@@ -11,4 +11,5 @@ interface Window {
       token: string
     }
   }
+  collection?: string
 }
