@@ -24,11 +24,13 @@
 </div>
 {{ end }}
 
-<div class="page-width collection">
+<div class="page-width collection{{if .Site.Params.public.algolia}} collection--has-filters{{end}}">
   <div class="first-paragraph md">
     <h1>{{.Title}}</h1>
     {{$first | safeHTML}}
   </div>
+
+  {{ if .Site.Params.public.algolia }}
 
   <!-- get all available options in child (product) pages -->
   {{- range .Pages }}
@@ -88,6 +90,8 @@
     {{ end }}
     {{ end }}
   </div>
+
+  {{ end }}
 
   <!-- 
     only try to create product list for actual collection pages,

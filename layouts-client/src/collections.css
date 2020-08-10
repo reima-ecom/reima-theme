@@ -19,6 +19,7 @@
 
 .collection {
   margin-bottom: 4rem;
+  max-width: 1128px;
 }
 
 .product-card {
@@ -162,11 +163,19 @@
 }
 
 @media (min-width: 1024px) {
-  .collection {
+  .collection--has-filters {
     display: grid;
     grid-template-columns: minmax(250px, 25%) 1fr;
     gap: 1rem 3rem;
     grid-template-rows: auto 1fr;
+  }
+  
+  .collection--has-filters .first-paragraph h1 {
+    margin: 0.5rem 0;
+  }
+
+  .first-paragraph p {
+    margin: 0;
   }
 
   .first-paragraph, .after {
@@ -188,14 +197,6 @@
 
   .filters > a {
     display: inline-block;
-  }
-
-  .first-paragraph h1 {
-    margin: 0.5rem 0;
-  }
-
-  .first-paragraph p {
-    margin: 0;
   }
 }
 

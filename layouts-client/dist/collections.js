@@ -56,23 +56,26 @@ const searchAndRender = async () => {
   }
 };
 
-document.getElementById('filters').addEventListener('change', async (e) => {
-  await ensureIndex();
-  const { name, value, checked } = /** @type {HTMLInputElement} */ (e.target);
-  // add to array of active filters
-  const key = `${name}:${value}`;
-  if (!filters[name]) filters[name] = [];
-  if (checked) filters[name].push(key);
-  else filters[name].splice(filters[name].indexOf(key), 1);
-  searchAndRender();
-});
-
-document.getElementById('clear').addEventListener('click', (e) => {
-  e.preventDefault();
-  document.querySelectorAll('#filters input').forEach((input) => {
-    // eslint-disable-next-line no-param-reassign
-    /** @type {HTMLInputElement} */ (input).checked = false;
+const filtersElement = document.getElementById('filters');
+if (filtersElement) {
+  filtersElement.addEventListener('change', async (e) => {
+    await ensureIndex();
+    const { name, value, checked } = /** @type {HTMLInputElement} */ (e.target);
+    // add to array of active filters
+    const key = `${name}:${value}`;
+    if (!filters[name]) filters[name] = [];
+    if (checked) filters[name].push(key);
+    else filters[name].splice(filters[name].indexOf(key), 1);
+    searchAndRender();
   });
-  filters = { collections: filters.collections };
-  searchAndRender();
-});
+
+  document.getElementById('clear').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('#filters input').forEach((input) => {
+      // eslint-disable-next-line no-param-reassign
+      /** @type {HTMLInputElement} */ (input).checked = false;
+    });
+    filters = { collections: filters.collections };
+    searchAndRender();
+  });
+}
