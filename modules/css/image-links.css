@@ -4,6 +4,11 @@
   max-width: var(--block-width);
 }
 
+.module-image-links h3 {
+  font-size: var(--h4-font-size);
+  letter-spacing: var(--h4-letter-spacing);
+}
+
 .module-image-links > div {
   display: grid;
   gap: 1rem;

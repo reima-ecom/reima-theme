@@ -32,8 +32,13 @@ body > header {
   align-items: center;
 }
 
+/* this is the menu opener label */
+.menu__hamburger {
+  margin-right: 14px;
+}
+
 .logo-link {
-  margin: 14px;
+  margin: 14px 14px 14px 0;
   flex: 1;
   display: flex;
 }

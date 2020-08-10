@@ -1,38 +1,32 @@
-@media (min-width: 992px) {
-  .sidebar {
-    display: grid;
-    grid-template-columns: 25% 1fr;
-    grid-template-areas:
-      "banner banner"
-      "sidebar content";
-    padding: var(--block-padding);
-    margin: var(--block-margin);
-    max-width: var(--block-width);
-    --inner-spacing: 1.5rem;
-  }
-  
-  hr {
-    margin-left: var(--inner-spacing);
-  }
-  
-  .sidebar__banner {
-    grid-area: banner;
-  }
-  
-  .sidebar__sidebar {
-    --block-padding: 0 var(--inner-spacing) 0 0;
-    grid-area: sidebar;
-  }
-  
-  .sidebar__main {
-    --block-padding: 0 0 0 var(--inner-spacing);
-    grid-area: content;
-  }
+:root {
+  --block-width: 1280px;
+}
+
+.sidebar__main h1 {
+  font-size: var(--h2-font-size);
+  letter-spacing: var(--h2-letter-spacing);
+}
+
+.sidebar__main h2 {
+  font-size: var(--h4-font-size);
+  letter-spacing: var(--h4-letter-spacing);
+}
+
+/* make content module left-aligned */
+.sidebar__main .module-content {
+  margin-left: 0;
 }
 
 .category-list {
   padding: var(--block-padding);
   margin: var(--block-margin);
+}
+
+.category-list h2 {
+  font-size: 0.875rem;
+  letter-spacing: .03rem;
+  line-height: 1.375;
+  text-transform: uppercase;
 }
 
 /* normalize ul */
@@ -63,7 +57,6 @@
 }
 
 .categories > h2 {
-  margin-top: 0;
   display: flex;
   justify-content: space-between;
 }
@@ -100,6 +93,45 @@
 }
 
 @media (min-width: 992px) {
+  .sidebar {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    grid-template-areas:
+      "banner banner"
+      "sidebar content";
+    padding: var(--block-padding);
+    margin: var(--block-margin);
+    max-width: var(--block-width);
+    --inner-spacing: 1.5rem;
+  }
+  
+  .sidebar__main hr {
+    margin-left: var(--inner-spacing);
+  }
+  
+  .sidebar__banner {
+    grid-area: banner;
+  }
+  
+  .sidebar__sidebar {
+    --block-padding: 0 var(--inner-spacing) 0 0;
+    grid-area: sidebar;
+  }
+
+  .sidebar__sidebar > hr {
+    display: none;
+  }
+  
+  .sidebar__main {
+    --block-padding: 0 0 0 var(--inner-spacing);
+    grid-area: content;
+  }
+
+  .category-list {
+    height: calc(100% - var(--content-padding));
+    border-right: var(--border);
+  }
+
   .categories {
     cursor: default;
   }

@@ -17,11 +17,18 @@
   --h4-font-size: 1.125rem;
   --h4-letter-spacing: 0;
   --h4-margin-bottom: .625rem;  
+  --h5-font-size: 1rem;
+  --h6-font-size: 0.875rem;
+  --h6-letter-spacing: .03rem;
 }
 
 @media (min-width: 768px) {
   :root {
     --h0-font-size: 2.5rem;
+    --h1-font-size: 2.125rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.5rem;
+    --h4-font-size: 1.25rem;
     --content-padding: 1.5rem;
   }
 }
@@ -30,10 +37,23 @@
   :root {
     --content-padding: 2rem;
 
-    --h0-font-size: 2.75em;
+    --h0-font-size: 2.75rem;
+    --h1-font-size: 2.5rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.75rem;
     --h4-font-size: 1.375rem;
     --h4-letter-spacing: -.01rem;
     --h4-margin-bottom: .75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --h0-font-size: 3.125rem;
+    --h1-font-size: 2.75rem;
+    --h2-font-size: 2.25rem;
+    --h3-font-size: 2rem;
+    --h4-font-size: 1.5rem;
   }
 }
 
@@ -47,6 +67,12 @@ body {
   color: #38383b;
 }
 
+header > div {
+  margin: auto;
+  max-width: var(--block-width);
+  padding: var(--block-padding);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -56,55 +82,8 @@ img {
 hr {
   border: none;
   border-bottom: var(--border);
+  margin: var(--content-padding) 0;
 }
-
-/* #region layout */
-.content-container {
-  /* padding: 1rem; */
-}
-
-@media (min-width: 992px) {
-  .content-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 1rem;
-    max-width: 1060px;
-    margin: auto;
-  }
-}
-
-.content-container > * > :first-child {
-  margin-top: 0;
-}
-
-.content-container > * > :last-child {
-  margin-bottom: 0;
-}
-
-.container {
-  padding: 1rem;
-}
-
-.container > :first-child {
-  margin-top: 0;
-}
-
-.container > :last-child {
-  margin-bottom: 0;
-}
-
-.border-top {
-  /* padding-top: 1.5rem; */
-  /* margin-top: 0.5rem; */
-  /* border-top: 1px solid #ccc; */
-}
-
-.border-bottom {
-  padding-bottom: 1.5rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid #ccc;
-}
-/* #endregion */
 
 /* #region basic typography */
 @font-face {
@@ -250,6 +229,11 @@ a:focus {
   outline-offset: 2px;
   outline-color: rgba(0,0,0,0.5);
 }
+
+.btn--inv:focus {
+  outline-color: rgba(255,255,255,0.5);
+}
+
 /* #endregion */
 
 .margin-bottom-xs {

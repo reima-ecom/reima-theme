@@ -35,12 +35,14 @@
     {{ end }}
   </div>
   <div class="sidebar__sidebar">
+    <hr>
     <div class="category-list">
       <input type="checkbox" id="categories-opener">
       <label for="categories-opener" class="categories">
         <h2>Shop by category <span></span></h2>
       </label>
       {{ template "categories" .Params.categories }}
+      <hr>
       <h2>Shop by purpose</h2>
       {{ template "categories" .Params.purposes }}
     </div>
