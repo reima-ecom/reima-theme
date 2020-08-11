@@ -2,6 +2,23 @@
   color: var(--color-text);
   max-width: var(--content-max-width);
   padding: 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero--full-width {
+  max-width: 100%;
+  padding: 0;
+  margin-top: 0;
+}
+
+.hero > div {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero > div > div {
@@ -12,14 +29,50 @@
   margin-top: 0;
 }
 
-.hero p {
-  margin-top: 0;
+.hero h1 {
+  margin-bottom: 1rem;
+}
+
+.hero h1 + .btn {
+  margin-top: 1rem;
+}
+
+.hero--overlay-mobile-left > div {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.hero--overlay-mobile-right > div {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.hero--overlay-right > div > div,
+.hero--overlay-left > div > div,
+.hero--overlay-center > div > div,
+.hero--overlay-mobile-right > div > div,
+.hero--overlay-mobile-left > div > div {
+  flex-basis: calc(50% - 2 * var(--content-padding));
+}
+
+.hero--overlay-small > div > div {
+  flex-basis: 33%;
+}
+
+.hero--overlay-mobile > div {
+  position: absolute;
+  display: flex;
+  padding: inherit;
+}  
+
+.hero--overlay-mobile.hero--overlay-invert {
+  --color-text: white;
+  --color-bg: var(--color-fg);
 }
 
 @media (min-width: 768px) {
   .hero {
     --h1-font-size: var(--h0-font-size);
-    position: relative;
     padding: var(--block-padding);
     margin: var(--block-margin);
   }  
@@ -27,33 +80,36 @@
   .hero > div {
     position: absolute;
     display: flex;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
     padding: inherit;
   }
 
-  
   .hero--overlay-right > div {
     justify-content: flex-end;
   }
-  
-  .hero--overlay-right > div > div,
-  .hero--overlay-left > div > div {
-    max-width: 50%;
+
+  .hero--overlay-left > div {
+    justify-content: flex-start;
   }
-  
-  .hero--overlay-small > div > div {
-    max-width: 33%;
+
+  .hero--overlay-center > div {
+    justify-content: center;
   }
   
   .hero--overlay-invert {
     --color-text: white;
     --color-bg: var(--color-fg);
+  }
+
+  .hero--overlay-align-left > div {
+    text-align: left;
+  }
+
+  .hero--overlay-align-right > div {
+    text-align: right;
+  }
+
+  .hero--overlay-align-center > div {
+    text-align: center;
   }
 }
 

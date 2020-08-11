@@ -2,16 +2,25 @@
 {{ with .overlayhorizontal }}
 {{ $class = printf "%s hero--overlay-%s" $class . }}
 {{ end }}
+{{ with .overlaymobile }}
+{{ $class = printf "%s hero--overlay-mobile hero--overlay-mobile-%s" $class . }}
+{{ end }}
+{{ with .overlayalign }}
+{{ $class = printf "%s hero--overlay-align-%s" $class . }}
+{{ end }}
 {{ if .overlaysmall }}
 {{ $class = printf "%s hero--overlay-small" $class }}
 {{ end }}
 {{ if .overlayinvert }}
 {{ $class = printf "%s hero--overlay-invert" $class }}
 {{ end }}
+{{ if .fullwidth }}
+{{ $class = printf "%s hero--full-width" $class }}
+{{ end }}
 <div class="{{$class}}">
   {{- $mobile := partial "helpers/get-image" .imagemobile }}
   {{- with partial "helpers/get-image" .image }}
-  {{- $params := (dict "image" . "widths" "1080,768") }}
+  {{- $params := (dict "image" . "widths" "2160,1080,768") }}
   {{- $default := .Resize "1060x" -}}
   <picture>
     <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}">
