@@ -1,6 +1,6 @@
 <section class="module-products border-top">
   {{ $title := .title }}
-  {{ with site.GetPage (printf "collections/%s" .collection) }}
+  {{ with site.GetPage (printf "/collections/%s" .collection) }}
   <h2 class="h4 margin-bottom-base">
     {{default .Title $title}}
   </h2>

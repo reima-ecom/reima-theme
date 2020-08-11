@@ -113,6 +113,6 @@
   }
 }
 
-.hero--overlay-small {
-  --h1-font-size: var(--h4-font-size);
+.hero.hero--overlay-small h1 {
+  font-size: var(--h4-font-size);
 }
