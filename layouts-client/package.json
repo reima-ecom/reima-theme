@@ -7,7 +7,7 @@
   "scripts": {
     "start": "rollup -c rollup-config.js -w",
     "build": "rollup -c rollup-config.js",
-    "test": "run-tests --no-unit"
+    "test": "eslint . && tsc -p jsconfig.json"
   },
   "dependencies": {
     "algoliasearch": "^4.2.0",
@@ -21,8 +21,12 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
     "glob": "^7.1.6",
     "glob-promise": "^3.4.0",
+    "typescript": "^3.9.7",
     "rollup": "^2.8.2"
   }
 }

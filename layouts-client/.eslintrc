@@ -1,4 +1,5 @@
 {
+  "extends": "airbnb-base",
   "env": {
     "browser": true
   },
@@ -6,7 +7,9 @@
     "ecmaVersion": 2020
   },
   "rules": {
+    "import/extensions": ["error", "ignorePackages"],
     "prefer-spread": "off",
     "prefer-object-spread": "off"
-  }
+  },
+  "ignorePatterns": "dist"
 }

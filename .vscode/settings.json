@@ -1,4 +1,6 @@
 {
+  "eslint.format.enable": true,
+  "javascript.preferences.importModuleSpecifierEnding": "js",
   "files.associations": {
     "*.html": "handlebars"
   }
