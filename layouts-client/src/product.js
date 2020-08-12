@@ -33,15 +33,6 @@ const getVariant = async (options) => variants.find((v) => {
   return Object.keys(v.options).every((k) => options[k] === v.options[k]);
 });
 
-/**
- * @param {number} price
- * @returns {string}
- */
-const formatPrice = (price) => {
-  if (!price) return '';
-  return `$${price.toFixed(2)}`;
-};
-
 const inputChange = async (e) => {
   const { name } = e.currentTarget;
   const { value } = e.currentTarget;
@@ -73,10 +64,10 @@ const inputChange = async (e) => {
     // update prices
     /** @type {HTMLElement} */
     const priceElement = document.querySelector('.price--actual');
-    priceElement.innerText = formatPrice(variant.price);
+    priceElement.innerText = variant.priceFormatted;
     if (variant.compareAtPrice > variant.price) priceElement.classList.add('price--sale');
     else priceElement.classList.remove('price--sale');
-    /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText = formatPrice(variant.compareAtPrice);
+    /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText = variant.compareAtPriceFormatted || '';
     // scroll to variant image if color change
     if (name === 'Color') {
       /** @type {import('./partials/elements/r-carousel').default} */(document.querySelector('r-carousel')).scrollToImage(variant.imageIndex);
@@ -94,7 +85,9 @@ radioBoxes.forEach((node) => {
  * @property {string} id
  * @property {boolean} available
  * @property {number} price
+ * @property {string} priceFormatted
  * @property {number} compareAtPrice
+ * @property {string} compareAtPriceFormatted
  * @property {number} imageIndex
  * @property {Object<string, string>} options
  */

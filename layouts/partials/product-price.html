@@ -8,10 +8,10 @@
   typography.css
  -->
 
-{{- if .priceHasRange -}}
+{{- if .hasPriceRange -}}
 from
 {{- end -}}
 <span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}">
-  {{partial "price" .price}}
+  {{.priceFormatted}}
 </span>
-<span class="price price--was">{{partial "price" .compareAtPrice}}</span>
+<span class="price price--was">{{.compareAtPriceFormatted}}</span>
