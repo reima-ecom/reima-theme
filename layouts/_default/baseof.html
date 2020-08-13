@@ -8,8 +8,7 @@
   {{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}} | Reima US{{else}}Clothing For Active
-    Kids | Reima US{{end}}</title>
+  <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} | {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
   {{ $.Scratch.Set "css-critical" (slice "index" "header-critical") }}
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}

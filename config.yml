@@ -36,3 +36,10 @@ module:
       target: assets/modules
     - source: modules/css
       target: static/modules
+    # deprecated layout modules
+    - source: modules-deprecated/html
+      target: layouts/partials/modules
+    - source: modules-deprecated/css
+      target: assets/modules
+    - source: modules-deprecated/css
+      target: static/modules
