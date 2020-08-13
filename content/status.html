@@ -1,18 +1,29 @@
 ---
 noindex: true
 ---
-<h1 class="text-center">
-  Site publishing
-</h1>
-<p class="text-center">
-  <button class="button" id="publish">Initiate publish</button>
-</p>
-<p class="text-center">
-  <strong>Last publishing run</strong><br>
-  Created at: <span id="created_at">...</span><br>
-  Status: <span id="status">...</span><br>
-  Conclusion: <span id="conclusion">...</span>
-</p>
+<style>
+  .status {
+    text-align: center;
+    padding: var(--block-padding);
+    margin: var(--block-margin);
+    max-width: var(--block-width);
+  }
+</style>
+<section class="status">
+  <h1>
+    Site publishing
+  </h1>
+  <p>
+    <button class="btn btn--cta" id="publish">Initiate publish</button>
+  </p>
+  <p>
+    <strong>Last publishing run</strong><br>
+    Created at: <span id="created_at">...</span><br>
+    Status: <span id="status">...</span><br>
+    Conclusion: <span id="conclusion">...</span>
+  </p>
+</section>
+
 <script>
   const btn = document.getElementById('publish');
   btn.addEventListener('click', async (e) => {

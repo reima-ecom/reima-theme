@@ -2,6 +2,7 @@
   --color-text: #38383b;
   --color-fg: #38383b;
   --color-bg: white;
+  --color-reima-red: #d2092d;
   --content-max-width: 1060px;
   --content-padding: 1rem;
   --border: 1px solid #ccc;
@@ -218,6 +219,18 @@ a:hover {
 .btn--inv {
   --color-text: white;
   --color-bg: var(--color-fg);
+}
+
+.btn--cta {
+  background: var(--color-reima-red);
+  border: none;
+  color: white;
+  font-weight: 400;
+}
+
+.btn--cta:hover,
+.btn--cta:focus {
+  background: #BA001F;
 }
 /* #endregion */
 
