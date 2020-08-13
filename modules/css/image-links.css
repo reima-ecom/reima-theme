@@ -1,38 +1,119 @@
-.module-image-links {
+.image-links {
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
+  color: var(--color-text);
+  text-align: center;
 }
 
-.module-image-links h3 {
+.image-links p {
+  margin: 0.5rem auto;
+}
+
+.image-links--text-left {
+  text-align: left;
+}
+
+.image-links--text-right {
+  text-align: right;
+}
+
+.image-links--color-invert {
+  --color-text: white;
+  --color-bg: var(--color-fg);
+}
+
+.image-links--small h3 {
   font-size: var(--h4-font-size);
   letter-spacing: var(--h4-letter-spacing);
+  margin-bottom: 0.5rem;
 }
 
-.module-image-links > div {
+.image-links--small .btn {
+  font-size: .875rem;
+  padding: .5rem 1rem;
+}
+
+.image-links > div {
   display: grid;
   gap: 1rem;
 }
 
-.module-image-links > div > div {
+/* this is the grid cell */
+.image-links > div > div {
   position: relative;
 }
 
-.module-image-links > div > div > div {
+.image-links__overlay {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   bottom: 0;
-  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem;
+  color: inherit;
+  text-decoration: none;
 }
 
-.module-image-links > div > div > div > :first-child {
+.image-links__overlay:hover,
+.image-links__overlay:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.image-links__overlay > div > :first-child {
   margin-top: 0;
 }
 
+.image-links__overlay > div > :last-child {
+  margin-bottom: 0;
+}
+
+.image-links--vertical-top .image-links__overlay {
+  align-items: flex-start;
+}
+
+.image-links--vertical-bottom .image-links__overlay {
+  align-items: flex-end;
+}
+
+.image-links--horizontal-left .image-links__overlay {
+  justify-content: flex-start;
+}
+
+.image-links--horizontal-right .image-links__overlay {
+  justify-content: flex-end;
+}
+
+.image-links--horizontal-left .image-links__overlay > div,
+.image-links--horizontal-right .image-links__overlay > div {
+  box-sizing: border-box;
+  max-width: 50%;
+}
+
+@media (min-width: 768px) {
+  .image-links > div {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .image-links--tablet-2 > div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image-links--tablet-3 > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (min-width: 992px) {
-  .module-image-links > div {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  .image-links--desktop-3 > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .image-links--desktop-4 > div {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
