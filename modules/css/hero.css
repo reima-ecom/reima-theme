@@ -29,7 +29,7 @@
   margin-top: 0;
 }
 
-.hero h1 {
+.hero h1:not(.hero--overlay-small) {
   margin-bottom: 1rem;
 }
 
