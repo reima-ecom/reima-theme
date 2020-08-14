@@ -28,9 +28,9 @@ module:
     - source: layouts-client/dist
       target: static
     # layout modules
-    - source: modules/html
+    - source: modules
       target: layouts/partials/modules
-    - source: modules/css
+    - source: modules
       target: assets/modules
     # deprecated layout modules
     - source: modules-deprecated/html
