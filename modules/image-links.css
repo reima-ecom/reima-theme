@@ -2,8 +2,11 @@
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
-  color: var(--color-text);
   text-align: center;
+}
+
+.image-links > div {
+  color: var(--color-text);
 }
 
 .image-links p {
@@ -18,7 +21,7 @@
   text-align: right;
 }
 
-.image-links--color-invert {
+.image-links--color-invert > div {
   --color-text: white;
   --color-bg: var(--color-fg);
 }

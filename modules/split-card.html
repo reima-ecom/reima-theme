@@ -1,0 +1,28 @@
+{{ $class := "split-card" }}
+{{ with .imagealign }}
+{{ $class = printf "%s split-card--image-%s" $class . }}
+{{ end }}
+{{ with .background }}
+{{ $class = printf "%s split-card--bg-%s" $class . }}
+{{ end }}
+<section class="{{$class}}">
+  <div>
+    {{partial "img" (dict "image" .image "widths" "375,750")}}
+    <div>
+      {{ if or .heading .subheading }}
+      <header>
+        {{ with .subheading }}<p>{{.}}</p>{{ end }}
+        {{ with .heading }}<h2>{{.}}</h2>{{ end }}
+      </header>
+      {{ end }}
+      <div>
+        {{.text | markdownify}}
+      </div>
+      {{ if .linktext }}
+      <div>
+        <a class="btn" href="{{.link}}">{{.linktext}}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

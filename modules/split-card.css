@@ -1,0 +1,53 @@
+.split-card p,
+.split-card div,
+.split-card h2 {
+  margin: 1rem auto;
+}
+
+.split-card > div > div {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+}
+
+.split-card header p {
+  font-size: var(--h6-font-size);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.375rem;
+}
+
+.split-card header h2 {
+  margin-top: 0;
+}
+
+.split-card--bg-gray > div {
+  background: var(--color-gray-lighter);
+}
+
+@media (min-width: 768px) {
+  .split-card {
+    margin: var(--block-margin);
+    padding: var(--block-padding);
+    max-width: var(--block-width);
+  }
+
+  .split-card > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--content-padding);
+  }
+
+  .split-card > div > div {
+    margin: 0;
+    padding: 0;
+  }
+
+  .split-card--bg-gray > div > div {
+    padding-right: var(--content-padding);
+  }
+
+  .split-card--image-right picture {
+    order: 1;
+  }
+}

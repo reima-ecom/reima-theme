@@ -3,7 +3,8 @@
   --color-fg: #38383b;
   --color-bg: white;
   --color-reima-red: #d2092d;
-  --content-max-width: 1060px;
+  --color-gray-lighter: #f2f2f5;
+  --content-max-width: 1280px;
   --content-padding: 1rem;
   --border: 1px solid #ccc;
   --block-padding: 0 var(--content-padding);
