@@ -2,6 +2,10 @@
   --block-width: 1280px;
 }
 
+.sidebar {
+  --block-margin: var(--content-padding) auto;
+}
+
 .sidebar__main h1 {
   font-size: var(--h2-font-size);
   letter-spacing: var(--h2-letter-spacing);

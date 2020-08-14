@@ -3,7 +3,10 @@
   --color-fg: #38383b;
   --color-bg: white;
   --color-reima-red: #d2092d;
+  --color-reima-blue: #407ec9;
   --color-gray-lighter: #f2f2f5;
+  --color-gray: #898d8d;
+  --color-border: #949494;
   --content-max-width: 1280px;
   --content-padding: 1rem;
   --border: 1px solid #ccc;
@@ -140,6 +143,16 @@ h6 {
 
 .text-sm {
   font-size: .875rem;
+}
+
+.price--sale {
+  color: var(--color-reima-blue);
+  font-weight: 700;
+}
+
+.price--was {
+  color: var(--color-border);
+  text-decoration: line-through;
 }
 /* #endregion */
 

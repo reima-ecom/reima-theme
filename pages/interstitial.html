@@ -34,19 +34,25 @@
 
     {{ end }}
   </div>
+  {{ if or .Params.categories .Params.purposes }}
   <div class="sidebar__sidebar">
     <hr>
     <div class="category-list">
+      {{ with .Params.categories }}
       <input type="checkbox" id="categories-opener">
       <label for="categories-opener" class="categories">
         <h2>Shop by category <span></span></h2>
       </label>
-      {{ template "categories" .Params.categories }}
+      {{ template "categories" . }}
+      {{ end }}
       <hr>
+      {{ with .Params.purposes }}
       <h2>Shop by purpose</h2>
-      {{ template "categories" .Params.purposes }}
+      {{ template "categories" . }}
+      {{ end }}
     </div>
   </div>
+  {{ end }}
 </div>
 
 {{ end }}

@@ -15,12 +15,21 @@ module:
     - source: ../../images
       target: content/images
     # css files used here
+    - source: assets
+      target: assets
     - source: layouts-client/src
       target: assets
-    - source: assets
-      target: assets
-    - source: assets
-      target: static
+    # all assets relating to pages are in the pages dir
+    # instead of the default layouts dir
+    # this allows html/css/js to live side-by-side
+    # and creates a cleaner structure
+    - source: pages
+      target: assets/pages
+    - source: pages
+      target: layouts/_default
+    # need to explicitly add the default dir back
+    - source: layouts/_default
+      target: layouts/_default
     # js entry points
     - source: layouts-client/dist
       target: assets

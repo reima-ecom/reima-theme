@@ -1,10 +1,10 @@
-.module-products {
+.product-list {
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
 }
 
-.module-products ul {
+.product-list ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1.5rem 1rem;
@@ -14,29 +14,45 @@
   font-size: 0.875rem;
 }
 
-.module-products li {
+.product-list li {
   position: relative;
   text-align: center;
 }
 
-.module-products li h2 {
+.product-list--center {
+  text-align: center;
+}
+
+.product-list--center ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-list--center li {
+  position: relative;
+  padding: 0.5rem;
+  width: 145px;
+}
+
+.product-list li:hover,
+.product-list li:focus-within {
+  outline: var(--border);
+}
+
+.product-list li h3 {
   font-size: 1em;
   letter-spacing: normal;
   margin: 0.25rem 0;
 }
 
-.module-products img {
-  padding: 0 0.5rem;
-  box-sizing: border-box;
-}
-
-.module-products li .color-dots {
+.product-list li .color-dots {
   display: flex;
   justify-content: center;
   margin: 0.75rem 0 0.5rem;
 }
 
-.module-products li .color-dots > div {
+.product-list li .color-dots > div {
   margin: 0 0.25rem;
   height: 1rem;
   width: 1rem;
@@ -44,13 +60,26 @@
   box-shadow: 0 0 0 1px #bfbfbf;
 }
 
+.product-list__rating {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+.product-list__rating span {
+  font-size: 0.75rem;
+}
+
+.product-list__rating span + span {
+  color: var(--color-gray);
+}
+
 /* #region sold out tag and muting */
 
-.module-products li .sold-out-tag {
+.product-list li .sold-out-tag {
   display: none;
 }
 
-.module-products li.sold-out .sold-out-tag {
+.product-list li.sold-out .sold-out-tag {
   display: block;
   position: absolute;
   padding: 0.25rem 0.5rem;
@@ -63,8 +92,18 @@
   letter-spacing: 0.1em;
 }
 
-.module-products li.sold-out img {
+.product-list li.sold-out img {
   opacity: 0.4;
 }
 
 /* #endregion */
+
+@media (min-width: 992px) {
+  .product-list ul {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .product-list--center li {
+    width: 200px;
+  }
+}

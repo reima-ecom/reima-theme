@@ -1,9 +1,17 @@
-<section class="module-products border-top">
-  {{ $title := .title }}
-  {{ with site.GetPage (printf "/collections/%s" .collection) }}
-  <h2 class="h4 margin-bottom-base">
-    {{default .Title $title}}
-  </h2>
+<section class="product-list{{if .center}} product-list--center{{end}}">
+
+  <!-- get the collection content page -->
+  {{ $collectionPage := . }}
+  {{ if not .File }}
+  {{ $collectionPage = site.GetPage (printf "/collections/%s" .collection) }}
+  {{ end }}
+
+  {{ with $collectionPage }}
+
+  {{ if not $.File }}
+  <h2>{{$.title}}</h2>
+  {{ end }}
+
   <ul>
     {{ range .Pages | first 10 }}
     {{ $link := partial "link" .RelPermalink }}
@@ -13,7 +21,11 @@
       {{partial "image" (dict "image" (index . 0) "widths" "200,400")}}
       {{ end }}
       <div class="color-dots">
-        {{ range (apply (apply .Params.variants "index" "." "options") "index" "." "Color") | uniq }}
+        {{ $coloroption := "Color" }}
+        {{ with site.Params.coloroption }}
+        {{ $coloroption = . }}
+        {{ end }}
+        {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ with . }}
         {{ with (index site.Data.colors (. | lower)) }}
         <div style="background-color: {{.}};"></div>
@@ -23,12 +35,19 @@
         {{ end }}
         {{ end }}
       </div>
-      <h2 class="h2">
+      <h3>
         <a class="silent-link stretched-link" href="{{$link}}">{{.Title}}</a>
-      </h2>
-      <div class="text-center">
+      </h3>
+      <div>
         {{partial "product-price" .Params}}
       </div>
+      {{ with .Params.reviewsBottomline }}
+      <div class="product-list__rating">
+        {{ range seq (math.Round .average) }}★{{ end }}
+        <span>{{ div (math.Round (mul .average 10)) 10 }}</span>
+        <span>({{.count}})</span>
+      </div>
+      {{ end }}
       <div class="sold-out-tag">Sold Out</div>
     </li>
     {{ else }}
@@ -36,6 +55,7 @@
     {{ end }}
     {{ end }}
   </ul>
+
   {{ else }}
   <p>No products found</p>
   {{ end }}
