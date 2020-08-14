@@ -1,9 +1,5 @@
 {{- range . | uniq -}}
 
-{{- if eq hugo.Environment "development" -}}
-<script async defer src="/{{.}}" type="module"></script>
-{{- else -}}
-
 <!-- get main js -->
 {{- with resources.Get (printf "%s" .) }}
 {{- $js := . | fingerprint -}}
@@ -12,7 +8,6 @@
 {{ warnf "Could not find js %s" . }}
 {{- end -}}
 
-{{- end -}}
 {{- end -}}
 
 <script>

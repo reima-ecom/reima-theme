@@ -17,8 +17,6 @@ module:
     # css files used here
     - source: layouts-client/src
       target: assets
-    - source: layouts-client/src
-      target: static
     - source: assets
       target: assets
     - source: assets
@@ -34,12 +32,8 @@ module:
       target: layouts/partials/modules
     - source: modules/css
       target: assets/modules
-    - source: modules/css
-      target: static/modules
     # deprecated layout modules
     - source: modules-deprecated/html
       target: layouts/partials/modules
     - source: modules-deprecated/css
       target: assets/modules
-    - source: modules-deprecated/css
-      target: static/modules
