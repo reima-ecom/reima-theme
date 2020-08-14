@@ -4,10 +4,8 @@
   max-width: 720px;
 }
 
-.module-content h2 {
-  font-size: 1.125rem;
-  letter-spacing: 0;
-  line-height: 1.25;
-  margin-bottom: 1rem;
-  font-weight: 700;
+@media (min-width: 992px) {
+  .module-content p {
+    font-size: 1.25rem;
+  }
 }
