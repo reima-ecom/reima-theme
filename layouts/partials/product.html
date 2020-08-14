@@ -59,14 +59,19 @@
       </div>
       {{ range $product.Params.options }}
       {{ $name := .name }}
-      <fieldset class="selections selections--{{$name}}">
+      {{ $nameEnglish := $name }}
+      <!-- see if this is color, and change class name if yes -->
+      {{ if eq $nameEnglish site.Params.coloroption }}
+      {{ $nameEnglish = "Color" }}
+      {{ end }}
+      <fieldset class="selections selections--{{$nameEnglish}}">
         <legend>{{.name}} <span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
         {{ range .values }}
         {{ $id := printf "%s-%s" $name .value}}
         <input type="radio" name="{{$name}}" id="{{$id}}" value="{{.value}}" {{ if .firstAvailable }}checked{{ end }} />
 
         {{ $labelStyle := "" }}
-        {{ if eq $name "Color" }}
+        {{ if eq $nameEnglish "Color" }}
         {{ $color := "grey" }}
         {{ with index $.Site.Data.colors (.value | lower) }}
         {{ $color = . }}
