@@ -6,9 +6,11 @@
     {{ range .testimonials }}
     <div>
       <blockquote{{with .link}} cite="{{.}}" {{end}}>
+        <img src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt='"'>
         <div>{{.text | markdownify}}</div>
         <footer>
           {{.author}}
+          {{ if .linktext }}
           <cite>
             {{ if .link }}
             <a href="{{.link}}">{{.linktext}}</a>
@@ -16,6 +18,7 @@
             {{.linktext}}
             {{ end }}
           </cite>
+          {{ end }}
         </footer>
         </blockquote>
     </div>

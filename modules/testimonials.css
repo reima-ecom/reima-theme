@@ -24,6 +24,14 @@
   max-width: 450px;
 }
 
+.testimonials img {
+  width: 40px;
+  height: 28px;
+  margin: var(--content-padding);
+  display: block;
+  margin-bottom: 0;
+ }
+ 
 .testimonials blockquote {
   border: var(--border);
   font-size: var(--text-font-size);
