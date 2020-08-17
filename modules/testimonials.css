@@ -1,0 +1,94 @@
+.testimonials {
+  margin: var(--block-margin);
+  max-width: var(--block-width);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonials > h2 {
+  padding: var(--block-padding);
+  margin: 0 0 var(--content-padding);
+}
+
+.testimonials > div {
+  display: flex;
+  overflow: auto;
+  padding-left: var(--content-padding);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.testimonials > div > div {
+  padding-right: var(--content-padding);
+  flex: 1 0 80vw;
+  max-width: 450px;
+}
+
+.testimonials blockquote {
+  border: var(--border);
+  font-size: var(--text-font-size);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.testimonials blockquote > div {
+  flex: 1 0 auto;
+  padding: var(--content-padding);
+}
+
+.testimonials blockquote p {
+  margin: 0;
+}
+
+.testimonials blockquote p + p {
+  margin-top: 1rem;
+}
+
+.testimonials blockquote > footer {
+  padding: var(--content-padding);
+  background: none;
+  color: inherit;
+  border-top: var(--border);
+  border-top-style: dashed;
+  font-weight: 700;
+}
+
+.testimonials blockquote > footer cite {
+  display: block;
+  color: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.testimonials blockquote > footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .testimonials > h2 {
+    text-align: center;
+  }
+
+  .testimonials > div {
+    margin: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  /* make testimonials one-third or larger and increase max-width */
+  .testimonials > div > div {
+    flex: 1 0 33%;
+    box-sizing: border-box;
+    max-width: 600px;
+  }
+
+  /* hide testimonial nr 4 and up */
+  .testimonials > div > div:nth-child(1n + 4) {
+    display: none;
+  }
+}

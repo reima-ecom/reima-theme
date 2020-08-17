@@ -1,0 +1,24 @@
+<section class="testimonials">
+  {{ with .heading }}
+  <h2>{{.}}</h2>
+  {{ end }}
+  <div>
+    {{ range .testimonials }}
+    <div>
+      <blockquote{{with .link}} cite="{{.}}" {{end}}>
+        <div>{{.text | markdownify}}</div>
+        <footer>
+          {{.author}}
+          <cite>
+            {{ if .link }}
+            <a href="{{.link}}">{{.linktext}}</a>
+            {{ else }}
+            {{.linktext}}
+            {{ end }}
+          </cite>
+        </footer>
+        </blockquote>
+    </div>
+    {{ end }}
+  </div>
+</section>
