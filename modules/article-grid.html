@@ -1,0 +1,20 @@
+{{- $posts := first 3 (where (where site.RegularPages "Section" "blogs") ".Params.category" .category) }}
+{{- $page := .Page }}
+{{- if $posts }}
+<section class="article-grid">
+  <h2>{{.heading}}</h2>
+  <div>
+    {{ range $posts }}
+    <article>
+      {{ with .Resources.GetMatch "image" }}
+      {{partial "image" (dict "image" . "widths" "400,200")}}
+      {{ end }}
+      <time datetime="{{.Date}}">{{.Date.Format "Jan 2, 2006"}}</time>
+      <a href="{{partial "link" .RelPermalink}}">
+        {{.Title}}
+      </a>
+    </article>
+    {{ end }}
+  </div>
+</section>
+{{- end }}
