@@ -4,13 +4,25 @@
 
 .grid {
   --block-margin: var(--content-padding) auto;
-  display: grid;
-  grid-template-areas: 
+  --grid-template-areas: 
     "banner"
     "title"
     "filters"
     "modules"
     "categories";
+  /* this is the display of sidebar and main
+  we don't want those in the content flow */
+  --container-display: contents;
+  --grid-margin: 0;
+  --grid-padding: 0;
+  --grid-template-columns: 1fr;
+
+  display: grid;
+  grid-template-areas: var(--grid-template-areas);
+  grid-template-columns: var(--grid-template-columns);
+  max-width: var(--block-width);
+  margin: var(--grid-margin);
+  padding: var(--grid-padding);
 }
 
 .grid__banner {
@@ -22,7 +34,7 @@
 }
 
 .grid__main {
-  display: contents;
+  display: var(--container-display);
   grid-area: main;
 }
 
@@ -31,7 +43,7 @@
 }
 
 .grid__sidebar {
-  display: contents;
+  display: var(--container-display);
   grid-area: sidebar;
 }
 
@@ -247,17 +259,17 @@
 
 @media (min-width: 992px) {
   .grid {
-    margin: var(--block-margin);
-    max-width: var(--block-width);
+    --grid-margin: var(--block-margin);
+    --container-display: block;
   }
   
   .grid--has-sidebar {
     --inner-spacing: 1.5rem;
-    padding: var(--block-padding);
-    grid-template-columns: 25% 1fr;
-    grid-template-areas:
-    "banner banner"
-    "sidebar main";
+    --grid-padding: var(--block-padding);
+    --grid-template-columns: 25% 1fr;
+    --grid-template-areas:
+      "banner banner"
+      "sidebar main";
   }
   
   .grid--has-sidebar .grid__main {
@@ -280,12 +292,7 @@
     margin-top: 0;
   }
 
-  .grid__main {
-    display: block;
-  }
-
   .grid__sidebar {
-    display: block;
     height: calc(100% - var(--content-padding));
     border-right: var(--border);
   }
