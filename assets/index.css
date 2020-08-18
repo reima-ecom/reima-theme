@@ -13,6 +13,7 @@
   --block-padding: 0 var(--content-padding);
   --block-margin: var(--content-padding) auto;
   --block-width: var(--content-max-width);
+  --hr-width: calc(var(--content-max-width) - 2 * var(--content-padding));
   
   /* h0 means display */
   --text-font-size: 1rem;
@@ -89,7 +90,8 @@ img {
 hr {
   border: none;
   border-bottom: var(--border);
-  margin: var(--content-padding) 0;
+  margin: var(--block-margin);
+  max-width: var(--hr-width);
 }
 
 /* #region basic typography */
@@ -203,8 +205,6 @@ a:hover {
 /* #region buttons */
 .btn {
   border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
   background-color: transparent;
   border: 2px solid;
   color: var(--color-text);
@@ -216,8 +216,8 @@ a:hover {
   padding: .6875rem 1.5rem;
   text-align: center;
   text-decoration: none;
-  -webkit-transition: background-color .2s, border-color .2s, color .2s;
   transition: background-color .2s, border-color .2s, color .2s;
+  font-family: inherit;
 }
 
 .btn:hover {
@@ -247,6 +247,11 @@ a:hover {
 .btn--cta:hover,
 .btn--cta:focus {
   background: #BA001F;
+}
+
+.btn--secondary {
+  font-weight: 400;
+  border-width: 1px;
 }
 /* #endregion */
 

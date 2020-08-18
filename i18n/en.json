@@ -8,6 +8,9 @@
   "Product feature: color": {
     "other": "Color"
   },
+  "Product feature: size": {
+    "other": "Size"
+  },
   "Product feature: sizeclothing": {
     "other": "Size, Clothing"
   },
