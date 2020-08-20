@@ -13,7 +13,7 @@
   {{ end }}
 
   <ul>
-    {{ range .Pages | first 10 }}
+    {{ range .Pages }}
     {{ $link := partial "link" .RelPermalink }}
     {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
     <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}">

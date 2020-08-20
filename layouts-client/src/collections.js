@@ -32,7 +32,7 @@ const searchAndRender = async () => {
   const { hits } = await index.search('', { facetFilters });
   // render results
   /** @type {HTMLElement} */
-  const list = document.querySelector('.product-list');
+  const list = document.querySelector('.product-list > ul');
   for (let i = 0; i < list.children.length; i += 1) {
     const hit = hits[i];
     const element = /** @type {HTMLAnchorElement} */(list.children[i]);
@@ -50,17 +50,19 @@ const searchAndRender = async () => {
       const dots = element.querySelector('.color-dots');
       dots.innerHTML = '';
       dots.innerHTML = hit.colors.map((c) => `<div style="background-color: ${colors[c.toLowerCase()]};"></div>`).join('');
-      element.querySelector('h2').innerText = hit.title;
+      /** @type {HTMLElement} */(element.querySelector('h3 a')).innerText = hit.title;
       /** @type {HTMLElement} */ (element.querySelector('.price')).innerText = `$${hit.price}`;
     }
   }
 };
 
-const filtersElement = document.getElementById('filters');
-if (filtersElement) {
-  filtersElement.addEventListener('change', async (e) => {
-    await ensureIndex();
+const filtersForm = document.getElementById('filters');
+if (filtersForm) {
+  filtersForm.addEventListener('change', async (e) => {
     const { name, value, checked } = /** @type {HTMLInputElement} */ (e.target);
+    // if this is an element opener checkbox, bail out
+    if (name.startsWith('open-')) return;
+    await ensureIndex();
     // add to array of active filters
     const key = `${name}:${value}`;
     if (!filters[name]) filters[name] = [];
@@ -69,12 +71,7 @@ if (filtersElement) {
     searchAndRender();
   });
 
-  document.getElementById('clear').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelectorAll('#filters input').forEach((input) => {
-      // eslint-disable-next-line no-param-reassign
-      /** @type {HTMLInputElement} */ (input).checked = false;
-    });
+  filtersForm.addEventListener('reset', () => {
     filters = { collections: filters.collections };
     searchAndRender();
   });

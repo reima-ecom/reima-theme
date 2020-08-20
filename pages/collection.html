@@ -1,4 +1,6 @@
 {{ define "dependencies" }}
+
+<!-- add css dependencies -->
 {{ range .Params.main }}
 {{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
 {{ end }}
@@ -6,6 +8,12 @@
 {{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
 {{ end }}
 {{ $.Scratch.Add "css-critical" "pages/collection" }}
+
+<!-- add js if there's fitering needed -->
+{{ if and .Params.filters .Site.Params.public.algolia }}
+{{ $.Scratch.Add "js-async" "collections.js"}}
+{{ end }}
+
 {{ end }}
 
 {{ define "main" }}
@@ -98,10 +106,10 @@
         {{- $options = dict }}
         {{- end }}
 
-        <label class="btn btn--secondary filter-list__open" for="filters-open">
+        <label class="btn btn--secondary filter-list__open" for="open-filters">
           Filter selection
         </label>
-        <input type="checkbox" name="filters-open" id="filters-open" class="filter-list__open-checkbox">
+        <input type="checkbox" name="open-filters" id="open-filters" class="filter-list__open-checkbox">
         {{ range $.Site.Data.features.order }}
         {{ $name := lower . }}
         {{ with index $options . }}
@@ -135,6 +143,15 @@
         {{ end }}
         <input type="reset" class="filter-list__clear" value="Clear filters">
       </form>
+      <div id="clear"></div>
+      <script id="colors" type="application/json">
+      {{ $.Site.Data.colors }}
+      </script>
+      {{ with .File }}
+      <script>
+        collection = '{{path.Base .Dir}}';
+      </script>
+      {{ end }}
     </div>
     {{ end }}
   </div>
