@@ -13,8 +13,16 @@
   {{ end }}
 
   <ul>
-    {{ range .Pages }}
+    <!-- get collection child product pages -->
+    {{ $productPages := .Pages }}
+    <!-- limit results if set -->
+    {{ with $.limit }}
+    {{ $productPages = $productPages | first . }}
+    {{ end }}
+    <!-- loop through product pages -->
+    {{ range $productPages }}
     {{ $link := partial "link" .RelPermalink }}
+    <!-- get the actual product page from the name of the product page under collections  -->
     {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
     <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}">
       {{ with .Resources.ByType "image" | first 1 }}
