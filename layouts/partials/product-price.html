@@ -12,6 +12,6 @@
 from
 {{- end -}}
 <span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}">
-  {{.priceFormatted}}
+  {{ with .priceFormatted }}{{.}}{{ else }}{{ errorf "Formatted price not found!" }}{{ end }}
 </span>
 <span class="price price--was">{{.compareAtPriceFormatted}}</span>
