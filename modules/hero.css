@@ -1,5 +1,7 @@
 .hero {
+  --overlay-bg: rgba(255,255,255,0.4);
   color: var(--color-text);
+  font-size: var(--text-font-size);
   max-width: var(--content-max-width);
   padding: 0;
   text-align: center;
@@ -22,11 +24,15 @@
 }
 
 .hero > div > div {
-  margin: var(--content-padding);
+  padding: var(--content-padding);
 }
 
 .hero > div > div > :first-child {
   margin-top: 0;
+}
+
+.hero > div > div > :last-child {
+  margin-bottom: 0;
 }
 
 .hero h1:not(.hero--overlay-small) {
@@ -98,6 +104,64 @@
   .hero--overlay-invert {
     --color-text: white;
     --color-bg: var(--color-fg);
+    --overlay-bg: rgba(0,0,0,0.4);
+  }
+
+  .hero--overlay-bg > div > div {
+    --content-padding: 4rem;
+    background-image:
+      /* main top-down */
+      linear-gradient(to bottom,
+        transparent 0%,
+        var(--overlay-bg) var(--content-padding),
+        var(--overlay-bg) calc(100% - var(--content-padding)),
+        transparent 100%
+      ),
+      /* left edge */
+      linear-gradient(to left, var(--overlay-bg), transparent),
+      /* right edge */
+      linear-gradient(to right, var(--overlay-bg), transparent),
+      /* top-left corner */
+      radial-gradient(
+        circle farthest-side at 100% 100%,
+        var(--overlay-bg) 0%, 
+        transparent 100%
+      ),
+      /* top-right corner */
+      radial-gradient(
+        circle farthest-side at 0 100%,
+        var(--overlay-bg) 0%, 
+        transparent 100%
+      ),
+      /* bottom-right corner */
+      radial-gradient(
+        circle farthest-side at 0 0,
+        var(--overlay-bg) 0%, 
+        transparent 100%
+      ),
+      /* bottom-left corner */
+      radial-gradient(
+        circle farthest-side at 100% 0,
+        var(--overlay-bg) 0%, 
+        transparent 100%
+      );
+    background-size: 
+      calc(100% - 2 * var(--content-padding)),
+      var(--content-padding) calc(100% - 2 * var(--content-padding)),
+      var(--content-padding) calc(100% - 2 * var(--content-padding)),
+      var(--content-padding) var(--content-padding),
+      var(--content-padding) var(--content-padding),
+      var(--content-padding) var(--content-padding),
+      var(--content-padding) var(--content-padding);
+    background-position: 
+      center,
+      top var(--content-padding) left 0,
+      top var(--content-padding) right 0,
+      top 0 left 0,
+      top 0 right 0,
+      bottom 0 right 0,
+      bottom 0 left 0;
+    background-repeat: no-repeat;
   }
 
   .hero--overlay-align-left > div {
