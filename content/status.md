@@ -7,6 +7,10 @@ version: "2020-08-21"
 
 ## Changes in 2020-08-21
 
+**Fixed missing descriptions on collection page**
+
+Collection page descriptions are now back.
+
 **New status page**
 
 The status page (this page!) will in the future include a log of changes, as well as a list of known bugs. Also, the theme is now more rigorously versioned, and you can see the version a site is running on on the status page.
