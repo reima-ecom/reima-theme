@@ -1,0 +1,13 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "pages/status" }}
+{{ $.Scratch.Add "js-async" "elements/publish.js" }}
+{{ end }}
+
+{{ define "main" }}
+<section class="status">
+  <h1>{{.Title}}</h1>
+  <p>Theme version: {{.Params.version}}</p>
+  {{partial "elements/publish"}}
+  {{.Content}}
+</section>
+{{ end }}

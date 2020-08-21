@@ -46,3 +46,8 @@ module:
       target: layouts/partials/modules
     - source: modules-deprecated/css
       target: assets/modules
+    # custom elements
+    - source: elements
+      target: layouts/partials/elements
+    - source: elements
+      target: assets/elements

@@ -1,0 +1,15 @@
+.status {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+  max-width: var(--content-width);
+}
+
+.status > h1:first-child {
+  margin-bottom: 0.5rem;
+}
+
+/* this is the version number */
+.status > h1:first-child + p {
+  margin: 0.5rem 0;
+  font-style: italic;
+}

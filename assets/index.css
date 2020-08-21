@@ -1,5 +1,6 @@
 :root {
   --color-text: #38383b;
+  --color-text-highlight: #fff0c5;
   --color-fg: #38383b;
   --color-bg: white;
   --color-reima-red: #d2092d;
@@ -13,8 +14,8 @@
   --block-padding: 0 var(--content-padding);
   --block-margin: var(--content-padding) auto;
   --block-width: var(--content-max-width);
+  --content-width: 720px;
   --hr-width: calc(var(--content-max-width) - 2 * var(--content-padding));
-  
   /* h0 means display */
   --text-font-size: 1rem;
   --h0-font-size: 2rem;
@@ -23,7 +24,7 @@
   --h3-font-size: 1.375rem;
   --h4-font-size: 1.125rem;
   --h4-letter-spacing: 0;
-  --h4-margin-bottom: .625rem;  
+  --h4-margin-bottom: .625rem;
   --h5-font-size: 1rem;
   --h6-font-size: 0.875rem;
   --h6-letter-spacing: .03rem;
@@ -44,7 +45,6 @@
 @media (min-width: 992px) {
   :root {
     --content-padding: 2rem;
-
     --h0-font-size: 2.75rem;
     --h1-font-size: 2.5rem;
     --h2-font-size: 2rem;
@@ -68,14 +68,14 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Campton",Arial,serif;
+  font-family: "Campton", Arial, serif;
   letter-spacing: 0.025em;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
   color: #38383b;
 }
 
-header > div {
+header>div {
   margin: auto;
   max-width: var(--block-width);
   padding: var(--block-padding);
@@ -95,10 +95,11 @@ hr {
 }
 
 /* #region basic typography */
+
 @font-face {
   font-family: 'Campton';
   font-display: swap;
-  src: url("/campton-book-webfont.woff2") format("woff2"),url("/campton-book-webfont.woff") format("woff");
+  src: url("/campton-book-webfont.woff2") format("woff2"), url("/campton-book-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal
 }
@@ -106,7 +107,7 @@ hr {
 @font-face {
   font-family: 'Campton';
   font-display: swap;
-  src: url("/campton-bold-webfont.woff2") format("woff2"),url("/campton-bold-webfont.woff") format("woff");
+  src: url("/campton-bold-webfont.woff2") format("woff2"), url("/campton-bold-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal
 }
@@ -145,6 +146,11 @@ h6 {
   text-transform: uppercase;
 }
 
+code {
+  padding: .25rem .3125rem;
+  background-color: var(--color-text-highlight);
+}
+
 .text-sm {
   font-size: .875rem;
 }
@@ -158,9 +164,11 @@ h6 {
   color: var(--color-border);
   text-decoration: line-through;
 }
+
 /* #endregion */
 
 /* #region links */
+
 a {
   color: #d2092d;
   cursor: pointer;
@@ -185,8 +193,7 @@ a:hover {
   text-decoration: none;
 }
 
-.silent-link:hover,
-.silent-link:focus {
+.silent-link:hover, .silent-link:focus {
   color: #d2092d;
   text-decoration: none;
 }
@@ -200,9 +207,11 @@ a:hover {
   left: 0;
   background-color: transparent;
 }
+
 /* #endregion */
 
 /* #region buttons */
+
 .btn {
   border-radius: 2px;
   background-color: transparent;
@@ -244,8 +253,7 @@ a:hover {
   font-weight: 400;
 }
 
-.btn--cta:hover,
-.btn--cta:focus {
+.btn--cta:hover, .btn--cta:focus {
   background: #BA001F;
 }
 
@@ -253,19 +261,20 @@ a:hover {
   font-weight: 400;
   border-width: 1px;
 }
+
 /* #endregion */
 
 /* #region focus */
-.btn:focus,
-a:focus {
+
+.btn:focus, a:focus {
   outline-style: dotted;
   outline-width: 2px;
   outline-offset: 2px;
-  outline-color: rgba(0,0,0,0.5);
+  outline-color: rgba(0, 0, 0, 0.5);
 }
 
 .btn--inv:focus {
-  outline-color: rgba(255,255,255,0.5);
+  outline-color: rgba(255, 255, 255, 0.5);
 }
 
 /* #endregion */
