@@ -28,3 +28,7 @@ Collection pages now use the new design, and requires that collections have been
 - Icon button (e.g. cart icon) focus outline not according to specification
 - Checkbox-based open buttons (e.g. menu icon and collection page filters) not tabbable
 - Product card color dots not according to specification - dots get "squished" if there are too many of them (see toddlers collection vantti on Canada site)
+
+## Theme demo
+
+See the [demo site](https://reima-demo.netlify.app) for a showcase of the current theme. Note that this site might not be running the latest version of the theme. You can check this on the [status page](https://reima-demo.netlify.app/status) of the demo site
