@@ -2,8 +2,5 @@
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: 720px;
-}
-
-.module-content p {
   font-size: var(--text-font-size);
 }
