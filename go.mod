@@ -1,3 +1,3 @@
-module github.com/reima-solution-sales/reima-theme
+module github.com/reima-ecom/reima-theme
 
 go 1.14

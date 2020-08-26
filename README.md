@@ -127,7 +127,7 @@ Always when there's a bug (or outage!), the following process should be followed
 3. Update documentation as needed.
 4. Write a post-mortem to gather learnings. Why did the bug happen? How was it fixed? What can we do to avoid similar issues in the future?
 
-Post mortems are written in the [LEARNINGS.md](https://github.com/reima-solution-sales/reima-us/blob/master/LEARNINGS.md) file. See that file for a template.
+Post mortems are written in the [LEARNINGS.md](https://github.com/reima-ecom/reima-us/blob/master/LEARNINGS.md) file. See that file for a template.
 
 ### Documentation
 
