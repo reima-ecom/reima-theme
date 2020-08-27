@@ -120,7 +120,8 @@ fields:
       file: 
       path: 
   label: Columns on tablet
-  description: Number of columns to output on tablet sized screens. Leave blank for default auto-fill behavior.
+  description: Number of columns to output on tablet sized screens. Leave blank for
+    default auto-fill behavior.
 - name: columnsdesktop
   type: select
   default: []
