@@ -1,0 +1,21 @@
+---
+label: Menu Entry
+hide_body: true
+fields:
+- name: name
+  type: text
+  config:
+    required: false
+  label: Name
+  description: Link title.
+- name: url
+  type: text
+  config:
+    required: false
+  label: Url
+  description: Link url. Please use the full url only for external links. I.e. internal
+    links should be "/products/a-product" and external links "https://www.google.com".
+    <strong>Remember the preceding slash on internal links.</strong> (This is the
+    way links work - with the preceding slash it tells the browser this is a link
+    relative to the root of the site. Without the slash, the link is considered relative
+    to the current page.)

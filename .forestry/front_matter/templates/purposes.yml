@@ -1,0 +1,10 @@
+---
+label: Shop by purpose
+hide_body: true
+display_field: noop
+fields:
+- name: noop
+  type: text
+  label: Noop
+  hidden: true
+  default: Uses the purposes defined on the page

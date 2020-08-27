@@ -1,0 +1,100 @@
+---
+label: Hero
+hide_body: true
+display_field: text
+fields:
+- name: image
+  type: file
+  config:
+    maxSize: 64
+  label: Image
+  hidden: false
+- name: imagemobile
+  type: file
+  config:
+    maxSize: 64
+  label: Image for Mobile
+  description: Image to use on mobile if smart cropping of the main image is not suitable.
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+  description: Heading to be used. Outputs an <code>h1</code> heading tag. Uses display
+    font size on desktop.
+- name: text
+  type: text
+  config:
+    required: false
+  label: Text
+  description: Outputs a <code>p</code> tag for text content.
+- name: button
+  type: include
+  config: {}
+  template: link
+  label: Button
+- name: overlaybg
+  type: boolean
+  label: Overlay background
+  description: Create a partially transparent background for the overlay to make text
+    more legible.
+- name: overlayinvert
+  type: boolean
+  label: White text in overlay
+  description: Make overlay text white.
+- name: overlayalign
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - center
+    - left
+    - right
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Overlay text alignment
+  description: Justify overlay content (i.e. align overlay text).
+- name: overlayhorizontal
+  type: select
+  default: ''
+  config:
+    required: false
+    options:
+    - center
+    - left
+    - right
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Overlay horizontal alignment
+  description: Horizontal alignment of overlay element. If left or right, also limits
+    the overlay width to half of the hero width.
+- name: overlaysmall
+  type: boolean
+  label: Small sized overlay
+  description: Decrease overlay heading size to <code>h4</code> heading, and limit
+    overlay width to one third of the hero.
+- name: fullwidth
+  type: boolean
+  label: Full width
+  description: Do not limit hero width (i.e. usually span across the entire page).
+- name: overlaymobile
+  type: select
+  default: []
+  config:
+    required: false
+    options: []
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Overlay on mobile
+  description: Show overlay on mobile on this side of the image, limiting size to
+    half the hero width.

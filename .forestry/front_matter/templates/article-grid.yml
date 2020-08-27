@@ -1,0 +1,25 @@
+---
+label: Article grid
+hide_body: true
+display_field: heading
+fields:
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+- name: category
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - Tips
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Blog category
+  description: Blog category to show posts for. Corresponds to the category in Reima
+    World space in Contentful.

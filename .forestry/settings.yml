@@ -1,0 +1,46 @@
+---
+new_page_extension: md
+auto_deploy: false
+admin_path: ''
+webhook_url: 
+sections:
+- type: directory
+  path: demo/content
+  label: Pages
+  create: all
+  match: "**/*"
+  templates:
+  - page
+  - collection
+  - deprecated-page
+- type: directory
+  path: demo/products/collections
+  label: Collections
+  create: none
+  match: "*/*"
+  templates:
+  - collection
+- type: document
+  path: demo/i18n/en.json
+  label: Strings
+- type: document
+  path: demo/data/menus.json
+  label: Menus
+- type: document
+  path: demo/data/announcements.json
+  label: Announcements
+upload_dir: images
+public_path: ''
+front_matter_path: ''
+use_front_matter_path: false
+file_template: ":filename:"
+build:
+  preview_env:
+  - HUGO_ENV=staging
+  - HUGO_VERSION=0.74.3
+  preview_output_directory: public
+  preview_docker_image: forestryio/hugo:latest
+  mount_path: "/srv"
+  instant_preview_command: hugo server -D -E -F --port 8080 --bind 0.0.0.0 --renderToDisk
+    -d public
+version: 0.71.1

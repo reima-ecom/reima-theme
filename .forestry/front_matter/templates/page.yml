@@ -1,0 +1,41 @@
+---
+label: Page
+hide_body: true
+fields:
+- name: layout
+  type: text
+  config:
+    required: true
+  label: layout
+  hidden: true
+  default: page
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: modules
+  type: blocks
+  label: Modules
+  template_types:
+  - hero
+  - content
+  - banner
+  - split-card
+  - image-links
+  - products
+  - testimonials
+  - article-grid
+  config:
+    min: 1
+    max: 
+- name: description
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Description
+  description: Description for SEO purposes

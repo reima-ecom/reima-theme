@@ -1,0 +1,14 @@
+---
+label: 'Deprecated: Collection List'
+hide_body: true
+fields:
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: handle
+  type: text
+  config:
+    required: false
+  label: Collection Handle

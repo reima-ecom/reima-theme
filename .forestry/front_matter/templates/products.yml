@@ -1,0 +1,39 @@
+---
+label: Product List
+hide_body: true
+display_field: title
+fields:
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: collection
+  type: text
+  config:
+    required: true
+  label: Collection
+- name: limit
+  type: number
+  description: Limit number of products to show. Leave blank or use zero to show all
+    products in collection.
+  default: 10
+  required: true
+  config:
+    min: 
+    max: 
+    step: 
+  label: Number of products to show
+- name: collectionref
+  type: select
+  default: []
+  config:
+    required: false
+    options: []
+    source:
+      type: pages
+      section: collections
+      file: 
+      path: 
+  label: Collection Reference
+  hidden: true

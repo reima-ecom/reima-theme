@@ -1,0 +1,28 @@
+---
+label: Announcements
+hide_body: true
+fields:
+- type: boolean
+  name: headerAnnouncementEnabled
+  label: Header Announcement Enabled
+- type: text
+  name: headerAnnouncement
+  label: Header Announcement
+  showOnly:
+    field: headerAnnouncementEnabled
+    value: true
+- type: boolean
+  name: collectionPageBannerEnabled
+  label: Collection Page Banner Enabled
+- type: text
+  name: collectionPageBannerTitle
+  label: Collection Page Banner Title
+  showOnly:
+    field: collectionPageBannerEnabled
+    value: true
+- type: text
+  name: collectionPageBannerText
+  label: Collection Page Banner Text
+  showOnly:
+    field: collectionPageBannerEnabled
+    value: true

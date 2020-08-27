@@ -1,0 +1,19 @@
+---
+label: Banner
+hide_body: true
+fields:
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+- name: text
+  type: text
+  config:
+    required: false
+  label: Text
+- name: button
+  type: include
+  config: {}
+  template: link
+  label: Button

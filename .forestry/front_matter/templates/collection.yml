@@ -1,0 +1,61 @@
+---
+label: Collection page
+hide_body: true
+display_field: title
+fields:
+- type: text
+  name: layout
+  label: layout
+  hidden: true
+  default: collection
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: banner
+  type: blocks
+  label: Banner
+  template_types:
+  - banner
+  config:
+    min: 0
+    max: 1
+- name: main
+  type: blocks
+  label: Main Content
+  template_types:
+  - hero
+  - content
+  - split-card
+  - image-links
+  - products
+  - categories
+  - purposes
+  config:
+    min: 1
+    max: 
+- name: categories
+  type: blocks
+  label: Categories
+  template_types:
+  - category
+  config:
+    min: 
+    max: 
+- type: field_group_list
+  name: purposes
+  label: Purposes
+  fields:
+  - type: text
+    name: heading
+    label: heading
+  - type: text
+    name: collection
+    label: collection
+  - type: file
+    name: image
+    label: image
+pages:
+- demo/content/collection.html
+- demo/content/kids.md

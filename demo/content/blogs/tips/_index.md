@@ -1,0 +1,6 @@
+---
+{
+  "title": "Tips",
+  "slug": "tips"
+}
+---

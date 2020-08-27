@@ -1,0 +1,64 @@
+---
+label: Split card
+hide_body: true
+display_field: heading
+fields:
+- name: image
+  type: file
+  config:
+    maxSize: 64
+  label: Image
+- name: subheading
+  type: text
+  config:
+    required: false
+  label: Subheading
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+- name: text
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Text
+  description: Markdown supported.
+- name: button
+  type: include
+  config: {}
+  template: link
+  label: Button
+- name: background
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - gray
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Background color
+  description: Background for the element. Leave blank for transparent background.
+- name: imagealign
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - right
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Image alignment on desktop
+  description: On desktop, it's possible to align the image to the right. Leave blank
+    for the default of image on the left.

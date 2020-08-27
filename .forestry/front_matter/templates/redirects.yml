@@ -1,0 +1,24 @@
+---
+label: Redirects
+hide_body: true
+fields:
+- type: field_group_list
+  name: Redirects
+  label: Redirects
+  fields:
+  - type: text
+    name: from
+    label: From
+    config:
+      required: true
+      min: 
+    description: This should be a path from the root of the site, e.g. "/collections/old".
+      Wildcards can be specified at the end of the path, e.g. "/collections/old/*"
+      will match everything under this directory.
+  - type: text
+    name: to
+    label: To
+    config:
+      required: true
+    description: Specify the path from the root of the site if this is an internal
+      link, e.g. "/some-page".

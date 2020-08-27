@@ -1,0 +1,70 @@
+{
+  "main": [
+    {
+      "name": "Pages",
+      "url": "",
+      "children": [
+        {
+          "name": "Page",
+          "url": "/page"
+        },
+        {
+          "name": "Collection page",
+          "url": "/collections/tops"
+        },
+        {
+          "name": "Collection interstitial",
+          "url": "/kids"
+        },
+        {
+          "name": "Collection plain",
+          "url": "/collection"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+
+          ],
+          "name": "Hero",
+          "url": "/modules/hero"
+        },
+        {
+          "name": "Image links",
+          "url": "/modules/image-links",
+          "children": [
+
+          ]
+        },
+        {
+          "name": "Split card",
+          "url": "/modules/split-card",
+          "children": [
+
+          ]
+        },
+        {
+          "name": "Testimonials",
+          "url": "/modules/testimonials",
+          "children": [
+
+          ]
+        },
+        {
+          "name": "Article grid",
+          "url": "/modules/article-grid",
+          "children": [
+
+          ]
+        }
+      ],
+      "name": "Modules",
+      "url": ""
+    }
+  ],
+  "footer": [
+
+  ]
+}

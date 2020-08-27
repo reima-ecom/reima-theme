@@ -1,0 +1,75 @@
+---
+label: Menus
+hide_body: true
+fields:
+- name: main
+  type: field_group_list
+  fields:
+  - name: menu_entry
+    type: include
+    config: {}
+    template: menu-entry
+    label: Menu Entry
+  - name: children
+    type: field_group_list
+    fields:
+    - name: menu_entry
+      type: include
+      config: {}
+      template: menu-entry
+      label: Menu Entry
+    - name: children
+      type: field_group_list
+      fields:
+      - name: menu_entry
+        type: include
+        config: {}
+        template: menu-entry
+        label: Menu Entry
+      config:
+        min: 
+        max: 
+        labelField: name
+      label: Children
+    config:
+      min: 
+      max: 
+      labelField: name
+    label: Children
+  config:
+    min: 
+    max: 
+    labelField: name
+  label: Main Menu Items
+  description: Items for the main menu visible in the header. This menu can have up
+    to two sub-levels.
+- name: footer
+  type: field_group_list
+  fields:
+  - name: menu_entry
+    type: include
+    config: {}
+    template: menu-entry
+    label: Menu Entry
+  - name: children
+    type: field_group_list
+    fields:
+    - name: menu_entry
+      type: include
+      config: {}
+      template: menu-entry
+      label: Menu Entry
+    config:
+      min: 
+      max: 
+      labelField: name
+    label: Children
+  config:
+    min: 
+    max: 
+    labelField: name
+  label: Footer Menu Items
+  description: Items for the footer menu, visible at the bottom of the page. This
+    menu can have one sub-level.
+pages:
+- demo/data/menus.json

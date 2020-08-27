@@ -1,0 +1,10 @@
+---
+label: Heading
+hide_body: true
+display_field: heading
+fields:
+- name: heading
+  type: text
+  config:
+    required: true
+  label: Heading

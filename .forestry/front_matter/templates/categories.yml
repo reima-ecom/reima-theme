@@ -1,0 +1,10 @@
+---
+label: Shop by category
+hide_body: true
+display_field: noop
+fields:
+- name: noop
+  type: text
+  label: Noop
+  hidden: true
+  default: Uses the categories defined on the page

@@ -1,0 +1,43 @@
+---
+label: Testimonials
+hide_body: true
+display_field: heading
+fields:
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+- name: testimonials
+  type: field_group_list
+  fields:
+  - name: text
+    type: textarea
+    default: ''
+    config:
+      required: true
+      wysiwyg: false
+      schema:
+        format: markdown
+    label: Quote
+    description: Usage of markdown possible e.g. for links.
+  - name: author
+    type: text
+    config:
+      required: true
+    label: Author
+  - name: linktext
+    type: text
+    config:
+      required: false
+    label: Link text
+  - name: link
+    type: text
+    config:
+      required: false
+    label: Link url
+  config:
+    min: 1
+    max: 
+    labelField: author
+  label: Testimonials

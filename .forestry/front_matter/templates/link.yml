@@ -1,0 +1,12 @@
+---
+label: Link
+hide_body: true
+fields:
+- name: linktext
+  type: text
+  config:
+    required: false
+  label: Link Text
+- name: link
+  type: text
+  label: Link

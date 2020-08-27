@@ -1,0 +1,34 @@
+# for forestry, see https://forestry.io/docs/faqs/how-to-use-yaml-json-front-matter-w-hugo/
+metaDataFormat: "yaml"
+
+buildDrafts: true
+disableFastRender: true
+disableKinds:
+  - taxonomy
+  - term
+
+params:
+  coloroption: 色
+  # these params will be rendered on every page (as window.site)
+  # note that hugo makes these lowercase, so best have all lowercase names
+  public:
+    algolia:
+      indexname: 'reima-us-dev'
+      appid: '6FDKJXBLR9'
+      apikey: '3cc34311314307aa6cc876263de9e486'
+    shopify:
+      store: reima-us
+      token: d2990d8e29e763239f8e8ff6cefc9ebe
+    currency: USD
+
+module:
+  imports:
+    - path: github.com/reima-ecom/reima-theme
+  mounts:
+    # images headless
+    - source: images
+      target: content/images
+    - source: content
+      target: content
+    - source: products
+      target: content
