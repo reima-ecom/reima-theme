@@ -1,3 +1,6 @@
+# for forestry, see https://forestry.io/docs/faqs/how-to-use-yaml-json-front-matter-w-hugo/
+metaDataFormat: "yaml"
+
 module:
   mounts:
     # default mounts

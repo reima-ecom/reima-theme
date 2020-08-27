@@ -1,6 +1,3 @@
-# for forestry, see https://forestry.io/docs/faqs/how-to-use-yaml-json-front-matter-w-hugo/
-metaDataFormat: "yaml"
-
 buildDrafts: true
 disableFastRender: true
 disableKinds:
