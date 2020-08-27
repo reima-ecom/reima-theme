@@ -18,25 +18,18 @@ Headless eCommerce for Reima.
 The folder structure mostly follows the default Hugo folder structure with a few additions. Some folders have more detailed readme files describing e.g. development principles.
 
 - `.forestry`: forestry.io configuration
-- `.github`: github config
-  - `workflows`: CI/CD in the form of action workflows
 - `.vscode`: VSCode config
-- `images`: upload folder for images, as well as Hugo headless page to enable resource getting
-- `packages`: modules such as logic for getting content (products, pages, etc.) from the different services
-- `tests`: Production tests against the website
-- `themes`: Hugo themes folder
-  - `theme`: default Reima headless theme
-    - `content`: pages global to all sites, such as a page for outputting the Algolia index
-    - `data`: data files, such as color codes
-    - `layouts`: layout files and partials
-    - `layouts-client`: css and js assets for the site (as well as some svg icons that should be inlined)
-    - `modules`: layout "modules" (i.e. blocks) design
-    - `static`: static content for the site
-- `us`: content for the us site - note that much of this is not commited, since it's downloaded on build
-  - `content-static`: content files that are editable in forestry
-- `workers`: Cloudflare workers, such as the ones serving the sites
+- `_deprecated`: deprecated files for old layout
+- `base`: base layout and other global code
+- `partials`: partial layouts such as breadcrumb
+- `elements`: custom elements (combine with above?)
+- `pages`: page layouts relating to a particular section
+- `modules`: content modules
+- `helpers`: small utility functions
+- `www`: demo site
+- other directories as in Hugo in general
 
-Other folders and root files are configuration files for the development environment or cache files.
+See the Hugo config.yaml file for details on how these folders are mounted inside Hugo.
 
 ## Browser compatibility
 
