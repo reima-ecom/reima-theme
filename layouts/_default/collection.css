@@ -260,10 +260,10 @@
 @media (min-width: 992px) {
   .grid {
     --grid-margin: var(--block-margin);
-    --container-display: block;
   }
   
   .grid--has-sidebar {
+    --container-display: block;
     --inner-spacing: 1.5rem;
     --grid-padding: var(--block-padding);
     --grid-template-columns: 25% 1fr;
@@ -285,7 +285,13 @@
   }
 
   .grid__banner {
+    padding: var(--block-padding);
     padding-bottom: var(--content-padding);
+  }
+
+  .grid--has-sidebar .grid__banner {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .grid__title h1 {

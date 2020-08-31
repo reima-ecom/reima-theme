@@ -7,7 +7,9 @@ version: "2020-08-31"
 
 ## Changes in 2020-08-31
 
-This update includes a major rewrite in the code structure to make the code more understandable. No effects should be visible on the client end.
+Collection page sidebar is no longer visible if there is no algolia search defined for the site.
+
+This update includes a major rewrite in the code structure to make the code more understandable. No effects should be visible from these changes on the client end.
 
 ## Changes in 2020-08-21
 

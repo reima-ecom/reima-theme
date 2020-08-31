@@ -18,7 +18,7 @@
 
 {{ define "main" }}
 
-{{ $hassidebar := or .Params.categories .Params.purposes .Params.filters }}
+{{ $hassidebar := or .Params.categories .Params.purposes (and .Params.filters site.Params.public.algolia) }}
 
 <div class="grid{{if $hassidebar}} grid--has-sidebar{{end}}">
   {{ with .Params.banner }}
