@@ -9,10 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} | {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
-  {{ $.Scratch.Set "css-critical" (slice "index" "header-critical") }}
+  {{ $.Scratch.Set "css-critical" (slice "_default/baseof" "header-critical") }}
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
-  {{ $.Scratch.Set "js-async" (slice "app.js") }}
+  {{ $.Scratch.Set "js-async" (slice "baseof.js") }}
   {{- block "dependencies" . -}} {{- end -}}
   <!-- here we internalize all css (this is the way AMP does it) -->
   {{partial "css-critical" ($.Scratch.Get "css-critical" | append ($.Scratch.Get "css-base") | append ($.Scratch.Get "css-async") )}}

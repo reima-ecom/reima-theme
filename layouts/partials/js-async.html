@@ -1,7 +1,7 @@
 {{- range . | uniq -}}
 
 <!-- get main js -->
-{{- with resources.Get (printf "%s" .) }}
+{{- with resources.Get (printf "js/%s" .) }}
 {{- $js := . | fingerprint -}}
 <script async defer src="{{$js.RelPermalink}}" type="module"></script>
 {{- else -}}

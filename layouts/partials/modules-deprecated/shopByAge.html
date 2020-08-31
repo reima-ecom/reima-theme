@@ -1,0 +1,29 @@
+{{ $page := .Page }}
+<section class="page-width">
+  <h1>{{.Params.title}}</h1>
+  <div class="categories">
+    {{ range .Params.items }}
+    <a href="{{partial "modules-deprecated/link" (dict "link" .link "root" $.Page)}}">
+      {{ $img := $page.Page.Resources.GetMatch .image }}
+      {{ if not $img }}
+      {{ $img = partial "helpers/get-image" .image }}
+      {{ end}}
+      {{ with $img }}
+      <picture>
+        <source media="(min-width: 768px)" loading="lazy" data-srcset="
+          {{(.Fill "400x600").RelPermalink}} 400w,
+          {{(.Fill "800x1200").RelPermalink}} 800w
+        " sizes="(max-width: 1340px) calc((100vw - 40px - 4rem) / 3), calc((1300px - 4rem) / 3)">
+        <source loading="lazy" data-srcset="
+          {{(.Fill "200x150 Top").RelPermalink}} 200w,
+          {{(.Fill "400x300 Top").RelPermalink}} 400w,
+          {{(.Fill "800x600 Top").RelPermalink}} 800w
+        " sizes="(min-width: 440px) 400px, calc(100vw - 40px)">
+        <img class="lazyload" loading="lazy" data-src="{{(.Fill "768x768").RelPermalink}}" />
+      </picture>
+      {{ end }}
+      <h2>{{.text}}</h2>
+    </a>
+    {{ end }}
+  </div>
+</section>

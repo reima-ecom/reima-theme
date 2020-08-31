@@ -4,32 +4,22 @@ Headless eCommerce for Reima.
 
 ## Architectural components
 
+- Forestry.io for content management
 - Shopify for products and collections
-- Contentful for content pages and strings
+- Contentful for brand content
 - Algolia for product search and filtering
 - Yotpo for reviews
-- Cloudflare workers for A/B testing
-- Netlify for building and hosting (including cloud functions)
+- Cloudflare workers for site hosting and A/B testing
 - Hugo static site generator for building the site
 - Web components aka custom elements for much of the client-side functionality (such as the cart)
 
 ## Folder structure
 
-The folder structure mostly follows the default Hugo folder structure with a few additions. Some folders have more detailed readme files describing e.g. development principles.
+The folder structure mostly follows the default Hugo folder structure with CSS and JS files handled a bit differently. 
 
-- `.forestry`: forestry.io configuration
-- `.vscode`: VSCode config
-- `_deprecated`: deprecated files for old layout
-- `base`: base layout and other global code
-- `partials`: partial layouts such as breadcrumb
-- `elements`: custom elements (combine with above?)
-- `pages`: page layouts relating to a particular section
-- `modules`: content modules
-- `helpers`: small utility functions
-- `www`: demo site
-- other directories as in Hugo in general
+In order to allow for CSS files to live next to their layout (HTML) counterparts, the `layouts` dir is mounted also as `assets`. This means that CSS files should be referenced relative to the `layouts` folder. I.e. the CSS for the base layout should be added as `_default/baseof.css`, because that is its path within the `layouts` folder.
 
-See the Hugo config.yaml file for details on how these folders are mounted inside Hugo.
+JS files also live next to their corresponding layout files. However, these need to be built with rollup, which outputs the build result to `assets/js`. So JS files should be referenced accordingly. Note that rollup doesn't create any subfolders, so just reference JS files as `js/[entrypoint].js`. Note also that the `assets/js` folder is mounted as a static folder as well, to allow for chunks to be loaded correctly. Remember to build the JS files when they are updated - this is not done in connection with site builds!
 
 ## Browser compatibility
 

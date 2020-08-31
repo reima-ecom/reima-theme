@@ -4,11 +4,11 @@
 {{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
 {{ with .Params.css }}
 {{ range . }}
-{{ $.Scratch.Add "css-critical" (printf "partials/%s" .) }}
+{{ $.Scratch.Add "css-critical" (printf "partials/modules-deprecated/%s" .) }}
 {{ end }}
 {{ end }}
-{{ $.Scratch.Add "css-critical" "modules/contentBlock" }}
-{{ $.Scratch.Add "css-critical" "hero" }}
+{{ $.Scratch.Add "css-critical" "partials/modules-deprecated/contentBlock" }}
+{{ $.Scratch.Add "css-critical" "partials/hero" }}
 
 {{ end }}
 
@@ -20,6 +20,6 @@
   {{.Content | markdownify}}
 </section>
 
-{{partial "modules/index" $}}
+{{partial "modules-deprecated/index" $}}
 
 {{ end }}

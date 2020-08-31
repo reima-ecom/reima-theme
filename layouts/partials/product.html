@@ -161,7 +161,7 @@
           {{partial "modal" (slice $tagId $)}}
           {{ range . }}
           {{ $iconValue := string . }}
-          {{ $svgPath := printf "partials/.product/%s-%s.svg" $tag $iconValue }}
+          {{ $svgPath := printf "%s-%s.svg" $tag $iconValue }}
           {{ with resources.Get $svgPath }}
           {{ $svg := .Content }}
           {{ if eq $iconValue $value }}

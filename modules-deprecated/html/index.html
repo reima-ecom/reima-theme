@@ -1,8 +1,0 @@
-{{ range .Params.sections }}
-{{ $partialPath := printf "modules/%s.html" .template }}
-{{ if templates.Exists ( printf "partials/%s" $partialPath ) }}
-{{ partial (printf "modules/%s" .template) (dict "Page" $ "Params" .) }}
-{{ else }}
-{{ warnf "Could not find section partial for %s at %s" .template $ }}
-{{ end }}
-{{ end }}

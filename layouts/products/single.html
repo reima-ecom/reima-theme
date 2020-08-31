@@ -1,11 +1,11 @@
 {{ define "dependencies" }}
 <!-- USE OLD CSS HERE! -->
 {{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
-{{ $.Scratch.Add "css-critical" "breadcrumb" }}
+{{ $.Scratch.Add "css-critical" "partials/breadcrumb" }}
 {{ $.Scratch.Add "css-critical" "modal-critical" }}
 {{ $.Scratch.Add "css-critical" "partials/elements/r-carousel" }}
 {{ $.Scratch.Add "css-critical" "partials/elements/r-thumbnails" }}
-{{ $.Scratch.Add "css-critical" "product" }}
+{{ $.Scratch.Add "css-critical" "partials/product" }}
 {{ $.Scratch.Add "css-critical" "reviews" }}
 {{ $.Scratch.Add "css-async" "modal" }}
 {{ $.Scratch.Add "js-async" "product.js" }}

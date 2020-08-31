@@ -2,15 +2,15 @@
 <!-- USE OLD CSS HERE! -->
 {{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
 {{ range .Params.sections }}
-{{ $.Scratch.Add "css-critical" (printf "modules/%s" .template) }}
+{{ $.Scratch.Add "css-critical" (printf "partials/modules-deprecated/%s" .template) }}
 {{ end }}
 {{ $.Scratch.Add "css-critical" "partials/elements/r-carousel" }}
-{{ $.Scratch.Add "css-critical" "hero" }}
+{{ $.Scratch.Add "css-critical" "partials/hero" }}
 {{ end }}
 
 {{ define "main" }}
 
 {{partial "hero" $}}
-{{partial "modules/index" $}}
+{{partial "modules-deprecated/index" $}}
 
 {{ end }}
