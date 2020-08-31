@@ -2,8 +2,12 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-08-21"
+version: "2020-08-31"
 ---
+
+## Changes in 2020-08-31
+
+This update includes a major rewrite in the code structure to make the code more understandable. No effects should be visible on the client end.
 
 ## Changes in 2020-08-21
 
@@ -27,7 +31,6 @@ Collection pages now use the new design, and requires that collections have been
 
 ## Known bugs
 
-- No description (copy) on collection pages
 - No breadcrumb on collection pages
 - Icon button (e.g. cart icon) focus outline not according to specification
 - Checkbox-based open buttons (e.g. menu icon and collection page filters) not tabbable
