@@ -1,4 +1,4 @@
-FROM golang:1.13
+FROM golang:1.15.1
 
 # VARIANT can be either 'hugo' for the standard version or 'hugo_extended' for the extended version.
 ARG VARIANT=hugo
@@ -22,6 +22,12 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
 # Copy patched hugo binary from build stage
 FROM mcr.microsoft.com/vscode/devcontainers/base
 COPY --from=0 /usr/bin/hugo /usr/bin
+
+# Copy go binaries and set path
+# (this is required to get hugo modules to work)
+COPY --from=0 /usr/local/go/bin /usr/local/go/bin
+ENV PATH="${PATH}:/usr/local/go/bin"
+
 EXPOSE 1313
 
 # [Optional] Uncomment this section to install additional OS packages you may want.
