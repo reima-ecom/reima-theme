@@ -8,12 +8,17 @@
   {{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} | {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
+  <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
+    {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
   {{ $.Scratch.Set "css-critical" (slice "_default/baseof" "header-critical") }}
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
   {{ $.Scratch.Set "js-async" (slice "baseof.js") }}
   {{- block "dependencies" . -}} {{- end -}}
+  <!-- if multilingual site, add css for language selector -->
+  {{ if site.IsMultiLingual }}
+  {{ $.Scratch.Add "css-critical" "header-languages" }}
+  {{ end }}
   <!-- here we internalize all css (this is the way AMP does it) -->
   {{partial "css-critical" ($.Scratch.Get "css-critical" | append ($.Scratch.Get "css-base") | append ($.Scratch.Get "css-async") )}}
   <!--
@@ -111,6 +116,30 @@
           </svg>
         </a>
       </div>
+
+      <!-- if this site is multilingual, show language selector -->
+      {{ if site.IsMultiLingual }}
+      <ul class="languages">
+        {{ range $.Site.Languages }}
+        <li>
+          {{ if eq . $.Site.Language }}
+          {{$.Site.Language.Lang}}
+          {{ else }}
+          {{ range where $.Translations "Lang" .Lang }}
+          <a href="{{.RelPermalink}}">
+            {{.Language.Lang}}
+          </a>
+          {{else}}
+          <a href="/{{.}}">
+            {{.Lang}}
+          </a>
+          {{ end }}
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
       <!-- 
       <a href="{{(.GetPage "account/index").RelPermalink}}" class="icon">
         <svg id="icon-uniE91A" viewBox="0 0 32 32">

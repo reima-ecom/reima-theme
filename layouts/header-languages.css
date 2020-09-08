@@ -1,0 +1,17 @@
+.languages {
+  list-style: none;
+  padding: 0;
+  margin: 0 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.languages li {
+  display: inline-block;
+}
+
+.languages a {
+  color: inherit;
+  text-decoration-color: inherit;
+  font-weight: normal;
+}

@@ -4,6 +4,15 @@ disableKinds:
   - taxonomy
   - term
 
+# uncomment these lines to test multilingual mode
+languages:
+  en:
+    languageName: English
+    weight: 1
+  fi:
+    languageName: Finnish
+    weight: 2
+
 params:
   coloroption: 色
   # these params will be rendered on every page (as window.site)
