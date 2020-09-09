@@ -11,12 +11,16 @@ fields:
   showOnly:
     field: ometria_enable
     value: true
+  config:
+    required: true
 - type: text
   name: ometria_store
   label: Ometria store id
   showOnly:
     field: ometria_enable
     value: true
+  config:
+    required: true
 - type: field_group
   name: ga
   fields:
