@@ -2,21 +2,20 @@
 label: Pixels
 hide_body: true
 fields:
-- name: enable_ometria
+- name: ometria_enable
   type: boolean
   label: Enable Ometria
-- type: field_group
-  name: ometria
-  label: Ometria
-  fields:
-  - type: text
-    name: account
-    label: Account id
-  - type: text
-    name: store
-    label: Store id
+- type: text
+  name: ometria_account
+  label: Ometria account id
   showOnly:
-    field: enable_ometria
+    field: ometria_enable
+    value: true
+- type: text
+  name: ometria_store
+  label: Ometria store id
+  showOnly:
+    field: ometria_enable
     value: true
 - type: field_group
   name: ga

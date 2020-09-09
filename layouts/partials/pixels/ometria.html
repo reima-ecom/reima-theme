@@ -3,16 +3,17 @@
   - account: account id
   - store: store id
  -->
-{{ with site.Data.pixels.ometria }}
+{{ with site.Data.pixels }}
+{{ if .ometria_enable }}
 
-<script src="//cdn.ometria.com/tags/{{.account}}.js"></script>
+<script src="//cdn.ometria.com/tags/{{.ometria_account}}.js"></script>
 {{- if $.IsHome }}
 <script>
-  ometria.init('homepage', null, '{{.store}}');
+  ometria.init('homepage', null, '{{.ometria_store}}');
 </script>
 {{- else if partial "helpers/is-collection" $ }}
 <script>
-  ometria.init('listing', null, '{{.store}}');
+  ometria.init('listing', null, '{{.ometria_store}}');
 </script>
 {{- else if partial "helpers/is-product" $ }}
 <!-- 
@@ -22,8 +23,9 @@
 <script>
   ometria.init('product', {
     pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
-  }, '{{.store}}');
+  }, '{{.ometria_store}}');
 </script>
 {{- end }}
 
+{{ end }}
 {{ end }}
