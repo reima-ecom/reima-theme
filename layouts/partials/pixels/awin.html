@@ -1,3 +1,5 @@
-{{ with site.Data.pixels.awin }}
-<script src="https://www.dwin1.com/{{.id}}.js" type="text/javascript" defer="defer"></script>
+{{ with site.Data.pixels }}
+{{ if .awin_enabled }}
+<script src="https://www.dwin1.com/{{.awin_id}}.js" type="text/javascript" defer="defer"></script>
+{{ end }}
 {{ end }}

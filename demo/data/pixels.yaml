@@ -2,10 +2,6 @@
 ometria_enable: true
 ometria_account: ometria-account
 ometria_store: ometria-store
-ga:
-  property: UA-177507029-1
-  autolink: reima-us.myshopify.com
-facebook:
-  id: facebook-id
-awin:
-  id: ''
+ga_enable: true
+ga_property: UA-177507029-1
+ga_autolink: reima-us.myshopify.com

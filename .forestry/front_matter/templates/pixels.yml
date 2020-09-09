@@ -4,7 +4,7 @@ hide_body: true
 fields:
 - name: ometria_enable
   type: boolean
-  label: Enable Ometria
+  label: Ometria
 - type: text
   name: ometria_account
   label: Ometria account id
@@ -21,31 +21,48 @@ fields:
     value: true
   config:
     required: true
-- type: field_group
-  name: ga
-  fields:
-  - type: text
-    name: property
-    label: Tracking id
-  - type: text
-    name: autolink
-    label: Shopify domain
-    description: 'Used to link together sessions between the headless site and Shopify
-      checkout. Example: `reima-us.myshopify.com`'
+- type: boolean
   label: Google Analytics
-- type: field_group
-  name: facebook
+  name: ga_enable
+- type: text
+  name: ga_property
+  label: GA tracking id
+  showOnly:
+    field: ga_enable
+    value: true
+  config:
+    required: true
+- type: text
+  name: ga_autolink
+  label: GA Shopify domain
+  description: 'Used to link together sessions between the headless site and Shopify
+    checkout. Example: `reima-us.myshopify.com`'
+  showOnly:
+    field: ga_enable
+    value: true
+  config:
+    required: true
+- type: boolean
+  name: facebook_enable
   label: Facebook
-  fields:
-  - type: text
-    name: id
-    label: Pixel id
-- type: field_group
-  name: awin
+- type: text
+  name: facebook_id
+  label: FB pixel id
+  showOnly:
+    field: facebook_enable
+    value: true
+  config:
+    required: true
+- type: boolean
+  name: awin_enable
   label: Awin
-  fields:
-  - type: text
-    name: id
-    label: Id
+- type: text
+  name: awin_id
+  label: Awin id
+  showOnly:
+    field: awin_enable
+    value: true
+  config:
+    required: true
 pages:
 - demo/data/pixels.yaml
