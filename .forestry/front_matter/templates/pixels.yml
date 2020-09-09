@@ -2,14 +2,14 @@
 label: Pixels
 hide_body: true
 fields:
-- name: ometria_enable
+- name: ometria_enabled
   type: boolean
   label: Ometria
 - type: text
   name: ometria_account
   label: Ometria account id
   showOnly:
-    field: ometria_enable
+    field: ometria_enabled
     value: true
   config:
     required: true
@@ -17,18 +17,18 @@ fields:
   name: ometria_store
   label: Ometria store id
   showOnly:
-    field: ometria_enable
+    field: ometria_enabled
     value: true
   config:
     required: true
 - type: boolean
   label: Google Analytics
-  name: ga_enable
+  name: ga_enabled
 - type: text
   name: ga_property
   label: GA tracking id
   showOnly:
-    field: ga_enable
+    field: ga_enabled
     value: true
   config:
     required: true
@@ -38,29 +38,29 @@ fields:
   description: 'Used to link together sessions between the headless site and Shopify
     checkout. Example: `reima-us.myshopify.com`'
   showOnly:
-    field: ga_enable
+    field: ga_enabled
     value: true
   config:
     required: true
 - type: boolean
-  name: facebook_enable
+  name: facebook_enabled
   label: Facebook
 - type: text
   name: facebook_id
   label: FB pixel id
   showOnly:
-    field: facebook_enable
+    field: facebook_enabled
     value: true
   config:
     required: true
 - type: boolean
-  name: awin_enable
+  name: awin_enabled
   label: Awin
 - type: text
   name: awin_id
   label: Awin id
   showOnly:
-    field: awin_enable
+    field: awin_enabled
     value: true
   config:
     required: true
