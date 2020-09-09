@@ -2,8 +2,14 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-08-31"
+version: "2020-09-09"
 ---
+
+## Changes in 2020-09-09
+
+**Add tracking pixels via forestry.io**
+
+Now it's possible to add pixels directly via forestry. See the "Pixels" entry in the sidebar. If it's not there, it still needs to be configured (contact a developer).
 
 ## Changes in 2020-08-31
 
