@@ -2,37 +2,45 @@
 label: Pixels
 hide_body: true
 fields:
+- name: enable_ometria
+  type: boolean
+  label: Enable Ometria
 - type: field_group
   name: ometria
-  label: ometria
+  label: Ometria
   fields:
   - type: text
     name: account
-    label: account
+    label: Account id
   - type: text
     name: store
-    label: store
+    label: Store id
+  showOnly:
+    field: enable_ometria
+    value: true
 - type: field_group
   name: ga
-  label: ga
   fields:
   - type: text
     name: property
-    label: property
+    label: Tracking id
   - type: text
     name: autolink
-    label: autolink
+    label: Shopify domain
+    description: 'Used to link together sessions between the headless site and Shopify
+      checkout. Example: `reima-us.myshopify.com`'
+  label: Google Analytics
 - type: field_group
   name: facebook
-  label: facebook
+  label: Facebook
   fields:
   - type: text
     name: id
-    label: id
+    label: Pixel id
 - type: field_group
   name: awin
-  label: awin
+  label: Awin
   fields:
   - type: text
     name: id
-    label: id
+    label: Id
