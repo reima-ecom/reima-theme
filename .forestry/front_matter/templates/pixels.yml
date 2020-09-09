@@ -1,0 +1,38 @@
+---
+label: Pixels
+hide_body: true
+fields:
+- type: field_group
+  name: ometria
+  label: ometria
+  fields:
+  - type: text
+    name: account
+    label: account
+  - type: text
+    name: store
+    label: store
+- type: field_group
+  name: ga
+  label: ga
+  fields:
+  - type: text
+    name: property
+    label: property
+  - type: text
+    name: autolink
+    label: autolink
+- type: field_group
+  name: facebook
+  label: facebook
+  fields:
+  - type: text
+    name: id
+    label: id
+- type: field_group
+  name: awin
+  label: awin
+  fields:
+  - type: text
+    name: id
+    label: id
