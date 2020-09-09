@@ -1,5 +1,4 @@
-# EXAMLE USAGE OF PIXELS
-# uncomment these lines to test pixels
+---
 ometria:
   account: ometria-account
   store: ometria-store
@@ -10,3 +9,4 @@ facebook:
   id: facebook-id
 awin:
   id: awin-id
+enable_ometria: false
