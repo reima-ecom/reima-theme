@@ -29,6 +29,11 @@ sections:
 - type: document
   path: demo/data/announcements.json
   label: Announcements
+- type: document
+  path: demo/data/pixels.yaml
+  label: Pixels
+  match: "**/*"
+  read_only: false
 upload_dir: demo/images
 public_path: ''
 front_matter_path: ''
