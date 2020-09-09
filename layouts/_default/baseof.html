@@ -209,15 +209,9 @@
       &copy; 2020 us.reima.com Reima Inc.
     </p>
   </footer>
-  {{partial "pixels/index"}}
+  {{partial "pixels/index" .}}
   <!-- inline js -->
   {{partial "js-inline"}}
-  {{block "analytics" .}}{{end}}
-  <script>
-    if (window.ga) {
-      ga('send', 'pageview');
-    }
-  </script>
   <script experiment>
     window.experiment = 'control';
   </script>

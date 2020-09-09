@@ -1,10 +1,4 @@
-{{ $product := . }}
-
-{{ if eq .Section "products"}}
-{{ else }}
-{{ $product = .GetPage (printf "/products/%s" .File.ContentBaseName) }}
-{{ end }}
-
+{{ $product := partial "helpers/get-product" . }}
 {{ with $product }}
 
 <div class="product">
@@ -277,19 +271,6 @@
   variants = {{.Params.variants }};
   yotpoId = '{{.Params.yotpoId}}';
   selectedOptions = {{ $selectedOptions }};
-  gaProduct = {
-    "id": "{{.File.ContentBaseName}}",
-    "name": "{{.Title}}",
-    "price": {{.Params.price }},
-  "quantity": 1
-  };
-  fbProduct = {
-    content_name: '{{.Title}}',
-    content_ids: ['{{.File.ContentBaseName}}'],
-    content_type: 'product',
-    value: '{{.Params.price}}',
-    currency: '{{site.Params.public.currency}}'
-  };
 </script>
 <script type="application/ld+json">
 {

@@ -1,0 +1,29 @@
+<!-- 
+  parameters expected:
+  - account: account id
+  - store: store id
+ -->
+{{ with site.Data.pixels.ometria }}
+
+<script src="//cdn.ometria.com/tags/{{.account}}.js"></script>
+{{- if $.IsHome }}
+<script>
+  ometria.init('homepage', null, '{{.store}}');
+</script>
+{{- else if partial "helpers/is-collection" $ }}
+<script>
+  ometria.init('listing', null, '{{.store}}');
+</script>
+{{- else if partial "helpers/is-product" $ }}
+<!-- 
+  TODO: move to use legacyid param or something similar!
+  using yotpoId for now, since that is the same
+ -->
+<script>
+  ometria.init('product', {
+    pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
+  }, '{{.store}}');
+</script>
+{{- end }}
+
+{{ end }}

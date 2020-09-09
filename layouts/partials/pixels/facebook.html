@@ -1,3 +1,5 @@
+{{ with site.Data.pixels.facebook }}
+
 <script>
   !function (f, b, e, v, n, t, s) {
     if (f.fbq) return; n = f.fbq = function () {
@@ -15,3 +17,17 @@
 </script>
 <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id={{.id}}&ev=PageView&noscript=1" /></noscript>
+
+{{ end }}
+
+{{ with partial "helpers/get-product" }}
+<script>
+  fbq('track', 'ViewContent', {
+    content_name: '{{.Title}}',
+    content_ids: ['{{$.File.ContentBaseName}}'],
+    content_type: 'product',
+    value: '{{.Params.price}}',
+    currency: '{{site.Params.public.currency}}'
+  });
+</script>
+{{ end }}

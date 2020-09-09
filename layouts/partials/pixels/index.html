@@ -1,23 +1,14 @@
-{{- if eq hugo.Environment "production" }}
-
-<!-- sentry error tracking -->
-{{- with site.Params.pixels.sentry }}
-{{partial "pixels/sentry" .}}
-{{- end }}
+{{- if hugo.IsProduction }}
 
 <!-- Google Analytics -->
-{{- with site.Params.pixels.ga }}
 {{partial "pixels/ga" .}}
-{{- end }}
-
 <!-- Facebook Pixel Code -->
-{{- with site.Params.pixels.facebook }}
 {{partial "pixels/facebook" .}}
-{{- end }}
-
 <!-- shareasale / awin -->
-{{- with site.Params.pixels.awin }}
 {{partial "pixels/awin" .}}
-{{- end }}
+<!-- ometria (pass in page) -->
+{{partial "pixels/ometria" .}}
+<!-- sentry error tracking -->
+{{partial "pixels/sentry" .}}
 
 {{- end }}

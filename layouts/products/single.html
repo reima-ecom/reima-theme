@@ -12,12 +12,7 @@
 {{ end }}
 
 {{ define "canonical" }}
-{{ $product := . }}
-{{ if eq .Section "products"}}
-{{ else }}
-{{ $product = .GetPage (printf "/products/%s" .File.ContentBaseName) }}
-{{ end }}
-
+{{ $product := partial "helpers/get-product" . }}
 <link rel="canonical" href="{{partial "link" $product.Permalink}}">
 {{ end }}
 
@@ -26,12 +21,4 @@
   {{partial "breadcrumb" $}}
   {{partialCached "product" $ .File.ContentBaseName}}
 </section>
-{{ end }}
-
-{{ define "analytics" }}
-<script>
-  ga('ec:addProduct', gaProduct);
-  ga('ec:setAction', 'detail');
-  fbq('track', 'ViewContent', fbProduct);
-</script>
 {{ end }}

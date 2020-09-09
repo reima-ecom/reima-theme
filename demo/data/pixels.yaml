@@ -1,0 +1,12 @@
+# EXAMLE USAGE OF PIXELS
+# uncomment these lines to test pixels
+ometria:
+  account: ometria-account
+  store: ometria-store
+ga:
+  property: UA-177507029-1
+  autolink: reima-us.myshopify.com
+facebook:
+  id: facebook-id
+awin:
+  id: awin-id

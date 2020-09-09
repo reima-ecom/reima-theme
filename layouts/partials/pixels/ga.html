@@ -1,3 +1,4 @@
+{{ with site.Data.pixels.ga }}
 <script>
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -12,3 +13,21 @@
   ga('require', 'linker');
   ga('linker:autoLink', ['{{.autolink}}'], false, true);
 </script>
+
+{{ with partial "helpers/get-product" $ }}
+<script>
+  ga('ec:addProduct', {
+    "id": "{{$.File.ContentBaseName}}",
+    "name": "{{.Title}}",
+    "price": {{.Params.price }},
+    "quantity": 1
+  });
+  ga('ec:setAction', 'detail');
+</script>
+{{ end }}
+
+<script>
+  ga('send', 'pageview');
+</script>
+
+{{ end }}
