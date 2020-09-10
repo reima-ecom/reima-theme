@@ -7,6 +7,7 @@ sections:
 - type: document
   path: content/_index.md
   label: Read only test
+  read_only: true
 - type: directory
   path: demo/content
   label: Pages
