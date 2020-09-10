@@ -5,7 +5,7 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: document
-  path: content/status.md
+  path: data/colors.yaml
   label: Read only test
   read_only: true
 - type: directory
