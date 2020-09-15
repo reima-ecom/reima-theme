@@ -236,6 +236,12 @@ a:hover {
   text-decoration: none;
 }
 
+.btn:disabled,
+.btn:disabled:hover {
+  cursor: not-allowed;
+  background-color: var(--color-gray);
+}
+
 .btn--sm {
   font-size: .875rem;
   padding: .5rem 1rem;
