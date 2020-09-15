@@ -181,7 +181,7 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ if T "Newsletter Title" }}
-  <form name="subscribe" action="/api/subscribe" class="airy newsletter">
+  <form name="subscribe" action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">
     <h2>{{T "Newsletter Title"}}</h2>
     <p>{{T "Newsletter Text"}}</p>
     <input type="hidden" name="tags" value="prospect,newsletter">
@@ -200,13 +200,13 @@
         <button type="submit" class="button">{{T "Newsletter Subscribe Button"}}</button>
       </div>
     </div>
-    <p success>{{T "Newsletter Thank You Message"}}</p>
+    <p success>{{T "Newsletter Thank You Message" | markdownify}}</p>
   </form>
   {{ end }}
   <footer>
     {{ partialCached "menu" (dict "menu" .Site.Data.menus.footer "root" $) "footer" }}
     <p>
-      &copy; 2020 us.reima.com Reima Inc.
+      &copy; 2020 Reima Oy.
     </p>
   </footer>
   {{partial "pixels/index" .}}
