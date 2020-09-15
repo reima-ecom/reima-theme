@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
     muslstack -s 0x800000 /usr/bin/hugo
 
 # Copy patched hugo binary from build stage
-FROM mcr.microsoft.com/vscode/devcontainers/base
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
+
 COPY --from=0 /usr/bin/hugo /usr/bin
 
 # Copy go binaries and set path
