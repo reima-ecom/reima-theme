@@ -27,8 +27,8 @@ fields:
     field: collectionPageBannerEnabled
     value: true
 - type: boolean
-    name: newsletterEnabled
-    label: Newsletter Enabled
+  name: newsletterEnabled
+  label: Newsletter Enabled
 - type: text
   name: newsletterTitle
   label: Newsletter Title
