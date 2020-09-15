@@ -4,6 +4,10 @@ auto_deploy: false
 admin_path: ''
 webhook_url: 
 sections:
+- type: document
+  path: data/colors.yaml
+  label: Read only test
+  read_only: true
 - type: directory
   path: demo/content
   label: Pages
