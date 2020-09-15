@@ -8,7 +8,7 @@ version: "2020-09-15"
 ## Changes in 2020-09-15
 
 - Change footer copyright text to say Reima Oy (previously mentioned us.reima.com)
-- Newsletter updated for usage across all Shopify shops
+- Newsletter updated for usage across all Shopify shops, and configuration moved to "announcements"
 
 ## Changes in 2020-09-09
 

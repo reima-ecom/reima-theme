@@ -180,10 +180,10 @@
   <main>
     {{ block "main" . }}{{ end }}
   </main>
-  {{ if T "Newsletter Title" }}
+  {{ if site.Data.announcements.newsletterEnabled }}
   <form name="subscribe" action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">
-    <h2>{{T "Newsletter Title"}}</h2>
-    <p>{{T "Newsletter Text"}}</p>
+    <h2>{{site.Data.announcements.newsletterTitle}}</h2>
+    <p>{{site.Data.announcements.newsletterText}}</p>
     <input type="hidden" name="tags" value="prospect,newsletter">
     <input type="email" placeholder="Enter your email" name="email" required>
     <div consent>
@@ -200,7 +200,7 @@
         <button type="submit" class="button">{{T "Newsletter Subscribe Button"}}</button>
       </div>
     </div>
-    <p success>{{T "Newsletter Thank You Message" | markdownify}}</p>
+    <p success>{{site.Data.announcements.newsletterThankYouMessage | markdownify}}</p>
   </form>
   {{ end }}
   <footer>

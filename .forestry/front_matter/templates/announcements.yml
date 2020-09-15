@@ -26,3 +26,30 @@ fields:
   showOnly:
     field: collectionPageBannerEnabled
     value: true
+- type: boolean
+    name: newsletterEnabled
+    label: Newsletter Enabled
+- type: text
+  name: newsletterTitle
+  label: Newsletter Title
+  config:
+    required: true
+  showOnly:
+    field: newsletterEnabled
+    value: true
+- type: text
+  name: newsletterText
+  label: Newsletter Text
+  config:
+    required: true
+  showOnly:
+    field: newsletterEnabled
+    value: true
+- type: text
+  name: newsletterThankYouMessage
+  label: Newsletter Thank You Message
+  config:
+    required: true
+  showOnly:
+    field: newsletterEnabled
+    value: true

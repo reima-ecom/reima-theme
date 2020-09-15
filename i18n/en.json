@@ -1,9 +1,12 @@
 {
-  "Newsletter Thank You Message": {
-    "other": "Thank you for subscribing! Also, check us out on Instagram at [@reimanorthamerica](https://www.instagram.com/reimanorthamerica/)!"
-  },
   "Newsletter TOS Consent": {
     "other": "I have read and accept [terms of service](/pages/terms-of-service) and [privacy policy](/pages/privacy-policy)"
+  },
+  "Newsletter Marketing Consent": {
+    "other": "Yes, I would like to receive Reima Club newsletter to my email, and get access to my account on reima.com"
+  },
+  "Newsletter Subscribe Button": {
+    "other": "Subscribe"
   },
   "Product feature: color": {
     "other": "Color"
@@ -59,23 +62,11 @@
   "Product feature description: warmth": {
     "other": "Temperatures ca. {{.Count}} °F"
   },
-  "Newsletter Title": {
-    "other": "Sign up and save 10% off your first purchase"
-  },
-  "Newsletter Text": {
-    "other": "Reima Friends are the first to know about our latest products, exclusive offers and top tips. Your coupon will be be emailed to you."
-  },
-  "Newsletter Marketing Consent": {
-    "other": "Yes, I would like to receive Reima Club newsletter to my email, and get access to my account on reima.com"
-  },
   "Cart Loading Message": {
     "other": "Loading..."
   },
   "Cart Checkout Button": {
     "other": "Checkout"
-  },
-  "Newsletter Subscribe Button": {
-    "other": "Subscribe"
   },
   "Cart Subtotal": {
     "other": "Subtotal"
