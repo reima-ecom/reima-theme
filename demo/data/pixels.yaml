@@ -5,7 +5,7 @@ ometria_store: ometria-store
 ga_enabled: true
 ga_property: UA-177507029-1
 ga_autolink: reima-us.myshopify.com
-facebook_enabled: false
+facebook_enabled: true
 facebook_id: facebook-id
 awin_enabled: false
 awin_id: awin-id

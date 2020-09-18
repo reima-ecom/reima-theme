@@ -21,11 +21,15 @@
 
 {{ end }}
 
-{{ with partial "helpers/get-product" }}
+{{ with partial "helpers/get-product" $ }}
+<!-- 
+  TODO: move to use legacyid param or something similar!
+  using yotpoId for now, since that is the same
+ -->
 <script>
   fbq('track', 'ViewContent', {
     content_name: '{{.Title}}',
-    content_ids: ['{{$.File.ContentBaseName}}'],
+    content_ids: ['{{$.Params.yotpoId}}'],
     content_type: 'product',
     value: '{{.Params.price}}',
     currency: '{{site.Params.public.currency}}'
