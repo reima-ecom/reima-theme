@@ -9,6 +9,10 @@ links:
       
       This is some **markdown**
 reviews: true
+accordion:
+  info: Features 
+  mats: Materials 
+  care: Care
 features:
   - tag: Waterproof
     title: Waterproof levels

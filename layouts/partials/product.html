@@ -139,13 +139,13 @@
       {{ end }}
       {{ end }}
 
-      {{ $fieldNames := dict "[info]" "Features" "[mats]" "Materials" "[care]" "Care" }}
-
       {{ range after 1 $productFields }}
       {{ $field := substr . 0 6 }}
       {{ $contents := substr . 6 }}
       <div class="accordion">
-        <a href="#" openid="parent">{{index $fieldNames $field}}</a>
+        <a href="#" openid="parent">
+          {{index site.Data.productpage.accordion (trim $field "[]")}}
+        </a>
         {{$contents | safeHTML}}
         <!-- if this is the info/features section, show tag-based features -->
         {{ if eq $field "[info]" }}

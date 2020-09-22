@@ -15,7 +15,7 @@ This configuration is done via the sidebar in forestry, through the item named "
 
 ### Product page feature tags now editable
 
-Now you can edit the tags that should show as "features" on the product page. You can specify the heading, icons and description as needed. Configuration as per above.
+Now you can edit the tags that should show as "features" on the product page. You can specify the heading, icons and description as needed. Also, the titles of the accordion (e.g. "Features" / "Materials") are now editable. Configuration as per above.
 
 ### Turn off product page reviews if needed
 
