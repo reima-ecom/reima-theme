@@ -4,56 +4,136 @@ hide_body: true
 fields:
 - type: field_group_list
   name: links
-  label: links
+  label: Links below description
   fields:
   - type: text
-    name: type
-    label: type
-  - type: text
     name: title
-    label: title
+    label: Link title
+  - name: type
+    type: select
+    default: link
+    config:
+      required: true
+      options:
+      - link
+      - modal
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: Link type
+    description: Select `link` if you want a regular link to an existing page. The
+      link opens up in a new tab.<br>Select 'modal` if
   - type: text
     name: link
-    label: link
-- type: boolean
-  name: reviews
-  label: reviews
+    label: Link URL
+    config:
+      required: true
+    showOnly:
+      field: type
+      value: link
+  - name: content
+    type: textarea
+    default: ''
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Content
+    description: Modal contents. Use markdown if needed.
+    showOnly:
+      field: type
+      value: modal
+  description: Links to show between the product description and the features etc.
+    section
 - type: field_group
   name: accordion
-  label: accordion
+  label: Features etc. section headings
   fields:
   - type: text
     name: info
-    label: info
+    label: Features
+    description: This is the section of the product description currently under "[product][info]"
+    config:
+      required: true
   - type: text
     name: mats
-    label: mats
+    label: Materials
+    description: This is the section of the product description currently under "[product][mats]"
+    config:
+      required: true
   - type: text
     name: care
-    label: care
+    label: Care
+    description: This is the section of the product description currently under "[product][care]"
+    config:
+      required: true
+  description: Headings for the "accordion" that shows features, materials and care
+    instructions.
 - type: field_group_list
   name: features
-  label: features
+  label: Product features
   fields:
   - type: text
     name: tag
-    label: tag
+    label: Tag name
+    description: Tag name to match. This is the "Waterproof" part of the example tag
+      "Waterproof:3000".
+    config:
+      required: true
   - type: text
     name: title
-    label: title
+    label: Title
+    description: What to show as the title for this feature. For instance "Waterproof
+      levels".
+    config:
+      required: true
   - type: text
     name: description
-    label: description
+    label: Description
+    config:
+      required: true
+    description: What the specific description of the product feature should be based
+      on the tag. Please insert "VALUE" where the tag value should be placed. For
+      instance, the description "Waterproof at least VALUE mm" and product tag "Waterproof:3000"
+      would render "Waterproof at least 3000 mm" as the specific description for that
+      product tag.
   - type: textarea
     name: modal
-    label: modal
+    label: Pop-up contents
+    description: Contents for the pop-up that shows when you click for more info.
+      You can use markdown here. This field is optional, leave blank to disable the
+      pop-up.
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
   - type: field_group_list
     name: values
-    label: values
+    label: Icons
     fields:
     - type: text
       name: value
-      label: value
+      label: Tag value
+      description: Which tag value this icon corresponds to. This is needed in order
+        to highlight the correct icon based on the product tag value. For instance,
+        if you enter "3000" here, the product tag "Waterproof:3000" will cause this
+        icon to be highlighted.
+      config:
+        required: true
     - type: file
       name: icon
-      label: icon
+      label: Icon
+      description: Icon <strong>as an SVG file</strong>. It is very important that
+        the icon is in SVG format as otherwise the highlighting will not work.
+    description: Icons to show for this particular tag
+  description: Configuration for product tags that should output additional icons
+    and descriptions
+- type: boolean
+  name: reviews
+  label: Enable reviews
+  description: Enable reviews on the product page. If there are no reviews to show
+    and yotpo has not been connected to this site, there's no need to enable the reviews
+    element.
