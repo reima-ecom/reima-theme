@@ -13,6 +13,10 @@ Now you can edit the links on the product page however you like. These are e.g. 
 
 This configuration is done via the sidebar in forestry, through the item named "Product Page" or something similar. If you can't find this sidebar item, it is probably not configured for your site, in which case contact a developer. :)
 
+### Turn off product page reviews if needed
+
+The reviews element on the product page can now be enabled as needed from the same "Product Page" file as described above. Review importing needs to be enabled by a developer, and if this has not been done, you probably want to disable the reviews element altogether.
+
 ## Changes in 2020-09-15
 
 - Change footer copyright text to say Reima Oy (previously mentioned us.reima.com)

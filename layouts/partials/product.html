@@ -220,6 +220,7 @@
     </div>
   </div>
 </div>
+{{ if .Params.enable_reviews }}
 <div class="reviews">
   <div>
     <h2>{{T "Reviews"}}</h2>
@@ -275,6 +276,7 @@
   </p>
   {{ end }}
 </div>
+{{ end }}
 
 {{ $selectedOptions := dict }}
 {{ with $firstAvailableOptions }}

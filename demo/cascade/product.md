@@ -11,4 +11,5 @@ cascade:
         ## Modal
         
         This is some **markdown**
+  enable_reviews: false
 ---
