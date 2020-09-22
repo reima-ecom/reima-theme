@@ -118,7 +118,7 @@
       </div>
       {{ end }}
 
-      {{ range .Params.links }}
+      {{ range site.Data.productpage.links }}
       {{ if eq .type "link" }}
       <p><a href="{{.link}}" target="_blank">{{.title}}</a></p>
       {{ else if eq .type "modal" }}
@@ -155,7 +155,7 @@
           {{ $tag := index $tagData 0 }}
           {{ $value := index $tagData 1 }}
           <!-- get feature for this tag if exists -->
-          {{ range where $product.Params.feature_tags "tag" $tag }}
+          {{ range where site.Data.productpage.features "tag" $tag }}
           {{ $modalid := .title }}
           <!-- feature heading with modal link if modal exists -->
           <div>
@@ -235,7 +235,7 @@
     </div>
   </div>
 </div>
-{{ if .Params.enable_reviews }}
+{{ if site.Data.productpage.reviews }}
 <div class="reviews">
   <div>
     <h2>{{T "Reviews"}}</h2>
