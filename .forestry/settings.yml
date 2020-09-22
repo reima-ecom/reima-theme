@@ -35,6 +35,10 @@ sections:
 - type: document
   path: i18n/en.json
   label: Translations
+- type: directory
+  path: demo/data
+  label: Data
+  create: all
   match: "**/*"
 upload_dir: demo/images
 public_path: ''
