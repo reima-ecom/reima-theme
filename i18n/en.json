@@ -62,6 +62,51 @@
   "Product feature description: warmth": {
     "other": "Temperatures ca. {{.Count}} °F"
   },
+  "Add to cart": {
+    "other": "Add to cart"
+  },
+  "Sold out": {
+    "other": "Sold out"
+  },
+  "Show More": {
+    "other": "Show More +"
+  },
+  "Show Less": {
+    "other": "Show Less -"
+  },
+  "Reviews": {
+    "other": "Reviews"
+  },
+  "Write a review": {
+    "other": "Write a review"
+  },
+  "Review Score": {
+    "other": "Score"
+  },
+  "Review Title": {
+    "other": "Title"
+  },
+  "Review Text": {
+    "other": "Review"
+  },
+  "Review Name": {
+    "other": "Use your name"
+  },
+  "Review Email": {
+    "other": "Email"
+  },
+  "Review Submit": {
+    "other": "Submit"
+  },
+  "Review Thank you": {
+    "other": "Thank you for your review!"
+  },
+  "Review Verified Buyer": {
+    "other": "Verified Buyer"
+  },
+  "No reviews": {
+    "other": "No reviews for this product yet."
+  },
   "Cart Loading Message": {
     "other": "Loading..."
   },

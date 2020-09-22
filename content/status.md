@@ -2,8 +2,16 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-15"
+version: "2020-09-22"
 ---
+
+## Changes in 2020-09-22
+
+### Product page links now editable
+
+Now you can edit the links on the product page however you like. These are e.g. "Size Chart" and "Delivery Info" links visible between the product description and the features list. You can create either links to existing pages (these open in a new tab) or a popup modal with the desired content.
+
+This configuration is done via the sidebar in forestry, through the item named "Product Page" or something similar. If you can't find this sidebar item, it is probably not configured for your site, in which case contact a developer. :)
 
 ## Changes in 2020-09-15
 
@@ -12,7 +20,7 @@ version: "2020-09-15"
 
 ## Changes in 2020-09-09
 
-**Add tracking pixels via forestry.io**
+### Add tracking pixels via forestry.io
 
 Now it's possible to add pixels directly via forestry. See the "Pixels" entry in the sidebar. If it's not there, it still needs to be configured (contact a developer).
 
@@ -24,21 +32,21 @@ This update includes a major rewrite in the code structure to make the code more
 
 ## Changes in 2020-08-21
 
-**Fixed missing descriptions on collection page**
+### Fixed missing descriptions on collection page
 
 Collection page descriptions are now back.
 
-**New status page**
+### New status page
 
 The status page (this page!) will in the future include a log of changes, as well as a list of known bugs. Also, the theme is now more rigorously versioned, and you can see the version a site is running on on the status page.
 
 ## Changes in 2020-08-20
 
-**New collection page design**
+### New collection page design
 
 Collection pages now use the new design, and requires that collections have been imported with the new collection importer. The layout of the new collection page is the same as that for the "interstitial" page (i.e. it uses the same code).
 
-**Other fixes**
+### Other fixes
 
 - The `product list` module now displays all products from a collection by default. The number of products can however be limited if needed.
 

@@ -92,9 +92,9 @@
       <div>
         <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}}>
           {{ if $firstAvailableOptions }}
-          Add to cart
+          {{T "Add to cart"}}
           {{ else }}
-          Sold out
+          {{T "Sold out"}}
           {{ end }}
         </button>
       </div>
@@ -113,18 +113,31 @@
         <div>
           {{$productReadMore | safeHTML}}
         </div>
-        <a href="#" class="more" openid="parent">Show More +</a>
-        <a href="#" class="less" openid="parent">Show Less -</a>
+        <a href="#" class="more" openid="parent">{{T "Show More"}}</a>
+        <a href="#" class="less" openid="parent">{{T "Show Less"}}</a>
       </div>
       {{ end }}
 
-      <p>
-        <a href="/pages/size-charts" target="_blank">Size Guide</a>
-      </p>
-      <p>
-        <a href="#" openid="delivery-info">Delivery Information</a>
-      </p>
-      {{partial "modal" (slice "delivery-info" $)}}
+      {{ range .Params.links }}
+      {{ if eq .type "link" }}
+      <p><a href="{{.link}}" target="_blank">{{.title}}</a></p>
+      {{ else if eq .type "modal" }}
+      {{ $id := .title }}
+      <p><a href="#" openid="{{$id}}">{{.title}}</a></p>
+      <div class="modal" id="{{$id}}">
+        <div>
+          <button class="icon" close>
+            <svg>
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </button>
+          {{.content | markdownify}}
+        </div>
+      </div>
+      {{ else }}
+      {{ warnf "Wrong link type %s at %s" .type $ }}
+      {{ end }}
+      {{ end }}
 
       {{ $fieldNames := dict "[info]" "Features" "[mats]" "Materials" "[care]" "Care" }}
 
@@ -209,11 +222,11 @@
 </div>
 <div class="reviews">
   <div>
-    <h2>Reviews</h2>
-    <a href="#" class="text-link" openid="parent" load="review-form.js">Write a review</a>
+    <h2>{{T "Reviews"}}</h2>
+    <a href="#" class="text-link" openid="parent" load="review-form.js">{{T "Write a review"}}</a>
     <form name="review">
-      <h3>Write a review</h3>
-      <fieldset>Score
+      <h3>{{T "Write a review"}}</h3>
+      <fieldset>{{T "Review Score"}}
         <div>
           <div class="stars">
             <input required type="radio" name="score" id="5star" value="5">
@@ -229,21 +242,22 @@
           </div>
         </div>
       </fieldset>
-      <label>Title <input required name="title" type="text"></label>
-      <label>Review <textarea required name="content" name="review" id="" cols="30" rows="10"></textarea></label>
-      <label>Use your name <input required name="name" type="text"></label>
-      <label>Email <input required name="email" type="email"></label>
+      <label>{{T "Review Title"}} <input required name="title" type="text"></label>
+      <label>{{T "Review Text"}} <textarea required name="content" name="review" id="" cols="30"
+          rows="10"></textarea></label>
+      <label>{{T "Review Name"}} <input required name="name" type="text"></label>
+      <label>{{T "Review Email"}} <input required name="email" type="email"></label>
       <p error></p>
-      <div><button class="button" type="submit">Submit</button></div>
+      <div><button class="button" type="submit">{{T "Review Submit"}}</button></div>
     </form>
     <p class="thank-you text-center">
-      Thank you for your review!
+      {{T "Review Thank you"}}
     </p>
   </div>
   {{ range .Params.reviews }}
   <blockquote>
     <header>
-      <span class="name">{{.name}}</span> {{ if .verified }}Verified Buyer{{ end }}
+      <span class="name">{{.name}}</span> {{ if .verified }}{{T "Review Verified Buyer"}}{{ end }}
       <span class="date">{{index (split .created_at "T") 0}}</span>
       <div class="stars">
         {{ range seq .score }}★{{ end }}
@@ -257,7 +271,7 @@
   </blockquote>
   {{ else }}
   <p>
-    No reviews for this product yet.
+    {{"No reviews"}}
   </p>
   {{ end }}
 </div>
