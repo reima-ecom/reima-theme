@@ -1,0 +1,59 @@
+---
+label: Product Page Settings
+hide_body: true
+fields:
+- type: field_group_list
+  name: links
+  label: links
+  fields:
+  - type: text
+    name: type
+    label: type
+  - type: text
+    name: title
+    label: title
+  - type: text
+    name: link
+    label: link
+- type: boolean
+  name: reviews
+  label: reviews
+- type: field_group
+  name: accordion
+  label: accordion
+  fields:
+  - type: text
+    name: info
+    label: info
+  - type: text
+    name: mats
+    label: mats
+  - type: text
+    name: care
+    label: care
+- type: field_group_list
+  name: features
+  label: features
+  fields:
+  - type: text
+    name: tag
+    label: tag
+  - type: text
+    name: title
+    label: title
+  - type: text
+    name: description
+    label: description
+  - type: textarea
+    name: modal
+    label: modal
+  - type: field_group_list
+    name: values
+    label: values
+    fields:
+    - type: text
+      name: value
+      label: value
+    - type: file
+      name: icon
+      label: icon
