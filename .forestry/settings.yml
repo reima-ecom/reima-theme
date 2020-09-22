@@ -32,14 +32,16 @@ sections:
 - type: document
   path: demo/data/pixels.yaml
   label: Pixels
-- type: document
-  path: i18n/en.json
-  label: Translations
 - type: directory
   path: demo/data
   label: Data
   create: all
   match: "**/*"
+- type: heading
+  label: Theme
+- type: document
+  path: i18n/en.json
+  label: Translations
 upload_dir: demo/images
 public_path: ''
 front_matter_path: ''
