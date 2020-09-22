@@ -137,3 +137,5 @@ fields:
   description: Enable reviews on the product page. If there are no reviews to show
     and yotpo has not been connected to this site, there's no need to enable the reviews
     element.
+pages:
+- demo/data/productpage.yaml

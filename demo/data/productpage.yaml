@@ -1,74 +1,77 @@
+---
 links:
-  - type: link
-    title: Home
-    link: /
-  - type: modal
-    title: Open modal
-    content: |
-      ## Modal
-      
-      This is some **markdown**
+- type: link
+  title: Home
+  link: "/"
+  content: ''
+- type: modal
+  title: Open modal
+  content: |
+    ## Modal
+
+    This is some **markdown**
+  link: ''
 reviews: true
 accordion:
-  info: Features 
-  mats: Materials 
+  info: Features
+  mats: Materials
   care: Care
 features:
-  - tag: Waterproof
-    title: Waterproof levels
-    description: Water column at least VALUE mm
-    modal: |
-      ## Waterproof levels
+- tag: Waterproof
+  title: Waterproof levels
+  description: Water column at least VALUE mm
+  modal: |
+    ## Waterproof levels
 
-      All Reima fabrics or products marked with drop symbols are waterproof. The waterproof level is indicated with water columns which tell how much water pressure the fabric endures in thickness, before water begins to pass its surface. The thickness of the water mass / pressure is stated in mm.
-      
-      ### Water column over 3 000 mm:
-      
-      Protects against rain for some time.
-      
-      ### Water column over 5 000 mm:
-      
-      Protects against heavy rain, too.
-      
-      ### Water column over 8 000 mm:
-      
-      Is suitable for both heavy rain but also sitting on wet.
-      
-      ### Water column over 12 000 mm:
-      
-      For extreme conditions. Protects in active outings in wet surroundings and in heavy rain, all-day.
-    values:
-      - value: '3000'
-        icon: Waterproof-3000.svg
-      - value: '5000'
-        icon: Waterproof-5000.svg
-      - value: '8000'
-        icon: Waterproof-8000.svg
-      - value: '12000'
-        icon: Waterproof-12000.svg
-  - tag: Breathability
-    title: Breathability
-    description: Breathability at least VALUE g/m2/24 h
-    modal: |
-      ## Breathability Levels
+    All Reima fabrics or products marked with drop symbols are waterproof. The waterproof level is indicated with water columns which tell how much water pressure the fabric endures in thickness, before water begins to pass its surface. The thickness of the water mass / pressure is stated in mm.
 
-      Breathability level is meant to measure fabrics that are functional: meaning they keep water out, yet allow moisture to be transferred to outer layers. Breathability can be measured by different standards. Breathability is measured in grams per square meter per day, or g/m2/24h. We use our own method to determine the breathability of our products, which is comparable to the ISO 15496 standard.
+    ### Water column over 3 000 mm:
 
-      ### Breathability of at least 3,000 g/m2/24h:
+    Protects against rain for some time.
 
-      The product is suitable for everyday outings and light rain.
+    ### Water column over 5 000 mm:
 
-      ### Breathability of at least 5,000 g/m2/24h:
+    Protects against heavy rain, too.
 
-      The product is suitable for playing outside.
+    ### Water column over 8 000 mm:
 
-      ### Breathability of at least 7,000 g/m2/24h:
+    Is suitable for both heavy rain but also sitting on wet.
 
-      The product is best for active kids / playing sports.
-    values:
-      - value: '3000'
-        icon: Breathability-3000.svg
-      - value: '5000'
-        icon: Breathability-5000.svg
-      - value: '7000'
-        icon: Breathability-7000.svg
+    ### Water column over 12 000 mm:
+
+    For extreme conditions. Protects in active outings in wet surroundings and in heavy rain, all-day.
+  values:
+  - value: "3000"
+    icon: Waterproof-3000.svg
+  - value: "5000"
+    icon: Waterproof-5000.svg
+  - value: "8000"
+    icon: Waterproof-8000.svg
+  - value: "12000"
+    icon: Waterproof-12000.svg
+- tag: Breathability
+  title: Breathability
+  description: Breathability at least VALUE g/m2/24 h
+  modal: |
+    ## Breathability Levels
+
+    Breathability level is meant to measure fabrics that are functional: meaning they keep water out, yet allow moisture to be transferred to outer layers. Breathability can be measured by different standards. Breathability is measured in grams per square meter per day, or g/m2/24h. We use our own method to determine the breathability of our products, which is comparable to the ISO 15496 standard.
+
+    ### Breathability of at least 3,000 g/m2/24h:
+
+    The product is suitable for everyday outings and light rain.
+
+    ### Breathability of at least 5,000 g/m2/24h:
+
+    The product is suitable for playing outside.
+
+    ### Breathability of at least 7,000 g/m2/24h:
+
+    The product is best for active kids / playing sports.
+  values:
+  - value: "3000"
+    icon: Breathability-3000.svg
+  - value: "5000"
+    icon: Breathability-5000.svg
+  - value: "7000"
+    icon: Breathability-7000.svg
