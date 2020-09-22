@@ -24,13 +24,13 @@ fields:
         path: 
     label: Link type
     description: Select `link` if you want a regular link to an existing page. The
-      link opens up in a new tab.<br>Select `modal` if you want to specify content 
+      link opens up in a new tab.<br>Select `modal` if you want to specify content
       for a pop-up modal instead.
   - type: text
     name: link
     label: Link URL
     config:
-      required: true
+      required: false
     showOnly:
       field: type
       value: link
@@ -38,7 +38,7 @@ fields:
     type: textarea
     default: ''
     config:
-      required: true
+      required: false
       wysiwyg: true
       schema:
         format: markdown
