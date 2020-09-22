@@ -30,7 +30,7 @@ fields:
     name: link
     label: Link URL
     config:
-      required: false
+      required: true
     showOnly:
       field: type
       value: link
