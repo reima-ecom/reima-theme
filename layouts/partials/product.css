@@ -196,14 +196,18 @@
   display: block;
 }
 
-.features > div > a {
+.features__heading {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   font-weight: 700;
+  font-size: inherit;
+}
+
+.features__heading a {
   border-bottom: none;
 }
 
-.features > div > a::after {
+.features__heading a::after {
   content: 'i';
   width: 1rem;
   height: 1rem;

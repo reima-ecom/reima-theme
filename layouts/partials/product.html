@@ -154,33 +154,48 @@
           {{ $tagData := split . ":" }}
           {{ $tag := index $tagData 0 }}
           {{ $value := index $tagData 1 }}
-          {{ with index $.Site.Data.features (lower $tag) }}
-          {{ $tagId := printf "product-feature-%s" (lower $tag) }}
+          <!-- get feature for this tag if exists -->
+          {{ range where $product.Params.feature_tags "tag" $tag }}
+          {{ $modalid := .title }}
+          <!-- feature heading with modal link if modal exists -->
           <div>
-            <a href="#" openid="{{$tagId}}">
-              {{ with T (printf "Product feature: %s" (lower $tag)) }}
-              {{.}}
+            <h3 class="features__heading">
+              {{ if .modal }}
+              <a href="#" openid="{{$modalid}}">
+                {{.title}}
+              </a>
               {{ else }}
-              {{$tag}}
+              {{.title}}
               {{ end }}
-            </a>
+            </h3>
           </div>
-          {{partial "modal" (slice $tagId $)}}
-          {{ range . }}
-          {{ $iconValue := string . }}
-          {{ $svgPath := printf "%s-%s.svg" $tag $iconValue }}
-          {{ with resources.Get $svgPath }}
+          <!-- modal if specified -->
+          {{ with .modal }}
+          <div class="modal" id="{{$modalid}}">
+            <div>
+              <button class="icon" close>
+                <svg>
+                  <use xlink:href="#icon-close"></use>
+                </svg>
+              </button>
+              {{. | markdownify}}
+            </div>
+          </div>
+          {{ end }}
+          <!-- icons -->
+          {{ range .values }}
+          {{ $iconValue := .value }}
+          {{ with partial "helpers/get-image" .icon }}
           {{ $svg := .Content }}
           {{ if eq $iconValue $value }}
           {{ $svg = replace $svg "<svg" "<svg class=\"active\"" }}
           {{ end }}
           {{$svg | safeHTML}}
           {{ end }}
-          {{ else }}
-          {{ warnf "Could not find svg icon at %s" $svgPath }}
           {{ end }}
+          <!-- tag description e.g. "Waterproof level 8000 mm" -->
           <p>
-            {{ T (printf "Product feature description: %s" (lower $tag)) $value }}
+            {{ replace .description "VALUE" $value }}
           </p>
           {{ end }}
           {{ end }}
