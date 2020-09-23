@@ -1,0 +1,56 @@
+{
+  "Show More": {
+    "other": "Näytä lisää +"
+  },
+  "Show Less": {
+    "other": "Näytä vähemmän -"
+  },
+  "Reviews": {
+    "other": "Reviews"
+  },
+  "Write a review": {
+    "other": "Write a review"
+  },
+  "Review Score": {
+    "other": "Score"
+  },
+  "Review Title": {
+    "other": "Title"
+  },
+  "Review Text": {
+    "other": "Review"
+  },
+  "Review Name": {
+    "other": "Use your name"
+  },
+  "Review Email": {
+    "other": "Email"
+  },
+  "Review Submit": {
+    "other": "Submit"
+  },
+  "Review Thank you": {
+    "other": "Thank you for your review!"
+  },
+  "Review Verified Buyer": {
+    "other": "Verified Buyer"
+  },
+  "No reviews": {
+    "other": "No reviews for this product yet."
+  },
+  "Cart Loading Message": {
+    "other": "Loading..."
+  },
+  "Cart Checkout Button": {
+    "other": "Checkout"
+  },
+  "Cart Subtotal": {
+    "other": "Subtotal"
+  },
+  "Cart Empty Message": {
+    "other": "Your cart is currently empty."
+  },
+  "Cart Title": {
+    "other": "Cart"
+  }
+}

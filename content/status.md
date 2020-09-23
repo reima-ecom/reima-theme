@@ -9,6 +9,8 @@ version: "2020-09-23"
 
 - New module: image grid. Although specifically designed for the baby kit product page, you can use this on any page.
 - Increased margin between modules.
+- New [help page](https://reima-demo.netlify.app/content-management-help) for content creators. The help page, along with this changelog page should also be visible in the forestry sidebar (if not, contact a developer).
+- Improved multilingual mode: sites can now be made multilingual. This requires set-up from a developer, but after that everything should be editable for the new language (locale). See the help page for more information.
 
 ## Changes in 2020-09-22
 

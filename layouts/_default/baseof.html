@@ -51,9 +51,11 @@
 </head>
 
 <body>
-  {{ if site.Data.announcements.headerAnnouncementEnabled }}
+  {{ $menus := partial "helpers/get-locale-data" "menus" }}
+  {{ $announcements := partial "helpers/get-locale-data" "announcements" }}
+  {{ if $announcements.headerAnnouncementEnabled }}
   <aside class="announcement">
-    {{site.Data.announcements.headerAnnouncement | markdownify}}
+    {{$announcements.headerAnnouncement | markdownify}}
   </aside>
   {{ end }}
   <header>
@@ -83,7 +85,7 @@
               </svg>
             </label>
           </h1>
-          {{ partialCached "menu" (dict "menu" .Site.Data.menus.main "root" $) "main" }}
+          {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
         </div>
       </div>
       <div class="logo-link">
@@ -180,10 +182,10 @@
   <main>
     {{ block "main" . }}{{ end }}
   </main>
-  {{ if site.Data.announcements.newsletterEnabled }}
+  {{ if $announcements.newsletterEnabled }}
   <form name="subscribe" action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">
-    <h2>{{site.Data.announcements.newsletterTitle}}</h2>
-    <p>{{site.Data.announcements.newsletterText}}</p>
+    <h2>{{$announcements.newsletterTitle}}</h2>
+    <p>{{$announcements.newsletterText}}</p>
     <input type="hidden" name="tags" value="prospect,newsletter">
     <input type="email" placeholder="Enter your email" name="email" required>
     <div consent>
@@ -200,11 +202,12 @@
         <button type="submit" class="button btn btn--cta">{{T "Newsletter Subscribe Button"}}</button>
       </div>
     </div>
-    <p success>{{site.Data.announcements.newsletterThankYouMessage | markdownify}}</p>
+    <p success>{{$announcements.newsletterThankYouMessage | markdownify}}</p>
   </form>
   {{ end }}
   <footer>
-    {{ partialCached "menu" (dict "menu" .Site.Data.menus.footer "root" $) "footer" }}
+    {{ $menus := partial "helpers/get-locale-data" "menus" }}
+    {{ partialCached "menu" (dict "menu" $menus.footer "root" $) "footer" }}
     <p>
       &copy; 2020 Reima Oy.
     </p>

@@ -21,6 +21,12 @@ In order to allow for CSS files to live next to their layout (HTML) counterparts
 
 JS files also live next to their corresponding layout files. However, these need to be built with rollup, which outputs the build result to `assets/js`. So JS files should be referenced accordingly. Note that rollup doesn't create any subfolders, so just reference JS files as `js/[entrypoint].js`. Note also that the `assets/js` folder is mounted as a static folder as well, to allow for chunks to be loaded correctly. Remember to build the JS files when they are updated - this is not done in connection with site builds!
 
+Finally, a demo site is available under `demo`. When in doubt about how to configure a site, see this example implementation!
+
+## Multilingual sites
+
+Multilingual sites need to have their [locales specified in the site config file](https://gohugo.io/content-management/multilingual/#configure-languages). Also, you need a separate i18n file for non-English languages (also applies to sites that are not multilingual but where the language is not English). Furthermore, some site settings found in the `data` directory have language-specific content (e.g. announcements and menu). These files should have a language-specific version named `datafile.locale.ext`, e.g. `announcements.fi.yaml`.
+
 ## Browser compatibility
 
 The site uses ES2015, such as `async/await`, rest operators `{...rest}`, etc. On the CSS side, flexbox is used heavily, and grid layout in some key places. Thus the goal is to have an optimal experience on modern browsers that support these elements.

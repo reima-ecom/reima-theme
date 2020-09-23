@@ -1,0 +1,37 @@
+---
+links:
+- type: modal
+  title: Avaa popup
+  content: |
+    ## Hei!
+
+    Ei täällä mitään sisältöä ole :)
+  link: ''
+reviews: true
+accordion:
+  info: Ominaisuudet
+  mats: Materiaalit
+  care: Hoito
+features:
+- tag: Waterproof
+  title: Vedenpitävyys
+  description: Vedenpitävä ainakin VALUE mm
+  values:
+  - value: "3000"
+    icon: Waterproof-3000.svg
+  - value: "5000"
+    icon: Waterproof-5000.svg
+  - value: "8000"
+    icon: Waterproof-8000.svg
+  - value: "12000"
+    icon: Waterproof-12000.svg
+- tag: Breathability
+  title: Hengittävyys
+  description: Hengitää ainakin VALUE g/m2/24 h
+  values:
+  - value: "3000"
+    icon: Breathability-3000.svg
+  - value: "5000"
+    icon: Breathability-5000.svg
+  - value: "7000"
+    icon: Breathability-7000.svg

@@ -1,0 +1,9 @@
+<!-- 
+  Return specified site data file for the current locale.
+  Fallback is default data file.
+ -->
+{{- $data := index site.Data .}}
+{{- with index site.Data (printf "%s.%s" . site.Language) }}
+{{- $data = . }}
+{{- end }}
+{{- return $data }}

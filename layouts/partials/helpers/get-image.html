@@ -6,7 +6,7 @@
   - image filename
 
  -->
-{{- $headless := site.GetPage "images" -}}
+{{- $headless := site.Home.Sites.First.GetPage "images" -}}
 {{- $path := trim . "/" }}
 {{- $img := $headless.Resources.GetMatch $path }}
 {{- if not $img }}

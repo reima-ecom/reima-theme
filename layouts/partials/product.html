@@ -1,4 +1,6 @@
 {{ $product := partial "helpers/get-product" . }}
+{{ $settings := partial "helpers/get-locale-data" "productpage" }}
+
 {{ with $product }}
 
 <div class="product">
@@ -118,7 +120,7 @@
       </div>
       {{ end }}
 
-      {{ range site.Data.productpage.links }}
+      {{ range $settings.links }}
       {{ if eq .type "link" }}
       <p><a href="{{.link}}" target="_blank">{{.title}}</a></p>
       {{ else if eq .type "modal" }}
@@ -144,7 +146,7 @@
       {{ $contents := substr . 6 }}
       <div class="accordion">
         <a href="#" openid="parent">
-          {{index site.Data.productpage.accordion (trim $field "[]")}}
+          {{index $settings.accordion (trim $field "[]")}}
         </a>
         {{$contents | safeHTML}}
         <!-- if this is the info/features section, show tag-based features -->
@@ -155,7 +157,7 @@
           {{ $tag := index $tagData 0 }}
           {{ $value := index $tagData 1 }}
           <!-- get feature for this tag if exists -->
-          {{ range where site.Data.productpage.features "tag" $tag }}
+          {{ range where $settings.features "tag" $tag }}
           {{ $modalid := .title }}
           <!-- feature heading with modal link if modal exists -->
           <div>
@@ -235,7 +237,7 @@
     </div>
   </div>
 </div>
-{{ if site.Data.productpage.reviews }}
+{{ if $settings.reviews }}
 <div class="reviews">
   <div>
     <h2>{{T "Reviews"}}</h2>
