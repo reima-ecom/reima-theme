@@ -1,3 +1,7 @@
+.split-card {
+  font-size: var(--text-font-size);
+}
+
 .split-card p,
 .split-card div,
 .split-card h2 {
@@ -26,6 +30,7 @@
 
 @media (min-width: 768px) {
   .split-card {
+    --content-padding: 2.5rem;
     margin: var(--block-margin);
     padding: var(--block-padding);
     max-width: var(--block-width);
