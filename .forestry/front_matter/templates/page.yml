@@ -39,3 +39,11 @@ fields:
       format: markdown
   label: Description
   description: Description for SEO purposes
+- name: buybutton
+  type: boolean
+  label: Enable Buy Buttons
+  description: If you enable this, it will be possible to create links - for instance
+    buttons - that add products to the cart. The link URL format is <code>#buy=variant-id</code>,
+    where <code>variant-id</code> is the Shopify Storefront ID of the variant. The
+    variant with that ID specified in the URL will be placed in the cart when clicking
+    the link or button.
