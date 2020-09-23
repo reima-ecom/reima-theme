@@ -31,6 +31,11 @@ fields:
     max: 
     labelField: 
   label: Image Cards
+- name: popup
+  type: boolean
+  label: Image Card Content as Pop-up
+  description: Show (optional) content of the image cards in a pop-up instead of the
+    default, which displays the content below the image
 - name: link
   type: boolean
   label: Button Below Grid
