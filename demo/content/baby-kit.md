@@ -1,10 +1,11 @@
 ---
 layout: page
 title: This is a page
+buybutton: true
 modules:
 - template: hero
   heading: A box full of magic for your little one
-  link: "#"
+  link: "#buy=variant"
   linktext: Get yours now for $199
   image: hero.jpg
   overlayinvert: true

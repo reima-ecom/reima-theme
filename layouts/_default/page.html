@@ -5,6 +5,9 @@
 {{ if .Content }}
 {{ $.Scratch.Add "css-critical" "partials/modules/content" }}
 {{ end }}
+{{ if .Params.buybutton }}
+{{ $.Scratch.Add "js-async" "page-buy-button.js" }}
+{{ end }}
 {{ end }}
 
 {{ define "main" }}
