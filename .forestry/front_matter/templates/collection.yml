@@ -28,6 +28,7 @@ fields:
   - hero
   - content
   - split-card
+  - image-grid
   - image-links
   - products
   - categories

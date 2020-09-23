@@ -22,6 +22,7 @@ fields:
   - content
   - banner
   - split-card
+  - image-grid
   - image-links
   - products
   - testimonials
