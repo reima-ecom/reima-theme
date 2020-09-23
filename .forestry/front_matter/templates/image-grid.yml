@@ -1,6 +1,7 @@
 ---
 label: Image Grid
 hide_body: true
+display_field: heading
 fields:
 - name: heading
   type: text
