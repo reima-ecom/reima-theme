@@ -43,7 +43,7 @@ fields:
 - name: linktext
   type: text
   config:
-    required: true
+    required: false
   label: Button Text
   showOnly:
     field: link
@@ -51,7 +51,7 @@ fields:
 - name: linkurl
   type: text
   config:
-    required: true
+    required: false
   label: Button URL
   showOnly:
     field: link
