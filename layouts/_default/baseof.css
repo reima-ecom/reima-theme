@@ -12,7 +12,7 @@
   --content-padding: 1rem;
   --border: 1px solid #ccc;
   --block-padding: 0 var(--content-padding);
-  --block-margin: var(--content-padding) auto;
+  --block-margin: var(--content-padding) auto calc(var(--content-padding) * 2);
   --block-width: var(--content-max-width);
   --content-width: 720px;
   --hr-width: calc(var(--content-max-width) - 2 * var(--content-padding));
