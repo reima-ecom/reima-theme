@@ -25,6 +25,38 @@ modules:
     All Reima products are designed to make life with a baby easier and smoother, tested by us and thousands of our customer families around the world. People are just loving it, see for yourself!
 
     Take a closer look at the product features you couldn’t have imagined needing, and soon can’t imagine living without.
+- template: image-grid
+  images:
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+    - image: kids-square.jpg
+      content: |
+        ### Product
+
+        Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
 - template: split-card
   image: keveni.jpg
   heading: Soft, skin-friendly materials
@@ -35,4 +67,27 @@ modules:
     In addition, in clothing the baby’s comfort is crucial, so we use soft and stretchy, yet durable fabrics like cotton and elastane, and pure cotton with a biowash finish.
 
     As the baby’s body temperature regulation is still developing, seasonal clothing needs to keep the baby nice and cool in the summer and warm and snug in the winter. Our summer wear is part tencel, which compared to plain cotton, is more absorbent and more effective at transferring moisture from the baby’s skin, making the clothing more pleasantly cool to wear.
+- template: image-grid
+  heading: Why Reima Baby Kit?
+  link: true
+  linkurl: '#'
+  linktext: Buy Baby Kit
+  linkmodifier: cta
+  columnsmobile: 1
+  images:
+    - image: kids-square.jpg
+      content: |
+        ### Superior quality
+
+        Reima quality has already convinced four generations of Finnish families, and the amazing craftsmanship in our products still takes parents by awe. We promise you will experience it too when opening your first Baby Kit!
+    - image: kids-square.jpg
+      content: |
+        ### The Moomins
+
+        The Moomin world is safe, their attitude toward others is tolerant, and their love for each other surpasses all obstacles. In our gender-neutral colours and cute Moomin prints, your baby is sure to win hearts.
+    - image: kids-square.jpg
+      content: |
+        ### Save time
+
+        Why make life more complicated than it already is? Reima Baby Kit is the easiest way to get a stylish wardrobe for your new-born! Plus, bundling all these premium items will save you time to enjoy your baby bubble.
 ---

@@ -18,4 +18,11 @@
     </li>
     {{ end }}
   </ul>
+  {{ if .link }}
+  <div class="image-grid__link">
+    <a href="{{.linkurl}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">
+      {{.linktext}}
+    </a>
+  </div>
+  {{ end }}
 </div>
