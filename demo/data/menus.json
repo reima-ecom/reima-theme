@@ -62,6 +62,10 @@
           "children": [
 
           ]
+        },
+        {
+          "name": "Image grid",
+          "url": "/modules/image-grid"
         }
       ],
       "name": "Modules",

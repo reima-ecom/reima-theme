@@ -1,0 +1,21 @@
+{{- $class := "image-grid" }}
+{{- with .columnsmobile }}
+{{- $class = printf "%s image-grid__col-mobile-%v" $class . }}
+{{- end }}
+<div class="{{$class}}">
+  {{- with .heading }}
+  <h2>{{.}}</h2>
+  {{- end }}
+  <ul>
+    {{ range .images }}
+    <li>
+      <div class="image-grid__zoom-container">
+        {{- partial "img" (dict "image" .image "widths" "300,600") }}
+      </div>
+      {{- with .content }}
+      {{. | markdownify}}
+      {{- end }}
+    </li>
+    {{ end }}
+  </ul>
+</div>
