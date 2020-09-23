@@ -1,4 +1,70 @@
 ---
 label: Image Grid
 hide_body: true
-fields: []
+fields:
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+  description: Optional heading (center aligned above the grid)
+- name: images
+  type: field_group_list
+  fields:
+  - name: image
+    type: file
+    config:
+      maxSize: 64
+    label: Image
+  - name: content
+    type: textarea
+    default: ''
+    config:
+      required: false
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Content
+    description: Optional content to show in connection with the image card
+  config:
+    min: 1
+    max: 
+    labelField: 
+  label: Image Cards
+- name: link
+  type: boolean
+  label: Button Below Grid
+  description: Whether to add a link button below the grid
+- name: linktext
+  type: text
+  config:
+    required: true
+  label: Button Text
+  showOnly:
+    field: link
+    value: true
+- name: linkurl
+  type: text
+  config:
+    required: true
+  label: Link URL
+  showOnly:
+    field: link
+    value: true
+- name: linkmodifier
+  type: select
+  default: ''
+  config:
+    required: false
+    options: []
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Button Modifier
+  description: Apply specific formatting for the button. E.g. the <code>cta</code>
+    modifier will make the button a red CTA button. Leave blank for default button.
+  showOnly:
+    field: link
+    value: true
