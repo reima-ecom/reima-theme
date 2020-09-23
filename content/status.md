@@ -2,8 +2,13 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-22"
+version: "2020-09-23"
 ---
+
+## Changes in 2020-09-23
+
+- New module: image grid. Although specifically designed for the baby kit product page, you can use this on any page.
+- Increased margin between modules.
 
 ## Changes in 2020-09-22
 
