@@ -26,6 +26,26 @@ modules:
 
           Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
   - template: image-grid
+    heading: Content pop-up
+    popup: true
+    images:
+      - image: kids-square.jpg
+      - image: kids-square.jpg
+        content: |
+          ### Some content
+
+          Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+      - image: kids-square.jpg
+        content: |
+          ### Some content
+
+          Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+      - image: kids-square.jpg
+        content: |
+          ### Some content
+
+          Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+  - template: image-grid
     heading: Three columns should fill on desktop
     columnsmobile: 1
     images:

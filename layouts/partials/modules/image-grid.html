@@ -2,12 +2,39 @@
 {{- with .columnsmobile }}
 {{- $class = printf "%s image-grid__col-mobile-%v" $class . }}
 {{- end }}
+{{- $popup := .popup }}
+{{- if $popup }}
+{{- $class = printf "%s image-grid--modal" $class }}
+{{- end }}
 <div class="{{$class}}">
   {{- with .heading }}
   <h2>{{.}}</h2>
   {{- end }}
   <ul>
     {{ range .images }}
+    {{ if and $popup .content }}
+    <li modal-opener>
+      <a class="image-grid__zoom-container" openid="parent">
+        {{- partial "img" (dict "image" .image "widths" "300,600") }}
+      </a>
+      <div class="image-grid__modal overlay">
+        <div>
+          <button class="icon" close>
+            <svg>
+              <!-- this icon reference comes from the menu -->
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </button>
+          {{- partial "img" (dict "image" .image "widths" "300,600") }}
+          <div>
+            {{- with .content }}
+            {{. | markdownify}}
+            {{- end }}
+          </div>
+        </div>
+      </div>
+    </li>
+    {{ else }}
     <li>
       <div class="image-grid__zoom-container">
         {{- partial "img" (dict "image" .image "widths" "300,600") }}
@@ -16,6 +43,7 @@
       {{. | markdownify}}
       {{- end }}
     </li>
+    {{ end }}
     {{ end }}
   </ul>
   {{ if .link }}
