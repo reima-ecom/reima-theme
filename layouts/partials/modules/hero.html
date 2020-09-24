@@ -2,6 +2,9 @@
 {{ with .overlayhorizontal }}
 {{ $class = printf "%s hero--overlay-%s" $class . }}
 {{ end }}
+{{ with .overlayvertical }}
+{{ $class = printf "%s hero--overlay-%s" $class . }}
+{{ end }}
 {{ with .overlaymobile }}
 {{ $class = printf "%s hero--overlay-mobile hero--overlay-mobile-%s" $class . }}
 {{ end }}
@@ -20,7 +23,32 @@
 {{ if .fullwidth }}
 {{ $class = printf "%s hero--full-width" $class }}
 {{ end }}
+{{ if .narrow }}
+{{ $class = printf "%s hero--narrow" $class }}
+{{ end }}
 <div class="{{$class}}">
+  {{- if eq .type "Youtube Video" }}
+
+  <div class="hero__video-container">
+    {{- $src := printf "https://www.youtube.com/embed/%s" .youtubeid }}
+    {{- $qry := slice }}
+    {{- if .youtubeautoplay }}{{ $qry = $qry | append "autoplay=1" }}{{end}}
+    {{- if .youtubenocontrols }}{{ $qry = $qry | append "controls=0" }}{{end}}
+    {{- if .youtubeloop }}{{ $qry = $qry | append (printf "loop=1&playlist=lJIrF4YjHfQ") }}{{end}}
+    <iframe width="560" height="315" src="{{$src}}{{with $qry}}?{{delimit . "&" | safeURL}}{{end}}" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+
+  {{- else if eq .type "Vimeo Video" }}
+
+  <div class="hero__video-container">
+    <iframe src="https://player.vimeo.com/video/{{.vimeoid}}{{if .vimeobg}}?background=1{{end}}" width="640"
+      height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+
+  {{- else }}
+
   {{- $mobile := partial "helpers/get-image" .imagemobile }}
   {{- with partial "helpers/get-image" .image }}
   {{- $params := (dict "image" . "widths" "2160,1080,768") }}
@@ -45,13 +73,18 @@
     </noscript>
   </picture>
   {{- end }}
-  <div>
-    <div>
+
+  {{- end }}
+
+  {{- if or .heading .text .link }}
+  <div class="hero__text-container">
+    <div class="hero__text">
       {{ with .heading }}<h1>{{.}}</h1>{{ end }}
       {{ with .text }}<p>{{. | markdownify}}</p>{{ end }}
       {{ if .link }}
-      <a href="{{.link}}" class="btn">{{.linktext}}</a>
+      <a href="{{.link}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">{{.linktext}}</a>
       {{ end }}
     </div>
   </div>
+  {{- end }}
 </div>

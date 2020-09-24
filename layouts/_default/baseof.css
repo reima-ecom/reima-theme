@@ -261,6 +261,7 @@ a:hover {
 
 .btn--cta:hover, .btn--cta:focus {
   background: #BA001F;
+  color: white;
 }
 
 .btn--secondary {
