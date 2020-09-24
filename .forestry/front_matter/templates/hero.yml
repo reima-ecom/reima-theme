@@ -89,7 +89,9 @@ fields:
   default: []
   config:
     required: false
-    options: []
+    options:
+    - left
+    - right
     source:
       type: simple
       section: 
@@ -97,4 +99,5 @@ fields:
       path: 
   label: Overlay on mobile
   description: Show overlay on mobile on this side of the image, limiting size to
-    half the hero width.
+    half the hero width. Leave blank for default, which is to show (text) content
+    below image on mobile.
