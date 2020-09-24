@@ -76,6 +76,8 @@ modules:
   overlayinvert: true
 - template: hero
   heading: Vertical alignment bottom
+  text: ... as well as narrow container
+  narrow: true
   overlayvertical: bottom
   image: hero.jpg
   overlayinvert: true

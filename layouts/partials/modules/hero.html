@@ -23,6 +23,9 @@
 {{ if .fullwidth }}
 {{ $class = printf "%s hero--full-width" $class }}
 {{ end }}
+{{ if .narrow }}
+{{ $class = printf "%s hero--narrow" $class }}
+{{ end }}
 <div class="{{$class}}">
   {{- if eq .type "Youtube Video" }}
 
