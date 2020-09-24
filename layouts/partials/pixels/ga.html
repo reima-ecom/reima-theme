@@ -18,12 +18,13 @@
 
 {{ with partial "helpers/get-product" $ }}
 <script>
-  ga('ec:addProduct', {
+  gaProduct = {
     "id": "{{$.File.ContentBaseName}}",
     "name": "{{.Title}}",
     "price": {{.Params.price }},
     "quantity": 1
-  });
+  };
+  ga('ec:addProduct', gaProduct);
   ga('ec:setAction', 'detail');
 </script>
 {{ end }}

@@ -27,13 +27,14 @@
   using yotpoId for now, since that is the same
  -->
 <script>
-  fbq('track', 'ViewContent', {
+  fbProduct = {
     content_name: '{{.Title}}',
     content_ids: ['{{.Params.yotpoId}}'],
     content_type: 'product',
     value: '{{.Params.price}}',
     currency: '{{site.Params.public.currency}}'
-  });
+  };
+  fbq('track', 'ViewContent', fbProduct);
 </script>
 
 {{ end }}
