@@ -14,7 +14,7 @@
   margin-top: 0;
 }
 
-.hero > div {
+.hero__text-container {
   left: 0;
   top: 0;
   right: 0;
@@ -23,15 +23,15 @@
   justify-content: center;
 }
 
-.hero > div > div {
+.hero__text {
   padding: var(--content-padding);
 }
 
-.hero > div > div > :first-child {
+.hero__text > :first-child {
   margin-top: 0;
 }
 
-.hero > div > div > :last-child {
+.hero__text > :last-child {
   margin-bottom: 0;
 }
 
@@ -43,29 +43,29 @@
   margin-top: 1rem;
 }
 
-.hero--overlay-mobile-left > div {
+.hero--overlay-mobile-left .hero__text-container {
   justify-content: flex-start;
   text-align: left;
 }
 
-.hero--overlay-mobile-right > div {
+.hero--overlay-mobile-right .hero__text-container {
   justify-content: flex-end;
   text-align: right;
 }
 
-.hero--overlay-right > div > div,
-.hero--overlay-left > div > div,
-.hero--overlay-center > div > div,
-.hero--overlay-mobile-right > div > div,
-.hero--overlay-mobile-left > div > div {
+.hero--overlay-right .hero__text,
+.hero--overlay-left .hero__text,
+.hero--overlay-center .hero__text,
+.hero--overlay-mobile-right .hero__text,
+.hero--overlay-mobile-left .hero__text {
   flex-basis: calc(50% - 2 * var(--content-padding));
 }
 
-.hero--overlay-small > div > div {
+.hero--overlay-small .hero__text {
   flex-basis: 33%;
 }
 
-.hero--overlay-mobile > div {
+.hero--overlay-mobile .hero__text-container {
   position: absolute;
   display: flex;
   padding: inherit;
@@ -76,6 +76,26 @@
   --color-bg: var(--color-fg);
 }
 
+.hero__video-container {
+  overflow: hidden;
+  position: relative;
+  width:100%;
+}
+
+.hero__video-container::after {
+  padding-top: 56.25%;
+  display: block;
+  content: '';
+}
+
+.hero__video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @media (min-width: 768px) {
   .hero {
     --h1-font-size: var(--h0-font-size);
@@ -83,21 +103,21 @@
     margin: var(--block-margin);
   }  
   
-  .hero > div {
+  .hero__text-container {
     position: absolute;
     display: flex;
     padding: inherit;
   }
 
-  .hero--overlay-right > div {
+  .hero--overlay-right .hero__text-container {
     justify-content: flex-end;
   }
 
-  .hero--overlay-left > div {
+  .hero--overlay-left .hero__text-container {
     justify-content: flex-start;
   }
 
-  .hero--overlay-center > div {
+  .hero--overlay-center .hero__text-container {
     justify-content: center;
   }
   
@@ -107,7 +127,7 @@
     --overlay-bg: rgba(0,0,0,0.4);
   }
 
-  .hero--overlay-bg > div > div {
+  .hero--overlay-bg .hero__text {
     --content-padding: 4rem;
     background-image:
       /* main top-down */
@@ -164,15 +184,15 @@
     background-repeat: no-repeat;
   }
 
-  .hero--overlay-align-left > div {
+  .hero--overlay-align-left .hero__text-container {
     text-align: left;
   }
 
-  .hero--overlay-align-right > div {
+  .hero--overlay-align-right .hero__text-container {
     text-align: right;
   }
 
-  .hero--overlay-align-center > div {
+  .hero--overlay-align-center .hero__text-container {
     text-align: center;
   }
 }

@@ -56,9 +56,23 @@ modules:
   text: "**Add markdown** to the text if you want. From the beach, to the snow, and everything in between!"
   overlayinvert: true
   overlaybg: true
+- template: hero
+  type: Youtube Video
+  youtubeid: lJIrF4YjHfQ
+  youtubeautoplay: true
+  youtubenocontrols: false
+  youtubeloop: true
+  overlaybg: true
+  heading: You can add a youtube video as the hero background
+  text: But be careful with text content, since (at least) Firefox by default disables autoplay!
+- template: hero
+  type: Vimeo Video
+  vimeoid: 459323817
+  vimeobg: false
 title: Hero demo
 
 ---
+
 # Hero
 
 Hero component is usually contained withing the page max width, but can occasionally span the entire width of the screen. If contained within the page width, the hero still fills the entire viewport on smaller screen sizes (tablet portrait and mobile).
@@ -72,17 +86,3 @@ Furthermore, the (text) content of the overlay can be justified to left, right o
 The image used is cropped to 1:1 on mobile using a best guess of the focal point of the image. If needed, the image for mobile can be cropped and set manually. For desktop 2:1 aspect ratio should be used.
 
 To make the content stand out, it should be possible to set a transparent overlay between the image and the content (not supported yet).
-
-## Data format / parameters
-
-- `heading: string`: Heading to be used. Outputs an `h1` heading tag. Uses display font size on desktop.
-- `text: string`: Outputs a `p` tag for text content.
-- `link: string` and `linktext: string`: Button link parameters.
-- `image: path`: Default image to use.
-- `imagemobile: path`: Image to use on mobile if smart cropping is not suitable.
-- `overlayinvert: boolean`: Make overlay text white.
-- `overlayalign: center|left|right`: Justify overlay content (i.e. align overlay text).
-- `overlayhorizontal: center|left|right`: Horizontal alignment of overlay element. If left or right, also limits the overlay width to half of the hero width.
-- `overlaysmall: boolean`: Decrease overlay heading size to `h4` heading, and limit overlay width to one third of the hero.
-- `fullwidth: boolean`: Do not limit hero width (i.e. usually span across the entire page).
-- `overlaymobile: left|right`: Show overlay on mobile on this side of the image, limiting size to half the hero width.
