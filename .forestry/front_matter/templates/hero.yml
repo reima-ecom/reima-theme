@@ -3,18 +3,91 @@ label: Hero
 hide_body: true
 display_field: text
 fields:
+- name: type
+  type: select
+  default: Image
+  config:
+    required: true
+    options:
+    - Image
+    - Youtube Video
+    - Vimeo Video
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Type
 - name: image
   type: file
   config:
     maxSize: 64
   label: Image
   hidden: false
+  showOnly:
+    field: type
+    value: Image
 - name: imagemobile
   type: file
   config:
     maxSize: 64
   label: Image for Mobile
   description: Image to use on mobile if smart cropping of the main image is not suitable.
+  showOnly:
+    field: type
+    value: Image
+- name: youtubeid
+  type: text
+  config:
+    required: false
+  label: Youtube ID
+  description: 'Example id format: <code>haD1hsRx31Q</code>. This id can be found
+    in the URL of the video (https://www.youtube.com/watch?v=haD1hsRx31Q) or when
+    you click "Share" (https://youtu.be/haD1hsRx31Q).<br><br><strong>Note regarding
+    videos and content</strong>: Be very careful when using a video at the same time
+    as text content (heading/text/button). The content will be put on top of the video,
+    and the video controls will not be clickable.'
+  showOnly:
+    field: type
+    value: Youtube Video
+- name: youtubeautoplay
+  type: boolean
+  label: Auto-play video
+  description: Whether to auto-play video on page load. Note that it is not guaranteed
+    to work - e.g. Firefox by default does <em>not</em> auto-play Youtube videos regardless
+    of this setting.
+  showOnly:
+    field: type
+    value: Youtube Video
+- name: youtubeloop
+  type: boolean
+  label: Loop video
+  showOnly:
+    field: type
+    value: Youtube Video
+- name: youtubenocontrols
+  type: boolean
+  label: Disable video player controls
+  showOnly:
+    field: type
+    value: Youtube Video
+- name: vimeoid
+  type: text
+  config:
+    required: false
+  label: Vimeo ID
+  description: E.g. <code>448635405</code>, which can be found in the URL (https://vimeo.com/448635405)
+  showOnly:
+    field: type
+    value: Vimeo Video
+- name: vimeobg
+  type: boolean
+  label: Background video
+  description: Whether to consider this a "background" video, with auto-play, looping,
+    and without player controls
+  showOnly:
+    field: type
+    value: Vimeo Video
 - name: heading
   type: text
   config:
@@ -58,6 +131,22 @@ fields:
       path: 
   label: Overlay text alignment
   description: Justify overlay content (i.e. align overlay text).
+- name: overlayvertical
+  type: select
+  default: ''
+  config:
+    required: false
+    options:
+    - top
+    - bottom
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Overlay vertical alignment
+  description: Vertical alignment of the overlay content. Leave blank for the default
+    content in the middle.
 - name: overlayhorizontal
   type: select
   default: ''
@@ -84,6 +173,11 @@ fields:
   type: boolean
   label: Full width
   description: Do not limit hero width (i.e. usually span across the entire page).
+- name: narrow
+  type: boolean
+  label: Narrow
+  description: Make the hero element a bit more narrow than the default, creating
+    a nice visual effect e.g. for video hero elements
 - name: overlaymobile
   type: select
   default: []
