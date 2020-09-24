@@ -60,7 +60,7 @@ modules:
   type: Youtube Video
   youtubeid: lJIrF4YjHfQ
   youtubeautoplay: true
-  youtubenocontrols: false
+  youtubenocontrols: true
   youtubeloop: true
   overlaybg: true
   heading: You can add a youtube video as the hero background
@@ -69,6 +69,17 @@ modules:
   type: Vimeo Video
   vimeoid: 459323817
   vimeobg: false
+- template: hero
+  heading: Vertical alignment top
+  overlayvertical: top
+  image: hero.jpg
+  overlayinvert: true
+- template: hero
+  heading: Vertical alignment bottom
+  overlayvertical: bottom
+  image: hero.jpg
+  overlayinvert: true
+
 title: Hero demo
 
 ---

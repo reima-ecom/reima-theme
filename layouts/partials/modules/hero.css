@@ -61,6 +61,14 @@
   flex-basis: calc(50% - 2 * var(--content-padding));
 }
 
+.hero--overlay-top .hero__text-container {
+  align-items: flex-start;
+}
+
+.hero--overlay-bottom .hero__text-container {
+  align-items: flex-end;
+}
+
 .hero--overlay-small .hero__text {
   flex-basis: 33%;
 }

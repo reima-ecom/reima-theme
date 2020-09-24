@@ -2,6 +2,9 @@
 {{ with .overlayhorizontal }}
 {{ $class = printf "%s hero--overlay-%s" $class . }}
 {{ end }}
+{{ with .overlayvertical }}
+{{ $class = printf "%s hero--overlay-%s" $class . }}
+{{ end }}
 {{ with .overlaymobile }}
 {{ $class = printf "%s hero--overlay-mobile hero--overlay-mobile-%s" $class . }}
 {{ end }}
