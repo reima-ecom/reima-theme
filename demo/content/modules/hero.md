@@ -10,9 +10,10 @@ modules:
   overlayinvert: true
 - template: hero
   heading: Mobile image
-  text: Use a separate image for mobile if needed
+  text: Use a separate image for mobile if needed; make button CTA if needed
   link: "#"
   linktext: Buy now
+  linkmodifier: cta
   image: hero.jpg
   overlayinvert: true
   imagemobile: hero-mobile.jpg

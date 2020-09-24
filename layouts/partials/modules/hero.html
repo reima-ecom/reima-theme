@@ -82,7 +82,7 @@
       {{ with .heading }}<h1>{{.}}</h1>{{ end }}
       {{ with .text }}<p>{{. | markdownify}}</p>{{ end }}
       {{ if .link }}
-      <a href="{{.link}}" class="btn">{{.linktext}}</a>
+      <a href="{{.link}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">{{.linktext}}</a>
       {{ end }}
     </div>
   </div>
