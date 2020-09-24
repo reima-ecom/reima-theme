@@ -10,3 +10,20 @@ fields:
 - name: link
   type: text
   label: Link
+- name: linkmodifier
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - cta
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Link modifier
+  description: 'Modify the visual appearance of the link (leave blank for default
+    appearance). Currently supported modifiers:<br><code>cta</code>: Create a more
+    highlighted link, i.e. something for a CTA<br><em>Not all elements necessarily
+    respect this setting.</em>'

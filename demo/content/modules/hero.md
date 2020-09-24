@@ -8,6 +8,7 @@ modules:
   linktext: Shop originals
   image: hero.jpg
   overlayinvert: true
+  type: Image
 - template: hero
   heading: Mobile image
   text: Use a separate image for mobile if needed; make button CTA if needed
@@ -17,6 +18,7 @@ modules:
   image: hero.jpg
   overlayinvert: true
   imagemobile: hero-mobile.jpg
+  type: Image
 - template: hero
   heading: Small details that make a big difference
   link: "#"
@@ -25,6 +27,7 @@ modules:
   imagemobile: category-hero-mobile.jpg
   overlayhorizontal: right
   overlaysmall: true
+  type: Image
 - template: hero
   image: hero-sneakers.jpg
   heading: Image can be full-width
@@ -32,6 +35,7 @@ modules:
   linktext: Shop sneakers
   overlayhorizontal: right
   fullwidth: true
+  type: Image
 - template: hero
   image: stayhome-banner-desktop.jpg
   imagemobile: stayhome-banner-mobile.jpg
@@ -42,6 +46,7 @@ modules:
   overlaymobile: left
   overlayhorizontal: center
   overlayalign: center
+  type: Image
 - template: hero
   heading: Mobile overlay can be right aligned and desktop left...
   overlaysmall: true
@@ -51,12 +56,15 @@ modules:
   overlaymobile: right
   overlayhorizontal: left
   overlayalign: left
+  type: Image
 - template: hero
   image: "/befunky-collage.jpg"
   heading: Add a background to the overlay if needed
-  text: "**Add markdown** to the text if you want. From the beach, to the snow, and everything in between!"
+  text: "**Add markdown** to the text if you want. From the beach, to the snow, and
+    everything in between!"
   overlayinvert: true
   overlaybg: true
+  type: Image
 - template: hero
   type: Youtube Video
   youtubeid: lJIrF4YjHfQ
@@ -65,7 +73,8 @@ modules:
   youtubeloop: true
   overlaybg: true
   heading: You can add a youtube video as the hero background
-  text: But be careful with text content, since (at least) Firefox by default disables autoplay!
+  text: But be careful with text content, since (at least) Firefox by default disables
+    autoplay!
 - template: hero
   type: Vimeo Video
   vimeoid: 459323817
@@ -75,18 +84,18 @@ modules:
   overlayvertical: top
   image: hero.jpg
   overlayinvert: true
+  type: Image
 - template: hero
   heading: Vertical alignment bottom
-  text: ... as well as narrow container
+  text: "... as well as narrow container"
   narrow: true
   overlayvertical: bottom
   image: hero.jpg
   overlayinvert: true
-
+  type: Image
 title: Hero demo
 
 ---
-
 # Hero
 
 Hero component is usually contained withing the page max width, but can occasionally span the entire width of the screen. If contained within the page width, the hero still fills the entire viewport on smaller screen sizes (tablet portrait and mobile).
