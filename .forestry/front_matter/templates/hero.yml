@@ -1,7 +1,7 @@
 ---
 label: Hero
 hide_body: true
-display_field: text
+display_field: heading
 fields:
 - name: type
   type: select
