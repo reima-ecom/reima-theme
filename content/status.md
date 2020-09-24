@@ -2,8 +2,14 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-23"
+version: "2020-09-24"
 ---
+
+## Changes in 2020-09-24
+
+### Hero video background possibility
+
+You can now add videos to heros instead of the default image-based hero. Currently both Youtube and Vimeo videos are supported. See the [hero demo page](https://reima-demo.netlify.app/modules/hero/) for examples.
 
 ## Changes in 2020-09-23
 
