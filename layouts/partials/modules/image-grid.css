@@ -1,18 +1,30 @@
 .image-grid {
-  --grid-column-width: 150px;
-  --grid-template-columns: repeat(auto-fit, minmax(var(--grid-column-width), 1fr));
+  --columns-mobile: 2;
+  --columns-tablet: 3;
+  --columns-desktop: 4;
+  --columns: var(--columns-mobile);
   max-width: 1280px;
   padding: var(--block-padding);
   margin: var(--block-margin);
 }
 
 .image-grid__col-mobile-1 {
-  --grid-column-width: 250px;
+  --columns-mobile: 1;
 }
 
-@media (min-width: 850px) {
+.image-grid__col-desktop-3 {
+  --columns-desktop: 3;
+}
+
+@media (min-width: 768px) {
   .image-grid {
-    --grid-column-width: 250px;
+    --columns: var(--columns-tablet);
+  }
+}
+
+@media (min-width: 992px) {
+  .image-grid {
+    --columns: var(--columns-desktop);
   }
 }
 
@@ -21,12 +33,17 @@
 }
 
 .image-grid ul {
-  display: grid;
-  grid-template-columns: var(--grid-template-columns);
-  gap: var(--content-padding);
   padding: 0;
-  margin: 0;
   list-style: none;
+  display: flex;
+  margin: calc(var(--content-padding) / -2);
+  flex-wrap: wrap;
+}
+
+.image-grid li {
+  padding: calc(var(--content-padding) / 2);
+  box-sizing: border-box;
+  width: calc(100% / var(--columns));
 }
 
 .image-grid ul h3 {
@@ -95,6 +112,9 @@
 
 .image-grid__show-more {
   align-self: center;
+  flex: 1;
+  text-align: center;
+  margin: 0.5rem;
 }
 
 .image-grid__show-more ~ li {
@@ -123,4 +143,36 @@
   .image-grid__show-more ~ li {
     display: block;
   }
+}
+
+.image-grid__last-fill {
+  flex: 1;
+}
+
+.image-grid__last-fill > div {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-lighter);
+  padding: 0 0.5rem;
+}
+
+.image-grid__last-fill--links-cta a {
+  background: var(--color-reima-red);
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.375;
+  padding: .6875rem 1.5rem;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.image-grid__last-fill--links-cta a:hover,
+.image-grid__last-fill--links-cta a:focus {
+    background: #ba001f;
+    color: #fff;
 }

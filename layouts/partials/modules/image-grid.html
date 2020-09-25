@@ -2,6 +2,9 @@
 {{- with .columnsmobile }}
 {{- $class = printf "%s image-grid__col-mobile-%v" $class . }}
 {{- end }}
+{{- with .columnsdesktop }}
+{{- $class = printf "%s image-grid__col-desktop-%v" $class . }}
+{{- end }}
 {{- $popup := .popup }}
 {{- if $popup }}
 {{- $class = printf "%s image-grid--modal" $class }}
@@ -60,6 +63,15 @@
       </label>
     </li>
     {{ end }}
+    {{ end }}
+    {{ if .lastfill }}
+    <li class="image-grid__last-fill{{with .lastfilllinks}} image-grid__last-fill--links-{{.}}{{end}}">
+      <div>
+        <div>
+          {{.lastfilltext | markdownify}}
+        </div>
+      </div>
+    </li>
     {{ end }}
   </ul>
   {{ if .link }}
