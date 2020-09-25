@@ -2,6 +2,9 @@
 {{- with .columnsmobile }}
 {{- $class = printf "%s image-grid__col-mobile-%v" $class . }}
 {{- end }}
+{{- with .columnsdesktop }}
+{{- $class = printf "%s image-grid__col-desktop-%v" $class . }}
+{{- end }}
 {{- $popup := .popup }}
 {{- if $popup }}
 {{- $class = printf "%s image-grid--modal" $class }}
@@ -11,7 +14,13 @@
   <h2>{{.}}</h2>
   {{- end }}
   <ul>
-    {{ range .images }}
+    {{ $showmore := -1 }}
+    {{ with .showmoreafter }}
+    {{ $showmore = sub . 1 }}
+    {{ end }}
+    {{ $moretext := .showmoretext }}
+
+    {{ range $i, $img := .images }}
     {{ if and $popup .content }}
     <li modal-opener>
       <a class="image-grid__zoom-container" openid="parent">
@@ -44,6 +53,25 @@
       {{- end }}
     </li>
     {{ end }}
+    <!-- add show more if specified -->
+    {{ if eq $showmore $i }}
+    <input type="checkbox" id="image-grid-show-more" name="image-grid-show-more" class="image-grid__show-more-chk"
+      autocomplete="off">
+    <li class="image-grid__show-more">
+      <label for="image-grid-show-more" class="link">
+        {{$moretext}}
+      </label>
+    </li>
+    {{ end }}
+    {{ end }}
+    {{ if .lastfill }}
+    <li class="image-grid__last-fill{{with .lastfilllinks}} image-grid__last-fill--links-{{.}}{{end}}">
+      <div>
+        <div>
+          {{.lastfilltext | markdownify}}
+        </div>
+      </div>
+    </li>
     {{ end }}
   </ul>
   {{ if .link }}

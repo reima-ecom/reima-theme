@@ -7,7 +7,9 @@ version: "2020-09-25"
 
 ## Changes in 2020-09-25
 
-- Faster filtering with preserved product order
+- Collection page: Faster filtering with preserved product order
+- Image grid: "Show all" button can now be enabled for mobile (see examples and forestry module)
+- Image grid: Possibility to add a last element that fills the last row (see examples and forestry module)
 
 ## Changes in 2020-09-24
 
