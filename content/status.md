@@ -2,8 +2,12 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-24"
+version: "2020-09-25"
 ---
+
+## Changes in 2020-09-25
+
+- Faster filtering with preserved product order
 
 ## Changes in 2020-09-24
 

@@ -18,7 +18,7 @@ const ensureIndex = async () => {
   if (!index) {
     if (!w.algoliasearch) {
       // @ts-ignore
-      await __import__('https://cdn.jsdelivr.net/npm/algoliasearch@3.32.0/dist/algoliasearchLite.min.js');
+      await __import__('https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js');
     }
     const client = w.algoliasearch(w.site.algolia.appid, w.site.algolia.apikey);
     index = client.initIndex(w.site.algolia.indexname);
@@ -29,7 +29,7 @@ const ensureIndex = async () => {
 const searchAndRender = async () => {
   // search for products
   const facetFilters = Object.values(filters);
-  const { hits } = await index.search('', { facetFilters });
+  const { hits } = await index.search('', { facetFilters, hitsPerPage: 1000 });
   // render results
   /** @type {HTMLElement} */
   const list = document.querySelector('.product-list > ul');
