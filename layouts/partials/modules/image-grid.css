@@ -114,3 +114,13 @@
 .image-grid__show-more-chk:checked + .image-grid__show-more {
   display: none;
 }
+
+@media (min-width: 768px) {
+  .image-grid__show-more {
+    display: none;
+  }
+
+  .image-grid__show-more ~ li {
+    display: block;
+  }
+}
