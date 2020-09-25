@@ -33,26 +33,15 @@ const searchAndRender = async () => {
   // render results
   /** @type {HTMLElement} */
   const list = document.querySelector('.product-list > ul');
+  // create map of hit handles
+  const hitHandles = hits.reduce((obj, hit) => ({
+    ...obj,
+    [hit.objectID]: true,
+  }), {});
+  // show or hide elements based on hits existence
   for (let i = 0; i < list.children.length; i += 1) {
-    const hit = hits[i];
-    const element = /** @type {HTMLAnchorElement} */(list.children[i]);
-    if (!hit) {
-      element.style.display = 'none';
-    } else {
-      element.style.display = '';
-      element.querySelector('a').href = `/collections/${window.collection}/products/${hit.objectID}`;
-      /** @type {HTMLImageElement} */
-      const img = element.querySelector('img');
-      img.dataset.src = '';
-      img.dataset.srcset = '';
-      img.srcset = '';
-      img.src = hit.imageSrc;
-      const dots = element.querySelector('.color-dots');
-      dots.innerHTML = '';
-      dots.innerHTML = hit.colors.map((c) => `<div style="background-color: ${colors[c.toLowerCase()]};"></div>`).join('');
-      /** @type {HTMLElement} */(element.querySelector('h3 a')).innerText = hit.title;
-      /** @type {HTMLElement} */ (element.querySelector('.price')).innerText = `$${hit.price}`;
-    }
+    const element = /** @type {HTMLElement} */(list.children[i]);
+    element.style.display = hitHandles[element.getAttribute('handle')] ? 'block' : 'none';
   }
 };
 

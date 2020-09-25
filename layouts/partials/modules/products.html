@@ -23,8 +23,9 @@
     {{ range $productPages }}
     {{ $link := partial "link" .RelPermalink }}
     <!-- get the actual product page from the name of the product page under collections  -->
-    {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
-    <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}">
+    {{ $producthandle := .File.ContentBaseName }}
+    {{ with site.GetPage (printf "/products/%s" $producthandle) }}
+    <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}" handle="{{$producthandle}}">
       {{ with .Resources.ByType "image" | first 1 }}
       {{partial "image" (dict "image" (index . 0) "widths" "200,400")}}
       {{ end }}
