@@ -84,6 +84,7 @@ modules:
 
           Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
   - template: image-grid
+    showmore: true
     showmoreafter: 4
     showmoretext: + Show all products
     lastfill: true

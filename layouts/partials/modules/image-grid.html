@@ -15,10 +15,10 @@
   {{- end }}
   <ul>
     {{ $showmore := -1 }}
-    {{ with .showmoreafter }}
-    {{ $showmore = sub . 1 }}
+    {{ if and .showmore .showmoreafter }}
+    {{ $showmore = sub .showmoreafter 1 }}
     {{ end }}
-    {{ $moretext := .showmoretext }}
+    {{ $moretext := default "Show more" .showmoretext }}
 
     {{ range $i, $img := .images }}
     {{ if and $popup .content }}
