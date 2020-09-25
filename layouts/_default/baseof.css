@@ -169,7 +169,8 @@ code {
 
 /* #region links */
 
-a {
+a,
+.link {
   color: #d2092d;
   cursor: pointer;
   text-decoration: underline;
@@ -183,7 +184,8 @@ a {
   border: none;
 }
 
-a:hover {
+a:hover,
+.link {
   color: #af0f03;
   text-decoration: underline;
 }

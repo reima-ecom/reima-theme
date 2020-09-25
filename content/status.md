@@ -7,7 +7,8 @@ version: "2020-09-25"
 
 ## Changes in 2020-09-25
 
-- Faster filtering with preserved product order
+- Collection page: Faster filtering with preserved product order
+- Image grid: "Show all" button can now be enabled for mobile
 
 ## Changes in 2020-09-24
 

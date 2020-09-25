@@ -11,7 +11,13 @@
   <h2>{{.}}</h2>
   {{- end }}
   <ul>
-    {{ range .images }}
+    {{ $showmore := -1 }}
+    {{ with .showmoreafter }}
+    {{ $showmore = sub . 1 }}
+    {{ end }}
+    {{ $moretext := .showmoretext }}
+
+    {{ range $i, $img := .images }}
     {{ if and $popup .content }}
     <li modal-opener>
       <a class="image-grid__zoom-container" openid="parent">
@@ -42,6 +48,16 @@
       {{- with .content }}
       {{. | markdownify}}
       {{- end }}
+    </li>
+    {{ end }}
+    <!-- add show more if specified -->
+    {{ if eq $showmore $i }}
+    <input type="checkbox" id="image-grid-show-more" name="image-grid-show-more" class="image-grid__show-more-chk"
+      autocomplete="off">
+    <li class="image-grid__show-more">
+      <label for="image-grid-show-more" class="link">
+        {{$moretext}}
+      </label>
     </li>
     {{ end }}
     {{ end }}
