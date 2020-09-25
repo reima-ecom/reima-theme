@@ -19,7 +19,7 @@ params:
   # note that hugo makes these lowercase, so best have all lowercase names
   public:
     algolia:
-      indexname: 'reima-us-dev'
+      indexname: 'reima-theme'
       appid: '6FDKJXBLR9'
       apikey: '3cc34311314307aa6cc876263de9e486'
     shopify:

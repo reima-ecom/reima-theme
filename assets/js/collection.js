@@ -20,8 +20,8 @@ const ensureIndex = async () => {
       // @ts-ignore
       await __import__('https://cdn.jsdelivr.net/npm/algoliasearch@3.32.0/dist/algoliasearchLite.min.js');
     }
-    const client = w.algoliasearch('6FDKJXBLR9', '3cc34311314307aa6cc876263de9e486');
-    index = client.initIndex('reima-us-dev');
+    const client = w.algoliasearch(w.site.algolia.appid, w.site.algolia.apikey);
+    index = client.initIndex(w.site.algolia.indexname);
   }
   return index;
 };
@@ -40,7 +40,7 @@ const searchAndRender = async () => {
       element.style.display = 'none';
     } else {
       element.style.display = '';
-      element.href = `/collections/${window.collection}/products/${hit.objectID}`;
+      element.querySelector('a').href = `/collections/${window.collection}/products/${hit.objectID}`;
       /** @type {HTMLImageElement} */
       const img = element.querySelector('img');
       img.dataset.src = '';
