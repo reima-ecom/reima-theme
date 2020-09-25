@@ -75,3 +75,67 @@ fields:
   showOnly:
     field: link
     value: true
+- name: showmore
+  type: boolean
+  label: Enable show more button on mobile
+  description: Enable a "show more" button for mobile if there are a lot of image
+    cards. This button can then be clicked to show the rest of the images.
+- name: showmoreafter
+  type: number
+  label: Show more after
+  description: Specify the number of image cards to show on mobile before the "show
+    more" button
+  default: 0
+  required: true
+  config:
+    min: 0
+    max: 
+    step: 
+  showOnly:
+    field: showmore
+    value: true
+- name: showmoretext
+  type: text
+  config:
+    required: false
+  label: Show more text
+  description: Text to show in the link, e.g. "Show all"
+  showOnly:
+    field: showmore
+    value: true
+- name: lastfill
+  type: boolean
+  label: Enable last element
+  description: Enable last element that fills the rest of the last row
+- name: lastfilltext
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Last element text
+  description: Text content to show in the last element. Use markdown at will.
+  showOnly:
+    field: lastfill
+    value: true
+- name: lastelementlinks
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - cta
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Last element link style
+  description: 'Specify additional styling for the links in the last element. Currently
+    supported:<br><code>cta</code>: Make links CTA buttons<br>Leave blank for default
+    link appearance.'
+  showOnly:
+    field: lastfill
+    value: true
