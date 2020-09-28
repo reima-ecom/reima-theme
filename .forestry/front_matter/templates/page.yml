@@ -28,6 +28,7 @@ fields:
   - testimonials
   - article-grid
   - hr
+  - content-table
   config:
     min: 1
     max: 

@@ -1,0 +1,21 @@
+.content-table {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+  max-width: var(--block-width);
+  font-size: var(--text-font-size);
+  text-align: center;
+}
+
+.content-table__container {
+  overflow: auto;
+}
+
+.content-table table {
+  white-space: nowrap;
+  margin: auto;
+}
+
+.content-table th,
+.content-table td {
+  padding: 3px 5px;
+}

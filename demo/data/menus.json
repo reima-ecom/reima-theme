@@ -66,6 +66,10 @@
         {
           "name": "Image grid",
           "url": "/modules/image-grid"
+        },
+        {
+          "name": "Content with Tables",
+          "url": "/modules/content-table"
         }
       ],
       "name": "Modules",

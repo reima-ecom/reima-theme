@@ -1,0 +1,13 @@
+---
+  label: Content with Table
+  hide_body: true
+  display_field: content
+  fields:
+  - name: content
+    type: textarea
+    default: ''
+    config:
+      required: true
+      wysiwyg: false
+    label: Content
+  

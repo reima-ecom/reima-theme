@@ -1,0 +1,6 @@
+<section class="content-table">
+  {{ $content := .content | markdownify }}
+  {{ $content := replace $content "<table" "<div class=\"content-table__container\"><table" }}
+  {{ $content = replace $content "</table>" "</table></div>" }}
+  {{$content | safeHTML}}
+</section>

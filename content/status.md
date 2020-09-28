@@ -2,8 +2,14 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-25"
+version: "2020-09-28"
 ---
+
+## Changes in 2020-09-28
+
+### Size chart creation via "Content with Table" module
+
+You can now create better size charts with the [Content with Table](https://reima-demo.netlify.app/modules/content-table/) module. See the module page for information on how this module works.
 
 ## Changes in 2020-09-25
 
