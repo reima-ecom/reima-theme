@@ -8,12 +8,6 @@
   position: relative;
 }
 
-.hero--full-width {
-  max-width: 100%;
-  padding: 0;
-  margin-top: 0;
-}
-
 .hero--narrow {
   max-width: 1024px;
 }
@@ -211,4 +205,10 @@
 
 .hero.hero--overlay-small h1 {
   font-size: var(--h4-font-size);
+}
+
+.hero--full-width {
+  max-width: 100%;
+  padding: 0;
+  margin-top: 0;
 }
