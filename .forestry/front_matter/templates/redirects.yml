@@ -14,7 +14,8 @@ fields:
       min: 
     description: This should be a path from the root of the site, e.g. "/collections/old".
       Wildcards can be specified at the end of the path, e.g. "/collections/old/*"
-      will match everything under this directory.
+      will match everything under this directory. <strong>Note that redirects will
+      not shadow existing pages.</strong>
   - type: text
     name: to
     label: To
