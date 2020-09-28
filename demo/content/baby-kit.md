@@ -9,6 +9,7 @@ modules:
   linktext: Get yours now for $199
   image: hero.jpg
   overlayinvert: true
+  type: Image
 - template: content
   content: |-
     ## From Finland, with love
@@ -18,6 +19,7 @@ modules:
     **Psst...** *No need for baby clothing right now? Reima has a wonderful collection for toddlers, kids and juniors as well!*
 - template: hero
   image: hero.jpg
+  type: Image
 - template: content
   content: |-
     ## Take a peek into the box
@@ -75,7 +77,7 @@ modules:
   linkurl: "#"
   linktext: Buy Baby Kit
   linkmodifier: cta
-  columnsmobile: 1
+  columnsmobile: '1'
   images:
   - image: kids-square.jpg
     content: |
@@ -92,5 +94,6 @@ modules:
       ### Save time
 
       Why make life more complicated than it already is? Reima Baby Kit is the easiest way to get a stylish wardrobe for your new-born! Plus, bundling all these premium items will save you time to enjoy your baby bubble.
+  columnsdesktop: '3'
 
 ---
