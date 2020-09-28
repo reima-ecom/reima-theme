@@ -9,6 +9,14 @@ See the [demo site](https://reima-demo.netlify.app) for a showcase of the theme 
 
 This document describes content management in general, as well as specific information on the content structure where needed.
 
+## Site publishing
+
+You should be able to publish your site by going to `https://your-site-url/status`. Currently the publishing process refreshes everything, including products from Shopify, so it can take a while (up to about 20 minutes as of writing).
+
+## Site preview
+
+Remember that you can see a preview of your site by clicking the eye icon in the upper-right corner in forestry (visible when editing a page). This allows you to view both draft content, as well as unsaved edits without publishing the whole site. The preview server might take a while to start up if not used in a while, so be patient when you're getting started for the day.
+
 ## Page URLs
 
 Pages receive their URL based on the filename and possible parent folders. So based on the page's location within the `Pages` section will determine its url. Here are some examples:
