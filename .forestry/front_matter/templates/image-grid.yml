@@ -139,3 +139,33 @@ fields:
   showOnly:
     field: lastfill
     value: true
+- name: columnsmobile
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - '1'
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Columns on mobile
+  description: Number of columns to show on "mobile". Leave blank for the default
+    2 columns on mobile.
+- name: columnsdesktop
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+    - '3'
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Columns on desktop
+  description: Number of columns to show on "desktop". Leave blank for the default
+    4 columns.
