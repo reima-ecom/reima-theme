@@ -11,6 +11,11 @@ version: "2020-09-28"
 
 You can now create better size charts with the [Content with Table](https://reima-demo.netlify.app/modules/content-table/) module. See the module page for information on how this module works.
 
+### Other updates
+
+- New module: Horizontal Line - create visual space with a page-wide horizontal line between modules
+- Bug fix: full-width hero modules are really full width again
+
 ## Changes in 2020-09-25
 
 - Collection page: Faster filtering with preserved product order
