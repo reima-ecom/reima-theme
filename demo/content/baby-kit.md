@@ -58,6 +58,7 @@ modules:
 
       Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
   popup: true
+- template: hr
 - template: split-card
   image: keveni.jpg
   heading: Soft, skin-friendly materials

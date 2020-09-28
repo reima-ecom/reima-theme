@@ -1,0 +1,7 @@
+.hr {
+  max-width: unset;
+  margin: var(--content-padding) 0;
+  padding: 0;
+  border: none;
+  border-bottom: var(--border);
+}

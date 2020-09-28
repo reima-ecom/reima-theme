@@ -27,6 +27,7 @@ fields:
   - products
   - testimonials
   - article-grid
+  - hr
   config:
     min: 1
     max: 
