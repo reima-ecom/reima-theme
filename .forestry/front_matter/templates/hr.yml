@@ -1,4 +1,8 @@
 ---
   label: Horizontal Line
   hide_body: true
-  
+  fields:
+  - name: title
+    type: text
+    label: Noop
+    hidden: true
