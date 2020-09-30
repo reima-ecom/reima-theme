@@ -83,6 +83,8 @@ modules:
       ### Some content
 
       Content is always nice, don't you think. Here you can put **markdown** and all kinds of nice stuff. Be wary about the length of the text, though. Especially on mobile!
+  showmore: true
+  showmoreafter: '0'
 - template: image-grid
   showmore: true
   showmoreafter: 4

@@ -16,7 +16,7 @@
   <ul>
     {{ $showmore := -1 }}
     {{ if and .showmore .showmoreafter }}
-    {{ $showmore = sub .showmoreafter 1 }}
+    {{ $showmore = sub (int .showmoreafter) 1 }}
     {{ end }}
     {{ $moretext := default "Show more" .showmoretext }}
 
