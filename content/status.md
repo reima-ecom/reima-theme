@@ -2,8 +2,14 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-09-28"
+version: "2020-10-02"
 ---
+
+## Changes in 2020-10-02
+
+### Site now published automatically
+
+Content changes to the sites are now published automatically. This means you no longer need to specifically click "Publish" on the status page after saving a page in forestry. However, **you still need to refresh the products whenever you want to update the product data from Shopify**.
 
 ## Changes in 2020-09-28
 
