@@ -1,6 +1,9 @@
 # Reima Headless
 
-Headless eCommerce for Reima.
+This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites.
+
+- Static site is built using [Hugo](https://gohugo.io/)
+- JS is built using [Rollup](https://rollupjs.org/guide/en/), so Node is used for this
 
 ## Architectural components
 
@@ -15,7 +18,7 @@ Headless eCommerce for Reima.
 
 ## Folder structure
 
-The folder structure mostly follows the default Hugo folder structure with CSS and JS files handled a bit differently. 
+The folder structure mostly follows the default Hugo folder structure with CSS and JS files handled a bit differently.
 
 In order to allow for CSS files to live next to their layout (HTML) counterparts, the `layouts` dir is mounted also as `assets`. This means that CSS files should be referenced relative to the `layouts` folder. I.e. the CSS for the base layout should be added as `_default/baseof.css`, because that is its path within the `layouts` folder.
 
@@ -105,7 +108,22 @@ These features are supported without JS. Functionality that is not supported sho
 - Carousel
 - Product thumbnails
 
-## Development standards
+## Development
+
+## Getting Started
+
+To make setup as easy as possible, use [vscode remote containers](https://code.visualstudio.com/docs/remote/containers) for development. After setting everything up according to the "Getting Started" section, you can clone this repository directly into a container with the vscode command `Remote-Containers: Clone Repository in Container Volume`. Vscode will build the container, clone the repo and start your coding session inside the container. Of course, you should have a working git setup and credential manager in place for this to work.
+
+All development should be done in feature branches, and changes merged to master via GitHub pull requests. [GitHub Flow](https://guides.github.com/introduction/flow/) is used as a branching strategy / workflow.
+
+When you are developing new features for the front-end (i.e. the theme), use the site in the `demo` folder to view changes:
+
+```bash
+> cd demo
+> hugo server
+```
+
+This theme is a [hugo module](https://gohugo.io/hugo-modules/use-modules/) that is then used on the individual ecommerce sites. The sites use a "vendored" approach, so the theme is not automatically updated based on changes. All theme updates to the production sites are initiated manually, so you cannot break the live sites just by editing this theme.
 
 ### Bugs and outages
 
@@ -146,7 +164,3 @@ Don't ever assume other peoples code or endpoints is bug-free and work the way y
 - New features are developed, and again not complete without documentation. "Bug-driven development" is ok in non-mission critical parts, but for instance package modules should always have unit tests for exported members.
 
 In addition, tests and documentation should be prioritized for mission-critical existing features (such as site worker). Documentation for existing features should be improved regularly.
-
-## Development
-
-Tools needed: Node.js, git, Hugo, etc.
