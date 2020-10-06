@@ -2,8 +2,16 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-10-02"
+version: "2020-10-06"
 ---
+
+## Changes in 2020-10-06
+
+Bug fixes:
+
+- Cart now shows correct currency
+- Add to cart button properly localized also when changing variants
+- Product image scrolls when changing color also on non-English site
 
 ## Changes in 2020-10-02
 

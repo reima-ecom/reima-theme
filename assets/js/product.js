@@ -1,4 +1,4 @@
-import { l as loadElement } from './load-element-b03c5bd5.js';
+import { l as loadElement } from './load-element-1f445840.js';
 
 setTimeout(() => {
   loadElement('r-cart');
@@ -36,17 +36,18 @@ const getVariant = async (options) => variants.find((v) => {
 const inputChange = async (e) => {
   const { name } = e.currentTarget;
   const { value } = e.currentTarget;
+  const isColor = e.currentTarget.closest('.selections--Color');
   selectedOptions[name] = value;
   // check if available
   const variant = await getVariant(selectedOptions);
   if (!variant) {
-    cartButton.innerText = 'Not available';
+    cartButton.innerText = cartButton.dataset.na;
     cartButton.disabled = true;
   } else if (!variant.available) {
-    cartButton.innerText = 'Sold out';
+    cartButton.innerText = cartButton.dataset.sold;
     cartButton.disabled = true;
   } else {
-    cartButton.innerText = 'Add to cart';
+    cartButton.innerText = cartButton.dataset.add;
     cartButton.disabled = false;
     form.dataset.variant = variant.id;
   }
@@ -69,7 +70,7 @@ const inputChange = async (e) => {
     else priceElement.classList.remove('price--sale');
     /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText = variant.compareAtPriceFormatted || '';
     // scroll to variant image if color change
-    if (name === 'Color') {
+    if (isColor) {
       /** @type {import('./elements/r-carousel').default} */(document.querySelector('r-carousel')).scrollToImage(variant.imageIndex);
       /** @type {import('./elements/r-thumbnails').default} */(document.querySelector('r-thumbnails')).setActiveThumbnail(variant.imageIndex, true);
     }

@@ -92,7 +92,8 @@
       {{ end }}
 
       <div>
-        <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}}>
+        <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}} 
+        data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
           {{ if $firstAvailableOptions }}
           {{T "Add to cart"}}
           {{ else }}

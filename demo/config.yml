@@ -23,9 +23,9 @@ params:
       appid: '6FDKJXBLR9'
       apikey: '3cc34311314307aa6cc876263de9e486'
     shopify:
-      store: reima-us
-      token: d2990d8e29e763239f8e8ff6cefc9ebe
-    currency: USD
+      store: reima-jp
+      token: e0370fdfeed9aeac00130441c6e2cf76
+    currency: JPY
 
 module:
   imports:
