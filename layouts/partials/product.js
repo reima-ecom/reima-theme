@@ -36,6 +36,7 @@ const getVariant = async (options) => variants.find((v) => {
 const inputChange = async (e) => {
   const { name } = e.currentTarget;
   const { value } = e.currentTarget;
+  const isColor = e.currentTarget.closest('.selections--Color');
   selectedOptions[name] = value;
   // check if available
   const variant = await getVariant(selectedOptions);
@@ -69,7 +70,7 @@ const inputChange = async (e) => {
     else priceElement.classList.remove('price--sale');
     /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText = variant.compareAtPriceFormatted || '';
     // scroll to variant image if color change
-    if (name === 'Color') {
+    if (isColor) {
       /** @type {import('./elements/r-carousel').default} */(document.querySelector('r-carousel')).scrollToImage(variant.imageIndex);
       /** @type {import('./elements/r-thumbnails').default} */(document.querySelector('r-thumbnails')).setActiveThumbnail(variant.imageIndex, true);
     }
