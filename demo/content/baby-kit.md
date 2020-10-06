@@ -74,7 +74,7 @@ modules:
 - template: image-grid
   heading: Why Reima Baby Kit?
   link: true
-  linkurl: "#"
+  linkurl: "#buy=Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDMwMzc5MDc0MzY4OQ=="
   linktext: Buy Baby Kit
   linkmodifier: cta
   columnsmobile: '1'

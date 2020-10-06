@@ -10,7 +10,7 @@ setTimeout(() => {
  */
 const addToCart = (e) => {
   e.preventDefault();
-  const [, variantId] = /** @type {HTMLElement} */(e.currentTarget).getAttribute('href').split('=');
+  const variantId = /** @type {HTMLElement} */(e.currentTarget).getAttribute('href').replace('#buy=', '');
   /** @type {Cart} */(document.querySelector('r-cart')).addVariant(variantId);
 };
 
