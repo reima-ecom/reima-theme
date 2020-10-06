@@ -40,13 +40,13 @@ const inputChange = async (e) => {
   // check if available
   const variant = await getVariant(selectedOptions);
   if (!variant) {
-    cartButton.innerText = 'Not available';
+    cartButton.innerText = cartButton.dataset.na;
     cartButton.disabled = true;
   } else if (!variant.available) {
-    cartButton.innerText = 'Sold out';
+    cartButton.innerText = cartButton.dataset.sold;
     cartButton.disabled = true;
   } else {
-    cartButton.innerText = 'Add to cart';
+    cartButton.innerText = cartButton.dataset.add;
     cartButton.disabled = false;
     form.dataset.variant = variant.id;
   }
