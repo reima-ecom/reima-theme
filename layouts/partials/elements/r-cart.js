@@ -8,10 +8,9 @@ const loadShopify = new Promise((resolve) => {
   document.body.appendChild(script);
 });
 
-const formatPrice = (price) => {
-  const priceFloat = Number.parseFloat(price);
-  return `$${priceFloat.toFixed(2)}`;
-};
+const formatPrice = (price, currency) => (price
+  ? new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(price)
+  : null);
 
 const addToCartEvent = (checkout, variantId) => {
   /** @type {any} */
@@ -64,11 +63,11 @@ export default class RCart extends HTMLElement {
         const input = item.querySelector('input');
         input.value = li.quantity;
         input.dataset.id = li.id;
-        /** @type {HTMLElement} */(item.querySelector('.price')).innerText = formatPrice(li.variant.price);
+        /** @type {HTMLElement} */(item.querySelector('.price')).innerText = formatPrice(li.variant.price, window.site.currency);
         this.items.appendChild(item);
       });
       this.checkout.href = checkout.webUrl;
-      this.subtotal.innerText = formatPrice(checkout.subtotalPriceV2.amount);
+      this.subtotal.innerText = formatPrice(checkout.subtotalPriceV2.amount, window.site.currency);
     }
   }
 

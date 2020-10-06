@@ -10,6 +10,7 @@ interface Window {
       store: string
       token: string
     }
+    currency: string
   }
   collection?: string
 }
