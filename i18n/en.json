@@ -63,13 +63,13 @@
     "other": "Temperatures ca. {{.Count}} °F"
   },
   "Add to cart": {
-    "other": "Add to cartu"
+    "other": "Add to cart"
   },
   "Sold out": {
-    "other": "Sold outu"
+    "other": "Sold out"
   },
   "Not available": {
-    "other": "Not availablu"
+    "other": "Not available"
   },
   "Show More": {
     "other": "Show More +"
