@@ -120,7 +120,7 @@ fields:
   showOnly:
     field: lastfill
     value: true
-- name: lastelementlinks
+- name: lastfilllinks
   type: select
   default: []
   config:
