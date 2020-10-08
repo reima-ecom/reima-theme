@@ -1,77 +1,86 @@
-# REIMA MAIN COLORS
-# Black - #000000
-# Blue - #00799b
-# Brown - #6f4e37
-# Green - #67a743
-# Grey - #cccccc
-# Lila - #a37bd3
-# Orange - #fa7a16
-# Pink - #d75687
-# Red - #d2092d
-# White - #ffffff
-# Yellow - #f4ea03
-
+---
 colors:
 - type: Color
   name: ホワイト
   color: white
+  image: ''
 - type: Color
   name: ブラック
   color: black
+  image: ''
 - type: Color
   name: トマトレッド
   color: "#d2092d"
+  image: ''
 - type: Color
   name: メランジュグレー
   color: "#cccccc"
+  image: ''
 - type: Color
   name: ソフトグレー
   color: "#cccccc"
+  image: ''
 - type: Color
   name: サンドベージュ
   color: "#6f4e37"
+  image: ''
 - type: Color
   name: ネイビー
   color: "#00799b"
+  image: ''
 - type: Color
   name: 青い夢
   color: "#00799b"
+  image: ''
 - type: Color
   name: マリンブルー
   color: "#00799b"
+  image: ''
 - type: Color
   name: ダークシーブルー
   color: "#00799b"
+  image: ''
 - type: Color
   name: オレンジ
   color: "#fa7a16"
+  image: ''
 - type: Image
   name: バブルガムピンク
   image: swatch.jpg
+  color: ''
 - type: Color
   name: ラズベリーピンク
   color: "#d75687"
+  image: ''
 - type: Color
   name: ローズアッシュ
   color: "#d75687"
+  image: ''
 - type: Color
   name: パウダーピンク
   color: "#d75687"
+  image: ''
 - type: Color
   name: ダークグリーン
   color: "#67a743"
+  image: ''
 - type: Color
   name: ソフトシアン
   color: "#67a743"
+  image: ''
 - type: Color
   name: グレイッシュグリーン
   color: "#67a743"
+  image: ''
 - type: Color
   name: イエロー
   color: "#f4ea03"
+  image: ''
 - type: Color
   name: レモンイエロー
   color: "#f4ea03"
+  image: ''
 - type: Color
   name: ウォームイエロー
   color: "#f4ea03"
+  image: ''

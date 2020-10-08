@@ -48,3 +48,5 @@ fields:
       value: Image
   description: Used on the product pages as well as the "listing" / "category" pages
     to show available colors.
+pages:
+- demo/data/colors.yaml
