@@ -14,3 +14,23 @@
   margin: 0.5rem 0;
   font-style: italic;
 }
+
+.status__log input {
+  position: fixed;
+  left: -100px;
+  visibility: hidden;
+}
+
+.status__log input:checked ~ label {
+  display: none;
+}
+
+.status__log code {
+  display: none;
+  background: none;
+  padding: 0;
+}
+
+.status__log input:checked ~ code {
+  display: initial;
+}

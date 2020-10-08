@@ -11,6 +11,10 @@ version: "2020-10-08"
 
 It is now possible to edit color swatches in forestry. Also, in addition to color codes, you can use images for showing patterns.
 
+### See build log on status page
+
+You can now see the build log on the status page. This enables you to identify missing colors, invalid links, etc.
+
 ## Changes in 2020-10-06
 
 Bug fixes:

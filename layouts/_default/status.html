@@ -8,17 +8,30 @@
   <h1>{{.Title}}</h1>
   <p>Theme version: {{.Params.version}}</p>
   <h2>
-    Site publishing
+    Site publish
   </h2>
   <p>
     Content updates are automatically published to the live production site.
     Product data from Shopify is <i>not</i> automatically updated.
   </p>
+  <h3>
+    Content update
+  </h3>
+  <div class="status__log">
+    <p>
+      Status: <span id="build-status">...</span>
+    </p>
+    <p>
+      <input type="checkbox" id="build-log-chk" autocomplete="off">
+      <label for="build-log-chk" class="link">Show log</label>
+      <code id="build-log">Loading log...</code>
+    </p>
+  </div>
+  <h3>Product data</h3>
   <p>
     <button class="btn btn--cta" id="publish">Refresh product data</button>
   </p>
   <p>
-    <strong>Last product data refresh</strong><br>
     Created at: <span id="created_at">...</span><br>
     Status: <span id="status">...</span><br>
     Conclusion: <span id="conclusion">...</span>
