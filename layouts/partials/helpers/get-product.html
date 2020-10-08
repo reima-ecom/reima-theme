@@ -2,6 +2,8 @@
 {{ if eq .Section "products"}}
 {{ $product = . }}
 {{ else }}
-{{ $product = .GetPage (printf "/products/%s" .File.ContentBaseName) }}
+{{ with .File }}
+{{ $product = $.GetPage (printf "/products/%s" .ContentBaseName) }}
+{{ end }}
 {{ end }}
 {{ return $product }}
