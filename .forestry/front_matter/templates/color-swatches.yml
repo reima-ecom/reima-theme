@@ -4,14 +4,47 @@ hide_body: true
 fields:
 - type: field_group_list
   name: colors
-  label: colors
+  label: Color Swatches
   fields:
   - type: text
-    name: type
-    label: type
-  - type: text
     name: name
-    label: name
+    label: Name
+    description: Name of the color, as set on the Shopify product variant.
+  - name: type
+    type: select
+    default: Color
+    config:
+      required: true
+      options:
+      - Color
+      - Image
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: Type
+    description: Prefer setting the color directly, as this will have much better
+      performance. However, for pattern "colors" you have the option of choosing an
+      image instead.
   - type: text
     name: color
-    label: color
+    label: Color code
+    description: Can be any format supported by CSS. For hex color codes, enter <code>#ababab</code>.
+      Alternatively, for rgb colors you can enter <code>rgb(143,143,143)</code>.
+    showOnly:
+      field: type
+      value: Color
+  - name: image
+    type: file
+    config:
+      maxSize: 0.1
+    label: Image
+    description: Image to use as the swatch. Note that this image is not resized in
+      any way, and always uses the full width and height of the swatch "dot". You
+      can use svg or webp images here.
+    showOnly:
+      field: type
+      value: Image
+  description: Used on the product pages as well as the "listing" / "category" pages
+    to show available colors.
