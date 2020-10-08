@@ -22,7 +22,7 @@ colors:
   image: ''
 - type: Color
   name: サンドベージュ
-  color: "#6f4e37"
+  color: "#6F4E38"
   image: ''
 - type: Color
   name: ネイビー
