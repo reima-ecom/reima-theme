@@ -2,8 +2,14 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-10-06"
+version: "2020-10-08"
 ---
+
+## Changes in 2020-10-08
+
+### Edit color swatches in forestry
+
+It is now possible to edit color swatches in forestry. Also, in addition to color codes, you can use images for showing patterns.
 
 ## Changes in 2020-10-06
 
