@@ -40,10 +40,6 @@ sections:
 - type: heading
   label: Theme
 - type: document
-  path: data/colors.yaml
-  label: Color Swatches
-  match: "**/*"
-- type: document
   path: i18n/en.json
   label: Translations
 upload_dir: demo/images
