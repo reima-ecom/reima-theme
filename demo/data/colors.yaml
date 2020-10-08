@@ -11,24 +11,67 @@
 # White - #ffffff
 # Yellow - #f4ea03
 
-ホワイト: white
-ブラック: black
-トマトレッド: "#d2092d"
-メランジュグレー: "#cccccc"
-ソフトグレー: "#cccccc"
-サンドベージュ: "#6f4e37"
-ネイビー: "#00799b"
-青い夢: "#00799b"
-マリンブルー: "#00799b"
-ダークシーブルー: "#00799b"
-オレンジ: "#fa7a16"
-バブルガムピンク: "#d75687"
-ラズベリーピンク: "#d75687"
-ローズアッシュ: "#d75687"
-パウダーピンク: "#d75687"
-ダークグリーン: "#67a743"
-ソフトシアン: "#67a743"
-グレイッシュグリーン: "#67a743"
-イエロー: "#f4ea03"
-レモンイエロー: "#f4ea03"
-ウォームイエロー: "#f4ea03"
+colors:
+- type: Color
+  name: ホワイト
+  color: white
+- type: Color
+  name: ブラック
+  color: black
+- type: Color
+  name: トマトレッド
+  color: "#d2092d"
+- type: Color
+  name: メランジュグレー
+  color: "#cccccc"
+- type: Color
+  name: ソフトグレー
+  color: "#cccccc"
+- type: Color
+  name: サンドベージュ
+  color: "#6f4e37"
+- type: Color
+  name: ネイビー
+  color: "#00799b"
+- type: Color
+  name: 青い夢
+  color: "#00799b"
+- type: Color
+  name: マリンブルー
+  color: "#00799b"
+- type: Color
+  name: ダークシーブルー
+  color: "#00799b"
+- type: Color
+  name: オレンジ
+  color: "#fa7a16"
+- type: Image
+  name: バブルガムピンク
+  image: swatch.jpg
+- type: Color
+  name: ラズベリーピンク
+  color: "#d75687"
+- type: Color
+  name: ローズアッシュ
+  color: "#d75687"
+- type: Color
+  name: パウダーピンク
+  color: "#d75687"
+- type: Color
+  name: ダークグリーン
+  color: "#67a743"
+- type: Color
+  name: ソフトシアン
+  color: "#67a743"
+- type: Color
+  name: グレイッシュグリーン
+  color: "#67a743"
+- type: Color
+  name: イエロー
+  color: "#f4ea03"
+- type: Color
+  name: レモンイエロー
+  color: "#f4ea03"
+- type: Color
+  name: ウォームイエロー
+  color: "#f4ea03"

@@ -36,8 +36,13 @@
         {{ end }}
         {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ with . }}
-        {{ with (index site.Data.colors (. | lower)) }}
-        <div style="background-color: {{.}};"></div>
+        {{ range where site.Data.colors.colors "name" "eq" . }}
+        <div {{with .color}}style="background-color: {{.}};"{{end}}>
+          {{ $colorname := .name }}
+          {{ with .image }}
+          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$colorname}}">
+          {{ end }}
+        </div>
         {{ else }}
         {{ warnf "Could not find color %s" .}}
         {{ end }}

@@ -91,10 +91,16 @@
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
+  overflow: hidden;
 }
 
 .selections--Color label span {
   display: none;
+}
+
+.selections--Color label img {
+  width: 100%;
+  height: 100%;
 }
 
 .selections--Color label.unavailable::before {

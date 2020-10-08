@@ -67,14 +67,16 @@
         <input type="radio" name="{{$name}}" id="{{$id}}" value="{{.value}}" {{ if .firstAvailable }}checked{{ end }} />
 
         {{ $labelStyle := "" }}
+        {{ $swatch := "" }}
         {{ if eq $nameEnglish "Color" }}
-        {{ $color := "grey" }}
-        {{ with index $.Site.Data.colors (.value | lower) }}
-        {{ $color = . }}
+        {{ range where site.Data.colors.colors "name" "eq" .value }}
+        {{ with .color }}
+        {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
+        {{ end }}
+        {{ $swatch = .image }}
         {{ else }}
         {{ warnf "Could not find color %s" .value}}
         {{ end }}
-        {{ $labelStyle = printf "style=\"background-color: %s;\"" $color }}
         {{ end }}
 
         {{ $label := .value }}
@@ -86,6 +88,9 @@
         <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
           {{ if not .availableInitially }}class="unavailable" {{ end }}>
           <span>{{$label}}</span>
+          {{ with $swatch }}
+          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$label}}">
+          {{ end }}
         </label>
         {{ end }}
       </fieldset>
