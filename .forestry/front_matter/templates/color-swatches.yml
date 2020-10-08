@@ -1,0 +1,17 @@
+---
+label: Color Swatches
+hide_body: true
+fields:
+- type: field_group_list
+  name: colors
+  label: colors
+  fields:
+  - type: text
+    name: type
+    label: type
+  - type: text
+    name: name
+    label: name
+  - type: text
+    name: color
+    label: color
