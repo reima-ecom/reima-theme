@@ -27,11 +27,12 @@ fields:
     description: Prefer setting the color directly, as this will have much better
       performance. However, for pattern "colors" you have the option of choosing an
       image instead.
-  - type: text
-    name: color
-    label: Color code
-    description: Can be any format supported by CSS. For hex color codes, enter <code>#ababab</code>.
-      Alternatively, for rgb colors you can enter <code>rgb(143,143,143)</code>.
+  - name: color
+    type: color
+    label: Color
+    config:
+      required: false
+      color_format: Hex
     showOnly:
       field: type
       value: Color
