@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.134.1/containers/hugo
 {
-	"name": "Hugo",
+	"name": "reima-theme (hugo)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
