@@ -1,0 +1,34 @@
+<section id="milestones" class="milestones content-container-mobile">
+    <div class="spacer-lg"></div>
+    <h3 class="h4">{{.heading}}</h3>
+    <ol class="about-timeline">
+        {{ range .milestones }}
+        <li>
+            <div class="media">
+                <div class="media-left">
+                    <div class="about-timeline-img">
+                        {{partial "img" (dict "image" .image "widths" "62,92")}}
+                    </div>
+                </div>
+                <div class="media-body media-middle">
+                    <div class="about-timeline-year">
+                        {{.year}}
+                    </div>
+                    {{ if .heading }}
+                    <h5 class="margin-bottom-xs margin-top-none">{{.heading}}</h5>
+                    {{ end }}
+                    {{ if .text }}
+                    <p class="margin-bottom-xs margin-top-none">
+                        {{.text}}
+                    </p>
+                    {{ end }}
+                    {{ if .link }}
+                    <a href="{{.link}}" target="_blank"
+                        class="{{if .externalLink}}external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">{{.linktext}}</a>
+                    {{ end }}
+                </div>
+            </div>
+        </li>
+        {{ end }}
+    </ol>
+</section>

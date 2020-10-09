@@ -1,0 +1,79 @@
+.milestones {
+    padding: var(--block-padding);
+    margin: var(--block-margin);
+    max-width: var(--block-width);
+}
+
+.about-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-timeline::before {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #ccc;
+    z-index: -1;
+}
+
+.about-timeline li {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.media {
+    display: flex;
+    align-items: flex-start;
+}
+
+.media>.media-left {
+    margin-right: .75rem;
+}
+
+.media>.media-body {
+    flex: 1 1 auto;
+}
+
+.media>.media-middle {
+    align-self: center;
+}
+
+.about-timeline-img img {
+    border: 1px solid #ccc;
+    padding: 3px;
+    width: 70px;
+    max-width: none;
+    box-shadow: inset 0px 0px 0px 2px #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.about-timeline-year {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin-bottom: .25rem;
+}
+
+@media (min-width: 768px) {
+    .about-timeline::before {
+        left: 49px;
+    }
+    .about-timeline-img img {
+        width: 100px;
+    }
+    .about-timeline .media-body {
+        padding-left: 1rem;
+    }
+    .about-timeline-year {
+        font-size: 1.5rem;
+    }
+}
