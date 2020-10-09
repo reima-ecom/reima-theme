@@ -23,7 +23,7 @@
                     </p>
                     {{ end }}
                     {{ if .link }}
-                    <a href="{{.link}}" target="_blank"
+                    <a href="{{.link}}" {{if .externalLink}}target="_blank"{{end}} 
                         class="{{if .externalLink}}external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">{{.linktext}}</a>
                     {{ end }}
                 </div>
