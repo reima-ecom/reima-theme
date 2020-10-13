@@ -1,7 +1,7 @@
 const getElementImport = async (name) => {
   switch (name) {
     case 'r-cart':
-      return __import__('./r-cart-60229991.js');
+      return __import__('./r-cart-ab690628.js');
     case 'r-search':
       return __import__('./r-search-6f71c299.js');
     case 'r-carousel':

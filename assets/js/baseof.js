@@ -1,4 +1,4 @@
-import { l as loadElement } from './load-element-3f6c9c57.js';
+import { l as loadElement } from './load-element-c9e8b576.js';
 
 function e({modulePath:e=".",importFunctionName:t="__import__"}={}){try{self[t]=new Function("u","return import(u)");}catch(o){const r=new URL(e,location),n=e=>{URL.revokeObjectURL(e.src),e.remove();};self[t]=e=>new Promise((o,a)=>{const c=new URL(e,r);if(self[t].moduleMap[c])return o(self[t].moduleMap[c]);const l=new Blob([`import * as m from '${c}';`,`${t}.moduleMap['${c}']=m;`],{type:"text/javascript"}),m=Object.assign(document.createElement("script"),{type:"module",src:URL.createObjectURL(l),onerror(){a(new Error(`Failed to import: ${e}`)),n(m);},onload(){o(self[t].moduleMap[c]),n(m);}});document.head.appendChild(m);}),self[t].moduleMap={};}}var t=Object.freeze({initialize:e});
 
