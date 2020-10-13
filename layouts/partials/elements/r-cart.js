@@ -38,11 +38,11 @@ const settings = window.site.shopify;
 export default class RCart extends HTMLElement {
   constructor() {
     super();
-    this.items = this.querySelector('.items');
+    this.items = undefined;
     /** @type {HTMLAnchorElement} */
-    this.checkout = this.querySelector('.checkout');
+    this.checkout = undefined;
     /** @type {HTMLElement} */
-    this.subtotal = this.querySelector('.summary .price');
+    this.subtotal = undefined;
   }
 
   render(checkout) {
@@ -104,6 +104,12 @@ export default class RCart extends HTMLElement {
   }
 
   async connectedCallback() {
+    this.items = this.querySelector('.items');
+    /** @type {HTMLAnchorElement} */
+    this.checkout = this.querySelector('.checkout');
+    /** @type {HTMLElement} */
+    this.subtotal = this.querySelector('.summary .price');
+
     let checkout;
     this.id = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
     if (this.id) {
