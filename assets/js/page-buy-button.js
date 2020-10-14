@@ -1,4 +1,4 @@
-import { l as loadElement } from './load-element-32e01943.js';
+import { l as loadElement } from './load-element-f5f33699.js';
 
 setTimeout(() => {
   loadElement('r-cart');

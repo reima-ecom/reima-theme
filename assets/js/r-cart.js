@@ -40,7 +40,9 @@ class RCart extends HTMLElement {
           img.alt = li.variant.image.altText;
         }
         item.querySelector('h2').innerText = li.title;
-        item.querySelector('h3').innerText = li.variant.title || '';
+        if (li.variant.title && li.variant.title !== 'Default Title') {
+          item.querySelector('h3').innerText = li.variant.title;
+        }
         const input = item.querySelector('input');
         input.value = li.quantity;
         input.dataset.id = li.id;
