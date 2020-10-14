@@ -1,13 +1,13 @@
 const getElementImport = async (name) => {
   switch (name) {
     case 'r-cart':
-      return __import__('./r-cart-ab690628.js');
+      return __import__('./r-cart.js');
     case 'r-search':
-      return __import__('./r-search-6f71c299.js');
+      return __import__('./r-search.js');
     case 'r-carousel':
-      return __import__('./r-carousel-978139e5.js');
+      return __import__('./r-carousel.js');
     case 'r-thumbnails':
-      return __import__('./r-thumbnails-de053413.js');
+      return __import__('./r-thumbnails.js');
     default:
       throw new Error(`No such element ${name}`);
   }

@@ -1,58 +1,59 @@
-.newsletter {
+r-newsletter {
   max-width: 500px;
   margin: 3rem auto;
   padding: 0 20px;
+  display: block;
 }
 
-.newsletter h2,
-.newsletter p {
+r-newsletter h2,
+r-newsletter p {
   text-align: center;
 }
 
-.newsletter input {
+r-newsletter input {
   background-color: #f2f2f5;
   width: 100%;
   font-size: 1rem;
 }
 
-.newsletter label {
+r-newsletter label {
   display: flex;
   align-items: center;
   margin: 0.75rem 0;
 }
 
-.newsletter label, .newsletter label .md {
+r-newsletter label, r-newsletter label .md {
   font-size: 0.875rem;
 }
 
-.newsletter label input {
+r-newsletter label input {
   width: unset;
   margin-right: 1rem;
 }
 
-.newsletter [consent] {
+r-newsletter form [consent] {
   display: none;
 }
 
-.newsletter[consent] [consent] {
+r-newsletter form[consent] [consent] {
   display: block;
 }
 
-.newsletter [failure] {
+r-newsletter form [failure] {
   color: red;
   text-align: left;
 }
 
-.newsletter [success] {
+r-newsletter form [success] {
   display: none;
 }
 
-.newsletter[success] [success] {
+r-newsletter form[success] [success] {
   display: block;
   font-weight: 700;
 }
 
-.newsletter[success] [consent],
-.newsletter[success] input {
+r-newsletter form[success] [consent],
+r-newsletter form[success] input {
   display: none;
 }

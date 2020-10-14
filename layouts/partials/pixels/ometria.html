@@ -7,6 +7,12 @@
 {{ if .ometria_enabled }}
 
 <script src="//cdn.ometria.com/tags/{{.ometria_account}}.js"></script>
+<script>
+  document.addEventListener('subscribe', (e) => {
+    ometria.identify(e.detail.email);
+  });
+</script>
+
 {{- if $.IsHome }}
 <script>
   ometria.init('homepage', null, '{{.ometria_store}}');
