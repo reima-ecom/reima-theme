@@ -22,10 +22,25 @@
     "id": "{{$.File.ContentBaseName}}",
     "name": "{{.Title}}",
     "price": {{.Params.price }},
-    "quantity": 1
+  "quantity": 1,
   };
   ga('ec:addProduct', gaProduct);
   ga('ec:setAction', 'detail');
+
+  document.addEventListener('cart-add', (e) => {
+    const checkout = e.detail.checkout;
+    const variantId = e.detail.variantId;
+
+    const gaProductWithVariant = Object.assign({}, gaProduct);
+    const lineItem = checkout.items.find((li) => li.variantId === variantId);
+    if (lineItem) {
+      gaProductWithVariant.variant = lineItem.title;
+    }
+
+    ga('ec:addProduct', gaProductWithVariant);
+    ga('ec:setAction', 'add');
+    ga('send', 'event', 'Cart', 'Added Product');
+  });
 </script>
 {{ end }}
 

@@ -1,4 +1,4 @@
-import { l as loadElement } from './load-element-3f6c9c57.js';
+import { l as loadElement } from './load-element-32e01943.js';
 
 function e({modulePath:e=".",importFunctionName:t="__import__"}={}){try{self[t]=new Function("u","return import(u)");}catch(o){const r=new URL(e,location),n=e=>{URL.revokeObjectURL(e.src),e.remove();};self[t]=e=>new Promise((o,a)=>{const c=new URL(e,r);if(self[t].moduleMap[c])return o(self[t].moduleMap[c]);const l=new Blob([`import * as m from '${c}';`,`${t}.moduleMap['${c}']=m;`],{type:"text/javascript"}),m=Object.assign(document.createElement("script"),{type:"module",src:URL.createObjectURL(l),onerror(){a(new Error(`Failed to import: ${e}`)),n(m);},onload(){o(self[t].moduleMap[c]),n(m);}});document.head.appendChild(m);}),self[t].moduleMap={};}}var t=Object.freeze({initialize:e});
 
@@ -28,8 +28,6 @@ t.initialize({ modulePath: '/' });
 
 if (document.querySelector('r-carousel')) loadElement('r-carousel');
 if (document.querySelector('r-thumbnails')) loadElement('r-thumbnails');
-// eslint-disable-next-line no-unused-expressions
-if (document.forms.namedItem('subscribe')) __import__('./r-subscribe-389aeca9.js');
 
 /**
  * @param {MouseEvent} e

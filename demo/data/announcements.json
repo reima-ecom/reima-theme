@@ -4,7 +4,7 @@
   "collectionPageBannerEnabled": false,
   "collectionPageBannerTitle": "Banner",
   "collectionPageBannerText": "Hello there",
-  "newsletterEnabled": false,
+  "newsletterEnabled": true,
   "newsletterTitle":  "Sign up and save 10% off your first purchase",
   "newsletterText":  "Reima Friends are the first to know about our latest products, exclusive offers and top tips. Your coupon will be be emailed to you.",
   "newsletterThankYouMessage":  "Thank you for subscribing!"

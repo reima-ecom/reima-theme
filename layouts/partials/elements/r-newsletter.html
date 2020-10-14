@@ -1,0 +1,31 @@
+{{ with partial "helpers/get-locale-data" "announcements" }}
+{{ if .newsletterEnabled }}
+
+{{ $.Scratch.Add "js-async" "r-newsletter.js" }}
+
+<r-newsletter>
+  <form action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">
+    <h2>{{.newsletterTitle}}</h2>
+    <p>{{.newsletterText}}</p>
+    <input type="hidden" name="tags" value="prospect,newsletter">
+    <input type="email" placeholder="Enter your email" name="email" required>
+    <div consent>
+      <label>
+        <input type="checkbox" name="marketing" id="Marketing-footer" checked required>
+        {{T "Newsletter Marketing Consent"}}
+      </label>
+      <label>
+        <input type="checkbox" name="consent" id="Consent-footer" required>
+        <div class="md">{{T "Newsletter TOS Consent" | markdownify}}</div>
+      </label>
+      <p failure></p>
+      <div>
+        <button type="submit" class="button btn btn--cta">{{T "Newsletter Subscribe Button"}}</button>
+      </div>
+    </div>
+    <p success>{{.newsletterThankYouMessage | markdownify}}</p>
+  </form>
+</r-newsletter>
+
+{{ end }}
+{{ end }}

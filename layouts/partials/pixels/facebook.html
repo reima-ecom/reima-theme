@@ -35,6 +35,10 @@
     currency: '{{site.Params.public.currency}}'
   };
   fbq('track', 'ViewContent', fbProduct);
+
+  document.addEventListener('cart-add', (e) => {
+    fbq('track', 'AddToCart', fbProduct);
+  });
 </script>
 
 {{ end }}

@@ -1,5 +1,5 @@
 ---
-ometria_enabled: false
+ometria_enabled: true
 ometria_account: ometria-account
 ometria_store: ometria-store
 ga_enabled: true

@@ -5,7 +5,7 @@ import glob from 'glob-promise';
 import { promises as fs } from 'fs';
 import __import__ from './rollup-plugin-dynamic-import.js';
 
-const SOURCE = 'layouts/**/!(helpers|elements)/*.js';
+const SOURCE = 'layouts/**/!(helpers)/*.js';
 const OUTPUT = 'assets/js';
 
 const cleanOutputAndGetConfig = async (srcGlob, outputDir) => {

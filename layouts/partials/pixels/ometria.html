@@ -7,6 +7,12 @@
 {{ if .ometria_enabled }}
 
 <script src="//cdn.ometria.com/tags/{{.ometria_account}}.js"></script>
+<script>
+  document.addEventListener('subscribe', (e) => {
+    ometria.identify(e.detail.email);
+  });
+</script>
+
 {{- if $.IsHome }}
 <script>
   ometria.init('homepage', null, '{{.ometria_store}}');
@@ -24,6 +30,18 @@
   ometria.init('product', {
     pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
   }, '{{.ometria_store}}');
+
+  document.addEventListener('cart-add', (e) => {
+    const checkout = e.detail.checkout;
+    const basket = new ometria.Basket();
+    basket.setId(checkout.id);
+    basket.setUrl(checkout.url);
+    basket.setTotal(checkout.total, checkout.currency);
+    checkout.items.forEach((item) => {
+      basket.addLineItem(item.productIdLegacy, item.quantity, item.price, item.variantIdLegacy);
+    });
+    ometria.setBasket(basket);
+  });
 </script>
 {{- end }}
 

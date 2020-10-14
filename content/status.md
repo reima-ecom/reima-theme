@@ -2,8 +2,15 @@
 layout: status
 title: Site status
 noindex: true
-version: "2020-10-08"
+version: "2020-10-14"
 ---
+
+## Changes in 2020-10-14
+
+Ometria tracking now supports the following events:
+
+- Add to cart: sets the "basket" in Ometria
+- Newsletter subscribe: identifies the user with the email provided
 
 ## Changes in 2020-10-08
 

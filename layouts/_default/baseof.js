@@ -26,8 +26,6 @@ dynamicImportPolyfill.initialize({ modulePath: '/' });
 
 if (document.querySelector('r-carousel')) loadElement('r-carousel');
 if (document.querySelector('r-thumbnails')) loadElement('r-thumbnails');
-// eslint-disable-next-line no-unused-expressions
-if (document.forms.namedItem('subscribe')) import('../partials/elements/r-subscribe.js');
 
 /**
  * @param {MouseEvent} e

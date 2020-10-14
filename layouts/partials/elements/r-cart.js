@@ -12,26 +12,7 @@ const formatPrice = (price, currency) => (price
   ? new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(price)
   : null);
 
-const addToCartEvent = (checkout, variantId) => {
-  /** @type {any} */
-  const {
-    ga, gaProduct, fbq, fbProduct,
-  } = window;
-  if (ga && gaProduct) {
-    // eslint-disable-next-line prefer-object-spread
-    const gaProductWithVariant = Object.assign({}, gaProduct);
-    const lineItem = checkout.lineItems.find((li) => li.variant.id === variantId);
-    if (lineItem) {
-      gaProductWithVariant.variant = lineItem.variant.title;
-    }
-    ga('ec:addProduct', gaProductWithVariant);
-    ga('ec:setAction', 'add');
-    ga('send', 'event', 'Cart', 'Added Product');
-  }
-  if (fbq && fbProduct) {
-    fbq('track', 'AddToCart', fbProduct);
-  }
-};
+const storefrontIdToLegacy = (id) => atob(id).split('/').pop();
 
 const settings = window.site.shopify;
 
@@ -92,7 +73,26 @@ export default class RCart extends HTMLElement {
     this.closest('.overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    addToCartEvent(checkout, variantId);
+    // new way to dispatch cart add event, will bubble to document
+    const basket = {
+      id: checkout.id,
+      url: checkout.webUrl,
+      total: Number.parseFloat(checkout.totalPrice),
+      currency: checkout.currencyCode,
+      items: checkout.lineItems.map((li) => ({
+        productId: li.variant.product.id,
+        variantId: li.variant.id,
+        quantity: li.quantity,
+        price: Number.parseFloat(li.variant.price),
+        title: li.variant.title,
+        productIdLegacy: storefrontIdToLegacy(li.variant.product.id),
+        variantIdLegacy: storefrontIdToLegacy(li.variant.id),
+      })),
+    };
+    this.dispatchEvent(new CustomEvent('cart-add', { 
+      bubbles: true,
+      detail: { variantId, checkout: basket } 
+    }));
   }
 
   async updateQuantity(inputElement) {
