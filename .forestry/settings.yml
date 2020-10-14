@@ -21,6 +21,10 @@ sections:
   templates:
   - collection
 - type: document
+  path: demo/data/colors.yaml
+  label: Color Swatches
+  match: "**/*"
+- type: document
   path: demo/i18n/en.json
   label: Strings
 - type: document
