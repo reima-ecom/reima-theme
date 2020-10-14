@@ -60,7 +60,7 @@ r-cart .checkout {
 
 r-cart .items > div {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 r-cart .items > div > div {
