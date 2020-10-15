@@ -1,9 +1,9 @@
 // immediately load shopify
-const loadShopify = new Promise((resolve) => {
+const loadShopify = new Promise<any>((resolve) => {
   const script = document.createElement('script');
   script.src = 'https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js';
   script.onload = () => resolve(
-    /** @type { {ShopifyBuy: any} & typeof window} */(window).ShopifyBuy,
+    (window as any).ShopifyBuy,
   );
   document.body.appendChild(script);
 });
@@ -17,23 +17,39 @@ const storefrontIdToLegacy = (id) => atob(id).split('/').pop();
 const settings = window.site.shopify;
 
 export default class RCart extends HTMLElement {
-  constructor() {
-    super();
-    this.items = undefined;
-    /** @type {HTMLAnchorElement} */
-    this.checkout = undefined;
-    /** @type {HTMLElement} */
-    this.subtotal = undefined;
+  items: HTMLElement;
+  subtotal: HTMLElement;
+  checkout: HTMLAnchorElement;
+  client: any;
+
+  get checkoutId() {
+    return this.getAttribute('checkout-id');
+  }
+
+  set checkoutId(val) {
+    this.setAttribute('checkout-id', val);
+  }
+
+  set itemCount(val) {
+    this.querySelector('aside[count]').innerHTML = val;
+  }
+
+  get loading() {
+    return this.hasAttribute('loading');
+  }
+
+  set loading(val) {
+    if (val) this.setAttribute('loading', '');
+    else this.removeAttribute('loading');
   }
 
   render(checkout) {
-    this.removeAttribute('loading');
     this.items.innerHTML = '';
     if (checkout) {
       /** @type {HTMLTemplateElement} */
-      const template = this.querySelector('#item');
+      const template = this.querySelector<HTMLTemplateElement>('#item');
       checkout.lineItems.forEach((li) => {
-        const item = /** @type {HTMLElement} */(template.content.cloneNode(true));
+        const item = template.content.cloneNode(true) as HTMLElement;
         if (li.variant.image) {
           const img = item.querySelector('img');
           img.src = li.variant.image.src;
@@ -46,7 +62,7 @@ export default class RCart extends HTMLElement {
         const input = item.querySelector('input');
         input.value = li.quantity;
         input.dataset.id = li.id;
-        /** @type {HTMLElement} */(item.querySelector('.price')).innerText = formatPrice(li.variant.price, window.site.currency);
+        item.querySelector<HTMLElement>('.price').innerText = formatPrice(li.variant.price, window.site.currency);
         this.items.appendChild(item);
       });
       this.checkout.href = checkout.webUrl;
@@ -65,9 +81,9 @@ export default class RCart extends HTMLElement {
 
   async addVariant(variantId) {
     await this.ensureClient();
-    if (!this.id) {
+    if (!this.checkoutId) {
       const checkout = await this.client.checkout.create();
-      this.id = checkout.id;
+      this.checkoutId = checkout.id.toString();
     }
     const checkout = await this.client.checkout.addLineItems(this.id, [{ variantId, quantity: 1 }]);
     this.render(checkout);
@@ -91,9 +107,9 @@ export default class RCart extends HTMLElement {
         variantIdLegacy: storefrontIdToLegacy(li.variant.id),
       })),
     };
-    this.dispatchEvent(new CustomEvent('cart-add', { 
+    this.dispatchEvent(new CustomEvent('cart-add', {
       bubbles: true,
-      detail: { variantId, checkout: basket } 
+      detail: { variantId, checkout: basket }
     }));
   }
 
@@ -105,13 +121,7 @@ export default class RCart extends HTMLElement {
     this.render(checkout);
   }
 
-  async connectedCallback() {
-    this.items = this.querySelector('.items');
-    /** @type {HTMLAnchorElement} */
-    this.checkout = this.querySelector('.checkout');
-    /** @type {HTMLElement} */
-    this.subtotal = this.querySelector('.summary .price');
-
+  async loadCheckout() {
     let checkout;
     this.id = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
     if (this.id) {
@@ -119,8 +129,35 @@ export default class RCart extends HTMLElement {
       checkout = await this.client.checkout.fetch(this.id);
     }
     this.render(checkout);
-    this.querySelector('.items').addEventListener('click', (e) => {
-      const t = /** @type {HTMLElement} */(e.target);
+    this.loading = false;
+  }
+
+  async connectedCallback() {
+    this.items = this.querySelector('.items');
+    /** @type {HTMLAnchorElement} */
+    this.checkout = this.querySelector('.checkout');
+    /** @type {HTMLElement} */
+    this.subtotal = this.querySelector('.summary .price');
+
+    const openCheckbox = this.querySelector<HTMLInputElement>('#r-cart-open-chk');
+    // load checkout if input initially checked
+    if (openCheckbox.checked) {
+      this.loadCheckout();
+      document.body.style.overflow = 'hidden';
+    }
+    // listen for open change
+    openCheckbox.addEventListener('change', (e) => {
+      const open = (e.target as HTMLInputElement).checked;
+      // set body overflow for scrolling
+      document.body.style.overflow = open ? 'hidden' : '';
+      // load cart if not loaded
+      if (this.loading) {
+        this.loadCheckout();
+      }
+    });
+
+    this.items.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
       if (t.nodeName === 'BUTTON') {
         const step = Number.parseInt(t.getAttribute('step'), 10);
         /** @type {HTMLInputElement} */
@@ -129,9 +166,10 @@ export default class RCart extends HTMLElement {
         this.updateQuantity(input);
       }
     });
-    this.querySelector('.items').addEventListener('change', async (e) => {
+    this.items.addEventListener('change', async (e) => {
       this.updateQuantity(e.target);
     });
   }
 }
-RCart.elementName = 'r-cart';
+
+window.customElements.define('r-cart', RCart);

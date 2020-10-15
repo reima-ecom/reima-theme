@@ -18,22 +18,3 @@ input:checked + .overlay,
   background: white;
   display: block;
 }
-
-#cart > div {
-  display: block;
-  width: 80%;
-  height: 100%;
-  margin-left: auto;
-  contain: layout;
-  max-width: 400px;
-}
-
-#cart input::-webkit-outer-spin-button,
-#cart input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-#cart input[type=number] {
-  -moz-appearance:textfield;
-}

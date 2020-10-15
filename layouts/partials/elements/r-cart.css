@@ -7,6 +7,56 @@ r-cart {
   box-sizing: border-box;
 }
 
+r-cart > input {
+  position: fixed;
+  opacity: 0;
+  z-index: -1;
+}
+
+r-cart > label.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+r-cart > input:focus ~ label,
+r-cart > input:focus ~ * label {
+  outline-style: dotted;
+  outline-width: 2px;
+  outline-offset: 2px;
+  outline-color: rgba(0, 0, 0, 0.5);
+}
+
+r-cart > div {
+  display: none;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+r-cart > div > label {
+  flex: 1;
+}
+
+r-cart > div > div {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  contain: layout;
+  max-width: 400px;
+}
+
+r-cart > input:checked ~ div {
+  display: flex;
+}
+
 r-cart h1 {
   border-bottom: 1px solid #ccc;
   padding: 1rem;
@@ -115,4 +165,14 @@ r-cart .price {
   flex: 1;
   text-align: right;
   letter-spacing: unset;
+}
+
+r-cart input::-webkit-outer-spin-button,
+r-cart input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+r-cart input[type=number] {
+  -moz-appearance:textfield;
 }
