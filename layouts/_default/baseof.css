@@ -26,12 +26,14 @@
   --h4-letter-spacing: 0;
   --h4-margin-bottom: .625rem;
   --h5-font-size: 1rem;
+  --h5-letter-spacing: 0;
+  --h5-margin-bottom: .5rem;
   --h6-font-size: 0.875rem;
   --h6-letter-spacing: .03rem;
 }
 
 @media (min-width: 768px) {
-  :root {
+   :root {
     --text-font-size: 1.25rem;
     --h0-font-size: 2.5rem;
     --h1-font-size: 2.125rem;
@@ -43,7 +45,7 @@
 }
 
 @media (min-width: 992px) {
-  :root {
+   :root {
     --content-padding: 2rem;
     --h0-font-size: 2.75rem;
     --h1-font-size: 2.5rem;
@@ -56,7 +58,7 @@
 }
 
 @media (min-width: 1024px) {
-  :root {
+   :root {
     --h0-font-size: 3.125rem;
     --h1-font-size: 2.75rem;
     --h2-font-size: 2.25rem;
@@ -94,6 +96,7 @@ hr {
   max-width: var(--hr-width);
 }
 
+
 /* #region basic typography */
 
 @font-face {
@@ -112,11 +115,20 @@ hr {
   font-style: normal
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+.h4,
+h5,
+h6 {
   font-weight: 700;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   line-height: 1.25;
 }
 
@@ -132,13 +144,21 @@ h3 {
   font-size: var(--h3-font-size);
 }
 
-h4 {
+h4,
+.h4 {
   font-size: var(--h4-font-size);
   letter-spacing: var(--h4-letter-spacing);
   margin-bottom: var(--h4-margin-bottom);
 }
 
-h5, h6 {
+h5 {
+  font-size: var(--h5-font-size);
+  letter-spacing: var(--h5-letter-spacing);
+  margin-bottom: var(--h5-margin-bottom);
+}
+
+h5,
+h6 {
   line-height: 1.375;
 }
 
@@ -165,7 +185,9 @@ code {
   text-decoration: line-through;
 }
 
+
 /* #endregion */
+
 
 /* #region links */
 
@@ -195,7 +217,8 @@ a:hover,
   text-decoration: none;
 }
 
-.silent-link:hover, .silent-link:focus {
+.silent-link:hover,
+.silent-link:focus {
   color: #d2092d;
   text-decoration: none;
 }
@@ -210,7 +233,9 @@ a:hover,
   background-color: transparent;
 }
 
+
 /* #endregion */
+
 
 /* #region buttons */
 
@@ -261,7 +286,8 @@ a:hover,
   font-weight: 400;
 }
 
-.btn--cta:hover, .btn--cta:focus {
+.btn--cta:hover,
+.btn--cta:focus {
   background: #BA001F;
   color: white;
 }
@@ -271,11 +297,14 @@ a:hover,
   border-width: 1px;
 }
 
+
 /* #endregion */
+
 
 /* #region focus */
 
-.btn:focus, a:focus {
+.btn:focus,
+a:focus {
   outline-style: dotted;
   outline-width: 2px;
   outline-offset: 2px;
@@ -285,6 +314,7 @@ a:hover,
 .btn--inv:focus {
   outline-color: rgba(255, 255, 255, 0.5);
 }
+
 
 /* #endregion */
 

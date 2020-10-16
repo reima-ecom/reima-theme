@@ -29,6 +29,7 @@ fields:
   - article-grid
   - hr
   - content-table
+  - milestones
   config:
     min: 1
     max: 
