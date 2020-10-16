@@ -1,30 +1,48 @@
+{{ $page := .Page }}
 <section id="milestones" class="milestones content-container-mobile">
-    <div class="spacer-lg"></div>
     <h3 class="h4">{{.heading}}</h3>
-    <ol class="about-timeline">
+    <ol class="milestones__about-timeline">
         {{ range .milestones }}
         <li>
-            <div class="media">
-                <div class="media-left">
-                    <div class="about-timeline-img">
-                        {{partial "img" (dict "image" .image "widths" "62,92")}}
+            <div class="milestones__media">
+                <div class="milestones__media-left">
+                    <div class="milestones__about-timeline-img">
+                        {{ $img := $page.Page.Resources.GetMatch .image }}
+                        {{ if not $img }}
+                        {{ $img = partial "helpers/get-image" .image }}
+                        {{ end }}
+                        {{ with $img }}
+                        <picture>
+                            <source media="(min-width: 768px)" loading="lazy"
+                                data-srcset="{{(.Fill "184x184").RelPermalink}} 184w">
+                            <source loading="lazy" data-srcset="{{(.Fill "124x124 Top").RelPermalink}} 124w">
+                            <img class="lazyload" loading="lazy" data-src="{{(.Fill "184x184").RelPermalink}}" />
+                        </picture>
+                        {{ end }}
                     </div>
                 </div>
-                <div class="media-body media-middle">
-                    <div class="about-timeline-year">
-                        {{.year}}
-                    </div>
-                    {{ if .heading }}
-                    <h5 class="margin-bottom-xs margin-top-none">{{.heading}}</h5>
+                <div class="milestones__media-body milestones__media-middle">
+                    <div class="milestones__about-timeline-year">{{.year}}</div>
+                    {{ with .heading }}
+                    <h5 class="milestones__about-timeline-heading">{{.}}</h5>
                     {{ end }}
-                    {{ if .text }}
-                    <p class="margin-bottom-xs margin-top-none">
-                        {{.text}}
-                    </p>
+                    {{ with .text }}
+                    <p class="milestones__about-timeline-text">{{.}}</p>
                     {{ end }}
                     {{ if .link }}
-                    <a href="{{.link}}" {{if .externalLink}}target="_blank"{{end}} 
-                        class="{{if .externalLink}}external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">{{.linktext}}</a>
+                    <a href="{{.link}}" {{if .externalLink}}target="_blank" {{end}}
+                        class="{{if .externalLink}}milestones__external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">
+                        {{.linktext}}
+                        {{ if .externalLink }}
+                        <span class="milestones__external-link-icon">
+                            <svg viewBox="0 0 32 32">
+                                <path
+                                    d="M14 4h-13v18h20v-11h1v12h-22v-20h14v1zm10 5h-1v-6.293l-11.646 11.647-.708-.708 11.647-11.646h-6.293v-1h8v8z">
+                                </path>
+                            </svg>
+                        </span>
+                        {{ end }}
+                    </a>
                     {{ end }}
                 </div>
             </div>

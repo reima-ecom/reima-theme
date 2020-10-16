@@ -47,5 +47,5 @@ fields:
     type: boolean
     config:
       required: false
-    label: External link
+    label: Open link in new tab
   label: Milestones
