@@ -6,8 +6,6 @@
 
 .milestones__about-timeline {
   position: relative;
-  display: flex;
-  flex-direction: column-reverse;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -27,6 +25,10 @@
 .milestones__about-timeline li {
   margin-bottom: 2rem;
   position: relative;
+}
+
+.milestones__about-timeline li:last-child {
+  margin-bottom: 0;
 }
 
 .milestones__media {

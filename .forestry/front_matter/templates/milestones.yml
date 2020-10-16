@@ -43,9 +43,11 @@ fields:
     config:
       required: false
     label: Stretched link
+    description: Link make its containing block clickable.
   - name: externalLink
     type: boolean
     config:
       required: false
     label: Open link in new tab
+    description: Link opens in new tab.
   label: Milestones

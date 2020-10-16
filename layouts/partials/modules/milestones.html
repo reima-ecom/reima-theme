@@ -1,4 +1,3 @@
-{{ $page := .Page }}
 <section id="milestones" class="milestones content-container-mobile">
     <h3 class="h4">{{.heading}}</h3>
     <ol class="milestones__about-timeline">
@@ -7,17 +6,14 @@
             <div class="milestones__media">
                 <div class="milestones__media-left">
                     <div class="milestones__about-timeline-img">
-                        {{ $img := $page.Page.Resources.GetMatch .image }}
-                        {{ if not $img }}
-                        {{ $img = partial "helpers/get-image" .image }}
-                        {{ end }}
-                        {{ with $img }}
-                        <picture>
-                            <source media="(min-width: 768px)" loading="lazy"
-                                data-srcset="{{(.Fill "184x184").RelPermalink}} 184w">
-                            <source loading="lazy" data-srcset="{{(.Fill "124x124 Top").RelPermalink}} 124w">
-                            <img class="lazyload" loading="lazy" data-src="{{(.Fill "184x184").RelPermalink}}" />
-                        </picture>
+                        {{ with partial "helpers/get-image" .image }}
+                            <img class="lazyload" loading="lazy"
+                            data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
+                            {{(.Fill "140x140").RelPermalink}} 140w,
+                            {{(.Fill "100x100").RelPermalink}} 100w,
+                            {{(.Fill "200x200").RelPermalink}} 200w"
+                            sizes="(min-width: 768px) 100px, 70px"
+                            data-src="{{(.Fill "100x100").RelPermalink}}" />
                         {{ end }}
                     </div>
                 </div>
