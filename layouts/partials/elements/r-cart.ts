@@ -22,6 +22,10 @@ export default class RCart extends HTMLElement {
   checkout: HTMLAnchorElement;
   client: any;
 
+  static get observedAttributes() {
+    return ['open'];
+  }
+
   get checkoutId() {
     return this.getAttribute('checkout-id');
   }
@@ -41,6 +45,28 @@ export default class RCart extends HTMLElement {
   set loading(val) {
     if (val) this.setAttribute('loading', '');
     else this.removeAttribute('loading');
+  }
+
+  get open() {
+    return this.hasAttribute('open');
+  }
+
+  set open(val) {
+    if (val) this.setAttribute('open', '');
+    else this.removeAttribute('open');
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'open') {
+      // set body overflow for scrolling
+      document.body.style.overflow = this.open ? 'hidden' : '';
+      // load cart if not loaded
+      if (this.loading) {
+        this.loadCheckout();
+      }
+      // keep checkbox in sync with open state to allow closing with label
+      this.querySelector<HTMLInputElement>('#r-cart-open-chk').checked = this.open;
+    }
   }
 
   render(checkout) {
@@ -134,10 +160,14 @@ export default class RCart extends HTMLElement {
 
   async connectedCallback() {
     this.items = this.querySelector('.items');
-    /** @type {HTMLAnchorElement} */
     this.checkout = this.querySelector('.checkout');
-    /** @type {HTMLElement} */
     this.subtotal = this.querySelector('.summary .price');
+
+    // make cart open on icon link click (instead of going to the cart page)
+    this.querySelector('a.icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.open = true;
+    });
 
     const openCheckbox = this.querySelector<HTMLInputElement>('#r-cart-open-chk');
     // load checkout if input initially checked
@@ -147,13 +177,7 @@ export default class RCart extends HTMLElement {
     }
     // listen for open change
     openCheckbox.addEventListener('change', (e) => {
-      const open = (e.target as HTMLInputElement).checked;
-      // set body overflow for scrolling
-      document.body.style.overflow = open ? 'hidden' : '';
-      // load cart if not loaded
-      if (this.loading) {
-        this.loadCheckout();
-      }
+      this.open = (e.target as HTMLInputElement).checked;
     });
 
     this.items.addEventListener('click', (e) => {

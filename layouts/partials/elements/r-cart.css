@@ -53,7 +53,7 @@ r-cart > div > div {
   max-width: 400px;
 }
 
-r-cart > input:checked ~ div {
+r-cart[open] > div {
   display: flex;
 }
 
