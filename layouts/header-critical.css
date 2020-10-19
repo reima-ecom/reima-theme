@@ -47,6 +47,12 @@ body > header {
   display: block;
 }
 
+header .icons {
+  display: grid;
+  gap: 0.5rem;
+  grid-auto-flow: column;
+}
+
 .icon {
   width: 1.5rem;
   height: 1.5rem;

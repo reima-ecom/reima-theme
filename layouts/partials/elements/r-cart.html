@@ -1,35 +1,51 @@
 {{- partial "check-deps" (slice "css-base:partials/elements/r-cart" $) -}}
+{{ $.Scratch.Add "ts" "partials/elements/r-cart.ts" }}
 
 <r-cart loading>
-  <h1>
-    {{T "Cart Title"}}
-    <button class="icon" close>
-      <svg>
-        <use xlink:href="#icon-close"></use>
-      </svg>
-    </button>
-  </h1>
-  <div class="items">{{T "Cart Loading Message"}}</div>
-  <div class="empty">{{T "Cart Empty Message"}}</div>
-  <div class="summary">
-    <h2>{{T "Cart Subtotal"}} <span class="price"></span></h2>
-    <a href="#" class="btn btn--cta button checkout">{{T "Cart Checkout Button"}}</a>
-  </div>
-  <template id="item">
-    <div>
-      <img src="" alt="">
-      <div>
-        <h2></h2>
-        <h3></h3>
-        <div class="subtotal">
-          <div class="quantity">
-            <button step="-1">-</button>
-            <input type="number" min="0">
-            <button step="+1">+</button>
-          </div>
-          <div class="price"></div>
-        </div>
+  <!-- cart icon button -->
+  <a class="icon" href="#">
+    <svg viewBox="0 0 32 32">
+      <path
+        d="M29.813 7h-6.375q-0.063-1.469-0.688-2.781-0.625-1.281-1.625-2.234t-2.313-1.516q-1.344-0.531-2.813-0.531-1.5 0-2.813 0.531-1.344 0.563-2.344 1.516t-1.625 2.234q-0.594 1.281-0.688 2.75v0.031h-6.344l-2 21.375v0.313q0 1.375 0.969 2.344t2.313 0.969h25.063q1.344 0 2.313-0.969t0.969-2.344v-0.313zM16 3q1.719 0 2.984 1.156t1.453 2.813v0.031h-8.875q0.188-1.688 1.453-2.844t2.984-1.156v0zM28.75 29q-0.031 0-0.063 0.016t-0.063 0.016-0.063-0.016-0.063-0.016v0h-25q-0.031 0-0.063 0.016t-0.063 0.016-0.063-0.016-0.063-0.016v0q0-0.031-0.016-0.063t-0.016-0.063 0.016-0.063 0.016-0.063v0l1.688-18.75h3.563v5.5q0 0.625 0.438 1.063t1.063 0.438 1.063-0.438 0.438-1.063v0-5.5h9v5.5q0 0.625 0.438 1.063t1.063 0.438 1.063-0.438 0.438-1.063v0-5.5h3.563l1.75 18.656v0.031q0 0.063-0.016 0.109t-0.047 0.109v0 0.094z">
+      </path>
+    </svg>
+    <span count></span>
+  </a>
+  <!-- overlay background -->
+  <div class="r-cart__overlay">
+    <div close></div>
+    <div class="r-cart__main">
+      <h1>
+        {{T "Cart Title"}}
+        <button class="icon" close>
+          <svg>
+            <use xlink:href="#icon-close"></use>
+          </svg>
+        </button>
+      </h1>
+      <div class="items">{{T "Cart Loading Message"}}</div>
+      <div class="empty">{{T "Cart Empty Message"}}</div>
+      <div class="summary">
+        <h2>{{T "Cart Subtotal"}} <span class="price"></span></h2>
+        <a href="#" class="btn btn--cta button checkout">{{T "Cart Checkout Button"}}</a>
       </div>
+      <template id="item">
+        <div>
+          <img src="" alt="">
+          <div>
+            <h2></h2>
+            <h3></h3>
+            <div class="subtotal">
+              <div class="quantity">
+                <button step="-1">-</button>
+                <input type="number" min="0">
+                <button step="+1">+</button>
+              </div>
+              <div class="price"></div>
+            </div>
+          </div>
+        </div>
+      </template>
     </div>
-  </template>
+  </div>
 </r-cart>

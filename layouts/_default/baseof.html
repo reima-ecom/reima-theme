@@ -14,6 +14,8 @@
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "partials/elements/r-newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
   {{ $.Scratch.Set "js-async" (slice "baseof.js") }}
+  <!-- store js to be loaded directly in this slice -->
+  {{ $.Scratch.Set "ts" slice }}
   {{- block "dependencies" . -}} {{- end -}}
   <!-- if multilingual site, add css for language selector -->
   {{ if site.IsMultiLingual }}
@@ -151,31 +153,20 @@
         </svg>
       </a>
        -->
-      {{ if site.Params.public.algolia }}
-      <button class="icon" openid="search" load="r-search">
-        <svg viewBox="0 0 32 32">
-          <path
-            d="M31.563 29.438l-8.375-8.375q1.313-1.656 2.063-3.719t0.75-4.375q0-2.688-1.031-5.063t-2.797-4.141-4.141-2.797q-2.375-1-5.063-1t-5.063 1q-2.375 1.031-4.141 2.797t-2.797 4.141q-1 2.375-1 5.063t1 5.063q1.031 2.375 2.797 4.141t4.141 2.797 5.063 1.031q2.313 0 4.375-0.75t3.75-2.094l-0.031 0.031 8.375 8.375q0.188 0.188 0.453 0.297t0.578 0.109q0.625 0 1.063-0.438t0.438-1.063q0-0.313-0.109-0.578t-0.297-0.453v0 0zM13 23q-2.063 0-3.906-0.781-1.813-0.781-3.172-2.141t-2.141-3.172q-0.781-1.844-0.781-3.906t0.781-3.906q0.781-1.813 2.141-3.172t3.172-2.141q1.844-0.781 3.906-0.781t3.906 0.781q1.813 0.781 3.172 2.141t2.141 3.172q0.781 1.844 0.781 3.906v0q0 2.063-0.781 3.906-0.781 1.813-2.141 3.172t-3.172 2.141q-1.844 0.781-3.906 0.781v0z">
-          </path>
-        </svg>
-      </button>
-      {{ end }}
-      <button class="icon" openid="cart" load="r-cart">
-        <svg viewBox="0 0 32 32">
-          <path
-            d="M29.813 7h-6.375q-0.063-1.469-0.688-2.781-0.625-1.281-1.625-2.234t-2.313-1.516q-1.344-0.531-2.813-0.531-1.5 0-2.813 0.531-1.344 0.563-2.344 1.516t-1.625 2.234q-0.594 1.281-0.688 2.75v0.031h-6.344l-2 21.375v0.313q0 1.375 0.969 2.344t2.313 0.969h25.063q1.344 0 2.313-0.969t0.969-2.344v-0.313zM16 3q1.719 0 2.984 1.156t1.453 2.813v0.031h-8.875q0.188-1.688 1.453-2.844t2.984-1.156v0zM28.75 29q-0.031 0-0.063 0.016t-0.063 0.016-0.063-0.016-0.063-0.016v0h-25q-0.031 0-0.063 0.016t-0.063 0.016-0.063-0.016-0.063-0.016v0q0-0.031-0.016-0.063t-0.016-0.063 0.016-0.063 0.016-0.063v0l1.688-18.75h3.563v5.5q0 0.625 0.438 1.063t1.063 0.438 1.063-0.438 0.438-1.063v0-5.5h9v5.5q0 0.625 0.438 1.063t1.063 0.438 1.063-0.438 0.438-1.063v0-5.5h3.563l1.75 18.656v0.031q0 0.063-0.016 0.109t-0.047 0.109v0 0.094z">
-          </path>
-        </svg>
-      </button>
-      {{ if site.Params.public.algolia }}
-      <div class="overlay" id="search">
-        {{partialCached "elements/r-search" $}}
-      </div>
-      {{ end }}
-      <div class="overlay" id="cart">
-        <div>
-          {{partialCached "elements/r-cart" $}}
+      <div class="icons">
+        {{ if site.Params.public.algolia }}
+        <button class="icon" openid="search" load="r-search">
+          <svg viewBox="0 0 32 32">
+            <path
+              d="M31.563 29.438l-8.375-8.375q1.313-1.656 2.063-3.719t0.75-4.375q0-2.688-1.031-5.063t-2.797-4.141-4.141-2.797q-2.375-1-5.063-1t-5.063 1q-2.375 1.031-4.141 2.797t-2.797 4.141q-1 2.375-1 5.063t1 5.063q1.031 2.375 2.797 4.141t4.141 2.797 5.063 1.031q2.313 0 4.375-0.75t3.75-2.094l-0.031 0.031 8.375 8.375q0.188 0.188 0.453 0.297t0.578 0.109q0.625 0 1.063-0.438t0.438-1.063q0-0.313-0.109-0.578t-0.297-0.453v0 0zM13 23q-2.063 0-3.906-0.781-1.813-0.781-3.172-2.141t-2.141-3.172q-0.781-1.844-0.781-3.906t0.781-3.906q0.781-1.813 2.141-3.172t3.172-2.141q1.844-0.781 3.906-0.781t3.906 0.781q1.813 0.781 3.172 2.141t2.141 3.172q0.781 1.844 0.781 3.906v0q0 2.063-0.781 3.906-0.781 1.813-2.141 3.172t-3.172 2.141q-1.844 0.781-3.906 0.781v0z">
+            </path>
+          </svg>
+        </button>
+        <div class="overlay" id="search">
+          {{partialCached "elements/r-search" $}}
         </div>
+        {{ end }}
+        {{partial "elements/r-cart" $}}
       </div>
     </div>
   </header>
@@ -200,6 +191,14 @@
     window.site = {{ site.Params.public }}
   </script>
   {{partial "js-async" ($.Scratch.Get "js-async")}}
+  {{- range $.Scratch.Get "ts" | uniq -}}
+  {{- with resources.Get . }}
+  {{- $js := . | js.Build | fingerprint -}}
+  <script async defer src="{{$js.RelPermalink}}" type="module"></script>
+  {{- else -}}
+  {{ warnf "Could not find js %s" . }}
+  {{- end -}}
+  {{- end -}}
 </body>
 
 </html>
