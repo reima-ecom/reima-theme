@@ -2,7 +2,6 @@
 {{ $.Scratch.Add "ts" "partials/elements/r-cart.ts" }}
 
 <r-cart loading>
-  <input type="checkbox" id="r-cart-open-chk">
   <!-- cart icon button -->
   <a class="icon" href="#">
     <svg viewBox="0 0 32 32">
@@ -13,16 +12,16 @@
     <span count></span>
   </a>
   <!-- overlay background -->
-  <div>
-    <label for="r-cart-open-chk"></label>
-    <div>
+  <div class="r-cart__overlay">
+    <div close></div>
+    <div class="r-cart__main">
       <h1>
         {{T "Cart Title"}}
-        <label for="r-cart-open-chk" class="icon" close>
+        <button class="icon" close>
           <svg>
             <use xlink:href="#icon-close"></use>
           </svg>
-        </label>
+        </button>
       </h1>
       <div class="items">{{T "Cart Loading Message"}}</div>
       <div class="empty">{{T "Cart Empty Message"}}</div>

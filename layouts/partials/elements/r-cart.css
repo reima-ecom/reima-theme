@@ -7,27 +7,35 @@ r-cart {
   box-sizing: border-box;
 }
 
-r-cart > input {
-  position: fixed;
+r-cart .icon {
+  position: relative;
+}
+
+r-cart .icon span {
   opacity: 0;
-  z-index: -1;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform: translate(50%, -50%);
+  transition: all 0.2s ease-in-out;
+  transition-property: width, height;
+  display: block;
+  background: #d2092d;
+  border-radius: 50%;
+  position: absolute;
+  color: transparent;
+  overflow: hidden;
 }
 
-r-cart > label.icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
+r-cart .icon span:not(:empty) {
+  width: 0.75rem;
+  height: 0.75rem;
+  opacity: 1;
 }
 
-r-cart > input:focus ~ label,
-r-cart > input:focus ~ * label {
-  outline-style: dotted;
-  outline-width: 2px;
-  outline-offset: 2px;
-  outline-color: rgba(0, 0, 0, 0.5);
-}
 
-r-cart > div {
+.r-cart__overlay {
   display: none;
   background: rgba(0,0,0,0.5);
   position: fixed;
@@ -38,11 +46,15 @@ r-cart > div {
   z-index: 10;
 }
 
-r-cart > div > label {
+r-cart[open] > .r-cart__overlay {
+  display: flex;
+}
+
+.r-cart__overlay > [close] {
   flex: 1;
 }
 
-r-cart > div > div {
+.r-cart__main {
   background: white;
   display: flex;
   flex-direction: column;
@@ -51,10 +63,6 @@ r-cart > div > div {
   margin-left: auto;
   contain: layout;
   max-width: 400px;
-}
-
-r-cart[open] > div {
-  display: flex;
 }
 
 r-cart h1 {
@@ -100,7 +108,7 @@ r-cart .items:empty ~ .empty {
   display: block;
 }
 
-r-cart[id]:not([loading]) .items:not(:empty) ~ .summary {
+r-cart[checkout-id]:not([loading]) .items:not(:empty) ~ .summary {
   display: block;
 }
 

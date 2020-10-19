@@ -34,10 +34,6 @@ export default class RCart extends HTMLElement {
     this.setAttribute('checkout-id', val);
   }
 
-  set itemCount(val) {
-    this.querySelector('aside[count]').innerHTML = val;
-  }
-
   get loading() {
     return this.hasAttribute('loading');
   }
@@ -64,9 +60,21 @@ export default class RCart extends HTMLElement {
       if (this.loading) {
         this.loadCheckout();
       }
-      // keep checkbox in sync with open state to allow closing with label
-      this.querySelector<HTMLInputElement>('#r-cart-open-chk').checked = this.open;
     }
+  }
+
+  get itemCount(): number {
+    return Number.parseInt(localStorage.getItem('cart-item-count'));
+  }
+
+  set itemCount(count: number) {
+    localStorage.setItem('cart-item-count', count.toString());
+    // update indicator
+    this.updateIndicatorDotCount(count);
+  }
+
+  updateIndicatorDotCount(count: number = this.itemCount) {
+    this.querySelector<HTMLElement>('[count]').innerHTML = this.itemCount ? this.itemCount.toString() : '';
   }
 
   render(checkout) {
@@ -93,6 +101,8 @@ export default class RCart extends HTMLElement {
       });
       this.checkout.href = checkout.webUrl;
       this.subtotal.innerText = formatPrice(checkout.subtotalPriceV2.amount, window.site.currency);
+      // update dot count
+      this.itemCount = checkout.lineItems.reduce((count, li) => count + li.quantity, 0);
     }
   }
 
@@ -111,11 +121,10 @@ export default class RCart extends HTMLElement {
       const checkout = await this.client.checkout.create();
       this.checkoutId = checkout.id.toString();
     }
-    const checkout = await this.client.checkout.addLineItems(this.id, [{ variantId, quantity: 1 }]);
+    const checkout = await this.client.checkout.addLineItems(this.checkoutId, [{ variantId, quantity: 1 }]);
     this.render(checkout);
     document.cookie = `X-checkout=${checkout.id}; Path=/`;
-    this.closest('.overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    this.open = true;
 
     // new way to dispatch cart add event, will bubble to document
     const basket = {
@@ -140,7 +149,7 @@ export default class RCart extends HTMLElement {
   }
 
   async updateQuantity(inputElement) {
-    const checkout = await this.client.checkout.updateLineItems(this.id, [{
+    const checkout = await this.client.checkout.updateLineItems(this.checkoutId, [{
       id: inputElement.dataset.id,
       quantity: Number.parseInt(inputElement.value, 10),
     }]);
@@ -149,10 +158,10 @@ export default class RCart extends HTMLElement {
 
   async loadCheckout() {
     let checkout;
-    this.id = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    if (this.id) {
+    this.checkoutId = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    if (this.checkoutId) {
       await this.ensureClient();
-      checkout = await this.client.checkout.fetch(this.id);
+      checkout = await this.client.checkout.fetch(this.checkoutId);
     }
     this.render(checkout);
     this.loading = false;
@@ -169,17 +178,23 @@ export default class RCart extends HTMLElement {
       this.open = true;
     });
 
-    const openCheckbox = this.querySelector<HTMLInputElement>('#r-cart-open-chk');
-    // load checkout if input initially checked
-    if (openCheckbox.checked) {
-      this.loadCheckout();
-      document.body.style.overflow = 'hidden';
-    }
-    // listen for open change
-    openCheckbox.addEventListener('change', (e) => {
-      this.open = (e.target as HTMLInputElement).checked;
+    // listen for close buttons
+    this.addEventListener('click', (e) => {
+      const self = e.target as HTMLElement;
+      if (self.hasAttribute('close') || self.closest('[close]')) {
+        this.open = false;
+      }
+    });
+    this.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.open = false;
+      }
     });
 
+    // set indicator dot count
+    this.updateIndicatorDotCount();
+
+    // listen for plus and minus quantity button clicks
     this.items.addEventListener('click', (e) => {
       const t = e.target as HTMLElement;
       if (t.nodeName === 'BUTTON') {
