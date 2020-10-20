@@ -9,6 +9,9 @@ fields:
   - type: textarea
     name: other
     label: other
+    description: Use markdown if you want to create links to legal pages.
+  description: Message to show for the newsletter subscription Terms Of Service consent
+    checkbox
 - type: field_group
   name: Newsletter Marketing Consent
   label: Newsletter Marketing Consent
@@ -16,6 +19,7 @@ fields:
   - type: textarea
     name: other
     label: other
+  description: Message to show for the newsletter subscription marketing consent checkbox
 - type: field_group
   name: Newsletter Subscribe Button
   label: Newsletter Subscribe Button
@@ -30,6 +34,7 @@ fields:
   - type: text
     name: other
     label: other
+  description: Shown inside the email textbox before any text has been entered.
 - type: field_group
   name: Product price
   label: Product price
@@ -37,6 +42,10 @@ fields:
   - type: text
     name: other
     label: other
+    description: Add <code>{{.price}}</code> where you want the price to be shown.
+  description: Use this if you want to edit how product prices are shown, e.g. if
+    you want to add "incl. taxes" after the price. The default is to just output the
+    (formatted) price.
 - type: field_group
   name: Product price with price range
   label: Product price with price range
@@ -44,6 +53,9 @@ fields:
   - type: text
     name: other
     label: other
+    description: Add <code>{{.price}}</code> where you want the price to be shown.
+      The default is <code>from {{.price}}</code>
+  description: Like the above, but used when there are variants with different prices.
 - type: field_group
   name: 'Product feature: color'
   label: 'Product feature: color'
@@ -156,6 +168,7 @@ fields:
   - type: textarea
     name: other
     label: other
+  description: Site-wide SEO description to be used if no page-level description exists.
 - type: field_group
   name: 'Product feature description: uv-protection'
   label: 'Product feature description: uv-protection'
