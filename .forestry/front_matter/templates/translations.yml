@@ -1,0 +1,319 @@
+---
+label: Translations
+hide_body: true
+fields:
+- type: field_group
+  name: Newsletter TOS Consent
+  label: Newsletter TOS Consent
+  fields:
+  - type: textarea
+    name: other
+    label: other
+- type: field_group
+  name: Newsletter Marketing Consent
+  label: Newsletter Marketing Consent
+  fields:
+  - type: textarea
+    name: other
+    label: other
+- type: field_group
+  name: Newsletter Subscribe Button
+  label: Newsletter Subscribe Button
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Newsletter Email Placeholder
+  label: Newsletter Email Placeholder
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Product price
+  label: Product price
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Product price with price range
+  label: Product price with price range
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: color'
+  label: 'Product feature: color'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: size'
+  label: 'Product feature: size'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: sizeclothing'
+  label: 'Product feature: sizeclothing'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: sizehand'
+  label: 'Product feature: sizehand'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature description: breathability'
+  label: 'Product feature description: breathability'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature description: durability'
+  label: 'Product feature description: durability'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: uv-protection'
+  label: 'Product feature: uv-protection'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature description: waterproof'
+  label: 'Product feature description: waterproof'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: sizefeet'
+  label: 'Product feature: sizefeet'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: gender'
+  label: 'Product feature: gender'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: sizeheadwear'
+  label: 'Product feature: sizeheadwear'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: durability'
+  label: 'Product feature: durability'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: warmth'
+  label: 'Product feature: warmth'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: waterproof'
+  label: 'Product feature: waterproof'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature: breathability'
+  label: 'Product feature: breathability'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: SEO Description
+  label: SEO Description
+  fields:
+  - type: textarea
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature description: uv-protection'
+  label: 'Product feature description: uv-protection'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 'Product feature description: warmth'
+  label: 'Product feature description: warmth'
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Add to cart
+  label: Add to cart
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Sold out
+  label: Sold out
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Not available
+  label: Not available
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Show More
+  label: Show More
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Show Less
+  label: Show Less
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Reviews
+  label: Reviews
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Write a review
+  label: Write a review
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Score
+  label: Review Score
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Title
+  label: Review Title
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Text
+  label: Review Text
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Name
+  label: Review Name
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Email
+  label: Review Email
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Submit
+  label: Review Submit
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Thank you
+  label: Review Thank you
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Review Verified Buyer
+  label: Review Verified Buyer
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: No reviews
+  label: No reviews
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Cart Loading Message
+  label: Cart Loading Message
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Cart Checkout Button
+  label: Cart Checkout Button
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Cart Subtotal
+  label: Cart Subtotal
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Cart Empty Message
+  label: Cart Empty Message
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: Cart Title
+  label: Cart Title
+  fields:
+  - type: text
+    name: other
+    label: other
