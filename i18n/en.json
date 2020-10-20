@@ -133,5 +133,11 @@
   },
   "Cart Title": {
     "other": "Cart"
+  },
+  "404 page heading": {
+    "other": "Oh no!"
+  },
+  "404 page content": {
+    "other": "The page you were looking for was *not* found."
   }
 }

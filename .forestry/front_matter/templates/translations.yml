@@ -330,5 +330,24 @@ fields:
   - type: text
     name: other
     label: other
+- type: field_group
+  name: 404 page heading
+  label: 404 page heading
+  fields:
+  - type: text
+    name: other
+    label: other
+- type: field_group
+  name: 404 page content
+  label: 404 page content
+  fields:
+  - type: textarea
+    name: other
+    label: other
+    description: Use markdown as needed
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
 pages:
 - demo/i18n/en.json

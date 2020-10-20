@@ -7,10 +7,9 @@
 
 <div class="page-width text-center airy">
   <h1>
-    Oh no!
+    {{T "404 page heading" | default "Oh no!"}}
   </h1>
-
-  The page you were looking for was not found.
+  {{T "404 page content" | default "Page not found :(" | markdownify}}
 </div>
 
 {{ end }}
