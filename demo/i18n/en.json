@@ -1,8 +1,137 @@
 {
   "Product price": {
-    "other": "{{.price}} incl. tax"
+    "other": "{{.price}} w/tax"
   },
   "Product price with price range": {
     "other": "begin {{.price}}"
+  },
+  "Newsletter TOS Consent": {
+    "other": ""
+  },
+  "Newsletter Marketing Consent": {
+    "other": ""
+  },
+  "Newsletter Subscribe Button": {
+    "other": ""
+  },
+  "Newsletter Email Placeholder": {
+    "other": ""
+  },
+  "Product feature: color": {
+    "other": ""
+  },
+  "Product feature: size": {
+    "other": ""
+  },
+  "Product feature: sizeclothing": {
+    "other": ""
+  },
+  "Product feature: sizehand": {
+    "other": ""
+  },
+  "Product feature description: breathability": {
+    "other": ""
+  },
+  "Product feature description: durability": {
+    "other": ""
+  },
+  "Product feature: uv-protection": {
+    "other": ""
+  },
+  "Product feature description: waterproof": {
+    "other": ""
+  },
+  "Product feature: sizefeet": {
+    "other": ""
+  },
+  "Product feature: gender": {
+    "other": ""
+  },
+  "Product feature: sizeheadwear": {
+    "other": ""
+  },
+  "Product feature: durability": {
+    "other": ""
+  },
+  "Product feature: warmth": {
+    "other": ""
+  },
+  "Product feature: waterproof": {
+    "other": ""
+  },
+  "Product feature: breathability": {
+    "other": ""
+  },
+  "SEO Description": {
+    "other": ""
+  },
+  "Product feature description: uv-protection": {
+    "other": ""
+  },
+  "Product feature description: warmth": {
+    "other": ""
+  },
+  "Add to cart": {
+    "other": ""
+  },
+  "Sold out": {
+    "other": ""
+  },
+  "Not available": {
+    "other": ""
+  },
+  "Show More": {
+    "other": ""
+  },
+  "Show Less": {
+    "other": ""
+  },
+  "Reviews": {
+    "other": ""
+  },
+  "Write a review": {
+    "other": ""
+  },
+  "Review Score": {
+    "other": ""
+  },
+  "Review Title": {
+    "other": ""
+  },
+  "Review Text": {
+    "other": ""
+  },
+  "Review Name": {
+    "other": ""
+  },
+  "Review Email": {
+    "other": ""
+  },
+  "Review Submit": {
+    "other": ""
+  },
+  "Review Thank you": {
+    "other": ""
+  },
+  "Review Verified Buyer": {
+    "other": ""
+  },
+  "No reviews": {
+    "other": ""
+  },
+  "Cart Loading Message": {
+    "other": ""
+  },
+  "Cart Checkout Button": {
+    "other": ""
+  },
+  "Cart Subtotal": {
+    "other": ""
+  },
+  "Cart Empty Message": {
+    "other": ""
+  },
+  "Cart Title": {
+    "other": ""
   }
 }

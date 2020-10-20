@@ -330,3 +330,5 @@ fields:
   - type: text
     name: other
     label: other
+pages:
+- demo/i18n/en.json
