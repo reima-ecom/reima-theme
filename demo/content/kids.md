@@ -88,6 +88,7 @@ banner:
   heading: Mid Season *Sale*
   text: Discount items up to -50%
   linktext: Shop now
+  linkmodifier: ''
 main:
 - template: hero
   heading: Small details that make a big difference
@@ -104,6 +105,17 @@ main:
   fullwidth: false
   overlaymobile: ''
   overlayalign: ''
+  type: Image
+  youtubeid: ''
+  youtubeautoplay: false
+  youtubeloop: false
+  youtubenocontrols: false
+  vimeoid: ''
+  vimeobg: false
+  linkmodifier: ''
+  overlaybg: false
+  overlayvertical: ''
+  narrow: false
 - template: categories
   noop: Uses the categories defined on the page
 - template: purposes
@@ -129,7 +141,7 @@ main:
     imagemobile: ''
   colorinvert: false
   columnstablet: ''
-  columnsdesktop: 
+  columnsdesktop: ''
 - template: products
   collection: tops
   title: Most popular for Kids
