@@ -1,9 +1,5 @@
 import loadElement from './helpers/load-element.js';
 
-setTimeout(() => {
-  loadElement('r-cart');
-}, 500);
-
 /** @type {HTMLFormElement} */
 const form = document.querySelector('form#product-form');
 const cartButton = form.querySelector('button');
@@ -27,6 +23,12 @@ form.addEventListener('submit', async (e) => {
     btn.disabled = false;
   }
 });
+
+const renderPrice = (price) => {
+  /** @type {ProductPageProperties & Window} */
+  const { priceTemplate } = window;
+  return priceTemplate.replace('PRICE', price);
+};
 
 const getVariant = async (options) => variants.find((v) => {
   if (Object.keys(v.options).length !== Object.keys(options).length) return false;
@@ -65,10 +67,13 @@ const inputChange = async (e) => {
     // update prices
     /** @type {HTMLElement} */
     const priceElement = document.querySelector('.price--actual');
-    priceElement.innerText = variant.priceFormatted;
+    priceElement.innerText = renderPrice(variant.priceFormatted);
     if (variant.compareAtPrice > variant.price) priceElement.classList.add('price--sale');
     else priceElement.classList.remove('price--sale');
-    /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText = variant.compareAtPriceFormatted || '';
+    /** @type {HTMLElement} */(document.querySelector('.price--was')).innerText =
+      variant.compareAtPriceFormatted 
+      ? renderPrice(variant.compareAtPriceFormatted) 
+      : '';
     // scroll to variant image if color change
     if (isColor) {
       /** @type {import('./elements/r-carousel').default} */(document.querySelector('r-carousel')).scrollToImage(variant.imageIndex);
@@ -97,4 +102,5 @@ radioBoxes.forEach((node) => {
  * @typedef ProductPageProperties
  * @property {Object<string, string>} [selectedOptions]
  * @property {Variant[]} [variants]
+ * @property {string} [priceTemplate]
  */

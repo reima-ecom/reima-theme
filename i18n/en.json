@@ -11,6 +11,12 @@
   "Newsletter Email Placeholder": {
     "other": "Enter your email"
   },
+  "Product price": {
+    "other": "{{.price}}"
+  },
+  "Product price with price range": {
+    "other": "from {{.price}}"
+  },
   "Product feature: color": {
     "other": "Color"
   },

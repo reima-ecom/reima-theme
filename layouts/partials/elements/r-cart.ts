@@ -158,7 +158,6 @@ export default class RCart extends HTMLElement {
 
   async loadCheckout() {
     let checkout;
-    this.checkoutId = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
     if (this.checkoutId) {
       await this.ensureClient();
       checkout = await this.client.checkout.fetch(this.checkoutId);
@@ -166,8 +165,10 @@ export default class RCart extends HTMLElement {
     this.render(checkout);
     this.loading = false;
   }
-
+  
   async connectedCallback() {
+    this.checkoutId = document.cookie.replace(/(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/, '$1');
+
     this.items = this.querySelector('.items');
     this.checkout = this.querySelector('.checkout');
     this.subtotal = this.querySelector('.summary .price');

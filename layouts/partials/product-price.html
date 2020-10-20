@@ -8,10 +8,27 @@
   typography.css
  -->
 
-{{- if .hasPriceRange -}}
-from
-{{- end -}}
+{{- $priceSpan := partial "product-price-inner" . }}
+
+{{- if .hasPriceRange }}
+{{T "Product price with price range" (dict "price" $priceSpan) | safeHTML}}
+{{- else }}
+{{$priceSpan}}
+{{- end }}
+
+{{- define "partials/product-price-inner" }}
 <span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}">
-  {{ with .priceFormatted }}{{.}}{{ else }}{{ warnf "Formatted price not found! (%s)" .handle }}{{ end }}
+  {{- with .priceFormatted }}
+  {{T "Product price" (dict "price" .) }}
+  {{- else }}
+  {{- warnf "Formatted price not found! (%s)" .handle }}
+  {{- end }}
 </span>
-<span class="price price--was">{{.compareAtPriceFormatted}}</span>
+{{- end }}
+
+<!-- we need to output the span because it might be needed on the product page -->
+<span class="price price--was">
+  {{- with .compareAtPriceFormatted }}
+  {{T "Product price" (dict "price" .)}}
+  {{- end }}
+</span>

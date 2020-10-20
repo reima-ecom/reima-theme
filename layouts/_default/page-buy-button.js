@@ -1,10 +1,3 @@
-import loadElement from '../partials/helpers/load-element.js';
-
-setTimeout(() => {
-  loadElement('r-cart');
-}, 500);
-
-
 /**
  * @param {Event} e
  */

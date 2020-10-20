@@ -97,8 +97,8 @@
       {{ end }}
 
       <div>
-        <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}} 
-        data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
+        <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}}
+          data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
           {{ if $firstAvailableOptions }}
           {{T "Add to cart"}}
           {{ else }}
@@ -310,6 +310,7 @@
   variants = {{.Params.variants }};
   yotpoId = '{{.Params.yotpoId}}';
   selectedOptions = {{ $selectedOptions }};
+  priceTemplate = '{{T "Product price" (dict "price" "PRICE")}}';
 </script>
 <script type="application/ld+json">
 {

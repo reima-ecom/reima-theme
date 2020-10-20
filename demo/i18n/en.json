@@ -1,0 +1,8 @@
+{
+  "Product price": {
+    "other": "{{.price}} incl. tax"
+  },
+  "Product price with price range": {
+    "other": "begin {{.price}}"
+  }
+}
