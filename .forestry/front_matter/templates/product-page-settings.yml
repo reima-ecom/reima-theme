@@ -141,6 +141,12 @@ fields:
 - name: paymentlogos
   type: field_group_list
   fields:
+  - name: name
+    type: text
+    config:
+      required: false
+    label: Name
+    description: Name of the payment provider
   - name: type
     type: select
     default: []
@@ -166,7 +172,7 @@ fields:
   config:
     min: 
     max: 
-    labelField: 
+    labelField: name
   label: Payment Provider Logos
   description: These will show up under the "Add to Cart" button.
 pages:
