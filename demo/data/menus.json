@@ -1,6 +1,10 @@
 {
   "main": [
     {
+      "name": "Help",
+      "url": "/content-management-help"
+    },
+    {
       "name": "Pages",
       "url": "",
       "children": [
@@ -29,39 +33,29 @@
     {
       "children": [
         {
-          "children": [
-
-          ],
+          "children": [],
           "name": "Hero",
           "url": "/modules/hero"
         },
         {
           "name": "Image links",
           "url": "/modules/image-links",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "name": "Split card",
           "url": "/modules/split-card",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "name": "Testimonials",
           "url": "/modules/testimonials",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "name": "Article grid",
           "url": "/modules/article-grid",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "name": "Image grid",
@@ -80,7 +74,5 @@
       "url": ""
     }
   ],
-  "footer": [
-
-  ]
+  "footer": []
 }
