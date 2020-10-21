@@ -1,6 +1,7 @@
 name: Dispatch Release Events
 on:
-  release: published
+  release:
+    types: [published]
 jobs:
   dispatch:
     strategy:
