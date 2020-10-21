@@ -25,24 +25,24 @@
     <!-- get the actual product page from the name of the product page under collections  -->
     {{ $producthandle := .File.ContentBaseName }}
     {{ with site.GetPage (printf "/products/%s" $producthandle) }}
+    <!-- this is the product page -->
+    {{ $product := . }}
     <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}" handle="{{$producthandle}}">
-      {{ with .Resources.ByType "image" | first 1 }}
-      {{partial "image" (dict "image" (index . 0) "widths" "200,400")}}
+      {{ range .Resources.ByType "image" | first 1 }}
+      {{partial "image" (dict "image" . "widths" "200,400")}}
       {{ end }}
       <div class="color-dots">
-        {{ $coloroption := "Color" }}
-        {{ with site.Params.coloroption }}
-        {{ $coloroption = . }}
-        {{ end }}
+        {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
         {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ with . }}
         {{ range where site.Data.colors.colors "name" "eq" . }}
-        <div {{with .color}}style="background-color: {{.}};"{{end}}>
+        <a {{with .color}}style="background-color: {{.}};" {{end}}
+          {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
           {{ $colorname := .name }}
           {{ with .image }}
           <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$colorname}}">
           {{ end }}
-        </div>
+        </a>
         {{ else }}
         {{ warnf "Could not find color %s" .}}
         {{ end }}
@@ -74,3 +74,47 @@
   <p>No products found</p>
   {{ end }}
 </section>
+
+<!-- 
+  get srcset for product image in the specified color
+  params: product: product page
+          color: color name
+ -->
+{{ define "partials/modules/products-get-image-srcset-attr" }}
+{{ $srcset := "" }}
+{{ with partial "modules/products-get-color-variant" (dict "variants" .product.Params.variants "color" .color ) }}
+{{ with index ($.product.Resources.ByType "image") .imageIndex }}
+{{ $srcset = partial "srcset" (dict "image" . "widths" "200,400") }}
+{{ end }}
+{{ else }}
+{{ warnf "Could not get variant in color %s for %s" .color .product }}
+{{ end }}
+{{ return (printf "data-image-srcset=%q" $srcset | safeHTMLAttr) }}
+{{ end }}
+
+<!-- 
+  get product variant from color name
+  params: variants: product variants from product page
+          color: color name
+ -->
+{{ define "partials/modules/products-get-color-variant" }}
+{{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
+{{ $variant := 0 }}
+{{ with .variants }}
+{{ range where . (printf "options.%s" $coloroption) $.color }}
+{{ $variant = . }}
+{{ end }}
+{{ else }}
+{{ warnf "No variants supplied (color is %s)" $.color }}
+{{ end }}
+{{ return $variant }}
+{{ end }}
+
+<!-- get color option name from site params, defaults to "Color" -->
+{{ define "partials/modules/products-get-color-option" }}
+{{ $coloroption := "Color" }}
+{{ with site.Params.coloroption }}
+{{ $coloroption = . }}
+{{ end }}
+{{ return $coloroption}}
+{{ end }}
