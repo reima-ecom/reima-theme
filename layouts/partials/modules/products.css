@@ -52,16 +52,18 @@
   margin: 0.75rem 0 0.5rem;
 }
 
-.product-list li .color-dots > div {
+.product-list li .color-dots > a {
   margin: 0 0.25rem;
   height: 1rem;
   width: 1rem;
   border-radius: 50%;
   box-shadow: 0 0 0 1px #bfbfbf;
   overflow: hidden;
+  z-index: 1;
+  color: transparent;
 }
 
-.product-list li .color-dots > div img {
+.product-list li .color-dots > a img {
   width: 100%;
   height: 100%;
 }

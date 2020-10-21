@@ -1,9 +1,14 @@
 {{ define "dependencies" }}
 
-<!-- add css dependencies -->
+<!-- add css and ts dependencies -->
 {{ range .Params.main }}
 {{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
+{{ $tspath := printf "partials/modules/%s.ts" .template }}
+{{ if templates.Exists $tspath }}
+{{ $.Scratch.Add "ts" $tspath }}
 {{ end }}
+{{ end }}
+
 {{ range .Params.banner }}
 {{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
 {{ end }}
