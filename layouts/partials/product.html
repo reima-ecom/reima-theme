@@ -105,6 +105,13 @@
           {{T "Sold out"}}
           {{ end }}
         </button>
+        <div class="product__payment-logos">
+          {{- range $settings.paymentlogos }}
+          {{ if eq .type "External SVG" }}
+          <img src="{{.src}}" alt="{{.name}}">
+          {{ end }}
+          {{ end -}}
+        </div>
       </div>
     </form>
 

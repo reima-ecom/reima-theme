@@ -273,3 +273,15 @@
   height: 1.125rem;
   margin-right: 0.5rem;
 }
+
+.product__payment-logos:not(:empty) {
+  text-align: center;
+  max-width: 500px;
+  margin: -1rem 0 2rem;
+}
+
+.product__payment-logos img {
+  height: 30px;
+  width: auto;
+  display: inline;
+}
