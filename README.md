@@ -110,7 +110,7 @@ These features are supported without JS. Functionality that is not supported sho
 
 ## Development
 
-## Getting Started
+### Getting Started
 
 To make setup as easy as possible, use [vscode remote containers](https://code.visualstudio.com/docs/remote/containers) for development. After setting everything up according to the "Getting Started" section, you can clone this repository directly into a container with the vscode command `Remote-Containers: Clone Repository in Container Volume`. Vscode will build the container, clone the repo and start your coding session inside the container. Of course, you should have a working git setup and credential manager in place for this to work.
 
@@ -125,11 +125,16 @@ When you are developing new features for the front-end (i.e. the theme), use the
 
 This theme is a [hugo module](https://gohugo.io/hugo-modules/use-modules/) that is then used on the individual ecommerce sites. The sites use a "vendored" approach, so the theme is not automatically updated based on changes. All theme updates to the production sites are initiated manually, so you cannot break the live sites just by editing this theme.
 
+Always use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) style commit messages for commits that end up on the master branch! For feature branches, the recommended workflow is:
+
+1. commit with whatever commit messages you like, but prefer conventional commits
+2. squash merge the resulting PR with a conventional commits style message
+
 ### Bugs and outages
 
 Always when there's a bug (or outage!), the following process should be followed:
 
-1. Write a test case to reproduce the encountered bug. Make sure this test is run at least on source changes, possibly on content changes or via cron job. 
+1. Write a test case to reproduce the encountered bug. Make sure this test is run at least on source changes, possibly on content changes or via cron job.
 2. Fix the bug.
 3. Update documentation as needed.
 4. Write a post-mortem to gather learnings. Why did the bug happen? How was it fixed? What can we do to avoid similar issues in the future?
@@ -164,3 +169,9 @@ Don't ever assume other peoples code or endpoints is bug-free and work the way y
 - New features are developed, and again not complete without documentation. "Bug-driven development" is ok in non-mission critical parts, but for instance package modules should always have unit tests for exported members.
 
 In addition, tests and documentation should be prioritized for mission-critical existing features (such as site worker). Documentation for existing features should be improved regularly.
+
+### Releases
+
+Releases to the theme are created using [semantic version](https://semver.org/) tags. This way, the sites using the theme (i.e. the Hugo module) can update the theme safely and automatically. The release notes in GitHub should contain the changelog from the previous release.
+
+This is all achieved automatically by using [semantic release](https://github.com/semantic-release/semantic-release) and [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). We might at some point run this in CI, but for now, semantic release is run on demand via the command line against the `master` branch.
