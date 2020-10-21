@@ -138,5 +138,36 @@ fields:
   description: Enable reviews on the product page. If there are no reviews to show
     and yotpo has not been connected to this site, there's no need to enable the reviews
     element.
+- name: paymentlogos
+  type: field_group_list
+  fields:
+  - name: type
+    type: select
+    default: []
+    config:
+      required: false
+      options:
+      - External SVG
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: Type
+  - name: src
+    type: text
+    config:
+      required: false
+    label: Image URL
+    description: Full URL to the image (what you might see in the browser bar).
+    showOnly:
+      field: type
+      value: External SVG
+  config:
+    min: 
+    max: 
+    labelField: 
+  label: Payment Provider Logos
+  description: These will show up under the "Add to Cart" button.
 pages:
 - demo/data/productpage.yaml
