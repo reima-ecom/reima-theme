@@ -196,7 +196,7 @@
   {{- $js := . | js.Build | fingerprint -}}
   <script async defer src="{{$js.RelPermalink}}" type="module"></script>
   {{- else -}}
-  {{ warnf "Could not find js %s" . }}
+  {{ warnf "Could not find ts %s" . }}
   {{- end -}}
   {{- end -}}
 </body>
