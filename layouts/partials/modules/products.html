@@ -36,7 +36,7 @@
         {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ with . }}
         {{ range where site.Data.colors.colors "name" "eq" . }}
-        <a {{with .color}}style="background-color: {{.}};" {{end}}
+        <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
           {{ $colorname := .name }}
           {{ with .image }}
