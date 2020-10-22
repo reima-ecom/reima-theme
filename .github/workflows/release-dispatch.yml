@@ -21,4 +21,4 @@ jobs:
         with:
           token: ${{ secrets.GHA_DISPATCH_TOKEN }}
           repository: ${{ matrix.repo }}
-          event-type: theme-release
+          event-type: theme-released
