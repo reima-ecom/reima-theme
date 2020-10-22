@@ -73,3 +73,4 @@ fields:
     menu can have one sub-level.
 pages:
 - demo/data/menus.json
+- demo/data/menus.json
