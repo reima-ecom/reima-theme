@@ -1,0 +1,15 @@
+<div class="module-image-links-small">
+  <h2>
+    {{.heading}}
+  </h2>
+  <div>
+    {{ range .images }}
+    <div>
+      <a href="{{.link}}/" class="silent-link text-sm">
+        {{ partial "img" (dict "image" .image "widths" "100,200,400" "class" "responsive-img") }}
+        {{ .title }}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>

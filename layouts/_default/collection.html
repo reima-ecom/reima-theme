@@ -2,7 +2,13 @@
 
 <!-- add css and ts dependencies -->
 {{ range .Params.main }}
+<!-- DEPRECATED -->
+{{ if or (eq .template "categories") (eq .template "purposes") }}
+{{ $.Scratch.Add "css-critical" (printf "partials/modules-deprecated/%s" .template) }}
+{{ else }}
 {{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
+{{ end }}
+<!-- add module js if it exists -->
 {{ $tspath := printf "partials/modules/%s.ts" .template }}
 {{ if templates.Exists $tspath }}
 {{ $.Scratch.Add "ts" $tspath }}
@@ -58,11 +64,11 @@
 
       {{ if eq .template "categories" }}
       <!-- DEPRECATED -->
-      {{ partial (printf "modules/%s" .template) $.Params.categories }}
+      {{ partial (printf "modules-deprecated/%s" .template) $.Params.categories }}
       {{ warnf "Interstitial page '%s' is using deprecated categories module in main content" $.File.Path }}
       {{ else if eq .template "purposes" }}
       {{ warnf "Interstitial page '%s' is using deprecated purposes module in main content" $.File.Path }}
-      {{ partial (printf "modules/%s" .template) $.Params.purposes }}
+      {{ partial (printf "modules-deprecated/%s" .template) $.Params.purposes }}
       {{ else }}
       {{ partial (printf "modules/%s" .template) . }}
       {{ end }}
