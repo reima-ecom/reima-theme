@@ -6,6 +6,9 @@
 {{ define "main" }}
 <section class="status">
   <h1>{{.Title}}</h1>
+  {{ with site.Data.version }}
+  <p>Theme version: {{.version}}</p>
+  {{ end }}
   <h2>
     Site publish
   </h2>
