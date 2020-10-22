@@ -9,7 +9,7 @@
     "title"
     "filters"
     "modules"
-    "categories";
+    "links";
   /* this is the display of sidebar and main
   we don't want those in the content flow */
   --container-display: contents;
@@ -51,8 +51,8 @@
   grid-area: filters;
 }
 
-.grid__categories {
-  grid-area: categories;
+.grid__sidebar-links {
+  grid-area: links;
 }
 
 .grid__title h1 {
@@ -75,6 +75,7 @@
   margin-left: 0;
 }
 
+/* TODO: move these `.grid__sidebar` classes to a better place */
 .grid__sidebar > * > hr {
   margin: 0 0 var(--content-padding);
 }
@@ -98,10 +99,11 @@
   color: #38383b;
   text-decoration: none;
   display: block;
-  padding: .25rem 0;
+  margin: .5rem 0;
 }
 
-.grid__sidebar input[type=checkbox] {
+/* DEPRECATED */
+#categories-opener {
   visibility: hidden;
   position: absolute;
   opacity: 0;
@@ -116,6 +118,13 @@
 
 .filter-list__open {
   margin-bottom: 0.25rem;
+}
+
+.filter-list input {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
 }
 
 .filter-list__open-checkbox ~ * {
@@ -210,12 +219,55 @@
 }
 /* #endregion */
 
-/* #region categories and purposes */
-/* categories label */
-.category-list {
+/* #region sidebar links */
+.sidebar-links {
   padding: var(--block-padding);
 }
 
+.sidebar-links__link--has-children {
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+.sidebar-links__link--has-children ul {
+  font-weight: 400;
+}
+
+.sidebar-links__opener {
+  cursor: pointer;
+}
+
+.sidebar-links__opener > h2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-links__opener > h2 span::before {
+  content: '+';
+}
+
+.sidebar-links__opener + ul {
+  display: none;
+}
+
+.sidebar-links__opener-chk {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.sidebar-links__opener-chk:checked + label h2 span::before {
+  content: '-';
+}
+
+.sidebar-links__opener-chk:checked + label + ul {
+  display: block;
+}
+/* #endregion */
+
+/* DEPRECATED */
+/* #region categories and purposes */
 .categories {
   cursor: pointer;
 }
@@ -328,6 +380,23 @@
     display: block;
   }
 
+  .sidebar-links__opener {
+    cursor: default;
+  }
+
+  .sidebar-links__opener span {
+    display: none;
+  }
+
+  .sidebar-links__opener + ul {
+    display: block;
+  }
+
+  .sidebar-links__opener-chk {
+    display: none;
+  }
+
+  /* DEPRECATED */
   .categories {
     cursor: default;
   }
