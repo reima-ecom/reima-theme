@@ -1,5 +1,5 @@
 ---
-label: Collection page
+label: Collection Page
 hide_body: true
 display_field: title
 fields:
@@ -36,6 +36,75 @@ fields:
   config:
     min: 1
     max: 
+- name: sidebar
+  type: field_group_list
+  fields:
+  - name: template
+    type: text
+    config:
+      required: false
+    label: template
+    default: sidebar-links
+    hidden: true
+  - name: title
+    type: text
+    config:
+      required: false
+    label: Title
+    description: Optional heading for this section of links.
+  - name: children
+    type: field_group_list
+    fields:
+    - name: title
+      type: text
+      config:
+        required: true
+      label: Title
+    - name: link
+      type: text
+      config:
+        required: true
+      label: Link URL
+      description: E.g. <code>/pages/reima</code> or <code>https://google.com</code>
+    - name: children
+      type: field_group_list
+      fields:
+      - name: title
+        type: text
+        config:
+          required: true
+        label: Title
+      - name: link
+        type: text
+        config:
+          required: false
+        label: Link URL
+      config:
+        min: 
+        max: 
+        labelField: 
+      label: Sublinks
+      description: Add "sub"-links if needed. For instance if this is a link to "Outdoor"
+        you could add the sublinks "Overalls" and "Hats".
+    config:
+      min: 1
+      max: 
+      labelField: 
+    label: Links
+    description: Links to include in this section.
+  - name: collapse_mobile
+    type: boolean
+    label: Collapse on Mobile
+    description: Collapse this section on mobile screens. Essentially makes this an
+      "accordion" on mobile. Has no effect on desktop - on desktop all links are always
+      shown.
+  config:
+    min: 
+    max: 
+    labelField: 
+  label: Sidebar Links
+  description: Add links to the sidebar. Links are shown below the main content on
+    mobile.
 - name: categories
   type: blocks
   label: Categories
