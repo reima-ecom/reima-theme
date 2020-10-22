@@ -1,6 +1,6 @@
 ---
 layout: collection
-title: All for kids
+title: All for kids (deprecated)
 categories:
 - heading: Outdoor
   collection: kids-outdoor
@@ -162,5 +162,6 @@ main:
     ## The Big-Ticket Items: Reima Kids’ Clothes
 
     At Reima we’re known for our snowsuits and ski gear – and for good reason. Ever since we first started turning tough military clothing into weather-defying kids’ products, we’ve continuously built on our collections, improving items with the use of high-tech materials and handy features. We even developed the Reimatec line, which thrives in temperatures as low as -20 degrees Celsius so kids can play outside even in Baltic breezes.
+sidebar: []
 
 ---
