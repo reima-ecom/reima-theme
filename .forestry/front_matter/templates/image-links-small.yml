@@ -1,4 +1,33 @@
 ---
 label: Image Links - Small
 hide_body: true
-fields: []
+display_field: heading
+fields:
+- name: heading
+  type: text
+  config:
+    required: false
+  label: Heading
+- name: images
+  type: field_group_list
+  fields:
+  - name: title
+    type: text
+    config:
+      required: true
+    label: Title
+  config:
+    min: 1
+    max: 
+    labelField: 
+  label: Images
+- name: link
+  type: text
+  config:
+    required: true
+  label: Link URL
+- name: image
+  type: file
+  config:
+    maxSize: 64
+  label: Image
