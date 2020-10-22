@@ -97,7 +97,7 @@
       {{ end }}
 
       <div>
-        <button type="submit" class="button button--full-width" {{if not $firstAvailableOptions}}disabled{{end}}
+        <button type="submit" class="btn btn--cta product__add-to-cart" {{if not $firstAvailableOptions}}disabled{{end}}
           data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
           {{ if $firstAvailableOptions }}
           {{T "Add to cart"}}
@@ -279,7 +279,7 @@
       <label>{{T "Review Name"}} <input required name="name" type="text"></label>
       <label>{{T "Review Email"}} <input required name="email" type="email"></label>
       <p error></p>
-      <div><button class="button" type="submit">{{T "Review Submit"}}</button></div>
+      <div><button class="btn btn--cta" type="submit">{{T "Review Submit"}}</button></div>
     </form>
     <p class="thank-you text-center">
       {{T "Review Thank you"}}

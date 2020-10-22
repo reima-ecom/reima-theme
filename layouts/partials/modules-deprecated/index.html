@@ -1,3 +1,4 @@
+{{ warnf "Page '%s' is using deprecated page layout and modules" $.File.Path }}
 {{ range .Params.sections }}
 {{ $partialPath := printf "modules-deprecated/%s.html" .template }}
 {{ if templates.Exists ( printf "partials/%s" $partialPath ) }}

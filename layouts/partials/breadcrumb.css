@@ -6,8 +6,9 @@
   .breadcrumb {
     display: block;
     list-style: none;
-    padding: 0;
-    margin: 2rem 0 0;
+    margin: var(--block-margin);
+    padding: var(--block-padding);
+    max-width: var(--block-width);
   }
   
   .breadcrumb > * {

@@ -1,3 +1,9 @@
+.reviews {
+  margin: var(--block-margin);
+  padding: var(--block-padding);
+  max-width: var(--block-width);
+}
+
 .reviews > div {
   display: flex;
   align-items: center;
