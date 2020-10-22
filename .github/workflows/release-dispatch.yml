@@ -2,13 +2,18 @@ name: Dispatch Release Events
 on:
   release:
     types: [published]
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/release-dispatch.yml
 jobs:
   dispatch:
     strategy:
       matrix:
         repo: 
-          - north-america
-          - japan
+          - reima-ecom/north-america
+          - reima-ecom/japan
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
