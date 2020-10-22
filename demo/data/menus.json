@@ -38,9 +38,18 @@
           "url": "/modules/hero"
         },
         {
-          "name": "Image links",
+          "name": "Image Links - Small",
+          "url": "/modules/image-links-small",
+          "children": []
+        },
+        {
+          "name": "Image Links - Banners",
           "url": "/modules/image-links",
           "children": []
+        },
+        {
+          "name": "Image grid",
+          "url": "/modules/image-grid"
         },
         {
           "name": "Split card",
@@ -56,10 +65,6 @@
           "name": "Article grid",
           "url": "/modules/article-grid",
           "children": []
-        },
-        {
-          "name": "Image grid",
-          "url": "/modules/image-grid"
         },
         {
           "name": "Content with Tables",
