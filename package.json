@@ -26,7 +26,8 @@
     "eslint-plugin-import": "^2.21.2",
     "glob": "^7.1.6",
     "glob-promise": "^3.4.0",
-    "typescript": "^3.9.7",
-    "rollup": "^2.8.2"
+    "rollup": "^2.8.2",
+    "semantic-release": "^17.2.1",
+    "typescript": "^3.9.7"
   }
 }
