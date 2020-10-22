@@ -1,5 +1,5 @@
 ---
-label: Shop by category (Deprecated)
+label: 'Deprecated: Shop by category'
 hide_body: true
 display_field: noop
 fields:
