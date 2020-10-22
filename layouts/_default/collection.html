@@ -149,9 +149,6 @@
         <input type="reset" class="filter-list__clear" value="Clear filters">
       </form>
       <div id="clear"></div>
-      <script id="colors" type="application/json">
-      {{ $.Site.Data.colors }}
-      </script>
       {{ with .File }}
       <script>
         collection = '{{path.Base .Dir}}';

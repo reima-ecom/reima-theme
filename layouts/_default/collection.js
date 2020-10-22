@@ -7,8 +7,6 @@
 /** @type {CollectionPageProperties & Window} */
 const w = window;
 
-const colors = JSON.parse(document.getElementById('colors').innerHTML);
-
 let filters = {
   collections: `collections:${w.collection}`,
 };
