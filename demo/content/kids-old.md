@@ -1,82 +1,87 @@
 ---
 layout: collection
 title: All for kids
-sidebar:
-- template: sidebar-links
-  title: Shop by category
-  collapse_mobile: true
-  children:
-  - title: Outdoor
-    link: /collections/kids-outdoor
-    children:
-    - title: Jackets
-    - title: Pants
-    - title: Snow suits and coveralls
-  - title: Footwear
-    link: /collections/kids-outdoor
-    children:
-    - title: Winter boots
-    - title: Trainers and sneakers
-    - title: Sandals and swimming shoes
-    - title: Rubber boots
-  - title: Tops
-    link: /collections/kids-outdoor
-    children:
-    - title: Shirts and t-shirts
-    - title: Hoodies and sweaters
-    - title: Dresses
-  - title: Bottoms
-    link: /collections/kids-outdoor
-    children:
-    - title: Jeans
-    - title: Shorts and skirts
-    - title: Sweatpants and leggins
-  - title: Mid-layers
-    link: /collections/kids-outdoor
-    children:
-    - title: Wool
-    - title: Fleece
-    - title: Base
-  - title: Accessories
-    link: /collections/kids-outdoor
-    children:
-    - title: Hats and beanies
-    - title: Gloves and mittens
-    - title: Socks
-    - title: Other accessories
-  - title: Sun protective clothing
-    link: /collections/kids-outdoor
-    children: []
-  - title: Another link without children
-    link: /collections/link
-    children: []
-  - title: Rainwear
-    link: /collections/kids-outdoor
-    children:
-    - title: Rain jackets
-    - title: Rain pants
-    - title: Accessories
-- template: sidebar-links
-  title: Shop by purpose
-  children:
-  - title: Outdoor
-    link: /collections/kids-outdoor
-  - title: Play
-    link: /collections/play
-  - title: Rain
-    link: /collections/rain
-  - title: Athleisure
-    link: /collections/athleisure
-- template: sidebar-links
-  children:
-  - title: Outdoor
-    link: /collections/kids-outdoor
-  - title: Play
-    link: /collections/play
-  - title: Rain
-    link: /collections/rain
-  - title: Athleisure
-    link: /collections/athleisure
+categories:
+- heading: Outdoor
+  collection: kids-outdoor
+  image: category-kids-outerwear.jpg
+  template: category
+  categories:
+  - heading: Jackets
+  - heading: Pants
+  - heading: Snow suits and coveralls
+- heading: Footwear
+  collection: kids-outdoor
+  template: category
+  image: category-kids-footwear.jpg
+  categories:
+  - heading: Winter boots
+  - heading: Trainers and sneakers
+  - heading: Sandals and swimming shoes
+  - heading: Rubber boots
+- heading: Tops
+  collection: kids-outdoor
+  template: category
+  image: category-kids-tops.jpg
+  categories:
+  - heading: Shirts and t-shirts
+  - heading: Hoodies and sweaters
+  - heading: Dresses
+- heading: Bottoms
+  template: category
+  collection: kids-outdoor
+  image: category-kids-bottoms.jpg
+  categories:
+  - heading: Jeans
+  - heading: Shorts and skirts
+  - heading: Sweatpants and leggins
+- heading: Mid-layers
+  template: category
+  collection: kids-outdoor
+  image: category-kids-midlayer.jpg
+  categories:
+  - heading: Wool
+  - heading: Fleece
+  - heading: Base
+- heading: Accessories
+  collection: kids-outdoor
+  template: category
+  image: category-kids-accessories.jpg
+  categories:
+  - heading: Hats and beanies
+  - heading: Gloves and mittens
+  - heading: Socks
+  - heading: Other accessories
+- heading: Rainwear
+  collection: kids-outdoor
+  template: category
+  image: category-kids-rain.jpg
+  categories:
+  - heading: Rain jackets
+  - heading: Rain pants
+  - heading: Accessories
+- heading: Sun protective clothing
+  template: category
+  collection: kids-outdoor
+  image: category-kids-sun.jpg
+  categories:
+  - heading: Swimwear
+  - heading: Beachwear
+  - heading: Hats
+  - heading: Sunglasses
+purposes:
+- heading: Outdoor
+  collection: kids-outdoor
+  image: purpose-urban.jpg
+- heading: Play
+  collection: kids-outdoor
+  image: purpose-play.jpg
+- heading: Rain
+  collection: kids-outdoor
+  image: purpose-rain.jpg
+- heading: Athleisure
+  collection: kids-outdoor
+  image: purpose-beach.jpg
 banner:
 - template: banner
   link: status
@@ -111,6 +116,10 @@ main:
   overlaybg: false
   overlayvertical: ''
   narrow: false
+- template: categories
+  noop: Uses the categories defined on the page
+- template: purposes
+  noop: Uses the purposes defined on the page
 - template: image-links
   heading: Hot right now
   align: left

@@ -23,7 +23,15 @@
 
 {{ define "main" }}
 
-{{ $hassidebar := or .Params.categories .Params.purposes (and .Params.filters site.Params.public.algolia) }}
+{{ $hassidebar := false }}
+<!-- check if sidebar parameter exists and is not empty array -->
+{{ with .Params.sidebar }}
+{{ $hassidebar = len . }}
+{{ end }}
+<!-- check if filtering enabled on page and algolia on site -->
+{{ $hassidebar := or $hassidebar (and .Params.filters site.Params.public.algolia) }}
+<!-- DEPRECATED -->
+{{ $hassidebar = or $hassidebar .Params.categories .Params.purposes }}
 
 <div class="grid{{if $hassidebar}} grid--has-sidebar{{end}}">
   {{ with .Params.banner }}
@@ -49,8 +57,11 @@
       {{ end }}
 
       {{ if eq .template "categories" }}
+      <!-- DEPRECATED -->
       {{ partial (printf "modules/%s" .template) $.Params.categories }}
+      {{ warnf "Interstitial page '%s' is using deprecated categories module in main content" $.File.Path }}
       {{ else if eq .template "purposes" }}
+      {{ warnf "Interstitial page '%s' is using deprecated purposes module in main content" $.File.Path }}
       {{ partial (printf "modules/%s" .template) $.Params.purposes }}
       {{ else }}
       {{ partial (printf "modules/%s" .template) . }}
@@ -62,10 +73,56 @@
 
   {{ if $hassidebar }}
   <div class="grid__sidebar">
-    {{ if or .Params.categories .Params.purposes }}
-    <div class="grid__categories">
+    {{ with .Params.sidebar }}
+    {{ if len . }}
+    <div class="grid__sidebar-links">
       <hr>
-      <div class="category-list">
+      <div class="sidebar-links">
+        <!-- loop through top level with heading -->
+        {{ range $i, $k := . }}
+        <!-- insert `hr` before all but first item -->
+        {{ if $i }}
+        <hr>
+        {{ end }}
+        <!-- add title `h2` only if exists -->
+        {{ if .title }}
+        {{ if .collapse_mobile }}
+        <input type="checkbox" id="links-opener-{{$i}}" class="sidebar-links__opener-chk">
+        <label for="links-opener-{{$i}}" class="sidebar-links__opener">
+          <h2>{{.title}} <span></span></h2>
+        </label>
+        {{ else }}
+        <h2>{{.title}}</h2>
+        {{ end }}
+        {{ end }}
+        <!-- create links -->
+        <ul>
+          {{ range .children }}
+          {{ $haschildren := len (.children | default slice) }}
+          <li {{if $haschildren}}class="sidebar-links__link--has-children" {{end}}>
+            <a href="{{.link}}">{{.title}}</a>
+            {{ if $haschildren }}
+            <ul>
+              {{ range .children }}
+              <li><a href="{{.link}}">{{.title}}</a></li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <!-- DEPRECATED -->
+    {{ if or .Params.categories .Params.purposes }}
+    {{ warnf "Interstitial page '%s' is using deprecated categories and purposes in sidebar" $.File.Path }}
+    <div class="grid__sidebar-links">
+      <hr>
+      <div class="sidebar-links">
         {{ with .Params.categories }}
         <input type="checkbox" id="categories-opener">
         <label for="categories-opener" class="categories">
@@ -130,7 +187,8 @@
           </label>
           {{ $order := index $.Site.Data.features $name }}
           {{ range partial "helpers/order" (dict "array" $values "order" $order) }}
-          <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="{{$name}}-{{.}}" class="filter-list__value-checkbox">
+          <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="{{$name}}-{{.}}"
+            class="filter-list__value-checkbox">
           <label for="{{$name}}-{{.}}" class="filter-list__value btn btn--secondary">
             {{ if eq $name "color" }}
             <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
