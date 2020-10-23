@@ -1,11 +1,10 @@
 {{ define "dependencies" }}
-<!-- USE OLD CSS HERE! -->
-{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
+{{ $.Scratch.Add "css-critical" "404" }}
 {{ end }}
 
 {{ define "main" }}
 
-<div class="page-width text-center airy">
+<div class="not-found">
   <h1>
     {{T "404 page heading" | default "Oh no!"}}
   </h1>

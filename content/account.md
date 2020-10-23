@@ -1,0 +1,4 @@
+---
+type: account
+noindex: true
+---
