@@ -1,11 +1,10 @@
 {{ define "dependencies" }}
-<!-- USE OLD CSS HERE! -->
-{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
+{{ $.Scratch.Add "css-critical" "blogs/list" }}
 {{ end }}
 
 {{ define "main" }}
 
-<section class="page-width page-width--narrow md airy">
+<section class="blogs">
   <h1>Blog posts</h1>
   <ul>
     {{ range .Pages }}

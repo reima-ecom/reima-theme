@@ -1,0 +1,5 @@
+.blogs {
+  max-width: var(--content-width);
+  margin: var(--block-margin);
+  padding: var(--block-padding);
+}
