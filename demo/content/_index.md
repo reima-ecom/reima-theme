@@ -42,6 +42,9 @@ sections:
       type: productLink
       slug: kids-sweater-mahin
   template: imageWithContent
+- title: Tops
+  handle: tops
+  template: collectionList
 - content: We think kids should enjoy the outdoors no matter the weather. Our gear
     is durable and non-toxic so it protects both children and the planet. No wonder
     we're loved and trusted by families who are happiest outside.

@@ -1,4 +1,6 @@
 <!-- 
+  DEPRECATED
+
   Output a product card for a particular product.
 
   Expected parameter:
@@ -20,12 +22,12 @@
     {{ $coloroption = . }}
     {{ end }}
     {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
-    {{ with . }}
-    {{ with (index $.Site.Data.colors (. | lower)) }}
-    <div style="background-color: {{.}};"></div>
-    {{ else }}
-    {{ warnf "Could not find color %s" .}}
-    {{ end }}
+    {{ with partial "helpers/get-color" . }}
+    <div {{with .color}}style="background-color: {{.}};"{{end}}>
+      {{ if .image }}
+      <img src="{{.image}}" alt="{{.name}}">
+      {{ end }}
+    </div>
     {{ end }}
     {{ end }}
   </div>

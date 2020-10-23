@@ -35,16 +35,13 @@
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
         {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ with . }}
-        {{ range where site.Data.colors.colors "name" "eq" . }}
+        {{ with partial "helpers/get-color" . }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
-          {{ $colorname := .name }}
-          {{ with .image }}
-          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$colorname}}">
+          {{ if .image }}
+          <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
         </a>
-        {{ else }}
-        {{ warnf "Could not find color %s" .}}
         {{ end }}
         {{ end }}
         {{ end }}

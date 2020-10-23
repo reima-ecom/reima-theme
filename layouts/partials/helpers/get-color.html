@@ -1,0 +1,32 @@
+<!-- 
+  Get color code or image from color name
+
+  Param: Name of color as defined on the product
+
+  Returns: dict with the following properties:
+  - name: color name (same as input param)
+  - color: color code (or empty string)
+  - image: relative url to color image (or empty string)
+  OR false if color not found
+ -->
+{{ $return := false }}
+{{ with where site.Data.colors.colors "name" "eq" . }}
+
+{{ if gt (len .) 1 }}
+{{ warnf "Many color definitions exist for color '%s', using the first one" $ }}
+{{ end }}
+
+{{ with index . 0 }}
+<!-- get image url if image set -->
+{{ $imgurl := "" }}
+{{ with .image }}
+{{ $imgurl = (partial "helpers/get-image" .).RelPermalink }}
+{{ end }}
+<!-- set return variable -->
+{{ $return = dict "name" $ "color" .color "image" $imgurl }}
+{{ end }}
+
+{{ else }}
+{{ warnf "Could not find color %s" .}}
+{{ end }}
+{{ return $return}}

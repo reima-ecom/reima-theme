@@ -69,27 +69,19 @@
         {{ $labelStyle := "" }}
         {{ $swatch := "" }}
         {{ if eq $nameEnglish "Color" }}
-        {{ range where site.Data.colors.colors "name" "eq" .value }}
+        {{ with partial "helpers/get-color" .value }}
         {{ with .color }}
         {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
         {{ end }}
         {{ $swatch = .image }}
-        {{ else }}
-        {{ warnf "Could not find color %s" .value}}
         {{ end }}
         {{ end }}
 
-        {{ $label := .value }}
-        {{ if eq $name "Size" }}
-        {{ with index $.Site.Data.sizes .value }}
-        {{ $label = . }}
-        {{ end }}
-        {{ end }}
         <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
           {{ if not .availableInitially }}class="unavailable" {{ end }}>
-          <span>{{$label}}</span>
-          {{ with $swatch }}
-          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$label}}">
+          <span>{{.value}}</span>
+          {{ if $swatch }}
+          <img src="{{$swatch}}" alt="{{.value}}">
           {{ end }}
         </label>
         {{ end }}
