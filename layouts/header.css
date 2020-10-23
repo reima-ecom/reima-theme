@@ -10,6 +10,7 @@
 }
 
 input:checked + .overlay,
+input:checked + label + .overlay,
 .overlay.open {
   display: block;
 }

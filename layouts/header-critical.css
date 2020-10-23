@@ -32,6 +32,11 @@ body > header {
   align-items: center;
 }
 
+.menu input:focus + label.menu__hamburger {
+  outline: var(--outline);
+  outline-offset: 2px;
+}
+
 /* this is the menu opener label */
 .menu__hamburger {
   margin-right: 14px;
