@@ -25,7 +25,9 @@
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"davidanson.vscode-markdownlint"
+		"davidanson.vscode-markdownlint",
+		"esbenp.prettier-vscode",
+		"pucelle.vscode-css-navigation"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
