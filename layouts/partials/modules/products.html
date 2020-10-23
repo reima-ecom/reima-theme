@@ -33,7 +33,7 @@
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ range $index, $value := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq | first 6 }}
         {{ with . }}
         {{ range where site.Data.colors.colors "name" "eq" . }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
@@ -46,6 +46,9 @@
         {{ else }}
         {{ warnf "Could not find color %s" .}}
         {{ end }}
+        {{ end }}
+        {{ if eq $index 5}}
+        <a href="{{$link}}" class="color-dot--see-more">+</a>
         {{ end }}
         {{ end }}
       </div>

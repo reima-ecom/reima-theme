@@ -68,6 +68,19 @@
   height: 100%;
 }
 
+.product-list li .color-dots > a.color-dot--see-more {
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  text-decoration: none;
+}
+
+.product-list li .color-dots > a.color-dot--see-more:hover {
+  background-color: #BA001F;
+  color: #d2092d;
+}
+
 .product-list__rating {
   margin-top: 0.25rem;
   font-size: 1rem;
