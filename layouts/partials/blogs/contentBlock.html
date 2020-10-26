@@ -1,12 +1,8 @@
-<!-- 
-  This is for articles from the Reima World space
- -->
-
 {{ if .Params.image }}
-<section class="content-block-image airy md">
+<section class="content-block-image">
   {{ with .Page.Resources.GetMatch .Params.image }}
   {{ if eq .MediaType.SubType "jpeg" }}
-  {{partial "image" (dict "image" . "widths" "400,360,200" "class" "responsive-img")}}
+  {{partial "image" (dict "image" . "widths" "768,328,1080" "sizes" "(min-width: 768px) 328px, (min-width: 540px) 540px, 100vw")}}
   {{ else }}
   <img src="{{partial "link" .RelPermalink}}" alt="">
   {{ end }}
@@ -18,7 +14,7 @@
 {{ end }}
 
 {{ with .Params.body }}
-<section class="md page-width page-width--narrow">
+<section class="article">
   {{ . | markdownify }}
 </section>
 {{ end }}
