@@ -1,5 +1,3 @@
-import loadElement from './helpers/load-element.js';
-
 /** @type {HTMLFormElement} */
 const form = document.querySelector('form#product-form');
 const cartButton = form.querySelector('button');

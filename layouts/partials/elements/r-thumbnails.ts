@@ -1,10 +1,8 @@
-import { g as getElementIndex } from './element-index-2d7b2ba1.js';
+import RCarousel from './r-carousel'
+import getElementIndex from '../helpers/element-index.js';
 
-class RThumbnails extends HTMLElement {
-  constructor() {
-    super();
-    this.carouselScrolling = 0;
-  }
+export default class RThumbnails extends HTMLElement {
+  carouselScrolling: number = 0;
 
   get carousel() {
     return this.getAttribute('carousel');
@@ -21,13 +19,13 @@ class RThumbnails extends HTMLElement {
    * @param {number} index Thumbnail image index to set as active
    * @param {boolean} [forceScroll] Force scroll even if carousel might be scrolling
    */
-  setActiveThumbnail(index, forceScroll) {
+  setActiveThumbnail(index: number, forceScroll?: boolean) {
     if (forceScroll || !this.carouselScrolling) {
       const thumbnail = this.querySelector('.active');
       if (thumbnail) thumbnail.classList.remove('active');
       this.children.item(index).classList.add('active');
 
-      const thumbnailElement = /** @type {HTMLElement} */ (this.children.item(index));
+      const thumbnailElement = this.children.item(index) as HTMLElement;
       const thumbMiddle = thumbnailElement.offsetLeft + thumbnailElement.clientWidth / 2;
       const thumbScrollPosition = thumbMiddle - this.clientWidth / 2;
       this.scrollTo(thumbScrollPosition, 0);
@@ -37,20 +35,18 @@ class RThumbnails extends HTMLElement {
   }
 
   connectedCallback() {
-    const scrollEverything = (index) => {
-      /** @type {import('./r-carousel').default} */
-      const carousel = document.querySelector(this.carousel);
+    const scrollEverything = (index: number) => {
+      const carousel = document.querySelector<RCarousel>(this.carousel);
       carousel.scrollToImage(index);
       this.markCarouselScroll();
       this.setActiveThumbnail(index, true);
     };
 
     this.addEventListener('click', (e) => {
-      const index = getElementIndex(/** @type {HTMLElement} */(e.target).closest('picture'));
+      const index = getElementIndex((e.target as HTMLElement).closest('picture'));
       scrollEverything(index);
     });
   }
 }
-RThumbnails.elementName = 'r-thumbnails';
 
-export default RThumbnails;
+window.customElements.define('r-thumbnails', RThumbnails);

@@ -22,7 +22,7 @@
 
 <!-- add js if there's fitering needed -->
 {{ if and .Params.filters .Site.Params.public.algolia }}
-{{ $.Scratch.Add "js-async" "collection.js"}}
+{{ $.Scratch.Add "ts" "_default/collection.ts"}}
 {{ end }}
 
 {{ end }}

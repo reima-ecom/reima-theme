@@ -1,6 +1,4 @@
-import dynamicImportPolyfill from 'dynamic-import-polyfill';
-import { getCLS, getFID, getLCP } from 'web-vitals';
-import loadElement from '../partials/helpers/load-element.js';
+import { getCLS, getFID, getLCP } from './baseof-web-vitals.es5.min.js';
 
 function sendToAnalytics({ name, value, id }) {
   const body = JSON.stringify({
@@ -21,11 +19,6 @@ function sendToAnalytics({ name, value, id }) {
 getCLS(sendToAnalytics);
 getFID(sendToAnalytics);
 getLCP(sendToAnalytics);
-
-dynamicImportPolyfill.initialize({ modulePath: '/' });
-
-if (document.querySelector('r-carousel')) loadElement('r-carousel');
-if (document.querySelector('r-thumbnails')) loadElement('r-thumbnails');
 
 /**
  * @param {MouseEvent} e
@@ -70,10 +63,20 @@ document.querySelectorAll('.modal').forEach((element) => {
   element.addEventListener('click', overlayClick);
 });
 
+const load = async (url: string) => new Promise((resovle, reject) => {
+  const script = document.createElement('script');
+  script.src = url;
+  script.onload = resovle;
+  script.onerror = reject;
+  script.type = 'module';
+  document.head.appendChild(script);
+});
+
 const loaderClick = async (e) => {
   const name = e.currentTarget.getAttribute('load');
-  if (name.startsWith('r-')) {
-    loadElement(name);
+  const url = window.lazy[name];
+  if (url) {
+    load(url);
   } else {
     throw new Error(`No lazy dependency "${name}" found`);
   }

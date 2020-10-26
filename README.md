@@ -3,7 +3,6 @@
 This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites.
 
 - Static site is built using [Hugo](https://gohugo.io/)
-- JS is built using [Rollup](https://rollupjs.org/guide/en/), so Node is used for this
 
 ## Architectural components
 
@@ -22,9 +21,7 @@ The folder structure mostly follows the default Hugo folder structure with CSS a
 
 In order to allow for CSS files to live next to their layout (HTML) counterparts, the `layouts` dir is mounted also as `assets`. This means that CSS files should be referenced relative to the `layouts` folder. I.e. the CSS for the base layout should be added as `_default/baseof.css`, because that is its path within the `layouts` folder.
 
-JS files also live next to their corresponding layout files. However, these need to be built with rollup, which outputs the build result to `assets/js`. So JS files should be referenced accordingly. Note that rollup doesn't create any subfolders, so just reference JS files as `js/[entrypoint].js`. Note also that the `assets/js` folder is mounted as a static folder as well, to allow for chunks to be loaded correctly. Remember to build the JS files when they are updated - this is not done in connection with site builds!
-
-Finally, a demo site is available under `demo`. When in doubt about how to configure a site, see this example implementation!
+A demo site is available under `demo`. When in doubt about how to configure a site, see this example implementation!
 
 ## Multilingual sites
 
@@ -32,7 +29,7 @@ Multilingual sites need to have their [locales specified in the site config file
 
 ## Browser compatibility
 
-The site uses ES2015, such as `async/await`, rest operators `{...rest}`, etc. On the CSS side, flexbox is used heavily, and grid layout in some key places. Thus the goal is to have an optimal experience on modern browsers that support these elements.
+The site uses ES2015, such as `async/await`, rest operators `{...rest}`, etc. On the CSS side, grid and flexbox are used for laying out content. Thus the goal is to have an optimal experience on modern browsers that support these elements.
 
 JavaScript is only delivered to browsers using `type=module`, and thus **legacy browsers will not use JS at all**. Instead, key functionality such as the cart will be implemented using a server-side approach. (This is what we call progressive enhancement.) For browsers that support ES6 Modules but lack other key functionality, polyfills are loaded on demand.
 
@@ -58,14 +55,14 @@ Based on caniuse data.
 
 ### Optimal experience
 
-These browsers should have a blazingly fast and pixel-perfect experience using modern features. The deciding factor here is browsers supporting `type=module`, `ES2015 (ES6)`, `IntersectionObserver` and CSS `display:grid`. Unfortunately, we cannot use dynamic imports, since these are not supported universally. Also, Safari doesn't support customized built-in elements, so those cannot be used either.
+These browsers should have a blazingly fast and pixel-perfect experience using modern features. The deciding factor here is browsers supporting `type=module`, `ES2015 (ES6)`, `IntersectionObserver` and CSS `display:grid`. Safari doesn't support customized built-in elements, so these need [a polyfill](https://github.com/WebReflection/custom-elements-builtin#readme), but this feature is currently not used.
 
-Development is done on Chrome stable branch and occasionally Firefox stable.
+Development is done on Chrome stable and/or Firefox stable.
 
 - Chrome 69+
 - Firefox 68+
 - Opera 64+
-- Samsung Internet 8.2+
+- Samsung Internet 10.1+
 - Edge 79+
 
 ### Working experience with JavaScript
@@ -77,6 +74,7 @@ These browsers should work, but will load slower polyfills for some of the funct
 - iOS Safari 10.3+
 - Safari 10.1+
 - Opera 48-63
+- Samsung Internet 8.2-10.0
 - Edge 16-18
 
 Note that scroll snapping is difficult and there are no good polyfills for this. So this feature will not be polyfilled.
@@ -94,19 +92,19 @@ Development is done mainly on Chrome with JavaScript disabled. Manual testing fo
 
 These features are supported without JS. Functionality that is not supported should when possible be hidden from the user (such as hiding the search button).
 
-**Supported functionality**
+#### Supported functionality
 
-- Cart and ordering (via separate cart page rendered in CloudFlare worker)
+- **TBC** Cart and ordering (via separate cart page rendered in CloudFlare worker)
 - Desktop menu (via css :hover selector)
 - Mobile menu (via css checkboxes and :checked selector)
 
-**Not supported**
+#### Not supported
 
 - Search
 - Filtering
 - Newsletter signup
-- Carousel
-- Product thumbnails
+- Carousel (only regular scrolling supported)
+- Product thumbnails (only regular scrolling supported)
 
 ## Development
 
@@ -123,7 +121,7 @@ When you are developing new features for the front-end (i.e. the theme), use the
 > hugo server
 ```
 
-This theme is a [hugo module](https://gohugo.io/hugo-modules/use-modules/) that is then used on the individual ecommerce sites. The sites use a "vendored" approach, so the theme is not automatically updated based on changes. All theme updates to the production sites are initiated manually, so you cannot break the live sites just by editing this theme.
+This theme is a [hugo module](https://gohugo.io/hugo-modules/use-modules/) that is then used on the individual ecommerce sites. The theme is automatically updated based on changes and [semantic versioning](https://semver.org/).
 
 Always use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) style commit messages for commits that end up on the master branch! For feature branches, the recommended workflow is:
 
@@ -147,11 +145,8 @@ All packages and independent pieces of logic should have a README or other indep
 
 Specific thoughts on how to document different things:
 
-- npm-style packages in `packages`
-  - describe architecture / design specs in README.md
-  - create proper typings for at least every exported pieces of logic (even exports used only inside the package itself)
 - design modules in `themes/theme/modules`
-  - create demo page describing usage and demoing design
+  - create demo page describing usage and demoing design in `demo/modules`
 - layout designs in `themes/theme/layouts`
   - describe what each file does at the top of the file (applies especially to partials!)
   - if creating complex logic (i.e. anything more than ifs or ranges), write a detailed description of the logic and why there is complexity
