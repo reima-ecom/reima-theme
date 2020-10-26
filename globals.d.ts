@@ -13,4 +13,7 @@ interface Window {
     currency: string
   }
   collection?: string
+  lazy: {
+    [name: string]: string
+  }
 }

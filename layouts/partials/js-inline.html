@@ -1,4 +1,4 @@
-  {{ with resources.Get "js/baseof.inline.js" }}
+  {{ with resources.Get . }}
   <script>
     {{.Content | safeJS}}
   </script>

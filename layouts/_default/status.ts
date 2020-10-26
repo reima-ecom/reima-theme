@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const btn = document.getElementById('publish');
 btn.addEventListener('click', async (e) => {
-  /** @type {HTMLButtonElement} */(e.target).disabled = true;
+  (e.target as HTMLButtonElement).disabled = true;
   const response = await fetch(
     'https://us.reima.com/api/publish',
     { method: 'POST' },

@@ -4,6 +4,12 @@
  * @property {function} [algoliasearch]
  */
 
+declare global {
+  interface Window {
+    algoliasearch: Function,
+ }
+}
+
 /** @type {CollectionPageProperties & Window} */
 const w = window;
 
@@ -16,7 +22,13 @@ const ensureIndex = async () => {
   if (!index) {
     if (!w.algoliasearch) {
       // @ts-ignore
-      await import('https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js');
+      await new Promise((resovle, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js';
+        script.onload = resovle;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
     }
     const client = w.algoliasearch(w.site.algolia.appid, w.site.algolia.apikey);
     index = client.initIndex(w.site.algolia.indexname);
@@ -38,7 +50,7 @@ const searchAndRender = async () => {
   }), {});
   // show or hide elements based on hits existence
   for (let i = 0; i < list.children.length; i += 1) {
-    const element = /** @type {HTMLElement} */(list.children[i])
+    const element = list.children[i] as HTMLElement;
     element.style.display = hitHandles[element.getAttribute('handle')] ? 'block' : 'none';
   }
 };
@@ -46,7 +58,7 @@ const searchAndRender = async () => {
 const filtersForm = document.getElementById('filters');
 if (filtersForm) {
   filtersForm.addEventListener('change', async (e) => {
-    const { name, value, checked } = /** @type {HTMLInputElement} */ (e.target);
+    const { name, value, checked } = e.target as HTMLInputElement;
     // if this is an element opener checkbox, bail out
     if (name.startsWith('open-')) return;
     await ensureIndex();
@@ -63,3 +75,5 @@ if (filtersForm) {
     searchAndRender();
   });
 }
+
+export {};
