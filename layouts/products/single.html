@@ -13,8 +13,9 @@
 {{ end }}
 
 {{ define "canonical" }}
-{{ $product := partial "helpers/get-product" . }}
-<link rel="canonical" href="{{partial "link" $product.Permalink}}">
+{{- with partial "helpers/get-product" . -}}
+<link rel="canonical" href="{{partial "link" .Permalink}}">
+{{- end -}}
 {{ end }}
 
 {{ define "main" }}
