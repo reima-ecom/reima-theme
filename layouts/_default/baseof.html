@@ -203,20 +203,7 @@
   {{- end -}}
   {{- end -}}
 
-  {{- range $.Scratch.Get "ts-lazy" | uniq -}}
-  {{- $name := . -}}
-  {{- with resources.Get . }}
-  {{- $js := . | js.Build (dict "format" "esm") -}}
-  {{- if hugo.IsProduction -}}
-  {{- $js = $js | fingerprint -}}
-  {{- end -}}
-  <script>
-    lazy = { '{{$name}}': '{{$js.RelPermalink}}' };
-  </script>
-  {{- else -}}
-  {{ warnf "Could not find ts %s" . }}
-  {{- end -}}
-  {{- end -}}
+  {{partial "ts-lazy" ($.Scratch.Get "ts-lazy") }}
 </body>
 
 </html>
