@@ -27,14 +27,19 @@
   <div>
     {{ range .cards }}
     <div>
-      {{- $mobile := partial "helpers/get-image" .imagemobile }}
+      <!-- get mobile image if exists -->
+      {{- $mobile := false }}
+      {{- with .imagemobile }}
+      {{- $mobile = partial "helpers/get-image" . }}
+      {{- end }}
+      <!-- get main image -->
       {{- with partial "helpers/get-image" .image }}
       {{- $params := (dict "image" . "widths" "375,768,1080") }}
       {{- $default := .Resize "1060x" -}}
       <picture>
-        {{- if $mobile }}
+        {{- with $mobile }}
         <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}">
-        <source srcset="{{partial "srcset" (dict "image" $mobile "widths" "1080,768")}}">
+        <source srcset="{{partial "srcset" (dict "image" . "widths" "1080,768")}}">
         {{- end }}
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
