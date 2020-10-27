@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import "../../../globals.d.ts";
 
 declare global {
