@@ -1,0 +1,21 @@
+<!-- create scratch to hold lazy map -->
+{{- $scripts := newScratch -}}
+<!-- loop through asset filenames -->
+{{- range . | uniq -}}
+{{- $name := . -}}
+{{- with resources.Get . }}
+<!-- build -->
+{{- $js := . | js.Build (dict "format" "esm") -}}
+<!-- if production, fingerprint for hash -->
+{{- if hugo.IsProduction -}}
+{{- $js = $js | fingerprint -}}
+{{- end -}}
+<!-- set in scratch map -->
+{{ $scripts.SetInMap "lazy" $name $js.RelPermalink }}
+{{- else -}}
+{{ warnf "Could not find ts %s" . }}
+{{- end -}}
+{{- end -}}
+<script>
+  lazy = {{$scripts.Get "lazy"}}
+</script>
