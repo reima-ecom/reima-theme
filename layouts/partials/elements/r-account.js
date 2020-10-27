@@ -1,3 +1,5 @@
+// This is a proof of concept, and as such not transformed to TS yet
+
 const query = async (graphQl) => {
   const resp = await fetch('https://reima-us.myshopify.com/api/2020-01/graphql', {
     headers: {
