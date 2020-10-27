@@ -1,4 +1,4 @@
-const getElementIndex = (node) => {
+const getElementIndex = (node: Element) => {
   let index = 0;
   let currentSibling = node.previousElementSibling;
   while (currentSibling) {

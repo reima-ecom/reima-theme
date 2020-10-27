@@ -27,7 +27,8 @@
 	"extensions": [
 		"davidanson.vscode-markdownlint",
 		"esbenp.prettier-vscode",
-		"pucelle.vscode-css-navigation"
+		"pucelle.vscode-css-navigation",
+		"denoland.vscode-deno"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [

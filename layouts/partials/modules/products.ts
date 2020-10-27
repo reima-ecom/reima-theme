@@ -2,8 +2,8 @@ function colorDotClick(e: MouseEvent) {
   const colorDotLink = (e.target as HTMLElement).closest('[data-image-srcset]');
   if (colorDotLink) {
     e.preventDefault();
-    const srcset = colorDotLink.getAttribute('data-image-srcset');
-    colorDotLink.closest('li').querySelector('img').srcset = srcset;
+    const srcset = colorDotLink.getAttribute('data-image-srcset')!;
+    colorDotLink.closest('li')!.querySelector<HTMLImageElement>('img')!.srcset = srcset;
   }
 }
 
