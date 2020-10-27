@@ -1,24 +1,16 @@
-import {
-  jsonlToObjects,
-} from "./domain.ts";
+import { jsonlToObjects } from "./domain.ts";
 import {
   createAdminQueryable,
-} from "./graphql.ts";
-import {
-  collectionBulkQuery,
-  Jsonl,
-} from "./queries.ts";
-import {
   createBulkOperation,
+  deleteDirectory,
+  deserializeContent,
   getBulkOperationUrlWhenReady,
-} from "./bulk-operation.ts";
-import {
+  Jsonl,
+  readFilesFromDir,
   serializeContent,
   writeFileToDir,
-  deleteDirectory,
-  readFilesFromDir,
-  deserializeContent,
-} from "./filesystem.ts";
+} from "./deps.ts";
+import { collectionBulkQuery } from "./queries.ts";
 import { toContent } from "./content.ts";
 
 // file downloading

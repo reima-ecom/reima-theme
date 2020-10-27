@@ -10,7 +10,7 @@ import {
   NodeType,
   Node,
   getNodeType,
-} from "./node.ts";
+} from "./deps.ts";
 
 export type CollectionHandle = string;
 export type ProductHandle = string;

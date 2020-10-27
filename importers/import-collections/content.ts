@@ -4,7 +4,7 @@ import {
   Collection,
   CollectionProduct,
 } from "./domain.ts";
-import { Content as FileContent } from "./filesystem.ts";
+import { Content as FileContent } from "./deps.ts";
 
 export type Content<t, T, A = {}> = {
   path: string;

@@ -1,5 +1,4 @@
-import { GraphQLQuery } from "./graphql.ts";
-import { ID } from "./node.ts";
+import { GraphQLQuery, ID } from "./deps.ts";
 
 export type BulkQuery = GraphQLQuery;
 

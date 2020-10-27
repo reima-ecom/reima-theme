@@ -5,7 +5,7 @@ import {
   BulkQueryResponse,
   CurrentBulkOperation,
   currentBulkOperation,
-} from "./queries.ts";
+} from "./bulk-queries.ts";
 
 function createYieldableQuery<T>(
   queryable: GraphQLQueryable,
