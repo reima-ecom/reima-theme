@@ -38,4 +38,7 @@ RUN mkdir -p /deno \
 ENV PATH=${DENO_INSTALL}/bin:${PATH} \
     DENO_DIR=${DENO_INSTALL}/.cache/deno
 
+# Install semantic-release globally
+RUN npm i -g semantic-release
+
 EXPOSE 1313
