@@ -1,5 +1,5 @@
 ---
-label: Page (old design)
+label: 'DEPRECATED: Page (old design, do not use)'
 hide_body: true
 fields:
 - type: text
