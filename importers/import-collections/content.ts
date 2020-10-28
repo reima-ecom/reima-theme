@@ -1,8 +1,8 @@
 import {
-  CollectionType,
-  CollectionHandle,
   Collection,
+  CollectionHandle,
   CollectionProduct,
+  CollectionType,
 } from "./domain.ts";
 import { Content as FileContent } from "./deps.ts";
 
@@ -105,18 +105,28 @@ export const toCollectionProductContent = (
   },
 });
 
+/**
+ * This interface is needed to explicitly set the right overload in map calls etc.
+ */
+export interface ToContentWithType<T> {
+  (
+    obj: T,
+    counter: number | undefined,
+  ): CollectionTypeContent;
+}
+
 export function toContent(
   obj: CollectionType,
-  counter: number,
+  counter: number | undefined,
 ): CollectionTypeContent;
 export function toContent(
   obj: FileContent,
-  counter: number,
+  counter: number | undefined,
 ): CollectionTypeContent;
 
 export function toContent(
   obj: CollectionType | FileContent,
-  counter: number,
+  counter: number | undefined = 0,
 ): CollectionTypeContent {
   if ("type" in obj) {
     switch (obj.type) {

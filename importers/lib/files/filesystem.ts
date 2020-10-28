@@ -8,6 +8,16 @@ export type Content = {
   content: object;
 };
 
+export enum FileAction {
+  "Remove",
+  "Write",
+}
+
+export type ContentAction = {
+  action: FileAction;
+  content: Content;
+};
+
 export const serializeContent = (stringifier: (obj: object) => string) =>
   (obj: Content): File => ({
     path: obj.path,
@@ -32,6 +42,23 @@ export const writeFileToDir = (dir: string) =>
       new TextEncoder().encode(file.data),
     );
   };
+
+export const runContentAction = (
+  dir: string,
+  stringifier: (obj: object) => string,
+): (contentAction: ContentAction) => Promise<any> => {
+  const writer = writeFileToDir(dir);
+  const serializer = serializeContent(stringifier);
+  return async (contentAction) => {
+    if (contentAction.action === FileAction.Write) {
+      await writer(serializer(contentAction.content));
+    } else if (contentAction.action === FileAction.Remove) {
+      await Deno.remove(`${dir}/${contentAction.content.path}`);
+    } else {
+      throw new Error("Not implemented");
+    }
+  };
+};
 
 export const deleteDirectory = async (dir: string) => {
   try {
