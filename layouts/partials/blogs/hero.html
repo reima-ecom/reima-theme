@@ -5,8 +5,9 @@
   should have `hero` frontmatter set
  -->
 
+{{ with .Params.hero }}
 <!-- there is only one "hero" image per article -->
-{{ with index .Params.hero 0 }}
+{{ with index . 0 }}
 <div class="hero">
   {{ with $.Page.Resources.GetMatch .image }}
   {{ if eq .MediaType.SubType "jpeg" }}
@@ -38,4 +39,5 @@
   </div>
   {{ end }}
 </div>
+{{ end }}
 {{ end }}
