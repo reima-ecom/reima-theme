@@ -349,5 +349,3 @@ fields:
       wysiwyg: true
       schema:
         format: markdown
-pages:
-- demo/i18n/en.json
