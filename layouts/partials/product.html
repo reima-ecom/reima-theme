@@ -8,12 +8,14 @@
     {{ $imgs := .Resources.ByType "image" }}
     <r-carousel thumbnails="r-thumbnails">
       <div>
+        <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
+        {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{ with index $imgs 0 }}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" class="responsive-img" />
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" />
         {{ end }}
         {{ range after 1 $imgs }}
-        {{partial "image" (dict "image" . "widths" "375,750" "class" "responsive-img" "dataset" .Params)}}
+        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" .Params)}}
         {{ end }}
       </div>
       {{ if gt (len $imgs) 1 }}
@@ -23,7 +25,8 @@
     </r-carousel>
     <r-thumbnails carousel="r-carousel">
       {{ range $imgs }}
-      {{partial "image" (dict "image" . "widths" "100,200" "class" "responsive-img" "dataset" .Params)}}
+      {{ $sizes := "(min-width: 768px) min(6vw, 82px), 15vw" }}
+      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" .Params)}}
       {{ end }}
     </r-thumbnails>
   </div>

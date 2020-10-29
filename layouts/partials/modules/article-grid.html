@@ -7,7 +7,8 @@
     {{ range $posts }}
     <article>
       {{ with .Resources.GetMatch "image" }}
-      {{partial "image" (dict "image" . "widths" "400,200")}}
+      {{ $sizes := "(min-width: 992px) 384px, 320px" }}
+      {{partial "image" (dict "image" . "widths" "400,200" "sizes" $sizes)}}
       {{ end }}
       <time datetime="{{.Date}}">{{.Date.Format "Jan 2, 2006"}}</time>
       <a href="{{partial "link" .RelPermalink}}">

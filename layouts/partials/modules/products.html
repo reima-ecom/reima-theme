@@ -29,7 +29,10 @@
     {{ $product := . }}
     <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}" handle="{{$producthandle}}">
       {{ range .Resources.ByType "image" | first 1 }}
-      {{partial "image" (dict "image" . "widths" "200,400")}}
+      <!-- grid layout with auto-fit and min 150px cells -->
+      <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
+      {{ $sizes := "233px" }}
+      {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes)}}
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}

@@ -2,7 +2,8 @@
 <section class="content-block-image">
   {{ with .Page.Resources.GetMatch .Params.image }}
   {{ if eq .MediaType.SubType "jpeg" }}
-  {{partial "image" (dict "image" . "widths" "768,328,1080" "sizes" "(min-width: 768px) 328px, (min-width: 540px) 540px, 100vw")}}
+  {{ $sizes := "(min-width: 768px) 328px, (min-width: 540px) 540px, 100vw" }}
+  {{partial "image" (dict "image" . "widths" "768,328,1080" "sizes" $sizes)}}
   {{ else }}
   <img src="{{partial "link" .RelPermalink}}" alt="">
   {{ end }}

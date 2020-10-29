@@ -7,7 +7,7 @@
     {{ range $posts }}
     <a href="{{partial "link" .RelPermalink}}" class="article">
       {{ with .Resources.GetMatch "image" }}
-      {{partial "image" (dict "image" . "widths" "400,200" "class" "responsive-img")}}
+      {{partial "image" (dict "image" . "widths" "400,200" "class" "responsive-img" "sizes" "100vw")}}
       {{ end }}
       <time datetime="{{.Date}}">{{.Date.Format "Jan 2, 2006"}}</time>
       <p>{{.Title}}</p>

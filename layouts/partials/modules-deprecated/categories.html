@@ -5,7 +5,7 @@
   <div>
     {{ range . }}
     <a href="/collections/{{.collection}}/" class="silent-link text-sm">
-      {{partial "img" (dict "image" .image "widths" "100,200" "class" "responsive-img")}}
+      {{partial "img" (dict "image" .image "widths" "100,200" "class" "responsive-img" "sizes" "100vw")}}
       {{.heading}}
     </a>
     {{ end }}

@@ -9,6 +9,22 @@
 {{- if $popup }}
 {{- $class = printf "%s image-grid--modal" $class }}
 {{- end }}
+
+<!-- set up sizes attr -->
+{{ $cols_mobile := 2 }}
+{{ $cols_tablet := 3 }}
+{{ $cols_desktop := 4 }}
+{{ with .columnsmobile }}
+{{ $cols_mobile = int . }}
+{{ end }}
+{{ with .columnsdesktop }}
+{{ $cols_desktop = int . }}
+{{ end }}
+{{ $vw_mobile := div 100 $cols_mobile }}
+{{ $vw_tablet := div 100 $cols_tablet }}
+{{ $vw_desktop := div 100 $cols_desktop }}
+{{ $sizes := printf "(min-width: 992px) %dvw, (min-width: 768px) %dvw, %dvw" $vw_desktop $vw_tablet $vw_mobile }}
+
 <div class="{{$class}}">
   {{- with .heading }}
   <h2>{{.}}</h2>
@@ -24,7 +40,7 @@
     {{ if and $popup .content }}
     <li modal-opener>
       <a class="image-grid__zoom-container" openid="parent">
-        {{- partial "img" (dict "image" .image "widths" "300,600") }}
+        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
       </a>
       <div class="image-grid__modal overlay">
         <div>
@@ -34,7 +50,8 @@
               <use xlink:href="#icon-close"></use>
             </svg>
           </button>
-          {{- partial "img" (dict "image" .image "widths" "300,600") }}
+          {{ $sizes_popup := "(min-width: 580px) 50vw, 100vw" }}
+          {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes_popup) }}
           <div>
             {{- with .content }}
             {{. | markdownify}}
@@ -46,7 +63,7 @@
     {{ else }}
     <li>
       <div class="image-grid__zoom-container">
-        {{- partial "img" (dict "image" .image "widths" "300,600") }}
+        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
       </div>
       {{- with .content }}
       {{. | markdownify}}

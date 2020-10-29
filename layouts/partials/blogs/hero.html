@@ -11,6 +11,7 @@
 <div class="hero">
   {{ with $.Page.Resources.GetMatch .image }}
   {{ if eq .MediaType.SubType "jpeg" }}
+  <!-- sizes attribute not needed, since these are always 100vw -->
   <picture>
     <source media="(min-width: 768px)" srcset="
           {{(.Fill "768x384").RelPermalink}} 768w,
