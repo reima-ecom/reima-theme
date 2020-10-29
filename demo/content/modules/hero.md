@@ -68,7 +68,7 @@ modules:
 - template: hero
   type: Youtube Video
   youtubeid: lJIrF4YjHfQ
-  youtubeautoplay: true
+  youtubeautoplay: false
   youtubenocontrols: true
   youtubeloop: true
   overlaybg: true

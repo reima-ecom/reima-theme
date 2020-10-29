@@ -22,12 +22,10 @@
   {{ end }}
   <!-- here we internalize all css (this is the way AMP does it) -->
   {{partial "css-critical" ($.Scratch.Get "css-critical" | append ($.Scratch.Get "css-base") | append ($.Scratch.Get "css-async") )}}
-  <!--
-  add css for clients without js 
+  <!--  add css for clients without js -->
   <noscript>
-    {{partial "css-critical" (slice "noscript")}}
+    {{partial "css-critical" (slice "_default/baseof.noscript")}}
   </noscript>
-  -->
   <link rel="preload" href="/campton-book-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/campton-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
