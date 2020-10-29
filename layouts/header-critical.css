@@ -33,7 +33,7 @@ body > header {
 }
 
 .menu input:focus + label.menu__hamburger {
-  outline: var(--outline);
+  outline: var(--focus-outline);
   outline-offset: 2px;
 }
 

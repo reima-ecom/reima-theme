@@ -11,7 +11,7 @@
   --content-max-width: 1280px;
   --content-padding: 1rem;
   --border: 1px solid #ccc;
-  --outline: 2px dotted rgba(0, 0, 0, 0.5);
+  --focus-outline: 2px dotted rgba(0, 0, 0, 0.5);
   --block-padding: 0 var(--content-padding);
   --block-margin: var(--content-padding) auto calc(var(--content-padding) * 2);
   --block-width: var(--content-max-width);
@@ -304,10 +304,9 @@ a:hover,
 
 /* #region focus */
 
-:focus,
 .btn:focus,
 a:focus {
-  outline: var(--outline);
+  outline: var(--focus-outline);
   outline-offset: 2px;
 }
 
