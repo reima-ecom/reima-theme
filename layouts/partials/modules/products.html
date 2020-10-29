@@ -37,9 +37,9 @@
         {{ range $index, $value := $colors }}
         {{ with . }}
         {{ range where site.Data.colors.colors "name" "eq" . }}
-        {{ $showmore := ge (len $colors) 7 }}
-        {{ $showmore := and $showmore (and (eq $index 6)) }}
-        {{ if $showmore  }}
+        {{ $seemore := ge (len $colors) 7 }}
+        {{ $seemore := and $seemore (and (eq $index 6)) }}
+        {{ if $seemore  }}
         <a href="{{$link}}" class="color-dots__see-more">+</a>
         {{ else }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
