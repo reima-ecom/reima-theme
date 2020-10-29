@@ -15,6 +15,72 @@ This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for u
 - Hugo static site generator for building the site
 - Web components aka custom elements for much of the client-side functionality (such as the cart)
 
+## Performance
+
+This theme is design to be blazingly fast. It should easily pass the [web vitals](https://web.dev/vitals/) test. It's optimized for modern browsers (cleaner and better performing code), but makes no assumption of this. Furthermore, [accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/) and [semantic document markup](https://www.google.com/search?q=semantic+html) are a priority. These are the main performance principles to use:
+
+### Properly size images
+
+Images are arguably the most important part of a web page to optimize, at least when it comes to network traffic. You can deliver the rigth resolution with `srcset` and the right format with `source`. But the most important and most easily forgotten part about this is the `sizes` attribute on images. It tells the browser what size to consider from `srcset`. Without this the browser considers the entire viewport as the width for choosing an image to load.
+
+The `sizes` attribute is extremely important. Consider three images that are shown in a 900px wide container side-by-side. Each image is 300 (CSS) pixels wide. Let's say the whole viewport is 1400px wide with a DPR of 2. That means that the image is selected based on a width of 2800px. But we only need a 600px wide image. The difference is massive - the requested image is almost 22 times too big. Read that again: it's 22 times too big!
+
+> The `sizes` attribute should *always* be used. (Unless the image is always 100vw wide, of course.)
+
+Another very useful tool in the image optimization toolbox is the use of [client hints](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/client-hints). Using client hints, it's possible to serve exactly the right resolution to every user. (This is of course not very practical from a caching perspective, but still.) Not only that, images can be varied based on the network connection and `save-data` header as needed. This has a nice side-effect of making the code easier, because now `srcset` is not needed anymore. So instead of developers choosing the right images for the `srcset`, they can devote all their time to get `sizes` right.
+
+> Use client hints and server-side image processing for optimal performance.
+
+### Lazy load below-the-fold images
+
+Images below the fold should be lazy loaded. This is possible via the native `loading=lazy` attribute, but it needs a JS polyfill, because it's at the time of writing not universally supported (damn Safari!). Above the fold, images should be loaded semi-eagerly with `loading=lazy` but with the `src` set as well. (In contrast to the polyfill, which is loaded at the end of the page.)
+
+> Use `loading=lazy` and Javascript lazy loading
+
+### Make it usable on every device
+
+Usable on every device means every device indeed. It means usable on older versions of mobile Safari, usable on IE, usable on Opera Mini, and usable even on the text-based [Lynx browser](https://lynx.browser.org/). This *does not*, however, mean that we need polyfills for every device, and post-css autoprefixers and such. Because usable is not the same as optimal.
+
+The first and arguably most important part of this is: the main flow (happy path?) of the site should work without Javascript. This enables us to [optimize for modern browsers](#optimize-for-modern-browsers), because we know that the most important features will work when our Javascript is not supported or turned off completely.
+
+The other part is: the site should work without most CSS features, and even without CSS at all. For instance `grid` layout can be used, but make sure the site looks ok without it. Make sure the site looks ok without CSS as well (e.g. link to skip to main content at the top, images with sane default dimensions, etc).
+
+> Be aggressive with new features, but make the site progressively enhanced.
+
+### Lazy load below-the-fold CSS
+
+Below the fold CSS can be lazy loaded. Here it's important to create good CSS bundles and cache those efficiently. For instance, non-critical global CSS should be in one file with a long cache duration. That way subsequent page loads will be fast. Thanks to HTTP/2 (?), each component used on a page can have its own CSS file. In practice, this means:
+
+- Internalize all critical CSS related to the main layout
+- Internalize the CSS of the first few components of a page
+- Create one CSS bundle for all "global" layout CSS
+- Create one CSS file for each module
+- Cache CSS files with efficient caching
+
+Remember that the fold can be in very different places for different users. Some might have the browser next to another window, and some might even have the whole screen in portrait mode. Test without the external styles, and always, always try to avoid layout shifts.
+
+> Internalize critical CSS, lazy load the rest with efficient browser caching
+
+### Optimize for modern browsers
+
+Since we are making the site [usable without Javascript](#make-it-usable-on-every-device), we can focus on making it pixel-perfect for modern browsers. While this includes both CSS and JS (and HTML in a lesser degree), we'll focus on JS here.
+
+A very good way to ensure JS capabilities is to use `type=module`. Using this we know that browsers executing JS will support at least ES2015, including Promises, fetch, and so on. Other features can just fail - we still have the no-JS fallback.
+
+This means we should avoid using polyfills, because the small amount of users needing them can just use the site without JS. However, some important features are still not universally supported, so polyfills are ok in some cases. For instance smooth scrolling is still not available in Safari, and IntersectionObserver came in pretty late.
+
+Using progressive enhancement, we can enhance the experience of the majority of users while ensuring a working experience for the few on legacy browsers.
+
+> Avoid polyfills and instead make JS features progressively enhanced
+
+### Use web workers where appropriate
+
+When you don't need the DOM, consider using web workers for your computing. However, this is quite a new approach and doesn't affect load times very much if sane Javascript loading is used. But worth keeping in mind.
+
+## Multilingual sites
+
+Multilingual sites need to have their [locales specified in the site config file](https://gohugo.io/content-management/multilingual/#configure-languages). Also, you need a separate i18n file for non-English languages (also applies to sites that are not multilingual but where the language is not English). Furthermore, some site settings found in the `data` directory have language-specific content (e.g. announcements and menu). These files should have a language-specific version named `datafile.locale.ext`, e.g. `announcements.fi.yaml`.
+
 ## Folder structure
 
 The folder structure mostly follows the default Hugo folder structure with CSS and JS files handled a bit differently.
@@ -22,10 +88,6 @@ The folder structure mostly follows the default Hugo folder structure with CSS a
 In order to allow for CSS files to live next to their layout (HTML) counterparts, the `layouts` dir is mounted also as `assets`. This means that CSS files should be referenced relative to the `layouts` folder. I.e. the CSS for the base layout should be added as `_default/baseof.css`, because that is its path within the `layouts` folder.
 
 A demo site is available under `demo`. When in doubt about how to configure a site, see this example implementation!
-
-## Multilingual sites
-
-Multilingual sites need to have their [locales specified in the site config file](https://gohugo.io/content-management/multilingual/#configure-languages). Also, you need a separate i18n file for non-English languages (also applies to sites that are not multilingual but where the language is not English). Furthermore, some site settings found in the `data` directory have language-specific content (e.g. announcements and menu). These files should have a language-specific version named `datafile.locale.ext`, e.g. `announcements.fi.yaml`.
 
 ## Browser compatibility
 
