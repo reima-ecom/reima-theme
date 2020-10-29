@@ -33,9 +33,15 @@
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ range $index, $value := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq | first 6 }}
+        {{ $colors := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ range $index, $value := $colors }}
         {{ with . }}
         {{ range where site.Data.colors.colors "name" "eq" . }}
+        {{ $showmore := ge (len $colors) 7 }}
+        {{ $showmore := and $showmore (and (eq $index 6)) }}
+        {{ if $showmore  }}
+        <a href="{{$link}}" class="color-dots__see-more">+</a>
+        {{ else }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
           {{ $colorname := .name }}
@@ -43,12 +49,10 @@
           <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$colorname}}">
           {{ end }}
         </a>
+        {{ end }}
         {{ else }}
         {{ warnf "Could not find color %s" .}}
         {{ end }}
-        {{ end }}
-        {{ if eq $index 5}}
-        <a href="{{$link}}" class="color-dot--see-more">+</a>
         {{ end }}
         {{ end }}
       </div>

@@ -3,6 +3,7 @@
   --color-text-highlight: #fff0c5;
   --color-fg: #38383b;
   --color-bg: white;
+  --color-cta-hover: #BA001F;
   --color-reima-red: #d2092d;
   --color-reima-blue: #407ec9;
   --color-gray-lighter: #f2f2f5;
@@ -288,7 +289,7 @@ a:hover,
 
 .btn--cta:hover,
 .btn--cta:focus {
-  background: #BA001F;
+  background: var(--color-cta-hover);
   color: white;
 }
 
