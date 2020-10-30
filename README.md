@@ -190,6 +190,8 @@ Always use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/
 1. commit with whatever commit messages you like, but prefer conventional commits
 2. squash merge the resulting PR with a conventional commits style message
 
+We're [creating release notes automatically based on commit messages](#releases). So the commit messages should be well written and understandable by users. If you want to add notes for developers, that's of course great! Just remember to also explain the commit so everyone understands what has changed.
+
 ### Bugs and outages
 
 Always when there's a bug (or outage!), the following process should be followed:
