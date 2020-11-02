@@ -1,3 +1,4 @@
+/// <reference lib="dom" />
 /// <reference types="../../../globals.d.ts" />
 
 type Cart = {
@@ -17,7 +18,7 @@ type LineItem = {
 };
 
 // immediately load shopify
-const loadShopify = new Promise<any>((resolve) => {
+const loadShopify = () => new Promise<any>((resolve) => {
   const script = document.createElement("script");
   script.src =
     "https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js";
@@ -139,12 +140,14 @@ export default class RCart extends HTMLElement {
         (count: number, li: LineItem) => count + li.quantity,
         0,
       );
+    } else {
+      this.itemCount = 0;
     }
   }
 
   async ensureClient() {
     if (this.client) return;
-    const ShopifyBuy = await loadShopify;
+    const ShopifyBuy = await loadShopify();
     this.client = ShopifyBuy.buildClient({
       domain: `${settings.store}.myshopify.com`,
       storefrontAccessToken: settings.token,
@@ -162,7 +165,8 @@ export default class RCart extends HTMLElement {
       [{ variantId, quantity: 1 }],
     );
     this.render(checkout);
-    document.cookie = `X-checkout=${checkout.id}; Path=/`;
+    // one week max-age
+    document.cookie = `X-checkout=${checkout.id}; Path=/; SameSite=Lax; Max-Age=604800`;
     this.open = true;
 
     // new way to dispatch cart add event, will bubble to document
