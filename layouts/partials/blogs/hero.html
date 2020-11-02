@@ -1,0 +1,44 @@
+<!-- 
+  Render hero image and possible text and buttons
+
+  Expects the page as the only parameter, and the page
+  should have `hero` frontmatter set
+ -->
+
+{{ with .Params.hero }}
+<!-- there is only one "hero" image per article -->
+{{ with index . 0 }}
+<div class="hero">
+  {{ with $.Page.Resources.GetMatch .image }}
+  {{ if eq .MediaType.SubType "jpeg" }}
+  <!-- sizes attribute not needed, since these are always 100vw -->
+  <picture>
+    <source media="(min-width: 768px)" srcset="
+          {{(.Fill "768x384").RelPermalink}} 768w,
+          {{(.Fill "1536x768").RelPermalink}} 1536w,
+          {{(.Fill "1440x720").RelPermalink}} 1440w,
+          {{(.Fill "2880x1440").RelPermalink}} 2880w
+        ">
+    <source srcset="
+          {{(.Fill "375x500").RelPermalink}} 375w,
+          {{(.Fill "750x1000").RelPermalink}} 750w,
+          {{(.Fill "1080x1440").RelPermalink}} 1080w,
+          {{(.Fill "1500x2000").RelPermalink}} 1500w
+        ">
+    <img src="{{(.Fill "1440x1440").RelPermalink}}" />
+  </picture>
+  {{ else }}
+  {{ warnf "Hero is %s on %s" .MediaType $.File.Path }}
+  {{ end }}
+  {{ end }}
+
+  {{ with .heading }}
+  <div>
+    <div>
+      <h1>{{.}}</h1>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+{{ end }}

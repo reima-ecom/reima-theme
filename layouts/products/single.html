@@ -6,12 +6,16 @@
 {{ $.Scratch.Add "css-critical" "partials/breadcrumb" }}
 {{ $.Scratch.Add "css-critical" "modal-critical" }}
 {{ $.Scratch.Add "css-async" "modal" }}
-{{ $.Scratch.Add "js-async" "product.js" }}
+{{ $.Scratch.Add "ts" "partials/product.ts" }}
+{{ $.Scratch.Add "ts" "partials/elements/r-carousel.ts" }}
+{{ $.Scratch.Add "ts" "partials/elements/r-thumbnails.ts" }}
+{{ $.Scratch.Add "ts-lazy" "partials/elements/r-review.ts" }}
 {{ end }}
 
 {{ define "canonical" }}
-{{ $product := partial "helpers/get-product" . }}
-<link rel="canonical" href="{{partial "link" $product.Permalink}}">
+{{- with partial "helpers/get-product" . -}}
+<link rel="canonical" href="{{partial "link" .Permalink}}">
+{{- end -}}
 {{ end }}
 
 {{ define "main" }}

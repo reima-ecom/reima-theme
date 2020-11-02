@@ -1,25 +1,19 @@
 {{ define "dependencies" }}
-
-<!-- USE OLD CSS HERE! -->
-{{ $.Scratch.Set "css-critical" (slice "global" "header-critical" "typography") }}
-{{ with .Params.css }}
-{{ range . }}
-{{ $.Scratch.Add "css-critical" (printf "partials/modules-deprecated/%s" .) }}
-{{ end }}
-{{ end }}
-{{ $.Scratch.Add "css-critical" "partials/modules-deprecated/contentBlock" }}
-{{ $.Scratch.Add "css-critical" "partials/hero" }}
-
+{{ $.Scratch.Add "css-critical" "blogs/single" }}
+{{ $.Scratch.Add "css-critical" "partials/blogs/hero" }}
+{{ $.Scratch.Add "css-critical" "partials/blogs/contentBlock" }}
 {{ end }}
 
 {{ define "main" }}
 
-{{partial "hero" $}}
+{{partial "blogs/hero" $}}
 
-<section class="page-width page-width--narrow md airy">
+<section class="article">
   {{.Content | markdownify}}
 </section>
 
-{{partial "modules-deprecated/index" $}}
+{{ range .Params.sections }}
+{{ partial (printf "blogs/%s" .template) (dict "Params" . "Page" $) }}
+{{ end }}
 
 {{ end }}

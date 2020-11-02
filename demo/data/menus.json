@@ -9,10 +9,6 @@
       "url": "",
       "children": [
         {
-          "name": "Page",
-          "url": "/page"
-        },
-        {
           "name": "Collection page",
           "url": "/collections/tops"
         },

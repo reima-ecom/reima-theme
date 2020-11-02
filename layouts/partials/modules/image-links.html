@@ -27,24 +27,31 @@
   <div>
     {{ range .cards }}
     <div>
-      {{- $mobile := partial "helpers/get-image" .imagemobile }}
+      <!-- get mobile image if exists -->
+      {{- $mobile := false }}
+      {{- with .imagemobile }}
+      {{- $mobile = partial "helpers/get-image" . }}
+      {{- end }}
+      <!-- get main image -->
       {{- with partial "helpers/get-image" .image }}
       {{- $params := (dict "image" . "widths" "375,768,1080") }}
-      {{- $default := .Resize "1060x" -}}
+      {{- $default := .Resize "1080x" -}}
       <picture>
-        {{- if $mobile }}
-        <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}">
-        <source srcset="{{partial "srcset" (dict "image" $mobile "widths" "1080,768")}}">
+        <!-- difficult to work out sizes... -->
+        {{ $sizes := "min(50vw, 650px)" }}
+        {{- with $mobile }}
+        <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}" sizes="{{$sizes}}">
+        <source srcset="{{partial "srcset" (dict "image" . "widths" "1080,768")}}">
         {{- end }}
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
           class="lazyload" loading="lazy" data-srcset="{{partial "srcset" $params}}"
-          data-src="{{$default.RelPermalink}}" />
-        <noscript>
-          <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
-            width="{{.Width}}" />
-        </noscript>
+          data-src="{{$default.RelPermalink}}" sizes="(min-width: 768px) {{$sizes}}, 100vw" />
       </picture>
+      <noscript>
+        <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
+          width="{{.Width}}" />
+      </noscript>
       {{ end }}
       <!-- whole card is the link if link but no linktext -->
       {{ $stretched := and .link (not .linktext) }}

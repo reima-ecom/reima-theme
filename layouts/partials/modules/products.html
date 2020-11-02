@@ -29,14 +29,17 @@
     {{ $product := . }}
     <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}" handle="{{$producthandle}}">
       {{ range .Resources.ByType "image" | first 1 }}
-      {{partial "image" (dict "image" . "widths" "200,400")}}
+      <!-- grid layout with auto-fit and min 150px cells -->
+      <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
+      {{ $sizes := "233px" }}
+      {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes)}}
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
         {{ $colors := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ range $index, $value := $colors }}
         {{ with . }}
-        {{ range where site.Data.colors.colors "name" "eq" . }}
+        {{ with partial "helpers/get-color" . }}
         {{ $seemore := ge (len $colors) 7 }}
         {{ $seemore := and $seemore (and (eq $index 6)) }}
         {{ if $seemore  }}
@@ -44,14 +47,11 @@
         {{ else }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
-          {{ $colorname := .name }}
-          {{ with .image }}
-          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$colorname}}">
+          {{ if .image }}
+          <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
         </a>
         {{ end }}
-        {{ else }}
-        {{ warnf "Could not find color %s" .}}
         {{ end }}
         {{ end }}
         {{ end }}

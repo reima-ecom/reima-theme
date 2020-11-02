@@ -13,9 +13,8 @@
   {{ $.Scratch.Set "css-critical" (slice "_default/baseof" "header-critical") }}
   {{ $.Scratch.Set "css-async" slice }}
   {{ $.Scratch.Set "css-base" (slice "header" "partials/elements/r-newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
-  {{ $.Scratch.Set "js-async" (slice "baseof.js") }}
-  <!-- store js to be loaded directly in this slice -->
-  {{ $.Scratch.Set "ts" slice }}
+  {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
+  {{ $.Scratch.Set "ts-lazy" slice }}
   {{- block "dependencies" . -}} {{- end -}}
   <!-- if multilingual site, add css for language selector -->
   {{ if site.IsMultiLingual }}
@@ -23,12 +22,10 @@
   {{ end }}
   <!-- here we internalize all css (this is the way AMP does it) -->
   {{partial "css-critical" ($.Scratch.Get "css-critical" | append ($.Scratch.Get "css-base") | append ($.Scratch.Get "css-async") )}}
-  <!--
-  add css for clients without js 
+  <!--  add css for clients without js -->
   <noscript>
-    {{partial "css-critical" (slice "noscript")}}
+    {{partial "css-critical" (slice "_default/baseof.noscript")}}
   </noscript>
-  -->
   <link rel="preload" href="/campton-book-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/campton-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
@@ -62,6 +59,7 @@
   {{ end }}
   <header>
     <div class="page-width menu">
+      <input type="checkbox" id="open-menu">
       <label for="open-menu" class="menu__hamburger icon">
         <svg viewBox="0 0 32 32">
           <path
@@ -69,7 +67,6 @@
           </path>
         </svg>
       </label>
-      <input type="checkbox" id="open-menu">
       <div class="overlay" id="menu">
         <div>
           <h1>
@@ -155,7 +152,9 @@
        -->
       <div class="icons">
         {{ if site.Params.public.algolia }}
-        <button class="icon" openid="search" load="r-search">
+        {{ $tsname := "partials/elements/r-search.ts" }}
+        {{ $.Scratch.Add "ts-lazy" $tsname }}
+        <button class="icon" openid="search" load="{{$tsname}}">
           <svg viewBox="0 0 32 32">
             <path
               d="M31.563 29.438l-8.375-8.375q1.313-1.656 2.063-3.719t0.75-4.375q0-2.688-1.031-5.063t-2.797-4.141-4.141-2.797q-2.375-1-5.063-1t-5.063 1q-2.375 1.031-4.141 2.797t-2.797 4.141q-1 2.375-1 5.063t1 5.063q1.031 2.375 2.797 4.141t4.141 2.797 5.063 1.031q2.313 0 4.375-0.75t3.75-2.094l-0.031 0.031 8.375 8.375q0.188 0.188 0.453 0.297t0.578 0.109q0.625 0 1.063-0.438t0.438-1.063q0-0.313-0.109-0.578t-0.297-0.453v0 0zM13 23q-2.063 0-3.906-0.781-1.813-0.781-3.172-2.141t-2.141-3.172q-0.781-1.844-0.781-3.906t0.781-3.906q0.781-1.813 2.141-3.172t3.172-2.141q1.844-0.781 3.906-0.781t3.906 0.781q1.813 0.781 3.172 2.141t2.141 3.172q0.781 1.844 0.781 3.906v0q0 2.063-0.781 3.906-0.781 1.813-2.141 3.172t-3.172 2.141q-1.844 0.781-3.906 0.781v0z">
@@ -183,22 +182,26 @@
   </footer>
   {{partial "pixels/index" .}}
   <!-- inline js -->
-  {{partial "js-inline"}}
+  {{partial "js-inline" "_default/baseof.inline.js"}}
   <script experiment>
     window.experiment = 'control';
   </script>
   <script>
     window.site = {{ site.Params.public }}
   </script>
-  {{partial "js-async" ($.Scratch.Get "js-async")}}
   {{- range $.Scratch.Get "ts" | uniq -}}
   {{- with resources.Get . }}
-  {{- $js := . | js.Build | fingerprint -}}
+  {{- $js := . | js.Build (dict "format" "esm") -}}
+  {{- if hugo.IsProduction -}}
+  {{- $js = $js | fingerprint -}}
+  {{- end -}}
   <script async defer src="{{$js.RelPermalink}}" type="module"></script>
   {{- else -}}
   {{ warnf "Could not find ts %s" . }}
   {{- end -}}
   {{- end -}}
+
+  {{partial "ts-lazy" ($.Scratch.Get "ts-lazy") }}
 </body>
 
 </html>

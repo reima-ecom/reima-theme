@@ -20,6 +20,9 @@ module:
     # this allows html/css/js to live side-by-side
     - source: layouts
       target: assets
-    # add js chunks to static
-    - source: assets/js
-      target: static/js
+    # this is a dummy import to get the `importers` dir
+    # into the hugo vendor dir for sites
+    # enables sites to vendor this dir and run the importers
+    # from there (instead of trying to figure out the cache location)
+    - source: importers
+      target: assets/dummy-import-do-not-use

@@ -49,29 +49,42 @@
 
   {{- else }}
 
-  {{- $mobile := partial "helpers/get-image" .imagemobile }}
+  <!-- see if we should lazy load (if this second or later module on page) -->
+  {{- $lazyload := gt .modulenr 0}}
+  <!-- get mobile image if exists -->
+  {{- $mobile := false }}
+  {{- with .imagemobile }}
+  {{- $mobile = partial "helpers/get-image" . }}
+  {{- end }}
+  <!-- get main image -->
   {{- with partial "helpers/get-image" .image }}
   {{- $params := (dict "image" . "widths" "2160,1080,768") }}
-  {{- $default := .Resize "1060x" -}}
+  {{- $default := .Resize "1080x" -}}
   <picture>
-    <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}">
-    {{- if $mobile }}
-    <source srcset="{{partial "srcset" (dict "image" $mobile "widths" "1080,768")}}">
+    <!-- 
+      Regarding `sizes`:
+      Assume the hero image spans the entire viewport but has a max width of 1280px.
+      This is close enough, although in reality there are paddings of 1.5-2rem.
+      `sizes` is only needed for the tablet+ source. 
+     -->
+    <source media="(min-width: 768px)" sizes="min(100vw, 1280px)" {{if $lazyload}}data-{{end -}}srcset="{{partial "srcset" $params}}">
+    {{- with $mobile }}
+    <source {{if $lazyload}}data-{{end -}}srcset="{{partial "srcset" (dict "image" . "widths" "1080,768")}}">
     {{- else }}
-    <source srcset="
+    <source {{if $lazyload}}data-{{end -}}srcset="
       {{- (.Fill "375x375").RelPermalink}} 375w,
       {{- (.Fill "750x750").RelPermalink}} 750w,
       {{- (.Fill "1080x1080").RelPermalink}} 1080w,
       {{- (.Fill "1500x1500").RelPermalink}} 1500w">
     {{- end }}
-    <img
-      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
-      class="lazyload" loading="lazy" data-src="{{$default.RelPermalink}}" width="{{.Width}}" height="{{.Height}}" />
-    <noscript>
-      <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
-        width="{{.Width}}" />
-    </noscript>
+    <img class="lazyload" {{if $lazyload}} loading="lazy"
+      srcset="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20{{$default.Width}}%20{{$default.Height}}'></svg>"
+      {{end}} src="{{$default.RelPermalink}}" width="{{.Width}}" height="{{.Height}}" />
   </picture>
+  <noscript>
+    <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}"
+      height="{{.Height}}" width="{{.Width}}" />
+  </noscript>
   {{- end }}
 
   {{- end }}

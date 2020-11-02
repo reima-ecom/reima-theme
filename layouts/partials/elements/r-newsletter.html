@@ -1,7 +1,7 @@
 {{ with partial "helpers/get-locale-data" "announcements" }}
 {{ if .newsletterEnabled }}
 
-{{ $.Scratch.Add "js-async" "r-newsletter.js" }}
+{{ $.Scratch.Add "ts" "partials/elements/r-newsletter.ts" }}
 
 <r-newsletter>
   <form action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">

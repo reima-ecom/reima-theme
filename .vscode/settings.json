@@ -1,7 +1,20 @@
 {
-  "eslint.format.enable": true,
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "files.associations": {
     "*.html": "handlebars"
-  }
+  },
+  "deno.enable": true,
+  "[typescript]":{
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "CSSNavigation.excludeGlobPatterns": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/coverage/**",
+    "**/public/**"
+  ]
 }

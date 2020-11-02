@@ -12,12 +12,14 @@
 			// Update VERSION to pick a specific hugo version.
 			// Example versions: latest, 0.73.0, 0,71.1
 			// Rebuild the container if it already exists to update.
-			"VERSION": "0.74.3",
+			"VERSION": "0.76.5",
 		}
 	},
 	"remoteEnv": {
 		// used by semantic release
-		"GH_TOKEN": "${localEnv:GITHUB_PAT}"
+		"GH_TOKEN": "${localEnv:GITHUB_PAT}",
+		// used by shopify importers
+		"SHOPIFY_BASIC_AUTH": "${localEnv:SHOPIFY_BASIC_AUTH_JP}"
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -25,7 +27,10 @@
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"davidanson.vscode-markdownlint"
+		"davidanson.vscode-markdownlint",
+		"esbenp.prettier-vscode",
+		"pucelle.vscode-css-navigation",
+		"denoland.vscode-deno"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [

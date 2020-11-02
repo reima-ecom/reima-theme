@@ -12,6 +12,7 @@
   --content-max-width: 1280px;
   --content-padding: 1rem;
   --border: 1px solid #ccc;
+  --focus-outline: 2px dotted rgba(0, 0, 0, 0.5);
   --block-padding: 0 var(--content-padding);
   --block-margin: var(--content-padding) auto calc(var(--content-padding) * 2);
   --block-width: var(--content-max-width);
@@ -306,10 +307,8 @@ a:hover,
 
 .btn:focus,
 a:focus {
-  outline-style: dotted;
-  outline-width: 2px;
+  outline: var(--focus-outline);
   outline-offset: 2px;
-  outline-color: rgba(0, 0, 0, 0.5);
 }
 
 .btn--inv:focus {

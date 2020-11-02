@@ -8,13 +8,16 @@
 
   - widths
     Comma-separated string of widths for srcset. The first
-    width in the list is used for the default src.    
+    width in the list is used for the default src.
+  
+  - sizes
+    Sizes attribute for the img
 
  -->
 
 {{- $imgpath := trim .image "/" }}
 {{- with partial "helpers/get-image" $imgpath }}
-{{- partial "image" (dict "image" . "widths" $.widths) }}
+{{- partial "image" (dict "image" . "widths" $.widths "sizes" $.sizes) }}
 {{- else }}
 {{- warnf "Could not find image %s (%s)" $imgpath .image }}
 {{- end }}

@@ -4,7 +4,7 @@
   {{ $img = partial "helpers/get-image" .Params.image }}
   {{ end}}
   {{ with $img }}
-  {{partial "image" (dict "image" . "widths" "1024,768,375" "class" "responsive-img")}}
+  {{partial "image" (dict "image" . "widths" "1024,768,375" "class" "responsive-img" "sizes" "100vw")}}
   {{ end }}
   <div>
     {{ with .Params.heading }}

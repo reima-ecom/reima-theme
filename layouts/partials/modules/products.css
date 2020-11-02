@@ -17,6 +17,7 @@
 .product-list li {
   position: relative;
   text-align: center;
+  z-index: 0;
 }
 
 .product-list--center {

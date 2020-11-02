@@ -6,20 +6,25 @@
 {{ $.Scratch.Add "css-critical" "partials/modules/content" }}
 {{ end }}
 {{ if .Params.buybutton }}
-{{ $.Scratch.Add "js-async" "page-buy-button.js" }}
+{{ $.Scratch.Add "ts" "_default/page-buy-button.ts" }}
 {{ end }}
 {{ end }}
 
 {{ define "main" }}
 
-{{ range .Params.modules }}
+{{ range $i, $k := .Params.modules }}
+
 <!-- render module template -->
-{{ partial (printf "modules/%s" .template) . }}
-<!-- add ts file if it exists -->
+<!-- add module index (order on page) to params passed to partial -->
+{{ $params := merge . (dict "modulenr" $i) }}
+{{ partial (printf "modules/%s" .template) $params }}
+
+<!-- add module ts file if it exists -->
 {{ $tspath := printf "partials/modules/%s.ts" .template }}
 {{ if templates.Exists $tspath }}
 {{ $.Scratch.Add "ts" $tspath }}
 {{ end }}
+
 {{ end }}
 
 {{ with .Content }}

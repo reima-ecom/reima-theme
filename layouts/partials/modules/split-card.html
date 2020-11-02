@@ -7,7 +7,8 @@
 {{ end }}
 <section class="{{$class}}">
   <div>
-    {{partial "img" (dict "image" .image "widths" "375,750")}}
+    {{ $sizes := "(min-width: 768px) min(620px, 50vw), 100vw" }}
+    {{partial "img" (dict "image" .image "widths" "375,750" "sizes" $sizes)}}
     <div>
       {{ if or .heading .subheading }}
       <header>

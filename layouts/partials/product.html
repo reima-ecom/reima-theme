@@ -8,12 +8,14 @@
     {{ $imgs := .Resources.ByType "image" }}
     <r-carousel thumbnails="r-thumbnails">
       <div>
+        <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
+        {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{ with index $imgs 0 }}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" class="responsive-img" />
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" />
         {{ end }}
         {{ range after 1 $imgs }}
-        {{partial "image" (dict "image" . "widths" "375,750" "class" "responsive-img" "dataset" .Params)}}
+        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" .Params)}}
         {{ end }}
       </div>
       {{ if gt (len $imgs) 1 }}
@@ -23,7 +25,8 @@
     </r-carousel>
     <r-thumbnails carousel="r-carousel">
       {{ range $imgs }}
-      {{partial "image" (dict "image" . "widths" "100,200" "class" "responsive-img" "dataset" .Params)}}
+      {{ $sizes := "(min-width: 768px) min(6vw, 82px), 15vw" }}
+      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" .Params)}}
       {{ end }}
     </r-thumbnails>
   </div>
@@ -69,27 +72,19 @@
         {{ $labelStyle := "" }}
         {{ $swatch := "" }}
         {{ if eq $nameEnglish "Color" }}
-        {{ range where site.Data.colors.colors "name" "eq" .value }}
+        {{ with partial "helpers/get-color" .value }}
         {{ with .color }}
         {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
         {{ end }}
         {{ $swatch = .image }}
-        {{ else }}
-        {{ warnf "Could not find color %s" .value}}
         {{ end }}
         {{ end }}
 
-        {{ $label := .value }}
-        {{ if eq $name "Size" }}
-        {{ with index $.Site.Data.sizes .value }}
-        {{ $label = . }}
-        {{ end }}
-        {{ end }}
         <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
           {{ if not .availableInitially }}class="unavailable" {{ end }}>
-          <span>{{$label}}</span>
-          {{ with $swatch }}
-          <img src="{{(partial "helpers/get-image" .).RelPermalink}}" alt="{{$label}}">
+          <span>{{.value}}</span>
+          {{ if $swatch }}
+          <img src="{{$swatch}}" alt="{{.value}}">
           {{ end }}
         </label>
         {{ end }}
@@ -254,7 +249,7 @@
 <div class="reviews">
   <div>
     <h2>{{T "Reviews"}}</h2>
-    <a href="#" class="text-link" openid="parent" load="review-form.js">{{T "Write a review"}}</a>
+    <a href="#" class="text-link" openid="parent" load="partials/elements/r-review.ts">{{T "Write a review"}}</a>
     <form name="review">
       <h3>{{T "Write a review"}}</h3>
       <fieldset>{{T "Review Score"}}

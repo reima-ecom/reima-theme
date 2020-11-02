@@ -6,7 +6,12 @@
     {{ range .images }}
     <div>
       <a href="{{.link}}/" class="silent-link text-sm">
-        {{ partial "img" (dict "image" .image "widths" "100,200,400" "class" "responsive-img") }}
+      <!-- 
+        we really don't know how grid columns are going to be laid out,
+        but we know they are 100-200px, so assume width of 200px
+       -->
+        {{ $sizes := "200px" }}
+        {{ partial "img" (dict "image" .image "widths" "100,200,400" "sizes" $sizes) }}
         {{ .title }}
       </a>
     </div>

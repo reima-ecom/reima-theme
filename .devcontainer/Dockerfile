@@ -29,11 +29,16 @@ COPY --from=0 /usr/bin/hugo /usr/bin
 COPY --from=0 /usr/local/go/bin /usr/local/go/bin
 ENV PATH="${PATH}:/usr/local/go/bin"
 
+# Install Deno
+ENV DENO_INSTALL=/deno
+RUN mkdir -p /deno \
+    && curl -fsSL https://deno.land/x/install/install.sh | sh \
+    && chown -R node /deno
+
+ENV PATH=${DENO_INSTALL}/bin:${PATH} \
+    DENO_DIR=${DENO_INSTALL}/.cache/deno
+
+# Install semantic-release globally
+RUN npm i -g semantic-release
+
 EXPOSE 1313
-
-# [Optional] Uncomment this section to install additional OS packages you may want.
-#
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
-
-

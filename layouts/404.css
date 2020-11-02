@@ -1,0 +1,6 @@
+.not-found {
+  max-width: var(--content-width);
+  margin: var(--block-margin);
+  padding: var(--block-padding);
+  text-align: center;
+}

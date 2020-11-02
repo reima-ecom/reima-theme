@@ -1,5 +1,5 @@
 if ('loading' in HTMLImageElement.prototype) {
-  document.querySelectorAll('[loading="lazy"]').forEach((/** @type {HTMLImageElement | HTMLSourceElement} */img) => {
+  document.querySelectorAll('img[loading="lazy"],source[data-srcset]').forEach((/** @type {HTMLImageElement | HTMLSourceElement} */img) => {
     /* eslint-disable no-param-reassign */
     if (img.dataset.src) img.src = img.dataset.src;
     if (img.dataset.srcset) img.srcset = img.dataset.srcset;
