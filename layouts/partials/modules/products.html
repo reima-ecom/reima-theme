@@ -36,15 +36,22 @@
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ range (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ $colors := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ range $index, $value := $colors }}
         {{ with . }}
         {{ with partial "helpers/get-color" . }}
+        {{ $seemore := ge (len $colors) 7 }}
+        {{ $seemore := and $seemore (and (eq $index 6)) }}
+        {{ if $seemore  }}
+        <a href="{{$link}}" class="color-dots__see-more">+</a>
+        {{ else }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
           {{ if .image }}
           <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
         </a>
+        {{ end }}
         {{ end }}
         {{ end }}
         {{ end }}

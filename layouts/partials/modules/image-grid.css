@@ -173,6 +173,6 @@
 
 .image-grid__last-fill--links-cta a:hover,
 .image-grid__last-fill--links-cta a:focus {
-    background: #ba001f;
+    background: var(--color-cta-hover);
     color: #fff;
 }
