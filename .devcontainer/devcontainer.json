@@ -12,7 +12,7 @@
 			// Update VERSION to pick a specific hugo version.
 			// Example versions: latest, 0.73.0, 0,71.1
 			// Rebuild the container if it already exists to update.
-			"VERSION": "0.76.5",
+			"VERSION": "0.78.0",
 		}
 	},
 	"remoteEnv": {

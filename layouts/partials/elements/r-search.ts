@@ -1,6 +1,5 @@
 /// <reference lib="dom" />
-
-import "../../../globals.d.ts";
+/// <reference path="../../../globals.d.ts" />
 
 declare global {
   interface Window {
