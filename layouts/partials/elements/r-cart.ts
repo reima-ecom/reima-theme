@@ -10,24 +10,29 @@ type Cart = {
 type LineItem = {
   variant: {
     id: string;
-    product: { id: string };
+    product: {
+      id: string;
+      handle: string;
+    };
     price: string;
     title: string;
   };
   quantity: number;
+  title: string;
 };
 
-// immediately load shopify
-const loadShopify = () => new Promise<any>((resolve) => {
-  const script = document.createElement("script");
-  script.src =
-    "https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js";
-  script.onload = () =>
-    resolve(
-      (window as any).ShopifyBuy,
-    );
-  document.body.appendChild(script);
-});
+// shopify loading promise creator
+const loadShopify = () =>
+  new Promise<any>((resolve) => {
+    const script = document.createElement("script");
+    script.src =
+      "https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js";
+    script.onload = () =>
+      resolve(
+        (window as any).ShopifyBuy,
+      );
+    document.body.appendChild(script);
+  });
 
 const formatPrice = (
   price: number,
@@ -166,7 +171,8 @@ export default class RCart extends HTMLElement {
     );
     this.render(checkout);
     // one week max-age
-    document.cookie = `X-checkout=${checkout.id}; Path=/; SameSite=Lax; Max-Age=604800`;
+    document.cookie =
+      `X-checkout=${checkout.id}; Path=/; SameSite=Lax; Max-Age=604800`;
     this.open = true;
 
     // new way to dispatch cart add event, will bubble to document
@@ -176,19 +182,22 @@ export default class RCart extends HTMLElement {
       total: Number.parseFloat(checkout.totalPrice),
       currency: checkout.currencyCode,
       items: checkout.lineItems.map((li: LineItem) => ({
-        productId: li.variant.product.id,
         variantId: li.variant.id,
+        title: li.variant.title,
         quantity: li.quantity,
         price: Number.parseFloat(li.variant.price),
-        title: li.variant.title,
+        productId: li.variant.product.id,
+        productHandle: li.variant.product.handle,
+        productTitle: li.title,
         productIdLegacy: storefrontIdToLegacy(li.variant.product.id),
         variantIdLegacy: storefrontIdToLegacy(li.variant.id),
       })),
     };
+    const variant = basket.items.find((li: any) => li.variantId === variantId);
     this.dispatchEvent(
       new CustomEvent("cart-add", {
         bubbles: true,
-        detail: { variantId, checkout: basket },
+        detail: { variantId, variant, checkout: basket },
       }),
     );
   }

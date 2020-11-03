@@ -31,6 +31,11 @@
     pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
   }, '{{.ometria_store}}');
 
+</script>
+{{- end }}
+
+{{ if partial "helpers/has-product" $ }}
+<script>
   document.addEventListener('cart-add', (e) => {
     const checkout = e.detail.checkout;
     const basket = new ometria.Basket();
@@ -43,7 +48,7 @@
     ometria.setBasket(basket);
   });
 </script>
-{{- end }}
+{{ end }}
 
 {{ end }}
 {{ end }}

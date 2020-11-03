@@ -19,7 +19,6 @@
 <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id={{.facebook_id}}&ev=PageView&noscript=1" /></noscript>
 
-{{ end }}
 
 {{ with partial "helpers/get-product" $ }}
 <!-- 
@@ -27,19 +26,31 @@
   using yotpoId for now, since that is the same
  -->
 <script>
-  fbProduct = {
+  fbq('track', 'ViewContent', {
     content_name: '{{.Title}}',
     content_ids: ['{{.Params.yotpoId}}'],
     content_type: 'product',
     value: '{{.Params.price}}',
     currency: '{{site.Params.public.currency}}'
-  };
-  fbq('track', 'ViewContent', fbProduct);
-
-  document.addEventListener('cart-add', (e) => {
-    fbq('track', 'AddToCart', fbProduct);
   });
 </script>
+{{ end }}
+
+{{ if partial "helpers/has-product" $}}
+<script>
+  document.addEventListener('cart-add', (e) => {
+    const variant = e.detail.variant;
+    const checkout = e.detail.checkout;
+    fbq('track', 'AddToCart', {
+      content_name: variant.productTitle,
+      content_ids: [variant.productIdLegacy],
+      content_type: 'product',
+      value: variant.price,
+      currency: checkout.currency
+    });
+  });
+</script>
+{{ end }}
 
 {{ end }}
 {{ end }}
