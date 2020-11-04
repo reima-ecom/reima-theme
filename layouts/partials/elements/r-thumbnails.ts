@@ -1,5 +1,4 @@
 import RCarousel from './r-carousel.ts'
-import getElementIndex from '../helpers/element-index.ts';
 
 export default class RThumbnails extends HTMLElement {
   carouselScrolling: number = 0;
@@ -21,11 +20,11 @@ export default class RThumbnails extends HTMLElement {
    */
   setActiveThumbnail(index: number, forceScroll?: boolean) {
     if (forceScroll || !this.carouselScrolling) {
-      const thumbnail = this.querySelector('.active');
-      if (thumbnail) thumbnail.classList.remove('active');
-      this.children.item(index)!.classList.add('active');
+      const thumbnailElement = this.querySelector<HTMLImageElement>(`img:nth-of-type(${index + 1})`)!;
+      const activeThumbnail = this.querySelector('.active');
+      if (activeThumbnail) activeThumbnail.classList.remove('active');
+      thumbnailElement.classList.add('active');
 
-      const thumbnailElement = this.children.item(index) as HTMLElement;
       const thumbMiddle = thumbnailElement.offsetLeft + thumbnailElement.clientWidth / 2;
       const thumbScrollPosition = thumbMiddle - this.clientWidth / 2;
       this.scrollTo(thumbScrollPosition, 0);
@@ -43,7 +42,7 @@ export default class RThumbnails extends HTMLElement {
     };
 
     this.addEventListener('click', (e) => {
-      const index = getElementIndex((e.target as HTMLElement).closest('picture')!);
+      const index = Number.parseInt((e.target as HTMLElement).dataset.index!);
       scrollEverything(index);
     });
   }

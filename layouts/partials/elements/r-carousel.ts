@@ -1,7 +1,6 @@
 /// <reference lib="dom" />
 
 import RThumbnails from "./r-thumbnails.ts";
-import getElementIndex from "../helpers/element-index.ts";
 
 const polyfill = async () => {
   if (
@@ -43,7 +42,9 @@ export default class RCarousel extends HTMLElement {
   }
 
   scrollToImage(imgIndex: number) {
-    const imageElement = this.slider.children.item(imgIndex) as HTMLElement;
+    const imageElement = this.slider.querySelector<HTMLImageElement>(
+      `img:nth-of-type(${imgIndex + 1})`,
+    )!;
     const scrollPositionX = imageElement.offsetLeft;
     this.slider.scrollTo({ left: scrollPositionX, behavior: "smooth" });
   }
@@ -84,13 +85,15 @@ export default class RCarousel extends HTMLElement {
     }
 
     if (this.thumbnails) {
-      this.thumbnailsElement = document.querySelector(this.thumbnails) as RThumbnails;
+      this.thumbnailsElement = document.querySelector<RThumbnails>(
+        this.thumbnails,
+      )!;
 
       const observer = new IntersectionObserver(
         (entries) => {
           const e = entries[0];
           if (e.isIntersecting) {
-            const index = getElementIndex(e.target);
+            const index = Number.parseInt((e.target as HTMLElement).dataset.index!);
             this.thumbnailsElement.setActiveThumbnail(index);
           }
         },

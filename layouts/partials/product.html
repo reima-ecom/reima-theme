@@ -12,10 +12,10 @@
         {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{ with index $imgs 0 }}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" />
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-index="{{.Name}}" />
         {{ end }}
         {{ range after 1 $imgs }}
-        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" .Params)}}
+        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "index" .Name))}}
         {{ end }}
       </div>
       {{ if gt (len $imgs) 1 }}
@@ -26,7 +26,7 @@
     <r-thumbnails carousel="r-carousel">
       {{ range $imgs }}
       {{ $sizes := "(min-width: 768px) min(6vw, 82px), 15vw" }}
-      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" .Params)}}
+      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" (dict "index" .Name))}}
       {{ end }}
     </r-thumbnails>
   </div>

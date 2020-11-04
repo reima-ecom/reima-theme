@@ -31,7 +31,7 @@
   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{$default.Width}} {{$default.Height}}'%3E%3C/svg%3E"
   loading="lazy" data-srcset="{{partial "srcset" $}}" data-src="{{$default.RelPermalink}}" height="{{.image.Height}}"
   width="{{.image.Width}}" class="lazyload {{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{.alt}}"
-  {{range $key, $val := .dataset}}dataset-{{$key}}="{{$val}}" {{end}} />
+  {{range $key, $val := .dataset}}data-{{$key}}="{{$val}}" {{end}} />
 <noscript>
   <img loading="lazy" srcset="{{partial "srcset" $}}" src="{{$default.RelPermalink}}" height="{{.image.Height}}"
     width="{{.image.Width}}" class="{{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{.alt}}" />
