@@ -30,16 +30,16 @@
     "other": "Size, Hand"
   },
   "Product feature description: breathability": {
-    "other": "Breathability at least {{.Count}} g/m2/24 h"
+    "other": "Breathability at least {{.}} g/m2/24 h"
   },
   "Product feature description: durability": {
-    "other": "Durability over {{.Count}} cycles Martindale"
+    "other": "Durability over {{.}} cycles Martindale"
   },
   "Product feature: uv-protection": {
     "other": "UV-Protection"
   },
   "Product feature description: waterproof": {
-    "other": "Water column at least {{.Count}} mm"
+    "other": "Water column at least {{.}} mm"
   },
   "Product feature: sizefeet": {
     "other": "Size, Feet"
@@ -66,10 +66,10 @@
     "other": "Reima is the globally leading brand in functional & outdoor kids clothing providing quality, year-around, clothes designed specifically for active children. Everything from fleece coats, to full down jackets, clothing for skiing and everything in between. Discover the joy of movement!"
   },
   "Product feature description: uv-protection": {
-    "other": "UV cut at least {{.Count}}+"
+    "other": "UV cut at least {{.}}+"
   },
   "Product feature description: warmth": {
-    "other": "Temperatures ca. {{.Count}} °F"
+    "other": "Temperatures ca. {{.}} °F"
   },
   "Add to cart": {
     "other": "Add to cart"
