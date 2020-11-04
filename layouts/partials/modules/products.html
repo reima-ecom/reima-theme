@@ -45,12 +45,14 @@
         {{ if $seemore  }}
         <a href="{{$link}}" class="color-dots__see-more">+</a>
         {{ else }}
+        {{ if lt $index 6 }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
           {{ if .image }}
           <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
         </a>
+        {{ end }}
         {{ end }}
         {{ end }}
         {{ end }}
