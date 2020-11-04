@@ -1,25 +1,3 @@
-import { getCLS, getFID, getLCP } from './baseof-web-vitals.es5.min.js';
-
-function sendToAnalytics({ name, value, id }) {
-  const body = JSON.stringify({
-    name,
-    value,
-    id,
-    timestamp: new Date(),
-    page: window.location.pathname,
-    host: window.location.hostname,
-    experiment: window.experiment,
-  });
-  // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
-  const url = 'https://us.reima.com/api/rum';
-  if (navigator.sendBeacon) navigator.sendBeacon(url, body);
-  else fetch(url, { body, method: 'POST', keepalive: true });
-}
-
-getCLS(sendToAnalytics);
-getFID(sendToAnalytics);
-getLCP(sendToAnalytics);
-
 /**
  * @param {MouseEvent} e
  */
