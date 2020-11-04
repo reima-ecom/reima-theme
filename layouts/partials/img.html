@@ -15,9 +15,10 @@
 
  -->
 
-{{- $imgpath := trim .image "/" }}
-{{- with partial "helpers/get-image" $imgpath }}
+{{- with trim .image "/" }}
+{{- with partial "helpers/get-image" . }}
 {{- partial "image" (dict "image" . "widths" $.widths "sizes" $.sizes) }}
 {{- else }}
-{{- warnf "Could not find image %s (%s)" $imgpath .image }}
+{{- warnf "Could not find image %s" . }}
+{{- end }}
 {{- end }}
