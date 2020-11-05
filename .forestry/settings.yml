@@ -12,7 +12,6 @@ sections:
   templates:
   - page
   - collection
-  - deprecated-page
 - type: directory
   path: demo/products/collections
   label: Collections
