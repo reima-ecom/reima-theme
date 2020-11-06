@@ -2,12 +2,8 @@
 
 <!-- add css and ts dependencies -->
 {{ range .Params.main }}
-<!-- DEPRECATED -->
-{{ if or (eq .template "categories") (eq .template "purposes") }}
-{{ $.Scratch.Add "css-critical" (printf "partials/modules-deprecated/%s" .template) }}
-{{ else }}
-{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
-{{ end }}
+<!-- add module css -->
+{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s.css" .template) }}
 <!-- add module js if it exists -->
 {{ $tspath := printf "partials/modules/%s.ts" .template }}
 {{ if templates.Exists $tspath }}
@@ -16,9 +12,9 @@
 {{ end }}
 
 {{ range .Params.banner }}
-{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
+{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s.css" .template) }}
 {{ end }}
-{{ $.Scratch.Add "css-critical" "_default/collection" }}
+{{ $.Scratch.Add "css-critical" "_default/collection.css" }}
 
 <!-- add js if there's fitering needed -->
 {{ if and .Params.filters .Site.Params.public.algolia }}
@@ -36,8 +32,6 @@
 {{ end }}
 <!-- check if filtering enabled on page and algolia on site -->
 {{ $hassidebar := or $hassidebar (and .Params.filters site.Params.public.algolia) }}
-<!-- DEPRECATED -->
-{{ $hassidebar = or $hassidebar .Params.categories .Params.purposes }}
 
 <div class="grid{{if $hassidebar}} grid--has-sidebar{{end}}">
   {{ with .Params.banner }}
@@ -58,20 +52,12 @@
     <div class="grid__modules">
       {{ range $i, $v := .Params.main }}
 
+      <!-- add horizontal line before all modules except hero -->
       {{ if and (ne .template "hero") (ne $i 0)}}
       <hr>
       {{ end }}
 
-      {{ if eq .template "categories" }}
-      <!-- DEPRECATED -->
-      {{ partial (printf "modules-deprecated/%s" .template) $.Params.categories }}
-      {{ warnf "Interstitial page '%s' is using deprecated categories module in main content" $.File.Path }}
-      {{ else if eq .template "purposes" }}
-      {{ warnf "Interstitial page '%s' is using deprecated purposes module in main content" $.File.Path }}
-      {{ partial (printf "modules-deprecated/%s" .template) $.Params.purposes }}
-      {{ else }}
       {{ partial (printf "modules/%s" .template) . }}
-      {{ end }}
 
       {{ end }}
     </div>
@@ -121,28 +107,6 @@
       </div>
     </div>
     {{ end }}
-    {{ end }}
-
-    <!-- DEPRECATED -->
-    {{ if or .Params.categories .Params.purposes }}
-    {{ warnf "Interstitial page '%s' is using deprecated categories and purposes in sidebar" $.File.Path }}
-    <div class="grid__sidebar-links">
-      <hr>
-      <div class="sidebar-links">
-        {{ with .Params.categories }}
-        <input type="checkbox" id="categories-opener">
-        <label for="categories-opener" class="categories">
-          <h2>Shop by category <span></span></h2>
-        </label>
-        {{ template "categories" . }}
-        {{ end }}
-        {{ with .Params.purposes }}
-        <hr>
-        <h2>Shop by purpose</h2>
-        {{ template "categories" . }}
-        {{ end }}
-      </div>
-    </div>
     {{ end }}
 
     {{ if and .Params.filters .Site.Params.public.algolia }}

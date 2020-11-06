@@ -4,12 +4,7 @@
 
 .grid {
   --block-margin: var(--content-padding) auto;
-  --grid-template-areas: 
-    "banner"
-    "title"
-    "filters"
-    "modules"
-    "links";
+  --grid-template-areas: "banner" "title" "filters" "modules" "links";
   /* this is the display of sidebar and main
   we don't want those in the content flow */
   --container-display: contents;
@@ -82,7 +77,7 @@
 
 .grid__sidebar h2 {
   font-size: 0.875rem;
-  letter-spacing: .03rem;
+  letter-spacing: 0.03rem;
   line-height: 1.375;
   text-transform: uppercase;
 }
@@ -99,14 +94,7 @@
   color: #38383b;
   text-decoration: none;
   display: block;
-  margin: .5rem 0;
-}
-
-/* DEPRECATED */
-#categories-opener {
-  visibility: hidden;
-  position: absolute;
-  opacity: 0;
+  margin: 0.5rem 0;
 }
 
 /* #region filters */
@@ -135,7 +123,7 @@
   flex-wrap: wrap;
   text-align: left;
   font-size: 0.875rem;
-  margin: 0 -.25rem;
+  margin: 0 -0.25rem;
   align-items: start;
 }
 
@@ -167,14 +155,14 @@
 
 .filter-list__name::after {
   float: right;
-  content: '+';
+  content: "+";
   font-size: 1.3125rem;
   font-weight: 400;
   line-height: 1;
 }
 
 .filter-list__name-checkbox:checked + .filter-list__name::after {
-  content: '-';
+  content: "-";
 }
 
 .filter-list__value {
@@ -243,7 +231,7 @@
 }
 
 .sidebar-links__opener > h2 span::before {
-  content: '+';
+  content: "+";
 }
 
 .sidebar-links__opener + ul {
@@ -258,7 +246,7 @@
 }
 
 .sidebar-links__opener-chk:checked + label h2 span::before {
-  content: '-';
+  content: "-";
 }
 
 .sidebar-links__opener-chk:checked + label + ul {
@@ -266,68 +254,23 @@
 }
 /* #endregion */
 
-/* DEPRECATED */
-/* #region categories and purposes */
-.categories {
-  cursor: pointer;
-}
-
-.categories > h2 {
-  display: flex;
-  justify-content: space-between;
-}
-
-.categories > h2 span::before {
-  content: '+';
-}
-
-/* hide categories by default */
-.categories + ul {
-  display: none;
-}
-
-/* do this when categories checked (open) */
-#categories-opener:checked + label + ul {
-  display: block;
-}
-
-#categories-opener:checked + label h2 span::before {
-  content: '-';
-}
-
-/* categories: add margins and adjust font weight at different levels */
-.categories + ul > li {
-  margin-top: 1rem;
-}
-
-.categories + ul {
-  font-weight: 700;  
-}
-
-.categories + ul li li {
-  font-weight: 400;
-}
-/* #endregion */
-
 @media (min-width: 992px) {
   .grid {
     --grid-margin: var(--block-margin);
   }
-  
+
   .grid--has-sidebar {
     --container-display: block;
     --inner-spacing: 1.5rem;
     --grid-padding: var(--block-padding);
     --grid-template-columns: 25% 1fr;
-    --grid-template-areas:
-      "banner banner"
-      "sidebar main";
+    --grid-template-areas: "banner banner" "sidebar main";
   }
-  
+
   .grid--has-sidebar .grid__main {
     --block-padding: 0 0 0 var(--inner-spacing);
   }
-  
+
   .grid--has-sidebar .grid__main hr {
     margin-left: var(--inner-spacing);
   }
@@ -369,7 +312,7 @@
 
   .filter-list__clear {
     display: initial;
-    margin-left: -.5rem;
+    margin-left: -0.5rem;
   }
 
   .filter-list > div {
@@ -394,18 +337,5 @@
 
   .sidebar-links__opener-chk {
     display: none;
-  }
-
-  /* DEPRECATED */
-  .categories {
-    cursor: default;
-  }
-
-  .categories span {
-    display: none;
-  }
-
-  .categories + ul {
-    display: block;
   }
 }

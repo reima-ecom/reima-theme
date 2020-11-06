@@ -318,6 +318,17 @@ a:focus {
 
 /* #endregion */
 
+input, textarea {
+  font-family: "camptonbook",Arial,serif;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  border: 1px solid #bfbfbf;
+  max-width: 100%;
+  padding: 8px 10px;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
 .margin-bottom-xs {
   margin-bottom: .375rem;
 }

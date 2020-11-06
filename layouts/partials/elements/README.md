@@ -9,5 +9,5 @@ JS should be built into the `dist` folder. The plan is to build using [deno](htt
 Then, you can include the element code as:
 
 - html: `{{partial "elements/[elementname]"}}`
-- css: `{{$.Scratch.Add "css-async" "elements/[elementname]"}}`
-- js: `{{$.Scratch.Add "js-async" "elements/[elementname]"}}`
+- css: `{{$.Scratch.Add "css-async" "elements/[elementname].css"}}`
+- js: `{{$.Scratch.Add "ts-async" "elements/[elementname].ts"}}`

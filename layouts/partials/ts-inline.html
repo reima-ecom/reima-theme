@@ -1,0 +1,7 @@
+{{ with resources.Get . }}
+<script>
+  {{(. | js.Build).Content | safeJS}}
+</script>
+{{ else }}
+{{ warnf "Could not find inline ts" }}
+{{ end }}

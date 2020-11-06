@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
+
 <head>
   <meta charset="UTF-8">
   {{ if .Params.noindex }}
@@ -10,22 +12,42 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
     {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
-  {{ $.Scratch.Set "css-critical" (slice "_default/baseof" "header-critical") }}
+
+  <!-- create list of critical css -->
+  {{ $.Scratch.Set "css-critical" (slice "_default/baseof.css" "_default/baseof.header-critical.css") }}
   {{ $.Scratch.Set "css-async" slice }}
-  {{ $.Scratch.Set "css-base" (slice "header" "partials/elements/r-newsletter" "forms" "partials/elements/r-cart" "partials/elements/r-search" "footer") }}
-  {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
-  {{ $.Scratch.Set "ts-lazy" slice }}
-  {{- block "dependencies" . -}} {{- end -}}
   <!-- if multilingual site, add css for language selector -->
   {{ if site.IsMultiLingual }}
-  {{ $.Scratch.Add "css-critical" "header-languages" }}
+  {{ $.Scratch.Add "css-critical" "_default/baseof.header-languages.css" }}
   {{ end }}
+
+  <!-- create a list of main layout css -->
+  {{ $.Scratch.Set "css-base" (slice "_default/baseof.header.css" "_default/baseof.footer.css") }}
+  {{ $.Scratch.Add "css-base" "partials/elements/r-cart.css" }}
+  <!-- if newsletter enabled, add that css -->
+  {{ if $announcements.newsletterEnabled }}
+  {{ $.Scratch.Add "css-base" "partials/elements/r-newsletter.css" }}
+  {{ end }}
+  <!-- if search enabled, add that css -->
+  {{ if site.Params.public.algolia }}
+  {{ $.Scratch.Add "css-base" "partials/elements/r-search.css" }}
+  {{ end }}
+
+  <!-- create list of scripts -->
+  {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
+  <!-- create list for scripts that should be lazy-loadable -->
+  {{ $.Scratch.Set "ts-lazy" slice }}
+
+  <!-- this is a hook for pages to add css to the above lists -->
+  {{- block "dependencies" . -}} {{- end -}}
+
   <!-- here we internalize all css (this is the way AMP does it) -->
   {{partial "css-critical" ($.Scratch.Get "css-critical" | append ($.Scratch.Get "css-base") | append ($.Scratch.Get "css-async") )}}
   <!--  add css for clients without js -->
   <noscript>
-    {{partial "css-critical" (slice "_default/baseof.noscript")}}
+    {{partial "css-critical" (slice "_default/baseof.noscript.css")}}
   </noscript>
+
   <link rel="preload" href="/campton-book-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/campton-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
@@ -51,7 +73,6 @@
 
 <body>
   {{ $menus := partial "helpers/get-locale-data" "menus" }}
-  {{ $announcements := partial "helpers/get-locale-data" "announcements" }}
   {{ if $announcements.headerAnnouncementEnabled }}
   <aside class="announcement">
     {{$announcements.headerAnnouncement | markdownify}}
@@ -172,7 +193,7 @@
   <main>
     {{ block "main" . }}{{ end }}
   </main>
-  {{partial "elements/r-newsletter" $}}
+  {{partial "elements/r-newsletter" $announcements}}
   <footer>
     {{ $menus := partial "helpers/get-locale-data" "menus" }}
     {{ partialCached "menu" (dict "menu" $menus.footer "root" $) "footer" }}
@@ -182,7 +203,7 @@
   </footer>
   {{partial "pixels/index" .}}
   <!-- inline js -->
-  {{partial "js-inline" "_default/baseof.inline.js"}}
+  {{partial "ts-inline" "_default/baseof.inline.ts"}}
   <script experiment>
     window.experiment = 'control';
   </script>

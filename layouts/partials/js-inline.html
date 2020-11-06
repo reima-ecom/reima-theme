@@ -1,7 +1,0 @@
-  {{ with resources.Get . }}
-  <script>
-    {{.Content | safeJS}}
-  </script>
-  {{ else }}
-  {{ warnf "Could not find inline js" }}
-  {{ end }}

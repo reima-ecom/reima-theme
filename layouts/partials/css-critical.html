@@ -1,6 +1,6 @@
 <style>
 {{- range . | uniq -}}
-{{- with resources.Get (printf "%s.css" .) -}}
+{{- with resources.Get . -}}
 {{- (. | minify).Content | safeCSS -}}
 {{- else -}}
 {{- warnf "Could not find css file %s" . -}}

@@ -1,4 +1,3 @@
-{{ with partial "helpers/get-locale-data" "announcements" }}
 {{ if .newsletterEnabled }}
 
 {{ $.Scratch.Add "ts" "partials/elements/r-newsletter.ts" }}
@@ -27,5 +26,4 @@
   </form>
 </r-newsletter>
 
-{{ end }}
 {{ end }}

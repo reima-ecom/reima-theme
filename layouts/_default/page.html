@@ -1,9 +1,9 @@
 {{ define "dependencies" }}
 {{ range .Params.modules }}
-{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s" .template) }}
+{{ $.Scratch.Add "css-critical" (printf "partials/modules/%s.css" .template) }}
 {{ end }}
 {{ if .Content }}
-{{ $.Scratch.Add "css-critical" "partials/modules/content" }}
+{{ $.Scratch.Add "css-critical" "partials/modules/content.css" }}
 {{ end }}
 {{ if .Params.buybutton }}
 {{ $.Scratch.Add "ts" "_default/page-buy-button.ts" }}
