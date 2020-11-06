@@ -1,7 +1,5 @@
 {{ if .newsletterEnabled }}
 
-{{ $.Scratch.Add "ts" "partials/elements/r-newsletter.ts" }}
-
 <r-newsletter>
   <form action="https://shopify-subscribe.reima.workers.dev" class="airy newsletter">
     <h2 id="newsletter">{{.newsletterTitle}}</h2>

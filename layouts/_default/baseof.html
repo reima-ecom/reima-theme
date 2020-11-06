@@ -13,6 +13,11 @@
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
     {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
 
+  <!-- create list of and for scripts -->
+  {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
+  <!-- create list for scripts that should be lazy-loadable -->
+  {{ $.Scratch.Set "ts-lazy" slice }}
+
   <!-- create list of critical css -->
   {{ $.Scratch.Set "css-critical" (slice "_default/baseof.css" "_default/baseof.header-critical.css") }}
   {{ $.Scratch.Set "css-async" slice }}
@@ -24,19 +29,15 @@
   <!-- create a list of main layout css -->
   {{ $.Scratch.Set "css-base" (slice "_default/baseof.header.css" "_default/baseof.footer.css") }}
   {{ $.Scratch.Add "css-base" "partials/elements/r-cart.css" }}
-  <!-- if newsletter enabled, add that css -->
+  <!-- if newsletter enabled, add that css and add ts here as well -->
   {{ if $announcements.newsletterEnabled }}
   {{ $.Scratch.Add "css-base" "partials/elements/r-newsletter.css" }}
+  {{ $.Scratch.Add "ts" "partials/elements/r-newsletter.ts" }}
   {{ end }}
   <!-- if search enabled, add that css -->
   {{ if site.Params.public.algolia }}
   {{ $.Scratch.Add "css-base" "partials/elements/r-search.css" }}
   {{ end }}
-
-  <!-- create list of scripts -->
-  {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
-  <!-- create list for scripts that should be lazy-loadable -->
-  {{ $.Scratch.Set "ts-lazy" slice }}
 
   <!-- this is a hook for pages to add css to the above lists -->
   {{- block "dependencies" . -}} {{- end -}}
