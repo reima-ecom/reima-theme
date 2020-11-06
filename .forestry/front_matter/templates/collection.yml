@@ -29,10 +29,9 @@ fields:
   - content
   - split-card
   - image-grid
+  - image-links-small
   - image-links
   - products
-  - categories
-  - purposes
   config:
     min: 1
     max: 
@@ -105,31 +104,6 @@ fields:
   label: Sidebar Links
   description: Add links to the sidebar. Links are shown below the main content on
     mobile.
-- name: categories
-  type: blocks
-  label: 'DEPRECATED: Categories'
-  template_types:
-  - category
-  config:
-    min: 
-    max: 
-  description: Do not use this anymore, please switch to using <code>Sidebar Links</code>
-    instead.
-- type: field_group_list
-  name: purposes
-  label: 'DEPRECATED: Purposes'
-  fields:
-  - type: text
-    name: heading
-    label: heading
-  - type: text
-    name: collection
-    label: collection
-  - type: file
-    name: image
-    label: image
-  description: Do not use this anymore, please switch to using <code>Sidebar Links</code>
-    instead.
 pages:
 - demo/content/collection.html
 - demo/content/kids.md
