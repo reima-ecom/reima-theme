@@ -1,4 +1,5 @@
 /// <reference lib="dom" />
+/// <reference lib="es2015" />
 /// <reference types="../../../globals.d.ts" />
 
 type Cart = {
@@ -217,7 +218,14 @@ export default class RCart extends HTMLElement {
     let checkout;
     if (this.checkoutId) {
       await this.ensureClient();
-      checkout = await this.client.checkout.fetch(this.checkoutId);
+      try {
+        checkout = await this.client.checkout.fetch(this.checkoutId);
+      } catch (error) {
+        // if there was an error, just ditch the old checkout
+        this.checkoutId = "";
+        document.cookie =
+          "X-checkout=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
     }
     this.render(checkout);
     this.loading = false;
