@@ -36,9 +36,13 @@
       {{ end }}
       <div class="color-dots">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ $colors := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
-        {{ $maxdots := 6 }}
-        {{ range $value := $colors | first $maxdots }}
+        {{ $color_dots := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ $show_plus := false }}
+        {{ if gt (len $color_dots) 7  }}
+        {{ $color_dots = $color_dots | first 6 }}
+        {{ $show_plus = true }}
+        {{ end }}
+        {{ range $value := $color_dots }}
         {{ with partial "helpers/get-color" . }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
@@ -48,7 +52,7 @@
         </a>
         {{ end }}
         {{ end }}
-        {{ if gt (len $colors) $maxdots  }}
+        {{ if $show_plus  }}
         <a href="{{$link}}" class="color-dots__see-more">+</a>
         {{ end }}
       </div>
