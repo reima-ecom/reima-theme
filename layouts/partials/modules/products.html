@@ -42,7 +42,8 @@
         {{ $color_dots = $color_dots | first 6 }}
         {{ $show_plus = true }}
         {{ end }}
-        {{ range $value := $color_dots }}
+        {{ range $color_dots }}
+        {{ with . }}
         {{ with partial "helpers/get-color" . }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
@@ -50,6 +51,7 @@
           <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
         </a>
+        {{ end }}
         {{ end }}
         {{ end }}
         {{ if $show_plus  }}
