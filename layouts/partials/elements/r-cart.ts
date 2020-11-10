@@ -115,9 +115,9 @@ export default class RCart extends HTMLElement {
     this.items.innerHTML = "";
     if (checkout) {
       /** @type {HTMLTemplateElement} */
-      const template = this.querySelector<HTMLTemplateElement>("#item");
+      const template = this.querySelector<HTMLTemplateElement>("#item")!;
       checkout.lineItems.forEach((li: any) => {
-        const item = template?.content.cloneNode(true) as HTMLElement;
+        const item = template.content.cloneNode(true) as HTMLElement;
         if (li.variant.image) {
           const img = item.querySelector("img")!;
           img.src = li.variant.image.src;
