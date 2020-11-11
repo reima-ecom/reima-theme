@@ -22,9 +22,9 @@ The optional chaining operator (which was annoyingly enough only needed for lint
 
 ### How can we avoid similar issues in the future?
 
-Firstly, we need to implement the cart (and possibly other features as well) so that it works without Javascript. This will enable the cart to work on non-supported browsers, for instance in this case when the cart JS threw a syntax error. This is tracked in issue #63.
+Firstly, we need to implement the cart (and possibly other features as well) so that it works without Javascript. This will enable the cart to work on non-supported browsers, for instance in this case when the cart JS threw a syntax error. [This is tracked in issue #63](https://github.com/reima-ecom/reima-theme/issues/63).
 
-Secondly, we need to enable error reporting from client-side code running in production. This enables us to monitor the functionality of the client-side code and fix these kinds of errors early. We should not rely on user bug reports, since these can take a long time to surface, as witnessed by the timeline of this bug. This is tracked in issue #72.
+Secondly, we need to enable error reporting from client-side code running in production. This enables us to monitor the functionality of the client-side code and fix these kinds of errors early. We should not rely on user bug reports, since these can take a long time to surface, as witnessed by the timeline of this bug. [This is tracked in issue #72](https://github.com/reima-ecom/reima-theme/issues/72).
 
 While either of these fixes will prevent bugs like this from breaking the most important flow of the whole site, we should definitely do both. The first one ensures that the cart is always usable, and the second one ensures that the site is working as expected on targeted browsers.
 
@@ -48,7 +48,7 @@ The call to `$.Scratch` was moved to the base layout, where the correct page con
 
 ### How can we avoid similar issues in the future?
 
-We should have automatic testing in place for all key functionality. This can be done with e.g. [Puppeteer](https://pptr.dev/), because these checks are not for browser compatibility, but rather just regression tests to make sure features are working as intended. This is tracked in issue #71.
+We should have automatic testing in place for all key functionality. This can be done with e.g. [Puppeteer](https://pptr.dev/), because these checks are not for browser compatibility, but rather just regression tests to make sure features are working as intended. [This is tracked in issue #71](https://github.com/reima-ecom/reima-theme/issues/71).
 
 ## Self-hosted CI (GitHub Actions runner) keeps crashing
 
