@@ -220,6 +220,7 @@ export default class RCart extends HTMLElement {
       await this.ensureClient();
       try {
         checkout = await this.client.checkout.fetch(this.checkoutId);
+        if (checkout && checkout.order) throw new Error('Checkout has an associated order');
       } catch (error) {
         // if there was an error, just ditch the old checkout
         this.checkoutId = "";
