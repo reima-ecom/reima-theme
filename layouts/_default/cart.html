@@ -10,29 +10,23 @@
     {{T "Cart Title"}}
   </h1>
   <ul items>
+    {{- range .Params.items -}}
     <li>
-      <img
-        src="https://cdn.shopify.com/s/files/1/0074/4393/9383/products/navy-winter-parka-mutka-front.jpg?v=1561376966"
-        alt="null">
+      <img src="{{.img}}">
       <div>
-        <h2>Toddlers' winter parka Mutka</h2>
-        <h3>Navy / 18-24 M</h3>
+        <h2>{{.title}}</h2>
+        <h3>{{.variant}}</h3>
         <div>1 pcs</div>
       </div>
-      <strong>$116.95</strong>
+      <strong>{{.price}}</strong>
     </li>
-    <li>
-      <img src="https://cdn.shopify.com/s/files/1/0074/4393/9383/products/536492B-4511_1.jpg?v=1578921308" alt="null">
-      <div>
-        <h2>Kids' swimsuit Vanuatu</h2>
-        <h3>Unicorn pink / 4T</h3>
-        <div>2 pcs</div>
-      </div>
-      <strong>$29.95</strong>
-    </li>
+    {{- else -}}
+    <li>Cart not available</li>
+    {{- end -}}
   </ul>
-  <div>
-    <h2>{{T "Cart Subtotal"}} <span subtotal>$179.78</span></h2>
+  <p empty>{{T "Cart Empty Message"}}</p>
+  <div bottomline>
+    <h2>{{T "Cart Subtotal"}} <span subtotal>{{.Params.subtotal}}</span></h2>
     <a weburl href="#" class="btn btn--cta btn--full-width">{{T "Cart Checkout Button"}}</a>
   </div>
 </div>

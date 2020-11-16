@@ -23,6 +23,10 @@
         {
           "name": "Baby kit",
           "url": "/baby-kit"
+        },
+        {
+          "name": "Cart page",
+          "url": "/cart-test"
         }
       ]
     },

@@ -4,6 +4,20 @@
   margin: var(--block-margin);
 }
 
+.cart [empty] {
+  display: none;
+}
+
+.cart [items]:empty ~ [empty] {
+  display: block;
+  font-size: var(--text-font-size);
+  text-align: center;
+}
+
+.cart [items]:empty ~ [bottomline] {
+  display: none;
+}
+
 .cart h1 {
   text-align: center;
 }
