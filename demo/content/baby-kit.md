@@ -5,7 +5,7 @@ buybutton: true
 modules:
 - template: hero
   heading: A box full of magic for your little one
-  link: "#buy=Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDMwMzc5MDc0MzY4OQ=="
+  link: "/cart?add=Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDMwMzc5MDc0MzY4OQ=="
   linktext: Get yours now for $199
   image: hero.jpg
   overlayinvert: true
