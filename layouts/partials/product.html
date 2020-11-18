@@ -41,6 +41,8 @@
   <div>
 
     <form action="/cart" method="POST" data-variant="{{$firstAvailableVariant.id}}" id="product-form">
+      <!-- TODO: DEPRECATED -->
+      <input type="hidden" name="product-id" value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
       <h1 id="product-name">
         {{.Title}}
       </h1>
