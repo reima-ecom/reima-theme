@@ -1,5 +1,7 @@
 {{ $bottomline := false }}
+{{ if site.Data.reviews }}
 {{ with index site.Data.reviews . }}
 {{ $bottomline = .bottomline }}
+{{ end }}
 {{ end }}
 {{ return $bottomline }}

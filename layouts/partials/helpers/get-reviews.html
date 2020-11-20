@@ -1,5 +1,7 @@
 {{ $reviews := slice }}
+{{ if site.Data.reviews }}
 {{ with index site.Data.reviews . }}
 {{ $reviews = .reviews }}
+{{ end }}
 {{ end }}
 {{ return $reviews }}
