@@ -64,7 +64,7 @@
       <div>
         {{partial "product-price" .Params}}
       </div>
-      {{ with .Params.reviewsBottomline }}
+      {{ with partial "helpers/get-reviews-bottomline" .Params.yotpoId }}
       <div class="product-list__rating">
         {{ range seq (math.Round .average) }}★{{ end }}
         <span>{{ div (math.Round (mul .average 10)) 10 }}</span>

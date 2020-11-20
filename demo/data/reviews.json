@@ -1,0 +1,66 @@
+{
+  "5175024156809": {
+    "reviews": [
+      {
+        "name": "Anonymous",
+        "score": 5,
+        "verified": false,
+        "title": "our favorite boot",
+        "content": "perfectly warm, cute, comfortable. our only problem was that last year it was not watreprrof enough, two prior years they were absolutely perfect for a slushy weather.",
+        "created_at": "2019-10-30T00:00:00.000Z"
+      },
+      {
+        "name": "Paulina M.",
+        "score": 5,
+        "verified": true,
+        "title": "Very warm and flexible",
+        "content": "Easy to put, my kid love it",
+        "created_at": "2020-07-14T18:49:30.000Z"
+      },
+      {
+        "name": "Kathi M.",
+        "score": 5,
+        "verified": true,
+        "title": "Thumbs up",
+        "content": "Love these cute snow boots",
+        "created_at": "2020-08-26T08:25:58.000Z"
+      }
+    ],
+    "bottomline": {
+      "count": 3,
+      "average": 5
+    }
+  },
+  "5175017242761": {
+    "reviews": [
+      {
+        "name": "Agata S.",
+        "score": 4,
+        "verified": true,
+        "title": "Warm and cozy",
+        "content": "Jacket and color is exactly as pictured. It is light, thick as a fleece and has a sweater look/feel on the outside. It will work as a mid layer in winter and on it&#x27;s own at warmer time. Only complaint is that the zipper on ours is hard to get started for my five year old and even me. Ideally, I would like for the jacket to have a hood. But overall very good quality and sizing is spot on.",
+        "created_at": "2020-07-15T14:04:50.000Z"
+      },
+      {
+        "name": "Amy B.",
+        "score": 4,
+        "verified": true,
+        "title": "Great jacket, but...",
+        "content": "Well made, looks good, nice and warm. However, as an outer layer for hiking this fabric is like Velcro, picking up every bit of grass, leaves, seeds, thorns. Takes a bit off effort to get all the stickers out of the fabric.",
+        "created_at": "2020-07-16T23:18:39.000Z"
+      },
+      {
+        "name": "Wayne",
+        "score": 5,
+        "verified": true,
+        "title": "Great quality/value proposition",
+        "content": "Great quality/value proposition",
+        "created_at": "2019-12-07T02:51:25.000Z"
+      }
+    ],
+    "bottomline": {
+      "count": 3,
+      "average": 4.333333333333333
+    }
+  }
+}

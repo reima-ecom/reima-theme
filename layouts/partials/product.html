@@ -42,7 +42,8 @@
 
     <form action="/cart" method="POST" data-variant="{{$firstAvailableVariant.id}}" id="product-form">
       <!-- TODO: DEPRECATED -->
-      <input type="hidden" name="product-id" value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
+      <input type="hidden" name="product-id"
+        value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
       <h1 id="product-name">
         {{.Title}}
       </h1>
@@ -52,7 +53,7 @@
         {{ else }}
         {{partial "product-price" .Params}}
         {{ end }}
-        {{ with .Params.reviewsBottomline }}
+        {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
         <div>
           {{ range seq (math.Round .average) }}★{{ end }} {{ div (math.Round (mul .average 10)) 10 }} ({{.count}})
         </div>
@@ -282,7 +283,7 @@
       {{T "Review Thank you"}}
     </p>
   </div>
-  {{ range .Params.reviews }}
+  {{ range partial "helpers/get-reviews" $product.Params.yotpoId }}
   <blockquote>
     <header>
       <span class="name">{{.name}}</span> {{ if .verified }}{{T "Review Verified Buyer"}}{{ end }}
