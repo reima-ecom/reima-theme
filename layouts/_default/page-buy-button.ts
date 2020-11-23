@@ -6,12 +6,11 @@
 const addToCart = (e) => {
   e.preventDefault();
   const variantId = e.currentTarget.getAttribute("href")
-    .replace("#buy=", "")
     .replace("/cart?add=", "");
   document.querySelector<RCart>("r-cart").addVariant(variantId);
 };
 
-document.querySelectorAll('[href^="#buy="], [href^="/cart?add="]').forEach(
+document.querySelectorAll('[href^="/cart?add="]').forEach(
   (element) => {
     element.addEventListener("click", addToCart);
   },
