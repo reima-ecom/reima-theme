@@ -90,5 +90,8 @@ fields:
   label: Taboola account id
   description: To track purchases in Shopify, please reference <a href="https://help.taboola.com/hc/en-us/articles/360010109214-Working-With-Shopify-"
     title="" target="_blank">the Taboola documentation regarding Shopify</a>.
+  showOnly:
+    field: taboola_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
