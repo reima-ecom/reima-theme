@@ -64,6 +64,31 @@ fields:
     value: true
   config:
     required: true
+- name: pinterest_enabled
+  type: boolean
+  label: Pinterest
+- name: pinterest_id
+  type: text
+  config:
+    required: false
+  label: Pinterest tag id
+  description: To find this, navigate to Ads Manager and click on Ads, then find Conversions
+    and click Create Pinterest Tag (if you've already created a Pinterest tag, you
+    can click into the title to view its unique tag ID).<br><br>To track purchases,
+    Shopify checkout needs to be updated based on <a href="https://help.pinterest.com/en/business/article/link-your-shopify-and-pinterest-accounts"
+    title="" target="_blank">these instructions</a>.
+  showOnly:
+    field: pinterest_enabled
+    value: true
+- name: taboola_enabled
+  type: boolean
+  label: Taboola
+- name: taboola_account
+  type: text
+  config:
+    required: false
+  label: Taboola account id
+  description: To track purchases in Shopify, please reference <a href="https://help.taboola.com/hc/en-us/articles/360010109214-Working-With-Shopify-"
+    title="" target="_blank">the Taboola documentation regarding Shopify</a>.
 pages:
-- demo/data/pixels.yaml
 - demo/data/pixels.yaml
