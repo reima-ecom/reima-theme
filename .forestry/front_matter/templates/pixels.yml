@@ -5,6 +5,10 @@ fields:
 - name: ometria_enabled
   type: boolean
   label: Ometria
+  description: <strong>The Ometria pixel will slow down the site by 220ms on average
+    (median 80ms).</strong><br><br>This is based on an experiment using real live
+    users, and using the <a href="https://web.dev/lcp/" title="" target="_blank">Largest
+    Contentful Paint metric</a>.
 - type: text
   name: ometria_account
   label: Ometria account id
@@ -90,5 +94,8 @@ fields:
   label: Taboola account id
   description: To track purchases in Shopify, please reference <a href="https://help.taboola.com/hc/en-us/articles/360010109214-Working-With-Shopify-"
     title="" target="_blank">the Taboola documentation regarding Shopify</a>.
+  showOnly:
+    field: taboola_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
