@@ -64,5 +64,19 @@ fields:
     value: true
   config:
     required: true
+- name: pinterest_enabled
+  type: boolean
+  label: Pinterest
+- name: pinterest_id
+  type: text
+  config:
+    required: false
+  label: Pinterest tag id
+  description: To find this, navigate to Ads Manager and click on Ads, then find Conversions
+    and click Create Pinterest Tag (if you've already created a Pinterest tag, you
+    can click into the title to view its unique tag ID).
+  showOnly:
+    field: pinterest_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
