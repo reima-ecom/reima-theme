@@ -31,7 +31,6 @@ Deno.test("collection handles mapper works", () => {
     {
       id: "1",
       handle: "something",
-      descriptionHtml: "",
       publishedOnCurrentPublication: true,
       seo: {
         description: "",
@@ -42,7 +41,6 @@ Deno.test("collection handles mapper works", () => {
     {
       id: "2",
       handle: "something else",
-      descriptionHtml: "",
       publishedOnCurrentPublication: true,
       seo: {
         description: "",
@@ -60,8 +58,8 @@ Deno.test("collection handles mapper works", () => {
 
 Deno.test("jsonl mapper works", () => {
   const actual = jsonlToObjects(
-    `{"id":"gid://shopify/Collection/1","handle":"something","descriptionHtml":"<i>content</i>[first_paragraph]first","publishedOnCurrentPublication":"","seo":{"description":"seo description","title":"seo title"},"title":"collection title","publishedOnCurrentPublication": true}
-{"id":"gid://shopify/Collection/2","handle":"something else","descriptionHtml":"html description","publishedOnCurrentPublication":"","seo":{"description":"","title":""},"title":"another collection","publishedOnCurrentPublication": true}
+    `{"id":"gid://shopify/Collection/1","handle":"something","publishedOnCurrentPublication":"","seo":{"description":"seo description","title":"seo title"},"title":"collection title","publishedOnCurrentPublication": true}
+{"id":"gid://shopify/Collection/2","handle":"something else","publishedOnCurrentPublication":"","seo":{"description":"","title":""},"title":"another collection","publishedOnCurrentPublication": true}
 {"__parentId":"gid://shopify/Collection/2","handle":"product","id":"gid://shopify/Product/","publishedOnCurrentPublication": true}
 `,
   );
@@ -72,8 +70,6 @@ Deno.test("jsonl mapper works", () => {
       handle: "something",
       title: "collection title",
       seoTitle: "seo title",
-      contentHtml: "<i>content</i>",
-      contentHtmlSummary: "first",
     },
     {
       type: "collection",
@@ -81,7 +77,6 @@ Deno.test("jsonl mapper works", () => {
       seoTitle: "another collection",
       handle: "something else",
       title: "another collection",
-      contentHtml: "html description",
     },
     { type: "product", handle: "product", collection: "something else" },
   ];

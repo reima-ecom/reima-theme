@@ -66,7 +66,6 @@ export const collectionBulkQuery: BulkQuery = `
         id
         handle
         title
-        descriptionHtml
         publishedOnCurrentPublication
         seo {
           title
@@ -95,7 +94,6 @@ export type CollectionShopify = {
   id: ID;
   handle: string;
   title: string;
-  descriptionHtml: string;
   publishedOnCurrentPublication: boolean;
   seo: {
     title: string;

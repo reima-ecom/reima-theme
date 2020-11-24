@@ -1,7 +1,3 @@
-<section class="module-content container">
-  {{ if .usehtml }}
-  {{.contenthtml | safeHTML}}
-  {{ else }}
+<section class="module-content">
   {{.content | markdownify}}
-  {{ end }}
 </section>

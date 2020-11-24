@@ -1,15 +1,15 @@
 import {
+  CollectionProductShopify,
   CollectionShopify,
   Jsonl,
   toCollectionTypeShopify,
-  CollectionProductShopify,
 } from "./queries.ts";
 import {
   filterPublished,
   filterType,
-  NodeType,
-  Node,
   getNodeType,
+  Node,
+  NodeType,
 } from "./deps.ts";
 
 export type CollectionHandle = string;
@@ -21,8 +21,6 @@ export type Collection = {
   title: string;
   seoTitle: string;
   seoDescription: string;
-  contentHtml?: string;
-  contentHtmlSummary?: string;
 };
 
 export type CollectionProduct = {
@@ -35,21 +33,13 @@ export type CollectionType = Collection | CollectionProduct;
 
 export const mapCollection = (
   bulkCollection: CollectionShopify,
-): Collection => {
-  // split current shopify description into parts
-  const [contentHtml, contentHtmlSummary] = bulkCollection.descriptionHtml
-    .split("[first_paragraph]");
-  const collection: Collection = {
-    type: "collection",
-    handle: bulkCollection.handle,
-    title: bulkCollection.title,
-    seoTitle: bulkCollection.seo.title || bulkCollection.title,
-    seoDescription: bulkCollection.seo.description,
-  };
-  if (contentHtml) collection.contentHtml = contentHtml;
-  if (contentHtmlSummary) collection.contentHtmlSummary = contentHtmlSummary;
-  return collection;
-};
+): Collection => ({
+  type: "collection",
+  handle: bulkCollection.handle,
+  title: bulkCollection.title,
+  seoTitle: bulkCollection.seo.title || bulkCollection.title,
+  seoDescription: bulkCollection.seo.description,
+});
 
 // collection handle map getter
 
