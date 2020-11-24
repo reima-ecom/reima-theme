@@ -1,0 +1,77 @@
+<!-- 
+  TODO: move to use legacyid param or something similar!
+  using yotpoId for now, since that is the same
+ -->
+
+{{ with site.Data.pixels }}
+{{ if .criteo_enabled }}
+
+{{- if $.IsHome }}
+
+<!-- Criteo Homepage Tag -->
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+  window.criteo_q = window.criteo_q || [];
+  var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+  window.criteo_q.push(
+    { event: "setAccount", account: {{.criteo_account }} }, // You should never update this line
+    { event: "setSiteType", type: deviceType },
+    { event: "viewHome" }
+  );
+</script>
+<!-- END Criteo Home Page Tag -->
+
+{{- else if partial "helpers/is-collection" $ }}
+
+{{ $product_ids := slice }}
+{{ range $.Pages | first 3 }}
+{{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
+{{ $product_ids = $product_ids | append .Params.yotpoId }}
+{{ end }}
+{{ end }}
+
+<!-- Criteo Category / Listing Tag -->
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+  window.criteo_q = window.criteo_q || [];
+  var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+  window.criteo_q.push(
+    { event: "setAccount", account: {{.criteo_account }} }, // You should never update this line
+    { event: "setSiteType", type: deviceType },
+    { event: "viewList", item: {{ $product_ids }} }
+  );
+</script>
+<!-- END Criteo Category / Listing Tag -->
+
+{{- else if partial "helpers/is-product" $ }}
+
+<!-- Criteo Product Tag -->
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+  window.criteo_q = window.criteo_q || [];
+  var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+  window.criteo_q.push(
+    { event: "setAccount", account: {{.criteo_account }} }, // You should never update this line
+    { event: "setSiteType", type: deviceType },
+    {
+      event: "viewItem",
+      item: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
+    }
+  );
+  // Criteo Basket/Cart Tag
+  document.addEventListener('cart-add', (e) => {
+    const checkout = e.detail.checkout;
+    const items = checkout.items.map((item) => ({
+      id: item.productIdLegacy,
+      price: item.price.toString(),
+      quantity: item.quantity.toString(),
+    }));
+    window.criteo_q.push({ event: "viewBasket", item: items });
+  });
+</script>
+<!-- END Criteo Product Tag -->
+
+{{- end }}
+
+{{ end }}
+{{ end }}
