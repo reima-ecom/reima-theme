@@ -1,0 +1,29 @@
+{{ with site.Data.pixels }}
+{{ if .taboola_enabled }}
+
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({ notify: 'event', name: 'page_view' });
+  !function (t, f, a, x) {
+    if (!document.getElementById(x)) {
+      t.async = 1; t.src = a; t.id = x; f.parentNode.insertBefore(t, f);
+    }
+  }(document.createElement('script'),
+    document.getElementsByTagName('script')[0],
+    '//cdn.taboola.com/libtrc/unip/{{.taboola_account}}/tfa.js',
+    'tb_tfa_script');
+</script>
+<noscript>
+  <img src="//trc.taboola.com/{{.taboola_account}}/log/3/unip?en=page_view" width="0" height="0" style="display:none" />
+</noscript>
+
+{{ if partial "helpers/has-product" $ }}
+<script>
+  document.addEventListener('cart-add', (e) => {
+    _tfa.push({ notify: 'event', name: 'add_to_cart' });
+  });
+</script>
+{{ end }}
+
+{{ end }}
+{{ end }}
