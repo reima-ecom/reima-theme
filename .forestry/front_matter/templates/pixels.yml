@@ -78,8 +78,9 @@ fields:
   label: Pinterest tag id
   description: To find this, navigate to Ads Manager and click on Ads, then find Conversions
     and click Create Pinterest Tag (if you've already created a Pinterest tag, you
-    can click into the title to view its unique tag ID).<br><br>To track purchases,
-    Shopify checkout needs to be updated based on <a href="https://help.pinterest.com/en/business/article/link-your-shopify-and-pinterest-accounts"
+    can click into the title to view its unique tag ID).<br><br>Supported events:<br>-
+    view page (fired on all pages)<br>- add to cart (buy links not supported)<br><br>To
+    track purchases, Shopify checkout needs to be updated based on <a href="https://help.pinterest.com/en/business/article/link-your-shopify-and-pinterest-accounts"
     title="" target="_blank">these instructions</a>.
   showOnly:
     field: pinterest_enabled
@@ -92,7 +93,9 @@ fields:
   config:
     required: false
   label: Taboola account id
-  description: To track purchases in Shopify, please reference <a href="https://help.taboola.com/hc/en-us/articles/360010109214-Working-With-Shopify-"
+  description: Supported events:<br>- view page (fired on all pages)<br>- add to cart
+    (buy links not supported)<br><br>To track purchases in Shopify, please reference
+    <a href="https://help.taboola.com/hc/en-us/articles/360010109214-Working-With-Shopify-"
     title="" target="_blank">the Taboola documentation regarding Shopify</a>.
   showOnly:
     field: taboola_enabled
@@ -105,9 +108,9 @@ fields:
   config:
     required: false
   label: Criteo account id
-  description: This is your Criteo account number, e.g. 68180 for the US site.<br><br>This
-    implementation supports the following events:<br>- view home page<br>- view product
-    listing (collection page)<br>- view product<br>- view cart (fired on add to cart)<br><br>User
+  description: This is your Criteo account number, e.g. 68180 for the US site.<br><br>Supported
+    events:<br>- view home page<br>- view product listing (collection page)<br>- view
+    product<br>- view cart (fired on add to cart; buy links not supported)<br><br>User
     email identification not supported.<br><br>To track purchases in Shopify, please
     install Criteo on your Shopify store accordingly.
   showOnly:
