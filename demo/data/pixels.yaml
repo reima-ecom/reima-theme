@@ -10,4 +10,8 @@ facebook_id: facebook-id
 awin_enabled: false
 awin_id: awin-id
 criteo_enabled: true
-criteo_account: 1111
+criteo_account: "1111"
+pinterest_enabled: true
+pinterest_id: "1111"
+taboola_enabled: true
+taboola_account: "1111"
