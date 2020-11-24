@@ -97,5 +97,21 @@ fields:
   showOnly:
     field: taboola_enabled
     value: true
+- name: criteo_enabled
+  type: boolean
+  label: Criteo
+- name: criteo_account
+  type: text
+  config:
+    required: false
+  label: Criteo account id
+  description: This is your Criteo account number, e.g. 68180 for the US site.<br><br>This
+    implementation supports the following events:<br>- view home page<br>- view product
+    listing (collection page)<br>- view product<br>- view cart (fired on add to cart)<br><br>User
+    email identification not supported.<br><br>To track purchases in Shopify, please
+    install Criteo on your Shopify store accordingly.
+  showOnly:
+    field: criteo_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
