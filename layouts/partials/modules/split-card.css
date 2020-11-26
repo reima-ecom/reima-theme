@@ -52,7 +52,7 @@
     padding-right: var(--content-padding);
   }
 
-  .split-card--image-right picture {
+  .split-card--image-right img {
     order: 1;
   }
 }

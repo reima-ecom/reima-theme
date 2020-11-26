@@ -11,7 +11,7 @@ modules:
   - template: split-card
     image: keveni.jpg
     imagealign: right
-    heading: Keveni Sneakers
+    heading: Keveni Sneakers (right)
     link: "#"
     linktext: Get yours now
   - template: split-card
