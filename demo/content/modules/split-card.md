@@ -23,6 +23,13 @@ modules:
     link: "#"
     linktext: Get yours now
   - template: split-card
+    image: keveni.jpg
+    subheading: Gray content
+    background: gray
+    heading: Keveni Sneakers
+    text: These stylish hi-tops are built for hiking, but designed every day use. And for the month of May, if you buy a pair of Keveni shoes, you can pick a pair of casual pants for free. The discount will be automatically taken.
+    imagealign: right
+  - template: split-card
     image: "/brookereimafave.jpg"
     heading: Make the element narrow if needed!
     text: |
@@ -34,6 +41,7 @@ modules:
     subheading: ''
     background: ''
     imagealign: ''
+    narrow: true
 ---
 
 # Split card

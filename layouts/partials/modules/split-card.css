@@ -1,58 +1,74 @@
 .split-card {
-  font-size: var(--text-font-size);
+  --split-width: 100%;
+  --split-max-width: 500px;
+  --split-display: block;
+  --split-content-padding: 0 1rem;
 }
 
-.split-card p,
-.split-card div,
-.split-card h2 {
-  margin: 1rem auto;
+@media (min-width: 500px) {
+  .split-card {
+    --split-width: calc(100% - 2 * var(--content-padding));
+  }
 }
 
-.split-card > div > div {
-  padding: var(--block-padding);
+@media (min-width: 768px) {
+  .split-card {
+    --split-display: grid;
+    --split-max-width: var(--content-max-width);
+    --split-content-padding: 0;
+  }
+
+  .split-card--narrow {
+    --split-max-width: 992px;
+  }
+
+  .split-card--bg-gray {
+    --split-content-padding: 0 1rem 0 0;
+  }
+  
+  .split-card--bg-gray.split-card--image-right {
+    --split-content-padding: 0 0 0 1rem;
+  }
+}
+
+.split-card {
+  display: var(--split-display);
+  width: var(--split-width);
+  max-width: var(--split-max-width);
   margin: var(--block-margin);
+  font-size: var(--text-font-size);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--content-padding);
 }
 
-.split-card header p {
+.split-card--bg-gray {
+  background: var(--color-gray-lighter);
+}
+
+.split-card--image-right img {
+  order: 1;
+}
+
+.split-card > div {
+  padding: var(--split-content-padding);
+  contain: layout;
+}
+
+.split-card > div header,
+.split-card > div div,
+.split-card > div p,
+.split-card > div h2 {
+  margin: 1rem 0;
+}
+
+.split-card > div header p {
   font-size: var(--h6-font-size);
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 0.375rem;
 }
 
-.split-card header h2 {
+.split-card > div header h2 {
   margin-top: 0;
-}
-
-.split-card--bg-gray > div {
-  background: var(--color-gray-lighter);
-}
-
-@media (min-width: 768px) {
-  .split-card {
-    --content-padding: 2.5rem;
-    margin: var(--block-margin);
-    padding: var(--block-padding);
-    max-width: var(--block-width);
-  }
-
-  .split-card > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--content-padding);
-  }
-
-  .split-card > div > div {
-    margin: 0;
-    padding: 0;
-  }
-
-  .split-card--bg-gray > div > div {
-    padding-right: var(--content-padding);
-  }
-
-  .split-card--image-right img {
-    order: 1;
-  }
 }
