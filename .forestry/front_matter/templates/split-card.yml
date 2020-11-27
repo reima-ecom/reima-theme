@@ -62,3 +62,8 @@ fields:
   label: Image alignment on desktop
   description: On desktop, it's possible to align the image to the right. Leave blank
     for the default of image on the left.
+- name: narrow
+  type: boolean
+  label: Narrow
+  description: Make the module a bit narrower on desktop. In practice sets a smaller
+    maximum width than the default content max width.
