@@ -20,40 +20,25 @@
   z-index: 0;
 }
 
-.product-list--center {
-  text-align: center;
-}
-
-.product-list--center ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.product-list--center li {
-  position: relative;
-  padding: 0.5rem;
-  width: 145px;
-}
-
-.product-list li:hover,
-.product-list li:focus-within {
+.product-list__product:hover,
+.product-list__product:focus-within {
   outline: var(--border);
+  outline-offset: 0.5rem;
 }
 
-.product-list li h3 {
+.product-list__product h3 {
   font-size: 1em;
   letter-spacing: normal;
   margin: 0.25rem 0;
 }
 
-.product-list li .color-dots {
+.product-list__swatches {
   display: flex;
   justify-content: center;
   margin: 0.75rem 0 0.5rem;
 }
 
-.product-list li .color-dots > a {
+.product-list__swatch {
   margin: 0 0.25rem;
   height: 1rem;
   width: 1rem;
@@ -64,12 +49,12 @@
   color: transparent;
 }
 
-.product-list li .color-dots > a img {
+.product-list__swatch img {
   width: 100%;
   height: 100%;
 }
 
-.product-list li .color-dots > a.color-dots__see-more {
+.product-list__swatch--see-more {
   background-color: white;
   color: black;
   font-size: 1.5rem;
@@ -77,7 +62,7 @@
   text-decoration: none;
 }
 
-.product-list li .color-dots > a.color-dots__see-more:hover {
+.product-list__swatch--see-more:hover {
   background-color: var(--color-cta-hover);
   color: white;
 }
@@ -95,13 +80,17 @@
   color: var(--color-gray);
 }
 
-/* #region sold out tag and muting */
-
-.product-list li .sold-out-tag {
-  display: none;
+.product-list__show-all {
+  align-self: center;
 }
 
-.product-list li.sold-out .sold-out-tag {
+/* #region sold out tag and muting */
+
+.product-list__product--sold-out > img {
+  opacity: 0.4;
+}
+
+.product-list__sold-out-tag {
   display: block;
   position: absolute;
   padding: 0.25rem 0.5rem;
@@ -114,18 +103,10 @@
   letter-spacing: 0.1em;
 }
 
-.product-list li.sold-out img {
-  opacity: 0.4;
-}
-
 /* #endregion */
 
 @media (min-width: 992px) {
   .product-list ul {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-
-  .product-list--center li {
-    width: 200px;
   }
 }

@@ -139,5 +139,11 @@
   },
   "404 page content": {
     "other": "The page you were looking for was *not* found."
+  },
+  "Product sold out tag": {
+    "other": "Sold Out"
+  },
+  "Product list show all": {
+    "other": "Show All"
   }
 }

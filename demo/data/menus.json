@@ -38,6 +38,11 @@
           "url": "/modules/hero"
         },
         {
+          "children": [],
+          "name": "Products",
+          "url": "/modules/products"
+        },
+        {
           "name": "Image Links - Small",
           "url": "/modules/image-links-small",
           "children": []

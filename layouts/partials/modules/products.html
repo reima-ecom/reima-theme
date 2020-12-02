@@ -15,6 +15,7 @@
   <ul>
     <!-- get collection child product pages -->
     {{ $productPages := .Pages }}
+    {{ $product_count := len .Pages }}
     <!-- limit results if set -->
     {{ with $.limit }}
     {{ $productPages = $productPages | first . }}
@@ -27,14 +28,14 @@
     {{ with site.GetPage (printf "/products/%s" $producthandle) }}
     <!-- this is the product page -->
     {{ $product := . }}
-    <li href="{{$link}}" class="{{if not .Params.available}}sold-out{{end}}" handle="{{$producthandle}}">
+    <li href="{{$link}}" class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}}" handle="{{$producthandle}}">
       {{ range .Resources.ByType "image" | first 1 }}
       <!-- grid layout with auto-fit and min 150px cells -->
       <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
       {{ $sizes := "233px" }}
       {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes)}}
       {{ end }}
-      <div class="color-dots">
+      <div class="product-list__swatches">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
         {{ $color_dots := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
         {{ $show_plus := false }}
@@ -46,7 +47,8 @@
         {{ with . }}
         {{ with partial "helpers/get-color" . }}
         <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
-          {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}>
+          {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}
+          class="product-list__swatch">
           {{ if .image }}
           <img src="{{.image}}" alt="{{.name}}">
           {{ end }}
@@ -55,7 +57,7 @@
         {{ end }}
         {{ end }}
         {{ if $show_plus  }}
-        <a href="{{$link}}" class="color-dots__see-more">+</a>
+        <a href="{{$link}}" class="product-list__swatch product-list__swatch--see-more">+</a>
         {{ end }}
       </div>
       <h3>
@@ -71,11 +73,20 @@
         <span>({{.count}})</span>
       </div>
       {{ end }}
-      <div class="sold-out-tag">Sold Out</div>
+      {{ if not .Params.available }}
+      <div class="product-list__sold-out-tag">{{T "Product sold out tag"}}</div>
+      {{ end }}
     </li>
     {{ else }}
     {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .Dir .Kind .Type }}
     {{ end }}
+    {{ end }}
+    {{ if gt $product_count (len $productPages)}}
+    <li class="product-list__show-all">
+      <a href="{{$collectionPage.RelPermalink}}" class="btn">
+        {{default (T "Product list show all") $.show_all}}
+      </a>
+    </li>
     {{ end }}
   </ul>
 
