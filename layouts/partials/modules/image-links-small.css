@@ -1,25 +1,13 @@
 .module-image-links-small {
-  --card-min: 100px;
-  --card-max: 200px;
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
 }
 
-@media (min-width: 768px) {
-  .module-image-links-small {
-    --card-min: 120px;
-  }
-}
-
 .module-image-links-small > div {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), max-content));
+  grid-template-columns: repeat(auto-fit, 120px);
   text-align: center;
   gap: calc(var(--content-padding) / 2);
-}
-
-.module-image-links-small > div > * {
-  max-width: var(--card-max);
 }

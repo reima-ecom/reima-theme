@@ -7,11 +7,10 @@
     <div>
       <a href="{{.link}}/" class="silent-link text-sm">
       <!-- 
-        we really don't know how grid columns are going to be laid out,
-        but we know they are 100-200px, so assume width of 200px
+        fix image width to 120px
        -->
-        {{ $sizes := "200px" }}
-        {{ partial "img" (dict "image" .image "widths" "100,200,400" "sizes" $sizes) }}
+        {{ $sizes := "120px" }}
+        {{ partial "img" (dict "image" .image "widths" "120,240" "sizes" $sizes) }}
         {{ .title }}
       </a>
     </div>
