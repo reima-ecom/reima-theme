@@ -24,6 +24,7 @@ fields:
   - split-card
   - image-grid
   - image-links
+  - image-links-small
   - products
   - testimonials
   - article-grid
