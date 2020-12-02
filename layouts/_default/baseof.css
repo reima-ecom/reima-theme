@@ -238,6 +238,7 @@ a:hover,
 
 /* #region buttons */
 
+.g-links-as-buttons a,
 .btn {
   border-radius: 2px;
   background-color: transparent;
@@ -255,6 +256,7 @@ a:hover,
   font-family: inherit;
 }
 
+.g-links-as-buttons a:hover,
 .btn:hover {
   background-color: var(--color-text);
   border-color: var(--color-text);

@@ -12,3 +12,7 @@ fields:
     schema:
       format: markdown
   label: Content
+- name: button_links
+  type: boolean
+  label: Links as buttons
+  description: Makes all the links within this module look like buttons.

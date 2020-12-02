@@ -72,6 +72,10 @@
           "children": []
         },
         {
+          "name": "Content (text)",
+          "url": "/modules/content"
+        },
+        {
           "name": "Content with Tables",
           "url": "/modules/content-table"
         },
