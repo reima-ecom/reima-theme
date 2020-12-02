@@ -65,8 +65,8 @@
   letter-spacing: var(--h4-letter-spacing);
 }
 
-/* make content module left-aligned */
-.grid__main .module-content {
+/* make content module left-aligned when sidebar */
+.grid--has-sidebar .grid__main .module-content {
   margin-left: 0;
 }
 
