@@ -4,7 +4,7 @@
 
 .modal.open {
   display: flex;
-  background: rgba(0,0,0,0.5);
+  background: var(--color-overlay-bg);
   position: fixed;
   left: 0;
   top: 0;
@@ -33,7 +33,9 @@
   top: 1rem;
 }
 
-.modal h2 {font-size: 1.5rem;}
+.modal h2 {
+  font-size: 1.5rem;
+}
 
 .modal h3 {
   margin-bottom: 0;

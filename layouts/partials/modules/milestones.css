@@ -12,14 +12,14 @@
 }
 
 .milestones__about-timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 34px;
   top: 0;
   bottom: 0;
   width: 2px;
   height: 100%;
-  background-color: #ccc;
+  background-color: var(--color-gray-light);
 }
 
 .milestones__about-timeline li {
@@ -36,15 +36,15 @@
   align-items: flex-start;
 }
 
-.milestones__media>.milestones__media-left {
-  margin-right: .75rem;
+.milestones__media > .milestones__media-left {
+  margin-right: 0.75rem;
 }
 
-.milestones__media>.milestones__media-body {
+.milestones__media > .milestones__media-body {
   flex: 1 1 auto;
 }
 
-.milestones__media>.milestones__media-middle {
+.milestones__media > .milestones__media-middle {
   align-self: center;
 }
 
@@ -53,7 +53,7 @@
   padding: 3px;
   width: 70px;
   max-width: none;
-  box-shadow: inset 0px 0px 0px 2px #fff;
+  box-shadow: inset 0px 0px 0px 2px white;
   border-radius: 50%;
   box-sizing: border-box;
 }
@@ -61,18 +61,18 @@
 .milestones__about-timeline-year {
   font-size: 1.375rem;
   font-weight: 700;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .milestones__about-timeline-heading,
 .milestones__about-timeline-text {
   margin-top: 0;
-  margin-bottom: .375rem;
+  margin-bottom: 0.375rem;
 }
 
 .milestones__external-link .milestones__external-link-icon {
   display: inline-block;
-  fill: #d2092d;
+  fill: var(--color-reima-red);
   vertical-align: middle;
   width: 1rem;
   height: 1rem;
@@ -80,7 +80,7 @@
 }
 
 .milestones__external-link:hover .milestones__external-link-icon {
-  fill: #af0f03;
+  fill: var(--color-reima-red-hover);
 }
 
 @media (min-width: 768px) {

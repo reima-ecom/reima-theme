@@ -10,7 +10,23 @@
       "children": [
         {
           "name": "Collection page",
-          "url": "/collections/tops"
+          "url": "/collections/tops",
+          "children": [
+            {
+              "name": "Sub page 1",
+              "url": "/collections/tops"
+            },
+            {
+              "name": "Sub page 2",
+              "url": "/collections/tops",
+              "children": [
+                {
+                  "name": "Sub sub page",
+                  "url": "/collections/tops"
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Collection interstitial",

@@ -6,35 +6,59 @@ input[type="checkbox"][id|="open"] {
 
 .announcement {
   width: 100%;
-  background-color: #f2f2f5;
-  padding: 6px 20px;
-  box-sizing: border-box;
+  background-color: var(--color-fg);
+  color: white;
   text-align: center;
-  font-size: 0.875rem;
+  font-size: var(--text-font-size-sm);
+  padding: 0.5rem 0;
+}
+
+.announcement .announcement--content {
+  padding: var(--block-padding);
+  margin: auto;
+  max-width: var(--block-width);
 }
 
 .announcement a {
-  color: inherit;
+  color: white;
   text-decoration: none;
+}
+
+.announcement a:hover {
+  color: var(--color-reima-red);
 }
 
 body > header {
   position: sticky;
   top: 0;
-  border-bottom: 1px solid #bfbfbf;
-  padding: 10px 0;
-  background: #fff;
+  border-bottom: var(--border);
+  padding: 0;
+  background: white;
   z-index: 1;
 }
 
 .menu {
   display: flex;
   align-items: center;
+  height: var(--menu-height);
 }
 
-.menu input:focus + label.menu__hamburger {
+.menu input:focus + label.menu__hamburger,
+.menu
+  input:focus
+  + label
+  + .overlay
+  > .overlay__inner
+  > .overlay__header
+  > label {
   outline: var(--focus-outline);
   outline-offset: 2px;
+}
+
+header .menu__links {
+  display: flex;
+  flex: 1;
+  align-items: center;
 }
 
 /* this is the menu opener label */
@@ -43,24 +67,42 @@ body > header {
 }
 
 .logo-link {
-  margin: 14px 14px 14px 0;
-  flex: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: var(--logo-width);
+  height: var(--logo-height);
+}
+
+.logo-link a {
+  display: block;
+  height: 100%;
+}
+
+.logo-link a svg {
+  width: var(--logo-width);
+  height: 100%;
+}
+
+header .menu__icons {
+  align-items: center;
   display: flex;
 }
 
-.logo-link svg {
-  display: block;
+body > header .icons {
+  display: inline-block;
 }
 
-body > header .icons {
+header .icons-grid {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.75rem;
   grid-auto-flow: column;
 }
 
 .icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border: none;
   padding: 0;
   background: none;
@@ -72,7 +114,7 @@ body > header .icons {
 }
 
 .icon:hover {
-  fill: #ff5c38;
+  fill: var(--color-reima-red);
 }
 
 .icon svg {
@@ -84,31 +126,33 @@ body > header .icons {
   display: none;
 }
 
-#menu > * {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 100%;
+#menu > .overlay__inner > ul {
+  overflow: auto;
 }
 
 #menu ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  flex: 1 0 100%;
-  overflow: auto;
+  flex: 1 0 90%;
 }
 
 #menu li {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 0 1rem 1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  border-bottom: var(--border);
 }
 
 #menu li label {
-  padding: 0.2rem;
+  margin: 0 1rem;
   box-sizing: border-box;
+}
+
+#menu li > input:focus ~ label {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 #menu input:checked + label svg {
@@ -119,21 +163,30 @@ body > header .icons {
   text-decoration: none;
   color: inherit;
   font-weight: 700;
-  font-size: 1.25em;
-  padding: 0.5rem 0;
+  font-size: 1.25rem;
   flex: 1 0 auto;
+  transition: all 0.4s;
+}
+
+#menu ul a[href=""] {
+  pointer-events: none;
+}
+
+#menu ul a:active {
+  background: transparent;
 }
 
 #menu ul ul li {
-  padding-right: 0;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-left: 0;
+}
+
+#menu ul ul li:last-child {
+  border-bottom: none;
 }
 
 #menu ul ul a {
   font-weight: 400;
-  font-size: 1.125em;
-  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
 
 #menu li > ul {
@@ -142,18 +195,21 @@ body > header .icons {
 
 #menu input:checked ~ ul {
   display: initial;
+  margin-top: 0.75rem;
+  border-top: var(--border);
+}
+
+#menu ul ul input:checked ~ ul {
+  padding-left: 1rem;
+}
+
+#menu ul ul input:checked ~ a {
+  padding-left: 1rem;
+  font-weight: 700;
 }
 
 #menu svg {
   display: block;
-}
-
-#menu h1 {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
 }
 
 @media (min-width: 1024px) {
@@ -164,6 +220,10 @@ body > header .icons {
     width: unset;
     height: unset;
     flex: 1;
+    visibility: visible;
+    opacity: 1;
+    padding-left: 1rem;
+    transition: none;
   }
 
   #menu > * {
@@ -171,8 +231,17 @@ body > header .icons {
     width: 100%;
   }
 
-  #menu.overlay h1 {
+  #menu.overlay .overlay__inner {
+    transform: none;
+    transition: none;
+  }
+
+  #menu.overlay .overlay__header {
     display: none;
+  }
+
+  #menu > .overlay__inner > ul {
+    overflow: visible;
   }
 
   #menu ul {
@@ -183,16 +252,16 @@ body > header .icons {
   }
 
   #menu ul a {
-    font-size: 1.125rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   #menu ul a:hover {
-    color: #ff5c38;
+    color: inherit;
   }
 
   #menu ul ul label {
+    display: block;
     margin-right: 0.5rem;
   }
 
@@ -205,25 +274,31 @@ body > header .icons {
     transform: rotate(270deg);
   }
 
-  #menu ul ul li:hover {
-    background-color: #f2f2f2;
-  }
-
-  #menu ul ul li:hover label {
-    fill: #ff5c38;
+  #menu ul ul li:hover > label {
+    fill: var(--color-reima-red);
   }
 
   #menu ul ul li {
-    padding: 0;
+    padding: 0.75rem 0 1rem;
     flex-wrap: nowrap;
     white-space: nowrap;
+    border-bottom: var(--border);
+    width: 100%;
+  }
+
+  #menu ul ul li a {
+    padding: 0;
   }
 
   #menu li {
     position: relative;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
     flex: 0 1 auto;
+    border-bottom: none;
+  }
+
+  #menu li label {
+    display: none;
   }
 
   #menu ul ul,
@@ -231,17 +306,36 @@ body > header .icons {
     display: none;
   }
 
-  #menu li:hover > ul {
-    display: block;
+  #menu li > ul {
+    background-color: white;
+    padding: 1rem;
     position: absolute;
-    background: white;
-    left: 0;
-    padding: 0;
-    top: 100%;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09);
-    z-index: 1;
+    display: none;
+    top: 40px;
+    max-height: initial;
+    -webkit-box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.3);
+    padding-top: 0;
+    opacity: 0;
+    transition: all 0.4s;
   }
 
+  #menu .overlay__inner > ul > li > a:focus {
+    outline: none;
+  }
+
+  #menu li > input:focus ~ a {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+  }
+
+  #menu li input:checked ~ ul,
+  #menu li:hover > ul {
+    opacity: 1;
+    display: flex;
+  }
+
+  #menu ul ul li input:checked ~ ul,
   #menu ul ul li:hover > ul {
     left: 100%;
     top: 0;
@@ -252,7 +346,10 @@ body > header .icons {
   }
 
   .logo-link {
+    position: initial;
+    display: flex;
     flex: 0 0 auto;
     order: -1;
+    width: auto;
   }
 }

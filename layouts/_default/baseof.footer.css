@@ -1,7 +1,7 @@
 footer {
-  background-color: #38383b;
-  color: #fff;
-  padding: 20px;
+  background-color: var(--color-fg);
+  color: white;
+  padding: 1rem;
 }
 
 footer ul {
@@ -20,7 +20,7 @@ footer > ul > li {
 }
 
 footer > ul > li::after {
-  content: ' ';
+  content: " ";
   height: 1px;
   display: block;
   background: white;
@@ -49,7 +49,16 @@ footer ul ul {
 footer a {
   color: white;
   text-decoration: none;
-  flex: 1 1 auto;
+  font-size: 0.875rem;
+  z-index: 1;
+}
+
+footer a[href=""] {
+  pointer-events: none;
+}
+
+footer a:hover {
+  color: white;
 }
 
 footer > p {
@@ -58,6 +67,24 @@ footer > p {
 
 footer label {
   fill: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+footer label.icon {
+  width: 100%;
+}
+
+footer label.icon svg {
+  width: auto;
+  position: absolute;
+  right: 0;
+}
+
+footer input:focus + label.icon {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 footer input:checked + label svg {

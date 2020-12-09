@@ -220,7 +220,9 @@ export default class RCart extends HTMLElement {
       await this.ensureClient();
       try {
         checkout = await this.client.checkout.fetch(this.checkoutId);
-        if (checkout && checkout.order) throw new Error('Checkout has an associated order');
+        if (checkout && checkout.order) {
+          throw new Error("Checkout has an associated order");
+        }
       } catch (error) {
         // if there was an error, just ditch the old checkout
         this.checkoutId = "";
@@ -243,7 +245,7 @@ export default class RCart extends HTMLElement {
     this.subtotal = this.querySelector<HTMLElement>(".summary .price")!;
 
     // make cart open on icon link click (instead of going to the cart page)
-    this.querySelector("a.icon")!.addEventListener("click", (e: Event) => {
+    this.querySelector("button.icon")!.addEventListener("click", (e: Event) => {
       e.preventDefault();
       this.open = true;
     });

@@ -3,6 +3,7 @@
   --split-max-width: 500px;
   --split-display: block;
   --split-content-padding: 0 1rem;
+  font-size: var(--text-font-size);
 }
 
 @media (min-width: 500px) {
@@ -25,7 +26,7 @@
   .split-card--bg-gray {
     --split-content-padding: 0 1rem 0 0;
   }
-  
+
   .split-card--bg-gray.split-card--image-right {
     --split-content-padding: 0 0 0 1rem;
   }

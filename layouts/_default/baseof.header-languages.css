@@ -1,17 +1,22 @@
 .languages {
+  display: inline-block;
   list-style: none;
   padding: 0;
-  margin: 0 1rem;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .languages li {
   display: inline-block;
+  margin-right: 0.75rem;
 }
 
 .languages a {
   color: inherit;
   text-decoration-color: inherit;
-  font-weight: normal;
+  font-weight: 400;
+}
+
+.languages a:hover {
+  color: var(--color-reima-red);
 }

@@ -11,7 +11,7 @@ r-newsletter p {
 }
 
 r-newsletter input {
-  background-color: #f2f2f5;
+  background-color: var(--color-gray-lighter);
   width: 100%;
   font-size: 1rem;
 }
@@ -22,7 +22,8 @@ r-newsletter label {
   margin: 0.75rem 0;
 }
 
-r-newsletter label, r-newsletter label .md {
+r-newsletter label,
+r-newsletter label .md {
   font-size: 0.875rem;
 }
 

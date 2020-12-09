@@ -79,94 +79,99 @@
   {{ $menus := partial "helpers/get-locale-data" "menus" }}
   {{ if $announcements.headerAnnouncementEnabled }}
   <aside class="announcement">
-    {{$announcements.headerAnnouncement | markdownify}}
+    <div class="announcement--content">
+      {{$announcements.headerAnnouncement | markdownify}}
+    </div>
   </aside>
   {{ end }}
   <header>
     <div class="page-width menu">
-      <input type="checkbox" id="open-menu">
-      <label for="open-menu" class="menu__hamburger icon">
-        <svg viewBox="0 0 32 32">
-          <path
-            d="M30.5 7.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0zM30.5 17.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0zM30.5 27.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0z">
-          </path>
-        </svg>
-      </label>
-      <div class="overlay" id="menu">
-        <div>
-          <h1>
-            <svg width="130" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 150">
+      <div class="menu__links">
+        <input type="checkbox" id="open-menu">
+        <label for="open-menu" class="menu__hamburger icon">
+          <svg viewBox="0 0 32 32">
+            <path
+              d="M30.5 7.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0zM30.5 17.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0zM30.5 27.5h-29q-0.625 0-1.063-0.438t-0.438-1.063 0.438-1.063 1.063-0.438v0h29q0.625 0 1.063 0.438t0.438 1.063-0.438 1.063-1.063 0.438v0z">
+            </path>
+          </svg>
+        </label>
+        <div class="overlay" id="menu">
+          <div class="overlay__inner">
+            <div class="overlay__header">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 150">
+                <use xlink:href="#logo" />
+              </svg>
+              <label for="open-menu" class="icon" close>
+                <svg>
+                  <symbol id="icon-close" viewBox="0 0 32 32">
+                    <path
+                      d="M24.25 25.75q-0.313 0-0.578-0.109t-0.484-0.328v0l-16.5-16.5q-0.219-0.188-0.328-0.469t-0.109-0.594q0-0.625 0.438-1.063t1.063-0.438q0.313 0 0.594 0.109t0.469 0.328l16.5 16.5q0.219 0.188 0.328 0.469t0.109 0.594q0 0.625-0.438 1.063t-1.063 0.438v0 0zM7.75 25.75q-0.625 0-1.063-0.438t-0.438-1.063q0-0.313 0.125-0.578t0.313-0.484v0l16.5-16.5q0.219-0.188 0.484-0.281t0.547-0.094q0.625 0 1.063 0.438t0.438 1.063q0 0.281-0.109 0.547t-0.297 0.453v0l-16.5 16.5q-0.188 0.219-0.469 0.328t-0.594 0.109v0 0z">
+                    </path>
+                  </symbol>
+                  <use xlink:href="#icon-close"></use>
+                </svg>
+              </label>
+            </div>
+            {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
+          </div>
+        </div>
+        <div class="logo-link">
+          <a href="{{(site.GetPage "/").RelPermalink}}" title="Reima">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 150" itemprop="logo">
+              <symbol id="logo">
+                <defs>
+                  <style>
+                    .cls-logo {
+                      fill: #d2092d;
+                    }
+                  </style>
+                </defs>
+                <title>Reima</title>
+                <path class="cls-logo"
+                  d="M84.08,49.9a48.18,48.18,0,0,0-14.2-2.22c-26,0-29.46,25.34-29.46,47.09v50.64H0V4.89H40.43v19.9H41c7-8.49,20-20,33.54-20.34a54.75,54.75,0,0,1,18.77,3Z"
+                  transform="translate(0)"></path>
+                <path class="cls-logo"
+                  d="M136.95,81.59c0,17.75,6.93,37.78,28,37.78,13.28,0,21.66-8,27.15-19.18l37.25,6C219.54,134.26,194.7,150,165,150c-43.89,0-70.75-30.91-70.75-73.56S117,.31,162.94.31c46.49,0,67.28,34.06,67.28,76.42v4.86Zm55.16-24.9c-2-14.31-11.26-28.33-26.86-28.33-16.17,0-25.12,13.74-27.15,28.33Z"
+                  transform="translate(0)"></path>
+                <rect class="cls-logo" x="244.67" y="3.97" width="40.43" height="140.53"></rect>
+                <path class="cls-logo"
+                  d="M345,17.48h.58C353.33,6.32,367.2.31,380.19.31c17.62,0,29.89,6.27,40.11,21.08C429.45,8.61,445.74.31,462.2.31c36.1,0,45,26.9,45,57.53v87.58H466.82V71.58c0-13.74.86-39.21-19.06-39.21-21.95,0-21.66,29.48-21.66,44.08v69H385.68V74.15c0-13.74,1.73-41.79-19.35-41.79C343.81,32.37,345,61.56,345,76.44v69H304.53V4.89H345Z"
+                  transform="translate(0)"></path>
+                <path class="cls-logo"
+                  d="M660,145.11H620.15V132.23h-.58a44.3,44.3,0,0,1-35.93,17.46c-41.59,0-65.27-37.5-65.27-75.56,0-37.21,24-74.13,64.68-74.13,14.73,0,27.27,6.3,37.09,17.75V4.58H660Zm-37-70.41c0-18.89-11.75-39.21-32.55-39.21S558.14,55.81,558.14,74.7s11.47,39.5,32.26,39.5,32.55-20.61,32.55-39.5"
+                  transform="translate(0)"></path>
+              </symbol>
               <use xlink:href="#logo" />
             </svg>
-            <label for="open-menu" class="icon" close>
-              <svg>
-                <symbol id="icon-close" viewBox="0 0 32 32">
-                  <path
-                    d="M24.25 25.75q-0.313 0-0.578-0.109t-0.484-0.328v0l-16.5-16.5q-0.219-0.188-0.328-0.469t-0.109-0.594q0-0.625 0.438-1.063t1.063-0.438q0.313 0 0.594 0.109t0.469 0.328l16.5 16.5q0.219 0.188 0.328 0.469t0.109 0.594q0 0.625-0.438 1.063t-1.063 0.438v0 0zM7.75 25.75q-0.625 0-1.063-0.438t-0.438-1.063q0-0.313 0.125-0.578t0.313-0.484v0l16.5-16.5q0.219-0.188 0.484-0.281t0.547-0.094q0.625 0 1.063 0.438t0.438 1.063q0 0.281-0.109 0.547t-0.297 0.453v0l-16.5 16.5q-0.188 0.219-0.469 0.328t-0.594 0.109v0 0z">
-                  </path>
-                </symbol>
-                <use xlink:href="#icon-close"></use>
-              </svg>
-            </label>
-          </h1>
-          {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
+          </a>
         </div>
       </div>
-      <div class="logo-link">
-        <a href="{{(site.GetPage "/").RelPermalink}}" title="Reima">
-          <svg width="130" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 150" itemprop="logo">
-            <symbol id="logo">
-              <defs>
-                <style>
-                  .cls-logo {
-                    fill: #d2092d;
-                  }
-                </style>
-              </defs>
-              <title>Reima</title>
-              <path class="cls-logo"
-                d="M84.08,49.9a48.18,48.18,0,0,0-14.2-2.22c-26,0-29.46,25.34-29.46,47.09v50.64H0V4.89H40.43v19.9H41c7-8.49,20-20,33.54-20.34a54.75,54.75,0,0,1,18.77,3Z"
-                transform="translate(0)"></path>
-              <path class="cls-logo"
-                d="M136.95,81.59c0,17.75,6.93,37.78,28,37.78,13.28,0,21.66-8,27.15-19.18l37.25,6C219.54,134.26,194.7,150,165,150c-43.89,0-70.75-30.91-70.75-73.56S117,.31,162.94.31c46.49,0,67.28,34.06,67.28,76.42v4.86Zm55.16-24.9c-2-14.31-11.26-28.33-26.86-28.33-16.17,0-25.12,13.74-27.15,28.33Z"
-                transform="translate(0)"></path>
-              <rect class="cls-logo" x="244.67" y="3.97" width="40.43" height="140.53"></rect>
-              <path class="cls-logo"
-                d="M345,17.48h.58C353.33,6.32,367.2.31,380.19.31c17.62,0,29.89,6.27,40.11,21.08C429.45,8.61,445.74.31,462.2.31c36.1,0,45,26.9,45,57.53v87.58H466.82V71.58c0-13.74.86-39.21-19.06-39.21-21.95,0-21.66,29.48-21.66,44.08v69H385.68V74.15c0-13.74,1.73-41.79-19.35-41.79C343.81,32.37,345,61.56,345,76.44v69H304.53V4.89H345Z"
-                transform="translate(0)"></path>
-              <path class="cls-logo"
-                d="M660,145.11H620.15V132.23h-.58a44.3,44.3,0,0,1-35.93,17.46c-41.59,0-65.27-37.5-65.27-75.56,0-37.21,24-74.13,64.68-74.13,14.73,0,27.27,6.3,37.09,17.75V4.58H660Zm-37-70.41c0-18.89-11.75-39.21-32.55-39.21S558.14,55.81,558.14,74.7s11.47,39.5,32.26,39.5,32.55-20.61,32.55-39.5"
-                transform="translate(0)"></path>
-            </symbol>
-            <use xlink:href="#logo" />
-          </svg>
-        </a>
-      </div>
 
-      <!-- if this site is multilingual, show language selector -->
-      {{ if site.IsMultiLingual }}
-      <ul class="languages">
-        {{ range $.Site.Languages }}
-        <li>
-          {{ if eq . $.Site.Language }}
-          {{$.Site.Language.Lang}}
-          {{ else }}
-          {{ range where $.Translations "Lang" .Lang }}
-          <a href="{{.RelPermalink}}">
-            {{.Language.Lang}}
-          </a>
-          {{else}}
-          <a href="/{{.}}">
-            {{.Lang}}
-          </a>
+      <div class="menu__icons">
+        <!-- if this site is multilingual, show language selector -->
+        {{ if site.IsMultiLingual }}
+        <ul class="languages">
+          {{ range $.Site.Languages }}
+          <li>
+            {{ if eq . $.Site.Language }}
+            {{$.Site.Language.Lang}}
+            {{ else }}
+            {{ range where $.Translations "Lang" .Lang }}
+            <a href="{{.RelPermalink}}">
+              {{.Language.Lang}}
+            </a>
+            {{else}}
+            <a href="/{{.}}">
+              {{.Lang}}
+            </a>
+            {{ end }}
+            {{ end }}
+          </li>
           {{ end }}
-          {{ end }}
-        </li>
+        </ul>
         {{ end }}
-      </ul>
-      {{ end }}
 
-      <!-- 
+        <!-- 
       <a href="{{(.GetPage "account/index").RelPermalink}}" class="icon">
         <svg id="icon-uniE91A" viewBox="0 0 32 32">
           <path
@@ -175,22 +180,25 @@
         </svg>
       </a>
        -->
-      <div class="icons">
-        {{ if site.Params.public.algolia }}
-        {{ $tsname := "partials/elements/r-search.ts" }}
-        {{ $.Scratch.Add "ts-lazy" $tsname }}
-        <button class="icon" openid="search" load="{{$tsname}}">
-          <svg viewBox="0 0 32 32">
-            <path
-              d="M31.563 29.438l-8.375-8.375q1.313-1.656 2.063-3.719t0.75-4.375q0-2.688-1.031-5.063t-2.797-4.141-4.141-2.797q-2.375-1-5.063-1t-5.063 1q-2.375 1.031-4.141 2.797t-2.797 4.141q-1 2.375-1 5.063t1 5.063q1.031 2.375 2.797 4.141t4.141 2.797 5.063 1.031q2.313 0 4.375-0.75t3.75-2.094l-0.031 0.031 8.375 8.375q0.188 0.188 0.453 0.297t0.578 0.109q0.625 0 1.063-0.438t0.438-1.063q0-0.313-0.109-0.578t-0.297-0.453v0 0zM13 23q-2.063 0-3.906-0.781-1.813-0.781-3.172-2.141t-2.141-3.172q-0.781-1.844-0.781-3.906t0.781-3.906q0.781-1.813 2.141-3.172t3.172-2.141q1.844-0.781 3.906-0.781t3.906 0.781q1.813 0.781 3.172 2.141t2.141 3.172q0.781 1.844 0.781 3.906v0q0 2.063-0.781 3.906-0.781 1.813-2.141 3.172t-3.172 2.141q-1.844 0.781-3.906 0.781v0z">
-            </path>
-          </svg>
-        </button>
-        <div class="overlay" id="search">
-          {{partialCached "elements/r-search" $}}
+        <div class="icons">
+          <div class="icons-grid">
+            {{ if site.Params.public.algolia }}
+            {{ $tsname := "partials/elements/r-search.ts" }}
+            {{ $.Scratch.Add "ts-lazy" $tsname }}
+            <button class="btn btn--icon icon" openid="search" load="{{$tsname}}">
+              <svg viewBox="0 0 32 32">
+                <path
+                  d="M31.563 29.438l-8.375-8.375q1.313-1.656 2.063-3.719t0.75-4.375q0-2.688-1.031-5.063t-2.797-4.141-4.141-2.797q-2.375-1-5.063-1t-5.063 1q-2.375 1.031-4.141 2.797t-2.797 4.141q-1 2.375-1 5.063t1 5.063q1.031 2.375 2.797 4.141t4.141 2.797 5.063 1.031q2.313 0 4.375-0.75t3.75-2.094l-0.031 0.031 8.375 8.375q0.188 0.188 0.453 0.297t0.578 0.109q0.625 0 1.063-0.438t0.438-1.063q0-0.313-0.109-0.578t-0.297-0.453v0 0zM13 23q-2.063 0-3.906-0.781-1.813-0.781-3.172-2.141t-2.141-3.172q-0.781-1.844-0.781-3.906t0.781-3.906q0.781-1.813 2.141-3.172t3.172-2.141q1.844-0.781 3.906-0.781t3.906 0.781q1.813 0.781 3.172 2.141t2.141 3.172q0.781 1.844 0.781 3.906v0q0 2.063-0.781 3.906-0.781 1.813-2.141 3.172t-3.172 2.141q-1.844 0.781-3.906 0.781v0z">
+                </path>
+              </svg>
+            </button>
+            <div class="overlay" id="search">
+              {{partialCached "elements/r-search" $}}
+            </div>
+            {{ end }}
+            {{partial "elements/r-cart" $}}
+          </div>
         </div>
-        {{ end }}
-        {{partial "elements/r-cart" $}}
       </div>
     </div>
   </header>

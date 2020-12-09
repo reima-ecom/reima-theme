@@ -78,7 +78,7 @@
 .grid__sidebar h2 {
   font-size: 0.875rem;
   letter-spacing: 0.03rem;
-  line-height: 1.375;
+  line-height: var(--text-line-height);
   text-transform: uppercase;
 }
 
@@ -91,7 +91,7 @@
 
 /* make links discreet */
 .grid__sidebar ul a {
-  color: #38383b;
+  color: var(--color-text);
   text-decoration: none;
   display: block;
   margin: 0.5rem 0;
@@ -170,6 +170,8 @@
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
   cursor: pointer;
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
 }
 
 .filter-list__name-checkbox:checked ~ .filter-list__value {

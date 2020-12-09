@@ -30,8 +30,8 @@
   margin: var(--content-padding);
   display: block;
   margin-bottom: 0;
- }
- 
+}
+
 .testimonials blockquote {
   border: var(--border);
   font-size: var(--text-font-size);
@@ -75,6 +75,11 @@
 .testimonials blockquote > footer a {
   color: inherit;
   text-decoration: underline;
+}
+
+.testimonials blockquote > footer a:hover {
+  color: var(--color-reima-red);
+  text-decoration-color: var(--color-reima-red);
 }
 
 @media (min-width: 768px) {

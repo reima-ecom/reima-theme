@@ -1,29 +1,49 @@
 :root {
   --color-text: #38383b;
   --color-text-highlight: #fff0c5;
-  --color-fg: #38383b;
+  --color-fg: var(--color-text);
   --color-bg: white;
+  --color-overlay-bg: rgba(0, 0, 0, 0.5);
   --color-cta-hover: #ba001f;
   --color-reima-red: #d2092d;
+  --color-reima-red-hover: #af0f03;
   --color-reima-blue: #407ec9;
+  --color-reima-deep-yellow: #ffc72c;
   --color-gray-lighter: #f2f2f5;
+  --color-gray-light: #ccc;
   --color-gray: #898d8d;
+  --color-gray-dark: #515155;
   --color-border: #949494;
+  --color-input-border: #bfbfbf;
+  --color-input-focus: #fcfcfc;
   --content-max-width: 1280px;
   --content-padding: 1rem;
-  --border: 1px solid #ccc;
-  --focus-outline: 2px dotted rgba(0, 0, 0, 0.5);
+  --border: 1px solid var(--color-gray-light);
+  --input-border: 1px solid var(--color-input-border);
+  --focus-outline: 2px dotted var(--color-overlay-bg);
   --block-padding: 0 var(--content-padding);
   --block-margin: var(--content-padding) auto calc(var(--content-padding) * 2);
   --block-width: var(--content-max-width);
   --content-width: 720px;
   --hr-width: calc(var(--content-max-width) - 2 * var(--content-padding));
-  /* h0 means display */
+  --menu-height: 60px;
+  --logo-width: 88px;
+  --logo-height: 20px;
   --text-font-size: 1rem;
+  --text-font-size-sm: 0.875rem;
+  --text-letter-spacing: 0;
+  --text-line-height: 1.375;
+  /* h0 means display */
   --h0-font-size: 2rem;
   --h1-font-size: 1.75rem;
+  --h1-letter-spacing: -0.03rem;
+  --h1-margin-bottom: 1rem;
   --h2-font-size: 1.5rem;
+  --h2-letter-spacing: -0.02rem;
+  --h2-margin-bottom: 0.875rem;
   --h3-font-size: 1.375rem;
+  --h3-letter-spacing: -0.01rem;
+  --h3-margin-bottom: 0.75rem;
   --h4-font-size: 1.125rem;
   --h4-letter-spacing: 0;
   --h4-margin-bottom: 0.625rem;
@@ -32,6 +52,7 @@
   --h5-margin-bottom: 0.5rem;
   --h6-font-size: 0.875rem;
   --h6-letter-spacing: 0.03rem;
+  --h6-margin-bottom: 0.375rem;
 }
 
 @media (min-width: 768px) {
@@ -39,20 +60,34 @@
     --text-font-size: 1.25rem;
     --h0-font-size: 2.5rem;
     --h1-font-size: 2.125rem;
+    --h1-letter-spacing: -0.04rem;
+    --h1-margin-bottom: 1.125rem;
     --h2-font-size: 1.75rem;
+    --h2-letter-spacing: -0.03rem;
+    --h2-margin-bottom: 1rem;
     --h3-font-size: 1.5rem;
+    --h3-letter-spacing: -0.02rem;
+    --h3-margin-bottom: 1rem;
     --h4-font-size: 1.25rem;
+    --h4-margin-bottom: 0.75rem;
     --content-padding: 1.5rem;
   }
 }
 
 @media (min-width: 992px) {
   :root {
+    --text-font-size-sm: 1rem;
     --content-padding: 2rem;
     --h0-font-size: 2.75rem;
     --h1-font-size: 2.5rem;
+    --h1-letter-spacing: -0.05rem;
+    --h1-margin-bottom: 1.25rem;
     --h2-font-size: 2rem;
+    --h2-letter-spacing: -0.03rem;
+    --h2-margin-bottom: 1.125rem;
     --h3-font-size: 1.75rem;
+    --h3-letter-spacing: -0.02rem;
+    --h3-margin-bottom: 1rem;
     --h4-font-size: 1.375rem;
     --h4-letter-spacing: -0.01rem;
     --h4-margin-bottom: 0.75rem;
@@ -61,11 +96,22 @@
 
 @media (min-width: 1024px) {
   :root {
+    --menu-height: 80px;
+    --logo-width: 120px;
+    --logo-height: 30px;
     --h0-font-size: 3.125rem;
     --h1-font-size: 2.75rem;
+    --h1-letter-spacing: -0.05rem;
+    --h1-margin-bottom: 1.5rem;
     --h2-font-size: 2.25rem;
+    --h2-letter-spacing: -0.04rem;
+    --h2-margin-bottom: 1.25rem;
     --h3-font-size: 2rem;
+    --h3-letter-spacing: -0.03rem;
+    --h3-margin-bottom: 1.25rem;
     --h4-font-size: 1.5rem;
+    --h4-letter-spacing: -0.02rem;
+    --h4-margin-bottom: 1rem;
   }
 }
 
@@ -73,10 +119,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Campton", Arial, serif;
-  letter-spacing: 0.025em;
-  line-height: 1.5;
+  letter-spacing: var(--text-letter-spacing);
+  line-height: var(--text-line-height);
   text-rendering: optimizeSpeed;
-  color: #38383b;
+  color: var(--color-text);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body > header > div {
@@ -126,6 +173,7 @@ h4,
 h5,
 h6 {
   font-weight: 700;
+  margin-top: 0;
 }
 
 h1,
@@ -137,14 +185,20 @@ h4 {
 
 h1 {
   font-size: var(--h1-font-size);
+  letter-spacing: var(--h1-letter-spacing);
+  margin-bottom: var(--h1-margin-bottom);
 }
 
 h2 {
   font-size: var(--h2-font-size);
+  letter-spacing: var(--h2-letter-spacing);
+  margin-bottom: var(--h2-margin-bottom);
 }
 
 h3 {
   font-size: var(--h3-font-size);
+  letter-spacing: var(--h3-letter-spacing);
+  margin-bottom: var(--h3-margin-bottom);
 }
 
 h4,
@@ -160,12 +214,10 @@ h5 {
   margin-bottom: var(--h5-margin-bottom);
 }
 
-h5,
 h6 {
-  line-height: 1.375;
-}
-
-h6 {
+  font-size: var(--h6-font-size);
+  letter-spacing: var(--h6-letter-spacing);
+  margin-bottom: var(--h6-margin-bottom);
   text-transform: uppercase;
 }
 
@@ -194,22 +246,20 @@ code {
 
 a,
 .link {
-  color: #d2092d;
+  color: var(--color-reima-red);
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.2s;
   -webkit-transition: color 0.2s;
-  text-decoration-color: #d2092d;
+  text-decoration-color: var(--color-reima-red);
   text-decoration-thickness: 0.1em;
   text-underline-offset: 2px;
   text-decoration-skip-ink: auto;
-  /* remove this workaround when switching entirely to new design */
-  border: none;
 }
 
 a:hover,
 .link {
-  color: #af0f03;
+  color: var(--color-reima-red-hover);
   text-decoration: underline;
 }
 
@@ -220,7 +270,7 @@ a:hover,
 
 .silent-link:hover,
 .silent-link:focus {
-  color: #d2092d;
+  color: var(--color-reima-red);
   text-decoration: none;
 }
 
@@ -240,7 +290,6 @@ a:hover,
 
 .g-links-as-buttons a,
 .btn {
-  border-radius: 2px;
   background-color: transparent;
   border: 2px solid;
   color: var(--color-text);
@@ -248,7 +297,7 @@ a:hover,
   display: inline-block;
   font-size: 1rem;
   font-weight: 700;
-  line-height: 1.375;
+  line-height: var(--text-line-height);
   padding: 0.6875rem 1.5rem;
   text-align: center;
   text-decoration: none;
@@ -283,6 +332,7 @@ a:hover,
 .btn--cta {
   background: var(--color-reima-red);
   border: none;
+  border-radius: 2px;
   color: white;
   font-weight: 400;
 }
@@ -296,6 +346,16 @@ a:hover,
 .btn--secondary {
   font-weight: 400;
   border-width: 1px;
+}
+
+.btn--icon {
+  background: none;
+  border: none;
+}
+
+.btn--icon:hover,
+.btn--icon:focus {
+  background: transparent;
 }
 
 /* #endregion */
@@ -316,14 +376,22 @@ a:focus {
 
 input,
 textarea {
-  font-family: "camptonbook", Arial, serif;
-  letter-spacing: 0.025em;
-  line-height: 1.5;
-  border: 1px solid #bfbfbf;
+  font-family: "Campton", Arial, serif;
+  letter-spacing: var(--text-letter-spacing);
+  line-height: var(--text-line-height);
+  border: var(--input-border);
   max-width: 100%;
-  padding: 8px 10px;
+  padding: 0.6875rem 1rem;
   border-radius: 2px;
   box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0px 0px 0px 1px var(--color-fg);
+  border-color: var(--color-fg);
+  outline: none;
+  background-color: var(--color-input-focus);
 }
 
 .margin-bottom-xs {
