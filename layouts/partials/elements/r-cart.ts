@@ -162,8 +162,24 @@ export default class RCart extends HTMLElement {
 
   async addVariant(variantId: string) {
     await this.ensureClient();
+    // create new checkout if none exists yet
     if (!this.checkoutId) {
-      const checkout = await this.client.checkout.create();
+      let input = undefined;
+      // check cookie for custom checkout attributes
+      try {
+        const match = document.cookie.match(
+          /(?:^|;\s*)X-Checkout-Attr-(\w*)=([^;]+)/,
+        );
+        if (match) {
+          const [, key, value] = match;
+          input = {
+            customAttributes: [{ key, value }],
+          };
+        }
+      } catch (error) {
+        console.error("Could not check cookie for attributes", error);
+      }
+      const checkout = await this.client.checkout.create(input);
       this.checkoutId = checkout.id.toString();
     }
     const checkout = await this.client.checkout.addLineItems(
@@ -220,7 +236,9 @@ export default class RCart extends HTMLElement {
       await this.ensureClient();
       try {
         checkout = await this.client.checkout.fetch(this.checkoutId);
-        if (checkout && checkout.order) throw new Error('Checkout has an associated order');
+        if (checkout && checkout.order) {
+          throw new Error("Checkout has an associated order");
+        }
       } catch (error) {
         // if there was an error, just ditch the old checkout
         this.checkoutId = "";
