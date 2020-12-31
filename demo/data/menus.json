@@ -104,5 +104,92 @@
       "url": ""
     }
   ],
-  "footer": []
+  "footer": [
+    {
+      "name": "Shopping Info",
+      "url": "",
+      "children": [
+        {
+          "name": "Size Charts",
+          "url": "/tips-and-help/size-charts"
+        },
+        {
+          "name": "Shipping",
+          "url": "/pages/shipping"
+        },
+        {
+          "name": "Reima Partner Sites",
+          "url": "/pages/reima-stores-partner-sites"
+        },
+        {
+          "name": "Terms of Sale",
+          "url": "/pages/terms-of-sale"
+        },
+        {
+          "name": "Terms of Service",
+          "url": "/pages/terms-of-service"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/pages/privacy-policy"
+        },
+        {
+          "name": "Refund Policy",
+          "url": "/pages/refund-policy"
+        },
+        {
+          "name": "FAQ",
+          "url": "/tips-and-help/faq"
+        }
+      ]
+    },    
+    {
+      "name": "Our Products",
+      "url": "",
+      "children": [
+        {
+          "name": "Reima Baby Kit",
+          "url": "/products/reima-baby-kit"
+        },
+        {
+          "name": "Babies / Infants",
+          "url": "/collections/babies"
+        },
+        {
+          "name": "Toddlers",
+          "url": "/collections/toddlers"
+        },
+        {
+          "name": "Kids",
+          "url": "/collections/kids"
+        },
+        {
+          "name": "Winter Sale",
+          "url": "/collections/sale"
+        },
+        {
+          "name": "Inside Reima",
+          "url": "/our-story"
+        }
+      ]
+    },    
+    {
+      "name": "Contact Us",
+      "url": "/pages/contact-us",
+      "children": [
+        {
+          "name": "Call us at 888-437-4938",
+          "url": "tel:888-437-4938"
+        },
+        {
+          "name": "customerservice.us@reima.com",
+          "url": "mailto:customerservice.us@reima.com"
+        },
+        {
+          "name": "Affiliates",
+          "url": "/pages/affiliates"
+        }
+      ]
+    }
+  ]
 }
