@@ -32,10 +32,14 @@
     <!-- Update current path in menu for id -->
     {{ $path := printf "%s-%s" (default "" $.path) .name }}
     <input type="checkbox" id="open-{{$path}}">
-    <!-- need to make href a safe attr because otherwise e.g. tel: links break -->
-    <a {{with $url}}{{ printf "href=%q" . | safeHTMLAttr }}{{end}}>{{ .name }}</a>
-    <label for="open-{{$path}}" class="icon">
-      <svg viewBox="0 0 32 32">
+    <label for="open-{{$path}}">
+      {{ if .url }}
+      <!-- need to make href a safe attr because otherwise e.g. tel: links break -->
+      <a {{ printf "href=%q" .url | safeHTMLAttr }}>{{.name}}</a>
+      {{ else }}
+      {{.name}}
+      {{ end }}
+      <svg viewBox="0 0 32 32" class="icon">
         {{ if not ($.root.Scratch.Get "icon-chevron-down") }}
         {{ $.root.Scratch.Set "icon-chevron-down" true }}
         <symbol id="icon-chevron-down">
@@ -51,8 +55,12 @@
     {{ partial "menu" (dict "menu" .children "root" $.root "path" $path) }}
     {{ end }}
     {{ else }}
+    {{ if .url }}
     <!-- need to make href a safe attr because otherwise e.g. tel: links break -->
-    <a {{with $url}}{{ printf "href=%q" . | safeHTMLAttr }}{{end}}>{{ .name }}</a>
+    <a {{ printf "href=%q" .url | safeHTMLAttr }}>{{ .name }}</a>
+    {{ else }}
+    {{.name}}
+    {{ end }}
     {{ end }}
   </li>
   {{ end }}

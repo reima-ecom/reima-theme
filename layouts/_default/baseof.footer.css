@@ -50,15 +50,10 @@ footer a {
   color: white;
   text-decoration: none;
   font-size: 0.875rem;
-  z-index: 1;
-}
-
-footer a[href=""] {
-  pointer-events: none;
 }
 
 footer a:hover {
-  color: white;
+  color: inherit;
 }
 
 footer > p {
@@ -66,23 +61,15 @@ footer > p {
 }
 
 footer label {
+  /* this is in order to make the arrow svg icon white */
   fill: white;
-  position: absolute;
-  left: 0;
-  right: 0;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
-footer label.icon {
-  width: 100%;
-}
-
-footer label.icon svg {
-  width: auto;
-  position: absolute;
-  right: 0;
-}
-
-footer input:focus + label.icon {
+footer input:focus + label {
   outline: var(--focus-outline);
   outline-offset: 2px;
 }
@@ -116,6 +103,14 @@ footer input:checked ~ ul {
   }
 
   footer label {
+    pointer-events: none;
+  }
+
+  footer label a {
+    pointer-events: initial;
+  }
+
+  footer .icon {
     display: none;
   }
 
