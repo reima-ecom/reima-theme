@@ -77,10 +77,6 @@ header .menu__icons {
 }
 
 body > header .icons {
-  display: inline-block;
-}
-
-header .icons-grid {
   display: grid;
   gap: 0.75rem;
   grid-auto-flow: column;
