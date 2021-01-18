@@ -5,22 +5,15 @@ input[type="checkbox"][id|="open"] {
 }
 
 .announcement {
-  width: 100%;
   background-color: var(--color-fg);
   color: white;
   text-align: center;
   font-size: var(--text-font-size-sm);
-  padding: 0.5rem 0;
-}
-
-.announcement .announcement--content {
-  padding: var(--block-padding);
-  margin: auto;
-  max-width: var(--block-width);
+  padding: 0.5rem max(50% - var(--content-max-width) / 2, var(--content-padding));
 }
 
 .announcement a {
-  color: white;
+  color: inherit;
   text-decoration: none;
 }
 
