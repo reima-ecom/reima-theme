@@ -35,14 +35,8 @@ body > header {
   height: var(--menu-height);
 }
 
-.menu input:focus + label.menu__hamburger,
-.menu
-  input:focus
-  + label
-  + .overlay
-  > .overlay__inner
-  > .overlay__header
-  > label {
+.menu #open-menu:focus ~ label[for=open-menu],
+.menu #open-menu:focus ~ * label[for=open-menu] {
   outline: var(--focus-outline);
   outline-offset: 2px;
 }
