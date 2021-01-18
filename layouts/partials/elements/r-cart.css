@@ -53,7 +53,7 @@ r-cart button[close]:focus {
   z-index: 10;
 }
 
-r-cart[open] > .r-cart__overlay {
+r-cart[open] .r-cart__overlay {
   display: flex;
   visibility: visible;
   opacity: 1;
@@ -61,7 +61,7 @@ r-cart[open] > .r-cart__overlay {
   z-index: +1;
 }
 
-r-cart[open] > .r-cart__overlay > .r-cart__main {
+r-cart[open] .r-cart__main {
   opacity: 1;
   transform: translateX(0);
   z-index: +1;
@@ -84,7 +84,7 @@ r-cart[open] > .r-cart__overlay > .r-cart__main {
   transition-delay: 0.2s;
 }
 
-.r-cart__header {
+r-cart h1 {
   border-bottom: var(--border);
   padding: 0 1rem;
   margin: 0;
@@ -112,7 +112,7 @@ r-cart .summary {
   padding: 1rem;
 }
 
-r-cart .summary .summary__subtotal {
+r-cart .summary h2 {
   display: flex;
   font-size: 1rem;
   font-weight: 400;
@@ -136,13 +136,13 @@ r-cart .checkout {
   display: block;
 }
 
-r-cart .items > .item {
+r-cart .items > div {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-r-cart .items > .item > .item__details {
+r-cart .items > div > div {
   flex: 1;
   margin-left: 1rem;
 }

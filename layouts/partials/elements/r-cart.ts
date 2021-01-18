@@ -245,7 +245,7 @@ export default class RCart extends HTMLElement {
     this.subtotal = this.querySelector<HTMLElement>(".summary .price")!;
 
     // make cart open on icon link click (instead of going to the cart page)
-    this.querySelector("button.icon")!.addEventListener("click", (e: Event) => {
+    this.querySelector("a.icon")!.addEventListener("click", (e: Event) => {
       e.preventDefault();
       this.open = true;
     });
