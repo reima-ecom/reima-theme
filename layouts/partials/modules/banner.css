@@ -23,17 +23,7 @@
 }
 
 @media (min-width: 768px) {
-  .module-banner {
-    /* padding: 1.5rem; */
-  }
-
   .module-banner h3 {
     margin-bottom: 0.625rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .module-banner {
-    /* margin-top: 1rem; */
   }
 }
