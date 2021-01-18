@@ -3,7 +3,6 @@
   margin: var(--block-margin);
   max-width: var(--block-width);
   font-size: var(--text-font-size);
-  text-align: center;
 }
 
 .content-table__container {
@@ -12,10 +11,33 @@
 
 .content-table table {
   white-space: nowrap;
-  margin: auto;
+  table-layout: auto;
+  border-collapse: collapse;
+  border: var(--border);
+  font-size: 0.875rem;
+}
+
+.content-table table tr:nth-child(even):not(:first-child) {
+  background-color: var(--color-gray-lighter);
 }
 
 .content-table th,
 .content-table td {
-  padding: 3px 5px;
+  padding: 0.75rem 0.5rem;
+  border: var(--border);
+  white-space: nowrap;
+}
+
+.content-table table thead th,
+.content-table table thead td {
+  background-color: var(--color-fg);
+  border-color: var(--color-gray-dark);
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .content-table table td,
+  .content-table table th {
+    padding: 1rem 0.75rem;
+  }
 }

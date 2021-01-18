@@ -64,31 +64,30 @@
 }
 
 .reviews .stars label::before {
-  content: '★';
-  color: #bfbfbf;
+  content: "★";
+  color: var(--color-input-border);
 }
-
 
 .reviews .stars input:checked + label::before,
 .reviews .stars input:checked ~ label::before {
-  color: #ff5c38;
+  color: var(--color-reima-red);
 }
 
 .reviews div .stars:hover label::before {
-  color: #bfbfbf;
+  color: var(--color-input-border);
 }
 
 .reviews div .stars label:hover::before,
 .reviews .stars label:hover ~ label::before {
-  color: #ff5c38;
+  color: var(--color-reima-red);
 }
 
 .reviews blockquote {
   margin: 0;
   font-size: 1rem;
   padding: 2rem 0;
-  border-top: 1px solid #bfbfbf;
-  border-bottom: 1px solid #bfbfbf;
+  border-top: var(--input-border);
+  border-bottom: var(--input-border);
 }
 
 .reviews blockquote + blockquote {

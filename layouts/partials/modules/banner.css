@@ -1,6 +1,6 @@
 .module-banner {
   padding: var(--content-padding);
-  background: #38383b;
+  background: var(--color-fg);
   color: white;
   letter-spacing: normal;
   display: flex;
@@ -19,21 +19,11 @@
 
 .module-banner h3 em {
   font-style: normal;
-  color: #ffc72c;
+  color: var(--color-reima-deep-yellow);
 }
 
 @media (min-width: 768px) {
-  .module-banner {
-    /* padding: 1.5rem; */
-  }
-
   .module-banner h3 {
     margin-bottom: 0.625rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .module-banner {
-    /* margin-top: 1rem; */
   }
 }

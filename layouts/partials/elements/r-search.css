@@ -1,16 +1,22 @@
 r-search #searchbox {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: var(--border);
+  height: var(--menu-height);
 }
 
 r-search button[close] {
   margin-right: 1rem;
 }
 
+r-search button[close]:focus {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
 r-search .ais-SearchBox {
   background: white;
-  padding: 1rem;
+  padding: 0 1rem;
   flex: 1;
 }
 
@@ -22,14 +28,12 @@ r-search .ais-SearchBox-form {
 
 r-search .ais-SearchBox-input {
   flex: 1;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 r-search .ais-SearchBox-form button {
   background: none;
   padding: 0.5rem;
-  border: 1px solid #bfbfbf;
+  border: var(--input-border);
   border-radius: 2px;
   margin-left: 0.25rem;
 }
@@ -71,7 +75,12 @@ r-search .hit > div {
 
 r-search .hit-name {
   font-weight: 700;
+  font-size: var(--text-font-size-sm);
   margin-bottom: 0.25rem;
+}
+
+r-search .hit-price {
+  font-size: var(--text-font-size-sm);
 }
 
 r-search .ais-Hits--empty {

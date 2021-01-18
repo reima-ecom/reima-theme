@@ -57,7 +57,7 @@
 }
 
 .image-grid__zoom-container img {
-  transition: transform .3s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 .image-grid__zoom-container img:hover {
@@ -82,7 +82,7 @@
 
 .image-grid .open .image-grid__modal {
   display: flex;
-  background: rgba(0,0,0,.5);
+  background: var(--color-overlay-bg);
   position: fixed;
   left: 0;
   top: 0;
@@ -100,7 +100,7 @@
 .image-grid .open .image-grid__modal > div {
   position: relative;
   max-width: 800px;
-  background: #fff;
+  background: white;
   padding: var(--content-padding);
   max-height: 100%;
   overflow-y: auto;
@@ -161,18 +161,18 @@
 
 .image-grid__last-fill--links-cta a {
   background: var(--color-reima-red);
-  color: #fff;
+  color: white;
   border-radius: 2px;
   cursor: pointer;
   display: inline-block;
-  line-height: 1.375;
-  padding: .6875rem 1.5rem;
+  line-height: var(--text-line-height);
+  padding: 0.6875rem 1.5rem;
   text-decoration: none;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .image-grid__last-fill--links-cta a:hover,
 .image-grid__last-fill--links-cta a:focus {
-    background: var(--color-cta-hover);
-    color: #fff;
+  background: var(--color-cta-hover);
+  color: white;
 }

@@ -61,13 +61,13 @@
 }
 
 .selections legend span {
-  font-weight: normal;
+  font-weight: 400;
   text-transform: initial;
   letter-spacing: normal;
 }
 
 .selections legend span:not(:empty)::before {
-  content: '—';
+  content: "—";
   margin-right: 0.25rem;
 }
 
@@ -89,8 +89,8 @@
 .selections label.unavailable::before {
   height: 1px;
   width: 80%;
-  background: #38383b;
-  content: ' ';
+  background: var(--color-fg);
+  content: " ";
   position: absolute;
   top: 50%;
   left: 10%;
@@ -102,13 +102,13 @@
 }
 
 .selections label {
-  box-shadow: 0 0 0 1px #bfbfbf;
+  box-shadow: 0 0 0 1px var(--color-input-border);
   padding: 0.375rem 0.5rem;
   margin: 0 0.25rem 0.5rem 0;
 }
 
 .selections input:checked + label {
-  box-shadow: 0 0 0 2px #38383b;
+  box-shadow: 0 0 0 2px var(--color-fg);
 }
 
 .selections--Color legend span {
@@ -140,7 +140,7 @@
 }
 
 .selections--Color label::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -180,7 +180,7 @@
 
 .description a {
   text-decoration: none;
-  border-bottom: 2px solid rgba(56,56,59,0.1);
+  border-bottom: 2px solid rgba(56, 56, 59, 0.1);
   color: inherit;
 }
 
@@ -199,8 +199,8 @@
 }
 
 .accordion {
-  border-bottom: 1px solid #bfbfbf;
-  border-top: 1px solid #bfbfbf;
+  border-bottom: var(--input-border);
+  border-top: var(--input-border);
   margin-top: 2rem;
 }
 
@@ -243,14 +243,14 @@
 }
 
 .features__heading a::after {
-  content: 'i';
+  content: "i";
   width: 1rem;
   height: 1rem;
   display: inline-flex;
   line-height: 1;
   justify-content: center;
   color: white;
-  background: #ff5c38;
+  background: var(--color-reima-red);
   border-radius: 50%;
   font-size: 0.75em;
   align-items: center;
@@ -259,7 +259,7 @@
 }
 
 .features > div > a:hover {
-  color: #ff5c38;
+  color: var(--color-reima-red);
 }
 
 .features > svg {
@@ -270,13 +270,14 @@
   margin-left: 0.25rem;
 }
 
-.features > svg, .features > svg path {
-  fill: #bfbfbf !important;
+.features > svg,
+.features > svg path {
+  fill: var(--color-input-border) !important;
 }
 
 .features svg.active,
 .features svg.active path {
-  fill: #38383b !important;
+  fill: var(--color-text) !important;
 }
 
 .features p {

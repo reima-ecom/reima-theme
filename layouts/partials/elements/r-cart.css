@@ -21,7 +21,7 @@ r-cart .icon span {
   transition: all 0.2s ease-in-out;
   transition-property: width, height;
   display: block;
-  background: #d2092d;
+  background: var(--color-reima-red);
   border-radius: 50%;
   position: absolute;
   color: transparent;
@@ -34,20 +34,37 @@ r-cart .icon span:not(:empty) {
   opacity: 1;
 }
 
+r-cart button[close]:focus {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
 
 .r-cart__overlay {
-  display: none;
-  background: rgba(0,0,0,0.5);
+  display: block;
+  background: var(--color-overlay-bg);
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.5s;
   z-index: 10;
 }
 
-r-cart[open] > .r-cart__overlay {
+r-cart[open] .r-cart__overlay {
   display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+  z-index: +1;
+}
+
+r-cart[open] .r-cart__main {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: +1;
 }
 
 .r-cart__overlay > [close] {
@@ -58,21 +75,24 @@ r-cart[open] > .r-cart__overlay {
   background: white;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 100%;
-  margin-left: auto;
-  contain: layout;
+  width: 90%;
   max-width: 400px;
+  height: 100%;
+  transform: translateX(100%);
+  margin-left: auto;
+  transition: all 0.2s;
+  transition-delay: 0.2s;
 }
 
 r-cart h1 {
-  border-bottom: 1px solid #ccc;
-  padding: 1rem;
+  border-bottom: var(--border);
+  padding: 0 1rem;
   margin: 0;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: var(--menu-height);
 }
 
 r-cart .items {
@@ -88,15 +108,15 @@ r-cart .empty {
 
 r-cart .summary {
   display: none;
-  border-top: 1px solid #ccc;
+  border-top: var(--border);
   padding: 1rem;
 }
 
 r-cart .summary h2 {
-  margin-top: 0;
   display: flex;
   font-size: 1rem;
-  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0 0 1rem;
   letter-spacing: 0.1em;
 }
 
@@ -119,14 +139,16 @@ r-cart .checkout {
 r-cart .items > div {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 r-cart .items > div > div {
   flex: 1;
+  margin-left: 1rem;
 }
 
 r-cart .items img {
-  width: 35%;
+  width: 25%;
   max-width: 130px;
 }
 
@@ -148,7 +170,7 @@ r-cart .items .subtotal {
 
 r-cart .items .quantity {
   display: inline-flex;
-  border: 1px solid #ccc;
+  border: var(--border);
   border-radius: 3px;
 }
 
@@ -157,6 +179,11 @@ r-cart .items .quantity button {
   background: transparent;
   border: none;
   line-height: 1;
+}
+
+r-cart .items .quantity button:focus {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 r-cart .items input {
@@ -173,6 +200,7 @@ r-cart .price {
   flex: 1;
   text-align: right;
   letter-spacing: unset;
+  font-weight: 700;
 }
 
 r-cart input::-webkit-outer-spin-button,
@@ -181,6 +209,6 @@ r-cart input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-r-cart input[type=number] {
-  -moz-appearance:textfield;
+r-cart input[type="number"] {
+  -moz-appearance: textfield;
 }

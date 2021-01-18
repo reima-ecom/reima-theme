@@ -5,12 +5,11 @@ input[type="checkbox"][id|="open"] {
 }
 
 .announcement {
-  width: 100%;
-  background-color: #f2f2f5;
-  padding: 6px 20px;
-  box-sizing: border-box;
+  background-color: var(--color-fg);
+  color: white;
   text-align: center;
-  font-size: 0.875rem;
+  font-size: var(--text-font-size-sm);
+  padding: 0.5rem max(50% - var(--content-max-width) / 2, var(--content-padding));
 }
 
 .announcement a {
@@ -18,23 +17,34 @@ input[type="checkbox"][id|="open"] {
   text-decoration: none;
 }
 
+.announcement a:hover {
+  color: var(--color-reima-red);
+}
+
 body > header {
   position: sticky;
   top: 0;
-  border-bottom: 1px solid #bfbfbf;
-  padding: 10px 0;
-  background: #fff;
+  border-bottom: var(--border);
+  background: white;
   z-index: 1;
 }
 
 .menu {
   display: flex;
   align-items: center;
+  height: var(--menu-height);
 }
 
-.menu input:focus + label.menu__hamburger {
+.menu #open-menu:focus ~ label[for=open-menu],
+.menu #open-menu:focus ~ * label[for=open-menu] {
   outline: var(--focus-outline);
   outline-offset: 2px;
+}
+
+header .menu__links {
+  display: flex;
+  flex: 1;
+  align-items: center;
 }
 
 /* this is the menu opener label */
@@ -43,24 +53,38 @@ body > header {
 }
 
 .logo-link {
-  margin: 14px 14px 14px 0;
-  flex: 1;
-  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: var(--logo-width);
+  height: var(--logo-height);
 }
 
-.logo-link svg {
+.logo-link a {
   display: block;
+  height: 100%;
+}
+
+.logo-link a svg {
+  width: var(--logo-width);
+  height: 100%;
+}
+
+header .menu__icons {
+  align-items: center;
+  display: flex;
 }
 
 body > header .icons {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.75rem;
   grid-auto-flow: column;
 }
 
 .icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border: none;
   padding: 0;
   background: none;
@@ -72,7 +96,7 @@ body > header .icons {
 }
 
 .icon:hover {
-  fill: #ff5c38;
+  fill: var(--color-reima-red);
 }
 
 .icon svg {
@@ -84,76 +108,78 @@ body > header .icons {
   display: none;
 }
 
-#menu > * {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 100%;
+#menu > .overlay__inner > ul {
+  overflow: auto;
 }
 
 #menu ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  flex: 1 0 100%;
-  overflow: auto;
+  flex: 1 0 90%;
 }
 
 #menu li {
-  padding: 0.5rem 1rem;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
   align-items: center;
-}
-
-#menu li label {
-  padding: 0.2rem;
-  box-sizing: border-box;
-}
-
-#menu input:checked + label svg {
-  transform: rotate(180deg);
-}
-
-#menu ul a {
-  text-decoration: none;
-  color: inherit;
+  border-bottom: var(--border);
   font-weight: 700;
-  font-size: 1.25em;
-  padding: 0.5rem 0;
+  font-size: 1.25rem;
   flex: 1 0 auto;
+  transition: all 0.4s;
 }
 
-#menu ul ul li {
-  padding-right: 0;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-#menu ul ul a {
-  font-weight: 400;
-  font-size: 1.125em;
-  padding: 0.5rem 1rem;
-}
-
-#menu li > ul {
+#menu li ul {
   display: none;
+  margin-top: 0.75rem;
+  border-top: var(--border);
+  padding-left: 1rem;
 }
 
 #menu input:checked ~ ul {
-  display: initial;
+  display: block;
+}
+
+#menu li li {
+  font-size: 1rem;
+  font-weight: 400;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#menu li li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#menu label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#menu input:focus + label {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 #menu svg {
   display: block;
 }
 
-#menu h1 {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
+#menu input:checked + label svg {
+  transform: rotate(180deg);
+}
+
+#menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#menu a:hover {
+  color: var(--color-reima-red);
 }
 
 @media (min-width: 1024px) {
@@ -164,15 +190,23 @@ body > header .icons {
     width: unset;
     height: unset;
     flex: 1;
+    visibility: visible;
+    opacity: 1;
+    padding-left: 1rem;
+    transition: none;
   }
 
-  #menu > * {
-    display: block;
-    width: 100%;
+  #menu.overlay .overlay__inner {
+    transform: none;
+    transition: none;
   }
 
-  #menu.overlay h1 {
+  #menu.overlay .overlay__header {
     display: none;
+  }
+
+  #menu > .overlay__inner > ul {
+    overflow: visible;
   }
 
   #menu ul {
@@ -182,67 +216,66 @@ body > header .icons {
     flex-wrap: wrap;
   }
 
-  #menu ul a {
-    font-size: 1.125rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+  #menu li {
+    position: relative;
+    flex: 0 1 auto;
+    border-bottom: none;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
   }
 
-  #menu ul a:hover {
-    color: #ff5c38;
-  }
-
-  #menu ul ul label {
-    margin-right: 0.5rem;
-  }
-
-  #menu input:checked + label svg {
-    transform: none;
-  }
-
-  #menu ul ul li > label svg,
-  #menu ul ul input:checked + label svg {
-    transform: rotate(270deg);
-  }
-
-  #menu ul ul li:hover {
-    background-color: #f2f2f2;
-  }
-
-  #menu ul ul li:hover label {
-    fill: #ff5c38;
-  }
-
-  #menu ul ul li {
+  #menu li ul {
+    position: absolute;
+    margin-top: 0;
+    border-top: none;
+    background: white;
+    left: 0;
     padding: 0;
+    top: 100%;
+    box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  #menu li li,
+  #menu li li:last-child {
+    padding: 0.75rem 1rem;
     flex-wrap: nowrap;
     white-space: nowrap;
   }
 
-  #menu li {
-    position: relative;
-    padding-top: 0;
-    padding-bottom: 0;
-    flex: 0 1 auto;
+  #menu label svg,
+  #menu input:checked + label svg {
+    transform: rotate(270deg);
   }
 
-  #menu ul ul,
+  #menu li li:hover > label {
+    fill: var(--color-reima-red);
+  }
+
+  #menu li li a {
+    padding: 0;
+  }
+
+  /* hide icons ... */
+  #menu .icon {
+    display: none;
+  }
+
+  /* ... but show icons in submenus */
+  #menu li li .icon {
+    display: initial;
+  }
+
+  #menu li ul,
   #menu input:checked ~ ul {
     display: none;
   }
 
   #menu li:hover > ul {
     display: block;
-    position: absolute;
-    background: white;
-    left: 0;
-    padding: 0;
-    top: 100%;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09);
-    z-index: 1;
   }
 
-  #menu ul ul li:hover > ul {
+  #menu li li input:checked ~ ul,
+  #menu li li:hover > ul {
     left: 100%;
     top: 0;
   }
@@ -252,7 +285,10 @@ body > header .icons {
   }
 
   .logo-link {
+    position: initial;
+    display: flex;
     flex: 0 0 auto;
     order: -1;
+    width: auto;
   }
 }

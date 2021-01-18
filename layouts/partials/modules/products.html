@@ -28,12 +28,15 @@
     {{ with site.GetPage (printf "/products/%s" $producthandle) }}
     <!-- this is the product page -->
     {{ $product := . }}
-    <li href="{{$link}}" class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}}" handle="{{$producthandle}}">
+    <li href="{{$link}}"
+      class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}}"
+      handle="{{$producthandle}}">
+      {{ $productName := .Title }}
       {{ range .Resources.ByType "image" | first 1 }}
       <!-- grid layout with auto-fit and min 150px cells -->
       <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
       {{ $sizes := "233px" }}
-      {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes)}}
+      {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes "alt" $productName)}}
       {{ end }}
       <div class="product-list__swatches">
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}

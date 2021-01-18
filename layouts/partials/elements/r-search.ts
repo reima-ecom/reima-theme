@@ -50,7 +50,7 @@ export default class RSearch extends HTMLElement {
         item: (item: HitItem) =>
           `
             <a href="/products/${item.objectID}" class="hit">
-            <img src="${item.imageSrc}" align="left" alt="${item.name}" />
+            <img src="${item.imageSrc}" align="left" alt="${item.title}" />
             <div>
             <div class="hit-name">${item.title}</div>
             <div class="hit-price">$${item.price}</div>
