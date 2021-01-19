@@ -16,5 +16,6 @@
     "**/vendor/**",
     "**/coverage/**",
     "**/public/**"
-  ]
+  ],
+  "html.format.templating": true
 }
