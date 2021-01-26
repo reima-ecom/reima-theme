@@ -25,6 +25,16 @@
 {{ $vw_desktop := div 100 $cols_desktop }}
 {{ $sizes := printf "(min-width: 992px) %dvw, (min-width: 768px) %dvw, %dvw" $vw_desktop $vw_tablet $vw_mobile }}
 
+<!-- get grid id for opening modal -->
+{{ $grid_id := "" }}
+<!-- by default, use slug of heading -->
+{{ with .heading }}
+{{ $grid_id = . | anchorize }}
+<!-- otherwise create 4 digit hash from stringified module config -->
+{{ else }}
+{{ $grid_id = slicestr ((printf "%s" .) | sha1) 36 }}
+{{ end }}
+
 <div class="{{$class}}">
   {{- with .heading }}
   <h2>{{.}}</h2>
@@ -36,20 +46,37 @@
     {{ end }}
     {{ $moretext := default "Show more" .showmoretext }}
 
+    <!-- store image id's here in order to detect duplicates -->
+    {{ $image_ids := slice }}
+
     {{ range $i, $img := .images }}
     {{ if and $popup .content }}
-    <li modal-opener>
-      <a class="image-grid__zoom-container" openid="parent">
+
+    <!-- get first line with content and anchorize -->
+    {{ $image_id := (index (split (trim .content "\n") "\n") 0) | anchorize}}
+    <!-- if this is a duplicate, append the index -->
+    {{ if in $image_ids $image_id }}
+    {{ $image_id = printf "%s-%d" $image_id $i }}
+    <!-- otherwise add this id to the list of used ids -->
+    {{ else }}
+    {{ $image_ids = $image_ids | append $image_id }}
+    {{ end }}
+    <!-- get full image id for opening modal -->
+    {{ $modal_id := printf "%s%s" $grid_id $image_id }}
+
+    <li>
+      <a class="image-grid__zoom-container" href="#{{$modal_id}}" onclick="document.body.style.overflow = 'hidden'">
         {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
       </a>
-      <div class="image-grid__modal overlay">
+      <aside class="image-grid__modal" id="{{$modal_id}}">
+        <a href="#" tabindex="-1" onclick="document.body.style.overflow = ''"></a>
         <div>
-          <button class="icon" close>
-            <svg>
+          <a class="image-grid__modal-close" href="#" onclick="document.body.style.overflow = ''">
+            <svg width="20" height="20">
               <!-- this icon reference comes from the menu -->
               <use xlink:href="#icon-close"></use>
             </svg>
-          </button>
+          </a>
           {{ $sizes_popup := "(min-width: 580px) 50vw, 100vw" }}
           {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes_popup) }}
           <div>
@@ -58,7 +85,7 @@
             {{- end }}
           </div>
         </div>
-      </div>
+      </aside>
     </li>
     {{ else }}
     <li>

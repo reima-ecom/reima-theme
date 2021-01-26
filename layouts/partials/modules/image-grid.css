@@ -70,18 +70,10 @@
 }
 
 .image-grid__modal {
-  display: none;
-}
-
-.image-grid__modal .icon {
-  background: white;
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
-
-.image-grid .open .image-grid__modal {
+  transition: opacity 0.5s, visibility 0s 0.5s;
   display: flex;
+  visibility: hidden;
+  opacity: 0;
   background: var(--color-overlay-bg);
   position: fixed;
   left: 0;
@@ -92,12 +84,15 @@
   align-items: center;
   justify-content: center;
   padding: var(--content-padding);
-  /* need to unset these because of the .overlay class */
-  width: unset;
-  height: unset;
 }
 
-.image-grid .open .image-grid__modal > div {
+.image-grid__modal:target {
+  transition: opacity 0.5s, visibility 0s;
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-grid__modal > div {
   position: relative;
   max-width: 800px;
   background: white;
@@ -108,6 +103,24 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--content-padding);
   align-items: center;
+}
+
+/* this is the background close link */
+.image-grid__modal > a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  cursor: default;
+}
+
+.image-grid__modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  /* hack to get rid of extra margin from the svg, which is inline by default */
+  display: flex;
 }
 
 .image-grid__show-more {
