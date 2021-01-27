@@ -9,9 +9,11 @@ const flattenEdges = (param: string) =>
     [param]: product[param].edges.map(({ node }: any) => node),
   });
 
-const addEmptySeo = (product: any) => ({
+const addSeoDescription = (product: any) => ({
   ...product,
-  seo: {},
+  seo: {
+    description: product.description.split('[--Read More--]')[0].trim(),
+  },
 });
 
 const addVariantStorefrontIds = (product: any) => ({
@@ -69,7 +71,7 @@ export const mapProductLegacy = (product: any): Promise<any> =>
   Promise.resolve(product)
     .then(flattenEdges("variants"))
     .then(flattenEdges("images"))
-    .then(addEmptySeo)
+    .then(addSeoDescription)
     .then(addVariantStorefrontIds)
     .then(addLegacyId)
     .then(addMockNumberFormat)

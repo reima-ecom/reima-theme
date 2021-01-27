@@ -58,6 +58,7 @@ const query = (count: number, cursor?: string) =>
         title
         availableForSale
         descriptionHtml
+        description
         tags
         images(first: 50) {
           edges {
