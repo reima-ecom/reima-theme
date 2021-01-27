@@ -1,6 +1,10 @@
 import { eachAsync, runSerial, takeAsync } from "./deps.ts";
 import { createProductGenerator } from "./product-generator.ts";
-import { purgeDeletedImages, purgeDeletedProducts } from "./purge-deleted.ts";
+import {
+  purgeAllButIndexAndImgs,
+  purgeDeletedImages,
+  purgeDeletedProducts,
+} from "./purge-deleted.ts";
 import { getImageSrcFilename, writeImages } from "./write-images.ts";
 import { writeProduct } from "./write-products.ts";
 
@@ -16,6 +20,7 @@ export const importProducts = async (
     .then(eachAsync(writeProduct(outDir, getImageSrcFilename)))
     .then(eachAsync(writeImages(outDir)))
     .then(eachAsync(purgeDeletedImages(outDir, getImageSrcFilename)))
+    .then(eachAsync(purgeAllButIndexAndImgs(outDir)))
     .then(
       // if we have a count, just run serially
       // when no count (all products fetched), we can purge

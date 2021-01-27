@@ -42,6 +42,10 @@ export const purgeDeletedProducts = (outDir: string) =>
       // go through every directory and delete dir if not found in array
       .then(deleteIfNotFound(outDir));
 
+/**
+ * Delete product images that do not exist anymore from the
+ * product's `imgs` directory.
+ */
 export const purgeDeletedImages = (
   outDir: string,
   srcToFilename: (src: string) => string,
@@ -52,3 +56,7 @@ export const purgeDeletedImages = (
         product.images.edges.map(({ node }) => srcToFilename(node.originalSrc))
       )
       .then(deleteIfNotFound(`${outDir}/${product.handle}/imgs`));
+
+export const purgeAllButIndexAndImgs = (outDir: string) =>
+  async (product: ProductNode) =>
+    deleteIfNotFound(`${outDir}/${product.handle}`)(["index.html", "imgs"]);
