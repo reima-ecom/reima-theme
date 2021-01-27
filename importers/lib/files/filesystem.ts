@@ -6,6 +6,7 @@ export type File = {
 export type Content = {
   path: string;
   content: object;
+  markdown?: string;
 };
 
 export enum FileAction {
@@ -21,7 +22,7 @@ export type ContentAction = {
 export const serializeContent = (stringifier: (obj: object) => string) =>
   (obj: Content): File => ({
     path: obj.path,
-    data: `---\n${stringifier(obj.content)}\n---`,
+    data: `---\n${stringifier(obj.content)}\n---\n${obj.markdown || ""}`,
   });
 
 export const deserializeContent = (parser: (str: string) => unknown) =>
