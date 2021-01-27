@@ -36,15 +36,15 @@ const imagesToResources = (
   (productNode: ProductNode) => ({
     resources: productNode.images.edges.map((img, i) => ({
       name: i.toString().padStart(2, "0"),
-      src: imgSrcToLocal(img.node.originalSrc),
+      src: `imgs/${imgSrcToLocal(img.node.originalSrc)}`,
     })),
   });
 
 export const writeProduct = (
   outDir: string,
-  imageSrcToLocal: (src: string) => string,
+  srcToFilename: (src: string) => string,
 ): ProductWriter => {
-  const getResources = imagesToResources(imageSrcToLocal);
+  const getResources = imagesToResources(srcToFilename);
   return (productNode) =>
     Promise.resolve({ productNode, product: {} })
       .then(transform(getResources))

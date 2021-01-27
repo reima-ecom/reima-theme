@@ -20,10 +20,10 @@ export const getImageSrcFilename = (src: string): string => {
   return name;
 };
 
-const getImageDownloadOptions = (outDir: string) =>
+const getImageDownloadOptions = (productDir: string) =>
   (src: string): DownloadOptions => ({
     src,
-    dest: `${outDir}/${getImageSrcFilename(src)}`,
+    dest: `${productDir}/imgs/${getImageSrcFilename(src)}`
   });
 
 const downloadImage = async ({ src, dest }: DownloadOptions) => {
@@ -62,7 +62,6 @@ const undefinedIfExists = async (
 
 export const writeImages = (outDir: string): ImageWriter =>
   async (product) => {
-    console.warn("Downloading", product.handle, "images to", outDir, "...");
     const writes = await Promise.resolve(product.images.edges)
       .then(map(getImageSrc))
       .then(map(getImageDownloadOptions(`${outDir}/${product.handle}`)))
@@ -70,5 +69,5 @@ export const writeImages = (outDir: string): ImageWriter =>
       .then((arr) => arr.filter(Boolean) as DownloadOptions[])
       .then(map(ensureDir))
       .then(map(downloadImage));
-    console.warn(`DONE ${writes.length} images for ${product.handle}`);
+    console.log(`Downloaded ${writes.length} new images for ${product.handle}`);
   };
