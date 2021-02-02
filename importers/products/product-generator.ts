@@ -14,6 +14,7 @@ export async function* createProductGenerator(
   let hasNextPage: boolean;
   let cursor: string | undefined;
   do {
+    const startTime = Date.now();
     const response = await fetch(
       url,
       { method: "POST", headers, body: query(5, cursor) },
@@ -26,7 +27,15 @@ export async function* createProductGenerator(
       if (errors) console.error(errors);
       throw new Error("Could not get product data");
     }
-    console.log("Got", data.products.edges.length, "products from Shopify");
+    const { products: { edges: { length } } } = data;
+    const elapsed = (Date.now() - startTime);
+    console.log(
+      "Got",
+      length,
+      "products from Shopify, average",
+      Math.round(elapsed / length),
+      "ms per product",
+    );
     for (const edge of data.products.edges) {
       yield edge.node;
       cursor = edge.cursor;
@@ -60,7 +69,10 @@ const query = (count: number, cursor?: string) =>
         descriptionHtml
         description
         tags
-        images(first: 50) {
+        images(first: 100) {
+          pageInfo {
+            hasNextPage
+          }
           edges {
             node {
               id
@@ -79,7 +91,10 @@ const query = (count: number, cursor?: string) =>
           name
           values
         }
-        variants(first: 50) {
+        variants(first: 100) {
+          pageInfo {
+            hasNextPage
+          }
           edges {
             node {
               id

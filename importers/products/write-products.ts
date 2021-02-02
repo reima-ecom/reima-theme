@@ -40,6 +40,12 @@ const imagesToResources = (
     })),
   });
 
+const checkMissingVariants: Transformer = (product) => {
+  if (product.variants.pageInfo.hasNextPage !== false) {
+    throw new Error(`Missing variants on ${product.handle}`);
+  }
+};
+
 export const writeProduct = (
   outDir: string,
   srcToFilename: (src: string) => string,
@@ -47,6 +53,7 @@ export const writeProduct = (
   const getResources = imagesToResources(srcToFilename);
   return (productNode) =>
     Promise.resolve({ productNode, product: {} })
+      .then(transform(checkMissingVariants))
       .then(transform(getResources))
       .then(transform(mapProductLegacy))
       .then(toContent)

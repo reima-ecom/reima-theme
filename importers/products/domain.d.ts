@@ -1,13 +1,21 @@
 type Product = {
-  handle: string
-  title: string
-}
+  handle: string;
+  title: string;
+};
 
 type ProductNode = {
   handle: string;
   title: string;
   descriptionHtml: string;
+  variants: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
+  };
   images: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
     edges: {
       node: ProductImageNode;
     }[];
@@ -16,4 +24,4 @@ type ProductNode = {
 
 type ProductImageNode = {
   originalSrc: string;
-}
+};

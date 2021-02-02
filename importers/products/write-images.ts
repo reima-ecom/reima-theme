@@ -23,7 +23,7 @@ export const getImageSrcFilename = (src: string): string => {
 const getImageDownloadOptions = (productDir: string) =>
   (src: string): DownloadOptions => ({
     src,
-    dest: `${productDir}/imgs/${getImageSrcFilename(src)}`
+    dest: `${productDir}/imgs/${getImageSrcFilename(src)}`,
   });
 
 const downloadImage = async ({ src, dest }: DownloadOptions) => {
@@ -60,9 +60,18 @@ const undefinedIfExists = async (
   return opts;
 };
 
+const checkMissingImages = (product: ProductNode) => {
+  if (product.images.pageInfo.hasNextPage !== false) {
+    throw new Error(`Images missing on product ${product.handle}`);
+  }
+  return product;
+};
+
 export const writeImages = (outDir: string): ImageWriter =>
   async (product) => {
-    const writes = await Promise.resolve(product.images.edges)
+    const writes = await Promise.resolve(product)
+      .then(checkMissingImages)
+      .then(({ images: { edges } }) => edges)
       .then(map(getImageSrc))
       .then(map(getImageDownloadOptions(`${outDir}/${product.handle}`)))
       .then(map(undefinedIfExists))
