@@ -34,3 +34,5 @@ fields:
       min: 
       max: 
       step: 
+pages:
+- demo/data/footer_logos.yaml
