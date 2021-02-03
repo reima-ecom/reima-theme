@@ -2,6 +2,26 @@
 layout: page
 title: ''
 modules:
+- template: image-grid
+  showmoreafter: '0'
+  lastfilllinks: []
+  images:
+  - image: "/3-sneak-peek.jpg"
+    content: ''
+  - image: "/3-sneak-peek.jpg"
+    content: ''
+  heading: ''
+  popup: false
+  link: false
+  linktext: ''
+  linkurl: ''
+  linkmodifier: ''
+  showmore: false
+  showmoretext: ''
+  lastfill: false
+  lastfilltext: ''
+  columnsmobile: ''
+  columnsdesktop: ''
 - template: hero
   type: Image
   image: "/3-sneak-peek.jpg"
