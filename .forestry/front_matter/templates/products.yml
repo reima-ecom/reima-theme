@@ -29,7 +29,9 @@ fields:
   config:
     required: false
   label: Show all button text
-  description: If there are more products to show than the limit, a "Show All" button will be shown. By default, the button text will be "Sold Out" or whatever is defined in the translation file, but you can override that default here if you wish.
+  description: If there are more products to show than the limit, a "Show All" button
+    will be shown. By default, the button text will be "Sold Out" or whatever is defined
+    in the translation file, but you can override that default here if you wish.
 - name: collectionref
   type: select
   default: []

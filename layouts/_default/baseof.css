@@ -405,3 +405,21 @@ textarea:focus {
 .margin-bottom-base {
   margin-bottom: 1rem;
 }
+
+.footer-logos {
+	margin: 3rem calc(var(--content-padding) / -2) 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.footer-logos img {
+  margin: calc(var(--content-padding) / 2);
+  max-width: calc(100% - var(--content-padding));
+}
+
+@media (min-width: 1024px) {
+  .footer-logos {
+    justify-content: center;
+  }
+}
