@@ -64,7 +64,8 @@ fields:
     name: other
     label: other
     default: Sold Out
-  description: Text contents of the tag shown in e.g. product list if the product is sold out.
+  description: Text contents of the tag shown in e.g. product list if the product
+    is sold out.
 - type: field_group
   name: Product list show all
   label: Product list show all button text
@@ -73,7 +74,9 @@ fields:
     name: other
     label: other
     default: Show All
-  description: If a product list is limited to show less than the total number of products in the collection, a button to view the entire collection is shown. This is the text content of that button.
+  description: If a product list is limited to show less than the total number of
+    products in the collection, a button to view the entire collection is shown. This
+    is the text content of that button.
 - type: field_group
   name: 'Product feature: color'
   label: 'Product feature: color'
