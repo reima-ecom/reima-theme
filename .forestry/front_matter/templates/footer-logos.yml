@@ -3,7 +3,7 @@ label: Footer Logos
 hide_body: true
 fields:
 - type: field_group_list
-  name: Footer logos
+  name: logos
   label: Footer logos
   fields:
   - type: file
