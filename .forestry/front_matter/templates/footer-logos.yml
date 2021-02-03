@@ -1,0 +1,17 @@
+---
+label: Footer Logos
+hide_body: true
+fields:
+- type: field_group_list
+  name: Footer logos
+  label: Footer logos
+  fields:
+  - type: file
+    name: logo
+    label: logo
+  - type: text
+    name: alt
+    label: alt
+  - type: number
+    name: width
+    label: width
