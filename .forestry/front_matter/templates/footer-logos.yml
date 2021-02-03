@@ -8,10 +8,29 @@ fields:
   fields:
   - type: file
     name: logo
-    label: logo
+    label: Logo
   - type: text
     name: alt
-    label: alt
+    label: Title
+    description: Accessible "alt" text for the logo, e.g. "Klarna".
+    config:
+      required: true
   - type: number
     name: width
-    label: width
+    label: Width
+    description: Resize image to this width.
+    config:
+      required: true
+  - name: height
+    type: number
+    label: Height
+    description: Image height when resized. This is needed for svg images, otherwise
+      the browser will not know the height before the image download is complete.
+      Ignored for png and jpg images (these get the height from the actual resized
+      image).
+    default: 0
+    required: true
+    config:
+      min: 
+      max: 
+      step: 
