@@ -53,3 +53,5 @@ fields:
     variant with that ID specified in the URL will be placed in the cart when clicking
     the link or button.<br><strong>Note: format of the URL has changed in version
     2.2.2</strong>'
+pages:
+- demo/content/bug.md
