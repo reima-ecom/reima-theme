@@ -7,6 +7,13 @@ type ProductNode = {
   handle: string;
   title: string;
   descriptionHtml: string;
+  collections: {
+    edges: {
+      node: {
+        handle: string;
+      };
+    }[];
+  };
   variants: {
     pageInfo: {
       hasNextPage: boolean;

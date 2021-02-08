@@ -46,6 +46,10 @@ const checkMissingVariants: Transformer = (product) => {
   }
 };
 
+const addCollections: Transformer = (product) => ({
+  collections: product.collections.edges.map(({ node }) => node.handle),
+});
+
 export const writeProduct = (
   outDir: string,
   srcToFilename: (src: string) => string,
@@ -56,6 +60,8 @@ export const writeProduct = (
       .then(transform(checkMissingVariants))
       .then(transform(getResources))
       .then(transform(mapProductLegacy))
+      // collections are needed for the algolia index
+      .then(transform(addCollections))
       .then(toContent)
       .then(serializeContent(serializer))
       .then(writeFileToDir(outDir));

@@ -12,7 +12,7 @@ const flattenEdges = (param: string) =>
 const addSeoDescription = (product: any) => ({
   ...product,
   seo: {
-    description: product.description.split('[--Read More--]')[0].trim(),
+    description: product.description.split("[--Read More--]")[0].trim(),
   },
 });
 
@@ -25,6 +25,8 @@ const addLegacyId = (product: any) => ({
   ...product,
   legacyResourceId: convertToLegacyId(product.id),
 });
+
+const deleteCollections = ({ collections, ...product }: any) => product;
 
 export class NumberFormatMock {
   currency: string;
@@ -75,5 +77,7 @@ export const mapProductLegacy = (product: any): Promise<any> =>
     .then(addVariantStorefrontIds)
     .then(addLegacyId)
     .then(addMockNumberFormat)
+    // collections are handled in the main writer
+    .then(deleteCollections)
     .then(mapProduct)
     .then(setVariantImageIndecies);

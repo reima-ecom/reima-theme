@@ -68,6 +68,13 @@ const query = (count: number, cursor?: string) =>
         availableForSale
         descriptionHtml
         description
+        collections(first: 100) {
+          edges {
+            node {
+              handle
+            }
+          }
+        }
         tags
         images(first: 100) {
           pageInfo {
