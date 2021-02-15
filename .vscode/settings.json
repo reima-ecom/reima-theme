@@ -17,5 +17,8 @@
     "**/coverage/**",
     "**/public/**"
   ],
-  "html.format.templating": true
+  "html.format.templating": true,
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true
+  }
 }

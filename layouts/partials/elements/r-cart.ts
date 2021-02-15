@@ -1,69 +1,29 @@
 /// <reference lib="dom" />
-/// <reference lib="es2015" />
-/// <reference types="../../../globals.d.ts" />
 
-type Cart = {
-  lineItems: LineItem[];
-  subtotalPriceV2: { amount: number };
-  webUrl: string;
-};
-
-type LineItem = {
-  variant: {
-    id: string;
-    product: {
-      id: string;
-      handle: string;
-    };
-    price: string;
-    title: string;
-  };
-  quantity: number;
-  title: string;
-};
-
-// shopify loading promise creator
-const loadShopify = () =>
-  new Promise<any>((resolve) => {
-    const script = document.createElement("script");
-    script.src =
-      "https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js";
-    script.onload = () =>
-      resolve(
-        (window as any).ShopifyBuy,
-      );
-    document.body.appendChild(script);
-  });
+import type {
+  Checkout,
+  LineItem,
+  Money,
+} from "https://raw.githubusercontent.com/reima-ecom/cart-worker/main/lib/checkout.ts";
+import type { UpdateQuantityPutRequestBody } from "https://raw.githubusercontent.com/reima-ecom/cart-worker/main/handler.ts";
 
 const formatPrice = (
-  price: number,
-  currency: string,
-) => (price
+  { amount, currency }: Money,
+) => (amount
   ? new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
-    price,
+    amount,
   )
   : "");
 
 const storefrontIdToLegacy = (id: string) => atob(id).split("/").pop();
 
-const settings = window.site.shopify;
-
 export default class RCart extends HTMLElement {
   items!: HTMLElement;
   subtotal!: HTMLElement;
   checkout!: HTMLAnchorElement;
-  client: any;
 
   static get observedAttributes() {
     return ["open"];
-  }
-
-  get checkoutId() {
-    return this.getAttribute("checkout-id") || "";
-  }
-
-  set checkoutId(val: string) {
-    this.setAttribute("checkout-id", val);
   }
 
   get loading() {
@@ -111,12 +71,12 @@ export default class RCart extends HTMLElement {
       : "";
   }
 
-  render(checkout: Cart) {
+  render(checkout?: Checkout) {
     this.items.innerHTML = "";
     if (checkout) {
       /** @type {HTMLTemplateElement} */
       const template = this.querySelector<HTMLTemplateElement>("#item")!;
-      checkout.lineItems.forEach((li: any) => {
+      checkout.items.forEach((li) => {
         const item = template.content.cloneNode(true) as HTMLElement;
         if (li.variant.image) {
           const img = item.querySelector("img")!;
@@ -128,21 +88,19 @@ export default class RCart extends HTMLElement {
           item.querySelector("h3")!.innerText = li.variant.title;
         }
         const input = item.querySelector("input")!;
-        input.value = li.quantity;
+        input.value = li.quantity.toString();
         input.dataset.id = li.id;
         item.querySelector<HTMLElement>(".price")!.innerText = formatPrice(
           li.variant.price,
-          window.site.currency,
         );
         this.items.appendChild(item);
       });
-      this.checkout.href = checkout.webUrl;
+      this.checkout.href = checkout.url;
       this.subtotal.innerText = formatPrice(
-        checkout.subtotalPriceV2.amount,
-        window.site.currency,
+        checkout.subtotal,
       );
       // update dot count
-      this.itemCount = checkout.lineItems.reduce(
+      this.itemCount = checkout.items.reduce(
         (count: number, li: LineItem) => count + li.quantity,
         0,
       );
@@ -151,63 +109,32 @@ export default class RCart extends HTMLElement {
     }
   }
 
-  async ensureClient() {
-    if (this.client) return;
-    const ShopifyBuy = await loadShopify();
-    this.client = ShopifyBuy.buildClient({
-      domain: `${settings.store}.myshopify.com`,
-      storefrontAccessToken: settings.token,
-    });
-  }
-
   async addVariant(variantId: string) {
-    await this.ensureClient();
-    // create new checkout if none exists yet
-    if (!this.checkoutId) {
-      let input = undefined;
-      // check cookie for custom checkout attributes
-      try {
-        const match = document.cookie.match(
-          /(?:^|;\s*)X-Checkout-Attr-(\w*)=([^;]+)/,
-        );
-        if (match) {
-          const [, key, value] = match;
-          input = {
-            customAttributes: [{ key, value }],
-          };
-        }
-      } catch (error) {
-        console.error("Could not check cookie for attributes", error);
-      }
-      const checkout = await this.client.checkout.create(input);
-      this.checkoutId = checkout.id.toString();
-    }
-    const checkout = await this.client.checkout.addLineItems(
-      this.checkoutId,
-      [{ variantId, quantity: 1 }],
-    );
+    const response = await fetch(`/cart?add=${variantId}`, {
+      headers: {
+        "Accept": "application/json",
+      },
+    });
+    const checkout: Checkout = await response.json();
     this.render(checkout);
-    // one week max-age
-    document.cookie =
-      `X-checkout=${checkout.id}; Path=/; SameSite=Lax; Max-Age=604800`;
     this.open = true;
 
     // new way to dispatch cart add event, will bubble to document
     const basket = {
       id: checkout.id,
-      url: checkout.webUrl,
-      total: Number.parseFloat(checkout.totalPrice),
-      currency: checkout.currencyCode,
-      items: checkout.lineItems.map((li: LineItem) => ({
+      url: checkout.url,
+      total: checkout.subtotal.amount,
+      currency: checkout.subtotal.currency,
+      items: checkout.items.map((li) => ({
         variantId: li.variant.id,
         title: li.variant.title,
         quantity: li.quantity,
-        price: Number.parseFloat(li.variant.price),
+        price: li.variant.price.amount,
         productId: li.variant.product.id,
         productHandle: li.variant.product.handle,
         productTitle: li.title,
         productIdLegacy: storefrontIdToLegacy(li.variant.product.id),
-        variantIdLegacy: storefrontIdToLegacy(li.variant.id),
+        variantIdLegacy: storefrontIdToLegacy(variantId),
       })),
     };
     const variant = basket.items.find((li: any) => li.variantId === variantId);
@@ -220,42 +147,37 @@ export default class RCart extends HTMLElement {
   }
 
   async updateQuantity(inputElement: HTMLInputElement) {
-    const checkout = await this.client.checkout.updateLineItems(
-      this.checkoutId,
-      [{
-        id: inputElement.dataset.id,
-        quantity: Number.parseInt(inputElement.value, 10),
-      }],
-    );
+    const updates: UpdateQuantityPutRequestBody = {
+      itemId: inputElement.dataset.id!,
+      quantity: Number.parseInt(inputElement.value, 10),
+    };
+    const response = await fetch("/cart", {
+      method: "PUT",
+      body: JSON.stringify(updates),
+      headers: {
+        "Accept": "application/json",
+      },
+    });
+    const checkout = await response.json();
     this.render(checkout);
   }
 
   async loadCheckout() {
-    let checkout;
-    if (this.checkoutId) {
-      await this.ensureClient();
-      try {
-        checkout = await this.client.checkout.fetch(this.checkoutId);
-        if (checkout && checkout.order) {
-          throw new Error("Checkout has an associated order");
-        }
-      } catch (error) {
-        // if there was an error, just ditch the old checkout
-        this.checkoutId = "";
-        document.cookie =
-          "X-checkout=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
+    const response = await fetch("/cart", {
+      headers: {
+        "Accept": "application/json",
+      },
+    });
+    let checkout: Checkout | undefined;
+    if (response.status === 200) {
+      checkout = await response.json();
     }
+    console.log(checkout);
     this.render(checkout);
     this.loading = false;
   }
 
   async connectedCallback() {
-    this.checkoutId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)X-checkout\s*=\s*([^;]*).*$)|^.*$/,
-      "$1",
-    );
-
     this.items = this.querySelector<HTMLElement>(".items")!;
     this.checkout = this.querySelector<HTMLAnchorElement>(".checkout")!;
     this.subtotal = this.querySelector<HTMLElement>(".summary .price")!;

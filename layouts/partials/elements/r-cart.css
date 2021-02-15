@@ -128,7 +128,7 @@ r-cart .items:empty ~ .empty {
   display: block;
 }
 
-r-cart[checkout-id]:not([loading]) .items:not(:empty) ~ .summary {
+r-cart:not([loading]) .items:not(:empty) ~ .summary {
   display: block;
 }
 
