@@ -103,6 +103,15 @@
           {{T "Sold out"}}
           {{ end }}
         </button>
+        {{ if $settings.klarnabanner }}
+        {{ $payment := printf "$%.2f" (float (div .Params.price 4)) }}
+        <div exp-klarna-banner class="product__klarna-banner">
+          <img src="/klarna.svg" alt="Klarna logo" width="54" height="30">
+          <div>
+            4 interest free payments of {{$payment}}. <a href="#">Learn more</a>
+          </div>
+        </div>
+        {{ end }}
         <div class="product__payment-logos">
           {{- range $settings.paymentlogos }}
           {{ if eq .type "External SVG" }}

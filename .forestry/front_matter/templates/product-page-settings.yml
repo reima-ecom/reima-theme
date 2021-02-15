@@ -138,6 +138,10 @@ fields:
   description: Enable reviews on the product page. If there are no reviews to show
     and yotpo has not been connected to this site, there's no need to enable the reviews
     element.
+- type: boolean
+  name: klarnabanner
+  label: Enable Klarna payment plan banner A/B test
+  description: This is an ongoing A/B test for the "4 interest-free payments ..." Klarna banner. The experiment needs to be enabled for the sites separately, so contact a developer if you want to test this. The banner is currently only in English.
 - name: paymentlogos
   type: field_group_list
   fields:

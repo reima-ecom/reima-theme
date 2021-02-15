@@ -75,7 +75,4 @@ features:
     icon: Breathability-5000.svg
   - value: "7000"
     icon: Breathability-7000.svg
-paymentlogos:
-- type: External SVG
-  src: https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg
-  name: Klarna
+klarnabanner: true
