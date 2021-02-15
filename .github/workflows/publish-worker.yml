@@ -1,0 +1,23 @@
+name: Publish site worker
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - demo/worker/**
+      - .github/workflows/publish-worker.yml
+
+jobs:
+  us-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: denolib/setup-deno@v2
+    - run: deno bundle sw.ts sw.js
+      working-directory: demo/worker
+    - name: Publish with wrangler
+      uses: cloudflare/wrangler-action@1.2.0
+      with:
+        workingDirectory: demo/worker
+        apiToken: ${{ secrets.CF_API_TOKEN }}
