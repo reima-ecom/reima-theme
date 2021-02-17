@@ -1,0 +1,32 @@
+.consent-banner {
+  display: none;
+  position: fixed;
+  position: sticky;
+  bottom: 0;
+  background: var(--color-reima-deep-yellow);
+  contain: layout;
+  padding: 0 1rem;
+  padding: 0 max(var(--content-padding), (100% - var(--content-max-width))/2);
+}
+
+.consent-banner[show] {
+  display: block;
+}
+
+.consent-banner::before {
+  content: " ";
+  margin-top: 1em;
+  display: block;
+}
+
+.consent-banner h1,
+.consent-banner h2,
+.consent-banner h3 {
+  font-size: var(--h4-font-size);
+  letter-spacing: var(--h4-letter-spacing);
+  margin-bottom: var(--h4-margin-bottom);
+}
+
+.consent-banner .btn + .btn {
+  margin-left: 1ch;
+}

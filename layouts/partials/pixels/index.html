@@ -15,4 +15,9 @@
 {{partial "pixels/pinterest" .}}
 {{partial "pixels/taboola" .}}
 
+{{- else }}
+
+<!-- cookie consent banner tester on dev -->
+{{partial "pixels/test-consent" .}}
+
 {{- end }}

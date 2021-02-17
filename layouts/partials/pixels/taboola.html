@@ -1,7 +1,7 @@
 {{ with site.Data.pixels }}
 {{ if .taboola_enabled }}
 
-<script type='text/javascript'>
+<script uses-cookies type='text/javascript'>
   window._tfa = window._tfa || [];
   window._tfa.push({ notify: 'event', name: 'page_view' });
   !function (t, f, a, x) {
@@ -14,11 +14,11 @@
     'tb_tfa_script');
 </script>
 <noscript>
-  <img src="//trc.taboola.com/{{.taboola_account}}/log/3/unip?en=page_view" width="0" height="0" style="display:none" />
+  <img uses-cookies src="//trc.taboola.com/{{.taboola_account}}/log/3/unip?en=page_view" width="0" height="0" style="display:none" />
 </noscript>
 
 {{ if partial "helpers/has-product" $ }}
-<script>
+<script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     _tfa.push({ notify: 'event', name: 'add_to_cart' });
   });

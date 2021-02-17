@@ -1,7 +1,7 @@
 {{ with site.Data.pixels }}
 {{ if .ga_enabled }}
 
-<script>
+<script uses-cookies>
   (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
       (i[r].q = i[r].q || []).push(arguments)
@@ -17,7 +17,7 @@
 </script>
 
 {{ with partial "helpers/get-product" $ }}
-<script>
+<script uses-cookies>
   ga('ec:addProduct', {
     id: "{{$.File.ContentBaseName}}",
     name: "{{.Title}}",
@@ -29,7 +29,7 @@
 {{ end }}
 
 {{ if partial "helpers/has-product" $ }}
-<script>
+<script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     const checkout = e.detail.checkout;
     const variant = e.detail.variant;
@@ -47,7 +47,7 @@
 </script>
 {{ end }}
 
-<script>
+<script uses-cookies>
   ga('send', 'pageview');
 </script>
 
