@@ -3,7 +3,7 @@ import {
   getEventListener,
   notFound404WhenTrailingSlash,
   rewriteForTesting,
-} from "https://raw.githubusercontent.com/reima-ecom/site-worker/v0.2.0/mod.ts";
+} from "https://raw.githubusercontent.com/reima-ecom/site-worker/v0.2.1/mod.ts";
 
 const eventListener = getEventListener({
   getAsset: notFound404WhenTrailingSlash(
