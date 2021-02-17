@@ -1,11 +1,13 @@
+{{ $.Scratch.Add "ts" "partials/consent-banners.ts" }}
+
 {{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
 
 {{ with $announcements.gdpr }}
 <aside gdpr class="consent-banner">
   {{.message | markdownify}}
   <p>
-    <a href="?consent=yes" class="btn btn--sm btn--cta">{{.accept_button}}</a>
-    <a href="?consent=no" class="btn btn--sm btn--cta">{{.reject_button}}</a>
+    <a href="?gdpr-consent=yes" class="btn btn--sm btn--cta">{{.accept_button}}</a>
+    <a href="?gdpr-consent=no" class="btn btn--sm btn--cta">{{.reject_button}}</a>
   </p>
   <p>
     {{ range .links }}

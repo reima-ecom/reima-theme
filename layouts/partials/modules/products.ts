@@ -8,6 +8,5 @@ function colorDotClick(e: MouseEvent) {
 }
 
 document.querySelectorAll<HTMLElement>('.product-list ul').forEach((element) => {
-  console.log('adding event listener');
   element.addEventListener('click', colorDotClick);
 });
