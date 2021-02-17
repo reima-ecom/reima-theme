@@ -53,3 +53,53 @@ fields:
   showOnly:
     field: newsletterEnabled
     value: true
+- name: gdpr
+  type: field_group
+  config: {}
+  fields:
+  - name: message
+    type: textarea
+    default: |-
+      \# We value your privacy!
+
+      We and our partners are using technologies like cookies and process personal. We use it in order to measure results and align our website content. Because we value your privacy, we are herewith asking for your permission to use these technologies.
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Message
+    description: Message to show to users, including the heading, as markdown.
+  - name: accept_button
+    type: text
+    config:
+      required: true
+    label: Accept button text
+    default: Accept
+  - name: reject_button
+    type: text
+    config:
+      required: true
+    label: Reject button text
+    default: Reject
+  - name: links
+    type: field_group_list
+    fields:
+    - name: text
+      type: text
+      config:
+        required: true
+      label: Text
+    - name: url
+      type: text
+      config:
+        required: true
+      label: Url
+    config:
+      min: 1
+      max: 
+      labelField: 
+    label: Links
+    description: Links to show in the banner, below the buttons. You should at least
+      include a link to the "privacy policy" or similar page.
+  label: GDPR cookie banner
