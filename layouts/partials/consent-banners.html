@@ -1,0 +1,34 @@
+{{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
+
+{{ with $announcements.gdpr }}
+<aside gdpr class="consent-banner">
+  {{.message | markdownify}}
+  <p>
+    <a href="?consent=yes" class="btn btn--sm btn--cta">{{.accept_button}}</a>
+    <a href="?consent=no" class="btn btn--sm btn--cta">{{.reject_button}}</a>
+  </p>
+  <p>
+    {{ range .links }}
+    <a href="{{.url}}">{{.text}}</a>
+    {{ end }}
+  </p>
+</aside>
+{{ else }}
+{{ warnf "GDPR notice not found for %s" site.Language }}
+{{ end }}
+
+{{ with $announcements.ccpa }}
+<aside ccpa class="consent-banner">
+  {{.message | markdownify}}
+  <p>
+    <a href="." class="btn btn--sm btn--cta">{{.dismiss_button}}</a>
+  </p>
+  <p>
+    {{ range .links }}
+    <a href="{{.url}}">{{.text}}</a>
+    {{ end }}
+  </p>
+</aside>
+{{ else }}
+{{ warnf "CCPA notice not found for %s" site.Language }}
+{{ end }}

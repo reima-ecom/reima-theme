@@ -5,7 +5,44 @@
   "collectionPageBannerTitle": "Banner",
   "collectionPageBannerText": "Hello there",
   "newsletterEnabled": true,
-  "newsletterTitle":  "Sign up and save 10% off your first purchase",
-  "newsletterText":  "Reima Friends are the first to know about our latest products, exclusive offers and top tips. Your coupon will be be emailed to you.",
-  "newsletterThankYouMessage":  "Thank you for subscribing!"
+  "newsletterTitle": "Sign up and save 10% off your first purchase",
+  "newsletterText": "Reima Friends are the first to know about our latest products, exclusive offers and top tips. Your coupon will be be emailed to you.",
+  "newsletterThankYouMessage": "Thank you for subscribing!",
+  "gdpr": {
+    "message": "# We value your privacy!\n\nWe and our partners are using technologies like cookies and process personal data like the IP-address or browser information in order to personalize the advertising that you see. This helps us to show you more relevant ads and improves your internet experience. We also use it in order to measure results or align our website content. Because we value your privacy, we are herewith asking for your permission to use these technologies. You can always change/withdraw your consent later by clicking on \"Cookie Settings\" at the bottom of the page.",
+    "accept_button": "Accept",
+    "reject_button": "Reject",
+    "links": [
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Terms of service"
+      },
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Privacy policy"
+      },
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Cookie policy"
+      }
+    ]
+  },
+  "ccpa": {
+    "message": "# We value your privacy!\n\nWe and our partners are using technologies like cookies and process personal data like the IP-address or browser information in order to personalize the advertising that you see. This helps us to show you more relevant ads and improves your internet experience. We also use it in order to measure results or align our website content. We do not sell your data.",
+    "dismiss_button": "Dismiss",
+    "links": [
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Terms of service"
+      },
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Privacy policy"
+      },
+      {
+        "url": "/pages/terms-of-service",
+        "text": "Cookie policy"
+      }
+    ]
+  }
 }
