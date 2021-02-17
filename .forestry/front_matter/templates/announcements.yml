@@ -103,3 +103,47 @@ fields:
     description: Links to show in the banner, below the buttons. You should at least
       include a link to the "privacy policy" or similar page.
   label: GDPR cookie banner
+- name: ccpa
+  type: field_group
+  config: {}
+  fields:
+  - name: message
+    type: textarea
+    default: |-
+      \# We value your privacy!
+
+      We and our partners are using technologies like cookies and process personal data like the IP-address or browser information in order to personalize the advertising that you see. This helps us to show you more relevant ads and improves your internet experience. We also use it in order to measure results or align our website content. We do not sell your data.
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Message
+    description: Message to show to users, including the heading, as markdown.
+  - name: dismiss_button
+    type: text
+    config:
+      required: true
+    label: Dismiss button text
+    default: Dismiss
+  - name: links
+    type: field_group_list
+    fields:
+    - name: text
+      type: text
+      config:
+        required: true
+      label: Text
+    - name: url
+      type: text
+      config:
+        required: true
+      label: Url
+    config:
+      min: 1
+      max: 
+      labelField: 
+    label: Links
+    description: Links to show in the banner, below the buttons. You should at least
+      include a link to the "privacy policy" or similar page.
+  label: CCPA notice
