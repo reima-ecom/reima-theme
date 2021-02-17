@@ -98,7 +98,7 @@ fields:
     config:
       min: 1
       max: 
-      labelField: 
+      labelField: text
     label: Links
     description: Links to show in the banner, below the buttons. You should at least
       include a link to the "privacy policy" or similar page.
@@ -142,7 +142,7 @@ fields:
     config:
       min: 1
       max: 
-      labelField: 
+      labelField: text
     label: Links
     description: Links to show in the banner, below the buttons. You should at least
       include a link to the "privacy policy" or similar page.
