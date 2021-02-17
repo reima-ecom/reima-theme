@@ -147,3 +147,5 @@ fields:
     description: Links to show in the banner, below the buttons. You should at least
       include a link to the "privacy policy" or similar page.
   label: CCPA notice
+pages:
+- demo/data/announcements.json
