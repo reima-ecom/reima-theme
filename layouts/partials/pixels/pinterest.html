@@ -1,7 +1,7 @@
 {{ with site.Data.pixels }}
 {{ if .pinterest_enabled }}
 
-<script type="text/javascript">
+<script uses-cookies type="text/javascript">
   !function (e) {
     if (!window.pintrk) {
       window.pintrk = function () { window.pintrk.queue.push(Array.prototype.slice.call(arguments)) }; var
@@ -16,12 +16,12 @@
   pintrk('page');
 </script>
 <noscript>
-  <img height="1" width="1" style="display:none;" alt=""
+  <img uses-cookies height="1" width="1" style="display:none;" alt=""
     src="https://ct.pinterest.com/v3/?tid={{.pinterest_id}}&noscript=1" />
 </noscript>
 
 {{ if partial "helpers/has-product" $ }}
-<script>
+<script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     pintrk('track', 'addtocart');
   });

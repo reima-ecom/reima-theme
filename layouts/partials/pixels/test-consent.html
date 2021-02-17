@@ -1,7 +1,7 @@
 <script uses-cookies type="text/plain">
-  console.log('Inline script loaded.');
+  console.log('Inline cookie-based analytics script loaded.');
 </script>
 {{ with resources.Get "partials/pixels/test-consent.ts" }}
 {{ $js := . | js.Build (dict "format" "esm") -}}
-<script uses-cookies load-on-consent="{{$js.RelPermalink}}"></script>
+<script uses-cookies type="application/javascript" load-on-consent="{{$js.RelPermalink}}"></script>
 {{ end }}

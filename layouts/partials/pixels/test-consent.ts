@@ -1,3 +1,3 @@
-console.log("External script loaded.");
+console.log("External cookie-based analytics script loaded.");
 
 export {};

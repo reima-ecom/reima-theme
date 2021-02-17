@@ -1,7 +1,7 @@
 {{ with site.Data.pixels }}
 {{ if .facebook_enabled }}
 
-<script>
+<script uses-cookies>
   !function (f, b, e, v, n, t, s) {
     if (f.fbq) return; n = f.fbq = function () {
       n.callMethod ?
@@ -16,7 +16,7 @@
   fbq('init', '{{.facebook_id}}');
   fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
+<noscript><img uses-cookies height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id={{.facebook_id}}&ev=PageView&noscript=1" /></noscript>
 
 
@@ -25,7 +25,7 @@
   TODO: move to use legacyid param or something similar!
   using yotpoId for now, since that is the same
  -->
-<script>
+<script uses-cookies>
   fbq('track', 'ViewContent', {
     content_name: '{{.Title}}',
     content_ids: ['{{.Params.yotpoId}}'],
@@ -37,7 +37,7 @@
 {{ end }}
 
 {{ if partial "helpers/has-product" $}}
-<script>
+<script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     const variant = e.detail.variant;
     const checkout = e.detail.checkout;

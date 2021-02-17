@@ -6,19 +6,19 @@
 {{ with site.Data.pixels }}
 {{ if .ometria_enabled }}
 
-<script src="//cdn.ometria.com/tags/{{.ometria_account}}.js"></script>
-<script>
+<script uses-cookies src="//cdn.ometria.com/tags/{{.ometria_account}}.js"></script>
+<script uses-cookies>
   document.addEventListener('subscribe', (e) => {
     ometria.identify(e.detail.email);
   });
 </script>
 
 {{- if $.IsHome }}
-<script>
+<script uses-cookies>
   ometria.init('homepage', null, '{{.ometria_store}}');
 </script>
 {{- else if partial "helpers/is-collection" $ }}
-<script>
+<script uses-cookies>
   ometria.init('listing', null, '{{.ometria_store}}');
 </script>
 {{- else if partial "helpers/is-product" $ }}
@@ -26,7 +26,7 @@
   TODO: move to use legacyid param or something similar!
   using yotpoId for now, since that is the same
  -->
-<script>
+<script uses-cookies>
   ometria.init('product', {
     pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
   }, '{{.ometria_store}}');
@@ -35,7 +35,7 @@
 {{- end }}
 
 {{ if partial "helpers/has-product" $ }}
-<script>
+<script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     const checkout = e.detail.checkout;
     const basket = new ometria.Basket();

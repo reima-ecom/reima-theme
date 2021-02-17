@@ -12,9 +12,14 @@ const gdprButtonClick = (e: Event) => {
       // load src
       if (element.hasAttribute("load-on-consent")) {
         element.setAttribute("src", element.getAttribute("load-on-consent")!);
+        element.removeAttribute("load-on-consent");
       }
       // load inline scripts
-      if (element.tagName === "SCRIPT" && element.hasAttribute("type")) {
+      if (
+        element.tagName === "SCRIPT" &&
+        element.hasAttribute("type") &&
+        !element.hasAttribute("src")
+      ) {
         element.removeAttribute("type");
         document.body.append(element);
       }
