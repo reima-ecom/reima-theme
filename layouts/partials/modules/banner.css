@@ -1,16 +1,21 @@
 .module-banner {
-  padding: var(--content-padding);
+  padding: calc(var(--content-padding) / 2) max(var(--content-padding) / 2, (100% - 768px) / 2);
   background: var(--color-fg);
   color: white;
   letter-spacing: normal;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
 .module-banner > :first-child {
-  flex: 1;
-  max-width: 480px;
+  flex: 1 1 200px;
+  max-width: max-content;
+}
+
+.module-banner > * {
+  margin: calc(var(--content-padding) / 2);
 }
 
 .module-banner h3 {
