@@ -4,6 +4,26 @@
   max-width: var(--block-width);
 }
 
+.product-list__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: -0.5rem;
+  margin-left: -2rem;
+  margin-bottom: var(--h4-margin-bottom);
+}
+
+.product-list__heading h2 {
+  flex: 1 1 auto;
+  width: max-content;
+  margin-bottom: 0;
+}
+
+.product-list__heading > * {
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+}
+
 .product-list ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -76,10 +96,6 @@
 
 .product-list__rating span + span {
   color: var(--color-gray);
-}
-
-.product-list__show-all {
-  align-self: center;
 }
 
 /* #region sold out tag and muting */
