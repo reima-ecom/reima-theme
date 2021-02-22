@@ -1,4 +1,20 @@
 ---
 label: SEO Properties
 hide_body: true
-fields: []
+fields:
+- name: description
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+    max: 300
+  label: Description
+  description: Description for SEO purposes. If left empty, the SEO description for
+    the page will be the default description set on the site level.
+- name: noindex
+  type: boolean
+  label: Noindex
+  description: Add a "noindex" tag on the page and remove from the sitemap.
