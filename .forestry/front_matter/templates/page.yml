@@ -34,16 +34,6 @@ fields:
   config:
     min: 1
     max: 
-- name: description
-  type: textarea
-  default: ''
-  config:
-    required: false
-    wysiwyg: false
-    schema:
-      format: markdown
-  label: Description
-  description: Description for SEO purposes
 - name: buybutton
   type: boolean
   label: Enable Buy Buttons
