@@ -95,5 +95,7 @@ modules:
 
       Why make life more complicated than it already is? Reima Baby Kit is the easiest way to get a stylish wardrobe for your new-born! Plus, bundling all these premium items will save you time to enjoy your baby bubble.
   columnsdesktop: '3'
+description: This is a baby kit test description. Note that this page is also noindexed.
+noindex: true
 
 ---
