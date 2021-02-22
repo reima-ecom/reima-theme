@@ -104,6 +104,11 @@ fields:
   label: Sidebar Links
   description: Add links to the sidebar. Links are shown below the main content on
     mobile.
+- name: seo
+  type: include
+  config: {}
+  template: seo-properties
+  label: SEO
 pages:
 - demo/content/collection.html
 - demo/content/kids.md
