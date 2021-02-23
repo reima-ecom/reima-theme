@@ -32,14 +32,14 @@ type FileWithDefinition = {
   definition: FrontmatterSpecs;
 };
 
-const readDirGithub = (githubRepo: string, path: string, githubToken: string) =>
+const readDirGithub = (githubRepo: string, path: string, githubToken?: string) =>
   async (): Promise<string[]> => {
     const response = await fetch(
       `https://api.github.com/repos/${githubRepo}/contents/${path}`,
       {
         headers: {
           "Accept": "application/vnd.github.v3",
-          "Authorization": `token ${githubToken}`,
+          "Authorization": githubToken ? `token ${githubToken}` : '',
         },
       },
     );
@@ -53,7 +53,7 @@ const readDirGithub = (githubRepo: string, path: string, githubToken: string) =>
 const readFileGithub = (
   githubRepo: string,
   path: string,
-  githubToken: string,
+  githubToken?: string,
 ) =>
   async (filename: string): Promise<FileWithContents> => {
     const url =
@@ -64,7 +64,7 @@ const readFileGithub = (
         headers: {
           // raw means raw file
           "Accept": "application/vnd.github.v3.raw",
-          "Authorization": `token ${githubToken}`,
+          "Authorization": githubToken ? `token ${githubToken}` : '',
         },
       },
     );
@@ -194,7 +194,7 @@ const mkdir = (path: string) =>
 const updateFrontmatter = async (
   githubRepo: string,
   targetDir: string,
-  githubToken: string,
+  githubToken?: string,
 ): Promise<void> => {
   // read source dir fm into array
   console.log(`Getting front matter templates from ${githubRepo}`);
