@@ -1,19 +1,20 @@
 interface Window {
-  experiment?: string
+  experiment?: string;
   site: {
     algolia?: {
-      indexname: string
-      appid: string
-      apikey: string
-    }
+      indexname: string;
+      appid: string;
+      apikey: string;
+    };
     shopify: {
-      store: string
-      token: string
-    }
-    currency: string
-  }
-  collection?: string
+      store: string;
+      token: string;
+    };
+    currency: string;
+  };
+  collection?: string;
   lazy: {
-    [name: string]: string
-  }
+    [name: string]: string;
+  };
+  locale: string;
 }
