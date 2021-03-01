@@ -3,7 +3,7 @@ name: Publish site worker
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - demo/worker/**
       - .github/workflows/publish-worker.yml
