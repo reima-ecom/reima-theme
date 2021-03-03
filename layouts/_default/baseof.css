@@ -257,10 +257,16 @@ a,
   text-decoration-skip-ink: auto;
 }
 
+.link--no-color {
+  color: inherit;
+  text-decoration-color: inherit;
+}
+
 a:hover,
-.link {
+.link:hover {
   color: var(--color-reima-red-hover);
-  text-decoration: underline;
+  text-decoration-style: underline;
+  text-decoration-color: var(--color-reima-red-hover);
 }
 
 .silent-link {
@@ -363,6 +369,7 @@ a:hover,
 /* #region focus */
 
 .btn:focus,
+.link:focus,
 a:focus {
   outline: var(--focus-outline);
   outline-offset: 2px;

@@ -41,7 +41,7 @@
   gap: 1ch;
 }
 
-.product__klarna-banner[exp-klarna-banner=treatment] {
+.product__klarna-banner[exp-klarna-banner="treatment"] {
   display: grid;
 }
 
@@ -200,19 +200,49 @@
   color: inherit;
 }
 
-.read-more > div,
+/* #region read-more toggle */
+
+/*
+We want to show the read more link under the contents when opened.
+That's why we set `display:contents` and then show the contents
+manually with CSS. The `[open]` attribute is still set on the 
+`details` elements, so we can use that for styling.
+*/
+
+.read-more {
+  display: contents;
+}
+
+.read-more > *:not(summary) {
+  display: none;
+}
+
+.read-more[open] > *:not(summary) {
+  display: block;
+}
+
+.read-more summary {
+  display: inline;
+}
+
+.read-more summary::marker {
+  display: none;
+  content: '';
+}
+
 .read-more .less {
   display: none;
 }
 
-.read-more.open > div,
-.read-more.open .less {
+.read-more[open] .less {
   display: unset;
 }
 
-.read-more.open .more {
+.read-more[open] .more {
   display: none;
 }
+
+/* #endregion */
 
 .tabs {
   border-bottom: var(--border);
@@ -254,7 +284,7 @@
 /* workaround for non-firefox */
 .tabs > details > summary::marker {
   display: none;
-  content: '';
+  content: "";
 }
 
 .tabs > input {
@@ -300,7 +330,8 @@
     display: grid;
     grid-auto-flow: column;
     gap: var(--content-padding);
-    padding: var(--content-padding);
+    padding: var(--content-padding)
+      max(var(--content-padding), (100% - var(--block-width)) / 2);
   }
 
   .tabs > details > div > *,
@@ -318,7 +349,7 @@
   }
 
   .tabs input:checked + details > div > :nth-child(2)::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: calc(-0.5 * var(--content-padding));

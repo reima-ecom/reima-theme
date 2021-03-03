@@ -133,13 +133,13 @@
       {{$productDescription | safeHTML}}
 
       {{ with $productReadMore }}
-      <div class="read-more">
-        <div>
-          {{$productReadMore | safeHTML}}
-        </div>
-        <a href="#" class="more" openid="parent">{{T "Show More"}}</a>
-        <a href="#" class="less" openid="parent">{{T "Show Less"}}</a>
-      </div>
+      <details class="read-more">
+        {{$productReadMore | safeHTML}}
+        <summary class="link link--no-color">
+          <span class="more">{{T "Show More"}}</span>
+          <span class="less">{{T "Show Less"}}</span>
+        </summary>
+      </details>
       {{ end }}
 
       {{ range $settings.links }}
