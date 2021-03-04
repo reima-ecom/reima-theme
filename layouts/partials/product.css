@@ -15,7 +15,8 @@
 }
 
 .product-prices .price {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 /* review stars are in a div */
@@ -28,6 +29,7 @@
 
 .product__add-to-cart {
   display: block;
+  font-weight: 700;
   width: 100%;
   max-width: 500px;
   margin: var(--content-padding) 0;
@@ -186,18 +188,6 @@
   .product > *:first-child {
     flex-basis: 40%;
   }
-}
-
-.description {
-  font-size: 1.125rem;
-  letter-spacing: 0.5px;
-  line-height: 1.5;
-}
-
-.description a {
-  text-decoration: none;
-  border-bottom: 2px solid rgba(56, 56, 59, 0.1);
-  color: inherit;
 }
 
 /* #region read-more toggle */

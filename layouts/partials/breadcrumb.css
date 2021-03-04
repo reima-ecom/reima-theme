@@ -9,18 +9,28 @@
     margin: var(--block-margin);
     padding: var(--block-padding);
     max-width: var(--block-width);
+    font-size: 0.875rem;
   }
-  
+
   .breadcrumb > * {
-    display: inline;
+    display: inline-block;
+    position: relative;
+    margin-right: 0.25rem;
   }
-  
+
   .breadcrumb > * + *::before {
-    content: ' / ';
+    content: " > ";
+    margin-right: 0.25rem;
+    color: var(--color-border);
   }
-  
+
   .breadcrumb a {
-    color: inherit;
+    color: var(--color-border);
     text-decoration: none;
+  }
+
+  .breadcrumb a:focus,
+  .breadcrumb a:hover {
+    color: var(--color-text);
   }
 }

@@ -171,7 +171,8 @@ h3,
 h4,
 .h4,
 h5,
-h6 {
+h6,
+.g-h2 {
   font-weight: 700;
   margin-top: 0;
 }
@@ -179,7 +180,8 @@ h6 {
 h1,
 h2,
 h3,
-h4 {
+h4,
+.g-h2 {
   line-height: 1.25;
 }
 
@@ -189,7 +191,8 @@ h1 {
   margin-bottom: var(--h1-margin-bottom);
 }
 
-h2 {
+h2,
+.g-h2 {
   font-size: var(--h2-font-size);
   letter-spacing: var(--h2-letter-spacing);
   margin-bottom: var(--h2-margin-bottom);
@@ -328,6 +331,10 @@ a:hover,
 .btn--sm {
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
+}
+
+.btn--lg {
+  padding: 1rem 2.2rem;
 }
 
 .btn--inv {

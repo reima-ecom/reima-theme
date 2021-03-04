@@ -44,7 +44,7 @@
       <!-- TODO: DEPRECATED -->
       <input type="hidden" name="product-id"
         value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
-      <h1 id="product-name">
+      <h1 class="g-h2" id="product-name">
         {{.Title}}
       </h1>
       <div class="product-prices">
@@ -95,7 +95,7 @@
       {{ end }}
 
       <div>
-        <button type="submit" class="btn btn--cta product__add-to-cart" {{if not $firstAvailableOptions}}disabled{{end}}
+        <button type="submit" class="btn btn--cta btn--lg product__add-to-cart" {{if not $firstAvailableOptions}}disabled{{end}}
           data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
           {{ if $firstAvailableOptions }}
           {{T "Add to cart"}}
@@ -124,7 +124,7 @@
       </div>
     </form>
 
-    <div class="description">
+    <div>
       {{ $productFields := split .RawContent "[product]" }}
       {{ $productMain := split (index $productFields 0) "[--Read More--]" }}
       {{ $productDescription := index $productMain 0 }}
@@ -144,10 +144,10 @@
 
       {{ range $settings.links }}
       {{ if eq .type "link" }}
-      <p><a href="{{.link}}" target="_blank">{{.title}}</a></p>
+      <p><a class="link--no-color" href="{{.link}}" target="_blank">{{.title}}</a></p>
       {{ else if eq .type "modal" }}
       {{ $id := .title }}
-      <p><a href="#" openid="{{$id}}">{{.title}}</a></p>
+      <p><a class="link--no-color" href="#" openid="{{$id}}">{{.title}}</a></p>
       <div class="modal" id="{{$id}}">
         <div>
           <button class="icon" close>
