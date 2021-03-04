@@ -59,6 +59,9 @@
         </div>
         {{ end }}
       </div>
+
+      <hr>
+
       {{ range $product.Params.options }}
       {{ $name := .name }}
       {{ $nameEnglish := $name }}
@@ -67,36 +70,42 @@
       {{ $nameEnglish = "Color" }}
       {{ end }}
       <fieldset class="selections selections--{{$nameEnglish}}">
-        <legend>{{.name}} <span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
-        {{ range .values }}
-        {{ $id := printf "%s-%s" $name .value}}
-        <input type="radio" name="{{$name}}" id="{{$id}}" value="{{.value}}" {{ if .firstAvailable }}checked{{ end }} />
+        <legend>{{.name}}<span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
+        <ul>
+          {{ range .values }}
+          <li>
+            {{ $id := printf "%s-%s" $name .value}}
+            <input type="radio" name="{{$name}}" id="{{$id}}" value="{{.value}}"
+              {{ if .firstAvailable }}checked{{ end }} />
 
-        {{ $labelStyle := "" }}
-        {{ $swatch := "" }}
-        {{ if eq $nameEnglish "Color" }}
-        {{ with partial "helpers/get-color" .value }}
-        {{ with .color }}
-        {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
-        {{ end }}
-        {{ $swatch = .image }}
-        {{ end }}
-        {{ end }}
+            {{ $labelStyle := "" }}
+            {{ $swatch := "" }}
+            {{ if eq $nameEnglish "Color" }}
+            {{ with partial "helpers/get-color" .value }}
+            {{ with .color }}
+            {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
+            {{ end }}
+            {{ $swatch = .image }}
+            {{ end }}
+            {{ end }}
 
-        <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
-          {{ if not .availableInitially }}class="unavailable" {{ end }}>
-          <span>{{.value}}</span>
-          {{ if $swatch }}
-          <img src="{{$swatch}}" alt="{{.value}}">
+            <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
+              {{ if not .availableInitially }}class="unavailable" {{ end }}>
+              <span>{{.value}}</span>
+              {{ if $swatch }}
+              <img src="{{$swatch}}" alt="{{.value}}">
+              {{ end }}
+            </label>
+          </li>
           {{ end }}
-        </label>
-        {{ end }}
+        </ul>
       </fieldset>
       {{ end }}
 
       <div>
-        <button type="submit" class="btn btn--cta btn--lg product__add-to-cart" {{if not $firstAvailableOptions}}disabled{{end}}
-          data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}" data-na="{{T "Not available"}}">
+        <button type="submit" class="btn btn--cta btn--lg product__add-to-cart"
+          {{if not $firstAvailableOptions}}disabled{{end}} data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}"
+          data-na="{{T "Not available"}}">
           {{ if $firstAvailableOptions }}
           {{T "Add to cart"}}
           {{ else }}

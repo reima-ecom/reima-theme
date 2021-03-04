@@ -111,35 +111,35 @@
       "children": [
         {
           "name": "Size Charts",
-          "url": "/tips-and-help/size-charts"
+          "url": "/"
         },
         {
           "name": "Shipping",
-          "url": "/pages/shipping"
+          "url": "/"
         },
         {
           "name": "Reima Partner Sites",
-          "url": "/pages/reima-stores-partner-sites"
+          "url": "/"
         },
         {
           "name": "Terms of Sale",
-          "url": "/pages/terms-of-sale"
+          "url": "/"
         },
         {
           "name": "Terms of Service",
-          "url": "/pages/terms-of-service"
+          "url": "/"
         },
         {
           "name": "Privacy Policy",
-          "url": "/pages/privacy-policy"
+          "url": "/"
         },
         {
           "name": "Refund Policy",
-          "url": "/pages/refund-policy"
+          "url": "/"
         },
         {
           "name": "FAQ",
-          "url": "/tips-and-help/faq"
+          "url": "/"
         }
       ]
     },    
@@ -149,33 +149,33 @@
       "children": [
         {
           "name": "Reima Baby Kit",
-          "url": "/products/reima-baby-kit"
+          "url": "/"
         },
         {
           "name": "Babies / Infants",
-          "url": "/collections/babies"
+          "url": "/"
         },
         {
           "name": "Toddlers",
-          "url": "/collections/toddlers"
+          "url": "/"
         },
         {
           "name": "Kids",
-          "url": "/collections/kids"
+          "url": "/"
         },
         {
           "name": "Winter Sale",
-          "url": "/collections/sale"
+          "url": "/"
         },
         {
           "name": "Inside Reima",
-          "url": "/our-story"
+          "url": "/"
         }
       ]
     },    
     {
       "name": "Contact Us",
-      "url": "/pages/contact-us",
+      "url": "/",
       "children": [
         {
           "name": "Call us at 888-437-4938",
@@ -187,7 +187,7 @@
         },
         {
           "name": "Affiliates",
-          "url": "/pages/affiliates"
+          "url": "/"
         }
       ]
     }

@@ -6,7 +6,7 @@
   .breadcrumb {
     display: block;
     list-style: none;
-    margin: var(--block-margin);
+    margin: var(--content-padding) 0;
     padding: var(--block-padding);
     max-width: var(--block-width);
     font-size: 0.875rem;
