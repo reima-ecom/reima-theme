@@ -215,6 +215,7 @@ manually with CSS. The `[open]` attribute is still set on the
   display: inline;
 }
 
+.read-more summary::-webkit-details-marker,
 .read-more summary::marker {
   display: none;
   content: "";
@@ -234,37 +235,29 @@ manually with CSS. The `[open]` attribute is still set on the
 
 /* #endregion */
 
+/* styles applicable to all views */
 .tabs {
   border-bottom: var(--border);
-}
-
-.tabs > details {
-  border-top: var(--border);
-}
-
-.tabs > details > div {
-  padding: 0 var(--content-padding);
 }
 
 .tabs ul {
   padding-left: 1rem;
 }
 
+/* mobile only styles */
+.tabs > details {
+  border-top: var(--border);
+  padding: 0 var(--content-padding);
+}
+
 .tabs > details > summary {
   display: block;
   cursor: pointer;
-}
-
-.tabs > details > summary label {
   color: inherit;
-  text-decoration: none;
-  display: block;
   font-size: var(--text-font-size);
   font-weight: 700;
   padding: var(--content-padding);
-  cursor: pointer;
-  /* take away the default link click action */
-  pointer-events: none;
+  margin: 0 calc(-1 * var(--content-padding));
 }
 
 .tabs > details[open] > summary {
@@ -272,34 +265,51 @@ manually with CSS. The `[open]` attribute is still set on the
   background: var(--color-fg);
 }
 
-/* workaround for non-firefox */
+.tabs > details > summary::-webkit-details-marker,
 .tabs > details > summary::marker {
   display: none;
   content: "";
 }
 
-.tabs > input {
-  position: absolute;
-  opacity: 0;
+/* add margins to first and last elements */
+.tabs > details > :nth-child(2) {
+  margin-top: var(--content-padding);
 }
 
+.tabs > details > :last-child {
+  margin-bottom: var(--content-padding);
+}
+
+/* hide "desktop" elements by default */
+.tabs > label,
+.tabs > aside,
+.tabs > input {
+  display: none;
+}
+
+/* desktop styles */
 @media (min-width: 768px) {
+  .tabs > details {
+    display: none;
+  }
+
   .tabs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    /* create stacking context so tabs don't appear above header */
+    position: relative;
+    z-index: 0;
   }
 
-  .tabs > details {
-    display: contents;
+  .tabs > input {
+    display: block;
+    position: absolute;
+    opacity: 0;
   }
 
-  .tabs > details > summary {
-    display: contents;
-  }
-
-  .tabs > details > summary label {
-    pointer-events: auto;
+  .tabs > label {
+    display: block;
     border: 1px solid var(--color-gray-light);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -308,38 +318,41 @@ manually with CSS. The `[open]` attribute is still set on the
     padding: 0.8125rem;
     font-size: 0.875rem;
     font-weight: normal;
+    cursor: pointer;
   }
 
-  .tabs > details > div {
+  .tabs > aside {
     display: none;
   }
 
-  .tabs input:checked + details > div {
+  .tabs > input:checked + label + aside {
     border-top: var(--border);
     width: 100%;
     order: 1;
     display: grid;
+    justify-content: center;
+    grid-auto-columns: minmax(33%,50%);
     grid-auto-flow: column;
     gap: var(--content-padding);
     padding: var(--content-padding)
       max(var(--content-padding), (100% - var(--block-width)) / 2);
   }
 
-  .tabs > details > div > *,
-  .tabs > details > div > * > :first-child {
+  /* remove margins from first and last elements of grid */
+  .tabs > aside > * > :first-child {
     margin-top: 0;
   }
 
-  .tabs > details > div > *,
-  .tabs > details > div > * > :last-child {
+  .tabs > aside > * > :last-child {
     margin-bottom: 0;
   }
 
-  .tabs input:checked + details > div > :nth-child(2) {
+  /* create the vertical line between grid items */
+  .tabs > aside > :nth-child(n+2) {
     position: relative;
   }
 
-  .tabs input:checked + details > div > :nth-child(2)::before {
+  .tabs > aside > :nth-child(n+2)::before {
     content: "";
     position: absolute;
     top: 0;
@@ -348,11 +361,11 @@ manually with CSS. The `[open]` attribute is still set on the
     border-left: var(--border);
   }
 
-  .tabs input:focus + details label {
+  .tabs input:focus + label {
     outline: var(--focus-outline);
   }
 
-  .tabs input:checked + details label {
+  .tabs input:checked + label {
     color: var(--color-text);
     border-color: var(--color-border);
     border-bottom-color: white;

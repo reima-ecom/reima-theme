@@ -1,0 +1,55 @@
+{{ $product := . }}
+<div class="reviews">
+  <details class="reviews__write">
+    <summary class="link" load="partials/elements/r-review.ts">{{T "Write a review"}}</summary>
+    <form name="review">
+      <h3>{{T "Write a review"}}</h3>
+      <fieldset>{{T "Review Score"}}
+        <div>
+          <div class="stars">
+            <input required type="radio" name="score" id="5star" value="5">
+            <label for="5star"></label>
+            <input required type="radio" name="score" id="4star" value="4">
+            <label for="4star"></label>
+            <input required type="radio" name="score" id="3star" value="3">
+            <label for="3star"></label>
+            <input required type="radio" name="score" id="2star" value="2">
+            <label for="2star"></label>
+            <input required type="radio" name="score" id="1star" value="1">
+            <label for="1star"></label>
+          </div>
+        </div>
+      </fieldset>
+      <label>{{T "Review Title"}} <input required name="title" type="text"></label>
+      <label>{{T "Review Text"}} <textarea required name="content" name="review" id="" cols="30"
+          rows="10"></textarea></label>
+      <label>{{T "Review Name"}} <input required name="name" type="text"></label>
+      <label>{{T "Review Email"}} <input required name="email" type="email"></label>
+      <p error></p>
+      <div><button class="btn btn--cta" type="submit">{{T "Review Submit"}}</button></div>
+    </form>
+    <p class="thank-you text-center">
+      {{T "Review Thank you"}}
+    </p>
+  </details>
+  {{ range partial "helpers/get-reviews" $product.Params.yotpoId }}
+  <blockquote>
+    <header>
+      <span class="name">{{.name}}</span> {{ if .verified }}{{T "Review Verified Buyer"}}{{ end }}
+      <span class="date">{{index (split .created_at "T") 0}}</span>
+      <div class="stars">
+        {{ range seq .score }}★{{ end }}
+      </div>
+    </header>
+    <!-- yotpo seems to escape html, so assuming it's safe -->
+    <h3>{{.title | safeHTML}}</h3>
+    <p>
+      {{.content | safeHTML}}
+    </p>
+  </blockquote>
+  {{ else }}
+  <p>
+    {{T "No reviews"}}
+  </p>
+  {{ end }}
+</div>

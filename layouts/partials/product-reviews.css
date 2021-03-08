@@ -6,16 +6,17 @@
   display: block;
 }
 
+.reviews__write summary::-webkit-details-marker,
 .reviews__write summary::marker {
   display: none;
   content: '';
 }
 
-.reviews > div .thank-you {
+.reviews > * .thank-you {
   display: none;
 }
 
-.reviews > div.thank-you .thank-you {
+.reviews > *.thank-you .thank-you {
   display: block;
   flex-basis: 100%;
   margin-bottom: 2rem;

@@ -179,16 +179,71 @@
   {{ range after 1 $productFields }}
   {{ $field := trim (substr . 0 6) "[]" }}
   {{ $contents := substr . 6 }}
-  <!-- this controls tab visibility on >768w -->
+  <!-- tabs on >768w -->
   <input type="radio" name="tab" id="{{$field}}" {{if eq $field "info"}}checked{{end}}>
-  <details>
-    <summary>
-      <!-- need a label here for the input -->
-      <label for="{{$field}}">
-        {{index $settings.accordion $field}}
-      </label>
-    </summary>
+  <label for="{{$field}}">{{index $settings.accordion $field}}</label>
+  <aside>
     <div>
+      {{$contents | safeHTML}}
+    </div>
+    <!-- if this is the info/features section, show tag-based features -->
+    {{ if eq $field "info" }}
+    <div class="features">
+      {{ range $product.Params.tags }}
+      {{ $tagData := split . ":" }}
+      {{ $tag := index $tagData 0 }}
+      {{ $value := index $tagData 1 }}
+      <!-- get feature for this tag if exists -->
+      {{ range where $settings.features "tag" $tag }}
+      {{ $modalid := .title }}
+      <!-- feature heading with modal link if modal exists -->
+      <div>
+        <h3 class="features__heading">
+          {{ if .modal }}
+          <a href="#" openid="{{$modalid}}" class="silent-link">
+            {{.title}}
+          </a>
+          {{ else }}
+          {{.title}}
+          {{ end }}
+        </h3>
+      </div>
+      <!-- modal if specified -->
+      {{ with .modal }}
+      <div class="modal" id="{{$modalid}}">
+        <div>
+          <button class="icon" close>
+            <svg>
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </button>
+          {{. | markdownify}}
+        </div>
+      </div>
+      {{ end }}
+      <!-- icons -->
+      {{ range .values }}
+      {{ $iconValue := .value }}
+      {{ with partial "helpers/get-image" .icon }}
+      {{ $svg := .Content }}
+      {{ if eq $iconValue $value }}
+      {{ $svg = replace $svg "<svg" "<svg class=\"active\"" }}
+      {{ end }}
+      {{$svg | safeHTML}}
+      {{ end }}
+      {{ end }}
+      <!-- tag description e.g. "Waterproof level 8000 mm" -->
+      <p>
+        {{ replace .description "VALUE" $value }}
+      </p>
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </aside>
+  <!-- tabs on "mobile" -->
+  <details>
+    <summary>{{index $settings.accordion $field}}</summary>
       {{$contents | safeHTML}}
       <!-- if this is the info/features section, show tag-based features -->
       {{ if eq $field "info" }}
@@ -244,73 +299,17 @@
         {{ end }}
       </div>
       {{ end }}
-    </div>
   </details>
   {{ end }}
   {{ if $settings.reviews }}
   <input type="radio" name="tab" id="reviews">
-  <details class="reviews">
-    <summary>
-      <label for="reviews">
-        {{T "Reviews"}}
-      </label>
-    </summary>
-    <div>
-      <div>
-        <details class="reviews__write">
-          <summary class="link" load="partials/elements/r-review.ts">{{T "Write a review"}}</summary>
-          <form name="review">
-            <h3>{{T "Write a review"}}</h3>
-            <fieldset>{{T "Review Score"}}
-              <div>
-                <div class="stars">
-                  <input required type="radio" name="score" id="5star" value="5">
-                  <label for="5star"></label>
-                  <input required type="radio" name="score" id="4star" value="4">
-                  <label for="4star"></label>
-                  <input required type="radio" name="score" id="3star" value="3">
-                  <label for="3star"></label>
-                  <input required type="radio" name="score" id="2star" value="2">
-                  <label for="2star"></label>
-                  <input required type="radio" name="score" id="1star" value="1">
-                  <label for="1star"></label>
-                </div>
-              </div>
-            </fieldset>
-            <label>{{T "Review Title"}} <input required name="title" type="text"></label>
-            <label>{{T "Review Text"}} <textarea required name="content" name="review" id="" cols="30"
-                rows="10"></textarea></label>
-            <label>{{T "Review Name"}} <input required name="name" type="text"></label>
-            <label>{{T "Review Email"}} <input required name="email" type="email"></label>
-            <p error></p>
-            <div><button class="btn btn--cta" type="submit">{{T "Review Submit"}}</button></div>
-          </form>
-          <p class="thank-you text-center">
-            {{T "Review Thank you"}}
-          </p>
-        </details>
-        {{ range partial "helpers/get-reviews" $product.Params.yotpoId }}
-        <blockquote>
-          <header>
-            <span class="name">{{.name}}</span> {{ if .verified }}{{T "Review Verified Buyer"}}{{ end }}
-            <span class="date">{{index (split .created_at "T") 0}}</span>
-            <div class="stars">
-              {{ range seq .score }}★{{ end }}
-            </div>
-          </header>
-          <!-- yotpo seems to escape html, so assuming it's safe -->
-          <h3>{{.title | safeHTML}}</h3>
-          <p>
-            {{.content | safeHTML}}
-          </p>
-        </blockquote>
-        {{ else }}
-        <p>
-          {{T "No reviews"}}
-        </p>
-        {{ end }}
-      </div>
-    </div>
+  <label for="reviews">{{T "Reviews"}}</label>
+  <aside>
+    {{partial "product-reviews" $product}}
+  </aside>
+  <details> 
+    <summary>{{T "Reviews"}}</summary>
+    {{partial "product-reviews" $product}}
   </details>
   {{ end }}
 </section>
