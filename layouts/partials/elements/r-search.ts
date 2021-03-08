@@ -20,6 +20,11 @@ type SearchHelper = {
   search: () => void;
 };
 
+const currencyFmt = new Intl.NumberFormat(window.locale, {
+  style: "currency",
+  currency: window.site.currency,
+});
+
 export default class RSearch extends HTMLElement {
   // instantsearch.js
   search: any;
@@ -53,7 +58,7 @@ export default class RSearch extends HTMLElement {
             <img src="${item.imageSrc}" align="left" alt="${item.title}" />
             <div>
             <div class="hit-name">${item.title}</div>
-            <div class="hit-price">$${item.price}</div>
+            <div class="hit-price">${currencyFmt.format(item.price)}</div>
             </div>
             </a>
           `,

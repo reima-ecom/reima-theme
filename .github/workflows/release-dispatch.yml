@@ -4,7 +4,7 @@ on:
     types: [published]
   push:
     branches:
-      - master
+      - main
     paths:
       - .github/workflows/release-dispatch.yml
 jobs:
@@ -12,8 +12,9 @@ jobs:
     strategy:
       matrix:
         repo: 
-          - reima-ecom/north-america
-          - reima-ecom/japan
+          - reima-ecom/reima-us
+          - reima-ecom/reima-canada
+          - reima-ecom/reima-jp
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch

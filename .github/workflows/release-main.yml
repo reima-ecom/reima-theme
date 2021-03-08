@@ -1,8 +1,8 @@
-name: Release on push to master
+name: Release on push to main
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   create-release:
     runs-on: ubuntu-latest

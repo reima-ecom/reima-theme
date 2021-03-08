@@ -2,6 +2,7 @@ const fs = require('fs');
 const commitPartial = fs.readFileSync(`${__dirname}/.release/commit.hbs`, 'utf8');
 
 module.exports = {
+  branches: 'main',
   plugins: [
     '@semantic-release/commit-analyzer',
     [

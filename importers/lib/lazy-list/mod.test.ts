@@ -35,6 +35,7 @@ Deno.test("each async", async () => {
   assertEquals((await eacher.next()).value, 2);
   assertEquals((await eacher.next()).value, 3);
   assert((await eacher.next()).done);
-  // assert side effects
+  // assert side effects, sleeping in order to wait for promises
+  await sleep(20);
   assertEquals(log, ["log 1", "log 2", "log 3"]);
 });

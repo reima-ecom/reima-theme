@@ -238,6 +238,7 @@
   {{partial "ts-inline" "_default/baseof.inline.ts"}}
   <script>
     window.site = {{ site.Params.public }}
+    window.locale = {{ site.Language.Lang }}
   </script>
   {{- range $.Scratch.Get "ts" | uniq -}}
   {{- with resources.Get . }}

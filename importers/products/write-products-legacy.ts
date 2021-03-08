@@ -39,7 +39,8 @@ export class NumberFormatMock {
         return `$${num}`;
       case "JPY": {
         const [thousands, singles] = (num / 1000).toString().split(".");
-        return `¥${thousands},${singles.padEnd(3, "0")}`;
+        if (thousands === "0") return `¥${singles.padEnd(3, "0")}`;
+        return `¥${thousands},${singles ? singles.padEnd(3, "0") : "000"}`;
       }
       case "CAD":
         return `CA$${num}`;

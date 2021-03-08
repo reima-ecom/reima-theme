@@ -14,3 +14,17 @@ Deno.test("mock number format JPY", () => {
     "¥4,130",
   );
 });
+
+Deno.test("mock number format JPY under a thousand", () => {
+  assertEquals(
+    new NumberFormatMock("", { currency: "JPY" }).format(430),
+    "¥430",
+  );
+});
+
+Deno.test("mock number format JPY exactly thousands", () => {
+  assertEquals(
+    new NumberFormatMock("", { currency: "JPY" }).format(1000),
+    "¥1,000",
+  );
+});
