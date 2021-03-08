@@ -268,7 +268,8 @@ manually with CSS. The `[open]` attribute is still set on the
 }
 
 .tabs > details[open] > summary {
-  border-bottom: var(--border);
+  color: var(--color-bg);
+  background: var(--color-fg);
 }
 
 /* workaround for non-firefox */
