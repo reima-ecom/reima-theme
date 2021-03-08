@@ -42,6 +42,8 @@ export class NumberFormatMock {
         if (thousands === "0") return `¥${singles.padEnd(3, "0")}`;
         return `¥${thousands},${singles ? singles.padEnd(3, "0") : "000"}`;
       }
+      case "CAD":
+        return `CA$${num}`;
       default:
         throw new Error(`Currency ${this.currency} not supported`);
     }

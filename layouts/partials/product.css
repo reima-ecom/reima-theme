@@ -4,8 +4,11 @@
   max-width: var(--block-width);
 }
 
+.product h1 {
+  margin-bottom: 0.625rem;
+}
+
 .product-prices {
-  margin-bottom: 2rem;
   display: flex;
   align-items: center;
 }
@@ -15,7 +18,8 @@
 }
 
 .product-prices .price {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 /* review stars are in a div */
@@ -26,8 +30,13 @@
   margin-left: auto;
 }
 
+.product hr {
+  margin: 1rem 0;
+}
+
 .product__add-to-cart {
   display: block;
+  font-weight: 700;
   width: 100%;
   max-width: 500px;
   margin: var(--content-padding) 0;
@@ -41,7 +50,7 @@
   gap: 1ch;
 }
 
-.product__klarna-banner[exp-klarna-banner=treatment] {
+.product__klarna-banner[exp-klarna-banner="treatment"] {
   display: grid;
 }
 
@@ -68,76 +77,90 @@
 }
 
 .selections legend {
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  font-size: 0.875rem;
   font-weight: 700;
   padding: 0;
-  margin: 0.75rem 0;
-}
-
-.selections legend span {
-  font-weight: 400;
-  text-transform: initial;
-  letter-spacing: normal;
+  margin-bottom: 5px;
 }
 
 .selections legend span:not(:empty)::before {
-  content: "—";
-  margin-right: 0.25rem;
+  content: ": ";
+}
+
+.selections ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  /* workaround for one pixel negative margin in label */
+  margin: 0 1px 1px 0;
 }
 
 .selections input {
-  position: absolute;
-  visibility: hidden;
-}
-
-.selections label {
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
+  position: fixed;
+  left: -50px;
+  opacity: 0;
 }
 
 .selections label.unavailable {
   opacity: 0.5;
+  position: relative;
 }
 
-.selections label.unavailable::before {
-  height: 1px;
-  width: 80%;
-  background: var(--color-fg);
+.selections label.unavailable::after {
   content: " ";
   position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: rotate(-12deg);
-}
-
-.selections legend span {
-  display: none;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: center / 100% 100%
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'%3E%3Cpath d='M100 0 L0 100' stroke='rgb(0,0,0)' stroke-width='1'/%3E%3Cpath d='M0 0 L100 100' stroke='rgb(0,0,0)' stroke-width='1'/%3E%3C/svg%3E ");
 }
 
 .selections label {
-  box-shadow: 0 0 0 1px var(--color-input-border);
-  padding: 0.375rem 0.5rem;
-  margin: 0 0.25rem 0.5rem 0;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  margin: 0 -1px -1px 0;
+  padding: 0.6875rem 0.5rem;
+  box-sizing: border-box;
+  min-width: 50px;
+  text-align: center;
+}
+
+.selections input:focus + label {
+  outline: var(--focus-outline);
 }
 
 .selections input:checked + label {
-  box-shadow: 0 0 0 2px var(--color-fg);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  border-color: var(--color-fg);
+  z-index: 1;
 }
 
-.selections--Color legend span {
-  display: inline;
+.selections--Color ul {
+  margin: -5px 0 0 -5px;
+}
+
+.selections--Color li {
+  margin: 5px 0 0 5px;
 }
 
 .selections--Color label {
-  padding: 0;
-  margin: 0;
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
   overflow: hidden;
+  /* needed in order to make image go under box-shadow */
+  position: relative;
+  /* reset */
+  padding: 0;
+  min-width: 0;
+  color: inherit;
+  z-index: unset;
 }
 
 .selections--Color label span {
@@ -147,104 +170,194 @@
 .selections--Color label img {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: -1;
 }
 
-.selections--Color label.unavailable::before {
-  transform: rotate(-45deg);
-  width: 100%;
-  left: 0;
-}
-
-.selections--Color label::after {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 3px solid white;
-  border-radius: 50%;
-  background: transparent;
-  box-sizing: border-box;
-  opacity: 0;
-}
-
-.selections--Color input:checked + label::after {
-  opacity: 1;
+.selections--Color input:checked + label {
+  border-color: inherit;
+  box-shadow: inset 0 0 0 2px #fff;
+  color: inherit;
+  z-index: unset;
+  background-color: unset;
 }
 
 @media (min-width: 768px) {
   .product {
-    display: flex;
-  }
-
-  .product > * {
-    margin: 20px;
-    flex: 1 0 50%;
-  }
-
-  .product > *:first-child {
-    flex-basis: 40%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--content-padding);
   }
 }
 
-.description {
-  font-size: 1.125rem;
-  letter-spacing: 0.5px;
-  line-height: 1.5;
+/* #region read-more toggle */
+
+/*
+We want to show the read more link under the contents when opened.
+That's why we set `display:contents` and then show the contents
+manually with CSS. The `[open]` attribute is still set on the 
+`details` elements, so we can use that for styling.
+*/
+
+.read-more {
+  display: contents;
 }
 
-.description a {
-  text-decoration: none;
-  border-bottom: 2px solid rgba(56, 56, 59, 0.1);
-  color: inherit;
+.read-more > *:not(summary) {
+  display: none;
 }
 
-.read-more > div,
+.read-more[open] > *:not(summary) {
+  display: block;
+}
+
+.read-more summary {
+  display: inline;
+}
+
+.read-more summary::marker {
+  display: none;
+  content: "";
+}
+
 .read-more .less {
   display: none;
 }
 
-.read-more.open > div,
-.read-more.open .less {
+.read-more[open] .less {
   display: unset;
 }
 
-.read-more.open .more {
+.read-more[open] .more {
   display: none;
 }
 
-.accordion {
-  border-bottom: var(--input-border);
-  border-top: var(--input-border);
-  margin-top: 2rem;
+/* #endregion */
+
+.tabs {
+  border-bottom: var(--border);
 }
 
-.accordion + .accordion {
-  margin-top: unset;
-  border-top: unset;
+.tabs > details {
+  border-top: var(--border);
 }
 
-.accordion > a {
+.tabs > details > div {
+  padding: 0 var(--content-padding);
+}
+
+.tabs ul {
+  padding-left: 1rem;
+}
+
+.tabs > details > summary {
   display: block;
-  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tabs > details > summary label {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  font-size: var(--text-font-size);
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.2em;
-  padding: 1.25rem 0;
-  border-bottom: none;
+  padding: var(--content-padding);
+  cursor: pointer;
+  /* take away the default link click action */
+  pointer-events: none;
 }
 
-.accordion > :not(a) {
+.tabs > details[open] > summary {
+  color: var(--color-bg);
+  background: var(--color-fg);
+}
+
+/* workaround for non-firefox */
+.tabs > details > summary::marker {
   display: none;
+  content: "";
 }
 
-.accordion.open > a {
-  padding-bottom: 0;
+.tabs > input {
+  position: absolute;
+  opacity: 0;
 }
 
-.accordion.open > :not(a) {
-  display: block;
+@media (min-width: 768px) {
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tabs > details {
+    display: contents;
+  }
+
+  .tabs > details > summary {
+    display: contents;
+  }
+
+  .tabs > details > summary label {
+    pointer-events: auto;
+    border: 1px solid var(--color-gray-light);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    color: var(--color-border);
+    margin: 0 0.25rem -1px;
+    padding: 0.8125rem;
+    font-size: 0.875rem;
+    font-weight: normal;
+  }
+
+  .tabs > details > div {
+    display: none;
+  }
+
+  .tabs input:checked + details > div {
+    border-top: var(--border);
+    width: 100%;
+    order: 1;
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--content-padding);
+    padding: var(--content-padding)
+      max(var(--content-padding), (100% - var(--block-width)) / 2);
+  }
+
+  .tabs > details > div > *,
+  .tabs > details > div > * > :first-child {
+    margin-top: 0;
+  }
+
+  .tabs > details > div > *,
+  .tabs > details > div > * > :last-child {
+    margin-bottom: 0;
+  }
+
+  .tabs input:checked + details > div > :nth-child(2) {
+    position: relative;
+  }
+
+  .tabs input:checked + details > div > :nth-child(2)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(-0.5 * var(--content-padding));
+    height: 100%;
+    border-left: var(--border);
+  }
+
+  .tabs input:focus + details label {
+    outline: var(--focus-outline);
+  }
+
+  .tabs input:checked + details label {
+    color: var(--color-text);
+    border-color: var(--color-border);
+    border-bottom-color: white;
+    z-index: 1;
+  }
 }
 
 .features__heading {
@@ -298,24 +411,4 @@
 
 .features p {
   margin-top: 0.25rem;
-}
-
-.social-sharing {
-  letter-spacing: 0.025em;
-  line-height: 1.5;
-  margin-top: 2rem;
-}
-
-.social-sharing a {
-  display: inline-flex;
-  color: inherit;
-  font-size: 1rem;
-  margin: 0 10px 0 0;
-  text-decoration: none;
-}
-
-.social-sharing svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  margin-right: 0.5rem;
 }

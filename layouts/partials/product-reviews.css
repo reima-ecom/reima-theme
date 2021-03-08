@@ -1,33 +1,24 @@
-.reviews {
-  margin: var(--block-margin);
-  padding: var(--block-padding);
-  max-width: var(--block-width);
+.reviews__write {
+  margin: var(--content-padding) 0;
 }
 
-.reviews > div {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+.reviews__write summary {
+  display: block;
 }
 
-.reviews > div > *:first-child {
-  flex: 1;
+.reviews__write summary::marker {
+  display: none;
+  content: '';
 }
 
-.reviews > div form,
 .reviews > div .thank-you {
   display: none;
 }
 
-.reviews > div.open form,
 .reviews > div.thank-you .thank-you {
   display: block;
   flex-basis: 100%;
   margin-bottom: 2rem;
-}
-
-.reviews form > *:first-child {
-  margin-top: 0;
 }
 
 .reviews form > * {
@@ -85,13 +76,13 @@
 .reviews blockquote {
   margin: 0;
   font-size: 1rem;
-  padding: 2rem 0;
-  border-top: var(--input-border);
-  border-bottom: var(--input-border);
+  padding: 0;
 }
 
 .reviews blockquote + blockquote {
-  border-top: none;
+  border-top: var(--input-border);
+  padding-top: var(--content-padding);
+  margin-top: var(--content-padding);
 }
 
 .reviews blockquote h3 {

@@ -171,7 +171,8 @@ h3,
 h4,
 .h4,
 h5,
-h6 {
+h6,
+.g-h2 {
   font-weight: 700;
   margin-top: 0;
 }
@@ -179,7 +180,8 @@ h6 {
 h1,
 h2,
 h3,
-h4 {
+h4,
+.g-h2 {
   line-height: 1.25;
 }
 
@@ -189,7 +191,8 @@ h1 {
   margin-bottom: var(--h1-margin-bottom);
 }
 
-h2 {
+h2,
+.g-h2 {
   font-size: var(--h2-font-size);
   letter-spacing: var(--h2-letter-spacing);
   margin-bottom: var(--h2-margin-bottom);
@@ -257,10 +260,16 @@ a,
   text-decoration-skip-ink: auto;
 }
 
+.link--no-color {
+  color: inherit;
+  text-decoration-color: inherit;
+}
+
 a:hover,
-.link {
+.link:hover {
   color: var(--color-reima-red-hover);
-  text-decoration: underline;
+  text-decoration-style: underline;
+  text-decoration-color: var(--color-reima-red-hover);
 }
 
 .silent-link {
@@ -324,6 +333,10 @@ a:hover,
   padding: 0.5rem 1rem;
 }
 
+.btn--lg {
+  padding: 1rem 2.2rem;
+}
+
 .btn--inv {
   --color-text: white;
   --color-bg: var(--color-fg);
@@ -363,6 +376,7 @@ a:hover,
 /* #region focus */
 
 .btn:focus,
+.link:focus,
 a:focus {
   outline: var(--focus-outline);
   outline-offset: 2px;
