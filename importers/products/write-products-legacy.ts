@@ -41,6 +41,8 @@ export class NumberFormatMock {
         const [thousands, singles] = (num / 1000).toString().split(".");
         return `¥${thousands},${singles.padEnd(3, "0")}`;
       }
+      case "CAD":
+        return `CA$${num}`;
       default:
         throw new Error(`Currency ${this.currency} not supported`);
     }
