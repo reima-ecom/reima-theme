@@ -1,6 +1,7 @@
 const postReview = async (formData: FormData) => {
   const review = {
-    appkey: '4ykNylt1Jh7QOYfmes2BSwhCx0t2RaRcGzTi4z7k',
+    // @ts-ignore
+    appkey: window.site.yotpo.appkey,
     // @ts-ignore
     sku: window.yotpoId,
     product_title: document.getElementById('product-name')!.innerText,
