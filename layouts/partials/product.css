@@ -94,6 +94,10 @@
   padding: 0;
   /* workaround for one pixel negative margin in label */
   margin: 0 1px 1px 0;
+  /* make new stacking context so the label z-index trick
+  doesn't result in it showing up over the header */
+  position: relative;
+  z-index: 0;
 }
 
 .selections input {
