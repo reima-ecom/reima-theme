@@ -138,6 +138,13 @@ fields:
   description: Enable reviews on the product page. If there are no reviews to show
     and yotpo has not been connected to this site, there's no need to enable the reviews
     element.
+- name: reviews_hide_name
+  type: boolean
+  label: 'Reviews: Hide Name'
+  description: Hide the reviewer name in the product page reviews section.
+  showOnly:
+    field: reviews
+    value: true
 - type: boolean
   name: klarnabanner
   label: Enable Klarna payment plan banner A/B test
