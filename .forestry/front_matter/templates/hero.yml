@@ -106,6 +106,12 @@ fields:
   config: {}
   template: link
   label: Button
+- name: yellow_emphasis
+  type: boolean
+  description: Make <em>emphasized</em> text turn the color to yellow instead of making
+    text italics. Enable here and put the desired text between asterisks. If you want
+    both bold and yellow, do three asterisks instead (two for bold, one for emphasis).
+  label: Make emphasized text yellow
 - name: overlaybg
   type: boolean
   label: Overlay background
