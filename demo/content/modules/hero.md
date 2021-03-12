@@ -95,9 +95,10 @@ modules:
   type: Image
 - template: hero
   image: "/befunky-collage.jpg"
-  heading: Add a **background** to the overlay if needed
-  text: "**Add yellow bold** to the text if you want"
-  overlaymobile: center
+  heading: Add a *yellow text* to the overlay with a background
+  text: "***Add yellow bold*** to the text if you want"
+  yellow_emphasis: true
+  overlaymobile: show
   overlayinvert: true
   overlaybg: true
   type: Image

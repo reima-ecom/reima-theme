@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.hero--yellow-emphasis em {
+  font-style: normal;
+  color: var(--color-reima-deep-yellow);
+}
+
 .hero--narrow {
   max-width: 1024px;
 }
