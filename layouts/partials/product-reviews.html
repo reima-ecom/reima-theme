@@ -1,3 +1,4 @@
+{{ $settings := partial "helpers/get-locale-data" "productpage" }}
 {{ $product := . }}
 <div class="reviews">
   <details class="reviews__write">
@@ -35,7 +36,9 @@
   {{ range partial "helpers/get-reviews" $product.Params.yotpoId }}
   <blockquote>
     <header>
+      {{ if not $settings.reviews_hide_name }}
       <span class="name">{{.name}}</span> {{ if .verified }}{{T "Review Verified Buyer"}}{{ end }}
+      {{ end }}
       <span class="date">{{index (split .created_at "T") 0}}</span>
       <div class="stars">
         {{ range seq .score }}★{{ end }}
