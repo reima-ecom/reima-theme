@@ -12,6 +12,7 @@ links:
     This is some **markdown**
   link: ''
 reviews: true
+reviews_hide_name: true
 accordion:
   info: Features
   mats: Materials

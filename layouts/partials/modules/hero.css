@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.hero--yellow-emphasis em {
+  font-style: normal;
+  color: var(--color-reima-deep-yellow);
+}
+
 .hero--narrow {
   max-width: 1024px;
 }
@@ -75,7 +80,7 @@
   position: absolute;
   display: flex;
   padding: inherit;
-}  
+}
 
 .hero--overlay-mobile.hero--overlay-invert {
   --color-text: white;
@@ -102,13 +107,74 @@
   height: 100%;
 }
 
+.hero--overlay-mobile.hero--overlay-bg .hero__text {
+  --content-padding: 4rem;
+  background-image:
+    /* main top-down */
+    linear-gradient(to bottom,
+        transparent 0%,
+        var(--overlay-bg) var(--content-padding),
+        var(--overlay-bg) calc(100% - var(--content-padding)),
+        transparent 100%
+        ),
+    /* left edge */
+    linear-gradient(to left, var(--overlay-bg), transparent),
+    /* right edge */
+    linear-gradient(to right, var(--overlay-bg), transparent),
+    /* top-left corner */
+    radial-gradient(
+        circle farthest-side at 100% 100%,
+        var(--overlay-bg) 0%,
+        transparent 100%
+        ),
+    /* top-right corner */
+    radial-gradient(
+        circle farthest-side at 0 100%,
+        var(--overlay-bg) 0%,
+        transparent 100%
+        ),
+    /* bottom-right corner */
+    radial-gradient(
+        circle farthest-side at 0 0,
+        var(--overlay-bg) 0%,
+        transparent 100%
+        ),
+    /* bottom-left corner */
+    radial-gradient(
+        circle farthest-side at 100% 0,
+        var(--overlay-bg) 0%,
+        transparent 100%
+        );
+  background-size:
+    calc(100% - 2 * var(--content-padding)),
+    var(--content-padding) calc(100% - 2 * var(--content-padding)),
+    var(--content-padding) calc(100% - 2 * var(--content-padding)),
+    var(--content-padding) var(--content-padding),
+    var(--content-padding) var(--content-padding),
+    var(--content-padding) var(--content-padding),
+    var(--content-padding) var(--content-padding);
+  background-position:
+    center,
+    top var(--content-padding) left 0,
+    top var(--content-padding) right 0,
+    top 0 left 0,
+    top 0 right 0,
+    bottom 0 right 0,
+    bottom 0 left 0;
+  background-repeat: no-repeat;
+}
+
+.hero--overlay-mobile.hero--overlay-bg.hero--overlay-invert {
+  --overlay-bg: rgba(0,0,0,0.4);
+}
+
 @media (min-width: 768px) {
   .hero {
     --h1-font-size: var(--h0-font-size);
     padding: var(--block-padding);
     margin: var(--block-margin);
-  }  
-  
+  }
+
   .hero__text-container {
     position: absolute;
     display: flex;
@@ -126,7 +192,7 @@
   .hero--overlay-center .hero__text-container {
     justify-content: center;
   }
-  
+
   .hero--overlay-invert {
     --color-text: white;
     --color-bg: var(--color-fg);
@@ -150,28 +216,28 @@
       /* top-left corner */
       radial-gradient(
         circle farthest-side at 100% 100%,
-        var(--overlay-bg) 0%, 
+        var(--overlay-bg) 0%,
         transparent 100%
       ),
       /* top-right corner */
       radial-gradient(
         circle farthest-side at 0 100%,
-        var(--overlay-bg) 0%, 
+        var(--overlay-bg) 0%,
         transparent 100%
       ),
       /* bottom-right corner */
       radial-gradient(
         circle farthest-side at 0 0,
-        var(--overlay-bg) 0%, 
+        var(--overlay-bg) 0%,
         transparent 100%
       ),
       /* bottom-left corner */
       radial-gradient(
         circle farthest-side at 100% 0,
-        var(--overlay-bg) 0%, 
+        var(--overlay-bg) 0%,
         transparent 100%
       );
-    background-size: 
+    background-size:
       calc(100% - 2 * var(--content-padding)),
       var(--content-padding) calc(100% - 2 * var(--content-padding)),
       var(--content-padding) calc(100% - 2 * var(--content-padding)),
@@ -179,7 +245,7 @@
       var(--content-padding) var(--content-padding),
       var(--content-padding) var(--content-padding),
       var(--content-padding) var(--content-padding);
-    background-position: 
+    background-position:
       center,
       top var(--content-padding) left 0,
       top var(--content-padding) right 0,

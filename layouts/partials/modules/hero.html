@@ -26,6 +26,9 @@
 {{ if .narrow }}
 {{ $class = printf "%s hero--narrow" $class }}
 {{ end }}
+{{ with .yellow_emphasis }}
+{{ $class = printf "%s hero--yellow-emphasis" $class }}
+{{ end }}
 <div class="{{$class}}">
   {{- if eq .type "Youtube Video" }}
 
@@ -92,7 +95,7 @@
   {{- if or .heading .text .link }}
   <div class="hero__text-container">
     <div class="hero__text">
-      {{ with .heading }}<h1>{{.}}</h1>{{ end }}
+      {{ with .heading }}<h1>{{. | markdownify}}</h1>{{ end }}
       {{ with .text }}<p>{{. | markdownify}}</p>{{ end }}
       {{ if .link }}
       <a href="{{.link}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">{{.linktext}}</a>
