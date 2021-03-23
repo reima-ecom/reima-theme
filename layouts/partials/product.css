@@ -43,15 +43,11 @@
 }
 
 .product__klarna-banner {
-  display: none;
+  display: grid;
   margin: calc(var(--content-padding) / -2) 0 var(--content-padding);
   grid-template-columns: max-content 1fr;
   align-items: center;
   gap: 1ch;
-}
-
-.product__klarna-banner[exp-klarna-banner="treatment"] {
-  display: grid;
 }
 
 .product__klarna-banner a {
