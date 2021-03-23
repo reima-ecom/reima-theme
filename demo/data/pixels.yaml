@@ -15,3 +15,5 @@ pinterest_enabled: true
 pinterest_id: "1111"
 taboola_enabled: true
 taboola_account: "1111"
+frosmo_enabled: true
+frosmo_site: "reima_headless_dev"
