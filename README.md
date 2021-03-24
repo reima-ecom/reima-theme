@@ -1,8 +1,6 @@
-# Reima Headless
+# Reima Headless Theme
 
-This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites.
-
-- Static site is built using [Hugo](https://gohugo.io/)
+This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites. See [Hugo](https://gohugo.io/) documentation for details.
 
 ## Architectural components
 
@@ -11,13 +9,14 @@ This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for u
 - Contentful for brand content
 - Algolia for product search and filtering
 - Yotpo for reviews
-- Cloudflare workers for site hosting and A/B testing
+- Cloudflare workers for CDN and A/B testing
+- Netlify is used for hosting
 - Hugo static site generator for building the site
 - Web components aka custom elements for much of the client-side functionality (such as the cart)
 
 ## Performance
 
-This theme is design to be blazingly fast. It should easily pass the [web vitals](https://web.dev/vitals/) test. It's optimized for modern browsers (cleaner and better performing code), but makes no assumption of this. Furthermore, [accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/) and [semantic document markup](https://www.google.com/search?q=semantic+html) are a priority. These are the main performance principles to use:
+This theme is designed to be blazingly fast. It should easily pass the [web vitals](https://web.dev/vitals/) test. It's optimized for modern browsers (cleaner and better performing code), but makes no assumption of this. Furthermore, [accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/) and [semantic document markup](https://www.google.com/search?q=semantic+html) are a priority. These are the main performance principles to use:
 
 ### Properly size images
 
@@ -156,7 +155,7 @@ These features are supported without JS. Functionality that is not supported sho
 
 #### Supported functionality
 
-- **TBC** Cart and ordering (via separate cart page rendered in CloudFlare worker)
+- Cart and ordering (via separate cart page rendered in CloudFlare worker)
 - Desktop menu (via css :hover selector)
 - Mobile menu (via css checkboxes and :checked selector)
 
@@ -172,7 +171,7 @@ These features are supported without JS. Functionality that is not supported sho
 
 ### Getting Started
 
-To make setup as easy as possible, use [vscode remote containers](https://code.visualstudio.com/docs/remote/containers) for development. After setting everything up according to the "Getting Started" section, you can clone this repository directly into a container with the vscode command `Remote-Containers: Clone Repository in Container Volume`. Vscode will build the container, clone the repo and start your coding session inside the container. Of course, you should have a working git setup and credential manager in place for this to work.
+The only mandatory tool when developing is the [Hugo static site builder](https://gohugo.io).
 
 All development should be done in feature branches, and changes merged to master via GitHub pull requests. [GitHub Flow](https://guides.github.com/introduction/flow/) is used as a branching strategy / workflow.
 
