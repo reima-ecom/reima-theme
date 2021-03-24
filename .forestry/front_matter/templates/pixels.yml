@@ -116,5 +116,20 @@ fields:
   showOnly:
     field: criteo_enabled
     value: true
+- name: frosmo_enabled
+  type: boolean
+  label: Frosmo
+- name: frosmo_site
+  type: text
+  config:
+    required: false
+  label: Frosmo site id
+  description: This is your Frosmo site id, e.g. "reima_com_fi" for the Finnish site. This can be found in Frosmo admin under
+    Setup -> Status -> Frosmo scripts -> Set up.<br><br>Supported events:<br>- view product details<br>- add to cart
+    <br><br>Both events track id/handle, name, price and url.
+    <br><br>To track purchases in Shopify, please install Frosmo on your Shopify store accordingly.
+  showOnly:
+    field: frosmo_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml

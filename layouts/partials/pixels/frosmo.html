@@ -1,0 +1,52 @@
+{{ with site.Data.pixels }}
+{{ if .frosmo_enabled }}
+
+<script uses-cookies type="text/javascript" charset="utf-8" src="//d2wzl9lnvjz3bh.cloudfront.net/frosmo.easy.js"></script>
+<script uses-cookies type="text/javascript" charset="utf-8" src="//d2wzl9lnvjz3bh.cloudfront.net/sites/{{.frosmo_site}}.js"></script>
+<script uses-cookies>
+  window.dataLayer = window.dataLayer || [];
+</script>
+
+{{ with partial "helpers/get-product" $ }}
+<script uses-cookies>
+  window.dataLayer.push({
+    'ecommerce': {
+      'detail': {
+        'products': [{
+          'id': '{{$.File.ContentBaseName}}',
+          'name': '{{.Title}}',
+          'price': {{.Params.price}},
+          'url': {{$.Permalink}}
+        }]
+      }
+    }
+  });
+</script>
+{{ end }}
+
+{{ if partial "helpers/has-product" $ }}
+<script uses-cookies>
+  document.addEventListener('cart-add', (e) => {
+    const checkout = e.detail.checkout;
+    const variant = e.detail.variant;
+
+    window.dataLayer.push({
+      'event': 'addToCart',
+      'ecommerce': {
+        'currencyCode': checkout.currency,
+        'add': {
+          'products': [{
+            'id': variant.productHandle,
+            'name': variant.productTitle,
+            'price': variant.price,
+            'url': {{$.Permalink}}
+          }]
+        }
+      }
+    });
+  });
+</script>
+{{ end }}
+
+{{ end }}
+{{ end }}
