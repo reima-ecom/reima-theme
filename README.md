@@ -1,23 +1,38 @@
-# Reima Headless
+# Reima Headless Theme
 
-This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites.
+This is a [Hugo module](https://gohugo.io/hugo-modules/use-modules/) theme for use on Reima headless ecommerce sites. See [Hugo](https://gohugo.io/) documentation for details.
 
-- Static site is built using [Hugo](https://gohugo.io/)
+## Architecture
 
-## Architectural components
+Each site (e.g. us.reima.com) is its own isolated environment, although it uses this themes and many tools provided in this repository. I.e. the sites are built and managed independently, but depend on this repository and the data from external providers. The main building blocks for the sites are:
 
 - Forestry.io for content management
 - Shopify for products and collections
 - Contentful for brand content
 - Algolia for product search and filtering
 - Yotpo for reviews
-- Cloudflare workers for site hosting and A/B testing
+- Cloudflare workers for CDN and A/B testing
+- Netlify is used for hosting
 - Hugo static site generator for building the site
 - Web components aka custom elements for much of the client-side functionality (such as the cart)
 
+### Content management
+
+Content is managed by the merchants in [Forestry](https://www.forestry.io). Forestry commits directly to the `main` branch of the respective site repo. The building blocks in Forestry are called "Front Matter Templates", and define the parameters for each type of page, module, configuration file, etc. This "Front Matter" configuration lives inside the `.forestry/front_matter/templates` folder of each repo (including this one, and can be edited manually or inside the Forestry admin. **The frontmatter configuration for each site repo is automatically synced with this repository.**
+
+### Hosting
+
+The sites are built and hosted on [Netlify](https://www.netlify.com). On each push to the `main` branch, Netlify re-builds the site and publishes it to production. This can happen e.g. when content is updated, data such as products are updated, or the theme is updated.
+
+We use [Cloudflare](https://www.cloudflare.com) in front of the Netlify deployment, and specifically Cloudflare Workers. This way, we have complete control over what is transmitted to the visitors, and can rewrite responses at will. This is how the cookie consent banners work. See the `reima-ecom/site-worker` repo for more information.
+
+### External data
+
+Data such as product information from Shopify, or reviews from Yotpo, are updated from the `/status` page of each site. See [us.reima.com/status](https://us.reima.com/status) for an example. This runs as a GitHub action on the site repo, and updates the `main` branch with new data. This, in turn, will trigger a site re-build.
+
 ## Performance
 
-This theme is design to be blazingly fast. It should easily pass the [web vitals](https://web.dev/vitals/) test. It's optimized for modern browsers (cleaner and better performing code), but makes no assumption of this. Furthermore, [accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/) and [semantic document markup](https://www.google.com/search?q=semantic+html) are a priority. These are the main performance principles to use:
+This theme is designed to be blazingly fast. It should easily pass the [web vitals](https://web.dev/vitals/) test. It's optimized for modern browsers (cleaner and better performing code), but makes no assumption of this. Furthermore, [accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/) and [semantic document markup](https://www.google.com/search?q=semantic+html) are a priority. These are the main performance principles to use:
 
 ### Properly size images
 
@@ -156,7 +171,7 @@ These features are supported without JS. Functionality that is not supported sho
 
 #### Supported functionality
 
-- **TBC** Cart and ordering (via separate cart page rendered in CloudFlare worker)
+- Cart and ordering (via separate cart page rendered in CloudFlare worker)
 - Desktop menu (via css :hover selector)
 - Mobile menu (via css checkboxes and :checked selector)
 
@@ -172,7 +187,7 @@ These features are supported without JS. Functionality that is not supported sho
 
 ### Getting Started
 
-To make setup as easy as possible, use [vscode remote containers](https://code.visualstudio.com/docs/remote/containers) for development. After setting everything up according to the "Getting Started" section, you can clone this repository directly into a container with the vscode command `Remote-Containers: Clone Repository in Container Volume`. Vscode will build the container, clone the repo and start your coding session inside the container. Of course, you should have a working git setup and credential manager in place for this to work.
+The only mandatory tool when developing is the [Hugo static site builder](https://gohugo.io).
 
 All development should be done in feature branches, and changes merged to master via GitHub pull requests. [GitHub Flow](https://guides.github.com/introduction/flow/) is used as a branching strategy / workflow.
 
@@ -191,6 +206,16 @@ Always use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/
 2. squash merge the resulting PR with a conventional commits style message
 
 We're [creating release notes automatically based on commit messages](#releases). So the commit messages should be well written and understandable by users. If you want to add notes for developers, that's of course great! Just remember to also explain the commit so everyone understands what has changed.
+
+### Designing pages and modules
+
+Please take a moment to understand how [Hugo](https://gohugo.io/documentation) works, as this theme tries to follow Hugo conventions as much as possible. In general, content lives in the `content` directory and layouts in the `layouts` directory. The main layout template is `layouts/_default/baseof.html` as per Hugo convention.
+
+The main way to create pages is to use the `page` type on content pages (`layouts/_default/page.html`). This template allows content creators to add "modules" to pages. Modules, in turn, are defined under the `layouts/partials/modules/` directory. For most updates, you only need to update the module in question.
+
+In general, the corresponding CSS files live next to their HTML layout template with the same name. They are added to the page using a Hugo scratchpad either in the base layout, or the page layout. It is unfortunately not possible to add CSS from partials (e.g. a "module") because that partial will be executed after the `head` has already been rendered.
+
+If you need to update the content structure of a module (or page), remember to update the corresponding frontmatter template. If you're creating a new module, remember to add this module to the list of allowed module types on the main `page` frontmatter template (`layouts/.forestry/front_matter/templates/page.yml`) and any other page types that support modules, such as `collection`. You can do this either by hand or via the Forestry GUI. If you want to configure and/or test your feature branch in the Forestry admin GUI, you can add that as a personal "site" in Forestry.
 
 ### Bugs and outages
 
@@ -233,4 +258,4 @@ In addition, tests and documentation should be prioritized for mission-critical 
 
 Releases to the theme are created using [semantic version](https://semver.org/) tags. This way, the sites using the theme (i.e. the Hugo module) can update the theme safely and automatically. The release notes in GitHub should contain the changelog from the previous release.
 
-This is all achieved automatically by using [semantic release](https://github.com/semantic-release/semantic-release) and [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). We might at some point run this in CI, but for now, semantic release is run on demand via the command line against the `master` branch.
+This is all achieved automatically by using [semantic release](https://github.com/semantic-release/semantic-release) and [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). This is run on each push (and PR merge) to the `main` branch. New releases are thus created automatically based on conventional commit messages. The sites that use this theme are automatically updated to the latest version according to go modules rules (breaking changes that result in major version bumps are not upgraded automatically).

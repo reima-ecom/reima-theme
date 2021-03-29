@@ -1,5 +1,8 @@
 <!-- 
-  Order an array based on another array.
+  Order an array based on another array. The items not in the
+  "ordering" array should be sorted so that numeric items
+  come first and are numerically sorted, and the rest is
+  sorted alphabetically.
 
   Example 1:
   We have an array [c a d] (array) that we want to order.
@@ -23,4 +26,5 @@
  -->
 {{ $ordered := intersect .order .array }}
 {{ $notordered := .array | complement $ordered }}
-{{ return ($ordered | append $notordered) }}
+{{ $sorted := sort $notordered }}
+{{ return ($ordered | append $sorted) }}
