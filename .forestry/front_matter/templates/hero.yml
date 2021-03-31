@@ -199,6 +199,6 @@ fields:
       file: 
       path: 
   label: Overlay on mobile
-  description: Show overlay on mobile. If left or right is specified, show on this side of the image, limiting size to
-    half the hero width. Leave blank for default, which is to show (text) content
-    below image on mobile.
+  description: Show overlay on mobile. If left or right is specified, show on this
+    side of the image, limiting size to half the hero width. Leave blank for default,
+    which is to show (text) content below image on mobile.

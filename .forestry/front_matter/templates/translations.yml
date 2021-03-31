@@ -370,3 +370,52 @@ fields:
       wysiwyg: true
       schema:
         format: markdown
+- type: field_group
+  name: Collection page number of products
+  label: Collection page number of products
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: '{{.}} products'
+    description: 'Use <code>{{.}}</code> where you want the number of products to go. Example: "{{.}} products".'
+- type: field_group
+  name: Collection page sort default
+  label: Collection page sort default
+  description: Text shown in the sorting drop-down initially (on page load).
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Sort...
+    description: As this is the initial value, a good value would be e.g. "Sort...".
+- type: field_group
+  name: Collection page sort highest price
+  label: Collection page sort highest price
+  description: Text for the sorting drop-down.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Highest price
+    description: E.g. "Highest price"
+- type: field_group
+  name: Collection page sort lowest price
+  label: Collection page sort lowest price
+  description: Text for the sorting drop-down.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Lowest price
+    description: E.g. "Lowest price"
+- type: field_group
+  name: Collection page sort most popular
+  label: Collection page sort most popular
+  description: Text for the sorting drop-down.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Most popular
+    description: E.g. "Most popular"

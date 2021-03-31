@@ -145,5 +145,20 @@
   },
   "Product list show all": {
     "other": "Show All"
+  },
+  "Collection page number of products": {
+    "other": "{{.}} products"
+  },
+  "Collection page sort default": {
+    "other": "Sort..."
+  },
+  "Collection page sort highest price": {
+    "other": "Highest price"
+  },
+  "Collection page sort lowest price": {
+    "other": "Lowest price"
+  },
+  "Collection page sort most popular": {
+    "other": "Most popular"
   }
 }

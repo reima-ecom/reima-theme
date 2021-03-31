@@ -20,14 +20,19 @@ sections:
   templates:
   - collection
 - type: document
-  path: demo/i18n/en.json
-  label: Strings
-- type: document
   path: demo/data/menus.json
   label: Menus
 - type: document
   path: demo/data/announcements.json
   label: Announcements
+- type: directory
+  path: demo/i18n
+  label: Translations
+  create: documents
+  match: "**/*"
+  new_doc_ext: json
+  templates:
+  - translations
 - type: document
   path: demo/data/pixels.yaml
   label: Pixels

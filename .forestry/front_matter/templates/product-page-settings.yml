@@ -148,7 +148,8 @@ fields:
 - type: boolean
   name: klarnabanner
   label: Enable Klarna payment plan banner
-  description: Show Klarna "4 interest-free payments ..." banner. The banner is in English, and will show prices as dollars and with two decimals! E.g. "$12.95".
+  description: Show Klarna "4 interest-free payments ..." banner. The banner is in
+    English, and will show prices as dollars and with two decimals! E.g. "$12.95".
 - name: paymentlogos
   type: field_group_list
   fields:

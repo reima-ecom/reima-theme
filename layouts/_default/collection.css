@@ -97,6 +97,47 @@
   margin: 0.5rem 0;
 }
 
+.grid__sort {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+  max-width: var(--block-width);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid__sort > div {
+  flex: 1;
+  margin: 1em;
+  white-space: nowrap;
+  margin-left: 0;
+}
+
+.grid__sort label {
+  position: relative;
+}
+
+.grid__sort select {
+  background: none;
+  outline: none;
+  border: var(--border);
+  border-radius: 2px;
+  padding: 1em 3em 1em 1em;
+  appearance: none;
+  cursor: pointer;
+}
+
+.grid__sort select:hover {
+  border-color: var(--color-fg);
+}
+
+.grid__sort .icon {
+  position: absolute;
+  right: 1em;
+  top: 0.9em;
+  fill: var(--color-fg);
+  pointer-events: none;
+}
+
 /* #region filters */
 .filter-list {
   --block-margin: 0.5rem auto;
