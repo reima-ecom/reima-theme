@@ -57,17 +57,16 @@
 
       <!-- add filtering before products module -->
       {{ if eq .template "products" }}
-      {{ if gt (len (T "Collection page number of products")) 0 }}
       <div class="grid__sort">
         {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
-        {{ $numProducts := len $collectionPage.Pages }}
-        <div>{{T "Collection page number of products" (printf "<strong>%d</strong>" $numProducts) | safeHTML}}</div>
+        {{ $numProducts := printf "<strong>%d</strong>" (len $collectionPage.Pages) }}
+        <div>{{(default (printf "%s products" $numProducts) (T "Collection page number of products" $numProducts)) | safeHTML}}</div>
         <label for="">
           <select sort-collection="{{.collection}}">
-            <option value="COLLECTION_DEFAULT">{{T "Collection page sort default"}}</option>
-            <option value="PRICE:reverse">{{T "Collection page sort highest price"}}</option>
-            <option value="PRICE">{{T "Collection page sort lowest price"}}</option>
-            <option value="BEST_SELLING">{{T "Collection page sort most popular"}}</option>
+            <option value="COLLECTION_DEFAULT">{{default "Sort..." (T "Collection page sort default")}}</option>
+            <option value="PRICE:reverse">{{ default "Highest price" (T "Collection page sort highest price")}}</option>
+            <option value="PRICE">{{ default "Lowest price" (T "Collection page sort lowest price")}}</option>
+            <option value="BEST_SELLING">{{ default "Most popular" (T "Collection page sort most popular")}}</option>
           </select>
           <svg viewBox="0 0 32 32" class="icon">
             {{ if not ($.Scratch.Get "icon-chevron-down") }}
@@ -82,7 +81,6 @@
           </svg>
         </label>
       </div>
-      {{ end }}
       {{ end }}
 
       {{ partial (printf "modules/%s" .template) . }}
