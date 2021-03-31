@@ -26,7 +26,7 @@ sections:
   path: demo/data/announcements.json
   label: Announcements
 - type: directory
-  path: data/i18n
+  path: demo/i18n
   label: Translations
   create: documents
   match: "**/*"
