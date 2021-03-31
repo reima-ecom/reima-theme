@@ -370,3 +370,9 @@ fields:
       wysiwyg: true
       schema:
         format: markdown
+- type: field_group
+  name: Collection page number of products
+  fields:
+  - type: textarea
+    name: other
+    default: '{{.}} products'
