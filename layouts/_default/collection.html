@@ -17,9 +17,7 @@
 {{ $.Scratch.Add "css-critical" "_default/collection.css" }}
 
 <!-- add js if there's fitering needed -->
-{{ if and .Params.filters .Site.Params.public.algolia }}
 {{ $.Scratch.Add "ts" "_default/collection.ts"}}
-{{ end }}
 
 {{ end }}
 
@@ -55,6 +53,36 @@
       <!-- add horizontal line before all modules except hero -->
       {{ if and (ne .template "hero") (ne $i 0)}}
       <hr>
+      {{ end }}
+
+      <!-- add filtering before products module -->
+      {{ if eq .template "products" }}
+      {{ if gt (len (T "Collection page number of products")) 0 }}
+      <div class="grid__sort">
+        {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
+        {{ $numProducts := len $collectionPage.Pages }}
+        <div>{{T "Collection page number of products" (printf "<strong>%d</strong>" $numProducts) | safeHTML}}</div>
+        <label for="">
+          <select sort-collection="{{.collection}}">
+            <option value="COLLECTION_DEFAULT">{{T "Collection page sort default"}}</option>
+            <option value="PRICE:reverse">{{T "Collection page sort highest price"}}</option>
+            <option value="PRICE">{{T "Collection page sort lowest price"}}</option>
+            <option value="BEST_SELLING">{{T "Collection page sort most popular"}}</option>
+          </select>
+          <svg viewBox="0 0 32 32" class="icon">
+            {{ if not ($.Scratch.Get "icon-chevron-down") }}
+            {{ $.Scratch.Set "icon-chevron-down" true }}
+            <symbol id="icon-chevron-down">
+              <path
+                d="M16 22q-0.313 0-0.594-0.125t-0.5-0.344v0l-8.5-9q-0.094-0.188-0.156-0.391t-0.063-0.422q0-0.625 0.438-1.063t1.063-0.438q0.25 0 0.484 0.078t0.422 0.234v0l7.406 7.781 7.406-7.844q0.188-0.125 0.438-0.219t0.5-0.094q0.625 0 1.063 0.438t0.438 1.063q0 0.25-0.063 0.453t-0.188 0.391v-0.031l-8.5 9q-0.188 0.25-0.469 0.391t-0.625 0.141v0 0z">
+              </path>
+            </symbol>
+            {{ end }}
+            <use xlink:href="#icon-chevron-down"></use>
+          </svg>
+        </label>
+      </div>
+      {{ end }}
       {{ end }}
 
       {{ partial (printf "modules/%s" .template) . }}

@@ -23,13 +23,6 @@
     <a href="{{$collectionPage.RelPermalink}}" class="btn btn--sm">
       {{default (T "Product list show all") $.show_all}}
     </a>
-    {{ else }}
-    <select name="products-sort">
-      <option value="COLLECTION_DEFAULT">Sort...</option>
-      <option value="PRICE:reverse">Highest price</option>
-      <option value="PRICE">Lowest price</option>
-      <option value="BEST_SELLING">Most popular</option>
-    </select>
     {{ end }}
   </div>
   {{ end }}

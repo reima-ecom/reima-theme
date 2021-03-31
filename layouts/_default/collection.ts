@@ -124,11 +124,12 @@ type CollectionSortResult = {
   WARNING: Uses global properties from the window object!
 */
 const getSortedCollection = async (
+  collection: string,
   sortKey: SortKey,
   reverse  = false,
 ): Promise<string[]> => {
   const query = `{
-    collectionByHandle(handle: "${window.collection}") {
+    collectionByHandle(handle: "${collection}") {
       products(first: 250, sortKey: ${sortKey}, reverse: ${reverse}) {
         edges {
           node {
@@ -158,7 +159,6 @@ const getSortedCollection = async (
   const handles = data.collectionByHandle.products.edges.map(({ node: { handle } }) =>
     handle
   );
-  console.log(handles);
   return handles;
 };
 
@@ -170,14 +170,15 @@ const sortList = (list: HTMLUListElement, handles: string[]) => {
   });
 };
 
-const sortSelect: HTMLSelectElement | null = document.querySelector('select[name=products-sort]');
+const sortSelect: HTMLSelectElement | null = document.querySelector('select[sort-collection]');
 if (sortSelect) {
   sortSelect.addEventListener('change', async (ev) => {
-    console.log(ev);
     const selectElement = ev.target as HTMLSelectElement;
-    const listElement = selectElement.parentElement!.nextElementSibling as HTMLUListElement;
+    const listElement = selectElement.closest(".grid__sort")!.nextElementSibling!.querySelector("ul") as HTMLUListElement;
+    const collection = selectElement.getAttribute("sort-collection")!;
     const [key, reverse] = selectElement.value.split(":");
-    sortList(listElement, await getSortedCollection(key as SortKey, !!reverse));
+    sortList(listElement, await getSortedCollection(collection, key as SortKey, !!reverse));
   });
 }
+
 export {};
