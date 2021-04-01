@@ -58,6 +58,7 @@
   position: relative;
   text-align: center;
   z-index: 0;
+  padding: 0.5rem 0.25rem;
 }
 
 .product-list__product:hover,
@@ -136,6 +137,17 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+.product-list__tag {
+  display: block;
+  position: absolute;
+  padding: 0.25rem 0.5rem;
+  top: 0;
+  left: 0;
+  background: var(--color-gray-lighter);
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
 
 /* #endregion */

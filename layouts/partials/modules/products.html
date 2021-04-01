@@ -84,7 +84,16 @@
         <span>({{.count}})</span>
       </div>
       {{ end }}
-      {{ if not .Params.available }}
+      <!-- go through all tags to find "site tags" to show, but only if available -->
+      {{ if .Params.available }}
+      {{ range .Params.tags }}
+      {{ $tag := split . ":" }}
+      {{ if eq (index $tag 0) "Site Tag" }}
+      <div class="product-list__tag">{{index $tag 1}}</div>
+      {{ end }}
+      {{ end }}
+      <!-- if not available, show sold out tag -->
+      {{ else }}
       <div class="product-list__sold-out-tag">{{T "Product sold out tag"}}</div>
       {{ end }}
     </li>
@@ -106,7 +115,7 @@
   {{ end }}
 </section>
 
-<!-- 
+<!--
   get srcset for product image in the specified color
   params: product: product page
           color: color name
