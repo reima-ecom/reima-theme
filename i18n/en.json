@@ -146,6 +146,9 @@
   "Product list show all": {
     "other": "Show All"
   },
+  "Collection page filter selection": {
+    "other": "Filter selection"
+  },
   "Collection page number of products": {
     "other": "{{.}} products"
   },

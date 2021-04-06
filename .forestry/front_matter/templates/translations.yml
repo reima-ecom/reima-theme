@@ -371,6 +371,15 @@ fields:
       schema:
         format: markdown
 - type: field_group
+  name: Collection page filter selection
+  label: Collection page filter selection
+  description: Button to open filters on narrow screens
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: 'Filter selection'
+- type: field_group
   name: Collection page number of products
   label: Collection page number of products
   fields:
