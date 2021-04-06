@@ -1,6 +1,7 @@
 {
   "headerAnnouncementEnabled": true,
   "headerAnnouncement": "[Sign up for our E-newsletter and get 10% off your first Reima purchase.](/blogs)",
+  "cartAnnouncement": "Free shipping",
   "collectionPageBannerEnabled": false,
   "collectionPageBannerTitle": "Banner",
   "collectionPageBannerText": "Hello there",

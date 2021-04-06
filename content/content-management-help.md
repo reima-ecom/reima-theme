@@ -23,7 +23,7 @@ Pages receive their URL based on the filename and possible parent folders. So ba
 
 | Page path | URL |
 |-----------|-----|
-| /_index.md | / |
+| /\_index.md | / |
 | /help.md | /help |
 | /tips/index.md | /tips |
 | /tips/sizing.md | /tips/sizing |
@@ -60,7 +60,7 @@ If multilingual mode is enabled, the language (locale) of a page is specified in
 
 | Page type | Filename English | Filename French |
 |-----------|------------------|-----------------|
-| Home page | _index.md | _index.fr.md |
+| Home page | \_index.md | \_index.fr.md |
 | Regular page | help.md | help.fr.md |
 
 Note that, by default, the URL of the default language is `/slug` and in the translated languages `/locale/slug`.
@@ -68,3 +68,14 @@ Note that, by default, the URL of the default language is `/slug` and in the tra
 ### Menu and other settings
 
 Menus and e.g. product page settings in different languages should have their own sections in forestry. So there should be two menu sidebar items "Menu" and "Menu French" or something similar. If this is not the case, contact a developer.
+
+## Product data in Shopify
+
+### Products
+
+All product-related content is managed in Shopify and imported from there. Because of the limitations in Shopify, there is some special handling needed:
+
+- **Product description**: This needs to be formatted with pre-defined separators in order to create the details, care, etc. views. See a working example product for details.
+- **Product tags**:
+  - Feature icons are added as tags according to the description above. 
+  - A visual "tag" can be applied to products in the product list (see design demo, link in issue #141). This is created with a tag `Site Tag:<tag>` where "<tag>" is the textual tag you want to show (don't include the <>).

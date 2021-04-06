@@ -11,6 +11,10 @@ fields:
   showOnly:
     field: headerAnnouncementEnabled
     value: true
+- type: text
+  name: cartAnnouncement
+  label: Cart announcement
+  description: Shown in the cart right above the CTA, i.e. the checkout button.
 - type: boolean
   name: collectionPageBannerEnabled
   label: Collection Page Banner Enabled

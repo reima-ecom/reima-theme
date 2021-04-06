@@ -27,6 +27,10 @@
   <p empty>{{T "Cart Empty Message"}}</p>
   <div bottomline>
     <h2>{{T "Cart Subtotal"}} <span subtotal>{{.Params.subtotal}}</span></h2>
+    {{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
+    {{ with $announcements.cartAnnouncement }}
+    <p>{{.}}</p>
+    {{ end }}
     <a checkout href="#" class="btn btn--cta btn--full-width">{{T "Cart Checkout Button"}}</a>
   </div>
 </div>

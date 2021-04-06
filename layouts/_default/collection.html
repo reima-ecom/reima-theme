@@ -165,7 +165,7 @@
         {{- end }}
 
         <label class="btn btn--secondary filter-list__open" for="open-filters">
-          Filter selection
+          {{default "Filter selection" (T "Collection page filter selection")}}
         </label>
         <input type="checkbox" name="open-filters" id="open-filters" class="filter-list__open-checkbox">
         {{ range $.Site.Data.features.order }}
