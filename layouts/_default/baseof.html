@@ -12,6 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
     {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
+  {{ partial "baseof/head-top.html" . }}
 
   <!-- create list of and for scripts -->
   {{ $.Scratch.Set "ts" (slice "_default/baseof.ts") }}
@@ -19,7 +20,7 @@
   {{ $.Scratch.Set "ts-lazy" slice }}
 
   <!-- create list of critical css -->
-  {{ $.Scratch.Set "css-critical" (slice "_default/_colors.css" "_default/baseof.css" "_default/baseof.header-critical.css") }}
+  {{ $.Scratch.Set "css-critical" (slice "_default/_colors.css" "_default/_typography.css" "_default/baseof.css" "_default/baseof.header-critical.css") }}
   {{ $.Scratch.Set "css-async" slice }}
   <!-- if multilingual site, add css for language selector -->
   {{ if site.IsMultiLingual }}
@@ -50,30 +51,14 @@
     {{partial "css-critical" (slice "_default/baseof.noscript.css")}}
   </noscript>
 
-  <link rel="preload" href="/campton-book-webfont.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/campton-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <meta name="description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
   <!-- add hreflang for front page and only front page -->
-  {{- if .IsHome -}}
-  <link rel="alternate" hreflang="en-US" href="https://us.reima.com/" />
-  <link rel="alternate" hreflang="en-CA" href="https://www.reima.ca/" />
-  <link rel="alternate" hreflang="fr-CA" href="https://www.reima.ca/fr/" />
-  <link rel="alternate" hreflang="ja-JP" href="https://www.reimajapan.com/" />
-  <link rel="alternate" hreflang="en" href="https://www.reima.com/int" />
-  <link rel="alternate" hreflang="de-AT" href="https://www.reima.com/at" />
-  <link rel="alternate" hreflang="de-CH" href="https://www.reima.com/ch" />
-  <link rel="alternate" hreflang="de-DE" href="https://www.reima.com/de" />
-  <link rel="alternate" hreflang="da" href="https://www.reima.com/dk" />
-  <link rel="alternate" hreflang="fi" href="https://www.reima.com/fi" />
-  <link rel="alternate" hreflang="no" href="https://www.reima.com/no" />
-  <link rel="alternate" hreflang="pl" href="https://www.reima.com/pl" />
-  <link rel="alternate" hreflang="sv" href="https://www.reima.com/se" />
-  {{- end -}}
   {{- block "canonical" . -}}
   <link rel="canonical" href="{{partial "link" .Permalink}}">
   {{- end -}}
+  {{ partial "baseof/head-bottom.html" . }}
 </head>
 
 <body>

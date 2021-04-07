@@ -1,0 +1,160 @@
+:root {
+  --font-family: "Campton", Arial, serif;
+  --text-font-size: 1rem;
+  --text-font-size-sm: 0.875rem;
+  --text-letter-spacing: 0;
+  --text-line-height: 1.375;
+  /* h0 means display */
+  --h0-font-size: 2rem;
+  --h1-font-size: 1.75rem;
+  --h1-letter-spacing: -0.03rem;
+  --h1-margin-bottom: 1rem;
+  --h2-font-size: 1.5rem;
+  --h2-letter-spacing: -0.02rem;
+  --h2-margin-bottom: 0.875rem;
+  --h3-font-size: 1.375rem;
+  --h3-letter-spacing: -0.01rem;
+  --h3-margin-bottom: 0.75rem;
+  --h4-font-size: 1.125rem;
+  --h4-letter-spacing: 0;
+  --h4-margin-bottom: 0.625rem;
+  --h5-font-size: 1rem;
+  --h5-letter-spacing: 0;
+  --h5-margin-bottom: 0.5rem;
+  --h6-font-size: 0.875rem;
+  --h6-letter-spacing: 0.03rem;
+  --h6-margin-bottom: 0.375rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-font-size: 1.25rem;
+    --h0-font-size: 2.5rem;
+    --h1-font-size: 2.125rem;
+    --h1-letter-spacing: -0.04rem;
+    --h1-margin-bottom: 1.125rem;
+    --h2-font-size: 1.75rem;
+    --h2-letter-spacing: -0.03rem;
+    --h2-margin-bottom: 1rem;
+    --h3-font-size: 1.5rem;
+    --h3-letter-spacing: -0.02rem;
+    --h3-margin-bottom: 1rem;
+    --h4-font-size: 1.25rem;
+    --h4-margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --text-font-size-sm: 1rem;
+    --h0-font-size: 2.75rem;
+    --h1-font-size: 2.5rem;
+    --h1-letter-spacing: -0.05rem;
+    --h1-margin-bottom: 1.25rem;
+    --h2-font-size: 2rem;
+    --h2-letter-spacing: -0.03rem;
+    --h2-margin-bottom: 1.125rem;
+    --h3-font-size: 1.75rem;
+    --h3-letter-spacing: -0.02rem;
+    --h3-margin-bottom: 1rem;
+    --h4-font-size: 1.375rem;
+    --h4-letter-spacing: -0.01rem;
+    --h4-margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --h0-font-size: 3.125rem;
+    --h1-font-size: 2.75rem;
+    --h1-letter-spacing: -0.05rem;
+    --h1-margin-bottom: 1.5rem;
+    --h2-font-size: 2.25rem;
+    --h2-letter-spacing: -0.04rem;
+    --h2-margin-bottom: 1.25rem;
+    --h3-font-size: 2rem;
+    --h3-letter-spacing: -0.03rem;
+    --h3-margin-bottom: 1.25rem;
+    --h4-font-size: 1.5rem;
+    --h4-letter-spacing: -0.02rem;
+    --h4-margin-bottom: 1rem;
+  }
+}
+
+@font-face {
+  font-family: "Campton";
+  font-display: swap;
+  src: url("/campton-book-webfont.woff2") format("woff2"),
+    url("/campton-book-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton";
+  font-display: swap;
+  src: url("/campton-bold-webfont.woff2") format("woff2"),
+    url("/campton-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+.h4,
+h5,
+h6,
+.g-h2 {
+  font-weight: 700;
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+.g-h2 {
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  letter-spacing: var(--h1-letter-spacing);
+  margin-bottom: var(--h1-margin-bottom);
+}
+
+h2,
+.g-h2 {
+  font-size: var(--h2-font-size);
+  letter-spacing: var(--h2-letter-spacing);
+  margin-bottom: var(--h2-margin-bottom);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+  letter-spacing: var(--h3-letter-spacing);
+  margin-bottom: var(--h3-margin-bottom);
+}
+
+h4,
+.h4 {
+  font-size: var(--h4-font-size);
+  letter-spacing: var(--h4-letter-spacing);
+  margin-bottom: var(--h4-margin-bottom);
+}
+
+h5 {
+  font-size: var(--h5-font-size);
+  letter-spacing: var(--h5-letter-spacing);
+  margin-bottom: var(--h5-margin-bottom);
+}
+
+h6 {
+  font-size: var(--h6-font-size);
+  letter-spacing: var(--h6-letter-spacing);
+  margin-bottom: var(--h6-margin-bottom);
+  text-transform: uppercase;
+}
+
