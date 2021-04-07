@@ -1,24 +1,7 @@
 :root {
-  --color-text: #38383b;
-  --color-text-highlight: #fff0c5;
-  --color-fg: var(--color-text);
-  --color-bg: white;
-  --color-overlay-bg: rgba(0, 0, 0, 0.5);
-  --color-cta-hover: #ba001f;
-  --color-reima-red: #d2092d;
-  --color-reima-red-hover: #af0f03;
-  --color-reima-blue: #407ec9;
-  --color-reima-deep-yellow: #ffc72c;
-  --color-gray-lighter: #f2f2f5;
-  --color-gray-light: #ccc;
-  --color-gray: #898d8d;
-  --color-gray-dark: #515155;
-  --color-border: #949494;
-  --color-input-border: #bfbfbf;
-  --color-input-focus: #fcfcfc;
   --content-max-width: 1280px;
   --content-padding: 1rem;
-  --border: 1px solid var(--color-gray-light);
+  --border: 1px solid var(--color-border);
   --input-border: 1px solid var(--color-input-border);
   --focus-outline: 2px dotted var(--color-overlay-bg);
   --block-padding: 0 var(--content-padding);
@@ -234,12 +217,12 @@ code {
 }
 
 .price--sale {
-  color: var(--color-reima-blue);
+  color: var(--color-text-emphasis);
   font-weight: 700;
 }
 
 .price--was {
-  color: var(--color-border);
+  color: var(--color-text-muted);
   text-decoration: line-through;
 }
 
@@ -249,12 +232,12 @@ code {
 
 a,
 .link {
-  color: var(--color-reima-red);
+  color: var(--color-link);
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.2s;
   -webkit-transition: color 0.2s;
-  text-decoration-color: var(--color-reima-red);
+  text-decoration-color: var(--color-link);
   text-decoration-thickness: 0.1em;
   text-underline-offset: 2px;
   text-decoration-skip-ink: auto;
@@ -267,9 +250,9 @@ a,
 
 a:hover,
 .link:hover {
-  color: var(--color-reima-red-hover);
+  color: var(--color-link-hover);
   text-decoration-style: underline;
-  text-decoration-color: var(--color-reima-red-hover);
+  text-decoration-color: var(--color-link-hover);
 }
 
 .silent-link {
@@ -279,7 +262,7 @@ a:hover,
 
 .silent-link:hover,
 .silent-link:focus {
-  color: var(--color-reima-red);
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -325,7 +308,7 @@ a:hover,
 .btn:disabled,
 .btn:disabled:hover {
   cursor: not-allowed;
-  background-color: var(--color-gray);
+  background-color: var(--color-bg-accent);
 }
 
 .btn--sm {
@@ -338,22 +321,22 @@ a:hover,
 }
 
 .btn--inv {
-  --color-text: white;
-  --color-bg: var(--color-fg);
+  --color-text: var(--color-text-inverted);
+  --color-bg: var(--color-bg-inverted);
 }
 
 .btn--cta {
-  background: var(--color-reima-red);
+  background: var(--color-primary);
   border: none;
   border-radius: 2px;
-  color: white;
+  color: var(--color-text-on-primary);
   font-weight: 400;
 }
 
 .btn--cta:hover,
 .btn--cta:focus {
-  background: var(--color-cta-hover);
-  color: white;
+  background: var(--color-primary-accent);
+  color: var(--color-text-on-primary);
 }
 
 .btn--secondary {
@@ -421,10 +404,10 @@ textarea:focus {
 }
 
 .footer-logos {
-	margin: 3rem calc(var(--content-padding) / -2) 2rem;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+  margin: 3rem calc(var(--content-padding) / -2) 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .footer-logos img {

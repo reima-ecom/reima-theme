@@ -22,8 +22,8 @@
 }
 
 .image-links--color-invert > div {
-  --color-text: white;
-  --color-bg: var(--color-fg);
+  --color-text: var(--color-text-inverted);
+  --color-bg: var(--color-bg-inverted);
 }
 
 .image-links--small h3 {

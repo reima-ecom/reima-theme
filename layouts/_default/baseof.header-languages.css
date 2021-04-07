@@ -16,5 +16,5 @@
 }
 
 .languages a:hover {
-  color: var(--color-reima-red);
+  color: var(--color-link);
 }

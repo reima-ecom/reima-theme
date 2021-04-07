@@ -78,8 +78,8 @@
 }
 
 .testimonials blockquote > footer a:hover {
-  color: var(--color-reima-red);
-  text-decoration-color: var(--color-reima-red);
+  color: var(--color-link);
+  text-decoration-color: var(--color-link);
 }
 
 @media (min-width: 768px) {

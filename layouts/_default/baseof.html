@@ -19,7 +19,7 @@
   {{ $.Scratch.Set "ts-lazy" slice }}
 
   <!-- create list of critical css -->
-  {{ $.Scratch.Set "css-critical" (slice "_default/baseof.css" "_default/baseof.header-critical.css") }}
+  {{ $.Scratch.Set "css-critical" (slice "_default/_colors.css" "_default/baseof.css" "_default/baseof.header-critical.css") }}
   {{ $.Scratch.Set "css-async" slice }}
   <!-- if multilingual site, add css for language selector -->
   {{ if site.IsMultiLingual }}

@@ -56,7 +56,7 @@
 
 .article-grid a:hover,
 .article-grid a:focus {
-  color: var(--color-reima-red);
+  color: var(--color-link);
 }
 
 @media (min-width: 768px) {

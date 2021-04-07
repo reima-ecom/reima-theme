@@ -1,7 +1,7 @@
 .module-banner {
   padding: calc(var(--content-padding) / 2) max(var(--content-padding) / 2, (100% - 768px) / 2);
-  background: var(--color-fg);
-  color: white;
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
   letter-spacing: normal;
   display: flex;
   flex-wrap: wrap;
@@ -24,7 +24,7 @@
 
 .module-banner h3 em {
   font-style: normal;
-  color: var(--color-reima-deep-yellow);
+  color: var(--color-text-emphasis-inverted);
 }
 
 @media (min-width: 768px) {

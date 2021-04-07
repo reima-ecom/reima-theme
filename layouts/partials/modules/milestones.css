@@ -19,7 +19,7 @@
   bottom: 0;
   width: 2px;
   height: 100%;
-  background-color: var(--color-gray-light);
+  background-color: var(--color-bg-accent);
 }
 
 .milestones__about-timeline li {
@@ -72,7 +72,7 @@
 
 .milestones__external-link .milestones__external-link-icon {
   display: inline-block;
-  fill: var(--color-reima-red);
+  fill: var(--color-link);
   vertical-align: middle;
   width: 1rem;
   height: 1rem;
@@ -80,7 +80,7 @@
 }
 
 .milestones__external-link:hover .milestones__external-link-icon {
-  fill: var(--color-reima-red-hover);
+  fill: var(--color-link-hover);
 }
 
 @media (min-width: 768px) {

@@ -11,7 +11,7 @@ r-newsletter p {
 }
 
 r-newsletter input {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--color-bg-accent);
   width: 100%;
   font-size: 1rem;
 }

@@ -1,6 +1,6 @@
 footer {
-  background-color: var(--color-fg);
-  color: white;
+  background-color: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
   padding: 1rem;
 }
 

@@ -220,8 +220,8 @@
 }
 
 .filter-list__value-checkbox:checked + .filter-list__value {
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
 }
 
 .filter-list__value:last-of-type {
@@ -246,7 +246,7 @@
 
 .filter-list__clear:hover,
 .filter-list__clear:focus {
-  color: var(--color-reima-red);
+  color: var(--color-link);
 }
 /* #endregion */
 
