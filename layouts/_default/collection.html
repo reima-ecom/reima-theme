@@ -57,8 +57,10 @@
 
       <!-- add filtering before products module -->
       {{ if eq .template "products" }}
+      <!-- only add in case no limit is imposed (i.e limit not defined, or limit greater than or equal to number of products -->
+      {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
+      {{ if or (not .limit) (ge .limit (len $collectionPage.Pages)) }}
       <div class="grid__sort">
-        {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
         {{ $numProducts := printf "<strong>%d</strong>" (len $collectionPage.Pages) }}
         <div>{{(default (printf "%s products" $numProducts) (T "Collection page number of products" $numProducts)) | safeHTML}}</div>
         <label for="">
@@ -81,6 +83,7 @@
           </svg>
         </label>
       </div>
+      {{ end }}
       {{ end }}
 
       {{ partial (printf "modules/%s" .template) . }}
