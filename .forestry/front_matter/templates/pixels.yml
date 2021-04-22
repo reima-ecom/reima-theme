@@ -28,6 +28,8 @@ fields:
 - type: boolean
   label: Google Analytics
   name: ga_enabled
+  description: Enable tracking via Google Universal Analytics. Also contains tracking
+    for Google Ads.
 - type: text
   name: ga_property
   label: GA tracking id
