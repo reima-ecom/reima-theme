@@ -36,6 +36,7 @@ fields:
     value: true
   config:
     required: true
+  description: Google Analytics property / tracking id is the one starting with "UA-".
 - type: text
   name: ga_autolink
   label: GA Shopify domain
@@ -46,6 +47,18 @@ fields:
     value: true
   config:
     required: true
+- name: aw_property
+  type: text
+  config:
+    required: false
+  label: Google Ads tracking id
+  description: Optionally add explicit Google Ads tracking. The property / tracking
+    id is the one starting with "AW-". Note that in order to track conversions in
+    the checkout, the Shopify checkout scripts need to be edited (see the US store
+    for an example).
+  showOnly:
+    field: ga_enabled
+    value: true
 - type: boolean
   name: facebook_enabled
   label: Facebook
