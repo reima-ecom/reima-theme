@@ -41,20 +41,19 @@ form.addEventListener("submit", async (e) => {
   btn.disabled = true;
   try {
     const { variant } = targetForm.dataset;
-    const cart = document.querySelector<RCart>("r-cart");
-    await cart.addVariant(variant);
+    const cart = document.querySelector<RCart>("r-cart")!;
+    await cart.addVariant(variant!);
   } finally {
     btn.disabled = false;
   }
 });
 
 const renderPrice = (price: string) => {
-  /** @type {ProductPageProperties & Window} */
   const { priceTemplate } = window;
   return priceTemplate.replace("PRICE", price);
 };
 
-const getVariant = async (options: Options) =>
+const getVariant = (options: Options) =>
   variants.find((v) => {
     if (Object.keys(v.options).length !== Object.keys(options).length) {
       return false;
@@ -62,14 +61,14 @@ const getVariant = async (options: Options) =>
     return Object.keys(v.options).every((k) => options[k] === v.options[k]);
   });
 
-const inputChange = async (e: Event) => {
+const inputChange = (e: Event) => {
   const { name, value } = e.currentTarget as HTMLInputElement;
   const isColor = (e.currentTarget as HTMLElement).closest(
     ".selections--Color",
   );
   selectedOptions[name] = value;
   // check if available
-  const variant = await getVariant(selectedOptions);
+  const variant = getVariant(selectedOptions);
   if (!variant) {
     cartButton.innerText = cartButton.dataset.na!;
     cartButton.disabled = true;
@@ -82,13 +81,13 @@ const inputChange = async (e: Event) => {
     form.dataset.variant = variant.id;
   }
   // update availability
-  radioBoxes.forEach(async (radio) => {
+  radioBoxes.forEach((radio) => {
     const thisSelection = Object.assign(
       {},
       selectedOptions,
       { [radio.name]: radio.value },
     );
-    const thisVariant = await getVariant(thisSelection);
+    const thisVariant = getVariant(thisSelection);
     const thisLabel = document.querySelector(`label[for="${radio.id}"]`)!;
     if (thisVariant && thisVariant.available) {
       thisLabel.classList.remove("unavailable");
@@ -123,3 +122,20 @@ const inputChange = async (e: Event) => {
 radioBoxes.forEach((node) => {
   node.addEventListener("change", inputChange);
 });
+
+// open reviews when the review link is clicked
+const reviewsLink = document.querySelector('[href="#reviews"]');
+const openReviews = () => {
+  document.querySelectorAll('#acc-reviews, #tab-reviews').forEach((element) => {
+    (element as HTMLInputElement).checked = true;
+  });
+}
+
+if (reviewsLink) {
+  reviewsLink.addEventListener('click', () => {
+    openReviews();
+  });
+}
+
+// open reviews if initial load is for reviews
+if (location.hash === '#reviews') openReviews();
