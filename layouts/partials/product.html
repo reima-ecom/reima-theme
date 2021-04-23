@@ -55,7 +55,9 @@
         {{ end }}
         {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
         <div>
-          {{ range seq (math.Round .average) }}★{{ end }} {{ div (math.Round (mul .average 10)) 10 }} ({{.count}})
+          <a href="#reviews" class="silent-link">
+            {{ range seq (math.Round .average) }}★{{ end }} {{ div (math.Round (mul .average 10)) 10 }} ({{.count}})
+          </a>
         </div>
         {{ end }}
       </div>
@@ -177,74 +179,18 @@
 
 <section class="tabs">
   {{ range after 1 $productFields }}
-  {{ $field := trim (substr . 0 6) "[]" }}
-  {{ $contents := substr . 6 }}
-  <!-- tabs on >768w -->
-  <input type="radio" name="tab" id="{{$field}}" {{if eq $field "info"}}checked{{end}}>
-  <label for="{{$field}}">{{index $settings.accordion $field}}</label>
-  <aside>
-    <div>
-      {{$contents | safeHTML}}
-    </div>
-    <!-- if this is the info/features section, show tag-based features -->
-    {{ if eq $field "info" }}
-    <div class="features">
-      {{ range $product.Params.tags }}
-      {{ $tagData := split . ":" }}
-      {{ $tag := index $tagData 0 }}
-      {{ $value := index $tagData 1 }}
-      <!-- get feature for this tag if exists -->
-      {{ range where $settings.features "tag" $tag }}
-      {{ $modalid := .title }}
-      <!-- feature heading with modal link if modal exists -->
+  <div class="tab">
+    {{ $field := trim (substr . 0 6) "[]" }}
+    {{ $contents := substr . 6 }}
+    <!-- tabs -->
+    <input type="radio" name="tab" id="tab-{{$field}}" {{if eq $field "info"}}checked{{end}}>
+    <input type="checkbox" name="acc-{{$field}}" id="acc-{{$field}}">
+    <label for="tab-{{$field}}">{{index $settings.accordion $field}}</label>
+    <label for="acc-{{$field}}">{{index $settings.accordion $field}}</label>
+    <aside>
       <div>
-        <h3 class="features__heading">
-          {{ if .modal }}
-          <a href="#" openid="{{$modalid}}" class="silent-link">
-            {{.title}}
-          </a>
-          {{ else }}
-          {{.title}}
-          {{ end }}
-        </h3>
+        {{$contents | safeHTML}}
       </div>
-      <!-- modal if specified -->
-      {{ with .modal }}
-      <div class="modal" id="{{$modalid}}">
-        <div>
-          <button class="icon" close>
-            <svg>
-              <use xlink:href="#icon-close"></use>
-            </svg>
-          </button>
-          {{. | markdownify}}
-        </div>
-      </div>
-      {{ end }}
-      <!-- icons -->
-      {{ range .values }}
-      {{ $iconValue := .value }}
-      {{ with partial "helpers/get-image" .icon }}
-      {{ $svg := .Content }}
-      {{ if eq $iconValue $value }}
-      {{ $svg = replace $svg "<svg" "<svg class=\"active\"" }}
-      {{ end }}
-      {{$svg | safeHTML}}
-      {{ end }}
-      {{ end }}
-      <!-- tag description e.g. "Waterproof level 8000 mm" -->
-      <p>
-        {{ replace .description "VALUE" $value }}
-      </p>
-      {{ end }}
-      {{ end }}
-    </div>
-    {{ end }}
-  </aside>
-  <!-- tabs on "mobile" -->
-  <details>
-    <summary>{{index $settings.accordion $field}}</summary>
-      {{$contents | safeHTML}}
       <!-- if this is the info/features section, show tag-based features -->
       {{ if eq $field "info" }}
       <div class="features">
@@ -299,18 +245,21 @@
         {{ end }}
       </div>
       {{ end }}
-  </details>
+    </aside>
+  </div>
   {{ end }}
   {{ if $settings.reviews }}
-  <input type="radio" name="tab" id="reviews">
-  <label for="reviews">{{T "Reviews"}}</label>
-  <aside>
-    {{partial "product-reviews" $product}}
-  </aside>
-  <details>
-    <summary>{{T "Reviews"}}</summary>
-    {{partial "product-reviews" $product}}
-  </details>
+  <div class="tab">
+    <!-- we need a separate element for the anchor b/c .tab is display:content on desktop -->
+    <a id="reviews"></a>
+    <input type="radio" name="tab" id="tab-reviews">
+    <input type="checkbox" name="acc-reviews" id="acc-reviews">
+    <label for="tab-reviews">{{T "Reviews"}}</label>
+    <label for="acc-reviews">{{T "Reviews"}}</label>
+    <aside>
+      {{partial "product-reviews" $product}}
+    </aside>
+  </div>
   {{ end }}
 </section>
 
