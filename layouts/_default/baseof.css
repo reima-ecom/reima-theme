@@ -119,11 +119,11 @@ html {
   scroll-behavior: smooth;
 }
 
-:target:before {
+:target::before {
   content: "";
   display: block;
-  height: 100px;
-  margin: -100px 0 0;
+  height: var(--menu-height);
+  margin: calc(var(--menu-height) * -1) 0 0;
 }
 
 body {
