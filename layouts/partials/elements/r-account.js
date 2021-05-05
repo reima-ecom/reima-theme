@@ -1,11 +1,11 @@
 // This is a proof of concept, and as such not transformed to TS yet
 
 const query = async (graphQl) => {
-  const resp = await fetch('https://reima-us.myshopify.com/api/2020-01/graphql', {
+  const resp = await fetch('https://reima-se.myshopify.com/api/2020-01/graphql', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': 'd2990d8e29e763239f8e8ff6cefc9ebe',
+      'X-Shopify-Storefront-Access-Token': '499e5799ae1f44c3c7e4f8947e13aa18',
     },
     method: 'POST',
     body: JSON.stringify({ query: graphQl }),

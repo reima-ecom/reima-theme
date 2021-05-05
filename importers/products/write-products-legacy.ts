@@ -44,6 +44,10 @@ export class NumberFormatMock {
       }
       case "CAD":
         return `CA$${num}`;
+      case "EUR":
+        return `${num} €`;
+      case "SEK":
+        return `${num} kr`;
       default:
         throw new Error(`Currency ${this.currency} not supported`);
     }
