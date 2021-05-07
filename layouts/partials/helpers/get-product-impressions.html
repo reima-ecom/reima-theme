@@ -1,0 +1,36 @@
+<!--
+this partial will return a slice of product pages of
+all the products shown on the page (in `products` modules)
+-->
+
+{{ $products := slice }}
+<!-- go through `modules` of regular pages -->
+{{ range .Params.modules }}
+{{ with partial "helpers/get-product-impressions-inner" . }}
+{{ $products = $products | append . }}
+{{ end }}
+{{ end }}
+<!-- go through `main` of collection pages -->
+{{ range .Params.main }}
+{{ with partial "helpers/get-product-impressions-inner" . }}
+{{ $products = $products | append . }}
+{{ end }}
+{{ end }}
+{{ return $products }}
+
+<!--
+given a "module", return its child product pages if applicable
+-->
+{{ define "partials/helpers/get-product-impressions-inner" }}
+{{ $products := false }}
+<!-- is this a `products` module? -->
+{{ if eq .template "products" }}
+<!-- get the collection page and specifically its child (product) pages -->
+{{ $products = (site.GetPage (printf "collections/%s" .collection)).Pages }}
+<!-- if there is a limit set, only return within the limit -->
+{{ with .limit }}
+{{ $products = $products | first . }}
+{{ end }}
+{{ end }}
+{{ return $products }}
+{{ end }}
