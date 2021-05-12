@@ -1,0 +1,12 @@
+#password_recovery {
+  display: none;
+}
+
+#password_recovery:target {
+  display: block;
+}
+
+#password_recovery:target + form {
+  display: none;
+}
+
