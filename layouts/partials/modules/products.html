@@ -35,7 +35,7 @@
   </div>
   {{ end }}
 
-  <ul>
+  <ul data-collection="{{path.Base .Dir}}">
     <!-- loop through product pages -->
     {{ range $productPages }}
     {{ $link := partial "link" .RelPermalink }}

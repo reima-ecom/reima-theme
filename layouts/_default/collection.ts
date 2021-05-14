@@ -37,7 +37,7 @@ const w = window;
 const { document } = window;
 
 let filters: { [facetFilter: string]: string | string[] } = {
-  collections: `collections:${w.collection}`,
+  collections: "",
 };
 
 let index: AlgoliaIndex;
@@ -59,45 +59,90 @@ const ensureIndex = async () => {
   return index;
 };
 
-const searchAndRender = async () => {
+const searchAndRender = async (collection) => {
   // search for products
   const facetFilters = Object.values(filters);
   const { hits } = await index.search("", { facetFilters, hitsPerPage: 1000 });
-  // render results
-  const list: HTMLElement = document.querySelector(".product-list > ul")!;
+  const collections = collection.split(",");
+
   // create map of hit handles
-  const hitHandles: { [handle: string]: true } = hits.reduce((obj, hit) => ({
-    ...obj,
-    [hit.objectID]: true,
-  }), {});
-  // show or hide elements based on hits existence
-  for (let i = 0; i < list.children.length; i += 1) {
-    const element = list.children[i] as HTMLElement;
-    element.style.display = hitHandles[element.getAttribute("handle")!]
-      ? "block"
-      : "none";
-  }
+  const hitHandles: { [handle: string]: true } = hits.reduce(
+    (obj, hit) => ({
+      ...obj,
+      [hit.objectID]: true,
+    }),
+    {}
+  );
+
+  collections.map((collection) => {
+    // render results
+    const list: HTMLElement = document.querySelector(
+      'ul[data-collection="' + collection + '"]'
+    ) as HTMLUListElement;
+
+    // show or hide elements based on hits existence
+    for (let i = 0; i < list.children.length; i += 1) {
+      const element = list.children[i] as HTMLElement;
+      element.style.display = hitHandles[element.getAttribute("handle")!]
+        ? "block"
+        : "none";
+    }
+  });
 };
 
-const filtersForm = document.getElementById("filters");
+const filtersForm: NodeListOf<HTMLFormElement> = document.querySelectorAll(
+  "form.filter-list"
+);
 if (filtersForm) {
-  filtersForm.addEventListener("change", async (e) => {
-    const { name, value, checked } = e.target as HTMLInputElement;
-    // if this is an element opener checkbox, bail out
-    if (name.startsWith("open-")) return;
-    await ensureIndex();
-    // add to array of active filters
-    const key = `${name}:${value}`;
-    if (!filters[name]) filters[name] = [];
-    const filter = filters[name] as string[];
-    if (checked) filter.push(key);
-    else filter.splice(filter.indexOf(key), 1);
-    searchAndRender();
-  });
+  filtersForm.forEach((formElement) => {
+    formElement.addEventListener("change", async (e) => {
+      const element = e.target as HTMLInputElement;
+      const { name, value, checked } = element;
 
-  filtersForm.addEventListener("reset", () => {
-    filters = { collections: filters.collections };
-    searchAndRender();
+      if (name === "open-filters") {
+        element.parentElement.parentElement.parentElement.classList.toggle(
+          "active"
+        );
+      }
+
+      // if this is an element opener checkbox, bail out
+      if (name.startsWith("open-")) return;
+      await ensureIndex();
+
+      // add to array of active filters
+      const key = `${name}:${value}`;
+      if (!filters[name]) filters[name] = [];
+      const filter = filters[name] as string[];
+      if (checked) filter.push(key);
+      else filter.splice(filter.indexOf(key), 1);
+      let collection = element.getAttribute("data-collection");
+
+      if (collection === "*") {
+        const productLists = document.querySelectorAll(".product-list > ul");
+        if (productLists) {
+          const collections = [];
+          const collectionsFilters = [];
+          for (let i = 0; i < productLists.length; i++) {
+            let collection = productLists[i].getAttribute("data-collection");
+            collections.push(collection);
+            collectionsFilters.push(`collections:${collection}`);
+          }
+          collection = collections.join();
+          filters.collections = collectionsFilters;
+        }
+      } else {
+        filters.collections = [`collections:${collection}`];
+      }
+
+      searchAndRender(collection);
+    });
+
+    formElement.addEventListener("reset", (e) => {
+      filters = { collections: filters.collections };
+      const element = e.target as HTMLInputElement;
+      const collection = element.getAttribute("data-collection");
+      searchAndRender(collection);
+    });
   });
 }
 
@@ -107,11 +152,11 @@ type CollectionSortData = {
     products: {
       edges: {
         node: {
-          handle: string
-        }
-      }[]
-    }
-  }
+          handle: string;
+        };
+      }[];
+    };
+  };
 };
 type CollectionSortErrors = any[];
 type CollectionSortResult = {
@@ -120,13 +165,13 @@ type CollectionSortResult = {
 };
 
 /**
-  Get product handles sorted by specified key
-  WARNING: Uses global properties from the window object!
-*/
+ Get product handles sorted by specified key
+ WARNING: Uses global properties from the window object!
+ */
 const getSortedCollection = async (
   collection: string,
   sortKey: SortKey,
-  reverse  = false,
+  reverse = false
 ): Promise<string[]> => {
   const query = `{
     collectionByHandle(handle: "${collection}") {
@@ -148,16 +193,16 @@ const getSortedCollection = async (
         "X-Shopify-Storefront-Access-Token": window.site.shopify.token,
       },
       body: JSON.stringify({ query }),
-    },
+    }
   );
   if (!response.ok) throw new Error("Could not fetch sort order");
-  const { data, errors } = await response.json() as CollectionSortResult;
+  const { data, errors } = (await response.json()) as CollectionSortResult;
   if (errors || !data) {
     console.error(errors);
     throw new Error("Could not fetch sort order");
   }
-  const handles = data.collectionByHandle.products.edges.map(({ node: { handle } }) =>
-    handle
+  const handles = data.collectionByHandle.products.edges.map(
+    ({ node: { handle } }) => handle
   );
   return handles;
 };
@@ -170,14 +215,23 @@ const sortList = (list: HTMLUListElement, handles: string[]) => {
   });
 };
 
-const sortSelect: HTMLSelectElement | null = document.querySelector('select[sort-collection]');
+const sortSelect: NodeListOf<HTMLSelectElement> = document.querySelectorAll(
+  "select[sort-collection]"
+);
 if (sortSelect) {
-  sortSelect.addEventListener('change', async (ev) => {
-    const selectElement = ev.target as HTMLSelectElement;
-    const listElement = selectElement.closest(".grid__sort")!.nextElementSibling!.querySelector("ul") as HTMLUListElement;
-    const collection = selectElement.getAttribute("sort-collection")!;
-    const [key, reverse] = selectElement.value.split(":");
-    sortList(listElement, await getSortedCollection(collection, key as SortKey, !!reverse));
+  sortSelect.forEach((selectElement) => {
+    selectElement.addEventListener("change", async (ev) => {
+      const selectElement = ev.target as HTMLSelectElement;
+      const collection = selectElement.getAttribute("sort-collection");
+      const listElement = document.querySelector(
+        'ul[data-collection="' + collection + '"]'
+      ) as HTMLUListElement;
+      const [key, reverse] = selectElement.value.split(":");
+      sortList(
+        listElement,
+        await getSortedCollection(collection, key as SortKey, !!reverse)
+      );
+    });
   });
 }
 
