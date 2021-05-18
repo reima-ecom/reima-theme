@@ -1,0 +1,26 @@
+main {
+  padding: var(--block-padding);
+  margin: var(--block-margin);
+  max-width: var(--content-width);
+}
+
+main form {
+  margin: auto;
+  max-width: 400px;
+}
+
+main input {
+  width: 100%;
+}
+
+main label {
+  margin: 1rem 0 0.5rem;
+  display: block;
+  font-weight: 700;
+}
+
+main .btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+

@@ -1,28 +1,7 @@
 {{ define "dependencies" }}
 {{ $.Scratch.Add "css-critical" "account/single.css" }}
-{{ $.Scratch.Add "css-critical" "partials/elements/r-account.css" }}
-{{ $.Scratch.Add "ts" "partials/elements/r-account.js" }}
 {{ end }}
 
 {{ define "main" }}
-<div class="account">
-  <h1>
-    My Account
-  </h1>
-  <r-account status="loading">
-    <div loading>
-      Loading...
-    </div>
-    <form login>
-      <input name="email" type="text" placeholder="Email">
-      <input name="pass" type="password" placeholder="Password">
-      <button type="submit" class="btn btn--cta">Log in</button>
-    </form>
-    <div info>
-      <h2 display-name>Name...</h2>
-      <p display-email>email...</p>
-      <button class="btn btn--cta" logout>Logout</button>
-    </div>
-  </r-account>
-</div>
+{{ .Content }}
 {{ end }}

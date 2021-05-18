@@ -1,0 +1,35 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "account/baseof.css" }}
+{{ $.Scratch.Add "css-critical" "account/login.css" }}
+{{ end }}
+
+{{ define "main" }}
+
+<form id="password_recovery">
+  <label for="customer_email">{{ T "Account page recovery email" | default "Email" }}</label>
+  <input class="input" type="email" name="email" />
+
+  <input class="btn btn--cta" type="submit" value="{{ T "Account page recovery submit" | default "Submit" }}" />
+
+  <p>
+    <a href="#">{{ T "Account page back" | default "Back" }}</a>
+  </p>
+</form>
+
+<form id="login" method="post">
+  <h1>{{ T "Account page title" | default "My Account" }}</h1>
+
+  <label for="customer_email">{{ T "Account page email" | default "Email" }}</label>
+  <input class="input" type="email" name="email" />
+
+  <label for="customer_password">{{ T "Account page password" | default "Password" }}</label>
+  <input class="input" type="password" name="password" />
+
+  <input class="btn btn--cta" type="submit" value="{{ T "Account page login" | default "Sign In" }}" />
+
+  <p>
+    <a href="#password_recovery">{{ T "Account page forgot password" | default "Forgot your password?" }}</a>
+  </p>
+</form>
+
+{{ end }}
