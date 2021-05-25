@@ -56,3 +56,13 @@
 
 {{ end }}
 {{ end }}
+
+<!-- add search event listener (from r-search.ts) -->
+<script uses-cookies>
+  document.addEventListener('search', (e) => {
+    const { query } = e.detail;
+    gtag('event', 'search', {
+      event_label: query
+    });
+  });
+</script>
