@@ -9,17 +9,22 @@
 {{- $images = $images | append (.Resize "750x").Permalink }}
 {{- end }}
 
+{{- $priceOrig := .Params.price }}
+{{- with .Params.compareAtPrice }}
+{{- $priceOrig = . }}
+{{- end }}
+
 {{- $feed.Add "products" (dict
   "id" .File.ContentBaseName
   "name" .Title
-  "category" ""
+  "collections" .Params.collections
   "brand" "Reima"
   "price" .Params.price
-  "priceOrig" .Params.price
-  "compareAtPrice" .Params.compareAtPrice
+  "priceOrig" $priceOrig
   "url" .Permalink
   "images" $images
-  "stock" 1
+  "available" .Params.available
+  "variants" .Params.variants
 ) -}}
 
 {{- end -}}
