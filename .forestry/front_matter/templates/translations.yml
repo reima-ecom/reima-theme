@@ -378,7 +378,7 @@ fields:
   - type: text
     name: other
     label: other
-    default: 'Filter selection'
+    default: Filter selection
 - type: field_group
   name: Collection page number of products
   label: Collection page number of products
@@ -386,8 +386,9 @@ fields:
   - type: text
     name: other
     label: other
-    default: '{{.}} products'
-    description: 'Use <code>{{.}}</code> where you want the number of products to go. Example: "{{.}} products".'
+    default: "{{.}} products"
+    description: 'Use <code>{{.}}</code> where you want the number of products to
+      go. Example: "{{.}} products".'
 - type: field_group
   name: Collection page sort default
   label: Collection page sort default

@@ -24,6 +24,29 @@
 </script>
 {{ end }}
 
+{{ with partial "helpers/get-product-impressions" $ }}
+<script>
+dataLayer.push({
+  'ecommerce': {
+    'currencyCode': '{{site.Params.public.currency}}',
+    'impressions': [
+    {{- range . }}
+    {
+      {{- with partial "helpers/get-product" . }}
+      'id': '{{.Params.yotpoId}}',
+      'name': '{{.Title}}',
+      'price': {{.Params.price}},
+      'image': '{{ (index (.Resources.ByType "image" | first 1) 0).Permalink }}',
+      {{- end }}
+      'url': '{{.Permalink}}'
+    },
+    {{- end }}
+    ]
+  }
+});
+</script>
+{{ end }}
+
 {{ if partial "helpers/has-product" $ }}
 <script uses-cookies>
   document.addEventListener('cart-add', (e) => {

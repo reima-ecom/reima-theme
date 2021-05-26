@@ -20,6 +20,28 @@ type SearchHelper = {
   search: () => void;
 };
 
+type UiState = {
+  [indexName: string]: {
+    [s: string]: unknown;
+    query: string | undefined;
+  };
+};
+
+export const EVENT_SEARCH = "search";
+export type EventSearchDetails = {
+  query: string | undefined;
+};
+
+const debounce = (func: (...args: any[]) => unknown, timeout = 300) => {
+  let timer: number;
+  return (...args: any[]) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+};
+
 const currencyFmt = new Intl.NumberFormat(window.locale, {
   style: "currency",
   currency: window.site.currency,
@@ -40,6 +62,16 @@ export default class RSearch extends HTMLElement {
         helper.search();
       },
     });
+  }
+
+  sendEvent(uiState: UiState) {
+    const firstIndex = Object.values(uiState)[0];
+    this.dispatchEvent(
+      new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
+        bubbles: true,
+        detail: { query: firstIndex.query },
+      }),
+    );
   }
 
   connectedCallback() {
@@ -66,12 +98,20 @@ export default class RSearch extends HTMLElement {
     });
 
     this.search.addWidgets([searchbox, hits]);
+    const sendEventDebounced = debounce(this.sendEvent.bind(this), 1000);
+    this.search.use(() => ({
+      onStateChange({ uiState }: unknown) {
+        sendEventDebounced(uiState);
+      },
+      subscribe() {},
+      unsubscribe() {},
+    }));
 
     this.search.start();
   }
 }
 
-const load = async (url: string) =>
+const load = (url: string) =>
   new Promise((resovle, reject) => {
     const script = document.createElement("script");
     script.src = url;

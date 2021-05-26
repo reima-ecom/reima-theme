@@ -180,6 +180,11 @@ main:
   title: Most popular for Kids
   limit: 10
   collectionref: products/collections/tops/_index.md
+- template: products
+  collection: tops
+  title: Most popular for Kids
+  limit: 4
+  collectionref: products/collections/tops/_index.md
 - template: content
   content: |-
     ## It Takes All Sorts: Kids’ Clothes at Reima

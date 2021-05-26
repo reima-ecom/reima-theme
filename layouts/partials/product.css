@@ -238,61 +238,57 @@ manually with CSS. The `[open]` attribute is still set on the
 /* styles applicable to all views */
 .tabs {
   border-bottom: var(--border);
+  margin: var(--block-margin);
 }
 
 .tabs ul {
   padding-left: 1rem;
 }
 
-/* mobile only styles */
-.tabs > details {
-  border-top: var(--border);
-  padding: 0 var(--content-padding);
+/* hide labels */
+.tab > label {
+  display: none;
 }
 
-.tabs > details > summary {
+/* ... but show the accordion label */
+.tab > label[for|=acc] {
   display: block;
   cursor: pointer;
   color: inherit;
+  border-top: var(--border);
   font-size: var(--text-font-size);
   font-weight: 700;
   padding: var(--content-padding);
-  margin: 0 calc(-1 * var(--content-padding));
 }
 
-.tabs > details[open] > summary {
-  color: var(--color-text-inverted);
-  background: var(--color-bg-inverted);
-}
-
-.tabs > details > summary::-webkit-details-marker,
-.tabs > details > summary::marker {
+/* same for inputs */
+.tab > input {
   display: none;
-  content: "";
 }
 
-/* add margins to first and last elements */
-.tabs > details > :nth-child(2) {
-  margin-top: var(--content-padding);
+.tab > input[id|=acc] {
+  display: block;
+  position: absolute;
+  opacity: 0;
 }
 
-.tabs > details > :last-child {
-  margin-bottom: var(--content-padding);
-}
-
-/* hide "desktop" elements by default */
-.tabs > label,
-.tabs > aside,
-.tabs > input {
+.tab > aside {
   display: none;
+}
+
+.tab > input[name|=acc]:checked ~ label[for|=acc] {
+  color: var(--color-bg);
+  background: var(--color-fg);
+}
+
+.tab > input[name|=acc]:checked ~ aside {
+  display: block;
+  padding: var(--content-padding)
+    max(var(--content-padding), (100% - var(--block-width)) / 2);
 }
 
 /* desktop styles */
 @media (min-width: 768px) {
-  .tabs > details {
-    display: none;
-  }
-
   .tabs {
     display: flex;
     flex-wrap: wrap;
@@ -302,13 +298,32 @@ manually with CSS. The `[open]` attribute is still set on the
     z-index: 0;
   }
 
-  .tabs > input {
+  /* remove .tab element from cssom to layout properly */
+  .tab {
+    display: contents;
+  }
+
+  /* hide asides possibly opened on mobile */
+  .tab > input[id|=acc]:checked ~ aside {
+    display: none;
+  }
+
+  /* hide and show appropriate labels and inputs */
+  .tab > input[id|=acc] {
+    display: none;
+  }
+
+  .tab > input {
     display: block;
     position: absolute;
     opacity: 0;
   }
 
-  .tabs > label {
+  .tab > label[for|=acc] {
+    display: none;
+  }
+
+  .tab > label {
     display: block;
     border: 1px solid var(--color-border);
     border-top-left-radius: 2px;
@@ -321,11 +336,7 @@ manually with CSS. The `[open]` attribute is still set on the
     cursor: pointer;
   }
 
-  .tabs > aside {
-    display: none;
-  }
-
-  .tabs > input:checked + label + aside {
+  .tab > input[name=tab]:checked ~ aside {
     border-top: var(--border);
     width: 100%;
     order: 1;
@@ -338,21 +349,12 @@ manually with CSS. The `[open]` attribute is still set on the
       max(var(--content-padding), (100% - var(--block-width)) / 2);
   }
 
-  /* remove margins from first and last elements of grid */
-  .tabs > aside > * > :first-child {
-    margin-top: 0;
-  }
-
-  .tabs > aside > * > :last-child {
-    margin-bottom: 0;
-  }
-
   /* create the vertical line between grid items */
-  .tabs > aside > :nth-child(n+2) {
+  .tab > aside > :nth-child(n+2) {
     position: relative;
   }
 
-  .tabs > aside > :nth-child(n+2)::before {
+  .tab > aside > :nth-child(n+2)::before {
     content: "";
     position: absolute;
     top: 0;
@@ -361,11 +363,21 @@ manually with CSS. The `[open]` attribute is still set on the
     border-left: var(--border);
   }
 
-  .tabs input:focus + label {
+  /* remove margins from within the aside */
+  .tab > aside > * > :last-child {
+        margin-bottom: 0;
+  }
+
+  .tab > aside > * > :first-child {
+        margin-top: 0;
+  }
+
+  /* style label focus and checked states */
+  .tab > input[name=tab]:focus ~ label {
     outline: var(--focus-outline);
   }
 
-  .tabs input:checked + label {
+  .tab > input[name=tab]:checked ~ label {
     color: var(--color-text);
     border-color: var(--color-border);
     border-bottom-color: white;

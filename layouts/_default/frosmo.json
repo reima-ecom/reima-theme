@@ -1,0 +1,32 @@
+{{- $feed := newScratch -}}
+{{- $feed.Set "products" slice -}}
+{{- $pages := where .Site.RegularPages "Section" "products" -}}
+
+{{- range $pages -}}
+
+{{- $images := slice }}
+{{- range .Resources.ByType "image" }}
+{{- $images = $images | append (.Resize "750x").Permalink }}
+{{- end }}
+
+{{- $priceOrig := .Params.price }}
+{{- with .Params.compareAtPrice }}
+{{- $priceOrig = . }}
+{{- end }}
+
+{{- $feed.Add "products" (dict
+  "id" .File.ContentBaseName
+  "name" .Title
+  "collections" .Params.collections
+  "brand" "Reima"
+  "price" .Params.price
+  "priceOrig" $priceOrig
+  "url" .Permalink
+  "images" $images
+  "available" .Params.available
+  "variants" .Params.variants
+) -}}
+
+{{- end -}}
+
+{{- $feed.Get "products" | jsonify -}}

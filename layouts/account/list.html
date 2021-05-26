@@ -1,0 +1,21 @@
+{{ define "dependencies" }}
+{{ $.Scratch.Add "css-critical" "account/baseof.css" }}
+{{ $.Scratch.Add "css-critical" "account/list.css" }}
+{{ end }}
+
+{{ define "main" }}
+
+<h1>{{ T "Account page title" | default "My Account" }}</h1>
+
+<p>
+  <span bind="name"></span><br>
+  <span bind="email"></span>
+</p>
+
+<h2>{{ T "Account page orders" | default "Orders" }}</h2>
+
+<ul>
+  <li>{{ T "Account page no orders" | default "You haven't placed any orders yet" }}</li>
+</ul>
+
+{{ end }}

@@ -1,5 +1,13 @@
 <section class="product-list{{if .center}} product-list--center{{end}}">
 
+  <!--
+  WARNING!
+
+  if/when updating the logic to get and show products, remember to update the
+  `helpers/get-product-impressions.html` partial, since the logic there is
+  tied to how the products module data is structured
+  -->
+
   <!-- get the collection content page -->
   {{ $collectionPage := . }}
   {{ if not .File }}
