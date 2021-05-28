@@ -126,7 +126,6 @@
   text-align: center;
 }
 
-
 /* TODO: move these `.grid__sidebar` classes to a better place */
 .grid__sidebar > * > hr {
   margin: 0 0 var(--content-padding);
@@ -223,7 +222,6 @@
 .product-filters.active {
   z-index: 2;
 }
-
 
 /* #region filters */
 .filter-list {
