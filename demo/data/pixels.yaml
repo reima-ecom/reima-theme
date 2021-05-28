@@ -17,4 +17,6 @@ taboola_enabled: true
 taboola_account: "1111"
 frosmo_enabled: true
 frosmo_site: reima_headless_dev
+luckyorange_enabled: true
+luckyorange_site: 1111
 aw_property: ''
