@@ -66,13 +66,10 @@ const searchAndRender = async (collection) => {
   const collections = collection.split(",");
 
   // create map of hit handles
-  const hitHandles: { [handle: string]: true } = hits.reduce(
-    (obj, hit) => ({
+  const hitHandles: { [handle: string]: true } = hits.reduce((obj, hit) => ({
       ...obj,
       [hit.objectID]: true,
-    }),
-    {}
-  );
+    }), {});
 
   collections.map((collection) => {
     // render results
@@ -152,11 +149,11 @@ type CollectionSortData = {
     products: {
       edges: {
         node: {
-          handle: string;
-        };
-      }[];
-    };
-  };
+          handle: string
+        }
+      }[]
+    }
+  }
 };
 type CollectionSortErrors = any[];
 type CollectionSortResult = {
@@ -165,13 +162,13 @@ type CollectionSortResult = {
 };
 
 /**
- Get product handles sorted by specified key
- WARNING: Uses global properties from the window object!
- */
+  Get product handles sorted by specified key
+  WARNING: Uses global properties from the window object!
+*/
 const getSortedCollection = async (
   collection: string,
   sortKey: SortKey,
-  reverse = false
+  reverse = false,
 ): Promise<string[]> => {
   const query = `{
     collectionByHandle(handle: "${collection}") {
@@ -193,16 +190,16 @@ const getSortedCollection = async (
         "X-Shopify-Storefront-Access-Token": window.site.shopify.token,
       },
       body: JSON.stringify({ query }),
-    }
+    },
   );
   if (!response.ok) throw new Error("Could not fetch sort order");
-  const { data, errors } = (await response.json()) as CollectionSortResult;
+  const { data, errors } = await response.json() as CollectionSortResult;
   if (errors || !data) {
     console.error(errors);
     throw new Error("Could not fetch sort order");
   }
-  const handles = data.collectionByHandle.products.edges.map(
-    ({ node: { handle } }) => handle
+  const handles = data.collectionByHandle.products.edges.map(({ node: { handle } }) => 
+    handle
   );
   return handles;
 };
