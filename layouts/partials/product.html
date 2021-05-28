@@ -6,6 +6,10 @@
 <div class="product">
   <div>
     {{ $imgs := .Resources.ByType "image" }}
+    {{ if templates.Exists "partials/get-variant-images.html" }}
+    {{ $variantSkus := apply .Params.variants "index" "." "sku" }}
+    {{ $imgs = partial "get-variant-images" $variantSkus }}
+    {{ end }}
     <r-carousel thumbnails="r-thumbnails">
       <div>
         <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
