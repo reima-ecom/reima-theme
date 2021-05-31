@@ -6,8 +6,8 @@
 
 .module-image-links-small > div {
   display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fit, 120px);
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 158px);
   text-align: center;
-  gap: calc(var(--content-padding) / 2);
+  gap: 0.750rem;
 }
