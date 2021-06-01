@@ -10,16 +10,16 @@
     {{ $variantSkus := apply .Params.variants "index" "." "sku" }}
     {{ $imgs = partial "get-variant-images" $variantSkus }}
     {{ end }}
-    <r-carousel thumbnails="r-thumbnails">
+    <r-carousel>
       <div>
         <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
         {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{ with index $imgs 0 }}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-index="0" />
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" />
         {{ end }}
         {{ range $i, $img := after 1 $imgs }}
-        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "index" $i))}}
+        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "path" .Name))}}
         {{ end }}
       </div>
       {{ if gt (len $imgs) 1 }}
@@ -30,7 +30,7 @@
     <r-thumbnails carousel="r-carousel">
       {{ range $i, $img := $imgs }}
       {{ $sizes := "(min-width: 768px) min(6vw, 82px), 15vw" }}
-      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" (dict "index" $i))}}
+      {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" (dict "path" .Name))}}
       {{ end }}
     </r-thumbnails>
   </div>
@@ -44,7 +44,7 @@
 
   <div>
 
-    <form action="/cart" method="POST" data-variant="{{$firstAvailableVariant.id}}" id="product-form">
+    <form action="/cart" method="POST" data-variant="{{$firstAvailableVariant.id}}" id="product-form" data-product-images="r-carousel">
       <!-- TODO: DEPRECATED -->
       <input type="hidden" name="product-id"
         value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
@@ -271,9 +271,20 @@
 {{ with $firstAvailableOptions }}
 {{ $selectedOptions = . }}
 {{ end }}
+<!-- create variants slice with added image path parameter -->
+{{ $variants := slice }}
+{{ range .Params.variants }}
+{{ $variantImage := 0 }}
+{{ if templates.Exists "partials/get-variant-image.html" }}
+{{ $variantImage = partial "get-variant-image" .sku }}
+{{ else }}
+{{ $variantImage = index ($product.Resources.ByType "image") .imageIndex }}
+{{ end }}
+{{ $variants = $variants | append (merge . (dict "imagePath" $variantImage.Name)) }}
+{{ end }}
 <script>
   handle = '{{.File.ContentBaseName}}';
-  variants = {{.Params.variants }};
+  variants = {{$variants}};
   yotpoId = '{{.Params.yotpoId}}';
   selectedOptions = {{ $selectedOptions }};
   priceTemplate = '{{T "Product price" (dict "price" "PRICE")}}';
