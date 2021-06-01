@@ -147,6 +147,21 @@ fields:
   showOnly:
     field: frosmo_enabled
     value: true
+- name: luckyorange_enabled
+  type: boolean
+  label: Lucky Orange
+- name: luckyorange_site
+  type: text
+  config:
+    required: false
+  label: Lucky Orange site id
+  description: This is your Lucky Orange site id, e.g. 305353 for the JP site.<br><br>Supported
+    features:<br>- Recordings<br>- Dynamic Heatmaps<br>- Chat<br>- Conversion Funnels<br>- Form
+    Analytics<br>- Polls<br><br>To track purchases in Shopify, please install Lucky Orange on
+    your Shopify store accordingly.
+  showOnly:
+    field: luckyorange_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
 - demo/data/pixels.yaml
