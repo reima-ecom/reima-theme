@@ -108,6 +108,7 @@ const query = (count: number, cursor?: string) =>
               availableForSale
               compareAtPrice
               price
+              sku
               image { originalSrc }
               selectedOptions {
                 name
