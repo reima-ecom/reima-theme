@@ -147,6 +147,16 @@ fields:
   showOnly:
     field: frosmo_enabled
     value: true
+- name: frosmo_host
+  type: text
+  config:
+    required: false
+  label: Frosmo script hostname
+  description: Insert the hostname that should be used for loading the Frosmo scripts.
+    For example "d22j8luu453d90.cloudfront.net".
+  showOnly:
+    field: frosmo_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
 - demo/data/pixels.yaml
