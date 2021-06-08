@@ -47,9 +47,28 @@ const xmlToImages = (
   })) || [];
 };
 
-const addPath = (dir: string) =>
-  (images: Image[]): ImageWithPath[] =>
-    images.map((img) => ({ ...img, path: join(dir, "imgs", img.name) }));
+const getImagePath = async (
+  dir: string,
+  image: Image,
+  skuIndex: number,
+  logger?: Logger
+): Promise<string> => {
+  let variantDir = `${skuIndex.toString().padStart(2, "0")}-${image.product}`;
+  for await (const dirEntry of Deno.readDir(dir)) {
+    if (dirEntry.name.endsWith(image.product)) {
+      variantDir = dirEntry.name;
+      logger && logger.debug(`Found existing variant images in ${dir}/${variantDir}`);
+    }
+  }
+  return join(dir, variantDir, image.name);
+};
+
+const addPath = (dir: string, skuIndex: number, logger?: Logger) =>
+  (images: Image[]): Promise<ImageWithPath[]> =>
+    Promise.all(images.map(async (img) => ({
+      ...img,
+      path: await getImagePath(dir, img, skuIndex, logger),
+    })));
 
 const removeExistingImages = (logger?: Logger) =>
   async (images: ImageWithPath[]): Promise<ImageWithPath[]> => {
@@ -91,16 +110,16 @@ const skuToMediaBankProductNumber = (sku: ParsedSku) =>
   `${sku.product}-${sku.color}`;
 
 export const downloadSkuImages = (dir: string, logger?: Logger) =>
-  (sku: string) =>
+  (sku: string, index: number) =>
     Promise.resolve(sku)
       .then((sku: string) => {
-        logger && logger.debug(`Downloading images for ${sku}`);
+        logger && logger.info(`Downloading images for ${sku}`);
         return sku;
       })
       .then(parseSku)
       .then(skuToMediaBankProductNumber)
       .then(downloadMediaBankXml)
       .then(xmlToImages)
-      .then(addPath(dir))
+      .then(addPath(dir, index, logger))
       .then(removeExistingImages(logger))
       .then(downloadImagesParallel(logger));

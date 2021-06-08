@@ -6,10 +6,6 @@
 <div class="product">
   <div>
     {{ $imgs := .Resources.ByType "image" }}
-    {{ if templates.Exists "partials/get-variant-images.html" }}
-    {{ $variantSkus := apply .Params.variants "index" "." "sku" }}
-    {{ $imgs = partial "get-variant-images" $variantSkus }}
-    {{ end }}
     <r-carousel>
       <div>
         <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
@@ -270,17 +266,17 @@
 {{ $selectedOptions := dict }}
 {{ with $firstAvailableOptions }}
 {{ $selectedOptions = . }}
+{{ else }}
+{{ $selectedOptions = (index $product.Params.variants 0).options }}
 {{ end }}
 <!-- create variants slice with added image path parameter -->
 {{ $variants := slice }}
 {{ range .Params.variants }}
-{{ $variantImage := 0 }}
-{{ if templates.Exists "partials/get-variant-image.html" }}
-{{ $variantImage = partial "get-variant-image" .sku }}
-{{ else }}
-{{ $variantImage = index ($product.Resources.ByType "image") .imageIndex }}
+{{ $variantImage := "not found" }}
+{{ with $product.Resources.GetMatch (printf "*-%s/*" .productAndColor) }}
+{{ $variantImage = .Name }}
 {{ end }}
-{{ $variants = $variants | append (merge . (dict "imagePath" $variantImage.Name)) }}
+{{ $variants = $variants | append (merge . (dict "imagePath" $variantImage)) }}
 {{ end }}
 <script>
   handle = '{{.File.ContentBaseName}}';

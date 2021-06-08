@@ -72,7 +72,7 @@ export const importProductsAndMediaBankImages = async (
 
   const writeProduct = getProductWriter(outDir, getCurrencyFormatter("en-US"));
 
-  if (limit) logger.info(`Limiting import to ${limit} products`);
+  if (limit) logger.warning(`Limiting import to ${limit} products`);
   let count = 0;
 
   const allProductHandles: string[] = [];
@@ -84,8 +84,9 @@ export const importProductsAndMediaBankImages = async (
 
     const dir = `${outDir}/${productNode.handle}`;
     const downloadImages = downloadSkuImages(dir, logger);
-    for (const { node } of productNode.variants.edges) {
-      await downloadImages(node.sku);
+    for (let i = 0; i < productNode.variants.edges.length; i++) {
+      const v = productNode.variants.edges[i].node;
+      await downloadImages(v.sku, i);
     }
 
     allProductHandles.push(productNode.handle);

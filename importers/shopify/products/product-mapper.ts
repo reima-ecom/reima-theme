@@ -1,4 +1,5 @@
 import type { ProductNode, VariantEdge } from "./product-generator.ts";
+import { parseSku } from "./sku-parser.ts";
 
 export type Product = {
   handle: string;
@@ -38,6 +39,8 @@ type Variant = {
   compareAtPrice?: number;
   compareAtPriceFormatted?: string;
   options: Record<string, string>;
+  sku: string;
+  productAndColor: string;
 };
 
 const transform = <
@@ -112,6 +115,11 @@ const addCollections = (p: ProductNode) => ({
 
 const addFiltering = () => ({ filtering: {} });
 
+const getProductAndColor = (sku: string) => {
+  const parsedSku = parseSku(sku);
+  return `${parsedSku.product}-${parsedSku.color}`;
+};
+
 const addVariants = (formatted: CurrencyFormatter) =>
   (p: ProductNode): Pick<Product, "variants"> => ({
     variants: p.variants.edges.map(({ node: variant }) => {
@@ -133,6 +141,8 @@ const addVariants = (formatted: CurrencyFormatter) =>
           ...obj,
           [opt.name]: opt.value,
         }), {}),
+        sku: variant.sku,
+        productAndColor: getProductAndColor(variant.sku),
       };
     }) || [],
   });
