@@ -273,8 +273,12 @@
 {{ $variants := slice }}
 {{ range .Params.variants }}
 {{ $variantImage := "not found" }}
+<!-- this is for the new shopify importer using the media bank -->
 {{ with $product.Resources.GetMatch (printf "*-%s/*" .productAndColor) }}
 {{ $variantImage = .Name }}
+<!-- this is for the original importer with shopify media -->
+{{ else }}
+{{ $variantImage = (index ($product.Resources.ByType "image") .imageIndex).Name }}
 {{ end }}
 {{ $variants = $variants | append (merge . (dict "imagePath" $variantImage)) }}
 {{ end }}
