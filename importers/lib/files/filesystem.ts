@@ -5,7 +5,7 @@ export type File = {
 
 export type Content = {
   path: string;
-  content: object;
+  content: unknown;
   markdown?: string;
 };
 
@@ -19,18 +19,22 @@ export type ContentAction = {
   content: Content;
 };
 
-export const serializeContent = (stringifier: (obj: object) => string) =>
+export const serializeContent = (
+  stringifier: (obj: unknown) => string,
+) =>
   (obj: Content): File => ({
     path: obj.path,
     data: `---\n${stringifier(obj.content)}\n---\n${obj.markdown || ""}`,
   });
 
-export const deserializeContent = (parser: (str: string) => unknown) =>
+export const deserializeContent = (
+  parser: (str: string) => Record<string, unknown>,
+) =>
   (file: File): Content => {
     const frontmatter = file.data.split("---")[1].trim();
     return {
       path: file.path,
-      content: parser(frontmatter) as object,
+      content: parser(frontmatter),
     };
   };
 
@@ -46,8 +50,8 @@ export const writeFileToDir = (dir: string) =>
 
 export const runContentAction = (
   dir: string,
-  stringifier: (obj: object) => string,
-): (contentAction: ContentAction) => Promise<any> => {
+  stringifier: (obj: unknown) => string,
+): (contentAction: ContentAction) => Promise<unknown> => {
   const writer = writeFileToDir(dir);
   const serializer = serializeContent(stringifier);
   return async (contentAction) => {
@@ -102,7 +106,7 @@ export const readFilesFromDir = (dir: string) =>
         path: file.path.replace(`${dir}/`, ""),
         data: file.data,
       }));
-    } catch (error) {
+    } catch (_error) {
       return [];
     }
   };

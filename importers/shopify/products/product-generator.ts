@@ -1,11 +1,13 @@
-/// <reference path="./domain.d.ts" />
+import type { ShopifyConfig } from "../cmd.ts";
+import type { Logger } from "../deps.ts";
 
-type ProductGeneratorOptions = { shop: string; token: string };
+type ProductGeneratorOptions = ShopifyConfig;
 
 export async function* createProductGenerator(
-  { shop, token }: ProductGeneratorOptions,
+  { store, token }: ProductGeneratorOptions,
+  logger?: Logger,
 ): AsyncGenerator<ProductNode> {
-  const url = `https://${shop}.myshopify.com/api/2021-01/graphql.json`;
+  const url = `https://${store}.myshopify.com/api/2021-01/graphql.json`;
   const headers = {
     "X-Shopify-Storefront-Access-Token": token,
     "Content-Type": "application/graphql",
@@ -29,14 +31,13 @@ export async function* createProductGenerator(
     }
     const { products: { edges: { length } } } = data;
     const elapsed = (Date.now() - startTime);
-    console.log(
-      "Got",
-      length,
-      "products from Shopify, average",
-      Math.round(elapsed / length),
-      "ms per product",
+    logger && logger.info(
+      `Got ${length} products from Shopify, average ${Math.round(elapsed / length)} ms per product`,
     );
     for (const edge of data.products.edges) {
+      if (edge.node.variants.pageInfo.hasNextPage) {
+        throw new Error(`Product ${edge.node.handle} has more variants`);
+      }
       yield edge.node;
       cursor = edge.cursor;
     }
@@ -52,8 +53,7 @@ const getPagination = (count: number, cursor?: string) => {
   return pagination;
 };
 
-const query = (count: number, cursor?: string) =>
-  `
+const query = (count: number, cursor?: string) => `
 {
   products(${getPagination(count, cursor)}) {
     pageInfo {
@@ -76,23 +76,12 @@ const query = (count: number, cursor?: string) =>
           }
         }
         tags
-        images(first: 100) {
-          pageInfo {
-            hasNextPage
-          }
-          edges {
-            node {
-              id
-              originalSrc
-            }
-          }
-        }
         priceRange {
           minVariantPrice { amount, currencyCode }
           maxVariantPrice { amount }
         }
         compareAtPriceRange {
-          maxVariantPrice { amount }
+          maxVariantPrice { amount, currencyCode }
         }
         options {
           name
@@ -109,7 +98,6 @@ const query = (count: number, cursor?: string) =>
               compareAtPrice
               price
               sku
-              image { originalSrc }
               selectedOptions {
                 name
                 value
@@ -123,6 +111,60 @@ const query = (count: number, cursor?: string) =>
 }
 `;
 
+type Decimal = string;
+
+type Money = {
+  amount: Decimal;
+  currencyCode?: string;
+};
+
+export type ProductNode = {
+  id: string;
+  handle: string;
+  title: string;
+  availableForSale: boolean;
+  descriptionHtml: string;
+  description: string;
+  collections: {
+    edges: {
+      node: {
+        handle: string;
+      };
+    }[];
+  };
+  tags: string[];
+  priceRange: {
+    minVariantPrice: Money;
+    maxVariantPrice: Money;
+  };
+  compareAtPriceRange: {
+    maxVariantPrice: Money;
+  };
+  options: {
+    name: string;
+    values: string[];
+  }[];
+  variants: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
+    edges: VariantEdge[];
+  };
+};
+
+export type VariantEdge = {
+  node: {
+    id: string;
+    availableForSale: boolean;
+    compareAtPrice: string;
+    price: string;
+    sku: string;
+    selectedOptions: {
+      name: string;
+      value: string;
+    }[];
+  };
+};
 type ProductQueryResult = {
   data?: {
     products: {

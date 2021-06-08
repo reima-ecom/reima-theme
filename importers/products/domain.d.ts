@@ -18,6 +18,9 @@ type ProductNode = {
     pageInfo: {
       hasNextPage: boolean;
     };
+    edges: {
+      node: VariantNode;
+    }[];
   };
   images: {
     pageInfo: {
@@ -28,6 +31,8 @@ type ProductNode = {
     }[];
   };
 };
+
+type VariantNode = any;
 
 type ProductImageNode = {
   originalSrc: string;
