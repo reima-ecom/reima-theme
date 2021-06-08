@@ -16,7 +16,7 @@ export type Product = {
   variants: Variant[];
   description: string;
   descriptionHtml: string;
-  yotpoId?: string;
+  yotpoId: string;
 };
 
 type Option = {
@@ -62,6 +62,9 @@ const transform = <
     },
   });
 
+const convertToLegacyId = (id: string): string =>
+  atob(id).split("/").pop() as string;
+
 const addScalars = (p: ProductNode) => ({
   handle: p.handle,
   title: p.title,
@@ -69,6 +72,7 @@ const addScalars = (p: ProductNode) => ({
   description: p.description,
   descriptionHtml: p.descriptionHtml,
   tags: p.tags,
+  yotpoId: convertToLegacyId(p.id),
 });
 
 const addMinPriceAsPrice = (p: ProductNode) => {

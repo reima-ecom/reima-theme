@@ -1,9 +1,13 @@
-type ProductGeneratorOptions = { shop: string; token: string };
+import type { ShopifyConfig } from "../cmd.ts";
+import type { Logger } from "../deps.ts";
+
+type ProductGeneratorOptions = ShopifyConfig;
 
 export async function* createProductGenerator(
-  { shop, token }: ProductGeneratorOptions,
+  { store, token }: ProductGeneratorOptions,
+  logger?: Logger,
 ): AsyncGenerator<ProductNode> {
-  const url = `https://${shop}.myshopify.com/api/2021-01/graphql.json`;
+  const url = `https://${store}.myshopify.com/api/2021-01/graphql.json`;
   const headers = {
     "X-Shopify-Storefront-Access-Token": token,
     "Content-Type": "application/graphql",
@@ -27,12 +31,8 @@ export async function* createProductGenerator(
     }
     const { products: { edges: { length } } } = data;
     const elapsed = (Date.now() - startTime);
-    console.log(
-      "Got",
-      length,
-      "products from Shopify, average",
-      Math.round(elapsed / length),
-      "ms per product",
+    logger && logger.info(
+      `Got ${length} products from Shopify, average ${Math.round(elapsed / length)} ms per product`,
     );
     for (const edge of data.products.edges) {
       if (edge.node.variants.pageInfo.hasNextPage) {

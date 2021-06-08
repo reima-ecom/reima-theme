@@ -1,12 +1,12 @@
-import {
-  parse,
-  stringify,
-} from "https://deno.land/std@0.97.0/encoding/yaml.ts";
+import { join } from "https://deno.land/std@0.97.0/path/mod.ts";
+import { stringify } from "https://deno.land/std@0.97.0/encoding/yaml.ts";
 import {
   createProductGenerator,
   ProductNode,
 } from "./products/product-generator.ts";
 import { Content, serializeContent, writeFileToDir } from "./deps.ts";
+import type { Logger } from "./deps.ts";
+import type { ShopifyConfig } from "./cmd.ts";
 import {
   CurrencyFormatter,
   mapProduct,
@@ -37,24 +37,6 @@ const getProductWriter = (
       .then(writeFileToDir(outDir));
 };
 
-type HugoConfig = {
-  params?: {
-    public?: {
-      shopify?: {
-        store?: string;
-        token?: string;
-      };
-    };
-  };
-} | null;
-
-const getShopConfig = (hugoConfigYaml: string) => {
-  const config = parse(hugoConfigYaml) as HugoConfig;
-  const { store, token } = config?.params?.public?.shopify || {};
-  if (!store || !token) throw new Error("No shop and/or token found in config");
-  return { shop: store, token };
-};
-
 const getCurrencyFormatter = (locale: string): CurrencyFormatter =>
   (currency: string) =>
     (value: number | string) => {
@@ -68,22 +50,56 @@ const getCurrencyFormatter = (locale: string): CurrencyFormatter =>
       return formatter.format(valueNumber);
     };
 
+const deleteNonExistingSubdirs = (logger: Logger) =>
+  async (dir: string, subdirs: string[]) => {
+    for await (const dirEntry of Deno.readDir(dir)) {
+      if (!subdirs.includes(dirEntry.name)) {
+        logger.debug(
+          `Deleting subdirectory ${dirEntry.name} since it wasn't found in array`,
+        );
+        await Deno.remove(join(dir, dirEntry.name), { recursive: true });
+      }
+    }
+  };
+
 export const importProductsAndMediaBankImages = async (
+  logger: Logger,
   outDir: string,
-  hugoConfigYaml: string,
+  shopifyConfig: ShopifyConfig,
   limit?: number,
 ) => {
+  logger.info(`Getting products from Shopify store ${shopifyConfig.store}`);
+
   const writeProduct = getProductWriter(outDir, getCurrencyFormatter("en-US"));
-  const shopConfig = getShopConfig(hugoConfigYaml);
+
+  if (limit) logger.info(`Limiting import to ${limit} products`);
   let count = 0;
-  for await (const productNode of createProductGenerator(shopConfig)) {
-    count++;
-    const dir = `${outDir}/${productNode.handle}/imgs`;
+
+  const allProductHandles: string[] = [];
+
+  for await (
+    const productNode of createProductGenerator(shopifyConfig, logger)
+  ) {
     await writeProduct(productNode);
-    const downloadImages = downloadSkuImages(dir);
+
+    const dir = `${outDir}/${productNode.handle}`;
+    const downloadImages = downloadSkuImages(dir, logger);
     for (const { node } of productNode.variants.edges) {
       await downloadImages(node.sku);
     }
+
+    allProductHandles.push(productNode.handle);
+
+    count++;
     if (limit && count >= limit) break;
   }
+
+  if (limit) {
+    logger.warning(
+      "Deleting product subdirectories even though limited number of products fetched",
+    );
+  }
+  await deleteNonExistingSubdirs(logger)(outDir, allProductHandles);
+
+  logger.info("Finished getting products and media");
 };
