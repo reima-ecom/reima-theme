@@ -17,8 +17,8 @@
   {{ with $collectionPage }}
 
   <!-- get collection child product pages -->
-  {{ $productPages := .Pages }}
-  {{ $product_count := len .Pages }}
+  {{ $productPages := .RegularPages }}
+  {{ $product_count := len .RegularPages }}
   <!-- limit results if set -->
   {{ with $.limit }}
   {{ $productPages = $productPages | first . }}
@@ -35,7 +35,7 @@
   </div>
   {{ end }}
 
-  <ul>
+  <ul data-collection="{{path.Base .Dir}}">
     <!-- loop through product pages -->
     {{ range $productPages }}
     {{ $link := partial "link" .RelPermalink }}

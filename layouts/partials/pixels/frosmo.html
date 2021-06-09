@@ -1,8 +1,8 @@
 {{ with site.Data.pixels }}
 {{ if .frosmo_enabled }}
 
-<script uses-cookies type="text/javascript" charset="utf-8" src="//d2wzl9lnvjz3bh.cloudfront.net/frosmo.easy.js"></script>
-<script uses-cookies type="text/javascript" charset="utf-8" src="//d2wzl9lnvjz3bh.cloudfront.net/sites/{{.frosmo_site}}.js"></script>
+<script uses-cookies type="text/javascript" charset="utf-8" src="//{{.frosmo_host}}/frosmo.easy.js"></script>
+<script uses-cookies type="text/javascript" charset="utf-8" src="//{{.frosmo_host}}/sites/{{.frosmo_site}}.js"></script>
 <script uses-cookies>
   window.dataLayer = window.dataLayer || [];
 </script>

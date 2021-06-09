@@ -15,6 +15,7 @@ jobs:
           - reima-ecom/reima-us
           - reima-ecom/reima-canada
           - reima-ecom/reima-jp
+          - reima-ecom/reima-austria
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch

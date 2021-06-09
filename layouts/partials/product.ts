@@ -1,6 +1,5 @@
-import RCart from "./elements/r-cart.ts";
-import RCarousel from "./elements/r-carousel.ts";
-import RThumbnails from "./elements/r-thumbnails.ts";
+import type RCart from "./elements/r-cart.ts";
+import type RCarousel from "./elements/r-carousel.ts";
 
 declare global {
   interface Window {
@@ -19,7 +18,7 @@ type Variant = {
   priceFormatted: string;
   compareAtPrice: number;
   compareAtPriceFormatted: string;
-  imageIndex: number;
+  imagePath: string;
   options: Options;
 };
 
@@ -62,10 +61,8 @@ const getVariant = (options: Options) =>
   });
 
 const inputChange = (e: Event) => {
+  const previousVariant = getVariant(selectedOptions);
   const { name, value } = e.currentTarget as HTMLInputElement;
-  const isColor = (e.currentTarget as HTMLElement).closest(
-    ".selections--Color",
-  );
   selectedOptions[name] = value;
   // check if available
   const variant = getVariant(selectedOptions);
@@ -106,16 +103,19 @@ const inputChange = (e: Event) => {
       variant.compareAtPriceFormatted
         ? renderPrice(variant.compareAtPriceFormatted)
         : "";
-    // scroll to variant image if color change
-    if (isColor) {
-      document.querySelector<RCarousel>("r-carousel")!.scrollToImage(
-        variant.imageIndex,
-      );
-      document.querySelector<RThumbnails>("r-thumbnails")!.setActiveThumbnail(
-        variant.imageIndex,
-        true,
-      );
+    // change product image if needed
+    if (previousVariant && previousVariant.imagePath !== variant.imagePath) {
+      const carouselSelector = form.dataset.productImages;
+      if (!carouselSelector) throw new Error('No carousel specified');
+      const carousel = document.querySelector<RCarousel>(carouselSelector);
+      if (!carousel) throw new Error('Carousel not found');
+      carousel.scrollToImage(variant.imagePath);
     }
+    // send variant change event (for analytics)
+    document.dispatchEvent(new CustomEvent("variant-changed", {
+      detail: variant,
+      bubbles: true,
+    }));
   }
 };
 

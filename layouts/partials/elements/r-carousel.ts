@@ -1,8 +1,6 @@
 /// <reference lib="dom" />
 
-import RThumbnails from "./r-thumbnails.ts";
-
-const polyfill = async () => {
+const polyfill = () => {
   if (
     !("scrollBehavior" in document.documentElement.style) ||
     !window.IntersectionObserver
@@ -17,7 +15,7 @@ const polyfill = async () => {
       document.head.appendChild(script);
     });
   }
-  // implicit void return
+  return Promise.resolve();
 };
 
 const scrollNext = (element: HTMLElement) => {
@@ -29,35 +27,29 @@ const scrollNext = (element: HTMLElement) => {
 };
 
 export default class RCarousel extends HTMLElement {
+  /** Overflowing and scrollable element with "slides" */
   slider!: HTMLElement;
-  autoScroller: number = 0;
-  thumbnailsElement!: RThumbnails;
 
-  get autoscroll() {
-    return this.hasAttribute("autoscroll");
+  get lastVariantImagePath() {
+    return this.dataset.lastVariantImagePath || "";
   }
 
-  get thumbnails() {
-    return this.getAttribute("thumbnails");
+  set lastVariantImagePath(path: string) {
+    this.dataset.lastVariantImagePath = path;
   }
 
-  scrollToImage(imgIndex: number) {
+  scrollToImage(path: string) {
     const imageElement = this.slider.querySelector<HTMLImageElement>(
-      `img:nth-of-type(${imgIndex + 1})`,
+      `img[data-path="${path}"]`,
     )!;
     const scrollPositionX = imageElement.offsetLeft;
     this.slider.scrollTo({ left: scrollPositionX, behavior: "smooth" });
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     this.slider = this.firstElementChild as HTMLElement;
 
-    if (this.autoscroll) {
-      this.autoScroller = window.setInterval(() => {
-        scrollNext(this.slider);
-      }, 10000);
-    }
-
+    // add event listeners for next and prev buttons
     const carouselButtons = this.querySelectorAll("button[next], button[prev]");
     if (carouselButtons) {
       const btnClick = (e: Event) => {
@@ -77,36 +69,31 @@ export default class RCarousel extends HTMLElement {
         } else if (btn.hasAttribute("next")) {
           scrollNext(this.slider);
         }
-        if (this.autoScroller) window.clearInterval(this.autoScroller);
       };
       carouselButtons.forEach((element) => {
         element.addEventListener("click", btnClick);
       });
     }
 
-    if (this.thumbnails) {
-      this.thumbnailsElement = document.querySelector<RThumbnails>(
-        this.thumbnails,
-      )!;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const e = entries[0];
-          if (e.isIntersecting) {
-            const index = Number.parseInt((e.target as HTMLElement).dataset.index!);
-            this.thumbnailsElement.setActiveThumbnail(index);
-          }
-        },
-        {
-          root: this.slider,
-          threshold: 0.6,
-        },
-      );
-
-      this.querySelectorAll(":scope > div > *").forEach(async (el) => {
-        observer.observe(el);
-      });
-    }
+    // create observer that fires image change event
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (e.isIntersecting) {
+          const path = (e.target as HTMLElement).dataset.path!;
+          this.dispatchEvent(
+            new CustomEvent("image-changed", { detail: { path } }),
+          );
+        }
+      },
+      {
+        root: this.slider,
+        threshold: 0.6,
+      },
+    );
+    this.querySelectorAll(":scope > div > *").forEach((el) => {
+      observer.observe(el);
+    });
   }
 }
 

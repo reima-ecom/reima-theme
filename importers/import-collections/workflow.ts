@@ -106,8 +106,8 @@ export default async function syncCollections(
   shopifyShop: string,
   shopifyBasicAuth: string,
   collectionsDir: string,
-  stringifier: (obj: object) => string,
-  parser: (str: string) => unknown,
+  stringifier: (obj: any) => string,
+  parser: (str: string) => any,
 ) {
   // set up dependencies
   const adminQueryable = createAdminQueryable(
