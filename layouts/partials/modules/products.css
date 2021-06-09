@@ -95,7 +95,7 @@
 }
 
 .product-list__swatch--see-more {
-  background-color: white;
+  background-color: var(--color-bg);
   color: var(--color-text);
   border: var(--border);
   font-size: 1.5rem;
@@ -104,8 +104,8 @@
 }
 
 .product-list__swatch--see-more:hover {
-  background-color: var(--color-cta-hover);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
 }
 
 .product-list__rating {
@@ -117,7 +117,7 @@
 }
 
 .product-list__rating span + span {
-  color: var(--color-gray);
+  color: var(--color-text-muted);
 }
 
 /* #region sold out tag and muting */
@@ -132,8 +132,8 @@
   padding: 0.25rem 0.5rem;
   top: 0;
   right: 0;
-  background: var(--color-fg);
-  color: white;
+  background: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -145,7 +145,7 @@
   padding: 0.25rem 0.5rem;
   top: 0;
   left: 0;
-  background: var(--color-gray-lighter);
+  background: var(--color-bg-accent);
   font-size: 0.75rem;
   text-transform: uppercase;
 }

@@ -23,12 +23,14 @@
       <button next></button>
       {{ end }}
     </r-carousel>
+    {{ if gt (len $imgs) 1 }}
     <r-thumbnails carousel="r-carousel">
       {{ range $i, $img := $imgs }}
       {{ $sizes := "(min-width: 768px) min(6vw, 82px), 15vw" }}
       {{partial "image" (dict "image" . "widths" "100,200" "sizes" $sizes "dataset" (dict "path" .Name))}}
       {{ end }}
     </r-thumbnails>
+    {{ end }}
   </div>
 
   <!-- find first available variant options -->
@@ -64,6 +66,8 @@
 
       <hr>
 
+      <!-- only render selections if more than one variant -->
+      {{ if gt (len $product.Params.variants) 1 }}
       {{ range $product.Params.options }}
       {{ $name := .name }}
       {{ $nameEnglish := $name }}
@@ -102,6 +106,7 @@
           {{ end }}
         </ul>
       </fieldset>
+      {{ end }}
       {{ end }}
 
       <div>
@@ -177,6 +182,8 @@
   </div>
 </div>
 
+<!-- only show tabs if we have product details or reviews are enabled -->
+{{ if or (after 1 $productFields) $settings.reviews }}
 <section class="tabs">
   {{ range after 1 $productFields }}
   <div class="tab">
@@ -262,6 +269,7 @@
   </div>
   {{ end }}
 </section>
+{{ end }}
 
 {{ $selectedOptions := dict }}
 {{ with $firstAvailableOptions }}

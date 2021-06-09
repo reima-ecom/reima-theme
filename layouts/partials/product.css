@@ -135,9 +135,9 @@
 }
 
 .selections input:checked + label {
-  background-color: var(--color-fg);
-  color: var(--color-bg);
-  border-color: var(--color-fg);
+  background-color: var(--color-bg-inverted);
+  border-color: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
   z-index: 1;
 }
 
@@ -325,10 +325,10 @@ manually with CSS. The `[open]` attribute is still set on the
 
   .tab > label {
     display: block;
-    border: 1px solid var(--color-gray-light);
+    border: 1px solid var(--color-border);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    color: var(--color-border);
+    color: var(--color-text-muted);
     margin: 0 0.25rem -1px;
     padding: 0.8125rem;
     font-size: 0.875rem;
@@ -404,7 +404,7 @@ manually with CSS. The `[open]` attribute is still set on the
   line-height: 1;
   justify-content: center;
   color: white;
-  background: var(--color-reima-red);
+  background: var(--color-primary);
   border-radius: 50%;
   font-size: 0.75em;
   align-items: center;
@@ -413,7 +413,7 @@ manually with CSS. The `[open]` attribute is still set on the
 }
 
 .features > div > a:hover {
-  color: var(--color-reima-red);
+  color: var(--color-link);
 }
 
 .features > svg {
@@ -426,7 +426,7 @@ manually with CSS. The `[open]` attribute is still set on the
 
 .features > svg,
 .features > svg path {
-  fill: var(--color-input-border) !important;
+  fill: var(--color-text-muted) !important;
 }
 
 .features svg.active,

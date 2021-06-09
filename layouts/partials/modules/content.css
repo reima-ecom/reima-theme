@@ -4,3 +4,12 @@
   max-width: 720px;
   font-size: var(--text-font-size);
 }
+
+.module-content th {
+  text-align: left;
+}
+
+.module-content th + th,
+.module-content td + td {
+  padding-left: 0.5rem;
+}

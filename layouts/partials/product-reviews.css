@@ -62,7 +62,7 @@
 
 .reviews .stars input:checked + label::before,
 .reviews .stars input:checked ~ label::before {
-  color: var(--color-reima-red);
+  color: var(--color-primary);
 }
 
 .reviews div .stars:hover label::before {
@@ -71,7 +71,7 @@
 
 .reviews div .stars label:hover::before,
 .reviews .stars label:hover ~ label::before {
-  color: var(--color-reima-red);
+  color: var(--color-primary);
 }
 
 .reviews blockquote {

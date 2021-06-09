@@ -5,8 +5,8 @@ input[type="checkbox"][id|="open"] {
 }
 
 .announcement {
-  background-color: var(--color-fg);
-  color: white;
+  background-color: var(--color-bg-inverted);
+  color: var(--color-text-inverted);
   text-align: center;
   font-size: var(--text-font-size-sm);
   padding: 0.5rem
@@ -19,7 +19,7 @@ input[type="checkbox"][id|="open"] {
 }
 
 .announcement a:hover {
-  color: var(--color-reima-red);
+  color: var(--color-link-inverted);
 }
 
 body > header {
@@ -97,7 +97,7 @@ body > header .icons {
 }
 
 .icon:hover {
-  fill: var(--color-reima-red);
+  fill: var(--color-primary);
 }
 
 .icon svg {
@@ -183,7 +183,7 @@ body > header .icons {
 }
 
 #menu a:hover {
-  color: var(--color-reima-red);
+  color: var(--color-link);
 }
 
 @media (min-width: 1024px) {
@@ -255,7 +255,7 @@ body > header .icons {
   }
 
   #menu li li:hover > label {
-    fill: var(--color-reima-red);
+    fill: var(--color-link);
   }
 
   #menu li li a {

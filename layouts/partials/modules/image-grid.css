@@ -168,13 +168,13 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: var(--color-gray-lighter);
+  background: var(--color-bg-accent);
   padding: 0 0.5rem;
 }
 
 .image-grid__last-fill--links-cta a {
-  background: var(--color-reima-red);
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
   border-radius: 2px;
   cursor: pointer;
   display: inline-block;
@@ -186,6 +186,6 @@
 
 .image-grid__last-fill--links-cta a:hover,
 .image-grid__last-fill--links-cta a:focus {
-  background: var(--color-cta-hover);
-  color: white;
+  background: var(--color-primary-accent);
+  color: var(--color-text-on-primary);
 }

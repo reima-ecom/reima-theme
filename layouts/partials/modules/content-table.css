@@ -18,7 +18,7 @@
 }
 
 .content-table table tr:nth-child(even):not(:first-child) {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--color-bg-accent);
 }
 
 .content-table th,
@@ -30,8 +30,8 @@
 
 .content-table table thead th,
 .content-table table thead td {
-  background-color: var(--color-fg);
-  border-color: var(--color-gray-dark);
+  background-color: var(--color-bg-inverted);
+  border-color: var(--color-bg-inverted-accent);
   color: white;
 }
 

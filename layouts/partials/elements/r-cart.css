@@ -21,7 +21,7 @@ r-cart .icon span {
   transition: all 0.2s ease-in-out;
   transition-property: width, height;
   display: block;
-  background: var(--color-reima-red);
+  background: var(--color-primary);
   border-radius: 50%;
   position: absolute;
   color: transparent;

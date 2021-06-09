@@ -3,7 +3,8 @@
   position: fixed;
   position: sticky;
   bottom: 0;
-  background: var(--color-reima-deep-yellow);
+  background: var(--color-secondary);
+  color: var(--color-text-on-secondary);
   contain: layout;
   padding: 0 1rem;
   padding: 0 max(var(--content-padding), (100% - var(--content-max-width))/2);

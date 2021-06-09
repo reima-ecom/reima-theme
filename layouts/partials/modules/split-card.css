@@ -44,7 +44,7 @@
 }
 
 .split-card--bg-gray {
-  background: var(--color-gray-lighter);
+  background: var(--color-bg-accent);
 }
 
 .split-card--image-right img {

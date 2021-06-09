@@ -10,7 +10,7 @@
 
 .hero--yellow-emphasis em {
   font-style: normal;
-  color: var(--color-reima-deep-yellow);
+  color: var(--color-text-emphasis-inverted);
 }
 
 .hero--narrow {
@@ -83,8 +83,8 @@
 }
 
 .hero--overlay-mobile.hero--overlay-invert {
-  --color-text: white;
-  --color-bg: var(--color-fg);
+  --color-text: var(--color-text-inverted);
+  --color-bg: var(--color-bg-inverted);
 }
 
 .hero__video-container {
@@ -194,8 +194,8 @@
   }
 
   .hero--overlay-invert {
-    --color-text: white;
-    --color-bg: var(--color-fg);
+    --color-text: var(--color-text-inverted);
+    --color-bg: var(--color-bg-inverted);
     --overlay-bg: rgba(0,0,0,0.4);
   }
 
