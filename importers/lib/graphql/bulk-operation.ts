@@ -1,8 +1,8 @@
 import { GraphQLQueryable } from "./graphql.ts";
 import {
-  createBulkQuery,
   BulkQuery,
   BulkQueryResponse,
+  createBulkQuery,
   CurrentBulkOperation,
   currentBulkOperation,
 } from "./bulk-queries.ts";
@@ -47,12 +47,15 @@ export const getBulkOperationUrlWhenReady = async (
   }, 15000);
 
   for await (const result of bulkOperationYieldable) {
-    const { currentBulkOperation: { status, url } } = result;
+    const { currentBulkOperation: { status, url, errorCode } } = result;
     currentStatus = status;
     if (status === "COMPLETED") {
       // clear logging interval
       clearInterval(statusLoggerIntervalId);
       return url;
+    }
+    if (status === "FAILED") {
+      throw new Error(`Bulk query failed with "${errorCode}"`);
     }
   }
 
