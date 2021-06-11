@@ -26,6 +26,10 @@ export default class RCart extends HTMLElement {
     return ["open"];
   }
 
+  get url() {
+    return this.getAttribute("url") || "/cart";
+  }
+
   get loading() {
     return this.hasAttribute("loading");
   }
@@ -110,7 +114,7 @@ export default class RCart extends HTMLElement {
   }
 
   async addVariant(variantId: string) {
-    const response = await fetch(`/cart?add=${variantId}`, {
+    const response = await fetch(`${this.url}?add=${variantId}`, {
       headers: {
         "Accept": "application/json",
       },
@@ -151,7 +155,7 @@ export default class RCart extends HTMLElement {
       itemId: inputElement.dataset.id!,
       quantity: Number.parseInt(inputElement.value, 10),
     };
-    const response = await fetch("/cart", {
+    const response = await fetch(this.url, {
       method: "PUT",
       body: JSON.stringify(updates),
       headers: {
@@ -163,7 +167,7 @@ export default class RCart extends HTMLElement {
   }
 
   async loadCheckout() {
-    const response = await fetch("/cart", {
+    const response = await fetch(this.url, {
       headers: {
         "Accept": "application/json",
       },
@@ -177,7 +181,7 @@ export default class RCart extends HTMLElement {
     this.loading = false;
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     this.items = this.querySelector<HTMLElement>(".items")!;
     this.checkout = this.querySelector<HTMLAnchorElement>(".checkout")!;
     this.subtotal = this.querySelector<HTMLElement>(".summary .price")!;

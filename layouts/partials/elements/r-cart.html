@@ -1,7 +1,7 @@
 {{- partial "check-deps" (slice "css-base:partials/elements/r-cart.css" $) -}}
 {{ $.Scratch.Add "ts" "partials/elements/r-cart.ts" }}
 
-<r-cart loading>
+<r-cart loading url="{{site.BaseURL}}cart">
   <!-- cart icon button -->
   <a class="icon" href="/cart">
     <svg viewBox="0 0 32 32">
