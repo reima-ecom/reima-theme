@@ -16,6 +16,7 @@ jobs:
           - reima-ecom/reima-canada
           - reima-ecom/reima-jp
           - reima-ecom/reima-austria
+          - reima-ecom/fbb-theme
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
