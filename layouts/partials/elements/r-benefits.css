@@ -3,10 +3,21 @@ r-benefits {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding-left: var(--content-padding);
-  padding-right: var(--content-padding);
+  padding: 1.5rem var(--content-padding);
+  position: relative;
   margin: auto;
   max-width: var(--block-width);
+}
+
+r-benefits::before {
+  background-color: rgba(0,0,0,0.2);
+  content: '';
+  height: 1px;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 0;
+  width: 100vw;
 }
 
 r-benefits .benefit {
@@ -26,6 +37,8 @@ r-benefits .benefit {
 
 r-benefits .benefit:last-child {
   border-bottom: 0 none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 r-benefits .benefit:hover {
@@ -50,20 +63,7 @@ r-benefits .icon {
 
 @media (min-width: 992px) {
   r-benefits {
-    padding: 1.5rem 0;
     flex-direction: row;
-    position: relative;
-  }
-
-  r-benefits::before {
-    background-color: rgba(0,0,0,0.2);
-    content: '';
-    height: 1px;
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
-    top: 0;
-    width: 100vw;
   }
 
   r-benefits .benefit {
@@ -71,6 +71,8 @@ r-benefits .icon {
     flex: 1 0 33%;
     max-width: 600px;
     padding-right: var(--content-padding);
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   r-benefits .icon {
