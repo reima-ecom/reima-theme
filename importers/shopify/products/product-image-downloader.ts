@@ -51,13 +51,14 @@ const getImagePath = async (
   dir: string,
   image: Image,
   skuIndex: number,
-  logger?: Logger
+  logger?: Logger,
 ): Promise<string> => {
   let variantDir = `${skuIndex.toString().padStart(2, "0")}-${image.product}`;
   for await (const dirEntry of Deno.readDir(dir)) {
     if (dirEntry.name.endsWith(image.product)) {
       variantDir = dirEntry.name;
-      logger && logger.debug(`Found existing variant images in ${dir}/${variantDir}`);
+      logger &&
+        logger.debug(`Found existing variant images in ${dir}/${variantDir}`);
     }
   }
   return join(dir, variantDir, image.name);
@@ -94,9 +95,26 @@ const downloadImagesParallel = (logger?: Logger) =>
     }
     logger &&
       logger.debug(`Downloading ${images.length} for ${images[0].product}`);
+    const sleep = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    const fetchImage = (image: ImageWithPath): Promise<Response> => {
+      return fetch(image.url);
+    };
     await Promise.all(
       images.map(async (image) => {
-        const data = (await fetch(image.url)).arrayBuffer();
+        let imageResponse: Response;
+        try {
+          imageResponse = await fetchImage(image);
+        } catch (_) {
+          // if fetching failed, just retry after 1 sec, the next error will throw
+          logger &&
+            logger.warning(
+              `Fetching image ${image.url} failed, retrying in 1 second...`,
+            );
+          await sleep(1000);
+          imageResponse = await fetchImage(image);
+        }
+        const data = imageResponse.arrayBuffer();
         await ensureDir(image.path);
         return Deno.writeFile(
           image.path,
