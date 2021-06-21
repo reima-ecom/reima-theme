@@ -151,5 +151,40 @@ fields:
     description: Links to show in the banner, below the buttons. You should at least
       include a link to the "privacy policy" or similar page.
   label: CCPA notice
+- type: boolean
+  name: benefitsEnabled
+  label: Benefits Enabled
+- name: benefits
+  type: field_group
+  config: {}
+  fields:
+    - name: links
+      type: field_group_list
+      fields:
+        - name: icon
+          type: file
+          label: Icon
+        - name: heading
+          type: text
+          config:
+            required: false
+          label: Heading
+        - name: text
+          type: text
+          config:
+            required: false
+          label: Text
+        - name: url
+          type: text
+          config:
+            required: false
+          label: Url
+      config:
+        min: 1
+        max: 3
+        labelField: text
+      label: Links
+      description: Links to show in the benefits section.
+  label: Benefits
 pages:
 - demo/data/announcements.json
