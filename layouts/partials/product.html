@@ -280,14 +280,20 @@
 <!-- create variants slice with added image path parameter -->
 {{ $variants := slice }}
 {{ range .Params.variants }}
-{{ $variantImage := "not found" }}
+{{ $variantImage := "" }}
 <!-- this is for the new shopify importer using the media bank -->
 {{ with $product.Resources.GetMatch (printf "*-%s/*" .productAndColor) }}
 {{ $variantImage = .Name }}
 <!-- this is for the original importer with shopify media -->
 {{ else }}
-{{ $variantImage = (index ($product.Resources.ByType "image") .imageIndex).Name }}
+{{ if .imageIndex }}
+{{ $imageIndex := .imageIndex }}
+{{ with $product.Resources.ByType "image" }}
+{{ $variantImage = (index . $imageIndex).Name }}
 {{ end }}
+{{ end }}
+{{ end }}
+<!-- add the variant to the list, with image -->
 {{ $variants = $variants | append (merge . (dict "imagePath" $variantImage)) }}
 {{ end }}
 <script>
