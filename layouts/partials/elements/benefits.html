@@ -1,7 +1,7 @@
 {{ if .benefitsEnabled }}
 
 {{ with .benefits }}
-<r-benefits>
+<section class="benefits">
   {{ range .links }}
   <a href="{{.url}}" class="benefit">
     <div class="icon">
@@ -19,11 +19,11 @@
       {{ end }}
       {{ end }}
     </div>
-    <strong class="heading">{{.heading}}</strong>
+    <h3 class="heading">{{.heading}}</h3>
     <span class="cta">{{.text}}</span>
   </a>
   {{ end }}
-</r-benefits>
+</section>
 {{ else }}
 {{ warnf "Benefits not found for %s" site.Language }}
 {{ end }}

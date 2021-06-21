@@ -42,7 +42,7 @@
   {{ end }}
   <!-- if benefits enabled, add that css and add ts here as well -->
   {{ if $announcements.benefitsEnabled }}
-  {{ $.Scratch.Add "css-base" "partials/elements/r-benefits.css" }}
+  {{ $.Scratch.Add "css-base" "partials/elements/benefits.css" }}
   {{ end }}
 
   <!-- this is a hook for pages to add css to the above lists -->
@@ -167,7 +167,7 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{partial "elements/r-newsletter" $announcements}}
-  {{partial "elements/r-benefits" $announcements}}
+  {{partial "elements/benefits" $announcements}}
   <footer>
     {{ $menus := partial "helpers/get-locale-data" "menus" }}
     {{ partialCached "menu" (dict "menu" $menus.footer "root" $) "footer" }}
