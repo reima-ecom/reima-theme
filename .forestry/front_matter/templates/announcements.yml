@@ -157,6 +157,9 @@ fields:
 - name: benefits
   type: field_group
   config: {}
+  showOnly:
+    field: benefitsEnabled
+    value: true
   fields:
     - name: links
       type: field_group_list
