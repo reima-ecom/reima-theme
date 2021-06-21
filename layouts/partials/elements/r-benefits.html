@@ -1,8 +1,6 @@
 {{ if .benefitsEnabled }}
 
-{{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
-
-{{ with $announcements.benefits }}
+{{ with .benefits }}
 <r-benefits>
   {{ range .links }}
   <a href="{{.url}}" class="benefit">
