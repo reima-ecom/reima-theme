@@ -1,0 +1,31 @@
+{{ if .benefitsEnabled }}
+
+{{ with .benefits }}
+<section class="benefits">
+  {{ range .links }}
+  <a href="{{.url}}" class="benefit">
+    <div class="icon">
+      {{ if .icon }}
+      {{ $img := partial "helpers/get-image" .icon }}
+      <!-- check if this is png or jpeg and resize if it is -->
+      {{ if or (eq $img.MediaType.SubType "png") (eq $img.MediaType.SubType "jpeg")}}
+      {{ $onex := $img.Resize (printf "%dx" .width) }}
+      {{ $twox := $img.Resize (printf "%dx" (mul .width 2)) }}
+      <img srcset="{{$onex.RelPermalink}} 1x, {{$twox.RelPermalink}} 2x" src="{{$onex.RelPermalink}}" alt=""
+           width="{{$onex.Width}}" height="{{$onex.Height}}">
+      <!-- if some other type (like svg), just output directly -->
+      {{ else }}
+      <img src="{{$img.RelPermalink}}" alt="" width="{{.width}}"{{with .height}} height="{{.}}"{{end}}>
+      {{ end }}
+      {{ end }}
+    </div>
+    <h3 class="heading">{{.heading}}</h3>
+    <span class="cta">{{.text}}</span>
+  </a>
+  {{ end }}
+</section>
+{{ else }}
+{{ warnf "Benefits not found for %s" site.Language }}
+{{ end }}
+
+{{ end }}
