@@ -172,5 +172,18 @@ fields:
   showOnly:
     field: luckyorange_enabled
     value: true
+- name: gtm_enabled
+  type: boolean
+  label: Google Tag Manager
+  description: Google Tag Manager delivers easily integrated tag management solutions.
+- type: text
+  name: gtm_property
+  label: GTM tracking id
+  showOnly:
+    field: gtm_enabled
+    value: true
+  config:
+    required: true
+  description: Google Tag Manager property / tracking id is the one starting with "GTM-".
 pages:
 - demo/data/pixels.yaml

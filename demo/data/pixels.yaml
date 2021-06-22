@@ -20,4 +20,6 @@ frosmo_site: reima_headless_dev
 frosmo_host: d22j8luu453d90.cloudfront.net
 luckyorange_enabled: true
 luckyorange_site: 1111
+gtm_enabled: true
+gtm_property: GTM-XXXXXXX
 aw_property: ''
