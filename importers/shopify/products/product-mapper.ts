@@ -99,6 +99,7 @@ const addCompareAtPrice = (p: ProductNode) => {
   const compareAtPrice = Number.parseFloat(
     p.compareAtPriceRange.maxVariantPrice.amount,
   );
+  if (!compareAtPrice) return {};
   const formatter = Intl.NumberFormat("en-US", {
     currency: p.compareAtPriceRange.maxVariantPrice.currencyCode,
     style: "currency",
