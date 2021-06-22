@@ -55,6 +55,10 @@
     {{partial "css-critical" (slice "_default/baseof.noscript.css")}}
   </noscript>
 
+  {{ if hugo.IsProduction }}
+  {{ partial "pixels/gtm" .}}
+  {{ end }}
+
   <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <meta name="description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
@@ -66,6 +70,10 @@
 </head>
 
 <body>
+  {{ if hugo.IsProduction }}
+  {{ partial "pixels/gtm-noscript" .}}
+  {{ end }}
+
   {{ $menus := partial "helpers/get-locale-data" "menus" }}
   {{ if $announcements.headerAnnouncementEnabled }}
   <aside class="announcement">
