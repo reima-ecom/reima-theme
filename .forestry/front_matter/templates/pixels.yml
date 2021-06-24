@@ -65,9 +65,9 @@ fields:
   label: Google Optimize
   name: googleoptimize_enabled
   description: Google Optimize is an online split-testing tool from Google that plugs
-  into your website and enables you to experiment with different ways of delivering
-  your content. It facilitates three types of testing – A/B testing, multivariate
-  testing, and redirect tests.
+    into your website and enables you to experiment with different ways of delivering
+    your content. It facilitates three types of testing – A/B testing, multivariate
+    testing, and redirect tests.
 - type: text
   name: googleoptimize_property
   label: Google Optimize id
