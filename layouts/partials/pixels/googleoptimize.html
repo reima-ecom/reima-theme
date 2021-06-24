@@ -1,0 +1,7 @@
+{{ with site.Data.pixels }}
+{{ if .googleoptimize_enabled }}
+
+<script uses-cookies src="https://www.googleoptimize.com/optimize.js?id={{.googleoptimize_property}}"></script>
+
+{{ end }}
+{{ end }}
