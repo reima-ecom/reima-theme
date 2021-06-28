@@ -33,7 +33,8 @@
       {{- $mobile = partial "helpers/get-image" . }}
       {{- end }}
       <!-- get main image -->
-      {{- with partial "helpers/get-image" .image }}
+      {{- with .image }}
+      {{- with partial "helpers/get-image" . }}
       {{- $params := (dict "image" . "widths" "375,768,1080") }}
       {{- $default := .Resize "1080x" -}}
       <picture>
@@ -53,6 +54,9 @@
           width="{{.Width}}" />
       </noscript>
       {{ end }}
+      {{- else }}
+      {{- warnf "No image found for image links with heading \"%s\"" .heading }}
+      {{- end }}
       <!-- whole card is the link if link but no linktext -->
       {{ $stretched := and .link (not .linktext) }}
       {{ if $stretched }}
