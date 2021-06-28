@@ -7,6 +7,17 @@ import type {
 } from "https://raw.githubusercontent.com/reima-ecom/cart-worker/main/lib/checkout.ts";
 import type { UpdateQuantityPutRequestBody } from "https://raw.githubusercontent.com/reima-ecom/cart-worker/main/handler.ts";
 
+const parseSku = (sku: string) => {
+  const match = sku.match(/^(\d{6}[a-zA-Z]?)(.{4})(.*)$/);
+  if (!match) throw new Error(`Could not parse sku ${sku}`);
+  const [, product, color, size] = match;
+  return {
+    product,
+    color,
+    size,
+  };
+};
+
 const formatPrice = (
   { amount, currency }: Money,
 ) => (amount
@@ -78,7 +89,6 @@ export default class RCart extends HTMLElement {
   render(checkout?: Checkout) {
     this.items.innerHTML = "";
     if (checkout) {
-      /** @type {HTMLTemplateElement} */
       const template = this.querySelector<HTMLTemplateElement>("#item")!;
       checkout.items.forEach((li) => {
         const item = template.content.cloneNode(true) as HTMLElement;
@@ -139,6 +149,8 @@ export default class RCart extends HTMLElement {
         productTitle: li.title,
         productIdLegacy: storefrontIdToLegacy(li.variant.product.id),
         variantIdLegacy: storefrontIdToLegacy(variantId),
+        sku: li.variant.sku,
+        parsedSku: parseSku(li.variant.sku),
       })),
     };
     const variant = basket.items.find((li: any) => li.variantId === variantId);

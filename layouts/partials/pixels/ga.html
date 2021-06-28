@@ -25,7 +25,7 @@
 <script uses-cookies>
   gtag('event', 'view_item', {
     items: [{
-      id: "{{$.File.ContentBaseName}}",
+      id: "{{(index (first 1 (where .Params.variants "available" true)) 0).productAndColor}}",
       name: "{{.Title}}",
       price: {{.Params.price }},
       quantity: 1,
@@ -43,7 +43,7 @@
 
     gtag('event', 'add_to_cart', {
       items: [{
-        id: variant.productHandle,
+        id: `${variant.parsedSku.product}-${variant.parsedSku.color}`,
         name: variant.productTitle,
         price: variant.price,
         variant: variant.title,
