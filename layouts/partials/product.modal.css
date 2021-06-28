@@ -50,3 +50,10 @@
   margin-bottom: 0;
   font-size: 1rem;
 }
+
+/* desktop styles */
+@media (min-width: 768px) {
+  .modal.modal--full-width {
+    padding: 2rem;
+  }
+}
