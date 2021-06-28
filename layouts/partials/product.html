@@ -109,6 +109,47 @@
       {{ end }}
       {{ end }}
 
+      <!-- if this is the size guide section, show tag-based size guide -->
+      {{ $size_guide := "" }}
+      {{ range $product.Params.tags }}
+
+      {{ $tagData := split . ":" }}
+      {{ $tag := index $tagData 0 }}
+
+      {{ range $settings.size_guide }}
+      {{ if eq $tag .tag}}
+      {{ $size_guide = . }}
+      {{ end }}
+      {{ end }}
+
+      {{ end }}
+
+      {{ if $size_guide }}
+      <div class="size-guide">
+        <a href="#" openid="size-guide-modal">
+          {{$size_guide.title}}
+        </a>
+        <!-- modal if specified -->
+        {{ with $size_guide.modal }}
+        <div class="modal" id="size-guide-modal">
+          <div>
+            <button class="icon" close>
+              <svg>
+                <use xlink:href="#icon-close"></use>
+              </svg>
+            </button>
+            <section class="content-table">
+              {{ $content := . | markdownify }}
+              {{ $content := replace $content "<table" "<div class=\"content-table__container\"><table" }}
+              {{ $content = replace $content "</table>" "</table></div>" }}
+              {{$content | safeHTML}}
+            </section>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+
       <div>
         <button type="submit" class="btn btn--cta btn--lg product__add-to-cart"
           {{if not $firstAvailableOptions}}disabled{{end}} data-add="{{T "Add to cart"}}" data-sold="{{T "Sold out"}}"
