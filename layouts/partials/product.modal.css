@@ -27,6 +27,15 @@
   overflow: auto;
 }
 
+.modal.modal--full-width {
+  padding: 0;
+}
+
+.modal.modal--full-width > div {
+  padding: 1rem;
+}
+
+
 .modal button[close] {
   position: absolute;
   right: 1rem;
