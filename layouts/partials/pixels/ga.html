@@ -22,10 +22,16 @@
 
 <!-- product view enhanced ecommerce event -->
 {{ with partial "helpers/get-product" $ }}
+{{ $productId := $.File.ContentBaseName }}
+{{ if site.Params.gaSkuProductId }}
+{{ $firstAvailableVariant := (index (first 1 (where .Params.variants "available" true)) 0) }}
+{{ $idVariant := default (index .Params.variants 0) $firstAvailableVariant }}
+{{ $productId = $idVariant.productAndColor }}
+{{ end }}
 <script uses-cookies>
   gtag('event', 'view_item', {
     items: [{
-      id: "{{(index (first 1 (where .Params.variants "available" true)) 0).productAndColor}}",
+      id: "{{$productId}}",
       name: "{{.Title}}",
       price: {{.Params.price }},
       quantity: 1,
@@ -36,6 +42,10 @@
 
 <!-- add to cart enhanced ecommerce event -->
 {{ if partial "helpers/has-product" $ }}
+{{ $productId := "variant.productHandle" }}
+{{ if site.Params.gaSkuProductId }}
+{{ $productId = "`${variant.parsedSku.product}-${variant.parsedSku.color}`" }}
+{{ end }}
 <script uses-cookies>
   document.addEventListener('cart-add', (e) => {
     const checkout = e.detail.checkout;
@@ -43,7 +53,7 @@
 
     gtag('event', 'add_to_cart', {
       items: [{
-        id: `${variant.parsedSku.product}-${variant.parsedSku.color}`,
+        id: {{$productId | safeJS}},
         name: variant.productTitle,
         price: variant.price,
         variant: variant.title,
