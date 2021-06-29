@@ -35,7 +35,7 @@
   </div>
   {{ end }}
 
-  <ul data-collection="{{path.Base .Dir}}">
+  <ul data-collection="{{path.Base .File.Dir}}">
     <!-- loop through product pages -->
     {{ range $productPages }}
     {{ $link := partial "link" .RelPermalink }}
@@ -106,7 +106,7 @@
       {{ end }}
     </li>
     {{ else }}
-    {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .Dir .Kind .Type }}
+    {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .File.Dir .Kind .Type }}
     {{ end }}
     {{ end }}
     {{ if gt $product_count (len $productPages)}}
@@ -140,7 +140,7 @@
 {{ return (printf "data-image-srcset=%q" $srcset | safeHTMLAttr) }}
 {{ end }}
 
-<!-- 
+<!--
   get product variant from color name
   params: variants: product variants from product page
           color: color name
