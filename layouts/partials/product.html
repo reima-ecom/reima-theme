@@ -286,7 +286,7 @@
 {{ $variantImage = .Name }}
 <!-- this is for the original importer with shopify media -->
 {{ else }}
-{{ if .imageIndex }}
+{{ if isset . "imageIndex" }}
 {{ $imageIndex := .imageIndex }}
 {{ with $product.Resources.ByType "image" }}
 {{ $variantImage = (index . $imageIndex).Name }}
