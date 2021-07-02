@@ -131,9 +131,12 @@
 {{ define "partials/modules/products-get-image-srcset-attr" }}
 {{ $srcset := "" }}
 {{ with partial "modules/products-get-color-variant" (dict "variants" .product.Params.variants "color" .color ) }}
-{{ with index ($.product.Resources.ByType "image") .imageIndex }}
-{{ $srcset = partial "srcset" (dict "image" . "widths" "200,400") }}
+{{ $image := $.product.Resources.GetMatch (printf "*-%s/*" .productAndColor) }}
+<!-- if we didn't find an image in the usual way, and the legacy imageIndex is set, use that to get the image -->
+{{ if and (not $image) (isset . "imageIndex") }}
+{{ $image = index ($.product.Resources.ByType "image") .imageIndex }}
 {{ end }}
+{{ $srcset = partial "srcset" (dict "image" $image "widths" "200,400") }}
 {{ else }}
 {{ warnf "Could not get variant in color %s for %s" .color .product }}
 {{ end }}

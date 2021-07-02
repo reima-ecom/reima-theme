@@ -39,3 +39,5 @@ module:
       target: content
     - source: products
       target: content
+    - source: products-dynamic
+      target: content

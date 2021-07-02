@@ -41,6 +41,10 @@ type Variant = {
   options: Record<string, string>;
   sku: string;
   productAndColor: string;
+  /** Internal color code from SKU */
+  colorCode: string;
+  /** Internal product code from SKU */
+  productCode: string;
 };
 
 const transform = <
@@ -124,6 +128,7 @@ const getProductAndColor = (sku: string) => {
 const addVariants = (formatted: CurrencyFormatter) =>
   (p: ProductNode): Pick<Product, "variants"> => ({
     variants: p.variants.edges.map(({ node: variant }) => {
+      const parsedSku = parseSku(variant.sku);
       return {
         id: variant.id,
         available: variant.availableForSale,
@@ -144,6 +149,8 @@ const addVariants = (formatted: CurrencyFormatter) =>
         }), {}),
         sku: variant.sku,
         productAndColor: getProductAndColor(variant.sku),
+        colorCode: parsedSku.color,
+        productCode: parsedSku.product,
       };
     }) || [],
   });
