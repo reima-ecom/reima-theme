@@ -96,7 +96,7 @@ fields:
       can use markdown here.
     config:
       required: true
-      wysiwyg: true
+      wysiwyg: false
       schema:
         format: markdown
   description: Configuration for product tags that should output size guide.
