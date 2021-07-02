@@ -17,7 +17,7 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-Alternatively, if applicable, provide a link to a page where this bug is visible. You can for instance create a new draft page illustrating the bug.
+Alternatively, if applicable, provide a link to a page where this bug is visible. You can for instance create a new draft page illustrating the bug. Or, if you wanted to fix the affected page in some other way instead of keeping the bug live, provide a timestamp when that page was live, so developers can easily inspect that version.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
