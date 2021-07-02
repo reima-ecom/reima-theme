@@ -33,6 +33,10 @@ colors:
   color: "#00799b"
   image: ''
 - type: Color
+  name: '6325'
+  color: "#00799b"
+  image: ''
+- type: Color
   name: マリンブルー
   color: "#00799b"
   image: ''
@@ -44,6 +48,10 @@ colors:
   name: オレンジ
   color: "#fa7a16"
   image: ''
+- type: Image
+  name: '4565'
+  image: swatch.jpg
+  color: ''
 - type: Image
   name: バブルガムピンク
   image: swatch.jpg

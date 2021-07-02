@@ -75,6 +75,26 @@
       {{ if eq $nameEnglish site.Params.coloroption }}
       {{ $nameEnglish = "Color" }}
       {{ end }}
+      <!--
+      if this is the color option, and we have the sku color code available,
+      create a dict with color name as key and sku color code as value
+      in this case the colors in `data/colors.yml` should also have the sku color as keys
+      (this is the case in the default data file in the theme
+      -->
+      {{ $colorNameToSku := dict }}
+      {{ if and (eq $nameEnglish "Color") (index $product.Params.variants 0).colorCode }}
+      {{ range $i, $v := $product.Params.variants }}
+      {{ $colorName := index $v.options site.Params.coloroption }}
+      {{ with index $colorNameToSku $colorName }}
+      {{ if ne $v.colorCode . }}
+      {{ warnf "Product %s has a variant with different sku color codes (%s) for the same color name (%s)" $product.Title $v.colorCode $colorName }}
+      {{ end }}
+      {{ else }}
+      {{ $colorNameToSku = merge $colorNameToSku (dict $colorName $v.colorCode) }}
+      {{ end }}
+      {{ end }}
+      {{ end }}
+
       <fieldset class="selections selections--{{$nameEnglish}}">
         <legend>{{.name}}<span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
         <ul>
@@ -87,7 +107,12 @@
             {{ $labelStyle := "" }}
             {{ $swatch := "" }}
             {{ if eq $nameEnglish "Color" }}
-            {{ with partial "helpers/get-color" .value }}
+            {{ $colorKey := .value }}
+            <!-- if there is a mapping from the color name to sku color code, use that as key -->
+            {{ with index $colorNameToSku .value }}
+            {{ $colorKey = . }}
+            {{ end }}
+            {{ with partial "helpers/get-color" $colorKey }}
             {{ with .color }}
             {{ $labelStyle = printf "style=\"background-color: %s;\"" . }}
             {{ end }}
