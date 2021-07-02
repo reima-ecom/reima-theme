@@ -66,6 +66,21 @@
   display: inline;
 }
 
+.size-guide {
+  font-size: .875rem;
+  margin-bottom: 20px;
+}
+
+.size-guide a {
+  color: var(--color-text-muted);
+  text-decoration-color: var(--color-text-muted);
+}
+
+.size-guide a:hover {
+  color: var(--color-link);
+  text-decoration-color: var(--color-link);
+}
+
 .selections {
   margin: 1rem 0;
   border: none;
@@ -382,6 +397,10 @@ manually with CSS. The `[open]` attribute is still set on the
     border-color: var(--color-border);
     border-bottom-color: white;
     z-index: 1;
+  }
+
+  .size-guide {
+    margin: 24px 0 -6px 0;
   }
 }
 

@@ -200,6 +200,7 @@ fields:
     value: true
   config:
     required: true
-  description: Google Tag Manager property / tracking id is the one starting with "GTM-".
+  description: Google Tag Manager property / tracking id is the one starting with
+    "GTM-".
 pages:
 - demo/data/pixels.yaml

@@ -27,6 +27,15 @@
   overflow: auto;
 }
 
+.modal.modal--full-width {
+  padding: 0;
+}
+
+.modal.modal--full-width > div {
+  padding: 1rem;
+}
+
+
 .modal button[close] {
   position: absolute;
   right: 1rem;
@@ -40,4 +49,11 @@
 .modal h3 {
   margin-bottom: 0;
   font-size: 1rem;
+}
+
+/* desktop styles */
+@media (min-width: 768px) {
+  .modal.modal--full-width {
+    padding: 2rem;
+  }
 }

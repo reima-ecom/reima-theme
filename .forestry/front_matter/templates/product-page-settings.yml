@@ -74,6 +74,33 @@ fields:
   description: Headings for the "accordion" that shows features, materials and care
     instructions.
 - type: field_group_list
+  name: size_guide
+  label: Size guide
+  fields:
+  - type: text
+    name: tag
+    label: Tag name
+    description: Tag name to match. For example "SizeClothing".
+    config:
+      required: true
+  - type: text
+    name: title
+    label: Title
+    description: What to show as the title / cta. For instance "Size guide".
+    config:
+      required: true
+  - type: textarea
+    name: modal
+    label: Pop-up contents
+    description: Contents for the pop-up that shows when you click title / cta. You
+      can use markdown here.
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: markdown
+  description: Configuration for product tags that should output size guide.
+- type: field_group_list
   name: features
   label: Product features
   fields:

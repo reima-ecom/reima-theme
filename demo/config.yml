@@ -15,6 +15,7 @@ languages:
 
 params:
   coloroption: 色
+  gaSkuProductId: true
   # these params will be rendered on every page (as window.site)
   # note that hugo makes these lowercase, so best have all lowercase names
   public:

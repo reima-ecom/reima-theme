@@ -161,33 +161,34 @@ fields:
     field: benefitsEnabled
     value: true
   fields:
-    - name: links
-      type: field_group_list
-      fields:
-        - name: icon
-          type: file
-          label: Icon
-        - name: heading
-          type: text
-          config:
-            required: false
-          label: Heading
-        - name: text
-          type: text
-          config:
-            required: false
-          label: Text
-        - name: url
-          type: text
-          config:
-            required: false
-          label: Url
+  - name: links
+    type: field_group_list
+    fields:
+    - name: icon
+      type: file
+      label: Icon
+    - name: heading
+      type: text
       config:
-        min: 1
-        max: 3
-        labelField: text
-      label: Links
-      description: Links to show in the benefits section.
+        required: false
+      label: Heading
+    - name: text
+      type: text
+      config:
+        required: false
+      label: Text
+    - name: url
+      type: text
+      config:
+        required: false
+      label: Url
+    config:
+      min: 1
+      max: 3
+      labelField: text
+    label: Links
+    description: Links to show in the benefits section.
   label: Benefits
 pages:
+- demo/data/announcements.json
 - demo/data/announcements.json
