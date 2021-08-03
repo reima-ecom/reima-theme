@@ -133,7 +133,7 @@
         {{ with $size_guide.modal }}
         <div class="modal modal--full-width" id="size-guide-modal">
           <div>
-            <button class="icon" close>
+            <button class="icon" onclick="event.preventDefault()" close>
               <svg>
                 <use xlink:href="#icon-close"></use>
               </svg>

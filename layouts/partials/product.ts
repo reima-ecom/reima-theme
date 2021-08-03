@@ -27,7 +27,7 @@ type Options = {
 };
 
 const form = document.querySelector<HTMLFormElement>("form#product-form")!;
-const cartButton = form.querySelector("button")!;
+const cartButton = form.querySelector("button[type=submit]")!;
 const radioBoxes = form.querySelectorAll<HTMLInputElement>(
   "input[type=radio]",
 )!;
