@@ -1,4 +1,8 @@
 .benefits {
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.benefits .container {
   align-items: flex-start;
   box-sizing: border-box;
   display: flex;
@@ -7,17 +11,6 @@
   position: relative;
   margin: auto;
   max-width: var(--block-width);
-}
-
-.benefits::before {
-  background-color: rgba(0,0,0,0.2);
-  content: '';
-  height: 1px;
-  position: absolute;
-  transform: translateX(-50%);
-  left: 50%;
-  top: 0;
-  width: 100vw;
 }
 
 .benefits .benefit {
@@ -66,7 +59,7 @@
 }
 
 @media (min-width: 992px) {
-  .benefits {
+  .benefits .container {
     flex-direction: row;
   }
 
