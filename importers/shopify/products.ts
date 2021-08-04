@@ -67,6 +67,7 @@ export const importProductsAndMediaBankImages = async (
   outDir: string,
   shopifyConfig: ShopifyConfig,
   limit?: number,
+  skipImageDownload?: boolean,
 ) => {
   logger.info(`Getting products from Shopify store ${shopifyConfig.store}`);
 
@@ -82,11 +83,13 @@ export const importProductsAndMediaBankImages = async (
   ) {
     await writeProduct(productNode);
 
-    const dir = `${outDir}/${productNode.handle}`;
-    const downloadImages = downloadSkuImages(dir, logger);
-    for (let i = 0; i < productNode.variants.edges.length; i++) {
-      const v = productNode.variants.edges[i].node;
-      await downloadImages(v.sku, i);
+    if (!skipImageDownload) {
+      const dir = `${outDir}/${productNode.handle}`;
+      const downloadImages = downloadSkuImages(dir, logger);
+      for (let i = 0; i < productNode.variants.edges.length; i++) {
+        const v = productNode.variants.edges[i].node;
+        await downloadImages(v.sku, i);
+      }
     }
 
     allProductHandles.push(productNode.handle);

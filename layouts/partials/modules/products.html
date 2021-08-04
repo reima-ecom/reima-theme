@@ -55,8 +55,14 @@
       {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes "alt" $productName)}}
       {{ end }}
       <div class="product-list__swatches">
+        {{ $color_codes := (apply .Params.variants "index" "." "colorCode") | uniq }}
+        <!-- this seems to be the best way to filter out nil values in hugo -->
+        {{ $color_dots := $color_codes | complement (slice nil) }}
+        <!-- DEPRECATED old way of getting colors not based on sku color code -->
+        {{ if not (len $color_dots) }}
         {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ $color_dots := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ $color_dots = (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+        {{ end }}
         {{ $show_plus := false }}
         {{ if gt (len $color_dots) 7  }}
         {{ $color_dots = $color_dots | first 6 }}
@@ -126,14 +132,26 @@
 <!--
   get srcset for product image in the specified color
   params: product: product page
-          color: color name
+          color: color name (sku code or color option name)
  -->
 {{ define "partials/modules/products-get-image-srcset-attr" }}
 {{ $srcset := "" }}
-{{ with partial "modules/products-get-color-variant" (dict "variants" .product.Params.variants "color" .color ) }}
-{{ with index ($.product.Resources.ByType "image") .imageIndex }}
-{{ $srcset = partial "srcset" (dict "image" . "widths" "200,400") }}
+{{ $variant := false }}
+<!-- get first variant with specified sku color name -->
+{{ with where .product.Params.variants "colorCode" .color }}
+{{ $variant = index . 0 }}
 {{ end }}
+<!-- DEPRECATED: get variant based on color option name -->
+{{ if not $variant }}
+{{ $variant = partial "modules/products-get-color-variant" (dict "variants" .product.Params.variants "color" .color ) }}
+{{ end }}
+{{ with $variant }}
+{{ $image := $.product.Resources.GetMatch (printf "*-%s/*" .productAndColor) }}
+<!-- DEPRECATED: if we didn't find an image in the usual way, and the legacy imageIndex is set, use that to get the image -->
+{{ if and (not $image) (isset . "imageIndex") }}
+{{ $image = index ($.product.Resources.ByType "image") .imageIndex }}
+{{ end }}
+{{ $srcset = partial "srcset" (dict "image" $image "widths" "200,400") }}
 {{ else }}
 {{ warnf "Could not get variant in color %s for %s" .color .product }}
 {{ end }}

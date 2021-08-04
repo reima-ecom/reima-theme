@@ -13,6 +13,7 @@ Usage:
 > deno run cmd.ts DIRECTORY [OPTIONS]
 
 Options:
+  -i        Skip image download
   -v        Verbose logging (DEBUG)
   -c COUNT  Only download the first COUNT products
 `;
@@ -85,6 +86,7 @@ await importProductsAndMediaBankImages(
   `${outDir}/products`,
   shopifyConfig,
   flags.c,
+  flags.i,
 );
 
 logger.warning("Collections are currently not supported");
