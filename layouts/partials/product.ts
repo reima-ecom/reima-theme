@@ -106,16 +106,18 @@ const inputChange = (e: Event) => {
     // change product image if needed
     if (previousVariant && previousVariant.imagePath !== variant.imagePath) {
       const carouselSelector = form.dataset.productImages;
-      if (!carouselSelector) throw new Error('No carousel specified');
+      if (!carouselSelector) throw new Error("No carousel specified");
       const carousel = document.querySelector<RCarousel>(carouselSelector);
-      if (!carousel) throw new Error('Carousel not found');
+      if (!carousel) throw new Error("Carousel not found");
       carousel.scrollToImage(variant.imagePath);
     }
     // send variant change event (for analytics)
-    document.dispatchEvent(new CustomEvent("variant-changed", {
-      detail: variant,
-      bubbles: true,
-    }));
+    document.dispatchEvent(
+      new CustomEvent("variant-changed", {
+        detail: variant,
+        bubbles: true,
+      }),
+    );
   }
 };
 
@@ -126,16 +128,33 @@ radioBoxes.forEach((node) => {
 // open reviews when the review link is clicked
 const reviewsLink = document.querySelector('[href="#reviews"]');
 const openReviews = () => {
-  document.querySelectorAll('#acc-reviews, #tab-reviews').forEach((element) => {
+  document.querySelectorAll("#acc-reviews, #tab-reviews").forEach((element) => {
     (element as HTMLInputElement).checked = true;
   });
-}
+};
 
 if (reviewsLink) {
-  reviewsLink.addEventListener('click', () => {
+  reviewsLink.addEventListener("click", () => {
     openReviews();
   });
 }
 
 // open reviews if initial load is for reviews
-if (location.hash === '#reviews') openReviews();
+if (location.hash === "#reviews") openReviews();
+
+// see if we're trying to link to a specific variant
+if (window.location.search) {
+  const params = new URLSearchParams(window.location.search);
+  params.forEach((value, key) => {
+    if (window.selectedOptions[key]) {
+      const input = document.querySelector<HTMLInputElement>(
+        `input[name="${key}"][value="${value}"]`,
+      );
+      if (input) {
+        console.log(input);
+        input.checked = true;
+        input.dispatchEvent(new InputEvent("change"));
+      }
+    }
+  });
+}
