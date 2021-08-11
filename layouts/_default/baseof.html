@@ -59,7 +59,7 @@
   {{ partial "pixels/gtm" .}}
   {{ end }}
 
-  <link rel="shortcut icon" href="/favicon-32x32.png" type="image/png">
+  <link rel="shortcut icon" href="{{site.BaseURL}}favicon-32x32.png" type="image/png">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <meta name="description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
   <!-- add hreflang for front page and only front page -->
