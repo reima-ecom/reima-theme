@@ -38,13 +38,13 @@
   <ul data-collection="{{path.Base .File.Dir}}">
     <!-- loop through product pages -->
     {{ range $productPages }}
-    {{ $link := partial "link" .RelPermalink }}
+    {{ $linkresolved := partial "link" .RelPermalink }}
     <!-- get the actual product page from the name of the product page under collections  -->
     {{ $producthandle := .File.ContentBaseName }}
     {{ with site.GetPage (printf "/products/%s" $producthandle) }}
     <!-- this is the product page -->
     {{ $product := . }}
-    <li href="{{$link}}"
+    <li href="{{$linkresolved}}"
       class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}}"
       handle="{{$producthandle}}">
       {{ $productName := .Title }}
@@ -71,7 +71,7 @@
         {{ range $color_dots }}
         {{ with . }}
         {{ with partial "helpers/get-color" . }}
-        <a href="{{$link}}" {{with .color}}style="background-color: {{.}};" {{end}}
+        <a href="{{$linkresolved}}" {{with .color}}style="background-color: {{.}};" {{end}}
           {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}
           class="product-list__swatch">
           {{ if .image }}
@@ -82,11 +82,11 @@
         {{ end }}
         {{ end }}
         {{ if $show_plus  }}
-        <a href="{{$link}}" class="product-list__swatch product-list__swatch--see-more">+</a>
+        <a href="{{$linkresolved}}" class="product-list__swatch product-list__swatch--see-more">+</a>
         {{ end }}
       </div>
       <h3>
-        <a class="silent-link stretched-link" href="{{$link}}">{{.Title}}</a>
+        <a class="silent-link stretched-link" href="{{$linkresolved}}">{{.Title}}</a>
       </h3>
       <div>
         {{partial "product-price" .Params}}

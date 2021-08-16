@@ -16,7 +16,8 @@
 
 <!-- render module template -->
 <!-- add module index (order on page) to params passed to partial -->
-{{ $params := merge . (dict "modulenr" $i) }}
+<!-- also add the page object, as this may be useful -->
+{{ $params := merge . (dict "modulenr" $i "pageobj" $) }}
 {{ partial (printf "modules/%s" .template) $params }}
 
 <!-- add module ts file if it exists -->

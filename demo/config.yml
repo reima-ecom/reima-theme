@@ -1,3 +1,4 @@
+baseURL: www.reima.com/demo
 buildDrafts: true
 disableFastRender: true
 disableKinds:
@@ -15,6 +16,7 @@ languages:
 
 params:
   coloroption: 色
+  noTrailingSlash: true
   gaSkuProductId: true
   # these params will be rendered on every page (as window.site)
   # note that hugo makes these lowercase, so best have all lowercase names

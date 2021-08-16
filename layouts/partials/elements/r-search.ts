@@ -64,6 +64,10 @@ export default class RSearch extends HTMLElement {
     });
   }
 
+  get baseUrl() {
+    return this.getAttribute('baseurl') || '/'
+  }
+
   sendEvent(uiState: UiState) {
     const firstIndex = Object.values(uiState)[0];
     this.dispatchEvent(
@@ -86,8 +90,8 @@ export default class RSearch extends HTMLElement {
       templates: {
         item: (item: HitItem) =>
           `
-            <a href="/products/${item.objectID}" class="hit">
-            <img src="${item.imageSrc}" align="left" alt="${item.title}" />
+            <a href="${this.baseUrl}products/${item.objectID}" class="hit">
+            <img src="${this.baseUrl}${item.imageSrc}" align="left" alt="${item.title}" />
             <div>
             <div class="hit-name">${item.title}</div>
             <div class="hit-price">${currencyFmt.format(item.price)}</div>

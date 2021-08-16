@@ -5,7 +5,7 @@
   <div>
     {{ range .images }}
     <div>
-      <a href="{{.link}}/" class="silent-link text-sm">
+      <a href="{{partial "helpers/get-link-module" (slice .link $)}}/" class="silent-link text-sm">
       <!-- 
         fix image width to 120px
        -->

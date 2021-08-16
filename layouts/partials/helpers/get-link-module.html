@@ -1,0 +1,24 @@
+<!--
+
+Get a link using the link helper from the context of a module.
+
+Expected input (context): a slice with the following items
+- link url
+- module object as it is passed in by the page layout
+(This is a slice to make calling this partial a bit less verbose.)
+
+Output: link url
+
+-->
+{{ $url := index . 0 }}
+{{ $module := index . 1 }}
+{{ $context := printf "`%s` module" $module.template }}
+{{ with $module.modulenr }}
+{{ $context = printf "%s, the %s module" $context (humanize (add $module.modulenr 1)) }}
+{{ end }}
+{{ $context = printf "%s on page `%s`" $context $module.pageobj.File.Path }}
+{{ if not $module.pageobj.File.Path }}
+{{ warnf "no file path on %s" $module}}
+{{ end }}
+{{ $urlparams := dict "url" $url "context" $context }}
+{{ return (partialCached "helpers/get-link" $urlparams $urlparams) }}

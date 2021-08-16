@@ -75,11 +75,9 @@
   {{ end }}
 
   {{ $menus := partial "helpers/get-locale-data" "menus" }}
-  {{ if $announcements.headerAnnouncementEnabled }}
-  <aside class="announcement">
-    {{$announcements.headerAnnouncement | markdownify}}
-  </aside>
-  {{ end }}
+
+  {{ partialCached "baseof/header-announcement" $announcements }}
+
   <header>
     <div class="page-width menu">
       <div class="menu__links">
@@ -132,7 +130,7 @@
               {{.Language.Lang}}
             </a>
             {{else}}
-            <a href="/{{.}}">
+            <a href="{{site.BaseURL}}{{.}}">
               {{.Lang}}
             </a>
             {{ end }}

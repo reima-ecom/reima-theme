@@ -1,3 +1,3 @@
 <section class="module-content{{if .button_links}} g-links-as-buttons{{end}}">
-  {{.content | markdownify}}
+  {{.content | .pageobj.RenderString}}
 </section>

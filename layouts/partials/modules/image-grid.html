@@ -81,7 +81,7 @@
           {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes_popup) }}
           <div>
             {{- with .content }}
-            {{. | markdownify}}
+            {{. | $.pageobj.RenderString}}
             {{- end }}
           </div>
         </div>
@@ -93,7 +93,7 @@
         {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
       </div>
       {{- with .content }}
-      {{. | markdownify}}
+      {{. | $.pageobj.RenderString}}
       {{- end }}
     </li>
     {{ end }}
@@ -112,7 +112,7 @@
     <li class="image-grid__last-fill{{with .lastfilllinks}} image-grid__last-fill--links-{{.}}{{end}}">
       <div>
         <div>
-          {{.lastfilltext | markdownify}}
+          {{.lastfilltext | $.pageobj.RenderString}}
         </div>
       </div>
     </li>
@@ -120,7 +120,7 @@
   </ul>
   {{ if .link }}
   <div class="image-grid__link">
-    <a href="{{.linkurl}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">
+    <a href="{{partial "helpers/get-link-module" (slice .linkurl $)}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">
       {{.linktext}}
     </a>
   </div>

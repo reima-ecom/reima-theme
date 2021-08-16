@@ -19,11 +19,11 @@
     </header>
     {{ end }}
     <div>
-      {{.text | markdownify}}
+      {{.text | $.pageobj.RenderString}}
     </div>
     {{ if .linktext }}
     <div>
-      <a class="btn" href="{{.link}}">{{.linktext}}</a>
+      <a class="btn" href="{{partial "helpers/get-link-module" (slice .link $)}}">{{.linktext}}</a>
     </div>
     {{ end }}
   </div>

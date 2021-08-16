@@ -13,14 +13,14 @@
       </label>
       <label>
         <input type="checkbox" name="consent" id="Consent-footer" required>
-        <div class="md">{{T "Newsletter TOS Consent" | markdownify}}</div>
+        <div class="md">{{T "Newsletter TOS Consent" | site.Home.RenderString}}</div>
       </label>
       <p failure></p>
       <div>
         <button type="submit" class="button btn btn--cta">{{T "Newsletter Subscribe Button"}}</button>
       </div>
     </div>
-    <p success>{{.newsletterThankYouMessage | markdownify}}</p>
+    <p success>{{.newsletterThankYouMessage | site.Home.RenderString}}</p>
   </form>
 </r-newsletter>
 

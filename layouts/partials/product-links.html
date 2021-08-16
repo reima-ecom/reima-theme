@@ -1,0 +1,30 @@
+<!--
+
+Convenience partial to allow product page links to be cached.
+
+Expects the product page as context.
+
+-->
+{{ $settings := partial "helpers/get-locale-data" "productpage" }}
+{{ range $settings.links }}
+{{ if eq .type "link" }}
+{{ $context := printf "link for all product pages \"%s\"" .title }}
+{{ $urlparams := dict "url" .link "context" $context }}
+<p><a class="link--no-color" href="{{partial "helpers/get-link" $urlparams}}" target="_blank">{{.title}}</a></p>
+{{ else if eq .type "modal" }}
+{{ $id := .title }}
+<p><a class="link--no-color" href="#" openid="{{$id}}">{{.title}}</a></p>
+<div class="modal" id="{{$id}}">
+  <div>
+    <button class="icon" close>
+      <svg>
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </button>
+    {{.content | $.Page.RenderString}}
+  </div>
+</div>
+{{ else }}
+{{ warnf "Wrong link type %s at %s" .type $ }}
+{{ end }}
+{{ end }}

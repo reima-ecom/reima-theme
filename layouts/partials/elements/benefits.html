@@ -4,7 +4,7 @@
 <section class="benefits">
   <div class="container">
     {{ range .links }}
-    <a href="{{.url}}" class="benefit">
+    <a href="{{partial "helpers/get-link" (dict "url" .url "context" "benefit bar links")}}" class="benefit">
       <div class="icon">
         {{ if .icon }}
         {{ $img := partial "helpers/get-image" .icon }}

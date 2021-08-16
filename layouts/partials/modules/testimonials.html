@@ -7,13 +7,13 @@
     <div>
       <blockquote{{with .link}} cite="{{.}}" {{end}}>
         <img src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt='"'>
-        <div>{{.text | markdownify}}</div>
+        <div>{{.text | $.pageobj.RenderString}}</div>
         <footer>
           {{.author}}
           {{ if .linktext }}
           <cite>
             {{ if .link }}
-            <a href="{{.link}}">{{.linktext}}</a>
+            <a href="{{partial "helpers/get-link-module" (slice .link $)}}">{{.linktext}}</a>
             {{ else }}
             {{.linktext}}
             {{ end }}

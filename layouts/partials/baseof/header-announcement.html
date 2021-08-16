@@ -1,0 +1,13 @@
+<!--
+
+Renders the announcement for use on the top of the page.
+
+Expects the `announcements` data file as input.
+
+-->
+
+{{ if .headerAnnouncementEnabled }}
+<aside class="announcement">
+  {{.headerAnnouncement | site.Home.RenderString}}
+</aside>
+{{ end }}

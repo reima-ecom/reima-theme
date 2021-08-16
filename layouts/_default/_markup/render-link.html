@@ -1,0 +1,4 @@
+{{ $context := printf "content link '%s' on page `%s`" .PlainText .Page.File.Path }}
+{{ $urlparams := dict "url" .Destination "context" $context }}
+{{ $url := partialCached "helpers/get-link" $urlparams $urlparams }}
+<a href="{{ $url }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

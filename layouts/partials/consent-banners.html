@@ -4,14 +4,14 @@
 
 {{ with $announcements.gdpr }}
 <aside gdpr class="consent-banner">
-  {{.message | markdownify}}
+  {{.message | site.Home.RenderString}}
   <p>
     <a href="?gdpr-consent=yes" class="btn btn--sm btn--cta">{{.accept_button}}</a>
     <a href="?gdpr-consent=no" class="btn btn--sm btn--cta">{{.reject_button}}</a>
   </p>
   <p>
     {{ range .links }}
-    <a href="{{.url}}">{{.text}}</a>
+    <a href="{{partial "helpers/get-link" (dict "url" .url "context" "GDPR banner link")}}">{{.text}}</a>
     {{ end }}
   </p>
 </aside>
@@ -21,13 +21,13 @@
 
 {{ with $announcements.ccpa }}
 <aside ccpa class="consent-banner">
-  {{.message | markdownify}}
+  {{.message | site.Home.RenderString}}
   <p>
     <a href="." class="btn btn--sm btn--cta">{{.dismiss_button}}</a>
   </p>
   <p>
     {{ range .links }}
-    <a href="{{.url}}">{{.text}}</a>
+    <a href="{{partial "helpers/get-link" (dict "url" .url "context" "CCPA banner link")}}">{{.text}}</a>
     {{ end }}
   </p>
 </aside>

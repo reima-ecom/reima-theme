@@ -1,0 +1,50 @@
+<!--
+
+Get the resolved URL from an "internal" url string.
+Will not touch external urls that have a scheme.
+Will try to find the .RelPermalink of URLs that look like content pages.
+If no page is found, will just return the URL passed in but give a warning.
+
+Parameters:
+- url
+  Url string to parse
+- context
+  Where this link was found for error reporting
+
+Returns an [URL structure](https://pkg.go.dev/net/url#URL)
+
+-->
+
+{{ $url := .url }}
+{{ $urlp := urls.Parse .url }}
+
+{{ if $urlp.Scheme }}
+
+{{ if eq $urlp.Host (urls.Parse site.BaseURL).Host }}
+{{ warnf "Link to `%s` should probably be relative (%s)" $.url $.context }}
+{{ end }}
+
+{{ else }}
+
+<!-- only try to get a page if we actually have a path, i.e. not #anchor -->
+{{ with $urlp.Path }}
+<!-- trim trailing slash to find content pages in root dir -->
+{{ with site.GetPage (strings.TrimSuffix "/" .) }}
+<!-- some sites want to have links without trailing slash, that's why the link partial is used -->
+{{ $url = partial "link" .RelPermalink }}
+<!-- add possible query and fragment -->
+{{ with $urlp.RawQuery }}
+{{ $url = printf "%s?%s" $url . }}
+{{ end }}
+{{ with $urlp.Fragment }}
+{{ $url = printf "%s#%s" $url . }}
+{{ end }}
+{{ else }}
+{{ warnf "Broken link `%s` (%s)" $urlp.Path $.context }}
+{{ end }}
+{{ end }}
+
+{{ end }}
+
+
+{{ return $url }}

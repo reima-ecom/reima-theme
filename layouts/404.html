@@ -8,7 +8,8 @@
   <h1>
     {{T "404 page heading" | default "Oh no!"}}
   </h1>
-  {{T "404 page content" | default "Page not found :(" | markdownify}}
+  <!-- we need to call RenderString on the home page, since it doesn't seem to work for the 404 page -->
+  {{T "404 page content" | default "Page not found :(" | site.Home.RenderString}}
 </div>
 
 {{ end }}

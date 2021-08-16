@@ -35,7 +35,8 @@
   {{ with .Params.banner }}
   <div class="grid__banner">
     {{ range . }}
-    {{ partial (printf "modules/%s" .template) . }}
+    {{ $params := merge . (dict "modulenr" 0 "pageobj" $) }}
+    {{ partial (printf "modules/%s" .template) $params }}
     {{ end }}
   </div>
   {{ end }}
@@ -166,7 +167,8 @@
       {{ end }}
 
 
-      {{ partial (printf "modules/%s" .template) . }}
+      {{ $params := merge . (dict "modulenr" $i "pageobj" $) }}
+      {{ partial (printf "modules/%s" .template) $params }}
 
       {{ end }}
     </div>
@@ -201,11 +203,11 @@
           {{ range .children }}
           {{ $haschildren := len (.children | default slice) }}
           <li {{if $haschildren}}class="sidebar-links__link--has-children" {{end}}>
-            <a href="{{.link}}">{{.title}}</a>
+            <a href="{{partial "helpers/get-link" (dict "url" .link "context" (printf "sidebar entry \"%s\" on collection page `%s`" .title $.File.Path))}}">{{.title}}</a>
             {{ if $haschildren }}
             <ul>
               {{ range .children }}
-              <li><a href="{{.link}}">{{.title}}</a></li>
+              <li><a href="{{partial "helpers/get-link" (dict "url" .link "context" (printf "sidebar entry \"%s\" on collection page `%s`" .title $.File.Path))}}">{{.title}}</a></li>
               {{ end }}
             </ul>
             {{ end }}
@@ -294,11 +296,12 @@
 {{ end }}
 
 {{ define "categories" }}
+{{ warnf "DEPRECATED: `categories` on collection layout page will be deleted in a future version" }}
 {{ with . }}
 <ul>
   {{ range . }}
   <li>
-    <a href="/collections/{{.collection}}">{{ .heading }}</a>
+    <a href="{{partial "helpers/get-link" (dict "url" (printf "/collections/%s" .collection) "context" "collection categories")}}">{{ .heading }}</a>
     {{ template "categories" .categories }}
   </li>
   {{ end }}

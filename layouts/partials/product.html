@@ -164,7 +164,7 @@
               </svg>
             </button>
             <section class="content-table">
-              {{ $content := . | markdownify }}
+              {{ $content := . | $product.Page.RenderString }}
               {{ $content := replace $content "<table" "<div class=\"content-table__container\"><table" }}
               {{ $content = replace $content "</table>" "</table></div>" }}
               {{$content | safeHTML}}
@@ -224,26 +224,7 @@
       </details>
       {{ end }}
 
-      {{ range $settings.links }}
-      {{ if eq .type "link" }}
-      <p><a class="link--no-color" href="{{.link}}" target="_blank">{{.title}}</a></p>
-      {{ else if eq .type "modal" }}
-      {{ $id := .title }}
-      <p><a class="link--no-color" href="#" openid="{{$id}}">{{.title}}</a></p>
-      <div class="modal" id="{{$id}}">
-        <div>
-          <button class="icon" close>
-            <svg>
-              <use xlink:href="#icon-close"></use>
-            </svg>
-          </button>
-          {{.content | markdownify}}
-        </div>
-      </div>
-      {{ else }}
-      {{ warnf "Wrong link type %s at %s" .type $ }}
-      {{ end }}
-      {{ end }}
+      {{ partialCached "product-links" $ }}
     </div>
   </div>
 </div>
@@ -295,7 +276,7 @@
                 <use xlink:href="#icon-close"></use>
               </svg>
             </button>
-            {{. | markdownify}}
+            {{. | $product.Page.RenderString}}
           </div>
         </div>
         {{ end }}

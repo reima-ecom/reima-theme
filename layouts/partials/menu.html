@@ -16,26 +16,22 @@
 <ul>
   {{ range .menu }}
   <li>
-    {{ $url := urls.Parse .url }}
+    {{ $linkresolved := false }}
     {{ if .url }}
-    <!-- try to load page if this is not an external url -->
-    {{ if not $url.Scheme }}
-    {{ with $.root.GetPage .url }}
-    {{ $url = partial "link" .RelPermalink }}
-    {{ else }}
-    {{ warnf "Could not find page with URL %s (named %s)" .url .name }}
+    {{ $context := printf "menu item '%s'" .name }}
+    {{ $urlparams := dict "url" .url "context" $context }}
+    {{ $linkresolved = partialCached "helpers/get-link" $urlparams $urlparams }}
     {{ end }}
-    {{ end }}
-    {{ end }}
+
     {{ if .children }}
     {{ if len .children }}
     <!-- Update current path in menu for id -->
     {{ $path := printf "%s-%s" (default "" $.path) .name }}
     <input type="checkbox" id="open-{{$path}}">
     <label for="open-{{$path}}">
-      {{ if .url }}
+      {{ if $linkresolved }}
       <!-- need to make href a safe attr because otherwise e.g. tel: links break -->
-      <a {{ printf "href=%q" .url | safeHTMLAttr }}>{{.name}}</a>
+      <a {{ printf "href=%q" $linkresolved | safeHTMLAttr }}>{{.name}}</a>
       {{ else }}
       {{.name}}
       {{ end }}
@@ -54,10 +50,11 @@
     <!-- render submenu, making sure to pass in current path -->
     {{ partial "menu" (dict "menu" .children "root" $.root "path" $path) }}
     {{ end }}
+
     {{ else }}
-    {{ if .url }}
+    {{ if $linkresolved }}
     <!-- need to make href a safe attr because otherwise e.g. tel: links break -->
-    <a {{ printf "href=%q" .url | safeHTMLAttr }}>{{ .name }}</a>
+    <a {{ printf "href=%q" $linkresolved | safeHTMLAttr }}>{{ .name }}</a>
     {{ else }}
     {{.name}}
     {{ end }}

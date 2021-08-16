@@ -95,10 +95,10 @@
   {{- if or .heading .text .link }}
   <div class="hero__text-container">
     <div class="hero__text">
-      {{ with .heading }}<h1>{{. | markdownify}}</h1>{{ end }}
-      {{ with .text }}<p>{{. | markdownify}}</p>{{ end }}
+      {{ with .heading }}<h1>{{. | $.pageobj.RenderString}}</h1>{{ end }}
+      {{ with .text }}<p>{{. | $.pageobj.RenderString}}</p>{{ end }}
       {{ if .link }}
-      <a href="{{.link}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">{{.linktext}}</a>
+      <a href="{{partial "helpers/get-link-module" (slice .link $)}}" class="btn{{with .linkmodifier}} btn--{{.}}{{end}}">{{.linktext}}</a>
       {{ end }}
     </div>
   </div>

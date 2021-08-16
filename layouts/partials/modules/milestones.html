@@ -26,7 +26,7 @@
                     <p class="milestones__about-timeline-text">{{.}}</p>
                     {{ end }}
                     {{ if .link }}
-                    <a href="{{.link}}" {{if .externalLink}}target="_blank" {{end}}
+                    <a href="{{partial "helpers/get-link-module" (slice .link $)}}" {{if .externalLink}}target="_blank" {{end}}
                         class="{{if .externalLink}}milestones__external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">
                         {{.linktext}}
                         {{ if .externalLink }}
