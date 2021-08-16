@@ -1,7 +1,7 @@
 <style>
 {{- range . | uniq -}}
 {{- with resources.Get . -}}
-{{- (. | minify).Content | safeCSS -}}
+{{- (. | resources.ExecuteAsTemplate "css.css" .).Content | safeCSS -}}
 {{- else -}}
 {{- warnf "Could not find css file %s" . -}}
 {{- end -}}

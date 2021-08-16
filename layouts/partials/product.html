@@ -188,7 +188,7 @@
         {{ if $settings.klarnabanner }}
         {{ $payment := printf "$%.2f" (float (div .Params.price 4)) }}
         <div class="product__klarna-banner">
-          <img src="/klarna.svg" alt="Klarna logo" width="54" height="30">
+          <img src="{{site.BaseURL}}klarna.svg" alt="Klarna logo" width="54" height="30">
           <div>
             4 interest free payments of {{$payment}}. <a
               href="https://cdn.klarna.com/1.0/shared/content/legal/terms/0/en_us/sliceitinx" target="_blank"
