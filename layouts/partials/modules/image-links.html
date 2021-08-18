@@ -57,7 +57,7 @@
       {{- else }}
       {{- warnf "No image found for image links with heading \"%s\"" .heading }}
       {{- end }}
-      {{ $linkresolved := partialCached "helpers/get-link-module" (slice .link $) }}
+      {{ $linkresolved := partial "helpers/get-link-module" (slice .link $) }}
       <!-- whole card is the link if link but no linktext -->
       {{ $stretched := and .link (not .linktext) }}
       {{ if $stretched }}
