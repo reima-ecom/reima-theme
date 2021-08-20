@@ -1,6 +1,6 @@
 {{- partial "check-deps" (slice "css-base:partials/elements/r-search.css" $) -}}
 
-<r-search baseurl="{{site.BaseURL}}">
+<r-search basepath="{{(urls.Parse site.BaseURL).Path}}">
   <div id="searchbox">
     <button class="icon" close>
       <svg>
