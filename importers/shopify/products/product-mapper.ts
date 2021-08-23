@@ -1,6 +1,8 @@
 import type { ProductNode, VariantEdge } from "./product-generator.ts";
 import { parseSku } from "./sku-parser.ts";
 
+type ProductFilters = Record<string, string[]>;
+
 export type Product = {
   handle: string;
   collections: string[];
@@ -12,7 +14,7 @@ export type Product = {
   compareAtPriceFormatted?: string;
   hasPriceRange: boolean;
   available: boolean;
-  filtering: Record<string, string[]>;
+  filtering: ProductFilters;
   options: Option[];
   variants: Variant[];
   description: string;
@@ -118,7 +120,32 @@ const addCollections = (p: ProductNode) => ({
   collections: p.collections.edges.map(({ node }) => node.handle),
 });
 
-const addFiltering = () => ({ filtering: {} });
+export const _addFiltering = (p: ProductNode) => {
+  const filterTags = [
+    "Breathability",
+    "Waterproof",
+    "Durability",
+    "Warmth",
+    "UV-Protection",
+    "SizeClothing",
+    "SizeHand",
+    "SizeFeet",
+    "SizeHeadwear",
+    "Color",
+    "Gender",
+  ];
+  const filterFeatures = p.tags.reduce((obj, tag) => {
+    const [tagName, tagValue] = tag.split(':');
+    if (filterTags.includes(tagName)) {
+      const values = obj[tagName] || [];
+      if (!values.includes(tagValue)) {
+        return { ...obj, [tagName]: [...values, tagValue] };
+      }
+    }
+    return obj;
+  }, {} as ProductFilters);
+  return { filtering: filterFeatures };
+};
 
 const getProductAndColor = (sku: string) => {
   const parsedSku = parseSku(sku);
@@ -216,7 +243,7 @@ export const mapProduct = (currencyFormatter: CurrencyFormatter) =>
       .then(transform(addCompareAtPrice))
       .then(transform(addHasPriceRange))
       .then(transform(addCollections))
-      .then(transform(addFiltering))
+      .then(transform(_addFiltering))
       .then(transform(addVariants(currencyFormatter)))
       .then(transform(addOptions))
       .then(({ product }: { product: Product }) => product);
