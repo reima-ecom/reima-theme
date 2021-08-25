@@ -57,8 +57,9 @@
         {{ end }}
         {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
         <div>
-          <a href="#reviews" class="silent-link">
-            {{ range seq (math.Round .average) }}★{{ end }} {{ div (math.Round (mul .average 10)) 10 }} ({{.count}})
+          <a href="#reviews" class="product-reviews silent-link">
+            {{ range seq (math.Round .average) }}★{{ end }} <span class="rating">{{ div (math.Round (mul .average 10)) 10 }}
+            <span class="review-count">({{.count}})</span></span>
           </a>
         </div>
         {{ end }}
