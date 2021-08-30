@@ -37,8 +37,8 @@ modules:
     image: purpose-urban.jpg
   - link: /collections/kids-outdoor
     image: purpose-play.jpg
-  - title: Rain
-    link: /collections/kids-outdoor
+  - title: Front page with anchor link
+    link: /#page-things
     image: purpose-rain.jpg
   - title: Athleisure
     link: /collections/kids-outdoor
