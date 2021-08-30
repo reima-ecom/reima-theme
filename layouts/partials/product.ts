@@ -145,16 +145,20 @@ if (location.hash === "#reviews") openReviews();
 // see if we're trying to link to a specific variant
 if (window.location.search) {
   const params = new URLSearchParams(window.location.search);
-  params.forEach((value, key) => {
-    if (window.selectedOptions[key]) {
-      const input = document.querySelector<HTMLInputElement>(
-        `input[name="${key}"][value="${value}"]`,
-      );
-      if (input) {
-        console.log(input);
-        input.checked = true;
-        input.dispatchEvent(new InputEvent("change"));
+  // wait for carousel to be defined to dispatch the event
+  // otherwise the scrollToImage method is not available
+  customElements.whenDefined("r-carousel").then(() => {
+    params.forEach((value, key) => {
+      if (window.selectedOptions[key]) {
+        const input = document.querySelector<HTMLInputElement>(
+          `input[name="${key}"][value="${value}"]`,
+        );
+        if (input) {
+          console.log(input);
+          input.checked = true;
+          input.dispatchEvent(new InputEvent("change"));
+        }
       }
-    }
+    });
   });
 }
