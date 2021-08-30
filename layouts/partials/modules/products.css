@@ -4,6 +4,25 @@
   max-width: var(--block-width);
 }
 
+.product-list .price--sale {
+  background-color: var(--color-text-emphasis-inverted);
+  border-radius: 2px;
+  color: var(--color-text);
+  padding: 0 .25rem;
+  margin-right: .25rem;
+}
+
+.product-list .price--sale::before {
+  background-color: var(--color-text-emphasis-inverted);
+  border-radius: 2px;
+  color: var(--color-text);
+  padding: 0 .25rem;
+  content: attr(data-discount);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .product-list__heading {
   display: flex;
   flex-wrap: wrap;
