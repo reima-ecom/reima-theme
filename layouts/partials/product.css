@@ -5,6 +5,7 @@
 }
 
 .product h1 {
+  margin-top: 0.625rem;
   margin-bottom: 0.625rem;
 }
 
@@ -18,7 +19,7 @@
 }
 
 .product-prices .price {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
@@ -64,6 +65,14 @@
   height: 30px;
   width: auto;
   display: inline;
+}
+
+.product-reviews .rating {
+  font-size: .875rem;
+}
+
+.product-reviews .review-count {
+  color: var(--color-text-muted);
 }
 
 .size-guide {
@@ -401,6 +410,10 @@ manually with CSS. The `[open]` attribute is still set on the
 
   .size-guide {
     margin: 24px 0 -6px 0;
+  }
+
+  .product h1 {
+    margin-top: 0;
   }
 }
 

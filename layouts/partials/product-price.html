@@ -29,6 +29,6 @@
 <!-- we need to output the span because it might be needed on the product page -->
 <span class="price price--was">
   {{- with .compareAtPriceFormatted }}
-  {{T "Product price" (dict "price" .)}}
+  {{.}}
   {{- end }}
 </span>
