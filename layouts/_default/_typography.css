@@ -84,8 +84,8 @@
 @font-face {
   font-family: "Campton";
   font-display: swap;
-  src: url("{{site.BaseURL}}campton-book-webfont.woff2") format("woff2"),
-    url("{{site.BaseURL}}campton-book-webfont.woff") format("woff");
+  src: url("{{(urls.Parse site.BaseURL).Path}}campton-book-webfont.woff2") format("woff2"),
+    url("{{(urls.Parse site.BaseURL).Path}}campton-book-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -93,8 +93,8 @@
 @font-face {
   font-family: "Campton";
   font-display: swap;
-  src: url("{{site.BaseURL}}campton-bold-webfont.woff2") format("woff2"),
-    url("{{site.BaseURL}}campton-bold-webfont.woff") format("woff");
+  src: url("{{(urls.Parse site.BaseURL).Path}}campton-bold-webfont.woff2") format("woff2"),
+    url("{{(urls.Parse site.BaseURL).Path}}campton-bold-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
