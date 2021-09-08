@@ -16,8 +16,9 @@
   background-color: var(--color-text-emphasis-inverted);
   border-radius: 2px;
   color: var(--color-text);
-  padding: 0 .25rem;
+  font-size: 0.75rem;
   content: attr(data-discount);
+  padding: 0.25rem 0.5rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -89,6 +90,11 @@
   font-size: 0.875rem;
   letter-spacing: normal;
   margin: 0.25rem 0;
+}
+
+.product-list__product--sale .product-list__tag {
+  right: 0;
+  left: inherit;
 }
 
 .product-list__swatches {
