@@ -202,5 +202,23 @@ fields:
     required: true
   description: Google Tag Manager property / tracking id is the one starting with
     "GTM-".
+- name: avantlink_enabled
+  type: boolean
+  label: Avant Link
+- name: avantlink_id
+  type: text
+  config:
+    required: false
+  label: Avant Link account id
+  description: This is your Avant Link site ID, e.g. 111111.<br><br>
+    Step 2 - Install the order confirmation script<br>
+    From your Shopify admin, go to Settings > Checkout > Order Processing.<br>
+    Again, replace "1111111" with your site ID and paste the AvantLink order <br>
+    confirmation code in the "Additional Scripts" section.<br>
+    Code can be found <a href="https://support.avantlink.com/hc/en-us/articles/360022353991-Shopify-Integration-Guide"
+    title="" target="_blank">here</a>.
+  showOnly:
+    field: avantlink_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml

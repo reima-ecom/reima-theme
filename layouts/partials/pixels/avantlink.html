@@ -1,0 +1,15 @@
+{{ with site.Data.pixels }}
+{{ if .avantlink_enabled }}
+
+<!-- AvantLink -->
+<script uses-cookies>
+  (function() {
+    var avm = document.createElement('script'); avm.type = 'text/javascript'; avm.async = true;
+    avm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.avmws.com/{{.avantlink_id}}/';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(avm, s);
+  })();
+</script>
+<!-- End AvantLink -->
+
+{{ end }}
+{{ end }}
