@@ -25,3 +25,5 @@ luckyorange_site: 1111
 gtm_enabled: true
 gtm_property: GTM-XXXXXXX
 aw_property: ''
+avantlink_enabled: true
+avantlink_id: 111111
