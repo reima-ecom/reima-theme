@@ -17,7 +17,12 @@
 {{- end }}
 
 {{- define "partials/product-price-inner" }}
-<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}">
+{{- $discountPercentage := 0 }}
+{{- if .compareAtPrice }}
+  {{ $diff := (float (sub .compareAtPrice .price)) }}
+  {{ $discountPercentage = math.Round (mul (div $diff .compareAtPrice) 100) }}
+{{end}}
+<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}" data-discount="{{ if $discountPercentage }} {{ (mul $discountPercentage -1)}}% {{end}}">
   {{- with .priceFormatted }}
   {{T "Product price" (dict "price" .) }}
   {{- else }}

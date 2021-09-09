@@ -45,7 +45,7 @@
     <!-- this is the product page -->
     {{ $product := . }}
     <li href="{{$linkresolved}}"
-      class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}}"
+      class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}} {{if gt .Params.compareAtPrice .Params.price}}product-list__product--sale{{end}}"
       handle="{{$producthandle}}">
       {{ $productName := .Title }}
       {{ range .Resources.ByType "image" | first 1 }}
