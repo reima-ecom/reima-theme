@@ -26,7 +26,7 @@
       <div class="items">{{T "Cart Loading Message"}}</div>
       <div class="empty">{{T "Cart Empty Message"}}</div>
       <div class="summary">
-        <h2>{{T "Cart Subtotal"}} <span class="price"></span></h2>
+        <h3>{{T "Cart Subtotal"}} <span class="price"></span></h2>
         {{- $announcements := partial "helpers/get-locale-data" "announcements" -}}
         {{ with $announcements.cartAnnouncement }}
         <p>{{.}}</p>
@@ -37,8 +37,8 @@
         <div>
           <img src="" alt="">
           <div>
-            <h2></h2>
-            <h3></h3>
+            <h3></h2>
+            <h4></h3>
             <div class="subtotal">
               <div class="quantity">
                 <button step="-1">-</button>

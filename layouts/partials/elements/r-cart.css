@@ -84,7 +84,7 @@ r-cart[open] .r-cart__main {
   transition-delay: 0.2s;
 }
 
-r-cart h1 {
+r-cart h2 {
   border-bottom: var(--border);
   padding: 0 1rem;
   margin: 0;
@@ -112,7 +112,7 @@ r-cart .summary {
   padding: 1rem;
 }
 
-r-cart .summary h2 {
+r-cart .summary h3 {
   display: flex;
   font-size: 1rem;
   font-weight: 400;
@@ -152,12 +152,12 @@ r-cart .items img {
   max-width: 130px;
 }
 
-r-cart .items h2 {
+r-cart .items h3 {
   font-size: 1.125rem;
   margin: 0 0 0.5rem;
 }
 
-r-cart .items h3 {
+r-cart .items h4 {
   font-size: 1rem;
   font-weight: 400;
   margin: 0.5rem 0;
