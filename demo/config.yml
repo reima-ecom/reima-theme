@@ -1,4 +1,4 @@
-baseURL: https://reima-theme.netlify.app/demo
+baseURL: https://reima-demo.netlify.app/demo
 buildDrafts: true
 disableFastRender: true
 disableKinds:
