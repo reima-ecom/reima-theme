@@ -104,6 +104,16 @@
       "url": ""
     }
   ],
+  "highlight": [
+    {
+      "name": "Sustainability",
+      "url": "/modules/content"
+    },
+    {
+      "name": "About Remima",
+      "url": "/modules/hero"
+    }
+  ],
   "footer": [
     {
       "name": "Shopping Info",
