@@ -1,0 +1,9 @@
+---
+label: Theme Settings
+hide_body: true
+fields:
+- name: show_discount_tags
+  type: boolean
+  label: Show Discount Tags
+  description: Hide/Show discount tags on product cards
+  default: true

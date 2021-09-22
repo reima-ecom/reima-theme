@@ -46,6 +46,10 @@ sections:
 - type: document
   path: i18n/en.json
   label: Translations
+- type: document
+  path: demo/data/themesettings.yaml
+  label: Settings
+  match: "**/*"
 upload_dir: demo/images
 public_path: ''
 front_matter_path: ''

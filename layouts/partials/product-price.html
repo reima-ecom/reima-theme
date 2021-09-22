@@ -18,11 +18,18 @@
 
 {{- define "partials/product-price-inner" }}
 {{- $discountPercentage := 0 }}
+{{- $showDiscountPercentageTag := false }}
 {{- if .compareAtPrice }}
   {{ $diff := (float (sub .compareAtPrice .price)) }}
   {{ $discountPercentage = math.Round (mul (div $diff .compareAtPrice) 100) }}
 {{end}}
-<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}}" data-discount="{{ if $discountPercentage }} {{ (mul $discountPercentage -1)}}% {{end}}">
+
+{{ with site.Data.themesettings }}
+{{ if .show_discount_tags }}
+  {{ $showDiscountPercentageTag = .show_discount_tags }}
+{{ end }}
+{{ end }}
+<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}} {{if and $showDiscountPercentageTag .compareAtPrice}}price--sale-tag{{end}}" data-discount="{{if $discountPercentage}} {{ (mul $discountPercentage -1)}}% {{end}}">
   {{- with .priceFormatted }}
   {{T "Product price" (dict "price" .) }}
   {{- else }}
