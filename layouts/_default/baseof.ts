@@ -63,3 +63,76 @@ const loaderClick = async (e) => {
 document.querySelectorAll('[load]').forEach((element) => {
   element.addEventListener('click', loaderClick);
 });
+
+
+/**
+ * Initialize Carousels
+ */
+document.querySelectorAll('.carousel').forEach(( carousel ) => {
+  const ele:HTMLElement= carousel.querySelector('ul');
+  const bullets = carousel.querySelectorAll('ol li');
+  const nextarrow:HTMLElement = carousel.querySelector('.next');
+  const prevarrow:HTMLElement = carousel.querySelector('.prev');
+  const autoplay:boolean = !!carousel.getAttribute('data-autoplay');
+  const autoplaySpeed:number = carousel.getAttribute('data-autoplay-speed') ?
+      parseInt(carousel.getAttribute('data-autoplay-speed'), 10) : 7000;
+  const dots:boolean = !!carousel.getAttribute('data-dots');
+  const arrows:boolean = !!carousel.getAttribute('data-arrows');
+
+  ele.scrollLeft = 0;
+  bullets[0].classList.add('selected');
+
+  const scrollTo = function(event) {
+    event.preventDefault();
+    const elID = this.getAttribute('href');
+    const el:HTMLElement = ele.querySelector('.carousel__item[data-id="' + elID.substr(1) + '"]');
+    ele.scrollLeft = el.offsetLeft;
+
+    // Set selected bullet
+    bullets.forEach(function(bullet) {
+      bullet.classList.remove('selected');
+    });
+    this.parentElement.classList.add('selected');
+  }
+
+  const nextSlide = function() {
+    if(!carousel.querySelector('ol li:last-child').classList.contains('selected')) {
+      carousel.querySelector('ol li.selected').nextElementSibling.querySelector('a').click();
+    } else {
+      carousel.querySelector('ol li:first-child a').click();
+    }
+  }
+
+  const prevSlide = function() {
+    if(!carousel.querySelector('ol li:first-child').classList.contains('selected')) {
+      carousel.querySelector('ol li.selected').previousElementSibling.querySelector('a').click();
+    } else {
+      carousel.querySelector('ol li:last-child a').click();
+    }
+  }
+
+  // Attach the handlers
+  if (arrows && nextarrow && prevarrow) {
+    nextarrow.style.display = 'block';
+    prevarrow.style.display = 'block';
+  }
+
+  nextarrow.addEventListener('click', nextSlide);
+  prevarrow.addEventListener('click', prevSlide);
+
+  if (dots) {
+    carousel.querySelector('.dots').style.display = 'flex';
+    bullets.forEach(function(bullet) {
+      bullet.querySelector('a').addEventListener('click', scrollTo);
+    });
+  }
+
+  // setInterval for autoplay
+  if (autoplay) {
+    setInterval(function(){
+      if (ele != document.querySelector('.carousel:hover ul')) {
+        nextarrow.click();
+      }
+    }, autoplaySpeed);
+  }
+});

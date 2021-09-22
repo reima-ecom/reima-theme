@@ -72,6 +72,46 @@ modules:
     imagemobile: "/kids-square.jpg"
     link: "#"
     linktext: Buy now
+- template: image-links
+  colorinvert: true
+  horizontal: right
+  vertical: bottom
+  small: true
+  columnstablet: ''
+  columnsdesktop: '4'
+  carousel_enabled: true
+  carousel_dots: true
+  carousel_autoplay: true
+  carousel_autoplay_speed: 7000
+  cards:
+  - heading: Infant outdoor clothing
+    image: "/infants-square.jpg"
+    link: "#"
+  - heading: Toddler outdoor clothing
+    image: "/toddlers-square.jpg"
+    link: "#"
+  - heading: Kids outdoor clothing
+    image: "/kids-square.jpg"
+    link: "#"
+    linktext: Buy now
+  - heading: Kids outdoor clothing
+    image: "/purpose-beach.jpg"
+    link: "#"
+    linktext: Buy now
+  - heading: Infant outdoor clothing
+    image: "/infants-square.jpg"
+    link: "#"
+  - heading: Toddler outdoor clothing
+    image: "/toddlers-square.jpg"
+    link: "#"
+  - heading: Kids outdoor clothing
+    image: "/kids-square.jpg"
+    link: "#"
+    linktext: Buy now
+  - heading: Kids outdoor clothing
+    image: "/purpose-beach.jpg"
+    link: "#"
+    linktext: Buy now
 title: Image links demo
 
 ---

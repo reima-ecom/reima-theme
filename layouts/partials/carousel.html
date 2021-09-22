@@ -1,0 +1,66 @@
+<div class="carousel" data-autoplay="{{ .carousel_autoplay }}" data-autoplay-speed="{{ .carousel_autoplay_speed }}" data-dots="{{ .carousel_dots }}" data-arrows="{{ .carousel_arrows }}">
+    <ul>
+        {{ range $index, $slide := .context.cards }}
+        <li class="carousel__item" data-id="item-{{ add $index 1}}">
+            <!-- get mobile image if exists -->
+            {{- $mobile := false }}
+            {{- with .imagemobile }}
+            {{- $mobile = partial "helpers/get-image" . }}
+            {{- end }}
+            <!-- get main image -->
+            {{- with $slide.image }}
+            {{- with partial "helpers/get-image" . }}
+            {{- $params := (dict "image" . "widths" "375,768,1080") }}
+            {{- $default := .Resize "1080x" -}}
+            <picture>
+                <!-- difficult to work out sizes... -->
+                {{ $sizes := "min(50vw, 650px)" }}
+                {{- with $mobile }}
+                <source media="(min-width: 768px)" srcset="{{partial "srcset" $params}}" sizes="{{$sizes}}">
+                <source srcset="{{partial "srcset" (dict "image" . "widths" "1080,768")}}">
+                {{- end }}
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
+                        class="lazyload" loading="lazy" data-srcset="{{partial "srcset" $params}}"
+                data-src="{{$default.RelPermalink}}" sizes="(min-width: 768px) {{$sizes}}, 100vw" />
+            </picture>
+            <noscript>
+                <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
+                width="{{.Width}}" />
+            </noscript>
+            {{ end }}
+            {{- else }}
+            {{- warnf "No image found for image links with heading \"%s\"" .heading }}
+            {{- end }}
+
+            {{ $linkresolved := partial "helpers/get-link-module" (slice .link $) }}
+            <!-- whole card is the link if link but no linktext -->
+            {{ $stretched := and .link (not .linktext) }}
+            {{ if $stretched }}
+            <a href="{{$linkresolved}}" class="image-links__overlay">
+                {{ else }}
+                <div class="image-links__overlay">
+                    {{ end }}
+                    <div>
+                        {{ with .heading }}<h3>{{.}}</h3>{{ end }}
+                        {{ with .text }}<p>{{.}}</p>{{ end }}
+                        {{ if .linktext }}
+                        <a class="btn" href="{{$linkresolved}}">{{.linktext}}</a>
+                        {{ end }}
+                    </div>
+                    {{ if not $stretched }}
+                </div>
+                {{ else }}
+            </a>
+            {{ end }}
+        </li>
+        {{ end }}
+    </ul>
+    <ol class="dots">
+        {{ range $index, $page := .context.cards }}
+        {{ if (modBool $index $.items) }}<li><a href="#item-{{ add $index 1 }}"></a></li>{{ end }}
+        {{ end }}
+    </ol>
+    <div class="prev">&lsaquo;</div>
+    <div class="next">&rsaquo;</div>
+</div>
