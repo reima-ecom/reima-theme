@@ -49,24 +49,32 @@
     {
       "children": [
         {
-          "children": [],
+          "children": [
+
+          ],
           "name": "Hero",
           "url": "/modules/hero"
         },
         {
-          "children": [],
+          "children": [
+
+          ],
           "name": "Products",
           "url": "/modules/products"
         },
         {
           "name": "Image Links - Small",
           "url": "/modules/image-links-small",
-          "children": []
+          "children": [
+
+          ]
         },
         {
           "name": "Image Links - Banners",
           "url": "/modules/image-links",
-          "children": []
+          "children": [
+
+          ]
         },
         {
           "name": "Image grid",
@@ -75,17 +83,23 @@
         {
           "name": "Split card",
           "url": "/modules/split-card",
-          "children": []
+          "children": [
+
+          ]
         },
         {
           "name": "Testimonials",
           "url": "/modules/testimonials",
-          "children": []
+          "children": [
+
+          ]
         },
         {
           "name": "Article grid",
           "url": "/modules/article-grid",
-          "children": []
+          "children": [
+
+          ]
         },
         {
           "name": "Content (text)",
@@ -102,6 +116,16 @@
       ],
       "name": "Modules",
       "url": ""
+    }
+  ],
+  "highlight": [
+    {
+      "name": "Sustainability",
+      "url": "/modules/content"
+    },
+    {
+      "name": "About Reima",
+      "url": "/modules/hero"
     }
   ],
   "footer": [
@@ -142,7 +166,7 @@
           "url": "/"
         }
       ]
-    },    
+    },
     {
       "name": "Our Products",
       "url": "",
@@ -172,7 +196,7 @@
           "url": "/"
         }
       ]
-    },    
+    },
     {
       "name": "Contact Us",
       "url": "/",

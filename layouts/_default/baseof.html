@@ -106,7 +106,10 @@
                 </svg>
               </label>
             </div>
-            {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
+            <div class="menu__scroller">
+              {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
+              {{ partialCached "menu" (dict "menu" $menus.highlight "root" $) "highlight" }}
+            </div>
           </div>
         </div>
         <div class="logo-link">
