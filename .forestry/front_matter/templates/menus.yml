@@ -45,14 +45,14 @@ fields:
     to two sub-levels.
 - name: highlight
   type: field_group_list
+  label: Main Menu Extra Items
+  description: Shown at the top level of the main menu. Links are shown below the
+    menu on "mobile" and above on "desktop".
   fields:
   - name: highlight_entry
     type: include
     config: {}
     template: menu-entry
-    label: Main Menu Extra Items
-    description: Shown at the top level of the main menu. Links are shown below the
-      menu on "mobile" and above on "desktop".
 - name: footer
   type: field_group_list
   fields:
