@@ -82,7 +82,7 @@
   margin: 0.25rem 0;
 }
 
-.product-list__product--sale .product-list__tag {
+.product-list__product--sale .price--sale-tag ~ .product-list__tag {
   right: 0;
   left: inherit;
 }
