@@ -29,7 +29,15 @@
   {{ $showDiscountPercentageTag = .show_discount_tags }}
 {{ end }}
 {{ end }}
-<span class="price price--actual {{if .compareAtPrice}}price--sale{{end}} {{if and $showDiscountPercentageTag .compareAtPrice}}price--sale-tag{{end}}" data-discount="{{if $discountPercentage}} {{ (mul $discountPercentage -1)}}% {{end}}">
+
+{{ $class := "price price--actual" }}
+{{if .compareAtPrice}}
+{{ $class = printf "%s price--sale" $class }}
+{{end}}
+{{if and $showDiscountPercentageTag .compareAtPrice}}
+{{ $class = printf "%s price--sale-tag" $class }}
+{{end}}
+<span class="{{$class}}" data-discount="{{if $discountPercentage}} {{ (mul $discountPercentage -1)}}% {{end}}">
   {{- with .priceFormatted }}
   {{T "Product price" (dict "price" .) }}
   {{- else }}
