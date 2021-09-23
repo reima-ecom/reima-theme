@@ -44,12 +44,15 @@ fields:
   description: Items for the main menu visible in the header. This menu can have up
     to two sub-levels.
 - name: highlight
-  type: include
-  config: {}
-  template: menu-entry
-  label: Main Menu Extra Items
-  description: Shown at the top level of the main menu. Links are shown below the
-    menu on "mobile" and above on "desktop".
+  type: field_group_list
+  fields:
+  - name: highlight_entry
+    type: include
+    config: {}
+    template: menu-entry
+    label: Main Menu Extra Items
+    description: Shown at the top level of the main menu. Links are shown below the
+      menu on "mobile" and above on "desktop".
 - name: footer
   type: field_group_list
   fields:
