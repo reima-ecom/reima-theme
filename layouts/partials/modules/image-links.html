@@ -8,6 +8,9 @@
 {{ with .align }}
 {{ $class = printf "%s image-links--text-%s" $class . }}
 {{ end }}
+{{ with .columnsmobile }}
+{{ $class = printf "%s image-links--mobile-%v" $class . }}
+{{ end }}
 {{ with .columnstablet }}
 {{ $class = printf "%s image-links--tablet-%v" $class . }}
 {{ end }}

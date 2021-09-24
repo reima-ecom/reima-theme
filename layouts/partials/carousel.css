@@ -108,11 +108,20 @@
   margin-bottom: 50px;
 }
 
+.image-links--mobile-2 .carousel__item {
+  box-sizing: border-box;
+  margin-right: 1rem;
+  min-width: calc(50% - 12px);
+}
+.image-links--mobile-2 .carousel__item:last-child {
+  margin-right: 0;
+}
+
 @media (min-width: 768px) {
   .image-links .carousel__item {
     box-sizing: border-box;
     margin-right: 1rem;
-    min-width: calc(100% - 12px);
+    min-width: calc(50% - 12px);
   }
 
   .image-links--tablet-2 .carousel__item {

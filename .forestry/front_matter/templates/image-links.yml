@@ -106,6 +106,22 @@ fields:
   type: boolean
   label: Invert colors
   description: Makes the text and buttons white in the content overlays.
+- name: columnsmobile
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+      - '1'
+      - '2'
+    source:
+      type: simple
+      section:
+      file:
+      path:
+  label: Columns on mobile
+  description: Number of columns to output on mobile sized screens. Leave blank for
+    default auto-fill behavior.
 - name: columnstablet
   type: select
   default: []

@@ -77,7 +77,8 @@ modules:
   horizontal: right
   vertical: bottom
   small: true
-  columnstablet: ''
+  columnsmobile: '1'
+  columnstablet: '2'
   columnsdesktop: '4'
   carousel_enabled: true
   carousel_dots: true
