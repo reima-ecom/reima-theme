@@ -43,10 +43,24 @@
     {{ $producthandle := .File.ContentBaseName }}
     {{ with site.GetPage (printf "/products/%s" $producthandle) }}
     <!-- this is the product page -->
+
+    {{- $showDiscountPercentageTag := false }}
+    {{ with site.Data.themesettings }}
+    {{ if .show_discount_tags }}
+    {{ $showDiscountPercentageTag = .show_discount_tags }}
+    {{ end }}
+    {{ end }}
+
+    {{ $class := "product-list__product" }}
+    {{if not .Params.available}}
+    {{ $class = printf "%s product-list__product--sold-out" $class }}
+    {{end}}
+    {{if and $showDiscountPercentageTag (gt .Params.compareAtPrice .Params.price)}}
+    {{ $class = printf "%s product-list__product--sale" $class }}
+    {{end}}
+
     {{ $product := . }}
-    <li href="{{$linkresolved}}"
-      class="product-list__product {{if not .Params.available}}product-list__product--sold-out{{end}} {{if gt .Params.compareAtPrice .Params.price}}product-list__product--sale{{end}}"
-      handle="{{$producthandle}}">
+    <li href="{{$linkresolved}}" class="{{$class}}" handle="{{$producthandle}}">
       {{ $productName := .Title }}
       {{ range .Resources.ByType "image" | first 1 }}
       <!-- grid layout with auto-fit and min 150px cells -->

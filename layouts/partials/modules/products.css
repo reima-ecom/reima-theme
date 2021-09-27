@@ -12,7 +12,7 @@
   margin-right: .25rem;
 }
 
-.product-list .price--sale::before {
+.product-list .price--sale-tag::before {
   background-color: var(--color-text-emphasis-inverted);
   border-radius: 2px;
   color: var(--color-text);
@@ -185,7 +185,7 @@
     justify-content: center;
   }
 
-  .product-list .price--sale::before {
+  .product-list .price--sale-tag::before {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
