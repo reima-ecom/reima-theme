@@ -1,6 +1,0 @@
-.article {
-  max-width: var(--content-width);
-  margin: var(--block-margin);
-  padding: var(--block-padding);
-  font-size: var(--text-font-size);
-}
