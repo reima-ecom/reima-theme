@@ -7,7 +7,30 @@ Expects the `announcements` data file as input.
 -->
 
 {{ if .headerAnnouncementEnabled }}
+<!-- if we have additional announcements, render a bit differently -->
+{{ $announcementCount := 1 }}
+{{ with .headerAnnouncementAdditional }}
+{{ $announcementCount = add $announcementCount (len .) }}
+{{ end }}
+{{ if gt $announcementCount 1 }}
+<aside class="announcement announcement--many announcement--many-{{$announcementCount}}">
+  <div>
+    <div>
+      {{.headerAnnouncement | site.Home.RenderString}}
+    </div>
+  </div>
+  {{ range .headerAnnouncementAdditional }}
+  <div>
+    <div>
+      {{. | site.Home.RenderString}}
+    </div>
+  </div>
+  {{ end }}
+</aside>
+<!-- if we only have the one announcement, just keep it simple -->
+{{ else }}
 <aside class="announcement">
   {{.headerAnnouncement | site.Home.RenderString}}
 </aside>
+{{ end }}
 {{ end }}

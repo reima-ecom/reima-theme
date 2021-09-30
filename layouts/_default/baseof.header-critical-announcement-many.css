@@ -1,0 +1,142 @@
+.announcement--many {
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.announcement--many > div {
+  flex: 0 0 100%;
+}
+
+.announcement--many > div > div {
+  padding: var(--padding);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/*
+Move all the additional announcements over the visible one.
+This is to make the animation origin always the same, i.e.
+without the `translateY` from the animation, all elements
+are in the same place.
+*/
+.announcement--many > div:nth-child(2) {
+  transform: translateX(-100%);
+}
+
+.announcement--many > div:nth-child(3) {
+  transform: translateX(-200%);
+}
+
+/* Set defaults for the animation */
+
+.announcement--many > div > div {
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/*
+For animation timing and constructing the actual animation
+(which is different depending on the number of elements,
+because the wait in between showing the announcement varies),
+we need some math.
+
+Let:
+- show = Amount of seconds to show each announcement
+- scroll = Amount of time to scroll in the next announcement
+- elements = Number of elements (announcements)
+- position = Position of specific announcement in the list
+
+Then:
+- animation-duration = (show + scroll) * elements
+  This is the total duration of one round of scrolling.
+- animation-delay = -(elements + 1 - position) * (show + scroll) - scroll
+  Makes the animation of each element start at the appropriate
+  position. Negative numbers mean "start the animation this
+  many seconds into the animation". The formula is a bit weird, but it
+  basically delays the animations in inverted order, so that the first one
+  is pushed the most (most negative), and the last one pushed the least.
+- scroll-pct = scroll / (show + scroll) * 100% / elements
+  This is the percent of animation time that should be spent scrolling.
+- show-pct = show / (show + scroll) * 100% / elements
+  This is the percent of animation time that should be spent showing the current
+  announcement.
+- Animation keyframes selectors should then be:
+  1. from (i.e. 0%) -> element below bar
+  2. scroll-pct -> element to bar
+  3. scroll-pct + show-pct -> hold element in bar
+  4. 2 * scroll-pct + show-pct -> element away from bar
+  5. to (i.e. 100%) -> keep element out of view
+*/
+
+.announcement--many {
+  --show-time: 10s;
+  --scroll-time: 1s;
+}
+
+.announcement--many-2 {
+  --elements: 2;
+  --animation: announcement-scroll-two;
+}
+
+.announcement--many-3 {
+  --elements: 3;
+  --animation: announcement-scroll-three;
+}
+
+.announcement--many > div:nth-child(1) > div {
+  --position: 1;
+}
+
+.announcement--many > div:nth-child(2) > div {
+  --position: 2;
+}
+
+.announcement--many > div:nth-child(3) > div {
+  --position: 3;
+}
+
+.announcement--many > div > div {
+  animation-name: var(--animation);
+  animation-duration: calc((var(--show-time) + var(--scroll-time)) * var(--elements));
+  animation-delay: calc(-1 * (var(--elements) + 1 - var(--position)) * (var(--show-time) + var(--scroll-time)) - var(--scroll-time));
+}
+
+@keyframes announcement-scroll-two {
+  from {
+    transform: translateY(100%);
+  }
+  4.5454545% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  54.5454545% {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes announcement-scroll-three {
+  from {
+    transform: translateY(100%);
+  }
+  3.03030303% {
+    transform: translateY(0%);
+  }
+  33.3333333% {
+    transform: translateY(0%);
+  }
+  36.3636363% {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}

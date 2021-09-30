@@ -44,6 +44,10 @@
   {{ if $announcements.benefitsEnabled }}
   {{ $.Scratch.Add "css-base" "partials/elements/benefits.css" }}
   {{ end }}
+  <!-- if we have many announcements, add css for that -->
+  {{ if gt $announcements.headerAnnouncementAdditional 0 }}
+  {{ $.Scratch.Add "css-critical" "_default/baseof.header-critical-announcement-many.css" }}
+  {{ end }}
 
   <!-- this is a hook for pages to add css to the above lists -->
   {{- block "dependencies" . -}} {{- end -}}

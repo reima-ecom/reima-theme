@@ -5,12 +5,13 @@ input[type="checkbox"][id|="open"] {
 }
 
 .announcement {
+  --padding: 0.5rem
+    max(50% - var(--content-max-width) / 2, var(--content-padding));
   background-color: var(--color-bg-inverted);
   color: var(--color-text-inverted);
   text-align: center;
   font-size: var(--text-font-size-sm);
-  padding: 0.5rem
-    max(50% - var(--content-max-width) / 2, var(--content-padding));
+  padding: var(--padding);
 }
 
 .announcement a {

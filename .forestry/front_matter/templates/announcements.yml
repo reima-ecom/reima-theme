@@ -8,6 +8,7 @@ fields:
 - type: text
   name: headerAnnouncement
   label: Header Announcement
+  description: Use markdown if needed.
   showOnly:
     field: headerAnnouncementEnabled
     value: true
@@ -19,7 +20,7 @@ fields:
     max: 
   label: Header Additional Announcements
   description: Add additional announcements if needed. If set, the announcements will
-    scroll one after the other endlessly.
+    scroll one after the other endlessly. Use markdown if needed.
   showOnly:
     field: headerAnnouncementEnabled
     value: true
