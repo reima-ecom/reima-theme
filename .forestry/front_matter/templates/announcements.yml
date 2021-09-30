@@ -11,6 +11,18 @@ fields:
   showOnly:
     field: headerAnnouncementEnabled
     value: true
+- name: headerAnnouncementAdditional
+  type: list
+  config:
+    use_select: false
+    min: 
+    max: 
+  label: Header Additional Announcements
+  description: Add additional announcements if needed. If set, the announcements will
+    scroll one after the other endlessly.
+  showOnly:
+    field: headerAnnouncementEnabled
+    value: true
 - type: text
   name: cartAnnouncement
   label: Cart announcement
@@ -190,4 +202,5 @@ fields:
     description: Links to show in the benefits section.
   label: Benefits
 pages:
+- demo/data/announcements.json
 - demo/data/announcements.json
