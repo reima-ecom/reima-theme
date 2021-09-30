@@ -53,6 +53,9 @@ fields:
     type: include
     config: {}
     template: menu-entry
+    label: Highlight Menu Entry
+  config:
+    labelField: name
 - name: footer
   type: field_group_list
   fields:
