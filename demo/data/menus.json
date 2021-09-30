@@ -2,7 +2,10 @@
   "main": [
     {
       "name": "Help",
-      "url": "/content-management-help"
+      "url": "/content-management-help",
+      "children": [
+
+      ]
     },
     {
       "name": "Pages",
@@ -30,19 +33,31 @@
         },
         {
           "name": "Collection interstitial",
-          "url": "/kids"
+          "url": "/kids",
+          "children": [
+
+          ]
         },
         {
           "name": "Collection plain",
-          "url": "/collection"
+          "url": "/collection",
+          "children": [
+
+          ]
         },
         {
           "name": "Baby kit",
-          "url": "/baby-kit"
+          "url": "/baby-kit",
+          "children": [
+
+          ]
         },
         {
           "name": "Cart page",
-          "url": "/cart-test"
+          "url": "/cart-test",
+          "children": [
+
+          ]
         }
       ]
     },
@@ -78,7 +93,10 @@
         },
         {
           "name": "Image grid",
-          "url": "/modules/image-grid"
+          "url": "/modules/image-grid",
+          "children": [
+
+          ]
         },
         {
           "name": "Split card",
@@ -103,15 +121,24 @@
         },
         {
           "name": "Content (text)",
-          "url": "/modules/content"
+          "url": "/modules/content",
+          "children": [
+
+          ]
         },
         {
           "name": "Content with Tables",
-          "url": "/modules/content-table"
+          "url": "/modules/content-table",
+          "children": [
+
+          ]
         },
         {
           "name": "Milestones",
-          "url": "/modules/milestones"
+          "url": "/modules/milestones",
+          "children": [
+
+          ]
         }
       ],
       "name": "Modules",
