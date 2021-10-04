@@ -98,6 +98,7 @@ const query = (count: number, cursor?: string) =>
           name
           values
         }
+        hasOnlyDefaultVariant
         variants(first: 100) {
           pageInfo {
             hasNextPage

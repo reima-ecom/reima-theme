@@ -50,6 +50,10 @@ const addCollections: Transformer = (product) => ({
   collections: product.collections.edges.map(({ node }) => node.handle),
 });
 
+const addHasOnlyDefaultVariant: Transformer = (product) => ({
+  hasOnlyDefaultVariant: product.hasOnlyDefaultVariant,
+});
+
 export const writeProduct = (
   outDir: string,
   srcToFilename: (src: string) => string,
@@ -60,13 +64,17 @@ export const writeProduct = (
       .then(transform(checkMissingVariants))
       .then(transform(getResources))
       .then(transform(mapProductLegacy))
+      .then(transform(addHasOnlyDefaultVariant))
       // add sku to variants in a very hacky way
       .then(({ productNode, product }: TransformerParam) => ({
         productNode,
         product: {
           ...product,
-          variants: product.variants.map((v: any, i: number) => ({ ...v, sku: productNode.variants.edges[i].node.sku }))
-        }
+          variants: product.variants.map((v: any, i: number) => ({
+            ...v,
+            sku: productNode.variants.edges[i].node.sku,
+          })),
+        },
       }))
       // collections are needed for the algolia index
       .then(transform(addCollections))

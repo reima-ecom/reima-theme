@@ -67,8 +67,8 @@
 
       <hr>
 
-      <!-- only render selections if more than one variant -->
-      {{ if gt (len $product.Params.variants) 1 }}
+      <!-- skip rendering if only one (or less) variant, and that variant is not the default -->
+      {{ if not (and (le (len $product.Params.variants) 1) $product.Params.hasOnlyDefaultVariant) }}
       {{ range $product.Params.options }}
       {{ $name := .name }}
       {{ $nameEnglish := $name }}
