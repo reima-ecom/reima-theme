@@ -14,7 +14,7 @@ type ProductNode = {
       };
     }[];
   };
-  hasOnlyDefaultVariant: boolean;
+  hasOnlyDefaultVariant?: boolean;
   variants: {
     pageInfo: {
       hasNextPage: boolean;
