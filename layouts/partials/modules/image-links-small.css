@@ -11,3 +11,103 @@
   text-align: center;
   gap: 0.750rem;
 }
+
+@media (min-width: 768px) {
+  .module-image-links-small--align-left > div {
+    justify-content: flex-start;
+  }
+
+  .module-image-links-small--align-right > div {
+    justify-content: flex-end;
+  }
+}
+
+/* Carousel */
+.module-image-links-small .carousel__item .title {
+  transition: color 0.2s;
+}
+.module-image-links-small .carousel__item:hover .title {
+  color: var(--color-link);
+}
+
+.module-image-links-small .carousel {
+  display: block;
+  margin: 0 auto 50px auto;
+  max-width: 340px;
+}
+.module-image-links-small .carousel {
+  display: block;
+  margin: 0 auto 50px auto;
+  max-width: 340px;
+}
+
+.module-image-links-small .carousel__item {
+  box-sizing: border-box;
+  margin-right: 1rem;
+  min-width: calc(50% - 12px);
+}
+
+.module-image-links-small .carousel {
+  max-width: 340px;
+}
+.module-image-links-small .carousel__item {
+  box-sizing: border-box;
+  margin-right: 1rem;
+  min-width: calc(50% - 12px);
+}
+.module-image-links-small .carousel__item:last-child {
+  margin-right: 0;
+}
+.module-image-links-small .dots li {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .module-image-links-small .dots li:nth-child(2n + 1) {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .module-image-links-small--tablet-2 .dots li:nth-child(2n + 1) {
+    display: inline-block;
+  }
+
+  .module-image-links-small--tablet-3 .carousel {
+    max-width: 510px;
+  }
+  .module-image-links-small--tablet-3 .carousel__item {
+    box-sizing: border-box;
+    margin-right: 1rem;
+    min-width: calc(33.333% - 12px);
+  }
+  .module-image-links-small--tablet-3 .dots li:nth-child(3n + 1) {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 992px) {
+  .module-image-links-small--desktop-3 .carousel {
+    max-width: 510px;
+  }
+  .module-image-links-small--desktop-3 .carousel__item {
+    box-sizing: border-box;
+    margin-right: 1rem;
+    min-width: calc(33.3333% - 12px);
+  }
+  .module-image-links-small--desktop-3 .dots li:nth-child(3n + 1) {
+    display: inline-block;
+  }
+
+  .module-image-links-small--desktop-4 .carousel {
+    max-width: 680px;
+  }
+  .module-image-links-small--desktop-4 .carousel__item {
+    box-sizing: border-box;
+    margin-right: 1rem;
+    min-width: calc(25% - 12px);
+  }
+  .module-image-links-small--desktop-4 .dots li:nth-child(4n + 1) {
+    display: inline-block;
+  }
+}

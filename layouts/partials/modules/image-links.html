@@ -8,9 +8,6 @@
 {{ with .align }}
 {{ $class = printf "%s image-links--text-%s" $class . }}
 {{ end }}
-{{ with .columnsmobile }}
-{{ $class = printf "%s image-links--mobile-%v" $class . }}
-{{ end }}
 {{ with .columnstablet }}
 {{ $class = printf "%s image-links--tablet-%v" $class . }}
 {{ end }}
@@ -26,7 +23,7 @@
 
 <div class="{{$class}}">
   {{ if .carousel_enabled }}
-    {{ partial "carousel.html" (dict "context" . "items_mobile" 1 "items_tablet" .columnstablet "items_desktop" .columnsdesktop "carousel_dots" .carousel_dots "carousel_arrows" .carousel_arrows "carousel_autoplay" .carousel_autoplay "carousel_autoplay_speed" .carousel_autoplay_speed) }}
+    {{ partial "carousel.html" (dict "slides" .cards "items_mobile" 1 "items_tablet" .columnstablet "items_desktop" .columnsdesktop "carousel_dots" .carousel_dots "carousel_arrows" .carousel_arrows "carousel_autoplay" .carousel_autoplay "carousel_autoplay_speed" .carousel_autoplay_speed) }}
   {{- else }}
   {{ with .heading }}
   <h2>{{.}}</h2>

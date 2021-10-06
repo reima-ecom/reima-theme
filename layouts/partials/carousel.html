@@ -1,6 +1,6 @@
 <div class="carousel" data-items-mobile="{{ .items_mobile }}" data-items-tablet="{{ .items_tablet }}" data-items-desktop="{{ .items_desktop }}" data-autoplay="{{ .carousel_autoplay }}" data-autoplay-speed="{{ .carousel_autoplay_speed }}" data-dots="{{ .carousel_dots }}" data-arrows="{{ .carousel_arrows }}">
     <ul>
-        {{ range $index, $slide := .context.cards }}
+        {{ range $index, $slide := .slides }}
         <li class="carousel__item" data-id="item-{{ add $index 1}}">
             <!-- get mobile image if exists -->
             {{- $mobile := false }}
@@ -49,15 +49,17 @@
                         {{ end }}
                     </div>
                     {{ if not $stretched }}
+
                 </div>
                 {{ else }}
             </a>
             {{ end }}
+            {{ with .title }}<span class="title">{{.}}</span>{{ end }}
         </li>
         {{ end }}
     </ul>
     <ol class="dots">
-        {{ range $index, $page := .context.cards }}
+        {{ range $index, $page := .slides }}
         <li><a href="#item-{{ add $index 1 }}"></a></li>
         {{ end }}
     </ol>

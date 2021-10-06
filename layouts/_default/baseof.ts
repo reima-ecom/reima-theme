@@ -133,7 +133,6 @@ document.querySelectorAll('.carousel').forEach((carousel) => {
   }
 
   // setInterval for autoplay
-
   if (autoplay) {
     setInterval(function () {
       if (ele != document.querySelector('.carousel:hover ul')) {
