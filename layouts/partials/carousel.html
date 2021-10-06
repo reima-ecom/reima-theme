@@ -1,4 +1,4 @@
-<div class="carousel" data-autoplay="{{ .carousel_autoplay }}" data-autoplay-speed="{{ .carousel_autoplay_speed }}" data-dots="{{ .carousel_dots }}" data-arrows="{{ .carousel_arrows }}">
+<div class="carousel" data-items-mobile="{{ .items_mobile }}" data-items-tablet="{{ .items_tablet }}" data-items-desktop="{{ .items_desktop }}" data-autoplay="{{ .carousel_autoplay }}" data-autoplay-speed="{{ .carousel_autoplay_speed }}" data-dots="{{ .carousel_dots }}" data-arrows="{{ .carousel_arrows }}">
     <ul>
         {{ range $index, $slide := .context.cards }}
         <li class="carousel__item" data-id="item-{{ add $index 1}}">
@@ -58,7 +58,7 @@
     </ul>
     <ol class="dots">
         {{ range $index, $page := .context.cards }}
-        {{ if (modBool $index $.items) }}<li><a href="#item-{{ add $index 1 }}"></a></li>{{ end }}
+        <li><a href="#item-{{ add $index 1 }}"></a></li>
         {{ end }}
     </ol>
     <div class="prev">&lsaquo;</div>
