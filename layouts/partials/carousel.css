@@ -1,0 +1,100 @@
+.carousel {
+  position: relative;
+}
+
+.carousel ul {
+  overflow: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  scroll-snap-type: x mandatory;
+  scroll-snap-points-y: repeat(100%);
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel ul::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel ul li {
+  position: relative;
+  min-width: 100%;
+  list-style: none;
+  scroll-snap-align: start;
+
+}
+
+.carousel .image-links__overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel ul li > picture {
+  object-fit: cover;
+}
+
+.carousel ul li > picture img {
+  width: 100%;
+}
+
+.carousel ul li > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel ol {
+  position: absolute;
+  bottom: -40px;
+  display: none;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 0;
+  z-index: 9;
+}
+
+.carousel ol li {
+  list-style: none;
+  padding: 0 5px;
+}
+
+.carousel ol li a {
+  background-color: #38383b;
+  border-radius: 100%;
+  display: block;
+  height: 8px;
+  width: 8px;
+  opacity: 0.25;
+}
+
+.carousel ol li.selected a {
+  opacity: 1;
+}
+
+.carousel .prev,
+.carousel .next {
+  display: none;
+  user-select: none;
+  cursor: pointer;
+  font-size: 50px;
+  color: white;
+  position: absolute;
+  left: 0;
+  padding: 15px 15px 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+  line-height: 0;
+}
+
+.carousel .next {
+  left: auto;
+  right: 0;
+}

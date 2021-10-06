@@ -1,12 +1,26 @@
-<div class="module-image-links-small">
+{{ $class := "module-image-links-small" }}
+{{ with .align }}
+{{ $class = printf "%s module-image-links-small--align-%s" $class . }}
+{{ end }}
+{{ with .columnstablet }}
+{{ $class = printf "%s module-image-links-small--tablet-%v" $class . }}
+{{ end }}
+{{ with .columnsdesktop }}
+{{ $class = printf "%s module-image-links-small--desktop-%v" $class . }}
+{{ end }}
+
+<div class="{{$class}}">
   <h2>
     {{.heading}}
   </h2>
+  {{ if .carousel_enabled }}
+  {{ partial "carousel.html" (dict "slides" .images "items_mobile" 2 "items_tablet" .columnstablet "items_desktop" .columnsdesktop "carousel_dots" .carousel_dots "carousel_arrows" .carousel_arrows "carousel_autoplay" .carousel_autoplay "carousel_autoplay_speed" .carousel_autoplay_speed) }}
+  {{- else }}
   <div>
     {{ range .images }}
     <div>
       <a href="{{partial "helpers/get-link-module" (slice .link $)}}" class="silent-link text-sm">
-      <!-- 
+      <!--
         fix image width to 120px
        -->
         {{ $sizes := "158px" }}
@@ -16,4 +30,5 @@
     </div>
     {{ end }}
   </div>
+  {{ end }}
 </div>

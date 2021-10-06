@@ -31,3 +31,89 @@ fields:
     max: 
     labelField: 
   label: Images
+- name: align
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+      - left
+      - right
+    source:
+      type: simple
+      section:
+      file:
+      path:
+  label: Items alignment
+  description: By default and if this is blank, items are centered.
+- name: columnstablet
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+      - '2'
+      - '3'
+    source:
+      type: simple
+      section:
+      file:
+      path:
+  label: Columns on tablet
+  description: Number of columns to output on tablet sized screens. Leave blank for
+    default auto-fill behavior.
+- name: columnsdesktop
+  type: select
+  default: []
+  config:
+    required: false
+    options:
+      - '3'
+      - '4'
+    source:
+      type: simple
+      section:
+      file:
+      path:
+  label: Columns on desktop
+  description: Number of columns to output on desktop sized screens. If left blank,
+    it inherits the settings from tablet.
+- name: carousel_enabled
+  type: boolean
+  label: Carousel Enabled
+  description: Enables carousel functionality
+- name: carousel_dots
+  type: boolean
+  label: Carousel Dots
+  description: Show dot indicators
+  showOnly:
+    field: carousel_enabled
+    value: true
+  default: true
+- name: carousel_arrows
+  type: boolean
+  label: Carousel Arrows
+  description: Show Prev/Next Arrows
+  showOnly:
+    field: carousel_enabled
+    value: true
+- name: carousel_autoplay
+  type: boolean
+  label: Carousel Autoplay
+  showOnly:
+    field: carousel_enabled
+    value: true
+  description: Enables Autoplay
+- name: carousel_autoplay_speed
+  type: number
+  label: Carousel Autoplay Speed
+  description: Autoplay Speed in milliseconds
+  default: 7000
+  required: true
+  config:
+    min:
+    max:
+    step:
+  showOnly:
+    field: carousel_autoplay
+    value: true
