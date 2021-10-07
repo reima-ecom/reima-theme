@@ -1,0 +1,9 @@
+{{ with site.Data.pixels }}
+{{ if .sizebay_enabled }}
+
+<!-- Sizebay -->
+<script uses-cookies src="https://szb-tenants-production.s3.amazonaws.com/{{.sizebay_id}}/prescript.js" id="sizebay-vfr-v4"></script>
+<!-- End Sizebay -->
+
+{{ end }}
+{{ end }}

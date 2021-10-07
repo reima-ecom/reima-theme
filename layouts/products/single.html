@@ -24,3 +24,7 @@
 {{partialCached "product" $ .File.ContentBaseName}}
 
 {{ end }}
+
+{{ define "scripts" }}
+{{ partial "partials/pixels/sizebay" .}}
+{{ end }}
