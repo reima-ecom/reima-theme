@@ -135,6 +135,12 @@
       {{ end }}
       {{ end }}
 
+      {{ with site.Data.pixels }}
+      {{ if .sizebay_enabled }}
+      <div id="sizebay-container"></div>
+      {{ end }}
+      {{ end }}
+
       <!-- if this is the size guide section, show tag-based size guide -->
       {{ $size_guide := "" }}
       {{ range $product.Params.tags }}

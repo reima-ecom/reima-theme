@@ -213,6 +213,7 @@
   </footer>
   {{partial "consent-banners" .}}
   {{partial "pixels/index" .}}
+  {{ block "scripts" . }}{{ end }}
   <!-- inline js -->
   {{partial "ts-inline" "_default/baseof.inline.ts"}}
   <script>

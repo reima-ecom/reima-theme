@@ -27,3 +27,5 @@ gtm_property: GTM-XXXXXXX
 aw_property: ''
 avantlink_enabled: true
 avantlink_id: 111111
+sizebay_enabled: true
+sizebay_id: 1234
