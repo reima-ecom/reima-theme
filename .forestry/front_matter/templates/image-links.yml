@@ -171,9 +171,9 @@ fields:
   default: 7000
   required: true
   config:
-    min:
-    max:
-    step:
+    min: 
+    max: 
+    step: 
   showOnly:
     field: carousel_autoplay
     value: true

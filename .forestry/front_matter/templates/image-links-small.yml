@@ -37,13 +37,13 @@ fields:
   config:
     required: false
     options:
-      - left
-      - right
+    - left
+    - right
     source:
       type: simple
-      section:
-      file:
-      path:
+      section: 
+      file: 
+      path: 
   label: Items alignment
   description: By default and if this is blank, items are centered.
 - name: columnstablet
@@ -52,13 +52,13 @@ fields:
   config:
     required: false
     options:
-      - '2'
-      - '3'
+    - '2'
+    - '3'
     source:
       type: simple
-      section:
-      file:
-      path:
+      section: 
+      file: 
+      path: 
   label: Columns on tablet
   description: Number of columns to output on tablet sized screens. Leave blank for
     default auto-fill behavior.
@@ -68,13 +68,13 @@ fields:
   config:
     required: false
     options:
-      - '3'
-      - '4'
+    - '3'
+    - '4'
     source:
       type: simple
-      section:
-      file:
-      path:
+      section: 
+      file: 
+      path: 
   label: Columns on desktop
   description: Number of columns to output on desktop sized screens. If left blank,
     it inherits the settings from tablet.
@@ -111,9 +111,9 @@ fields:
   default: 7000
   required: true
   config:
-    min:
-    max:
-    step:
+    min: 
+    max: 
+    step: 
   showOnly:
     field: carousel_autoplay
     value: true
