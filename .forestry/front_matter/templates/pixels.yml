@@ -229,7 +229,7 @@ fields:
   label: Sizebay account id
   description: This is your Sizebay ID, e.g. 1234
   showOnly:
-    field: avantlink_enabled
+    field: sizebay_enabled
     value: true
 pages:
 - demo/data/pixels.yaml
