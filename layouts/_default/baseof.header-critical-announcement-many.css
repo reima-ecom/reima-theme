@@ -20,17 +20,23 @@
 }
 
 /*
-Move all the additional announcements over the visible one.
+Move all the additional announcements below the bar.
+(This is order to make sure no elements overlap
+one another for e.g. click handling.)
 This is to make the animation origin always the same, i.e.
 without the `translateY` from the animation, all elements
 are in the same place.
 */
+.announcement--many > div:nth-child(1) {
+  transform: translateY(100%);
+}
+
 .announcement--many > div:nth-child(2) {
-  transform: translateX(-100%);
+  transform: translate(-100%, 100%);
 }
 
 .announcement--many > div:nth-child(3) {
-  transform: translateX(-200%);
+  transform: translate(-200%, 100%);
 }
 
 /* Set defaults for the animation */
@@ -109,36 +115,36 @@ Then:
 
 @keyframes announcement-scroll-two {
   from {
-    transform: translateY(100%);
+    transform: translateY(0%);
   }
   4.5454545% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   }
   50% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   }
   54.5454545% {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
   to {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
 }
 
 @keyframes announcement-scroll-three {
   from {
-    transform: translateY(100%);
+    transform: translateY(0%);
   }
   3.03030303% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   }
   33.3333333% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   }
   36.3636363% {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
   to {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
 }

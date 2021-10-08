@@ -16,13 +16,17 @@ Expects the `announcements` data file as input.
 <aside class="announcement announcement--many announcement--many-{{$announcementCount}}">
   <div>
     <div>
-      {{.headerAnnouncement | site.Home.RenderString}}
+      <div>
+        {{.headerAnnouncement | site.Home.RenderString}}
+      </div>
     </div>
   </div>
   {{ range .headerAnnouncementAdditional }}
   <div>
     <div>
-      {{. | site.Home.RenderString}}
+      <div>
+        {{. | site.Home.RenderString}}
+      </div>
     </div>
   </div>
   {{ end }}
