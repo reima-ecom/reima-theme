@@ -2,7 +2,14 @@
 [
   {{- $last := add (len $pages) -1 -}}
   {{- range $i, $p := $pages -}}
-  {
+  {{- $attributes := newScratch -}}
+  {{- range .Params.tags -}}
+  {{- $entry := split . ":" -}}
+  {{- if ge (len $entry) 2 -}}
+  {{- $attributes.Add (index $entry 0) (slice (index $entry 1)) -}}
+  {{- end -}}
+  {{- end -}}
+    {
     "Id": "{{.Params.yotpoId}}",
     "Name": {{.Title | jsonify}},
     "Description": "{{.Params.description}}",
@@ -39,6 +46,9 @@
     {{- end -}}
     {{- end -}}
     "CategoryPath": {{ $categoryPath | jsonify }}
+    {{- range $name, $values := $attributes.Values }},
+    "{{$name}}": {{$values | jsonify}}
+    {{- end -}}
   }{{ if ne $i $last }},{{ end }}
   {{- end -}}
 ]
