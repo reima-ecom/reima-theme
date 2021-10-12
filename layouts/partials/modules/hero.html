@@ -60,15 +60,16 @@
   {{- $mobile = partial "helpers/get-image" . }}
   {{- end }}
   <!-- get main image -->
-  {{- with partial "helpers/get-image" .image }}
+  {{- with .image }}
+  {{- with partial "helpers/get-image" . }}
   {{- $params := (dict "image" . "widths" "2160,1080,768") }}
   {{- $default := .Resize "1080x" -}}
   <picture>
-    <!-- 
+    <!--
       Regarding `sizes`:
       Assume the hero image spans the entire viewport but has a max width of 1280px.
       This is close enough, although in reality there are paddings of 1.5-2rem.
-      `sizes` is only needed for the tablet+ source. 
+      `sizes` is only needed for the tablet+ source.
      -->
     <source media="(min-width: 768px)" sizes="min(100vw, 1280px)" {{if $lazyload}}data-{{end -}}srcset="{{partial "srcset" $params}}">
     {{- with $mobile }}
@@ -88,6 +89,9 @@
     <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}"
       height="{{.Height}}" width="{{.Width}}" />
   </noscript>
+  {{- end }}
+  {{- else }}
+  {{- warnf "No image found for hero module on page %s" $.pageobj.Path }}
   {{- end }}
 
   {{- end }}
