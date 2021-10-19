@@ -57,7 +57,6 @@
   left: 50%;
   transform: translateX(-50%);
   padding-left: 0;
-  z-index: 9;
 }
 
 .carousel ol li {
@@ -90,7 +89,6 @@
   padding: 15px 15px 30px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 9;
   line-height: 0;
 }
 
