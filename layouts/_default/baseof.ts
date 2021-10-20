@@ -74,7 +74,8 @@ document.querySelectorAll('.carousel').forEach((carousel) => {
   const bullets = carousel.querySelectorAll('ol li');
   const nextarrow: HTMLElement = carousel.querySelector('.next');
   const prevarrow: HTMLElement = carousel.querySelector('.prev');
-  const autoplay: boolean = !!carousel.getAttribute('data-autoplay');
+  const autoplay = carousel.getAttribute('data-autoplay');
+  const autoplayEnabled: boolean = autoplay === "true";
   const autoplaySpeed: number = carousel.getAttribute('data-autoplay-speed')
     ? parseInt(carousel.getAttribute('data-autoplay-speed'), 10)
     : 7000;
@@ -133,7 +134,7 @@ document.querySelectorAll('.carousel').forEach((carousel) => {
   }
 
   // setInterval for autoplay
-  if (autoplay) {
+  if (autoplayEnabled) {
     setInterval(function () {
       if (ele != document.querySelector('.carousel:hover ul')) {
         const screenWidth = window.innerWidth;
