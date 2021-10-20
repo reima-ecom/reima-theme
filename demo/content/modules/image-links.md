@@ -82,7 +82,7 @@ modules:
   carousel_enabled: true
   carousel_dots: true
   carousel_autoplay: true
-  carousel_autoplay_speed: 7000
+  carousel_autoplay_speed: 
   cards:
   - heading: Infant outdoor clothing
     image: "/infants-square.jpg"
