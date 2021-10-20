@@ -28,6 +28,17 @@ modules:
 
       This is popup #3
 - template: image-grid
+  heading: Links
+  links: true
+  hover_effect: none
+  images:
+  - image: kids-square.jpg
+    link: /demo/collections/tops/products/juniors-sweater-winged/
+  - image: kids-square.jpg
+    link: /demo/collections/tops/products/juniors-sweater-winged/
+  - image: kids-square.jpg
+  - image: kids-square.jpg
+- template: image-grid
   heading: One column on mobile, three on desktop
   columnsmobile: '1'
   columnsdesktop: '3'
