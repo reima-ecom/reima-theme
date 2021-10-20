@@ -39,92 +39,21 @@
     <!-- loop through product pages -->
     {{ range $productPages }}
     {{ $linkresolved := partial "link" .RelPermalink }}
-    <!-- get the actual product page from the name of the product page under collections  -->
-    {{ $producthandle := .File.ContentBaseName }}
-    {{ with site.GetPage (printf "/products/%s" $producthandle) }}
-    <!-- this is the product page -->
-
-    {{- $showDiscountPercentageTag := false }}
-    {{ with site.Data.themesettings }}
-    {{ if .show_discount_tags }}
-    {{ $showDiscountPercentageTag = .show_discount_tags }}
-    {{ end }}
-    {{ end }}
-
-    {{ $class := "product-list__product" }}
-    {{if not .Params.available}}
-    {{ $class = printf "%s product-list__product--sold-out" $class }}
-    {{end}}
-    {{if and $showDiscountPercentageTag (gt .Params.compareAtPrice .Params.price)}}
-    {{ $class = printf "%s product-list__product--sale" $class }}
-    {{end}}
-
+    {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
     {{ $product := . }}
-    <li href="{{$linkresolved}}" class="{{$class}}" handle="{{$producthandle}}">
-      {{ $productName := .Title }}
-      {{ range .Resources.ByType "image" | first 1 }}
-      <!-- grid layout with auto-fit and min 150px cells -->
-      <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
-      {{ $sizes := "233px" }}
-      {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes "alt" $productName)}}
-      {{ end }}
-      <div class="product-list__swatches">
-        {{ $color_codes := (apply .Params.variants "index" "." "colorCode") | uniq }}
-        <!-- this seems to be the best way to filter out nil values in hugo -->
-        {{ $color_dots := $color_codes | complement (slice nil) }}
-        <!-- DEPRECATED old way of getting colors not based on sku color code -->
-        {{ if not (len $color_dots) }}
-        {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
-        {{ $color_dots = (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
-        {{ end }}
-        {{ $show_plus := false }}
-        {{ if gt (len $color_dots) 7  }}
-        {{ $color_dots = $color_dots | first 6 }}
-        {{ $show_plus = true }}
-        {{ end }}
-        {{ range $color_dots }}
-        {{ with . }}
-        {{ with partial "helpers/get-color" . }}
-        <a href="{{$linkresolved}}" {{with .color}}style="background-color: {{.}};" {{end}}
-          {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}
-          class="product-list__swatch">
-          {{ if .image }}
-          <img src="{{.image}}" alt="{{.name}}">
-          {{ end }}
-        </a>
-        {{ end }}
-        {{ end }}
-        {{ end }}
-        {{ if $show_plus  }}
-        <a href="{{$linkresolved}}" class="product-list__swatch product-list__swatch--see-more">+</a>
-        {{ end }}
-      </div>
-      <h3>
-        <a class="silent-link stretched-link" href="{{$linkresolved}}">{{.Title}}</a>
-      </h3>
-      <div>
-        {{partial "product-price" .Params}}
-      </div>
-      {{ with partial "helpers/get-reviews-bottomline" .Params.yotpoId }}
-      <div class="product-list__rating">
-        {{ range seq (math.Round .average) }}★{{ end }}
-        <span>{{ div (math.Round (mul .average 10)) 10 }}</span>
-        <span>({{.count}})</span>
-      </div>
-      {{ end }}
-      <!-- go through all tags to find "site tags" to show, but only if available -->
-      {{ if .Params.available }}
-      {{ range .Params.tags }}
-      {{ $tag := split . ":" }}
-      {{ if eq (index $tag 0) "Site Tag" }}
-      <div class="product-list__tag">{{index $tag 1}}</div>
-      {{ end }}
-      {{ end }}
-      <!-- if not available, show sold out tag -->
-      {{ else }}
-      <div class="product-list__sold-out-tag">{{T "Product sold out tag"}}</div>
-      {{ end }}
-    </li>
+
+    {{ if $.split_colors }}
+
+    {{ range partial "modules/products-get-colors" $product }}
+    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved "color" .) }}
+    {{ end }}
+
+    {{ else }}
+
+    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved) }}
+
+    {{ end }}
+
     {{ else }}
     {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .File.Dir .Kind .Type }}
     {{ end }}
@@ -142,6 +71,151 @@
   <p>No products found</p>
   {{ end }}
 </section>
+
+<!--
+  render product list item
+  params: product: product page
+          url: link to product page within collection
+          color: color name IF rendering specific color
+                 (if falsey, will render color dots
+                 if specified, will render color name)
+-->
+{{ define "partials/modules/products-render-li" }}
+{{- $showDiscountPercentageTag := false }}
+{{ with site.Data.themesettings }}
+{{ if .show_discount_tags }}
+{{ $showDiscountPercentageTag = .show_discount_tags }}
+{{ end }}
+{{ end }}
+
+{{ with .product }}
+
+{{ $product := . }}
+{{ $url := $.url }}
+{{ $available := .Params.available }}
+
+<!-- change variables if color specified -->
+{{ with $.color }}
+<!-- link to specific color if needed -->
+{{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
+{{ $url = printf "%s?%s=%s" $url $coloroption . }}
+<!-- check availability by color -->
+{{ $available = false }}
+{{ range partial "modules/products-get-variants-in-color" (dict "product" $product "color" .) }}
+{{ $available = or $available .available }}
+{{ end }}
+{{ end }}
+
+{{ $class := "product-list__product" }}
+{{if not $available}}
+{{ $class = printf "%s product-list__product--sold-out" $class }}
+{{end}}
+{{if and $showDiscountPercentageTag (gt .Params.compareAtPrice .Params.price)}}
+{{ $class = printf "%s product-list__product--sale" $class }}
+{{end}}
+
+<li href="{{$url}}" class="{{$class}}" handle="{{.File.ContentBaseName}}">
+  {{ $image := false }}
+  {{ $alt := .Title }}
+  <!-- grid layout with auto-fit and min 150px cells -->
+  <!-- just assume a max of 233px, which is the widest possible before two columns become three -->
+  {{ $sizes := "233px" }}
+  <!-- if color specified, get image in that color -->
+  {{ with $.color }}
+  {{ with index (partial "modules/products-get-variants-in-color" (dict "product" $product "color" .)) 0 }}
+  {{ $image = index ($.product.Resources.ByType "image") .imageIndex }}
+  {{ end }}
+  {{ $alt = printf "%s - %s" $alt . }}
+  <!-- if no color, get the first product image -->
+  {{ else }}
+  {{ range .Resources.ByType "image" | first 1 }}
+  {{ $image = . }}
+  {{ end }}
+  {{ end }}
+  <!-- render the image -->
+  {{ with $image }}
+  {{partial "image" (dict "image" . "widths" "200,400" "sizes" $sizes "alt" $alt)}}
+  {{ end }}
+  <!-- show swatches if no color specified -->
+  {{ if not $.color }}
+  <div class="product-list__swatches">
+    {{ $color_dots := partial "modules/products-get-colors" $product }}
+    {{ $show_plus := false }}
+    {{ if gt (len $color_dots) 7  }}
+    {{ $color_dots = $color_dots | first 6 }}
+    {{ $show_plus = true }}
+    {{ end }}
+    {{ range $color_dots }}
+    {{ with . }}
+    {{ with partial "helpers/get-color" . }}
+    <a href="{{$url}}" {{with .color}}style="background-color: {{.}};" {{end}}
+      {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}
+      class="product-list__swatch">
+      {{ if .image }}
+      <img src="{{.image}}" alt="{{.name}}">
+      {{ end }}
+    </a>
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if $show_plus  }}
+    <a href="{{$url}}" class="product-list__swatch product-list__swatch--see-more">+</a>
+    {{ end }}
+  </div>
+  {{ end }}
+  <h3>
+    <a class="silent-link stretched-link" href="{{$url}}">{{.Title}}</a>
+  </h3>
+  <!-- show color name if specified -->
+  {{ if $.color }}
+  <div>{{$.color}}</div>
+  {{ end }}
+  <div>
+    {{partial "product-price" .Params}}
+  </div>
+  {{ with partial "helpers/get-reviews-bottomline" .Params.yotpoId }}
+  <div class="product-list__rating">
+    {{ range seq (math.Round .average) }}★{{ end }}
+    <span>{{ div (math.Round (mul .average 10)) 10 }}</span>
+    <span>({{.count}})</span>
+  </div>
+  {{ end }}
+  <!-- go through all tags to find "site tags" to show, but only if available -->
+  {{ if $available }}
+  {{ range .Params.tags }}
+  {{ $tag := split . ":" }}
+  {{ if eq (index $tag 0) "Site Tag" }}
+  <div class="product-list__tag">{{index $tag 1}}</div>
+  {{ end }}
+  {{ end }}
+  <!-- if not available, show sold out tag -->
+  {{ else }}
+  <div class="product-list__sold-out-tag">{{T "Product sold out tag"}}</div>
+  {{ end }}
+</li>
+
+{{ end }}
+{{ end }}
+
+<!--
+  get color codes for specific product
+  param: product (main product page)
+-->
+{{ define "partials/modules/products-get-colors" }}
+{{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
+{{ $colors := (apply (apply .Params.variants "index" "." "options") "index" "." $coloroption) | uniq }}
+{{ return $colors }}
+{{ end }}
+
+<!--
+  get product variants in specific color
+  params: product: product page
+          color: color name
+-->
+{{ define "partials/modules/products-get-variants-in-color" }}
+{{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
+{{ return where .product.Params.variants (printf "options.%s" $coloroption) .color }}
+{{ end }}
 
 <!--
   get srcset for product image in the specified color
