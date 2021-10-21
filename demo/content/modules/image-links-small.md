@@ -31,6 +31,8 @@ modules:
     image: category-kids-sun.jpg
 - template: image-links-small
   heading: Shop by purpose
+  columnstablet: '2'
+  columnsdesktop: '3'
   images:
   - title: Outdoor
     link: "/collections/kids-outdoor"
@@ -46,11 +48,11 @@ modules:
     image: purpose-beach.jpg
 - template: image-links-small
   heading: Carousel
-  columnstablet: '3'
-  columnsdesktop: '4'
+  columnstablet: '2'
+  columnsdesktop: '3'
   carousel_enabled: true
   carousel_dots: true
-  carousel_autoplay: true
+  carousel_autoplay: false
   carousel_autoplay_speed: 
   images:
   - title: Outdoor

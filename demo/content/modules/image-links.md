@@ -77,11 +77,12 @@ modules:
   horizontal: right
   vertical: bottom
   small: true
-  columnstablet: '2'
-  columnsdesktop: '4'
+  columnstablet: '3'
+  columnsdesktop: '3'
   carousel_enabled: true
   carousel_dots: true
-  carousel_autoplay: true
+  carousel_arrows: false
+  carousel_autoplay: false
   carousel_autoplay_speed: 
   cards:
   - heading: Infant outdoor clothing
