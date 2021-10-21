@@ -51,16 +51,16 @@
   margin: 1rem 0;
 }
 
-.image-grid__zoom-container {
+.image-grid__container {
   overflow: hidden;
   display: block;
 }
 
-.image-grid__zoom-container img {
+.image-grid--effect-zoom .image-grid__container img {
   transition: transform 0.3s ease-out;
 }
 
-.image-grid__zoom-container img:hover {
+.image-grid--effect-zoom .image-grid__container img:hover {
   transform: scale(1.08);
 }
 

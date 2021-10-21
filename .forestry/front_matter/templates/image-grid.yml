@@ -27,6 +27,12 @@ fields:
         format: markdown
     label: Content
     description: Optional content to show in connection with the image card
+  - name: link
+    type: text
+    config:
+      required: false
+    label: Link
+    description: Link is only used if "Image Card as Link" is enabled.
   config:
     min: 1
     max: 
@@ -37,6 +43,25 @@ fields:
   label: Image Card Content as Pop-up
   description: Show (optional) content of the image cards in a pop-up instead of the
     default, which displays the content below the image
+- name: links
+  type: boolean
+  label: Image Card as Link
+  description: Add link if image card has link URL defined.
+- name: hover_effect
+  type: select
+  default: zoom
+  config:
+    required: false
+    options:
+    - zoom
+    - none
+    source:
+      type: simple
+      section:
+      file:
+      path:
+  label: Hover effect
+  description: Hover effect for Image card. Leave blank for the default "zoom" effect.
 - name: link
   type: boolean
   label: Button Below Grid
