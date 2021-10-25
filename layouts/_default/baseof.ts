@@ -84,6 +84,9 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
     autoplaySpeed: carousel.getAttribute("data-autoplay-speed"),
     dots: carousel.getAttribute("data-dots"),
     arrows: carousel.getAttribute("data-arrows"),
+    itemsMobile: carousel.getAttribute("data-items-mobile"),
+    itemsTablet: carousel.getAttribute("data-items-tablet"),
+    itemsDesktop: carousel.getAttribute("data-items-desktop"),
   };
 
   ele.scrollLeft = 0;
@@ -161,20 +164,21 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
 
         // Table breakpoint
         if (screenWidth > 767 && screenWidth < 992) {
-          visibleItems =
-            parseInt(carousel.getAttribute("data-items-tablet"), 10) + 1;
+          visibleItems = settings.itemsTablet
+            ? parseInt(settings.itemsTablet, 10) + 1
+            : 2;
         }
         // Desktop breakpoint
         else if (screenWidth > 991) {
-          visibleItems =
-            parseInt(carousel.getAttribute("data-items-desktop"), 10) + 1;
+          visibleItems = settings.itemsDesktop
+            ? parseInt(settings.itemsDesktop, 10) + 1
+            : 2;
         }
         // Mobile breakpoint
         else {
-          visibleItems = parseInt(
-            carousel.getAttribute("data-items-mobile"),
-            10
-          );
+          visibleItems = settings.itemsMobile
+            ? parseInt(settings.itemsMobile, 10)
+            : 1;
           nextarrow.click();
         }
 
