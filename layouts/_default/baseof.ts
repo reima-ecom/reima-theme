@@ -193,7 +193,7 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
           selectedIndex + visibleItems > bullets.length
             ? 1
             : selectedIndex + visibleItems;
-        const nextBullet: HTMLElement = document.querySelector(
+        const nextBullet: HTMLElement = carousel.querySelector(
           ".dots li:nth-child(" + bulletIndex + ") a"
         );
         if (nextBullet) {
