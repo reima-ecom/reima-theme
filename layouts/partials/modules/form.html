@@ -1,0 +1,31 @@
+<form action="https://shopify-subscribe.reima.workers.dev" class="airy module-form">
+  <h2>{{.title}}</h2>
+  <p>{{.description}}</p>
+
+  <input type="hidden" name="tags" value="{{.tags}}">
+
+  {{ range $index, $field := .fields }}
+    {{ if eq $field.type "checkbox" }}
+      <label>
+        <input type="{{ $field.type }}" name="{{ $field.name }}" {{ if $field.checked }}checked{{ end }} {{ if $field.required }}required{{ end }}>
+        {{ $field.placeholder }}
+      </label>
+    {{ else }}
+      <input type="{{ $field.type }}" placeholder="{{ $field.placeholder }}" name="{{ $field.name }}" {{ if $field.required }}required{{ end }}>
+    {{ end }}
+  {{ end }}
+
+
+  <div consent>
+    <label>
+      <input type="checkbox" name="consent" required>
+      <div class="md">{{T "Newsletter TOS Consent" | site.Home.RenderString}}</div>
+    </label>
+    <p failure></p>
+    <div>
+      <button type="submit" class="button btn btn--cta">{{ .submitCta }}</button>
+    </div>
+  </div>
+
+  <p success>{{.thankYouMessage | site.Home.RenderString}}</p>
+</form>
