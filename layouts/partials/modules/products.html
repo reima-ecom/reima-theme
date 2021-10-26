@@ -93,24 +93,52 @@
 {{ $product := . }}
 {{ $url := $.url }}
 {{ $available := .Params.available }}
+{{ $priceParams := .Params }}
 
 <!-- change variables if color specified -->
 {{ with $.color }}
 <!-- link to specific color if needed -->
 {{ $coloroption := partialCached "modules/products-get-color-option" "noop" }}
 {{ $url = printf "%s?%s=%s" $url $coloroption . }}
-<!-- check availability by color -->
+<!-- go through all variants and set variables -->
+{{ $variants := partial "modules/products-get-variants-in-color" (dict "product" $product "color" .) }}
 {{ $available = false }}
-{{ range partial "modules/products-get-variants-in-color" (dict "product" $product "color" .) }}
+{{ $price := (index $variants 0).price }}
+{{ $priceFormatted := (index $variants 0).priceFormatted }}
+{{ $compareAtPrice := (index $variants 0).compareAtPrice }}
+{{ $compareAtPriceFormatted := (index $variants 0).compareAtPriceFormatted }}
+{{ $hasPriceRange := (index $variants 0).hasPriceRange }}
+{{ range $variants }}
+<!-- check availability by color -->
 {{ $available = or $available .available }}
+<!-- pricing -->
+{{ if lt .price $price }}
+{{ $price = .price }}
+{{ $priceFormatted = .priceFormatted }}
+{{ $hasPriceRange = true }}
+{{ end }}
+{{ if gt .compareAtPrice $compareAtPrice }}
+{{ $compareAtPrice = .compareAtPrice }}
+{{ $compareAtPriceFormatted = .compareAtPriceFormatted }}
 {{ end }}
 {{ end }}
+<!-- set params for price partial -->
+{{ $priceParams = dict
+  "price" $price
+  "priceFormatted" $priceFormatted
+  "compareAtPrice" $compareAtPrice
+  "compareAtPriceFormatted" $compareAtPriceFormatted
+  "hasPriceRange" $hasPriceRange
+}}
+{{ end }}
+
+{{ $hasDiscount := gt $priceParams.compareAtPrice $priceParams.price }}
 
 {{ $class := "product-list__product" }}
 {{if not $available}}
 {{ $class = printf "%s product-list__product--sold-out" $class }}
 {{end}}
-{{if and $showDiscountPercentageTag (gt .Params.compareAtPrice .Params.price)}}
+{{if and $showDiscountPercentageTag $hasDiscount}}
 {{ $class = printf "%s product-list__product--sale" $class }}
 {{end}}
 
@@ -170,10 +198,12 @@
   {{ if $.color }}
   <div>{{$.color}}</div>
   {{ end }}
+  <!-- product price -->
   <div>
-    {{partial "product-price" .Params}}
+    {{partial "product-price" $priceParams}}
   </div>
   {{ with partial "helpers/get-reviews-bottomline" .Params.yotpoId }}
+  <!-- rating stars -->
   <div class="product-list__rating">
     {{ range seq (math.Round .average) }}★{{ end }}
     <span>{{ div (math.Round (mul .average 10)) 10 }}</span>
