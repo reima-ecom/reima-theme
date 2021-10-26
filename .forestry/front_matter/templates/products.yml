@@ -13,6 +13,10 @@ fields:
   config:
     required: true
   label: Collection
+- name: split_colors
+  type: boolean
+  label: Split products into colors
+  description: If set, will split products into separate items according to colors.
 - name: limit
   type: number
   description: Limit number of products to show. Leave blank or use zero to show all
