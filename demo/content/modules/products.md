@@ -17,6 +17,10 @@ modules:
   title: Limited to four
   limit: 4
   show_all: All Tops
+- template: products
+  collection: tops
+  title: Split product into color variants
+  split_colors: true
 
 ---
 
