@@ -174,7 +174,7 @@
             {{partialCached "elements/r-search" $}}
           </div>
           {{ else if site.Params.public.loop54 }}
-          {{ $tsname := "partials/elements/r-search.ts" }}
+          {{ $tsname := "partials/elements/r-search-loop.ts" }}
           {{ $.Scratch.Add "ts-lazy" $tsname }}
           <a href="#search" class="btn btn--icon icon" load="{{$tsname}}">
             <svg>

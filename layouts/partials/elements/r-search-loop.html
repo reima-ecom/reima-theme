@@ -1,4 +1,4 @@
-<div id="search" class="search">
+<r-search-loop id="search" class="search">
   <div class="search__header">
     <form action="/search" method="GET">
       <input name="q" type="search" placeholder="Search for products">
@@ -15,15 +15,34 @@
     </a>
   </div>
   <hr>
-  <div>
-    <h3>Suggested</h3>
-    <ul>
-      <li><a href="">Raingear</a></li>
-      <li><a href="">Jackets</a></li>
-      <li><a href="">Rubber Boots</a></li>
-      <li><a href="">Outerwear</a></li>
-      <li><a href="">Fleece jackets</a></li>
-      <li><a href="">Sneakers</a></li>
+  <div results="suggested" show>
+    <h3 class="search__list-title">Suggested</h3>
+    <ul class="search__link-list">
+      <li><a href="" class="silent-link">Raingear</a></li>
+      <li><a href="" class="silent-link">Jackets</a></li>
+      <li><a href="" class="silent-link">Rubber Boots</a></li>
+      <li><a href="" class="silent-link">Outerwear</a></li>
+      <li><a href="" class="silent-link">Fleece jackets</a></li>
+      <li><a href="" class="silent-link">Sneakers</a></li>
     </ul>
   </div>
-</div>
+  <div results="top-hits">
+    <h3 class="search__list-title">Top Hits</h3>
+    <ul class="search__link-list"></ul>
+  </div>
+  <div results="products">
+    <ul class="search__product-list"></ul>
+  </div>
+  <template product>
+    <li>
+      <a href="" class="silent-link">
+        <img src="" alt="">
+        <h4 title></h4>
+        <span price></span>
+      </a>
+    </li>
+  </template>
+  <template top-hit>
+    <li><a href="" class="silent-link"></a></li>
+  </template>
+</r-search-loop>

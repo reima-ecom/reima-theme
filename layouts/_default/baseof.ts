@@ -71,6 +71,12 @@ document.querySelectorAll("[load]").forEach((element) => {
   element.addEventListener("click", loaderClick);
 });
 
+// load, i.e. trigger link click if we're inside a target that should have TS loaded
+if (document.location.hash) {
+  document.querySelector(`[load][href="${document.location.hash}"]`)
+    ?.dispatchEvent(new MouseEvent("click"));
+}
+
 /**
  * Initialize Carousels
  */
@@ -96,7 +102,7 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
     event.preventDefault();
     const elID = this.getAttribute("href");
     const el: HTMLElement = ele.querySelector(
-      '.carousel__item[data-id="' + elID.substr(1) + '"]'
+      '.carousel__item[data-id="' + elID.substr(1) + '"]',
     );
     ele.scrollLeft = el.offsetLeft;
 
@@ -167,14 +173,12 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
           visibleItems = settings.itemsTablet
             ? parseInt(settings.itemsTablet, 10) + 1
             : 2;
-        }
-        // Desktop breakpoint
+        } // Desktop breakpoint
         else if (screenWidth > 991) {
           visibleItems = settings.itemsDesktop
             ? parseInt(settings.itemsDesktop, 10) + 1
             : 2;
-        }
-        // Mobile breakpoint
+        } // Mobile breakpoint
         else {
           visibleItems = settings.itemsMobile
             ? parseInt(settings.itemsMobile, 10)
@@ -189,12 +193,11 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
           }
         });
 
-        const bulletIndex =
-          selectedIndex + visibleItems > bullets.length
-            ? 1
-            : selectedIndex + visibleItems;
+        const bulletIndex = selectedIndex + visibleItems > bullets.length
+          ? 1
+          : selectedIndex + visibleItems;
         const nextBullet: HTMLElement = carousel.querySelector(
-          ".dots li:nth-child(" + bulletIndex + ") a"
+          ".dots li:nth-child(" + bulletIndex + ") a",
         );
         if (nextBullet) {
           nextBullet.click();
