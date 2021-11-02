@@ -33,9 +33,10 @@ const overlayClick = (e) => {
     e.target === e.currentTarget ||
     /** @type {HTMLElement} */ e.target.closest("[close]")
   ) {
-    /** @type {HTMLElement} */ e.currentTarget
-      .closest(".open")
-      .classList.remove("open");
+    const overlayElement: HTMLElement = e.currentTarget.closest(".open");
+    if (overlayElement) {
+      overlayElement.classList.remove("open");
+    }
     document.body.style.overflow = "";
   }
 };
