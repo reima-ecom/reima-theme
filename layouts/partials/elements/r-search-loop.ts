@@ -1,25 +1,30 @@
 /// <reference lib="dom" />
-/// <reference path="../../../globals.d.ts" />
 
 import type {
   EventSearchDetails,
   SearchResultProduct,
-  SearchResultTopHit,
   SearchResults,
+  SearchResultTopHit,
 } from "./search-domain.ts";
 import { EVENT_SEARCH } from "./search-domain.ts";
-import { search } from "./search-loop54.ts";
+import { createSearcher } from "./search-loop54.ts";
 
-const currencyFmt = new Intl.NumberFormat(window.locale, {
-  style: "currency",
-  currency: window.site.currency,
-});
+const createCurrencyFormatter = (locale: string, currency: string) => {
+  const formatter = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+  });
+  return (amount: number) => formatter.format(amount);
+};
 
-const createProductItemFrom = (productTemplate: HTMLTemplateElement) =>
+const createProductItemFrom = (
+  productTemplate: HTMLTemplateElement,
+  formatCurrency: (amount: number) => string,
+) =>
   (product: SearchResultProduct): HTMLElement => {
     const productItem = productTemplate.content.cloneNode(true) as HTMLElement;
     productItem.querySelector("[title]")!.textContent = product.title;
-    productItem.querySelector("[price]")!.textContent = currencyFmt.format(
+    productItem.querySelector("[price]")!.textContent = formatCurrency(
       product.price,
     );
     productItem.querySelector("img")!.src = product.imageUrl;
@@ -38,6 +43,24 @@ const createTopHitItemFrom = (topHitTemplate: HTMLTemplateElement) =>
   };
 
 export default class RSearchLoop extends HTMLElement {
+  get loopUrl() {
+    const attr = this.getAttribute("loop-url");
+    if (!attr) throw new Error("Mandatory argument missing");
+    return attr;
+  }
+
+  get currency() {
+    const attr = this.getAttribute("currency");
+    if (!attr) throw new Error("Mandatory argument missing");
+    return attr;
+  }
+
+  get locale() {
+    const attr = this.getAttribute("locale");
+    if (!attr) throw new Error("Mandatory argument missing");
+    return attr;
+  }
+
   sendEvent(query: string) {
     this.dispatchEvent(
       new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
@@ -72,7 +95,7 @@ export default class RSearchLoop extends HTMLElement {
       const productsList = productsElement!.querySelector("ul")!;
       productsList.innerHTML = "";
       productsList.append(
-        ...products.map(createProductItemFrom(productTemplate!)),
+        ...products.map(createProductItemFrom(productTemplate!, createCurrencyFormatter(this.locale, this.currency))),
       );
     } else {
       this.setResultVisible("products", false);
@@ -86,7 +109,9 @@ export default class RSearchLoop extends HTMLElement {
       const topHitsList = this.querySelector<HTMLUListElement>(
         "[results=top-hits] ul",
       );
-      if (!topHitTemplate || !topHitsList) throw new Error("Malformed top hits template");
+      if (!topHitTemplate || !topHitsList) {
+        throw new Error("Malformed top hits template");
+      }
       topHitsList.innerHTML = "";
       topHitsList.append(
         ...topHits.map(createTopHitItemFrom(topHitTemplate)),
@@ -97,7 +122,7 @@ export default class RSearchLoop extends HTMLElement {
   }
 
   async searchAndRender(query: string) {
-    const results = await search(query);
+    const results = await createSearcher(this.loopUrl)(query);
     this.render(results);
   }
 

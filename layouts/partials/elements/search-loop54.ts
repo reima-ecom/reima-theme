@@ -4,6 +4,42 @@ import type {
   SearchResultTopHit,
 } from "./search-domain.ts";
 
+type LoopSearchRequest = {
+  query: string;
+};
+
+/** https://docs.loop54.com/latest/api/docs.html#tag/User-initiated/paths/~1search/post */
+type LoopSearchResponse = {
+  makesSense: boolean;
+  results: {
+    count: number;
+    items: LoopSearchResponseItem[];
+  };
+};
+
+type LoopSearchResponseItem = {
+  type: string;
+  id: string;
+  attributes: {
+    name: string;
+    type: string;
+    values: string[];
+  }[];
+};
+
+type LoopErrorResponse = {
+  /** The HTTP status code of the response. */
+  code: number;
+  /** The HTTP status string of the response. */
+  status: string;
+  /** The name of the error. */
+  title: string;
+  /** The more detailed information about the error. Note: not always shown. */
+  detail: string;
+  /** The input parameter, if any, that caused the error. */
+  parameter: string;
+};
+
 const productsDemo: SearchResultProduct[] = [
   {
     title: "Reflecting winter mittens Vilkku",
@@ -99,15 +135,54 @@ const topHitsDemo: SearchResultTopHit[] = [
   { title: "Light Jackets", url: "#" },
 ];
 
-export const search: Searcher = (query) => {
-  if (!query) {
-    return Promise.resolve({
-      products: [],
-      topHits: [],
-    });
-  }
-  return Promise.resolve({
-    products: productsDemo,
-    topHits: topHitsDemo,
-  });
+const loopItemToProduct = (
+  item: LoopSearchResponseItem,
+): SearchResultProduct => {
+  const attributes = item.attributes.reduce(
+    (obj, attr) => ({ ...obj, [attr.name]: attr.values[0] }),
+    {} as Record<string, unknown>,
+  );
+  return {
+    url: "#",
+    title: attributes["Name"] as string,
+    price: attributes["Price"] as number,
+    imageUrl: attributes["ImageURL"] as string,
+  };
 };
+
+export const createSearcher = (baseUrl: string): Searcher =>
+  async (query) => {
+    if (!query) {
+      return {
+        products: [],
+        topHits: [],
+      };
+    } else if (query === "test") {
+      return {
+        products: productsDemo,
+        topHits: topHitsDemo,
+      };
+    }
+
+    const requestBody: LoopSearchRequest = { query };
+    const searchResponse = await fetch(`${baseUrl}/search`, {
+      method: "POST",
+      headers: { "Api-Version": "V3", "User-Id": "Test" },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!searchResponse.ok) {
+      const error: LoopErrorResponse = await searchResponse.json();
+      console.error(error);
+      throw new Error(`Loop54 returned error ${error.code}: ${error.title}`);
+    }
+
+    const response: LoopSearchResponse = await searchResponse.json();
+
+    const products: SearchResultProduct[] = response.results.items.map((item) =>
+      loopItemToProduct(item)
+    );
+    const topHits: SearchResultTopHit[] = [];
+
+    return { products, topHits };
+  };

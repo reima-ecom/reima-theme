@@ -22,7 +22,7 @@ params:
   # note that hugo makes these lowercase, so best have all lowercase names
   public:
     loop54:
-      apikey: none
+      url: 'https://reima-us-dev.54proxy.com'
     #algolia:
     #  indexname: 'reima-theme'
     #  appid: '6FDKJXBLR9'
