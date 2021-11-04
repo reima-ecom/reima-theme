@@ -4,7 +4,7 @@ import type {
   EventSearchDetails,
   SearchResultProduct,
   SearchResults,
-  SearchResultTopHit,
+  SearchResultCategory,
 } from "./search-domain.ts";
 import { EVENT_SEARCH } from "./search-domain.ts";
 import { createSearcher } from "./search-loop54.ts";
@@ -32,34 +32,41 @@ const createProductItemFrom = (
     return productItem;
   };
 
-const createTopHitItemFrom = (topHitTemplate: HTMLTemplateElement) =>
-  (topHit: SearchResultTopHit): HTMLElement => {
-    const topHitItem = topHitTemplate.content.cloneNode(true) as HTMLElement;
-    const topHitLink = topHitItem.querySelector("a");
-    if (!topHitLink) throw new Error("Malformed top hit template");
-    topHitLink.textContent = topHit.title;
-    topHitLink.href = topHit.url;
-    return topHitItem;
+const createCategoryFrom = (categoryTemplate: HTMLTemplateElement) =>
+  (category: SearchResultCategory): HTMLElement => {
+    const categoryItem = categoryTemplate.content.cloneNode(true) as HTMLElement;
+    const categoryLink = categoryItem.querySelector("a");
+    if (!categoryLink) throw new Error("Malformed category template");
+    categoryLink.textContent = category.title;
+    categoryLink.href = category.url;
+    return categoryItem;
   };
 
 export default class RSearchLoop extends HTMLElement {
-  get loopUrl() {
+  get loopUrl(): string {
     const attr = this.getAttribute("loop-url");
     if (!attr) throw new Error("Mandatory argument missing");
     return attr;
   }
 
-  get currency() {
+  get currency(): string {
     const attr = this.getAttribute("currency");
     if (!attr) throw new Error("Mandatory argument missing");
     return attr;
   }
 
-  get locale() {
+  get locale(): string {
     const attr = this.getAttribute("locale");
     if (!attr) throw new Error("Mandatory argument missing");
     return attr;
   }
+
+  get take(): number | undefined {
+    const attr = this.getAttribute("take");
+    if (!attr) return undefined;
+    return Number.parseInt(attr);
+  }
+
 
   sendEvent(query: string) {
     this.dispatchEvent(
@@ -77,8 +84,8 @@ export default class RSearchLoop extends HTMLElement {
     else elem.removeAttribute("show");
   }
 
-  render({ products, topHits }: SearchResults) {
-    if (products.length || topHits.length) {
+  render({ products, categories, hasMore }: SearchResults) {
+    if (products.length || categories.length) {
       this.setResultVisible("suggested", false);
     } else {
       this.setResultVisible("suggested", true);
@@ -101,28 +108,30 @@ export default class RSearchLoop extends HTMLElement {
       this.setResultVisible("products", false);
     }
 
-    if (topHits.length) {
-      this.setResultVisible("top-hits", true);
-      const topHitTemplate = this.querySelector<HTMLTemplateElement>(
-        "template[top-hit]",
+    if (categories.length) {
+      this.setResultVisible("categories", true);
+      const categoryTemplate = this.querySelector<HTMLTemplateElement>(
+        "template[category]",
       );
-      const topHitsList = this.querySelector<HTMLUListElement>(
-        "[results=top-hits] ul",
+      const categorysList = this.querySelector<HTMLUListElement>(
+        "[results=categories] ul",
       );
-      if (!topHitTemplate || !topHitsList) {
+      if (!categoryTemplate || !categorysList) {
         throw new Error("Malformed top hits template");
       }
-      topHitsList.innerHTML = "";
-      topHitsList.append(
-        ...topHits.map(createTopHitItemFrom(topHitTemplate)),
+      categorysList.innerHTML = "";
+      categorysList.append(
+        ...categories.map(createCategoryFrom(categoryTemplate)),
       );
     } else {
-      this.setResultVisible("top-hits", false);
+      this.setResultVisible("categories", false);
     }
+
+    this.setResultVisible("more", hasMore);
   }
 
   async searchAndRender(query: string) {
-    const results = await createSearcher(this.loopUrl)(query);
+    const results = await createSearcher(this.loopUrl, this.take)(query);
     this.render(results);
   }
 

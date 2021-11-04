@@ -1,11 +1,15 @@
 import type {
   Searcher,
+  SearchResultCategory,
   SearchResultProduct,
-  SearchResultTopHit,
 } from "./search-domain.ts";
 
 type LoopSearchRequest = {
   query: string;
+  resultsOptions?: {
+    skip?: number;
+    take?: number;
+  };
 };
 
 /** https://docs.loop54.com/latest/api/docs.html#tag/User-initiated/paths/~1search/post */
@@ -14,6 +18,7 @@ type LoopSearchResponse = {
   results: {
     count: number;
     items: LoopSearchResponseItem[];
+    facets: LoopSearchResponseFacet[];
   };
 };
 
@@ -27,17 +32,44 @@ type LoopSearchResponseItem = {
   }[];
 };
 
+type LoopSearchResponseFacet =
+  | LoopSearchResponseDistinctFacet
+  | LoopSearchResponseRangeFacet;
+
+type LoopSearchResponseDistinctFacet = {
+  name: string;
+  type: "distinct";
+  approximated: boolean;
+  items: {
+    item: string | number | boolean;
+    count: number;
+    selected: boolean;
+  }[];
+};
+
+type LoopSearchResponseRangeFacet = {
+  name: string;
+  type: "range";
+  approximated: boolean;
+  min: string | number | boolean;
+  max: string | number | boolean;
+  selectedMin: string | number | boolean;
+  selectedmax: string | number | boolean;
+};
+
 type LoopErrorResponse = {
-  /** The HTTP status code of the response. */
-  code: number;
-  /** The HTTP status string of the response. */
-  status: string;
-  /** The name of the error. */
-  title: string;
-  /** The more detailed information about the error. Note: not always shown. */
-  detail: string;
-  /** The input parameter, if any, that caused the error. */
-  parameter: string;
+  error: {
+    /** The HTTP status code of the response. */
+    code: number;
+    /** The HTTP status string of the response. */
+    status: string;
+    /** The name of the error. */
+    title: string;
+    /** The more detailed information about the error. Note: not always shown. */
+    detail: string;
+    /** The input parameter, if any, that caused the error. */
+    parameter: string;
+  };
 };
 
 const productsDemo: SearchResultProduct[] = [
@@ -126,7 +158,7 @@ const productsDemo: SearchResultProduct[] = [
       "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/536548-4607.jpg",
   },
 ];
-const topHitsDemo: SearchResultTopHit[] = [
+const categoriesDemo: SearchResultCategory[] = [
   { title: "Kid's Jackets", url: "#" },
   { title: "Rain jackets", url: "#" },
   { title: "Winter Jackets", url: "#" },
@@ -150,21 +182,30 @@ const loopItemToProduct = (
   };
 };
 
-export const createSearcher = (baseUrl: string): Searcher =>
+const loopFacetToCategory = (
+  facet: LoopSearchResponseFacet,
+): SearchResultCategory | undefined => {
+  console.warn("Not implemented: facet to category", facet);
+  return;
+};
+
+export const createSearcher = (baseUrl: string, take = 12): Searcher =>
   async (query) => {
     if (!query) {
       return {
         products: [],
-        topHits: [],
+        categories: [],
+        hasMore: false,
       };
     } else if (query === "test") {
       return {
         products: productsDemo,
-        topHits: topHitsDemo,
+        categories: categoriesDemo,
+        hasMore: true,
       };
     }
 
-    const requestBody: LoopSearchRequest = { query };
+    const requestBody: LoopSearchRequest = { query, resultsOptions: { take } };
     const searchResponse = await fetch(`${baseUrl}/search`, {
       method: "POST",
       headers: { "Api-Version": "V3", "User-Id": "Test" },
@@ -172,17 +213,53 @@ export const createSearcher = (baseUrl: string): Searcher =>
     });
 
     if (!searchResponse.ok) {
-      const error: LoopErrorResponse = await searchResponse.json();
+      const { error }: LoopErrorResponse = await searchResponse.json();
       console.error(error);
       throw new Error(`Loop54 returned error ${error.code}: ${error.title}`);
     }
 
     const response: LoopSearchResponse = await searchResponse.json();
 
-    const products: SearchResultProduct[] = response.results.items.map((item) =>
-      loopItemToProduct(item)
+    const products: SearchResultProduct[] = response.results.items.map(
+      loopItemToProduct,
     );
-    const topHits: SearchResultTopHit[] = [];
+    const categories: SearchResultCategory[] = response.results.facets.map(
+      loopFacetToCategory,
+    ).filter(Boolean);
+    const hasMore = response.results.count > response.results.items.length;
 
-    return { products, topHits };
+    if (!response.results.facets.length) console.log("No facets returned");
+
+    return { products, categories, hasMore };
   };
+
+/**
+ * Fixes https://github.com/microsoft/TypeScript/issues/16655 for `Array.prototype.filter()`
+ * For example, using the fix the type of `bar` is `string[]` in the below snippet as it should be.
+ *
+ *  const foo: (string | null | undefined)[] = [];
+ *  const bar = foo.filter(Boolean);
+ *
+ * For related definitions, see https://github.com/microsoft/TypeScript/blob/master/src/lib/es5.d.ts
+ *
+ * Original licenses apply, see
+ *  - https://github.com/microsoft/TypeScript/blob/master/LICENSE.txt
+ *  - https://stackoverflow.com/help/licensing
+ */
+
+/** See https://stackoverflow.com/a/51390763/1470607  */
+type Falsy = false | 0 | "" | null | undefined;
+
+declare global {
+  interface Array<T> {
+    /**
+     * Returns the elements of an array that meet the condition specified in a callback function.
+     * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array.
+     * @param thisArg An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value.
+     */
+    filter<S extends T>(
+      predicate: BooleanConstructor,
+      thisArg?: unknown,
+    ): Exclude<S, Falsy>[];
+  }
+}

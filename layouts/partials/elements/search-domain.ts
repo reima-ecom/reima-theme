@@ -5,17 +5,19 @@ export type SearchResultProduct = {
   imageUrl: string;
 };
 
-export type SearchResultTopHit = {
+export type SearchResultCategory = {
   title: string;
   url: string;
 };
 
 export type SearchResults = {
   products: SearchResultProduct[];
-  topHits: SearchResultTopHit[];
+  categories: SearchResultCategory[];
+  /** Search has more results to show, i.e. add link to search page. */
+  hasMore: boolean;
 };
 
-export type Searcher = (query: string) => Promise<SearchResults>;
+export type Searcher = (query: string, limit?: number) => Promise<SearchResults>;
 
 export const EVENT_SEARCH = "search";
 export type EventSearchDetails = {
