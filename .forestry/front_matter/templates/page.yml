@@ -31,6 +31,7 @@ fields:
   - hr
   - content-table
   - milestones
+  - form
   config:
     min: 1
     max: 
@@ -48,5 +49,9 @@ fields:
   config: {}
   template: seo-properties
   label: SEO
+- name: hide_newsletter_sign_up
+  type: boolean
+  label: Hide Newsletter Sign up
+  description: Hide Newsletter Sign up announcement.
 pages:
 - demo/content/bug.md
