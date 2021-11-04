@@ -2,7 +2,8 @@
   <h2>{{.title}}</h2>
   <p>{{.description}}</p>
 
-  <input type="hidden" name="tags" value="{{.tags}}">
+  {{ $tags := delimit .tags "," }}
+  <input type="hidden" name="tags" value="{{ $tags }}">
 
   {{ range $index, $field := .fields }}
     {{ if eq $field.type "checkbox" }}
