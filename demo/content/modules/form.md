@@ -58,9 +58,9 @@ modules:
     type: checkbox
     required: false
     checked: true
-    tags:
-    - prospect
-    - newsletter
-    - babybox-signup
+  tags:
+  - prospect
+  - newsletter
+  - babybox-signupp
 hide_newsletter_sign_up: true
 ---
