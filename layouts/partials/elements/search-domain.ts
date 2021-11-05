@@ -15,6 +15,8 @@ export type SearchResults = {
   categories: SearchResultCategory[];
   /** Search has more results to show, i.e. add link to search page. */
   hasMore: boolean;
+  /** Original search query. */
+  query: string;
 };
 
 export type Searcher = (query: string, limit?: number) => Promise<SearchResults>;

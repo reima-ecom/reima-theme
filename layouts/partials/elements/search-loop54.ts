@@ -196,12 +196,14 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
         products: [],
         categories: [],
         hasMore: false,
+        query
       };
     } else if (query === "test") {
       return {
         products: productsDemo,
         categories: categoriesDemo,
         hasMore: true,
+        query
       };
     }
 
@@ -230,7 +232,7 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
 
     if (!response.results.facets.length) console.log("No facets returned");
 
-    return { products, categories, hasMore };
+    return { products, categories, hasMore, query };
   };
 
 /**

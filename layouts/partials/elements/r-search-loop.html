@@ -1,4 +1,4 @@
-<r-search-loop id="search" class="search" loop-url="{{site.Params.public.loop54.url}}" currency="{{site.Params.public.currency}}" locale="{{site.Language.Lang}}">
+<r-search-loop id="search" class="search" results="#search-results">
   <div class="search__header">
     <form action="/search" method="GET">
       <input name="q" type="search" placeholder="Search for products">
@@ -15,37 +15,6 @@
     </a>
   </div>
   <div class="search__body">
-    <div results="suggested" show>
-      <h3 class="search__list-title">Suggested</h3>
-      <ul class="search__link-list">
-        <li><a href="" class="silent-link">Raingear</a></li>
-        <li><a href="" class="silent-link">Jackets</a></li>
-        <li><a href="" class="silent-link">Rubber Boots</a></li>
-        <li><a href="" class="silent-link">Outerwear</a></li>
-        <li><a href="" class="silent-link">Fleece jackets</a></li>
-        <li><a href="" class="silent-link">Sneakers</a></li>
-      </ul>
-    </div>
-    <div results="categories">
-      <ul class="search__link-list"></ul>
-    </div>
-    <div results="products">
-      <ul class="search__product-list"></ul>
-    </div>
-    <div results="more">
-      <a href="" class="btn">Show all</a>
-    </div>
+    {{partial "elements/r-search-results"}}
   </div>
-  <template product>
-    <li>
-      <a href="" class="silent-link">
-        <img src="" alt="">
-        <h4 title></h4>
-        <span price></span>
-      </a>
-    </li>
-  </template>
-  <template category>
-    <li><a href="" class="silent-link"></a></li>
-  </template>
 </r-search-loop>
