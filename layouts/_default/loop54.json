@@ -9,12 +9,23 @@
   {{- $attributes.Add (index $entry 0) (slice (index $entry 1)) -}}
   {{- end -}}
   {{- end -}}
+  {{- $image := false -}}
+  {{- with .Resources.ByType "image" -}}
+  {{- $image = (index . 0).Resize "375x" -}}
+  {{- end -}}
     {
     "Id": "{{.Params.yotpoId}}",
     "Name": {{.Title | jsonify}},
+    "Url": "{{.Permalink}}",
     "Description": "{{.Params.description}}",
     "Brand": "Reima",
-    "ImageURL": "{{with .Resources.ByType "image"}}{{((index . 0).Resize "375x").Permalink}}{{end}}",
+    "ImageURL": "{{with $image}}{{.Permalink}}{{end}}",
+    {{- with $image }}
+    "ImageDimensons": {
+      "Width": {{.Width}},
+      "Height": {{.Height}}
+    },
+    {{- end }}
     "Attributes": {{ .Params.filtering | jsonify }},
     "Collections": {{ .Params.collections | jsonify }},
     "Tags": {{ .Params.tags | jsonify }},
