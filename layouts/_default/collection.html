@@ -16,8 +16,15 @@
 {{ end }}
 {{ $.Scratch.Add "css-critical" "_default/collection.css" }}
 
-<!-- add js if there's fitering needed -->
-{{ $.Scratch.Add "ts" "_default/collection.ts"}}
+<!-- add collection sorting -->
+{{ $.Scratch.Add "ts" "_default/collection-sort.ts"}}
+
+<!-- add collection filtering -->
+{{ if site.Params.public.algolia }}
+{{ $.Scratch.Add "ts" "_default/collection-filter.ts"}}
+{{ else if site.Params.public.loop54 }}
+{{ $.Scratch.Add "ts" "_default/collection-filter-loop.ts"}}
+{{ end }}
 
 {{ end }}
 
@@ -28,8 +35,9 @@
 {{ with .Params.sidebar }}
 {{ $hassidebar = len . }}
 {{ end }}
-<!-- check if filtering enabled on page and algolia on site -->
-{{ $hassidebar := or $hassidebar (and .Params.filters site.Params.public.algolia) }}
+<!-- check if filtering enabled on page and search provider on site -->
+{{ $hasfiltering := (and .Params.filters (or site.Params.public.algolia site.Params.public.loop54)) }}
+{{ $hassidebar := or $hassidebar $hasfiltering }}
 
 <div class="grid{{if $hassidebar}} grid--has-sidebar{{end}}">
   {{ with .Params.banner }}
@@ -63,8 +71,8 @@
       {{ if or (not .limit) (ge .limit (len $collectionPage.Pages)) }}
 
       <div class="product-filters">
-        {{ if and $.Params.filters $.Site.Params.public.algolia }}
-        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile">
+        {{ if $hasfiltering }}
+        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
           <!-- get all available options in child (product) pages -->
           {{ $collection := .collection }}
           {{- range $.Pages }}
@@ -220,8 +228,8 @@
     {{ end }}
     {{ end }}
 
-    {{ if and .Params.filters .Site.Params.public.algolia }}
-    <form id="filters" class="filter-list filter-list--desktop">
+    {{ if $hasfiltering }}
+    <form id="filters" class="filter-list filter-list--desktop" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
       <!-- get all available options in child (product) pages -->
       {{- range .Pages }}
       {{- $handle := "" }}

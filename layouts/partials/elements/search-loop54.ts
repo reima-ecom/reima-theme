@@ -1,4 +1,5 @@
 import type {
+  Filterer,
   Searcher,
   SearchResultCategory,
   SearchResultProduct,
@@ -9,6 +10,10 @@ type LoopSearchRequest = {
   resultsOptions?: {
     skip?: number;
     take?: number;
+    facets?: {
+      attributeName: string;
+      selected: (string | number | boolean)[];
+    }[];
   };
 };
 
@@ -175,7 +180,7 @@ const loopItemToProduct = (
     {} as Record<string, unknown>,
   );
   return {
-    url: "#",
+    url: attributes["Url"] as string,
     title: attributes["Name"] as string,
     price: attributes["Price"] as number,
     imageUrl: attributes["ImageURL"] as string,
@@ -189,6 +194,25 @@ const loopFacetToCategory = (
   return;
 };
 
+const searchLoop = async (
+  baseUrl: string,
+  search: LoopSearchRequest,
+): Promise<LoopSearchResponse> => {
+  const searchResponse = await fetch(`${baseUrl}/search`, {
+    method: "POST",
+    headers: { "Api-Version": "V3", "User-Id": "Test" },
+    body: JSON.stringify(search),
+  });
+
+  if (!searchResponse.ok) {
+    const { error }: LoopErrorResponse = await searchResponse.json();
+    console.error(error);
+    throw new Error(`Loop54 returned error ${error.code}: ${error.title}`);
+  }
+
+  return await searchResponse.json();
+};
+
 export const createSearcher = (baseUrl: string, take = 12): Searcher =>
   async (query) => {
     if (!query) {
@@ -196,31 +220,20 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
         products: [],
         categories: [],
         hasMore: false,
-        query
+        query,
       };
     } else if (query === "test") {
       return {
         products: productsDemo,
         categories: categoriesDemo,
         hasMore: true,
-        query
+        query,
       };
     }
 
     const requestBody: LoopSearchRequest = { query, resultsOptions: { take } };
-    const searchResponse = await fetch(`${baseUrl}/search`, {
-      method: "POST",
-      headers: { "Api-Version": "V3", "User-Id": "Test" },
-      body: JSON.stringify(requestBody),
-    });
 
-    if (!searchResponse.ok) {
-      const { error }: LoopErrorResponse = await searchResponse.json();
-      console.error(error);
-      throw new Error(`Loop54 returned error ${error.code}: ${error.title}`);
-    }
-
-    const response: LoopSearchResponse = await searchResponse.json();
+    const response = await searchLoop(baseUrl, requestBody);
 
     const products: SearchResultProduct[] = response.results.items.map(
       loopItemToProduct,
@@ -233,6 +246,25 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
     if (!response.results.facets.length) console.log("No facets returned");
 
     return { products, categories, hasMore, query };
+  };
+
+export const createFilterer = (baseUrl: string): Filterer =>
+  async (filter) => {
+    console.error("Searching with dummy string");
+
+    const response = await searchLoop(baseUrl, {
+      query: "reima",
+      resultsOptions: {
+        facets: filter.map((f) => ({
+          attributeName: f.attribute,
+          selected: f.selected,
+        })),
+      },
+    });
+
+    return response.results.items.map((item) => ({
+      handle: item.id,
+    }));
   };
 
 /**

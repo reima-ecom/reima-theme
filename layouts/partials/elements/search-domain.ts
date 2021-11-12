@@ -25,3 +25,13 @@ export const EVENT_SEARCH = "search";
 export type EventSearchDetails = {
   query: string | undefined;
 };
+
+export type FilterQuery = {
+  attribute: string,
+  selected: string[],
+}[];
+export type FilterResult = {
+  handle: string
+};
+
+export type Filterer = (filters: FilterQuery) => Promise<FilterResult[]>;
