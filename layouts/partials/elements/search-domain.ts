@@ -31,7 +31,7 @@ export type FilterQuery = {
   selected: string[],
 }[];
 export type FilterResult = {
-  handle: string
+  id: string
 };
 
 export type Filterer = (filters: FilterQuery) => Promise<FilterResult[]>;

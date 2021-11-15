@@ -14,7 +14,10 @@ const filterQueryFromForm = (form: HTMLFormElement): FilterQuery => {
       filters[keyName].push(value);
     }
   }
-  const result = Object.entries(filters).map(([attribute, selected]) => ({ attribute, selected }));
+  const result = Object.entries(filters).map(([attribute, selected]) => ({
+    attribute,
+    selected,
+  }));
   return result;
 };
 
@@ -24,7 +27,7 @@ const createFormFilterer = (form: HTMLFormElement) => {
   if (!baseUrl) throw new Error("Need loop-url attribute");
 
   // these are the product list `<ul>` elements to update when filtering with this form
-  const _productListElements: NodeListOf<HTMLUListElement> = document
+  const productListElements: NodeListOf<HTMLUListElement> = document
     .querySelectorAll<HTMLUListElement>("ul[data-collection]");
 
   return async (event: Event) => {
@@ -38,10 +41,22 @@ const createFormFilterer = (form: HTMLFormElement) => {
     const results = await createFilterer(baseUrl)(filter);
 
     // create array of hit handles
-    const _hitHandles: string[] = results.map((el) => el.handle);
+    const filteredIds: string[] = results.map((el) => el.id);
 
-    // show handles that match filters
-    throw new Error("Not implemented");
+    // filter based on id array
+    productListElements.forEach((ul) => {
+      ul.querySelectorAll("li").forEach((li) => {
+        const productId = li.getAttribute("product-id");
+        if (!productId) {
+          throw new Error("`product-id` not set on `<li>` element");
+        }
+        if (filteredIds.includes(productId)) {
+          li.style.display = "block";
+        } else {
+          li.style.display = "none";
+        }
+      });
+    });
   };
 };
 

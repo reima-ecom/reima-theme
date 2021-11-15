@@ -27,6 +27,25 @@ type LoopSearchResponse = {
   };
 };
 
+type LoopEntityRequest = {
+  resultsOptions?: {
+    skip?: number;
+    take?: number;
+    facets?: {
+      attributeName: string;
+      selected: (string | number | boolean)[];
+    }[];
+  };
+};
+
+type LoopEntityResponse = {
+  results: {
+    count: number;
+    items: LoopSearchResponseItem[];
+    facets: LoopSearchResponseFacet[];
+  };
+};
+
 type LoopSearchResponseItem = {
   type: string;
   id: string;
@@ -194,14 +213,26 @@ const loopFacetToCategory = (
   return;
 };
 
-const searchLoop = async (
+type LoopRequestTypes<E> =
+  E extends "/search" ? {
+    Request: LoopSearchRequest,
+    Response: LoopSearchResponse
+  } : 
+  E extends "/getEntities" ? {
+    Request: LoopEntityRequest,
+    Response: LoopEntityResponse
+  }
+  : never;
+
+const loopRequest = async <E extends string>(
   baseUrl: string,
-  search: LoopSearchRequest,
-): Promise<LoopSearchResponse> => {
-  const searchResponse = await fetch(`${baseUrl}/search`, {
+  endpoint: E,
+  body: LoopRequestTypes<E>["Request"],
+): Promise<LoopRequestTypes<E>["Response"]> => {
+  const searchResponse = await fetch(`${baseUrl}${endpoint}`, {
     method: "POST",
     headers: { "Api-Version": "V3", "User-Id": "Test" },
-    body: JSON.stringify(search),
+    body: JSON.stringify(body),
   });
 
   if (!searchResponse.ok) {
@@ -233,7 +264,7 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
 
     const requestBody: LoopSearchRequest = { query, resultsOptions: { take } };
 
-    const response = await searchLoop(baseUrl, requestBody);
+    const response = await loopRequest(baseUrl, "/search", requestBody);
 
     const products: SearchResultProduct[] = response.results.items.map(
       loopItemToProduct,
@@ -250,11 +281,9 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
 
 export const createFilterer = (baseUrl: string): Filterer =>
   async (filter) => {
-    console.error("Searching with dummy string");
-
-    const response = await searchLoop(baseUrl, {
-      query: "reima",
+    const response = await loopRequest(baseUrl, "/getEntities", {
       resultsOptions: {
+        take: 5000,
         facets: filter.map((f) => ({
           attributeName: f.attribute,
           selected: f.selected,
@@ -263,7 +292,7 @@ export const createFilterer = (baseUrl: string): Filterer =>
     });
 
     return response.results.items.map((item) => ({
-      handle: item.id,
+      id: item.id,
     }));
   };
 
