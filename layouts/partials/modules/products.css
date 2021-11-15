@@ -35,7 +35,6 @@
 
 .product-list__heading h2 {
   flex: 1 1 auto;
-  width: max-content;
   margin-bottom: 0;
 }
 
