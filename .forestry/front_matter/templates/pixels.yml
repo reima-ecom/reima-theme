@@ -231,5 +231,17 @@ fields:
   showOnly:
     field: sizebay_enabled
     value: true
+- name: mailchimp_enabled
+  type: boolean
+  label: Mailchimp
+- name: mailchimp_url
+  type: text
+  config:
+    required: false
+  label: Mailchimp script URL
+  description: Script URL for Mailchimp integration.
+  showOnly:
+    field: mailchimp_enabled
+    value: true
 pages:
 - demo/data/pixels.yaml
