@@ -1,5 +1,6 @@
 import type {
   Filterer,
+  FilterQuery,
   Searcher,
   SearchResultCategory,
   SearchResultProduct,
@@ -213,14 +214,13 @@ const loopFacetToCategory = (
   return;
 };
 
-type LoopRequestTypes<E> =
-  E extends "/search" ? {
-    Request: LoopSearchRequest,
-    Response: LoopSearchResponse
-  } : 
-  E extends "/getEntities" ? {
-    Request: LoopEntityRequest,
-    Response: LoopEntityResponse
+type LoopRequestTypes<E> = E extends "/search" ? {
+  Request: LoopSearchRequest;
+  Response: LoopSearchResponse;
+}
+  : E extends "/getEntities" ? {
+    Request: LoopEntityRequest;
+    Response: LoopEntityResponse;
   }
   : never;
 
@@ -280,21 +280,27 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>
-  async (filter) => {
-    const response = await loopRequest(baseUrl, "/getEntities", {
-      resultsOptions: {
-        take: 5000,
-        facets: filter.map((f) => ({
-          attributeName: f.attribute,
-          selected: f.selected,
-        })),
-      },
-    });
+  (collection) =>
+    async (filter) => {
+      let filterWithCollection: FilterQuery = filter;
+      if (collection) {
+        filterWithCollection = filterWithCollection.concat({ attribute: "Collections", selected: [collection] });
+      }
 
-    return response.results.items.map((item) => ({
-      id: item.id,
-    }));
-  };
+      const response = await loopRequest(baseUrl, "/getEntities", {
+        resultsOptions: {
+          take: 5000,
+          facets: filterWithCollection.map((f) => ({
+            attributeName: f.attribute,
+            selected: f.selected,
+          })),
+        },
+      });
+
+      return response.results.items.map((item) => ({
+        id: item.id,
+      }));
+    };
 
 /**
  * Fixes https://github.com/microsoft/TypeScript/issues/16655 for `Array.prototype.filter()`

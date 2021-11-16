@@ -27,24 +27,28 @@ const createFormFilterer = (form: HTMLFormElement) => {
   if (!baseUrl) throw new Error("Need loop-url attribute");
 
   // these are the product list `<ul>` elements to update when filtering with this form
+  let productListSelector = "ul[data-collection]";
+  const formCollectionAttribute = form.getAttribute("collection");
+  if (formCollectionAttribute && formCollectionAttribute !== "*") {
+    productListSelector = `ul[data-collection="${formCollectionAttribute}"]`;
+  }
   const productListElements: NodeListOf<HTMLUListElement> = document
-    .querySelectorAll<HTMLUListElement>("ul[data-collection]");
+    .querySelectorAll<HTMLUListElement>(productListSelector);
 
-  return async (event: Event) => {
-    // don't know what this is, but this use case is not supported
-    const { collection } = (event.target as HTMLInputElement).dataset;
-    if (collection && collection !== "*") throw new Error("Not implemented");
-
+  return (_event: Event) => {
     const filter = filterQueryFromForm(form);
 
-    // search for products
-    const results = await createFilterer(baseUrl)(filter);
-
-    // create array of hit handles
-    const filteredIds: string[] = results.map((el) => el.id);
-
     // filter based on id array
-    productListElements.forEach((ul) => {
+    productListElements.forEach(async (ul) => {
+      // the collection this list is showing
+      const collection = ul.dataset.collection;
+
+      // search for products
+      const results = await createFilterer(baseUrl)(collection)(filter);
+
+      // create array of hit handles
+      const filteredIds: string[] = results.map((el) => el.id);
+
       ul.querySelectorAll("li").forEach((li) => {
         const productId = li.getAttribute("product-id");
         if (!productId) {

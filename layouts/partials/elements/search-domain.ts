@@ -34,4 +34,4 @@ export type FilterResult = {
   id: string
 };
 
-export type Filterer = (filters: FilterQuery) => Promise<FilterResult[]>;
+export type Filterer = (collection?: string) => (filters: FilterQuery) => Promise<FilterResult[]>;

@@ -72,7 +72,7 @@
 
       <div class="product-filters">
         {{ if $hasfiltering }}
-        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
+        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" collection="{{.collection}}" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
           <!-- get all available options in child (product) pages -->
           {{ $collection := .collection }}
           {{- range $.Pages }}
@@ -229,7 +229,7 @@
     {{ end }}
 
     {{ if $hasfiltering }}
-    <form id="filters" class="filter-list filter-list--desktop" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
+    <form id="filters" class="filter-list filter-list--desktop" collection="*" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
       <!-- get all available options in child (product) pages -->
       {{- range .Pages }}
       {{- $handle := "" }}
