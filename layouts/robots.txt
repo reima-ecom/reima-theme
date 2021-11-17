@@ -1,0 +1,10 @@
+# www.robotstxt.org/
+
+# Allow crawling of all content
+User-agent: *
+{{ range .Pages }}
+Disallow: {{ .RelPermalink }}
+{{ end }}
+
+# Sitemap
+sitemap: {{site.BaseURL}}sitemap.xml
