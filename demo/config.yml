@@ -5,6 +5,8 @@ disableKinds:
   - taxonomy
   - term
 
+enableRobotsTXT: true
+
 # uncomment these lines to test multilingual mode
 languages:
   en:
