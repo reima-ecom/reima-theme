@@ -2,7 +2,9 @@
 
 # Allow crawling of all content
 User-agent: *
-Disallow:
+{{ range where .Pages ".Params.noindex" true}}
+Disallow: {{ .RelPermalink }}
+{{ end }}
 
 # Sitemap
 sitemap: {{site.BaseURL}}sitemap.xml
