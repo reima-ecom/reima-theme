@@ -18,11 +18,14 @@ export default class RSearchLoop extends HTMLElement {
       "input",
       (e) => this.results.searchAndRender((<HTMLInputElement> e.target).value),
     );
-    // search immediately if input has input
-    // but wait for the element to be defined first
+
+    // wait for the element to be defined first
+    await window.customElements.whenDefined("r-search-results");
+    // search immediately if input has input, otherwise get suggestions
     if (input?.value) {
-      await window.customElements.whenDefined("r-search-results");
       this.results.searchAndRender(input.value);
+    } else {
+      this.results.showSuggestions();
     }
   }
 }

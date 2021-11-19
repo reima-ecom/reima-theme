@@ -35,3 +35,5 @@ export type FilterResult = {
 };
 
 export type Filterer = (collection?: string) => (filters: FilterQuery) => Promise<FilterResult[]>;
+
+export type Suggester = () => Promise<string[]>;

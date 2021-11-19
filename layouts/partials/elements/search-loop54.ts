@@ -4,6 +4,7 @@ import type {
   Searcher,
   SearchResultCategory,
   SearchResultProduct,
+  Suggester,
 } from "./search-domain.ts";
 
 type LoopSearchRequest = {
@@ -80,6 +81,24 @@ type LoopSearchResponseRangeFacet = {
   max: string | number | boolean;
   selectedMin: string | number | boolean;
   selectedmax: string | number | boolean;
+};
+
+type LoopSuggestionRequest = {
+  customData: {
+    queriesOptions: {
+      skip: number;
+      take: number;
+    };
+  };
+};
+
+type LoopSuggestionResponse = {
+  customData: {
+    commonSearches: {
+      key: string;
+      value: number;
+    }[];
+  };
 };
 
 type LoopErrorResponse = {
@@ -222,6 +241,10 @@ type LoopRequestTypes<E> = E extends "/search" ? {
     Request: LoopEntityRequest;
     Response: LoopEntityResponse;
   }
+  : E extends "/Client.Requests.GetCommonSearches" ? {
+    Request: LoopSuggestionRequest;
+    Response: LoopSuggestionResponse;
+  }
   : never;
 
 const loopRequest = async <E extends string>(
@@ -284,7 +307,10 @@ export const createFilterer = (baseUrl: string): Filterer =>
     async (filter) => {
       let filterWithCollection: FilterQuery = filter;
       if (collection) {
-        filterWithCollection = filterWithCollection.concat({ attribute: "Collections", selected: [collection] });
+        filterWithCollection = filterWithCollection.concat({
+          attribute: "Collections",
+          selected: [collection],
+        });
       }
 
       const response = await loopRequest(baseUrl, "/getEntities", {
@@ -301,6 +327,16 @@ export const createFilterer = (baseUrl: string): Filterer =>
         id: item.id,
       }));
     };
+
+export const createSuggester = (baseUrl: string): Suggester =>
+  async () => {
+    const response = await loopRequest(
+      baseUrl,
+      "/Client.Requests.GetCommonSearches",
+      { customData: { queriesOptions: { skip: 0, take: 5 } } },
+    );
+    return response.customData.commonSearches.map((s) => s.key);
+  };
 
 /**
  * Fixes https://github.com/microsoft/TypeScript/issues/16655 for `Array.prototype.filter()`

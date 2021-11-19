@@ -2,16 +2,9 @@
   loop-url="{{site.Params.public.loop54.url}}" currency="{{site.Params.public.currency}}" locale="{{site.Language.Lang}}"
   {{ with .take }}take="{{.}}"{{ end }}
 >
-  <div results="suggested" show>
+  <div results="suggested">
     <h3 class="search-results__list-title">Suggested</h3>
-    <ul class="search-results__link-list">
-      <li><a href="" class="silent-link">Raingear</a></li>
-      <li><a href="" class="silent-link">Jackets</a></li>
-      <li><a href="" class="silent-link">Rubber Boots</a></li>
-      <li><a href="" class="silent-link">Outerwear</a></li>
-      <li><a href="" class="silent-link">Fleece jackets</a></li>
-      <li><a href="" class="silent-link">Sneakers</a></li>
-    </ul>
+    <ul class="search-results__link-list"></ul>
   </div>
   <div results="categories">
     <ul class="search-results__link-list"></ul>
@@ -32,6 +25,9 @@
     </li>
   </template>
   <template category>
+    <li><a href="" class="silent-link"></a></li>
+  </template>
+  <template suggestion>
     <li><a href="" class="silent-link"></a></li>
   </template>
 </r-search-results>

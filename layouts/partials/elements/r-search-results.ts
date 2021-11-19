@@ -1,4 +1,4 @@
-
+/// <reference lib="dom" />
 
 import type {
   EventSearchDetails,
@@ -7,7 +7,7 @@ import type {
   SearchResults,
 } from "./search-domain.ts";
 import { EVENT_SEARCH } from "./search-domain.ts";
-import { createSearcher } from "./search-loop54.ts";
+import { createSearcher, createSuggester } from "./search-loop54.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
   const formatter = new Intl.NumberFormat(locale, {
@@ -42,6 +42,18 @@ const createCategoryFrom = (categoryTemplate: HTMLTemplateElement) =>
     categoryLink.textContent = category.title;
     categoryLink.href = category.url;
     return categoryItem;
+  };
+
+const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
+  (suggestion: string): HTMLElement => {
+    const suggestionItem = suggestionTemplate.content.cloneNode(
+      true,
+    ) as HTMLElement;
+    const suggestionLink = suggestionItem.querySelector("a");
+    if (!suggestionLink) throw new Error("Malformed suggestion template");
+    suggestionLink.textContent = suggestion;
+    suggestionLink.href = `/search/?q=${suggestion}`;
+    return suggestionItem;
   };
 
 export default class RSearchResults extends HTMLElement {
@@ -135,6 +147,26 @@ export default class RSearchResults extends HTMLElement {
       if (!moreLink) throw new Error("Show more link not found")
       moreLink.href = `/search/?q=${query}`;
     }
+  }
+
+  async showSuggestions() {
+    const suggestions = await createSuggester(this.loopUrl)();
+    if (suggestions.length) {
+      const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
+        "template[suggestion]",
+      );
+      const suggestionsElement = this.querySelector<HTMLElement>(
+        "[results=suggested]",
+      );
+      const suggestionsList = suggestionsElement!.querySelector("ul")!;
+      suggestionsList.innerHTML = "";
+      suggestionsList.append(
+        ...suggestions.map(
+          createSuggestionFrom(suggestionTemplate!),
+        ),
+      );
+    }
+    this.setResultVisible("suggested", true);
   }
 
   async searchAndRender(query: string) {
