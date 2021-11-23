@@ -19,7 +19,7 @@ export type SearchResults = {
   query: string;
 };
 
-export type Searcher = (query: string, limit?: number) => Promise<SearchResults>;
+export type Searcher = (query: string, take?: number, skip?: number) => Promise<SearchResults>;
 
 export const EVENT_SEARCH = "search";
 export type EventSearchDetails = {

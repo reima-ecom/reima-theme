@@ -57,6 +57,27 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
   };
 
 export default class RSearchResults extends HTMLElement {
+  lastQuery = "";
+
+  connectedCallback() {
+    if (this.loadMore) {
+      const moreLink = this.querySelector<HTMLAnchorElement>(
+        "[results=more] a",
+      );
+      if (!moreLink) throw new Error("Show more link not found");
+      moreLink.addEventListener("click", async (event) => {
+        event.preventDefault();
+        this.skip = this.skip + this.take;
+        await this.searchAndRender(undefined, false);
+        // push take to url to enable going back to the same results
+        const url = new URL(location.href);
+        const take = this.productList.childElementCount;
+        url.searchParams.set("take", take.toString());
+        history.pushState(undefined, document.title, url.toString());
+      });
+    }
+  }
+
   get loopUrl(): string {
     const attr = this.getAttribute("loop-url");
     if (!attr) throw new Error("Mandatory argument missing");
@@ -75,10 +96,40 @@ export default class RSearchResults extends HTMLElement {
     return attr;
   }
 
-  get take(): number | undefined {
+  get take(): number {
     const attr = this.getAttribute("take");
-    if (!attr) return undefined;
+    if (!attr) return 15;
     return Number.parseInt(attr);
+  }
+
+  get loadMore(): boolean {
+    return this.hasAttribute("load-more");
+  }
+
+  get skip(): number {
+    const attr = this.getAttribute("skip");
+    if (!attr) return 0;
+    return Number.parseInt(attr);
+  }
+
+  set skip(value: number) {
+    value && this.setAttribute("skip", value?.toString());
+  }
+
+  get productList(): HTMLUListElement {
+    const list = this.querySelector<HTMLUListElement>(
+      "[results=products] ul",
+    );
+    if (!list) throw new Error("Element not found");
+    return list;
+  }
+
+  get categoryList(): HTMLUListElement {
+    const list = this.querySelector<HTMLUListElement>(
+      "[results=categories] ul",
+    );
+    if (!list) throw new Error("Element not found");
+    return list;
   }
 
   sendEvent(query: string) {
@@ -97,7 +148,7 @@ export default class RSearchResults extends HTMLElement {
     else elem.removeAttribute("show");
   }
 
-  render({ products, categories, hasMore, query }: SearchResults) {
+  renderMore({ products, categories, hasMore, query }: SearchResults) {
     if (products.length || categories.length) {
       this.setResultVisible("suggested", false);
     } else {
@@ -109,12 +160,7 @@ export default class RSearchResults extends HTMLElement {
       const productTemplate = this.querySelector<HTMLTemplateElement>(
         "template[product]",
       );
-      const productsElement = this.querySelector<HTMLElement>(
-        "[results=products]",
-      );
-      const productsList = productsElement!.querySelector("ul")!;
-      productsList.innerHTML = "";
-      productsList.append(
+      this.productList.append(
         ...products.map(
           createProductItemFrom(
             productTemplate!,
@@ -129,22 +175,20 @@ export default class RSearchResults extends HTMLElement {
       const categoryTemplate = this.querySelector<HTMLTemplateElement>(
         "template[category]",
       );
-      const categorysList = this.querySelector<HTMLUListElement>(
-        "[results=categories] ul",
-      );
-      if (!categoryTemplate || !categorysList) {
+      if (!categoryTemplate) {
         throw new Error("Malformed top hits template");
       }
-      categorysList.innerHTML = "";
-      categorysList.append(
+      this.categoryList.append(
         ...categories.map(createCategoryFrom(categoryTemplate)),
       );
     }
 
     this.setResultVisible("more", hasMore);
     if (hasMore) {
-      const moreLink = this.querySelector<HTMLAnchorElement>("[results=more] a");
-      if (!moreLink) throw new Error("Show more link not found")
+      const moreLink = this.querySelector<HTMLAnchorElement>(
+        "[results=more] a",
+      );
+      if (!moreLink) throw new Error("Show more link not found");
       moreLink.href = `/search/?q=${query}`;
     }
   }
@@ -169,8 +213,19 @@ export default class RSearchResults extends HTMLElement {
     this.setResultVisible("suggested", true);
   }
 
-  async searchAndRender(query: string) {
-    const results = await createSearcher(this.loopUrl, this.take)(query);
-    this.render(results);
+  clearResults() {
+    this.productList.innerHTML = "";
+    this.categoryList.innerHTML = "";
+  }
+
+  async searchAndRender(query = this.lastQuery, clear = true, take?: number) {
+    const results = await createSearcher(this.loopUrl)(
+      query,
+      take || this.take,
+      this.skip,
+    );
+    this.lastQuery = query;
+    clear && this.clearResults();
+    this.renderMore(results);
   }
 }

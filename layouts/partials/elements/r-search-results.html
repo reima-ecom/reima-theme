@@ -1,6 +1,7 @@
 <r-search-results id="search-results" class="search-results"
   loop-url="{{site.Params.public.loop54.url}}" currency="{{site.Params.public.currency}}" locale="{{site.Language.Lang}}"
   {{ with .take }}take="{{.}}"{{ end }}
+  {{ if .loadMore}}load-more{{ end }}
 >
   <div results="suggested">
     <h3 class="search-results__list-title">Suggested</h3>
@@ -13,7 +14,7 @@
     <ul class="search-results__product-list"></ul>
   </div>
   <div results="more">
-    <a href="" class="btn">Show all</a>
+    <a href="" class="btn">Show more</a>
   </div>
   <template product>
     <li>

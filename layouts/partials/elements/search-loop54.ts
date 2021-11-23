@@ -267,8 +267,8 @@ const loopRequest = async <E extends string>(
   return await searchResponse.json();
 };
 
-export const createSearcher = (baseUrl: string, take = 12): Searcher =>
-  async (query) => {
+export const createSearcher = (baseUrl: string): Searcher =>
+  async (query, take, skip) => {
     if (!query) {
       return {
         products: [],
@@ -285,7 +285,7 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
       };
     }
 
-    const requestBody: LoopSearchRequest = { query, resultsOptions: { take } };
+    const requestBody: LoopSearchRequest = { query, resultsOptions: { take, skip } };
 
     const response = await loopRequest(baseUrl, "/search", requestBody);
 
@@ -295,7 +295,7 @@ export const createSearcher = (baseUrl: string, take = 12): Searcher =>
     const categories: SearchResultCategory[] = response.results.facets.map(
       loopFacetToCategory,
     ).filter(Boolean);
-    const hasMore = response.results.count > response.results.items.length;
+    const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
 
     if (!response.results.facets.length) console.log("No facets returned");
 
