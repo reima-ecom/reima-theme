@@ -3,6 +3,10 @@ export type SearchResultProduct = {
   price: number;
   url: string;
   imageUrl: string;
+  imageDimensions?: {
+    width: number;
+    height: number;
+  };
 };
 
 export type SearchResultCategory = {
@@ -19,7 +23,11 @@ export type SearchResults = {
   query: string;
 };
 
-export type Searcher = (query: string, take?: number, skip?: number) => Promise<SearchResults>;
+export type Searcher = (
+  query: string,
+  take?: number,
+  skip?: number,
+) => Promise<SearchResults>;
 
 export const EVENT_SEARCH = "search";
 export type EventSearchDetails = {
@@ -27,13 +35,15 @@ export type EventSearchDetails = {
 };
 
 export type FilterQuery = {
-  attribute: string,
-  selected: string[],
+  attribute: string;
+  selected: string[];
 }[];
 export type FilterResult = {
-  id: string
+  id: string;
 };
 
-export type Filterer = (collection?: string) => (filters: FilterQuery) => Promise<FilterResult[]>;
+export type Filterer = (
+  collection?: string,
+) => (filters: FilterQuery) => Promise<FilterResult[]>;
 
 export type Suggester = () => Promise<string[]>;

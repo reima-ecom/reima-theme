@@ -223,6 +223,10 @@ const loopItemToProduct = (
     title: attributes["Name"] as string,
     price: attributes["Price"] as number,
     imageUrl: attributes["ImageURL"] as string,
+    imageDimensions: {
+      width: Number.parseInt(attributes["ImageDimensonsWidth"] as string),
+      height: Number.parseInt(attributes["ImageDimensonsHeight"] as string),
+    },
   };
 };
 

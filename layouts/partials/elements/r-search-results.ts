@@ -28,6 +28,10 @@ const createProductItemFrom = (
       product.price,
     );
     productItem.querySelector("img")!.src = product.imageUrl;
+    if (product.imageDimensions) {
+      productItem.querySelector("img")!.width = product.imageDimensions.width;
+      productItem.querySelector("img")!.height = product.imageDimensions.height;
+    }
     productItem.querySelector("a")!.href = product.url;
     return productItem;
   };
