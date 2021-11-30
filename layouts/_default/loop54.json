@@ -21,7 +21,7 @@
     "Brand": "Reima",
     "ImageURL": "{{with $image}}{{.Permalink}}{{end}}",
     {{- with $image }}
-    "ImageDimensons": {
+    "ImageDimensions": {
       "Width": {{.Width}},
       "Height": {{.Height}}
     },
