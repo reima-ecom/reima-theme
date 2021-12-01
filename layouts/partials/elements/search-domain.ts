@@ -1,4 +1,5 @@
 export type SearchResultProduct = {
+  id: string;
   title: string;
   price: number;
   url: string;
@@ -36,6 +37,11 @@ export type EventSearchDetails = {
   query: string | undefined;
 };
 
+export const EVENT_SEARCH_PRODUCT_CLICK = "search-product-click";
+export type EventSearchProductClickDetails = {
+  productId: string;
+};
+
 export type FilterQuery = {
   attribute: string;
   selected: string[];
@@ -49,3 +55,16 @@ export type Filterer = (
 ) => (filters: FilterQuery) => Promise<FilterResult[]>;
 
 export type Suggester = () => Promise<string[]>;
+
+interface CustomEventMap {
+  "search": CustomEvent<EventSearchDetails>;
+  "search-product-click": CustomEvent<EventSearchProductClickDetails>;
+}
+declare global {
+  interface Document { //adds definition to Document, but you can do the same with HTMLElement
+    addEventListener<K extends keyof CustomEventMap>(
+      type: K,
+      listener: (this: Document, ev: CustomEventMap[K]) => void,
+    ): void;
+  }
+}

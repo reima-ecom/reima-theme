@@ -2,11 +2,12 @@
 
 import type {
   EventSearchDetails,
+  EventSearchProductClickDetails,
   SearchResultCategory,
   SearchResultProduct,
   SearchResults,
 } from "./search-domain.ts";
-import { EVENT_SEARCH } from "./search-domain.ts";
+import { EVENT_SEARCH, EVENT_SEARCH_PRODUCT_CLICK } from "./search-domain.ts";
 import { createSearcher, createSuggester } from "./search-loop54.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
@@ -34,7 +35,9 @@ const createProductItemFrom = (
     if (product.imageDimensions?.height) {
       productItem.querySelector("img")!.height = product.imageDimensions.height;
     }
-    productItem.querySelector("a")!.href = product.url;
+    const linkElement = productItem.querySelector("a")!;
+    linkElement.href = product.url;
+    linkElement.setAttribute("product-id", product.id);
     return productItem;
   };
 
@@ -66,6 +69,7 @@ export default class RSearchResults extends HTMLElement {
   lastQuery = "";
 
   connectedCallback() {
+    // add handling of button to load more results (if enabled)
     if (this.loadMore) {
       const moreLink = this.querySelector<HTMLAnchorElement>(
         "[results=more] a",
@@ -82,6 +86,23 @@ export default class RSearchResults extends HTMLElement {
         history.pushState(undefined, document.title, url.toString());
       });
     }
+    // add event listener for product click
+    this.productList.addEventListener("click", (ev) => {
+      const linkElement = (ev.target as HTMLElement).closest("a");
+      if (linkElement) {
+        const productId = linkElement.getAttribute("product-id");
+        if (!productId) throw new Error("Product id not found");
+        this.dispatchEvent(
+          new CustomEvent<EventSearchProductClickDetails>(
+            EVENT_SEARCH_PRODUCT_CLICK,
+            {
+              bubbles: true,
+              detail: { productId },
+            },
+          ),
+        );
+      }
+    });
   }
 
   get loopUrl(): string {
@@ -138,7 +159,7 @@ export default class RSearchResults extends HTMLElement {
     return list;
   }
 
-  sendEvent(query: string) {
+  sendSearchEvent(query: string) {
     this.dispatchEvent(
       new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
         bubbles: true,
@@ -224,7 +245,12 @@ export default class RSearchResults extends HTMLElement {
     this.categoryList.innerHTML = "";
   }
 
-  async searchAndRender(query = this.lastQuery, clear = true, take?: number, instant = false) {
+  async searchAndRender(
+    query = this.lastQuery,
+    clear = true,
+    take?: number,
+    instant = false,
+  ) {
     const results = await createSearcher(this.loopUrl)(
       query,
       take || this.take,

@@ -104,6 +104,19 @@ type LoopSuggestionResponse = {
   };
 };
 
+type LoopEventType = "click" | "addtocart" | "purchase";
+type LoopEventRequest = {
+  events: {
+    type: LoopEventType;
+    entity: {
+      type: "Product";
+      id: string;
+    };
+  }[];
+};
+
+type LoopEventResponse = Record<never, never>;
+
 type LoopErrorResponse = {
   error: {
     /** The HTTP status code of the response. */
@@ -119,101 +132,6 @@ type LoopErrorResponse = {
   };
 };
 
-const productsDemo: SearchResultProduct[] = [
-  {
-    title: "Reflecting winter mittens Vilkku",
-    price: 32.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/14_01_01.jpg",
-  },
-  {
-    title: "Kids’ waterproof trousers Lammikko",
-    price: 26.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/522233-2350.jpg",
-  },
-  {
-    title: "Kids’ hooded raincoat Lampi",
-    price: 34.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/02_01_01.jpg",
-  },
-  {
-    title: "Kids’ Jacket Frebben",
-    price: 109.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/03_02_01.jpg",
-  },
-  {
-    title: "Kids’ fleece jacket Hopper",
-    price: 109.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/526355-2850.jpg",
-  },
-  {
-    title: "Kids’ winter shoes Freddo",
-    price: 74.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/07_01_01.jpg",
-  },
-  {
-    title: "Snowsuit Gotland",
-    price: 129.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/08_01_01.jpg",
-  },
-  {
-    title: "Reimatec Kiddo overall Kapelli",
-    price: 89.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/520242A-2400.jpg",
-  },
-  {
-    title: "Anti-Bite Pants Sillat",
-    price: 59.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/532225-3880.jpg",
-  },
-  {
-    title: "Xylitol Cool t-shirt Vauhdikas",
-    price: 22.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/536545-9990.jpg",
-  },
-  {
-    title: "Xylitol Cool shorts Ilmassa",
-    price: 22.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/536543-7330.jpg",
-  },
-  {
-    title: "Xylitol Cool jacket Harkat",
-    price: 22.95,
-    url: "/",
-    imageUrl:
-      "https://res.cloudinary.com/fantastic/image/upload/f_auto/c_scale,w_800/Reima/products/536548-4607.jpg",
-  },
-];
-const categoriesDemo: SearchResultCategory[] = [
-  { title: "Kid's Jackets", url: "#" },
-  { title: "Rain jackets", url: "#" },
-  { title: "Winter Jackets", url: "#" },
-  { title: "Fleece Jackets", url: "#" },
-  { title: "Ski & Snowboard Jackets", url: "#" },
-  { title: "Light Jackets", url: "#" },
-];
-
 const loopItemToProduct = (
   item: LoopSearchResponseItem,
 ): SearchResultProduct => {
@@ -222,6 +140,7 @@ const loopItemToProduct = (
     {} as Record<string, unknown>,
   );
   return {
+    id: item.id,
     url: attributes["Url"] as string,
     title: attributes["Name"] as string,
     price: attributes["Price"] as number,
@@ -240,6 +159,8 @@ const loopFacetToCategory = (
   return;
 };
 
+const getUserId = (): string => "N/A";
+
 type LoopRequestTypes<E> = E extends "/search" ? {
   Request: LoopSearchRequest;
   Response: LoopSearchResponse;
@@ -252,17 +173,26 @@ type LoopRequestTypes<E> = E extends "/search" ? {
     Request: LoopSuggestionRequest;
     Response: LoopSuggestionResponse;
   }
+  : E extends "/createEvents" ? {
+    Request: LoopEventRequest;
+    Response: LoopEventResponse;
+  }
   : never;
 
 const loopRequest = async <E extends string>(
   baseUrl: string,
   endpoint: E,
   body: LoopRequestTypes<E>["Request"],
+  keepalive = false,
 ): Promise<LoopRequestTypes<E>["Response"]> => {
   const searchResponse = await fetch(`${baseUrl}${endpoint}`, {
     method: "POST",
-    headers: { "Api-Version": "V3", "User-Id": "Test" },
+    headers: {
+      "Api-Version": "V3",
+      "User-Id": getUserId(),
+    },
     body: JSON.stringify(body),
+    keepalive,
   });
 
   if (!searchResponse.ok) {
@@ -281,13 +211,6 @@ export const createSearcher = (baseUrl: string): Searcher =>
         products: [],
         categories: [],
         hasMore: false,
-        query,
-      };
-    } else if (query === "test") {
-      return {
-        products: productsDemo,
-        categories: categoriesDemo,
-        hasMore: true,
         query,
       };
     }
@@ -353,6 +276,16 @@ export const createSuggester = (baseUrl: string): Suggester =>
       { customData: { queriesOptions: { skip: 0, take: 5 } } },
     );
     return response.customData.commonSearches.map((s) => s.key);
+  };
+
+export const createEventSender = (baseUrl: string) =>
+  (type: LoopEventType, productId: string) => {
+    loopRequest(
+      baseUrl,
+      "/createEvents",
+      { events: [{ type, entity: { type: "Product", id: productId } }] },
+      true,
+    );
   };
 
 /**
