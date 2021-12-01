@@ -27,6 +27,8 @@ export type Searcher = (
   query: string,
   take?: number,
   skip?: number,
+  /** Set to true if searching based on key press */
+  instant?: boolean,
 ) => Promise<SearchResults>;
 
 export const EVENT_SEARCH = "search";

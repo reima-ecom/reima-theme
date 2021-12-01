@@ -17,6 +17,9 @@ type LoopSearchRequest = {
       selected: (string | number | boolean)[];
     }[];
   };
+  customData?: {
+    directSearch?: boolean;
+  };
 };
 
 /** https://docs.loop54.com/latest/api/docs.html#tag/User-initiated/paths/~1search/post */
@@ -272,7 +275,7 @@ const loopRequest = async <E extends string>(
 };
 
 export const createSearcher = (baseUrl: string): Searcher =>
-  async (query, take, skip) => {
+  async (query, take, skip, instant) => {
     if (!query) {
       return {
         products: [],
@@ -289,7 +292,17 @@ export const createSearcher = (baseUrl: string): Searcher =>
       };
     }
 
-    const requestBody: LoopSearchRequest = { query, resultsOptions: { take, skip } };
+    const requestBody: LoopSearchRequest = {
+      query,
+      resultsOptions: { take, skip },
+    };
+
+    // set direct search flag, issue reima-ecom/reima-us#42
+    if (instant) {
+      requestBody.customData = {
+        directSearch: true,
+      };
+    }
 
     const response = await loopRequest(baseUrl, "/search", requestBody);
 

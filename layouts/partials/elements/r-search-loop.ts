@@ -11,19 +11,23 @@ export default class RSearchLoop extends HTMLElement {
     return resultsElement;
   }
 
+  search(query: string) {
+    this.results.searchAndRender(query, undefined, undefined, true);
+  }
+
   async connectedCallback() {
     const input = this.querySelector<HTMLInputElement>("input[type=search]");
     // add input event listener
     input?.addEventListener(
       "input",
-      (e) => this.results.searchAndRender((<HTMLInputElement> e.target).value),
+      (e) => this.search((<HTMLInputElement> e.target).value),
     );
 
     // wait for the element to be defined first
     await window.customElements.whenDefined("r-search-results");
     // search immediately if input has input, otherwise get suggestions
     if (input?.value) {
-      this.results.searchAndRender(input.value);
+      this.search(input.value);
     } else {
       this.results.showSuggestions();
     }

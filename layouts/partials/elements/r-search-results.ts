@@ -28,8 +28,10 @@ const createProductItemFrom = (
       product.price,
     );
     productItem.querySelector("img")!.src = product.imageUrl;
-    if (product.imageDimensions) {
+    if (product.imageDimensions?.width) {
       productItem.querySelector("img")!.width = product.imageDimensions.width;
+    }
+    if (product.imageDimensions?.height) {
       productItem.querySelector("img")!.height = product.imageDimensions.height;
     }
     productItem.querySelector("a")!.href = product.url;
@@ -222,11 +224,12 @@ export default class RSearchResults extends HTMLElement {
     this.categoryList.innerHTML = "";
   }
 
-  async searchAndRender(query = this.lastQuery, clear = true, take?: number) {
+  async searchAndRender(query = this.lastQuery, clear = true, take?: number, instant = false) {
     const results = await createSearcher(this.loopUrl)(
       query,
       take || this.take,
       this.skip,
+      instant,
     );
     this.lastQuery = query;
     clear && this.clearResults();
