@@ -20,6 +20,19 @@
 {{ end }}
 </script>
 
+{{ if .aw_conversion_ids }}
+{{ with .aw_subscribe_newsletter_id }}
+<!-- Event snippet for Subscribe conversion page -->
+<script uses-cookies>
+  document.addEventListener('subscribe', () => {
+    gtag('event', 'conversion', {
+      'send_to': '{{.}}'
+    });
+  });
+</script>
+{{ end }}
+{{ end }}
+
 <!-- product view enhanced ecommerce event -->
 {{ with partial "helpers/get-product" $ }}
 {{ $productId := $.File.ContentBaseName }}
@@ -60,6 +73,14 @@
         quantity: 1,
       }]
     });
+
+    {{ if .aw_conversion_ids }}
+    {{ with .aw_add_to_cart_id }}
+    gtag('event', 'conversion', {
+      'send_to': '{{.}}'
+    });
+    {{ end }}
+    {{ end }}
   });
 </script>
 {{ end }}

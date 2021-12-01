@@ -25,6 +25,9 @@ luckyorange_site: 1111
 gtm_enabled: true
 gtm_property: GTM-XXXXXXX
 aw_property: ''
+aw_conversion_ids: true
+aw_add_to_cart_id: 'AW-XXXXXXX/XXXXXXX'
+aw_subscribe_newsletter_id: 'AW-XXXXXXX/XXXXXXX'
 avantlink_enabled: true
 avantlink_id: 111111
 sizebay_enabled: true
