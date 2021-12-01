@@ -61,6 +61,25 @@ fields:
   showOnly:
     field: ga_enabled
     value: true
+- name: aw_conversion_ids
+  type: boolean
+  label: Google Ads conversion ids
+- name: aw_add_to_cart_id
+  type: text
+  config:
+    required: false
+  label: Add to cart conversion id
+  showOnly:
+    field: aw_conversion_ids
+    value: true
+- name: aw_subscribe_newsletter_id
+  type: text
+  config:
+    required: false
+  label: Subscribe newsletter id
+  showOnly:
+    field: aw_conversion_ids
+    value: true
 - type: boolean
   label: Google Optimize
   name: googleoptimize_enabled
