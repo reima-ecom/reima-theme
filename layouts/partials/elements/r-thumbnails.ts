@@ -29,14 +29,14 @@ export default class RThumbnails extends HTMLElement {
   setActiveThumbnail(path: string, forceScroll?: boolean) {
     if (forceScroll || !this.carouselScrolling) {
       const thumbnailElement = this.querySelector<HTMLImageElement>(
-        `img[data-path="${path}"]`,
+        `img[data-path="${path}"]`
       )!;
       const activeThumbnail = this.querySelector(".active");
       if (activeThumbnail) activeThumbnail.classList.remove("active");
       thumbnailElement.classList.add("active");
 
-      const thumbMiddle = thumbnailElement.offsetLeft +
-        thumbnailElement.clientWidth / 2;
+      const thumbMiddle =
+        thumbnailElement.offsetLeft + thumbnailElement.clientWidth / 2;
       const thumbScrollPosition = thumbMiddle - this.clientWidth / 2;
       this.scrollTo(thumbScrollPosition, 0);
     }
@@ -58,7 +58,9 @@ export default class RThumbnails extends HTMLElement {
 
     this.addEventListener("click", (e) => {
       const path = (e.target as HTMLElement).dataset.path!;
-      scrollEverything(path);
+      if (path) {
+        scrollEverything(path);
+      }
     });
   }
 }

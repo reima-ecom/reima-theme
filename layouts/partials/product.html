@@ -23,6 +23,23 @@
       <button next></button>
       {{ end }}
     </r-carousel>
+
+    {{ range $i, $video := .Params.videos }}
+    <a class="video-link" openid="video-{{$i}}">
+      <span>&#9654; {{T "Video"}}</span>
+    </a>
+    <div class="modal modal--video" id="video-{{$i}}">
+      <div>
+        <button class="icon" close>
+          <svg>
+            <use xlink:href="#icon-close"></use>
+          </svg>
+        </button>
+        <video autoplay muted controls src="{{.originalSrc}}"></video>
+      </div>
+    </div>
+    {{ end }}
+
     {{ if gt (len $imgs) 1 }}
     <r-thumbnails carousel="r-carousel">
       {{ range $i, $img := $imgs }}
