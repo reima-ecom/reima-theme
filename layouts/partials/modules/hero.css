@@ -109,63 +109,14 @@
 
 .hero--overlay-mobile.hero--overlay-bg .hero__text {
   --content-padding: 4rem;
-  background-image:
-    /* main top-down */
-    linear-gradient(to bottom,
-        transparent 0%,
-        var(--overlay-bg) var(--content-padding),
-        var(--overlay-bg) calc(100% - var(--content-padding)),
-        transparent 100%
-        ),
-    /* left edge */
-    linear-gradient(to left, var(--overlay-bg), transparent),
-    /* right edge */
-    linear-gradient(to right, var(--overlay-bg), transparent),
-    /* top-left corner */
-    radial-gradient(
-        circle farthest-side at 100% 100%,
-        var(--overlay-bg) 0%,
-        transparent 100%
-        ),
-    /* top-right corner */
-    radial-gradient(
-        circle farthest-side at 0 100%,
-        var(--overlay-bg) 0%,
-        transparent 100%
-        ),
-    /* bottom-right corner */
-    radial-gradient(
-        circle farthest-side at 0 0,
-        var(--overlay-bg) 0%,
-        transparent 100%
-        ),
-    /* bottom-left corner */
-    radial-gradient(
-        circle farthest-side at 100% 0,
-        var(--overlay-bg) 0%,
-        transparent 100%
-        );
-  background-size:
-    calc(100% - 2 * var(--content-padding)),
-    var(--content-padding) calc(100% - 2 * var(--content-padding)),
-    var(--content-padding) calc(100% - 2 * var(--content-padding)),
-    var(--content-padding) var(--content-padding),
-    var(--content-padding) var(--content-padding),
-    var(--content-padding) var(--content-padding),
-    var(--content-padding) var(--content-padding);
-  background-position:
-    center,
-    top var(--content-padding) left 0,
-    top var(--content-padding) right 0,
-    top 0 left 0,
-    top 0 right 0,
-    bottom 0 right 0,
-    bottom 0 left 0;
-  background-repeat: no-repeat;
 }
-
-.hero--overlay-mobile.hero--overlay-bg.hero--overlay-invert {
-  --overlay-bg: rgba(0,0,0,0.4);
+.hero--overlay-bg picture img,
+.hero--overlay-bg .hero__video-container iframe {
+  filter: opacity(80%);
+}
+.hero--overlay-bg.hero--overlay-invert picture img,
+.hero--overlay-bg.hero--overlay-invert .hero__video-container iframe {
+  filter: brightness(80%);
 }
 
 @media (min-width: 768px) {
@@ -201,59 +152,6 @@
 
   .hero--overlay-bg .hero__text {
     --content-padding: 4rem;
-    background-image:
-      /* main top-down */
-      linear-gradient(to bottom,
-        transparent 0%,
-        var(--overlay-bg) var(--content-padding),
-        var(--overlay-bg) calc(100% - var(--content-padding)),
-        transparent 100%
-      ),
-      /* left edge */
-      linear-gradient(to left, var(--overlay-bg), transparent),
-      /* right edge */
-      linear-gradient(to right, var(--overlay-bg), transparent),
-      /* top-left corner */
-      radial-gradient(
-        circle farthest-side at 100% 100%,
-        var(--overlay-bg) 0%,
-        transparent 100%
-      ),
-      /* top-right corner */
-      radial-gradient(
-        circle farthest-side at 0 100%,
-        var(--overlay-bg) 0%,
-        transparent 100%
-      ),
-      /* bottom-right corner */
-      radial-gradient(
-        circle farthest-side at 0 0,
-        var(--overlay-bg) 0%,
-        transparent 100%
-      ),
-      /* bottom-left corner */
-      radial-gradient(
-        circle farthest-side at 100% 0,
-        var(--overlay-bg) 0%,
-        transparent 100%
-      );
-    background-size:
-      calc(100% - 2 * var(--content-padding)),
-      var(--content-padding) calc(100% - 2 * var(--content-padding)),
-      var(--content-padding) calc(100% - 2 * var(--content-padding)),
-      var(--content-padding) var(--content-padding),
-      var(--content-padding) var(--content-padding),
-      var(--content-padding) var(--content-padding),
-      var(--content-padding) var(--content-padding);
-    background-position:
-      center,
-      top var(--content-padding) left 0,
-      top var(--content-padding) right 0,
-      top 0 left 0,
-      top 0 right 0,
-      bottom 0 right 0,
-      bottom 0 left 0;
-    background-repeat: no-repeat;
   }
 
   .hero--overlay-align-left .hero__text-container {
