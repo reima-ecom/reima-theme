@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import type {
   Filterer,
   FilterQuery,
@@ -159,7 +161,36 @@ const loopFacetToCategory = (
   return;
 };
 
-const getUserId = (): string => "N/A";
+declare global {
+  interface Window {
+    cookieConsent?: boolean;
+  }
+}
+
+const createUserId = (): string => Math.random().toString(36).substr(2, 9);
+
+const getUserId = (): string => {
+  // check to see if we have cookie consent
+  // this window variable is set if cookies are enabled
+  if (window.cookieConsent) {
+    // get user id from cookie
+    const userId = document.cookie
+      .split("; ")
+      ?.find((row) => row.startsWith("Loop54 UID="))
+      ?.split("=")[1];
+    if (userId) {
+      return userId;
+    }
+    // get new user id
+    const newUserId = createUserId();
+    // set cookie, 6 month max age
+    document.cookie =
+      `Loop54 UID=${newUserId}; Path=/; Max-Age=15778800; SameSite=Lax;`;
+    return newUserId;
+  }
+  // if no consent, just get a random id every time
+  return createUserId();
+};
 
 type LoopRequestTypes<E> = E extends "/search" ? {
   Request: LoopSearchRequest;
