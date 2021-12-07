@@ -148,8 +148,8 @@ const loopItemToProduct = (
     price: attributes["Price"] as number,
     imageUrl: attributes["ImageURL"] as string,
     imageDimensions: {
-      width: Number.parseInt(attributes["ImageDimensonsWidth"] as string),
-      height: Number.parseInt(attributes["ImageDimensonsHeight"] as string),
+      width: Number.parseInt(attributes["ImageDimensionsWidth"] as string),
+      height: Number.parseInt(attributes["ImageDimensionsHeight"] as string),
     },
   };
 };
