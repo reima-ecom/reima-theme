@@ -6,6 +6,7 @@
   overflow: auto;
   display: flex;
   flex-wrap: nowrap;
+  justify-content: flex-start;
   scroll-snap-type: x mandatory;
   scroll-snap-points-y: repeat(100%);
   scrollbar-width: none;

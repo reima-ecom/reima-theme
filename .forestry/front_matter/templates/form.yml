@@ -1,0 +1,80 @@
+---
+label: Form
+hide_body: true
+fields:
+  - name: title
+    type: text
+    config:
+      required: false
+    label: Title
+  - name: description
+    type: textarea
+    default: ''
+    config:
+      required: false
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Description
+  - name: thankYouMessage
+    type: textarea
+    default: ''
+    config:
+      required: true
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Thank You Message
+  - name: submitCta
+    type: text
+    default: Submit
+    config:
+      required: true
+    label: Submit CTA
+  - name: tags
+    type: tag_list
+    default: [ ]
+    label: Tags
+  - name: fields
+    type: field_group_list
+    fields:
+      - name: name
+        type: text
+        config:
+          required: false
+        label: Name
+      - name: placeholder
+        type: text
+        config:
+          required: false
+        label: Placeholder
+      - name: type
+        type: select
+        default: text
+        config:
+          required: true
+          options:
+            - text
+            - email
+            - tel
+            - checkbox
+          source:
+            type: simple
+            section:
+            file:
+            path:
+        label: Type
+      - name: required
+        type: boolean
+        label: Required
+      - name: checked
+        type: boolean
+        label: Checked
+        showOnly:
+          field: type
+          value: checkbox
+    config:
+      min:
+      max:
+      labelField:
+    label: Fields

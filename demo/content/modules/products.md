@@ -21,6 +21,16 @@ modules:
   collection: tops
   title: Split product into color variants
   split_colors: true
+- template: products
+  collection: tops
+  title: Carousel
+  limit: 12
+  columnstablet: '3'
+  columnsdesktop: '4'
+  carousel_enabled: true
+  carousel_dots: true
+  carousel_autoplay: true
+  carousel_autoplay_speed: 7000
 
 ---
 

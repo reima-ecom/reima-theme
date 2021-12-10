@@ -1,4 +1,15 @@
-<section class="product-list{{if .center}} product-list--center{{end}}">
+{{ $class := "product-list" }}
+{{ with $.columnstablet }}
+{{ $class = printf "%s product-list--tablet-%v" $class . }}
+{{ end }}
+{{ with $.columnsdesktop }}
+{{ $class = printf "%s product-list--desktop-%v" $class . }}
+{{ end }}
+{{ with .center }}
+{{ $class = printf "%s product-list--center" $class . }}
+{{ end }}
+
+<section class="{{$class}}">
 
   <!--
   WARNING!
@@ -35,9 +46,17 @@
   </div>
   {{ end }}
 
+  {{ if $.carousel_enabled }}
+    {{ $carousel_autoplay_speed := 7000 }}
+    {{- if $.carousel_autoplay_speed }}
+      {{ $carousel_autoplay_speed = $.carousel_autoplay_speed }}
+    {{- end }}
+    <div class="carousel" data-items-mobile="2" data-items-tablet="{{ $.columnstablet }}" data-items-desktop="{{ $.columnsdesktop }}" data-autoplay="{{ $.carousel_autoplay }}" data-autoplay-speed="{{ $carousel_autoplay_speed }}" data-dots="{{ $.carousel_dots }}" data-arrows="{{ $.carousel_arrows }}">
+  {{ end }}
+
   <ul data-collection="{{path.Base .File.Dir}}">
     <!-- loop through product pages -->
-    {{ range $productPages }}
+    {{ range $pageIndex, $page := $productPages  }}
     {{ $linkresolved := partial "link" .RelPermalink }}
     {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
     {{ $product := . }}
@@ -45,12 +64,12 @@
     {{ if $.split_colors }}
 
     {{ range partial "modules/products-get-colors" $product }}
-    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved "color" .) }}
+    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved "pageIndex" $pageIndex "carouselEnabled" $.carousel_enabled "color" .) }}
     {{ end }}
 
     {{ else }}
 
-    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved) }}
+    {{ partial "modules/products-render-li" (dict "product" $product "url" $linkresolved "pageIndex" $pageIndex "carouselEnabled" $.carousel_enabled) }}
 
     {{ end }}
 
@@ -67,6 +86,18 @@
     {{ end }}
   </ul>
 
+  {{ if $.carousel_enabled }}
+    <ol class="dots">
+      {{ range $pageIndex, $page := $productPages }}
+      <li><a href="#item-{{ add $pageIndex 1 }}"></a></li>
+      {{ end }}
+    </ol>
+    <div class="prev">&lsaquo;</div>
+    <div class="next">&rsaquo;</div>
+  </div>
+  {{ end }}
+
+
   {{ else }}
   <p>No products found</p>
   {{ end }}
@@ -76,6 +107,8 @@
   render product list item
   params: product: product page
           url: link to product page within collection
+          pageIndex: page index value
+          carouselEnabled: boolean value for enable / disable carousel
           color: color name IF rendering specific color
                  (if falsey, will render color dots
                  if specified, will render color name)
@@ -141,8 +174,11 @@
 {{if and $showDiscountPercentageTag $hasDiscount}}
 {{ $class = printf "%s product-list__product--sale" $class }}
 {{end}}
+{{ if $.carouselEnabled }}
+{{ $class = printf "%s carousel__item" $class }}
+{{end}}
 
-<li href="{{$url}}" class="{{$class}}" handle="{{.File.ContentBaseName}}" product-id="{{.Params.yotpoId}}">
+<li href="{{$url}}" class="{{$class}}" handle="{{.File.ContentBaseName}}" data-id="{{if $.carouselEnabled }}item-{{ add $.pageIndex 1}}{{end}}" product-id="{{.Params.yotpoId}}">
   {{ $image := false }}
   {{ $alt := .Title }}
   <!-- grid layout with auto-fit and min 150px cells -->

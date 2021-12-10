@@ -14,7 +14,7 @@ const newsletterSubmit = async (e: Event) => {
   if (resp.ok) {
     f.setAttribute("success", "");
     f.dispatchEvent(
-      new CustomEvent("subscribe", { bubbles: true, detail: data }),
+      new CustomEvent("subscribe", { bubbles: true, detail: data })
     );
   } else {
     const msg = await resp.text();
@@ -28,10 +28,13 @@ const emailFocus = (e: FocusEvent) => {
 
 export default class RNewsletter extends HTMLElement {
   connectedCallback() {
-    this.querySelector("form")!.addEventListener("submit", newsletterSubmit);
+    this.querySelector("form.newsletter")!.addEventListener(
+      "submit",
+      newsletterSubmit
+    );
     this.querySelector<HTMLInputElement>("input[name=email]")!.addEventListener(
       "focus",
-      emailFocus,
+      emailFocus
     );
   }
 }

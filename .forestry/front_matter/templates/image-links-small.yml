@@ -105,15 +105,12 @@ fields:
     value: true
   description: Enables Autoplay
 - name: carousel_autoplay_speed
-  type: number
+  type: text
+  config:
+    required: false
   label: Carousel Autoplay Speed
   description: Autoplay Speed in milliseconds
-  default: 7000
-  required: true
-  config:
-    min: 
-    max: 
-    step: 
+  default: '7000'
   showOnly:
     field: carousel_autoplay
     value: true

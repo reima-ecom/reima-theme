@@ -1,0 +1,61 @@
+.module-form {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 0 20px;
+  display: block;
+}
+
+.module-form h2,
+.module-form p {
+  text-align: center;
+}
+
+.module-form input {
+  background-color: var(--color-bg-accent);
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.module-form label {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+
+.module-form label,
+.module-form label .md {
+  font-size: 0.875rem;
+}
+
+.module-form label input {
+  width: unset;
+  margin-right: 1rem;
+}
+
+.module-form[consent] {
+  display: none;
+}
+
+.module-form[consent] [consent] {
+  display: block;
+}
+
+.module-form[failure] {
+  color: red;
+  text-align: left;
+}
+
+.module-form [success] {
+  display: none;
+}
+
+.module-form[success] [success] {
+  display: block;
+  font-weight: 700;
+}
+
+.module-form[success] [consent],
+.module-form[success] input {
+  display: none;
+}
