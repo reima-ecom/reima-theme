@@ -23,10 +23,12 @@ params:
   # these params will be rendered on every page (as window.site)
   # note that hugo makes these lowercase, so best have all lowercase names
   public:
-    algolia:
-      indexname: 'reima-theme'
-      appid: '6FDKJXBLR9'
-      apikey: '3cc34311314307aa6cc876263de9e486'
+    loop54:
+      url: 'https://reima-us-dev.54proxy.com'
+    #algolia:
+    #  indexname: 'reima-theme'
+    #  appid: '6FDKJXBLR9'
+    #  apikey: '3cc34311314307aa6cc876263de9e486'
     shopify:
       store: reima-jp
       token: e0370fdfeed9aeac00130441c6e2cf76

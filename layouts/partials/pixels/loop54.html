@@ -1,0 +1,9 @@
+{{ with site.Params.public.loop54 }}
+
+{{ $.Scratch.Add "ts" "partials/pixels/loop54.ts" }}
+
+<script loop>
+  window.loop54url = "{{.url}}";
+</script>
+
+{{ end }}

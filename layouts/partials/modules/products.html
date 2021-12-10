@@ -178,7 +178,7 @@
 {{ $class = printf "%s carousel__item" $class }}
 {{end}}
 
-<li href="{{$url}}" class="{{$class}}" handle="{{.File.ContentBaseName}}" data-id="{{if $.carouselEnabled }}item-{{ add $.pageIndex 1}}{{end}}">
+<li href="{{$url}}" class="{{$class}}" handle="{{.File.ContentBaseName}}" data-id="{{if $.carouselEnabled }}item-{{ add $.pageIndex 1}}{{end}}" product-id="{{.Params.yotpoId}}">
   {{ $image := false }}
   {{ $alt := .Title }}
   <!-- grid layout with auto-fit and min 150px cells -->
