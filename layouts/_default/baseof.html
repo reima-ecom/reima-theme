@@ -8,7 +8,7 @@
   {{ if .Params.noindex }}
   <meta name="robots" content="noindex">
   {{ end }}
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
     {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
