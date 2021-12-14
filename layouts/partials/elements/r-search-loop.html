@@ -1,6 +1,6 @@
 <r-search-loop id="search" class="search" results="#search-results">
   <div class="search__header">
-    <form action="/search" method="GET">
+    <form action="/search" method="GET" autocomplete="off">
       <input name="q" type="search" placeholder="Search for products">
       <button class="icon" type="submit">
         <svg>
@@ -8,11 +8,11 @@
         </svg>
       </button>
     </form>
-    <a href="#" class="icon search__close">
+    <label for="open-search" class="icon search__close">
       <svg>
         <use xlink:href="#icon-close"></use>
       </svg>
-    </a>
+    </label>
   </div>
   <div class="search__body">
     {{partial "elements/r-search-results"}}
