@@ -1,11 +1,17 @@
 .search {
   --display: none;
+  --bg: var(--color-bg);
 }
 
 .search:target {
   --display: grid;
 }
 
+@media (min-width: 768px) {
+  .search {
+    --bg: var(--color-overlay-bg);
+  }
+}
 
 .search {
   overflow: auto;
@@ -15,10 +21,9 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: var(--color-bg);
   z-index: 1;
-  gap: var(--content-padding);
-  grid-template-rows: auto 1fr;
+  grid-template-rows: min-content minmax(50%, min-content);
+  background: var(--bg);
 }
 
 .search:target::before {
@@ -29,11 +34,8 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--content-padding);
-  width: 100%;
-  max-width: var(--block-width);
-  margin: var(--content-padding) auto 0;
-  padding: 0 var(--content-padding);
-  box-sizing: border-box;
+  padding: var(--content-padding) max(var(--content-padding), (100% - var(--content-max-width))/2);
+  background: var(--color-bg);
 }
 
 .search__header form {
@@ -68,8 +70,7 @@
 
 .search__body {
   overflow: auto;
-  width: 100%;
   border-top: var(--border);
   padding: 0 max(var(--content-padding), (100% - var(--content-max-width))/2);
-  box-sizing: border-box;
+  background: var(--color-bg);
 }
