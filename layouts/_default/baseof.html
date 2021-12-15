@@ -32,6 +32,7 @@
   {{ $.Scratch.Add "css-base" "partials/elements/r-cart.css" }}
   {{ $.Scratch.Add "css-base" "partials/consent-banners.css" }}
   {{ $.Scratch.Add "css-base" "partials/carousel.css" }}
+  {{ $.Scratch.Add "css-base" "partials/menu.css" }}
   <!-- if newsletter enabled, add that css and add ts here as well -->
   {{ if $announcements.newsletterEnabled }}
   {{ $.Scratch.Add "css-base" "partials/elements/r-newsletter.css" }}
@@ -117,6 +118,9 @@
             <div class="menu__scroller">
               {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
               {{ partialCached "menu" (dict "menu" $menus.highlight "root" $) "highlight" }}
+              {{ range $menus.additional_content }}
+                {{ partial "modules/image-links-small" . }}
+              {{ end }}
             </div>
           </div>
         </div>

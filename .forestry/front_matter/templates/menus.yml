@@ -56,6 +56,20 @@ fields:
     label: Highlight Menu Entry
   config:
     labelField: name
+- name: additional_content
+  type: field_group_list
+  label: Main Menu Additional Items
+  description: Additional items are only visible on Mobile breakpoint
+  fields:
+  - name: additional_menu_entry
+    type: include
+    config: {}
+    template: image-links-small
+    label: Additional Menu Entry
+  config:
+    min:
+    max:
+    labelField: name
 - name: footer
   type: field_group_list
   fields:

@@ -162,6 +162,47 @@
       "url": "/modules/hero"
     }
   ],
+  "additional_content": [
+    {
+      "images": [
+        {
+          "title": "Link 1",
+          "link": "/collections/tops",
+          "image": "/kids-square.jpg"
+        },
+        {
+          "title": "Link 2",
+          "link": "/collections/tops",
+          "image": "/kids-square.jpg"
+        }
+      ],
+      "heading": "",
+      "columnstablet": "",
+      "columnsdesktop": "",
+      "carousel_enabled": false,
+      "carousel_dots": false,
+      "carousel_arrows": false,
+      "carousel_autoplay": false,
+      "carousel_autoplay_speed": ""
+    },
+    {
+      "images": [
+        {
+          "title": "Link 3",
+          "link": "/collections/tops",
+          "image": "/3-sneak-peek.jpg"
+        }
+      ],
+      "heading": "",
+      "columnstablet": "",
+      "columnsdesktop": "",
+      "carousel_enabled": false,
+      "carousel_dots": false,
+      "carousel_arrows": false,
+      "carousel_autoplay": false,
+      "carousel_autoplay_speed": ""
+    }
+  ],
   "footer": [
     {
       "name": "Shopping Info",
