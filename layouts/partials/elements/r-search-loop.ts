@@ -1,8 +1,35 @@
 /// <reference lib="dom" />
 
 import RSearchResults from "./r-search-results.ts";
+import { EventSearchDetails, EVENT_SEARCH } from "./search-domain.ts";
+
+const debounce = (func: (query: string) => void, timeout = 300): (query: string) => void => {
+  let timer: number;
+  return (query) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.call(this, query);
+    }, timeout);
+  };
+};
 
 export default class RSearchLoop extends HTMLElement {
+  constructor() {
+    super();
+    this.sendEventDebounced = debounce(this.sendEvent.bind(this), 1000);
+  }
+
+  sendEventDebounced: (query: string) => void;
+
+  sendEvent(query: string) {
+    this.dispatchEvent(
+      new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
+        bubbles: true,
+        detail: { query },
+      }),
+    );
+  }
+
   get results(): RSearchResults {
     const resultsSelector = this.getAttribute("results");
     if (!resultsSelector) throw new Error("Need results element selector");
@@ -13,6 +40,7 @@ export default class RSearchLoop extends HTMLElement {
 
   search(query: string) {
     this.results.searchAndRender(query, undefined, undefined, true);
+    this.sendEventDebounced(query);
   }
 
   async connectedCallback() {
