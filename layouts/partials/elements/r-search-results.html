@@ -2,12 +2,14 @@
   loop-url="{{site.Params.public.loop54.url}}" currency="{{site.Params.public.currency}}" locale="{{site.Language.Lang}}"
   {{ with .take }}take="{{.}}"{{ end }}
   {{ if .loadMore}}load-more{{ end }}
+  {{ if .showRelated}}show-related{{ end }}
 >
   <div results="suggested">
     <h3 class="search-results__list-title">Suggested</h3>
     <ul class="search-results__link-list"></ul>
   </div>
-  <div results="categories">
+  <div results="related">
+    <h3 class="search-results__list-title">Related searches</h3>
     <ul class="search-results__link-list"></ul>
   </div>
   <div results="products">

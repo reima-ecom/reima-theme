@@ -3,7 +3,6 @@
 import type {
   EventSearchDetails,
   EventSearchProductClickDetails,
-  SearchResultCategory,
   SearchResultProduct,
   SearchResults,
 } from "./search-domain.ts";
@@ -39,18 +38,6 @@ const createProductItemFrom = (
     linkElement.href = product.url;
     linkElement.setAttribute("product-id", product.id);
     return productItem;
-  };
-
-const createCategoryFrom = (categoryTemplate: HTMLTemplateElement) =>
-  (category: SearchResultCategory): HTMLElement => {
-    const categoryItem = categoryTemplate.content.cloneNode(
-      true,
-    ) as HTMLElement;
-    const categoryLink = categoryItem.querySelector("a");
-    if (!categoryLink) throw new Error("Malformed category template");
-    categoryLink.textContent = category.title;
-    categoryLink.href = category.url;
-    return categoryItem;
   };
 
 const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
@@ -129,6 +116,10 @@ export default class RSearchResults extends HTMLElement {
     return Number.parseInt(attr);
   }
 
+  get showRelated(): boolean {
+    return this.hasAttribute("show-related");
+  }
+
   get loadMore(): boolean {
     return this.hasAttribute("load-more");
   }
@@ -151,9 +142,9 @@ export default class RSearchResults extends HTMLElement {
     return list;
   }
 
-  get categoryList(): HTMLUListElement {
+  get relatedList(): HTMLUListElement {
     const list = this.querySelector<HTMLUListElement>(
-      "[results=categories] ul",
+      "[results=related] ul",
     );
     if (!list) throw new Error("Element not found");
     return list;
@@ -175,8 +166,8 @@ export default class RSearchResults extends HTMLElement {
     else elem.removeAttribute("show");
   }
 
-  renderMore({ products, categories, hasMore, query }: SearchResults) {
-    if (products.length || categories.length) {
+  renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
+    if (products.length) {
       this.setResultVisible("suggested", false);
     } else {
       this.setResultVisible("suggested", true);
@@ -197,17 +188,19 @@ export default class RSearchResults extends HTMLElement {
       );
     }
 
-    this.setResultVisible("categories", !!categories.length);
-    if (categories.length) {
-      const categoryTemplate = this.querySelector<HTMLTemplateElement>(
-        "template[category]",
-      );
-      if (!categoryTemplate) {
-        throw new Error("Malformed top hits template");
+    if (this.showRelated) {
+      this.setResultVisible("related", !!relatedQueries.length);
+      if (relatedQueries.length) {
+        const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
+          "template[suggestion]",
+        );
+        if (!suggestionTemplate) {
+          throw new Error("Malformed suggestion template");
+        }
+        this.relatedList.append(
+          ...relatedQueries.map(createSuggestionFrom(suggestionTemplate)),
+        );
       }
-      this.categoryList.append(
-        ...categories.map(createCategoryFrom(categoryTemplate)),
-      );
     }
 
     this.setResultVisible("more", hasMore);
@@ -242,7 +235,7 @@ export default class RSearchResults extends HTMLElement {
 
   clearResults() {
     this.productList.innerHTML = "";
-    this.categoryList.innerHTML = "";
+    this.relatedList.innerHTML = "";
   }
 
   async searchAndRender(

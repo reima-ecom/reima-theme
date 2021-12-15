@@ -18,6 +18,7 @@ export type SearchResultCategory = {
 export type SearchResults = {
   products: SearchResultProduct[];
   categories: SearchResultCategory[];
+  relatedQueries: string[];
   /** Search has more results to show, i.e. add link to search page. */
   hasMore: boolean;
   /** Original search query. */

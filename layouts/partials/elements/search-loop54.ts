@@ -32,6 +32,10 @@ type LoopSearchResponse = {
     items: LoopSearchResponseItem[];
     facets: LoopSearchResponseFacet[];
   };
+  relatedQueries: {
+    count: number;
+    items: { query: string }[];
+  };
 };
 
 type LoopEntityRequest = {
@@ -241,6 +245,7 @@ export const createSearcher = (baseUrl: string): Searcher =>
       return {
         products: [],
         categories: [],
+        relatedQueries: [],
         hasMore: false,
         query,
       };
@@ -263,6 +268,9 @@ export const createSearcher = (baseUrl: string): Searcher =>
     const products: SearchResultProduct[] = response.results.items.map(
       loopItemToProduct,
     );
+    const relatedQueries: string[] = response.relatedQueries.items.map((q) =>
+      q.query
+    );
     const categories: SearchResultCategory[] = response.results.facets.map(
       loopFacetToCategory,
     ).filter(Boolean);
@@ -270,7 +278,7 @@ export const createSearcher = (baseUrl: string): Searcher =>
 
     if (!response.results.facets.length) console.log("No facets returned");
 
-    return { products, categories, hasMore, query };
+    return { products, relatedQueries, categories, hasMore, query };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>

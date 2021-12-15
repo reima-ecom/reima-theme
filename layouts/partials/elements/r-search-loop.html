@@ -15,6 +15,6 @@
     </label>
   </div>
   <div class="search__body">
-    {{partial "elements/r-search-results"}}
+    {{partial "elements/r-search-results" (dict "showRelated" true)}}
   </div>
 </r-search-loop>
