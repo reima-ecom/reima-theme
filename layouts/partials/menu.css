@@ -1,0 +1,33 @@
+.menu .module-image-links-small > div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0 10px 10px 10px;
+}
+
+.menu .module-image-links-small .title {
+  display: none;
+}
+
+.menu .carousel {
+  margin-bottom: 20px
+}
+.menu .carousel ol {
+  bottom: -24px
+}
+
+#menu .carousel .carousel__item {
+  border: 0 none;
+  padding: 0;
+}
+
+#menu .carousel ol li {
+  border: 0 none;
+  padding: 0 5px;
+}
+
+@media (min-width: 1024px) {
+  .menu .module-image-links-small {
+    display: none;
+  }
+}
