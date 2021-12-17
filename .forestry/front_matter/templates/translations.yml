@@ -429,3 +429,13 @@ fields:
     label: other
     default: Most popular
     description: E.g. "Most popular"
+- type: field_group
+  name: Video
+  label: Video
+  description: Text for the Video button.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Video
+    description: E.g. "Video"
