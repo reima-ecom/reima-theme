@@ -16,7 +16,7 @@ type LoopSearchRequest = {
     take?: number;
     facets?: {
       attributeName: string;
-      selected: (string | number | boolean)[];
+      selected?: (string | number | boolean)[];
     }[];
   };
   customData?: {
@@ -168,6 +168,8 @@ const loopFacetToCategory = (
 declare global {
   interface Window {
     cookieConsent?: boolean;
+    //TODO: refactor away this global dependency
+    facets?: string[];
   }
 }
 
@@ -261,6 +263,12 @@ export const createSearcher = (baseUrl: string): Searcher =>
       requestBody.customData = {
         directSearch: true,
       };
+    }
+
+    //TODO: remove global dependency
+    if (window.facets) {
+      requestBody.resultsOptions ??= {};
+      requestBody.resultsOptions.facets = window.facets.map(f => ({ attributeName: `Attributes_${f}` }));
     }
 
     const response = await loopRequest(baseUrl, "/search", requestBody);
