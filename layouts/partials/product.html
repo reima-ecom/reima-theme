@@ -273,6 +273,7 @@
       {{ if eq $field "info" }}
       <div class="features">
         {{ range $product.Params.tags }}
+
         {{ $tagData := split . ":" }}
         {{ $tag := index $tagData 0 }}
         {{ $value := index $tagData 1 }}
@@ -280,45 +281,48 @@
         {{ range where $settings.features "tag" $tag }}
         {{ $modalid := .title }}
         <!-- feature heading with modal link if modal exists -->
-        <div>
-          <h3 class="features__heading">
-            {{ if .modal }}
-            <a href="#" openid="{{$modalid}}" class="silent-link">
+        <div class="feature">
+          <div class="feature__title">
+            <h3 class="features__heading">
+              {{ if .modal }}
+              <a href="#" openid="{{$modalid}}" class="silent-link">
+                {{.title}}
+              </a>
+              {{ else }}
               {{.title}}
-            </a>
-            {{ else }}
-            {{.title}}
-            {{ end }}
-          </h3>
-        </div>
-        <!-- modal if specified -->
-        {{ with .modal }}
-        <div class="modal" id="{{$modalid}}">
-          <div>
-            <button class="icon" close>
-              <svg>
-                <use xlink:href="#icon-close"></use>
-              </svg>
-            </button>
-            {{. | $product.Page.RenderString}}
+              {{ end }}
+            </h3>
           </div>
+          <!-- modal if specified -->
+          {{ with .modal }}
+          <div class="modal" id="{{$modalid}}">
+            <div>
+              <button class="icon" close>
+                <svg>
+                  <use xlink:href="#icon-close"></use>
+                </svg>
+              </button>
+              {{. | $product.Page.RenderString}}
+            </div>
+          </div>
+          {{ end }}
+
+          <!-- icons -->
+          {{ range .values }}
+          {{ $iconValue := .value }}
+          {{ with partial "helpers/get-image" .icon }}
+          {{ $svg := .Content }}
+          {{ if eq $iconValue $value }}
+          {{ $svg = replace $svg "<svg" "<svg class=\"active\"" }}
+          {{ end }}
+          {{$svg | safeHTML}}
+          {{ end }}
+          {{ end }}
+          <!-- tag description e.g. "Waterproof level 8000 mm" -->
+          <p>
+            {{ replace .description "VALUE" $value }}
+          </p>
         </div>
-        {{ end }}
-        <!-- icons -->
-        {{ range .values }}
-        {{ $iconValue := .value }}
-        {{ with partial "helpers/get-image" .icon }}
-        {{ $svg := .Content }}
-        {{ if eq $iconValue $value }}
-        {{ $svg = replace $svg "<svg" "<svg class=\"active\"" }}
-        {{ end }}
-        {{$svg | safeHTML}}
-        {{ end }}
-        {{ end }}
-        <!-- tag description e.g. "Waterproof level 8000 mm" -->
-        <p>
-          {{ replace .description "VALUE" $value }}
-        </p>
         {{ end }}
         {{ end }}
       </div>
