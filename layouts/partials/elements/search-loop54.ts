@@ -166,7 +166,11 @@ const loopFacetToDomain = (
   }
   return {
     name: facet.name,
-    items: facet.items.map(i => ({ name: i.item.toString(), selected: i.selected })),
+    items: facet.items.map((i) => ({
+      name: i.item.toString(),
+      selected: i.selected,
+      facet: facet.name,
+    })),
   };
 };
 
@@ -247,7 +251,7 @@ const loopRequest = async <E extends string>(
 };
 
 export const createSearcher = (baseUrl: string): Searcher =>
-  async (query, take, skip, instant) => {
+  async (query, take, skip, instant, facetFilters) => {
     if (!query) {
       return {
         products: [],
@@ -273,7 +277,19 @@ export const createSearcher = (baseUrl: string): Searcher =>
     //TODO: remove global dependency
     if (window.facets) {
       requestBody.resultsOptions ??= {};
-      requestBody.resultsOptions.facets = window.facets.map(f => ({ attributeName: `Attributes_${f}` }));
+      requestBody.resultsOptions.facets = window.facets.map((f) => ({
+        attributeName: `Attributes_${f}`,
+      }));
+      if (facetFilters) {
+        requestBody.resultsOptions.facets = requestBody.resultsOptions.facets.map((facet) => {
+          const filter = facetFilters[facet.attributeName];
+          if (!filter) return facet;
+          return {
+            ...facet,
+            selected: filter,
+          };
+        });
+      }
     }
 
     const response = await loopRequest(baseUrl, "/search", requestBody);

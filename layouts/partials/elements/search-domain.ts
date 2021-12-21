@@ -12,6 +12,7 @@ export type SearchResultProduct = {
 
 export type SearchResultFacetItem = {
   name: string;
+  facet: string;
   selected: boolean;
 };
 
@@ -36,6 +37,7 @@ export type Searcher = (
   skip?: number,
   /** Set to true if searching based on key press */
   instant?: boolean,
+  facetFilters?: { [facet: string]: string[] },
 ) => Promise<SearchResults>;
 
 export const EVENT_SEARCH = "search";
@@ -46,6 +48,13 @@ export type EventSearchDetails = {
 export const EVENT_SEARCH_PRODUCT_CLICK = "search-product-click";
 export type EventSearchProductClickDetails = {
   productId: string;
+};
+
+export const EVENT_FILTER_CHANGE = "search-filter-change";
+export type EventSearchFilterChange = {
+  facet: string;
+  item: string;
+  selected: boolean;
 };
 
 export type FilterQuery = {
@@ -63,11 +72,18 @@ export type Filterer = (
 export type Suggester = () => Promise<string[]>;
 
 interface CustomEventMap {
-  "search": CustomEvent<EventSearchDetails>;
-  "search-product-click": CustomEvent<EventSearchProductClickDetails>;
+  EVENT_SEARCH: CustomEvent<EventSearchDetails>;
+  EVENT_SEARCH_PRODUCT_CLICK: CustomEvent<EventSearchProductClickDetails>;
+  EVENT_FILTER_CHANGE: CustomEvent<EventSearchFilterChange>;
 }
 declare global {
   interface Document { //adds definition to Document, but you can do the same with HTMLElement
+    addEventListener<K extends keyof CustomEventMap>(
+      type: K,
+      listener: (this: Document, ev: CustomEventMap[K]) => void,
+    ): void;
+  }
+  interface HTMLElement { //adds definition to Document, but you can do the same with HTMLElement
     addEventListener<K extends keyof CustomEventMap>(
       type: K,
       listener: (this: Document, ev: CustomEventMap[K]) => void,

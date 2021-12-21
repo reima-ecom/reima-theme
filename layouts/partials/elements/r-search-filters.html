@@ -1,16 +1,18 @@
 <r-search-filters id="search-filters"
-  {{ with .results }}results="{{.}}"{{ end }}
+  results="{{ with .results }}{{.}}{{ else }}r-search-results{{ end }}"
 >
-  <ul>
-  </ul>
+  <form>
+  </form>
   <template facet>
-    <li>
-      <h3 title></h3>
-      <ul></ul>
-    </li>
+    <fieldset>
+      <details>
+        <summary title></summary>
+      </details>
+    </fieldset>
   </template>
   <template item>
-    <li></li>
+    <input type="checkbox">
+    <label for=""></label>
   </template>
   {{ $facetTitles := newScratch }}
   {{ range site.Data.features.order }}

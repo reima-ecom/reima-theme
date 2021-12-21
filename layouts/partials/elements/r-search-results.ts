@@ -2,11 +2,16 @@
 
 import type {
   EventSearchDetails,
+  EventSearchFilterChange,
   EventSearchProductClickDetails,
   SearchResultProduct,
   SearchResults,
 } from "./search-domain.ts";
-import { EVENT_SEARCH, EVENT_SEARCH_PRODUCT_CLICK } from "./search-domain.ts";
+import {
+  EVENT_FILTER_CHANGE,
+  EVENT_SEARCH,
+  EVENT_SEARCH_PRODUCT_CLICK,
+} from "./search-domain.ts";
 import { createSearcher, createSuggester } from "./search-loop54.ts";
 import type RSearchFilters from "./r-search-filters.ts";
 
@@ -55,6 +60,7 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
+  facetFilters: { [name: string]: string[] } = {};
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -91,6 +97,22 @@ export default class RSearchResults extends HTMLElement {
         );
       }
     });
+
+    // add event listener for filters change
+    if (this.filtersElement) {
+      this.filtersElement.addEventListener(EVENT_FILTER_CHANGE, (ev) => {
+        if (ev.detail.selected) {
+          this.facetFilters[ev.detail.facet] ??= [];
+          this.facetFilters[ev.detail.facet].push(ev.detail.item);
+        } else if (this.facetFilters[ev.detail.facet]) {
+          this.facetFilters[ev.detail.facet].splice(
+            this.facetFilters[ev.detail.facet].indexOf(ev.detail.item),
+            1,
+          );
+        }
+        this.searchAndRender();
+      });
+    }
   }
 
   get loopUrl(): string {
@@ -256,11 +278,13 @@ export default class RSearchResults extends HTMLElement {
       take || this.take,
       this.skip,
       instant,
+      this.facetFilters,
     );
+    const queryChanged = this.lastQuery !== query;
     this.lastQuery = query;
     clear && this.clearResults();
     this.renderMore(results);
-    if (this.filtersElement) {
+    if (this.filtersElement && queryChanged) {
       this.filtersElement.render(results);
     }
   }
