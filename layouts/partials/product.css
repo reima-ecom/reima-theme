@@ -489,6 +489,7 @@ manually with CSS. The `[open]` attribute is still set on the
 .features--col-2 {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .features--col-2 p {
   font-size: .875rem;
