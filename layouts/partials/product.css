@@ -464,16 +464,16 @@ manually with CSS. The `[open]` attribute is still set on the
   color: var(--color-link);
 }
 
-.features > svg {
+.features .feature > svg {
   width: 50px;
 }
 
-.features > svg + svg {
+.features .feature > svg + svg {
   margin-left: 0.25rem;
 }
 
-.features > svg,
-.features > svg path {
+.features .feature > svg,
+.features .feature > svg path {
   fill: var(--color-text-muted) !important;
 }
 
