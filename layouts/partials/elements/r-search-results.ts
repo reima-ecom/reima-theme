@@ -8,6 +8,7 @@ import type {
 } from "./search-domain.ts";
 import { EVENT_SEARCH, EVENT_SEARCH_PRODUCT_CLICK } from "./search-domain.ts";
 import { createSearcher, createSuggester } from "./search-loop54.ts";
+import type RSearchFilters from "./r-search-filters.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
   const formatter = new Intl.NumberFormat(locale, {
@@ -150,6 +151,12 @@ export default class RSearchResults extends HTMLElement {
     return list;
   }
 
+  get filtersElement(): RSearchFilters | null {
+    const filtersAttr = this.getAttribute("filters");
+    if (!filtersAttr) return null;
+    return document.querySelector<RSearchFilters>(filtersAttr);
+  }
+
   sendSearchEvent(query: string) {
     this.dispatchEvent(
       new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
@@ -253,5 +260,8 @@ export default class RSearchResults extends HTMLElement {
     this.lastQuery = query;
     clear && this.clearResults();
     this.renderMore(results);
+    if (this.filtersElement) {
+      this.filtersElement.render(results);
+    }
   }
 }

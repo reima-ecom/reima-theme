@@ -10,14 +10,19 @@ export type SearchResultProduct = {
   };
 };
 
-export type SearchResultCategory = {
-  title: string;
-  url: string;
+export type SearchResultFacetItem = {
+  name: string;
+  selected: boolean;
+};
+
+export type SearchResultFacet = {
+  name: string;
+  items: SearchResultFacetItem[];
 };
 
 export type SearchResults = {
   products: SearchResultProduct[];
-  categories: SearchResultCategory[];
+  facets: SearchResultFacet[];
   relatedQueries: string[];
   /** Search has more results to show, i.e. add link to search page. */
   hasMore: boolean;

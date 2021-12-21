@@ -10,7 +10,8 @@
 {{- $js := (resources.Get $tsname) | js.Build (dict "format" "esm") -}}
 <script src="{{$js.RelPermalink}}" type="module"></script>
 
-{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true)}}
+{{partial "elements/r-search-filters"}}
+{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true "filters" "r-search-filters")}}
 
 <script>
   facets = {{site.Data.features.order}}

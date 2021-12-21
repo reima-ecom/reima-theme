@@ -1,0 +1,23 @@
+<r-search-filters id="search-filters"
+  {{ with .results }}results="{{.}}"{{ end }}
+>
+  <ul>
+  </ul>
+  <template facet>
+    <li>
+      <h3 title></h3>
+      <ul></ul>
+    </li>
+  </template>
+  <template item>
+    <li></li>
+  </template>
+  {{ $facetTitles := newScratch }}
+  {{ range site.Data.features.order }}
+  {{ $name := lower . }}
+  {{ $facetTitles.SetInMap "facetTitles" $name (T (printf "Product feature: %s" $name)) }}
+  {{ end }}
+  <script type="application/json" facetTitles>
+    {{ $facetTitles.Get "facetTitles" }}
+  </script>
+</r-search-filters>

@@ -4,7 +4,7 @@ import type {
   Filterer,
   FilterQuery,
   Searcher,
-  SearchResultCategory,
+  SearchResultFacet,
   SearchResultProduct,
   Suggester,
 } from "./search-domain.ts";
@@ -158,11 +158,16 @@ const loopItemToProduct = (
   };
 };
 
-const loopFacetToCategory = (
+const loopFacetToDomain = (
   facet: LoopSearchResponseFacet,
-): SearchResultCategory | undefined => {
-  console.warn("Not implemented: facet to category", facet);
-  return;
+): SearchResultFacet | undefined => {
+  if (facet.type !== "distinct") {
+    throw new Error("Not implemented: Non-distinct facets");
+  }
+  return {
+    name: facet.name,
+    items: facet.items.map(i => ({ name: i.item.toString(), selected: i.selected })),
+  };
 };
 
 declare global {
@@ -246,7 +251,7 @@ export const createSearcher = (baseUrl: string): Searcher =>
     if (!query) {
       return {
         products: [],
-        categories: [],
+        facets: [],
         relatedQueries: [],
         hasMore: false,
         query,
@@ -279,14 +284,14 @@ export const createSearcher = (baseUrl: string): Searcher =>
     const relatedQueries: string[] = response.relatedQueries.items.map((q) =>
       q.query
     );
-    const categories: SearchResultCategory[] = response.results.facets.map(
-      loopFacetToCategory,
+    const facets: SearchResultFacet[] = response.results.facets.map(
+      loopFacetToDomain,
     ).filter(Boolean);
     const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
 
     if (!response.results.facets.length) console.log("No facets returned");
 
-    return { products, relatedQueries, categories, hasMore, query };
+    return { products, relatedQueries, facets, hasMore, query };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>
