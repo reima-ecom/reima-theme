@@ -4,6 +4,7 @@
   {{ with .filters }}filters="{{.}}"{{ end }}
   {{ if .loadMore}}load-more{{ end }}
   {{ if .showRelated}}show-related{{ end }}
+  {{ with site.Data.features.order }}facets="{{ delimit . "," }}"{{ end }}
 >
   <div results="suggested">
     <h3 class="search-results__list-title">Suggested</h3>

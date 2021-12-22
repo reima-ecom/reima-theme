@@ -60,7 +60,6 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
-  facetFilters: { [name: string]: string[] } = {};
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -102,13 +101,9 @@ export default class RSearchResults extends HTMLElement {
     if (this.filtersElement) {
       this.filtersElement.addEventListener(EVENT_FILTER_CHANGE, (ev) => {
         if (ev.detail.selected) {
-          this.facetFilters[ev.detail.facet] ??= [];
-          this.facetFilters[ev.detail.facet].push(ev.detail.item);
-        } else if (this.facetFilters[ev.detail.facet]) {
-          this.facetFilters[ev.detail.facet].splice(
-            this.facetFilters[ev.detail.facet].indexOf(ev.detail.item),
-            1,
-          );
+          this.addFacetFilter(ev.detail.facet, ev.detail.item);
+        } else {
+          this.removeFacetFilter(ev.detail.facet, ev.detail.item);
         }
         this.searchAndRender();
       });
@@ -177,6 +172,41 @@ export default class RSearchResults extends HTMLElement {
     const filtersAttr = this.getAttribute("filters");
     if (!filtersAttr) return null;
     return document.querySelector<RSearchFilters>(filtersAttr);
+  }
+
+  get facets(): string[] {
+    //TODO possibly move logic of "Attributes_$" to search-loop54.ts
+    return this.getAttribute("facets")?.split(",").map(f => `Attributes_${f}`) || [];
+  }
+
+  get facetFilters(): { [name: string]: string[] } {
+    if (this.facets.length) {
+      const qry = new URLSearchParams(location.hash.substr(1));
+      return this.facets.reduce((filters, facetName) => {
+        const filtersSearch = qry.getAll(facetName);
+        if (filtersSearch.length) {
+          return { ...filters, [facetName]: filtersSearch };
+        }
+        return filters;
+      }, {} as Record<string, string[]>);
+    }
+    return {};
+  }
+
+  addFacetFilter(facetName: string, item: string) {
+    const qry = new URLSearchParams(location.hash.substr(1));
+    qry.append(facetName, item);
+    location.hash = qry.toString();
+  }
+
+  removeFacetFilter(facetName: string, item: string) {
+    const qry = new URLSearchParams(location.hash.substr(1));
+    const newFilters = qry.getAll(facetName).filter(v => v !== item);
+    qry.delete(facetName);
+    newFilters.forEach(f => {
+      qry.append(facetName, f);
+    });
+    location.hash = qry.toString();
   }
 
   sendSearchEvent(query: string) {
