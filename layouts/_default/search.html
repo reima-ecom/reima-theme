@@ -10,7 +10,12 @@
 {{- $js := (resources.Get $tsname) | js.Build (dict "format" "esm") -}}
 <script src="{{$js.RelPermalink}}" type="module"></script>
 
-{{partial "elements/r-search-filters"}}
+<label class="btn" for="show-filters">Filter Selection</label>
+<input id="show-filters" type="checkbox">
+<aside class="filters">
+  {{partial "elements/r-search-filters"}}
+  <label class="btn btn--inv" for="show-filters">X</label>
+</aside>
 {{partial "elements/r-search-results" (dict "take" 50 "loadMore" true "filters" "r-search-filters")}}
 
 <script>

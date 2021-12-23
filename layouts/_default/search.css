@@ -3,3 +3,42 @@ main {
   margin: var(--block-margin);
   max-width: var(--block-width);
 }
+
+r-search-filters {
+  display: block;
+  background: var(--color-bg);
+  padding: var(--content-padding);
+}
+
+r-search-filters + label {
+  height: max-content;
+  width: max-content;
+}
+
+.filters {
+  --display: grid;
+  display: var(--toggle-display);
+  grid-template-columns: min(calc(100% - var(--content-padding) * 6), 30ch) max-content;
+  background: var(--color-overlay-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  overflow: auto;
+}
+
+input[type=checkbox][id|=show] {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+
+input[type=checkbox][id|=show] + * {
+  --toggle-display: none;
+}
+
+input[type=checkbox][id|=show]:checked + * {
+  --toggle-display: var(--display);
+}
