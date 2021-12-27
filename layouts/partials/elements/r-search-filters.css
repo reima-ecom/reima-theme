@@ -1,0 +1,40 @@
+r-search-filters fieldset {
+  border: none;
+  border-top: var(--border);
+  padding: calc(var(--content-padding) / 2) 0;
+}
+
+r-search-filters fieldset:last-of-type {
+  border-bottom: var(--border);
+}
+
+r-search-filters summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+r-search-filters summary::-webkit-details-marker,
+r-search-filters summary::marker {
+  display: none;
+  content: "";
+}
+
+r-search-filters fieldset input {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+}
+
+r-search-filters fieldset label {
+  border: 1px solid;
+  padding: 5px;
+  display: inline-block;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+r-search-filters fieldset input:checked + label {
+  background: var(--color-fg);
+  color: var(--color-bg);
+  border-color: var(--color-fg);
+}
