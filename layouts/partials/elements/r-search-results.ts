@@ -100,10 +100,12 @@ export default class RSearchResults extends HTMLElement {
     // add event listener for filters change
     if (this.filtersElement) {
       this.filtersElement.addEventListener(EVENT_FILTER_CHANGE, (ev) => {
-        if (ev.detail.selected) {
-          this.addFacetFilter(ev.detail.facet, ev.detail.item);
+        const { facet, item, selected } =
+          (ev as CustomEvent<EventSearchFilterChange>).detail;
+        if (selected) {
+          this.addFacetFilter(facet, item);
         } else {
-          this.removeFacetFilter(ev.detail.facet, ev.detail.item);
+          this.removeFacetFilter(facet, item);
         }
         this.searchAndRender();
       });
@@ -175,8 +177,7 @@ export default class RSearchResults extends HTMLElement {
   }
 
   get facets(): string[] {
-    //TODO possibly move logic of "Attributes_$" to search-loop54.ts
-    return this.getAttribute("facets")?.split(",").map(f => `Attributes_${f}`) || [];
+    return this.getAttribute("facets")?.split(",") || [];
   }
 
   get facetFilters(): { [name: string]: string[] } {
@@ -201,9 +202,9 @@ export default class RSearchResults extends HTMLElement {
 
   removeFacetFilter(facetName: string, item: string) {
     const qry = new URLSearchParams(location.hash.substr(1));
-    const newFilters = qry.getAll(facetName).filter(v => v !== item);
+    const newFilters = qry.getAll(facetName).filter((v) => v !== item);
     qry.delete(facetName);
-    newFilters.forEach(f => {
+    newFilters.forEach((f) => {
       qry.append(facetName, f);
     });
     location.hash = qry.toString();
@@ -303,7 +304,7 @@ export default class RSearchResults extends HTMLElement {
     take?: number,
     instant = false,
   ) {
-    const results = await createSearcher(this.loopUrl)(
+    const results = await createSearcher(this.loopUrl, this.facets)(
       query,
       take || this.take,
       this.skip,

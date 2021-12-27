@@ -164,12 +164,14 @@ const loopFacetToDomain = (
   if (facet.type !== "distinct") {
     throw new Error("Not implemented: Non-distinct facets");
   }
+  // normalized facet name
+  const facetName = facetNameFromLoop(facet.name);
   return {
-    name: facet.name,
+    name: facetName,
     items: facet.items.map((i) => ({
       name: i.item.toString(),
       selected: i.selected,
-      facet: facet.name,
+      facet: facetName,
     })),
   };
 };
@@ -177,8 +179,6 @@ const loopFacetToDomain = (
 declare global {
   interface Window {
     cookieConsent?: boolean;
-    //TODO: refactor away this global dependency
-    facets?: string[];
   }
 }
 
@@ -250,7 +250,10 @@ const loopRequest = async <E extends string>(
   return await searchResponse.json();
 };
 
-export const createSearcher = (baseUrl: string): Searcher =>
+const facetNameToLoop = (facetName: string): string => `Attributes_${facetName}`;
+const facetNameFromLoop = (facetName: string): string => facetName.replace("Attributes_", "");
+
+export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
   async (query, take, skip, instant, facetFilters) => {
     if (!query) {
       return {
@@ -274,15 +277,14 @@ export const createSearcher = (baseUrl: string): Searcher =>
       };
     }
 
-    //TODO: remove global dependency
-    if (window.facets) {
+    if (facets) {
       requestBody.resultsOptions ??= {};
-      requestBody.resultsOptions.facets = window.facets.map((f) => ({
-        attributeName: `Attributes_${f}`,
+      requestBody.resultsOptions.facets = facets.map((f) => ({
+        attributeName: facetNameToLoop(f),
       }));
       if (facetFilters) {
         requestBody.resultsOptions.facets = requestBody.resultsOptions.facets.map((facet) => {
-          const filter = facetFilters[facet.attributeName];
+          const filter = facetFilters[facetNameFromLoop(facet.attributeName)];
           if (!filter) return facet;
           return {
             ...facet,
@@ -300,14 +302,12 @@ export const createSearcher = (baseUrl: string): Searcher =>
     const relatedQueries: string[] = response.relatedQueries.items.map((q) =>
       q.query
     );
-    const facets: SearchResultFacet[] = response.results.facets.map(
+    const resultFacets: SearchResultFacet[] = response.results.facets.map(
       loopFacetToDomain,
     ).filter(Boolean);
     const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
 
-    if (!response.results.facets.length) console.log("No facets returned");
-
-    return { products, relatedQueries, facets, hasMore, query };
+    return { products, relatedQueries, facets: resultFacets, hasMore, query };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>

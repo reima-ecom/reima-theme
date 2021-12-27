@@ -49,11 +49,7 @@ export default class RSearchFilters extends HTMLElement {
     const filterTitles = JSON.parse(
       this.querySelector("script[facetTitles]")!.textContent!,
     );
-    return Object.fromEntries(
-      Object.entries(filterTitles).map((
-        [name, title],
-      ) => [`Attributes_${name}`, title as string]),
-    );
+    return filterTitles;
   }
 
   get results(): RSearchResults {
