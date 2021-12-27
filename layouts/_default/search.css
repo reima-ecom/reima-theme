@@ -1,33 +1,74 @@
 main {
+  --main-display: block;
+  --display: grid;
+  --position: fixed;
+  --background: var(--color-overlay-bg);
+  --width: auto;
+  --z-index: 1;
+  --filters-padding: var(--content-padding);
+  --close-btn-show: block;
+}
+
+@media (min-width: 1080px) {
+  main {
+    --main-display: grid;
+    --display: block;
+    --position: initial;
+    --background: none;
+    --width: 30ch;
+    --z-index: unset;
+    --filters-padding: var(--content-padding) var(--content-padding) 0 0;
+    --close-btn-show: none;
+  }
+}
+
+main {
+  display: var(--main-display);
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
+  grid-template-areas: "head head" "filters main";
+  grid-template-columns: max-content;
+}
+
+main > label {
+  grid-area: head;
+  width: max-content;
+}
+
+.filters {
+  grid-area: filters;
+  display: var(--toggle-display);
+  grid-template-columns: min(calc(100% - var(--content-padding) * 6), 30ch) max-content;
+  background: var(--background);
+  position: var(--position);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--width);
+  z-index: var(--z-index);
+  overflow: auto;
 }
 
 r-search-filters {
   display: block;
   background: var(--color-bg);
-  padding: var(--content-padding);
+  padding: var(--filters-padding);
 }
 
-r-search-filters + label {
+r-search-filters + label.btn {
+  display: var(--close-btn-show);
   height: max-content;
   width: max-content;
 }
 
-.filters {
-  --display: grid;
-  display: var(--toggle-display);
-  grid-template-columns: min(calc(100% - var(--content-padding) * 6), 30ch) max-content;
-  background: var(--color-overlay-bg);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  overflow: auto;
+r-search-results.search-results {
+  grid-area: main;
+  margin: unset;
 }
+
+/* below a general approach to showing elements based on checkbox */
 
 input[type=checkbox][id|=show] {
   position: absolute;
