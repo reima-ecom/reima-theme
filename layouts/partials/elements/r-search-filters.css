@@ -1,7 +1,32 @@
+r-search-filters {
+  --padding: calc(var(--content-padding) / 2) 0;
+}
+
+r-search-filters form header {
+  border-top: var(--border);
+  padding: var(--padding);
+  display: flex;
+}
+
+r-search-filters form header h2 {
+  flex: 1;
+  font-size: inherit;
+  margin: 0;
+  font-weight: normal;
+}
+
+r-search-filters form header input {
+  padding: 0;
+  background: no-repeat;
+  outline: none;
+  border: none;
+  font-size: inherit;
+}
+
 r-search-filters fieldset {
   border: none;
   border-top: var(--border);
-  padding: calc(var(--content-padding) / 2) 0;
+  padding: var(--padding);
 }
 
 r-search-filters fieldset:last-of-type {

@@ -6,7 +6,7 @@ import type {
   SearchResultFacetItem,
   SearchResults,
 } from "./search-domain.ts";
-import { EVENT_FILTER_CHANGE } from "./search-domain.ts";
+import { EVENT_FILTER_CHANGE, EVENT_FILTER_RESET } from "./search-domain.ts";
 import type RSearchResults from "./r-search-results.ts";
 
 const createItemFrom = (itemTemplate: HTMLTemplateElement) =>
@@ -28,7 +28,9 @@ const createFacetFrom = (
   itemTemplate: HTMLTemplateElement,
   facetTitles: Record<string, string>,
 ) =>
-  (facet: SearchResultFacet): HTMLElement => {
+  (facet: SearchResultFacet): HTMLElement | undefined=> {
+    // bail if no items in facet
+    if (!facet.items.length) return;
     const facetItem = facetTemplate.content.cloneNode(true) as HTMLElement;
     facetItem.querySelector("[title]")!.textContent = facetTitles[facet.name] ||
       facet.name;
@@ -40,7 +42,7 @@ const createFacetFrom = (
 
 export default class RSearchFilters extends HTMLElement {
   get facetList(): HTMLElement {
-    const list = this.querySelector("form");
+    const list = this.querySelector<HTMLElement>("form > div");
     if (!list) throw new Error("Element not found");
     return list;
   }
@@ -68,13 +70,14 @@ export default class RSearchFilters extends HTMLElement {
       this.querySelector("template[item]")!,
       this.facetTitles,
     );
-    const facetElements = results.facets.map((facet) => facetCreator(facet));
+    const facetElements = results.facets.map((facet) => facetCreator(facet)).filter(Boolean);
     this.facetList.innerHTML = "";
     this.facetList.append(...facetElements);
   }
 
   connectedCallback() {
-    this.querySelector("form")!.addEventListener("change", (ev) => {
+    const form = this.querySelector("form")!;
+    form.addEventListener("change", (ev) => {
       const input = ev.target as HTMLInputElement;
       const [facet, item] = input.name.split(":");
       const selected = input.checked;
@@ -85,6 +88,9 @@ export default class RSearchFilters extends HTMLElement {
           detail: { facet, item, selected },
         }),
       );
+    });
+    form.addEventListener("reset", (_) => {
+      this.dispatchEvent(new CustomEvent(EVENT_FILTER_RESET, { bubbles: true }));
     });
   }
 }

@@ -57,6 +57,8 @@ export type EventSearchFilterChange = {
   selected: boolean;
 };
 
+export const EVENT_FILTER_RESET = "search-filter-reset";
+
 export type FilterQuery = {
   attribute: string;
   selected: string[];

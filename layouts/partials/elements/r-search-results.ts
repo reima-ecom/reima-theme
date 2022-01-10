@@ -9,6 +9,7 @@ import type {
 } from "./search-domain.ts";
 import {
   EVENT_FILTER_CHANGE,
+  EVENT_FILTER_RESET,
   EVENT_SEARCH,
   EVENT_SEARCH_PRODUCT_CLICK,
 } from "./search-domain.ts";
@@ -109,6 +110,10 @@ export default class RSearchResults extends HTMLElement {
         }
         this.searchAndRender();
       });
+      this.filtersElement.addEventListener(EVENT_FILTER_RESET, () => {
+        this.resetFacetFilters();
+        this.searchAndRender();
+      });
     }
   }
 
@@ -192,6 +197,10 @@ export default class RSearchResults extends HTMLElement {
       }, {} as Record<string, string[]>);
     }
     return {};
+  }
+
+  resetFacetFilters() {
+    location.hash = '';
   }
 
   addFacetFilter(facetName: string, item: string) {
