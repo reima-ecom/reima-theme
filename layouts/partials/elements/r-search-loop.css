@@ -74,3 +74,15 @@ input:checked + .search {
   padding: 0 max(var(--content-padding), (100% - var(--content-max-width))/2);
   background: var(--color-bg);
 }
+
+.search__body::before {
+  margin-bottom: var(--content-padding);
+  content: ' ';
+  display: block;
+}
+
+.search__body::after {
+  margin-top: var(--content-padding);
+  content: ' ';
+  display: block;
+}

@@ -2,6 +2,7 @@
 <meta name="robots" content="noindex">
 {{ $.Scratch.Add "css-critical" "_default/search.css" }}
 {{ $.Scratch.Add "css-critical" "partials/elements/r-search-results.css" }}
+{{ $.Scratch.Add "css-critical" "partials/elements/r-search-filters.css" }}
 {{ end }}
 
 {{ define "main" }}
@@ -10,6 +11,14 @@
 {{- $js := (resources.Get $tsname) | js.Build (dict "format" "esm") -}}
 <script src="{{$js.RelPermalink}}" type="module"></script>
 
-{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true)}}
+<label class="btn btn--secondary" for="show-filters">
+  {{default "Filter selection" (T "Collection page filter selection")}}
+</label>
+<input id="show-filters" type="checkbox">
+<aside class="filters">
+  {{partial "elements/r-search-filters"}}
+  <label class="btn btn--inv" for="show-filters">X</label>
+</aside>
+{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true "filters" "r-search-filters")}}
 
 {{ end }}

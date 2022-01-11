@@ -29,6 +29,7 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  margin-top: var(--content-padding);
 }
 
 .search-results__link-list {

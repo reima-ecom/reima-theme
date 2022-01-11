@@ -2,12 +2,20 @@
 
 import type {
   EventSearchDetails,
+  EventSearchFilterChange,
   EventSearchProductClickDetails,
+  SearchResultFacet,
   SearchResultProduct,
   SearchResults,
 } from "./search-domain.ts";
-import { EVENT_SEARCH, EVENT_SEARCH_PRODUCT_CLICK } from "./search-domain.ts";
+import {
+  EVENT_FILTER_CHANGE,
+  EVENT_FILTER_RESET,
+  EVENT_SEARCH,
+  EVENT_SEARCH_PRODUCT_CLICK,
+} from "./search-domain.ts";
 import { createSearcher, createSuggester } from "./search-loop54.ts";
+import type RSearchFilters from "./r-search-filters.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
   const formatter = new Intl.NumberFormat(locale, {
@@ -52,8 +60,35 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
     return suggestionItem;
   };
 
+const addFacets = (
+  original: SearchResultFacet[],
+  extra: SearchResultFacet[],
+): SearchResultFacet[] => {
+  const all = [...original];
+  extra.forEach((extraFacet) => {
+    const allFacetIndex = all.findIndex((af) => af.name === extraFacet.name);
+    if (allFacetIndex) {
+      const allFacet = all[allFacetIndex];
+      const extraFacetsNotInAll = extraFacet.items.filter((ef) =>
+        !allFacet.items.find((af) => af.name === ef.name)
+      );
+      all.splice(allFacetIndex, 1, {
+        ...allFacet,
+        items: [
+          ...allFacet.items,
+          ...extraFacetsNotInAll,
+        ],
+      });
+    } else {
+      all.push(extraFacet);
+    }
+  });
+  return all;
+};
+
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
+  suggestionsEnabled = false;
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -90,6 +125,24 @@ export default class RSearchResults extends HTMLElement {
         );
       }
     });
+
+    // add event listener for filters change
+    if (this.filtersElement) {
+      this.filtersElement.addEventListener(EVENT_FILTER_CHANGE, (ev) => {
+        const { facet, item, selected } =
+          (ev as CustomEvent<EventSearchFilterChange>).detail;
+        if (selected) {
+          this.addFacetFilter(facet, item);
+        } else {
+          this.removeFacetFilter(facet, item);
+        }
+        this.searchAndRender();
+      });
+      this.filtersElement.addEventListener(EVENT_FILTER_RESET, () => {
+        this.resetFacetFilters();
+        this.searchAndRender();
+      });
+    }
   }
 
   get loopUrl(): string {
@@ -150,6 +203,50 @@ export default class RSearchResults extends HTMLElement {
     return list;
   }
 
+  get filtersElement(): RSearchFilters | null {
+    const filtersAttr = this.getAttribute("filters");
+    if (!filtersAttr) return null;
+    return document.querySelector<RSearchFilters>(filtersAttr);
+  }
+
+  get facets(): string[] {
+    return this.getAttribute("facets")?.split(",") || [];
+  }
+
+  get facetFilters(): { [name: string]: string[] } {
+    if (this.facets.length && this.filtersElement) {
+      const qry = new URLSearchParams(location.hash.substr(1));
+      return this.facets.reduce((filters, facetName) => {
+        const filtersSearch = qry.getAll(facetName);
+        if (filtersSearch.length) {
+          return { ...filters, [facetName]: filtersSearch };
+        }
+        return filters;
+      }, {} as Record<string, string[]>);
+    }
+    return {};
+  }
+
+  resetFacetFilters() {
+    location.hash = "";
+  }
+
+  addFacetFilter(facetName: string, item: string) {
+    const qry = new URLSearchParams(location.hash.substr(1));
+    qry.append(facetName, item);
+    location.hash = qry.toString();
+  }
+
+  removeFacetFilter(facetName: string, item: string) {
+    const qry = new URLSearchParams(location.hash.substr(1));
+    const newFilters = qry.getAll(facetName).filter((v) => v !== item);
+    qry.delete(facetName);
+    newFilters.forEach((f) => {
+      qry.append(facetName, f);
+    });
+    location.hash = qry.toString();
+  }
+
   sendSearchEvent(query: string) {
     this.dispatchEvent(
       new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
@@ -169,8 +266,11 @@ export default class RSearchResults extends HTMLElement {
   renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
     if (products.length) {
       this.setResultVisible("suggested", false);
-    } else {
+      this.setResultVisible("no-results", false);
+    } else if (this.suggestionsEnabled) {
       this.setResultVisible("suggested", true);
+    } else {
+      this.setResultVisible("no-results", true);
     }
 
     this.setResultVisible("products", !!products.length);
@@ -231,6 +331,7 @@ export default class RSearchResults extends HTMLElement {
       );
     }
     this.setResultVisible("suggested", true);
+    this.suggestionsEnabled = true;
   }
 
   clearResults() {
@@ -244,14 +345,26 @@ export default class RSearchResults extends HTMLElement {
     take?: number,
     instant = false,
   ) {
-    const results = await createSearcher(this.loopUrl)(
+    const search = createSearcher(this.loopUrl, this.facets);
+    const results = await search(
       query,
       take || this.take,
       this.skip,
       instant,
+      this.facetFilters,
     );
+    const queryChanged = this.lastQuery !== query;
     this.lastQuery = query;
     clear && this.clearResults();
     this.renderMore(results);
+    if (this.filtersElement && queryChanged) {
+      let { facets } = results;
+      // get all facets (without filters) if filters set
+      if (Object.keys(this.facetFilters).length) {
+        // add remaining facets to list
+        facets = addFacets(facets, (await search(query, 0, 0, true)).facets);
+      }
+      this.filtersElement.render(facets);
+    }
   }
 }

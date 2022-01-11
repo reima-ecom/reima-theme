@@ -1,0 +1,30 @@
+<r-search-filters id="search-filters"
+  results="{{ with .results }}{{.}}{{ else }}r-search-results{{ end }}"
+>
+  <form>
+    <header>
+      <h2>Filters</h2>
+      <input type="reset" class="link" />
+    </header>
+    <div></div>
+  </form>
+  <template facet>
+    <fieldset>
+      <details>
+        <summary title></summary>
+      </details>
+    </fieldset>
+  </template>
+  <template item>
+    <input type="checkbox">
+    <label for=""></label>
+  </template>
+  {{ $facetTitles := newScratch }}
+  {{ range site.Data.features.order }}
+  {{ $name := lower . }}
+  {{ $facetTitles.SetInMap "facetTitles" $name (T (printf "Product feature: %s" $name)) }}
+  {{ end }}
+  <script type="application/json" facetTitles>
+    {{ $facetTitles.Get "facetTitles" }}
+  </script>
+</r-search-filters>
