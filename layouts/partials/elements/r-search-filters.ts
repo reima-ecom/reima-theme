@@ -4,7 +4,6 @@ import type {
   EventSearchFilterChange,
   SearchResultFacet,
   SearchResultFacetItem,
-  SearchResults,
 } from "./search-domain.ts";
 import { EVENT_FILTER_CHANGE, EVENT_FILTER_RESET } from "./search-domain.ts";
 import type RSearchResults from "./r-search-results.ts";
@@ -28,7 +27,7 @@ const createFacetFrom = (
   itemTemplate: HTMLTemplateElement,
   facetTitles: Record<string, string>,
 ) =>
-  (facet: SearchResultFacet): HTMLElement | undefined=> {
+  (facet: SearchResultFacet): HTMLElement | undefined => {
     // bail if no items in facet
     if (!facet.items.length) return;
     const facetItem = facetTemplate.content.cloneNode(true) as HTMLElement;
@@ -36,7 +35,9 @@ const createFacetFrom = (
       facet.name;
     const createItem = createItemFrom(itemTemplate);
     const items = facet.items.map((i) => createItem(i));
-    facetItem.querySelector("details")!.append(...items);
+    const detailsElement = facetItem.querySelector("details")!;
+    detailsElement.open = facet.items.some((i) => i.selected);
+    detailsElement.append(...items);
     return facetItem;
   };
 
@@ -64,13 +65,15 @@ export default class RSearchFilters extends HTMLElement {
     return resultsElement;
   }
 
-  render(results: SearchResults) {
+  render(facets: SearchResultFacet[]) {
     const facetCreator = createFacetFrom(
       this.querySelector("template[facet]")!,
       this.querySelector("template[item]")!,
       this.facetTitles,
     );
-    const facetElements = results.facets.map((facet) => facetCreator(facet)).filter(Boolean);
+    const facetElements = facets.map((facet) => facetCreator(facet)).filter(
+      Boolean,
+    );
     this.facetList.innerHTML = "";
     this.facetList.append(...facetElements);
   }
@@ -90,7 +93,9 @@ export default class RSearchFilters extends HTMLElement {
       );
     });
     form.addEventListener("reset", (_) => {
-      this.dispatchEvent(new CustomEvent(EVENT_FILTER_RESET, { bubbles: true }));
+      this.dispatchEvent(
+        new CustomEvent(EVENT_FILTER_RESET, { bubbles: true }),
+      );
     });
   }
 }

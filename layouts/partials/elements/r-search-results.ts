@@ -4,6 +4,7 @@ import type {
   EventSearchDetails,
   EventSearchFilterChange,
   EventSearchProductClickDetails,
+  SearchResultFacet,
   SearchResultProduct,
   SearchResults,
 } from "./search-domain.ts";
@@ -58,6 +59,32 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
     suggestionLink.href = `/search/?q=${suggestion}`;
     return suggestionItem;
   };
+
+const addFacets = (
+  original: SearchResultFacet[],
+  extra: SearchResultFacet[],
+): SearchResultFacet[] => {
+  const all = [...original];
+  extra.forEach((extraFacet) => {
+    const allFacetIndex = all.findIndex((af) => af.name === extraFacet.name);
+    if (allFacetIndex) {
+      const allFacet = all[allFacetIndex];
+      const extraFacetsNotInAll = extraFacet.items.filter((ef) =>
+        !allFacet.items.find((af) => af.name === ef.name)
+      );
+      all.splice(allFacetIndex, 1, {
+        ...allFacet,
+        items: [
+          ...allFacet.items,
+          ...extraFacetsNotInAll,
+        ],
+      });
+    } else {
+      all.push(extraFacet);
+    }
+  });
+  return all;
+};
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
@@ -201,7 +228,7 @@ export default class RSearchResults extends HTMLElement {
   }
 
   resetFacetFilters() {
-    location.hash = '';
+    location.hash = "";
   }
 
   addFacetFilter(facetName: string, item: string) {
@@ -318,7 +345,8 @@ export default class RSearchResults extends HTMLElement {
     take?: number,
     instant = false,
   ) {
-    const results = await createSearcher(this.loopUrl, this.facets)(
+    const search = createSearcher(this.loopUrl, this.facets);
+    const results = await search(
       query,
       take || this.take,
       this.skip,
@@ -330,7 +358,13 @@ export default class RSearchResults extends HTMLElement {
     clear && this.clearResults();
     this.renderMore(results);
     if (this.filtersElement && queryChanged) {
-      this.filtersElement.render(results);
+      let { facets } = results;
+      // get all facets (without filters) if filters set
+      if (Object.keys(this.facetFilters).length) {
+        // add remaining facets to list
+        facets = addFacets(facets, (await search(query, 0, 0, true)).facets);
+      }
+      this.filtersElement.render(facets);
     }
   }
 }
