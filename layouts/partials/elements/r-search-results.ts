@@ -214,7 +214,7 @@ export default class RSearchResults extends HTMLElement {
   }
 
   get facetFilters(): { [name: string]: string[] } {
-    if (this.facets.length) {
+    if (this.facets.length && this.filtersElement) {
       const qry = new URLSearchParams(location.hash.substr(1));
       return this.facets.reduce((filters, facetName) => {
         const filtersSearch = qry.getAll(facetName);
