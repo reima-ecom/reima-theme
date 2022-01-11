@@ -61,6 +61,7 @@ const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
+  suggestionsEnabled = false;
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -238,8 +239,11 @@ export default class RSearchResults extends HTMLElement {
   renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
     if (products.length) {
       this.setResultVisible("suggested", false);
-    } else {
+      this.setResultVisible("no-results", false);
+    } else if (this.suggestionsEnabled) {
       this.setResultVisible("suggested", true);
+    } else {
+      this.setResultVisible("no-results", true);
     }
 
     this.setResultVisible("products", !!products.length);
@@ -300,6 +304,7 @@ export default class RSearchResults extends HTMLElement {
       );
     }
     this.setResultVisible("suggested", true);
+    this.suggestionsEnabled = true;
   }
 
   clearResults() {

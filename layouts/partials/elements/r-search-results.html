@@ -6,6 +6,9 @@
   {{ if .showRelated}}show-related{{ end }}
   {{ with site.Data.features.order }}facets="{{ delimit . "," }}"{{ end }}
 >
+  <div results="no-results">
+    <h3 class="search-results__list-title">No products found</h3>
+  </div>
   <div results="suggested">
     <h3 class="search-results__list-title">Suggested</h3>
     <ul class="search-results__link-list"></ul>
