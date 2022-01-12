@@ -2,9 +2,11 @@
 
 import RSearchResults from "../partials/elements/r-search-results.ts";
 import RSearchFilters from "../partials/elements/r-search-filters.ts";
+import RSearchTitle from "../partials/elements/r-search-title.ts";
 
 window.customElements.define("r-search-results", RSearchResults);
 window.customElements.define("r-search-filters", RSearchFilters);
+window.customElements.define("r-search-title", RSearchTitle);
 
 window.customElements.whenDefined("r-search-results").then(() => {
   const search = new URLSearchParams(location.search);

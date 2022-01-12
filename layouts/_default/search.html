@@ -11,14 +11,20 @@
 {{- $js := (resources.Get $tsname) | js.Build (dict "format" "esm") -}}
 <script src="{{$js.RelPermalink}}" type="module"></script>
 
-<label class="btn btn--secondary" for="show-filters">
-  {{default "Filter selection" (T "Collection page filter selection")}}
-</label>
+<header>
+  <r-search-title>
+    <h1>Search results for <span query><span></h1>
+    <div><span count></span> results</div>
+  </r-search-title>
+  <label class="btn btn--secondary" for="show-filters">
+    {{default "Filter selection" (T "Collection page filter selection")}}
+  </label>
+</header>
 <input id="show-filters" type="checkbox">
 <aside class="filters">
   {{partial "elements/r-search-filters"}}
   <label class="btn btn--inv" for="show-filters">X</label>
 </aside>
-{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true "filters" "r-search-filters")}}
+{{partial "elements/r-search-results" (dict "take" 50 "loadMore" true "filters" "r-search-filters" "title" "r-search-title")}}
 
 {{ end }}

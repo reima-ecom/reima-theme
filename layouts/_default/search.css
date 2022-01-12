@@ -28,12 +28,31 @@ main {
   margin: var(--block-margin);
   max-width: var(--block-width);
   grid-template-areas: "head head" "filters main";
-  grid-template-columns: max-content;
+  grid-template-columns: max-content 1fr;
 }
 
-main > label {
+main > header {
   grid-area: head;
   width: max-content;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  width: 100%;
+  align-items: center;
+}
+
+main > header h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+main > header h1 span {
+  font-weight: 700;
+}
+
+main > header div {
+  color: var(--color-text-muted);
+  font-size: var(--text-font-size-sm);
 }
 
 .filters {

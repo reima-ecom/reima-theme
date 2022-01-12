@@ -2,6 +2,7 @@
   loop-url="{{site.Params.public.loop54.url}}" currency="{{site.Params.public.currency}}" locale="{{site.Language.Lang}}"
   {{ with .take }}take="{{.}}"{{ end }}
   {{ with .filters }}filters="{{.}}"{{ end }}
+  {{ with .title }}show-title="{{.}}"{{ end }}
   {{ if .loadMore}}load-more{{ end }}
   {{ if .showRelated}}show-related{{ end }}
   {{ with site.Data.features.order }}facets="{{ delimit . "," }}"{{ end }}

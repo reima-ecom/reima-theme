@@ -145,6 +145,14 @@ export default class RSearchResults extends HTMLElement {
     }
   }
 
+  get titleElement(): HTMLElement | undefined {
+    const attr = this.getAttribute("show-title");
+    if (!attr) return undefined
+    const elem = document.querySelector<HTMLElement>(attr);
+    if (!elem) throw new Error("Could not find title element");
+    return elem;
+  }
+
   get loopUrl(): string {
     const attr = this.getAttribute("loop-url");
     if (!attr) throw new Error("Mandatory argument missing");
@@ -365,6 +373,10 @@ export default class RSearchResults extends HTMLElement {
         facets = addFacets(facets, (await search(query, 0, 0, true)).facets);
       }
       this.filtersElement.render(facets);
+    }
+    if (this.titleElement) {
+      this.titleElement.setAttribute("query", query);
+      this.titleElement.setAttribute("count", results.products.length.toString());
     }
   }
 }
