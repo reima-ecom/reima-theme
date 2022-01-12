@@ -221,3 +221,31 @@ features:
   - value: "7000"
     icon: Breathability-7000.svg
 klarnabanner: true
+paymentlogos:
+  - name: Visa
+    type: External SVG
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/Visa.svg?v=1614864954
+  - type: External SVG
+    name: Mastercard
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/MC.svg?v=1614864955
+  - name: JCB
+    type: External SVG
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/JCB.svg?v=1614864955
+  - name: Apple Pay
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/Apple.svg?v=1614864955
+    type: External SVG
+  - name: Rakuten Pay
+    type: External SVG
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/RakutenPay.svg?v=1638535682
+  - name: Amazon Pay
+    src: https://cdn.shopify.com/s/files/1/0313/0195/9817/files/amazonpay-secondary-logo-rgb.svg?v=1624457137
+    type: External SVG
+payments_benefits_links:
+  - type: link
+    title: Free delivery on orders over 120€
+    link: "#"
+    content: ''
+  - type: link
+    title: Free returns for 30 days
+    link: "#"
+    content: ''

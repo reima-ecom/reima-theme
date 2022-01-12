@@ -71,16 +71,37 @@
   white-space: nowrap;
 }
 
-.product__payment-logos:not(:empty) {
-  text-align: center;
+.product__payment-benefits {
+  background-color: var(--color-bg-accent);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: .875rem 0;
   max-width: 500px;
-  margin: calc(var(--content-padding) / -2) 0 var(--content-padding);
+}
+
+.product__payment-logos {
+  display: flex;
+  margin: 0 1rem;
+}
+
+.product__benefits {
+  display: block;
+  margin: 0 1rem;
+}
+
+.product__benefits p {
+  font-size: .875rem;
+}
+.product__benefits p:last-child {
+  margin-bottom: 0;
 }
 
 .product__payment-logos img {
-  height: 30px;
+  height: 24px;
   width: auto;
-  display: inline;
+  display: block;
+  margin-right: 10px;
 }
 
 .product-reviews .rating {
