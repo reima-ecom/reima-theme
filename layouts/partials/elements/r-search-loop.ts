@@ -1,6 +1,7 @@
 /// <reference lib="dom" />
 
 import RSearchResults from "./r-search-results.ts";
+import RSearchAutocomplete from "./r-search-autocomplete.ts";
 import { EventSearchDetails, EVENT_SEARCH } from "./search-domain.ts";
 
 const debounce = (func: (query: string) => void, timeout = 300): (query: string) => void => {
@@ -66,3 +67,4 @@ window.customElements.define("r-search-loop", RSearchLoop);
 if (!window.customElements.get("r-search-results")) {
   window.customElements.define("r-search-results", RSearchResults);
 }
+window.customElements.define("r-search-autocomplete", RSearchAutocomplete);

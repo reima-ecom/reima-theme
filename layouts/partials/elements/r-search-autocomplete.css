@@ -1,0 +1,25 @@
+r-search-autocomplete {
+  display: none;
+}
+
+r-search-autocomplete[show] {
+  display: block;
+}
+
+r-search-autocomplete h3 {
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	color: var(--color-text-muted);
+	margin-top: var(--content-padding);
+}
+
+r-search-autocomplete ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--content-padding) 0 calc(var(--content-padding) * 2);
+}
+
+r-search-autocomplete ul a {
+	display: block;
+	padding: calc(var(--content-padding) / 2) 0;
+}
