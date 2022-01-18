@@ -220,13 +220,28 @@
           </div>
         </div>
         {{ end }}
-        <div class="product__payment-logos">
-          {{- range $settings.paymentlogos }}
-          {{ if eq .type "External SVG" }}
-          <img src="{{.src}}" alt="{{.name}}">
+
+
+        {{ with or ($settings.paymentlogos) ($settings.payments_benefits_links)}}
+        <div class="product__payment-benefits">
+          {{ with $settings.paymentlogos }}
+          <div class="product__payment-logos">
+            {{- range $settings.paymentlogos }}
+            {{ if eq .type "External SVG" }}
+            <img src="{{.src}}" alt="{{.name}}">
+            {{ end }}
+            {{ end -}}
+          </div>
           {{ end }}
-          {{ end -}}
+
+          {{ with $settings.payments_benefits_links }}
+          <div class="product__benefits">
+            {{ partialCached "product-payments-benefits-links" $ }}
+          </div>
+          {{ end }}
         </div>
+        {{ end }}
+
       </div>
     </form>
 

@@ -214,5 +214,52 @@ fields:
     labelField: name
   label: Payment Provider Logos
   description: These will show up under the "Add to Cart" button.
+- type: field_group_list
+  name: payments_benefits_links
+  label: Links below Payment & Benefits
+  fields:
+  - type: text
+    name: title
+    label: Link title
+  - name: type
+    type: select
+    default: link
+    config:
+      required: true
+      options:
+      - link
+      - modal
+      source:
+        type: simple
+        section:
+        file:
+        path:
+    label: Link type
+    description: Select `link` if you want a regular link to an existing page. The
+      link opens up in a new tab.<br>Select `modal` if you want to specify content
+      for a pop-up modal instead.
+  - type: text
+    name: link
+    label: Link URL
+    config:
+      required: false
+    showOnly:
+      field: type
+      value: link
+  - name: content
+    type: textarea
+    default: ''
+    config:
+      required: false
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Content
+    description: Modal contents. Use markdown if needed.
+    showOnly:
+      field: type
+      value: modal
+  description: Links to show in payments &amp; benefits block. Links will be shown
+    under payments logos.
 pages:
 - demo/data/productpage.yaml
