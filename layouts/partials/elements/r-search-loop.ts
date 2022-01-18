@@ -2,9 +2,13 @@
 
 import RSearchResults from "./r-search-results.ts";
 import RSearchAutocomplete from "./r-search-autocomplete.ts";
-import { EventSearchDetails, EVENT_SEARCH } from "./search-domain.ts";
+import RSearchCategories from "./r-search-categories.ts";
+import { EVENT_SEARCH, EventSearchDetails } from "./search-domain.ts";
 
-const debounce = (func: (query: string) => void, timeout = 300): (query: string) => void => {
+const debounce = (
+  func: (query: string) => void,
+  timeout = 300,
+): (query: string) => void => {
   let timer: number;
   return (query) => {
     clearTimeout(timer);
@@ -68,3 +72,4 @@ if (!window.customElements.get("r-search-results")) {
   window.customElements.define("r-search-results", RSearchResults);
 }
 window.customElements.define("r-search-autocomplete", RSearchAutocomplete);
+window.customElements.define("r-search-categories", RSearchCategories);

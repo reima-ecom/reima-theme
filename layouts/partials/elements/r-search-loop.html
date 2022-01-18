@@ -16,6 +16,7 @@
   </div>
   <div class="search__body">
     {{partial "elements/r-search-autocomplete" (dict "for" "r-search-loop input")}}
+    {{partial "elements/r-search-categories" (dict "for" "r-search-loop r-search-results")}}
     {{partial "elements/r-search-results" (dict "showRelated" true)}}
   </div>
 </r-search-loop>

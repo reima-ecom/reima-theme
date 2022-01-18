@@ -17,6 +17,17 @@ window.customElements.whenDefined("r-search-results").then(() => {
   }
   if (!query) throw new Error("Need query parameter `q` for search");
 
-  document.querySelector<RSearchResults>("main r-search-results")
-    ?.searchAndRender(query, true, take);
+  const resultsElement = document.querySelector<RSearchResults>(
+    "main r-search-results",
+  );
+  // open filters if there are selected filters
+  resultsElement?.addEventListener("search-results", (ev) => {
+    const hasActiveFilters = ev.detail.results.facets.some((facet) =>
+      facet.items.some((item) => item.selected)
+    );
+    if (hasActiveFilters) {
+      document.querySelector<HTMLInputElement>("#show-filters")!.checked = true;
+    }
+  });
+  resultsElement?.searchAndRender(query, true, take);
 });

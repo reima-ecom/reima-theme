@@ -1,0 +1,29 @@
+r-search-categories {
+  display: none;
+}
+
+r-search-categories[show] {
+  display: block;
+}
+
+r-search-categories h3 {
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	color: var(--color-text-muted);
+	margin-top: var(--content-padding);
+}
+
+r-search-categories ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--content-padding) 0 calc(var(--content-padding) * 2);
+}
+
+r-search-categories ul a {
+	display: block;
+	padding: calc(var(--content-padding) / 2) 0;
+}
+
+r-search-categories ul a [category] {
+  font-weight: 700;
+}

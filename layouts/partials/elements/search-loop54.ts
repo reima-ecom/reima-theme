@@ -265,8 +265,11 @@ const loopRequest = async <E extends string>(
   return await searchResponse.json();
 };
 
+const startsWithCapital = (word: string) =>
+  word.charAt(0) === word.charAt(0).toUpperCase();
+
 const facetNameToLoop = (facetName: string): string =>
-  `Attributes_${facetName}`;
+  startsWithCapital(facetName) ? facetName : `Attributes_${facetName}`;
 const facetNameFromLoop = (facetName: string): string =>
   facetName.replace("Attributes_", "");
 
@@ -279,6 +282,7 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
         relatedQueries: [],
         hasMore: false,
         query,
+        count: 0,
       };
     }
 
@@ -325,7 +329,14 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
     ).filter(Boolean);
     const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
 
-    return { products, relatedQueries, facets: resultFacets, hasMore, query };
+    return {
+      products,
+      relatedQueries,
+      facets: resultFacets,
+      hasMore,
+      query,
+      count: response.results.count,
+    };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>
@@ -382,7 +393,7 @@ export const createAutocompleter = (baseUrl: string) =>
       { query },
       true,
     );
-    return response.queries.items.map(loopQry => loopQry.query);
+    return response.queries.items.map((loopQry) => loopQry.query);
   };
 
 /**

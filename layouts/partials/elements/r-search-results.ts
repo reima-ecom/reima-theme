@@ -1,9 +1,9 @@
 /// <reference lib="dom" />
 
 import type {
-  EventSearchDetails,
   EventSearchFilterChange,
   EventSearchProductClickDetails,
+  EventSearchResultsDetails,
   SearchResultFacet,
   SearchResultProduct,
   SearchResults,
@@ -11,8 +11,8 @@ import type {
 import {
   EVENT_FILTER_CHANGE,
   EVENT_FILTER_RESET,
-  EVENT_SEARCH,
   EVENT_SEARCH_PRODUCT_CLICK,
+  EVENT_SEARCH_RESULTS,
 } from "./search-domain.ts";
 import { createSearcher, createSuggester } from "./search-loop54.ts";
 import type RSearchFilters from "./r-search-filters.ts";
@@ -147,7 +147,7 @@ export default class RSearchResults extends HTMLElement {
 
   get titleElement(): HTMLElement | undefined {
     const attr = this.getAttribute("show-title");
-    if (!attr) return undefined
+    if (!attr) return undefined;
     const elem = document.querySelector<HTMLElement>(attr);
     if (!elem) throw new Error("Could not find title element");
     return elem;
@@ -255,11 +255,11 @@ export default class RSearchResults extends HTMLElement {
     location.hash = qry.toString();
   }
 
-  sendSearchEvent(query: string) {
+  sendSearchEvent(query: string, results: SearchResults) {
     this.dispatchEvent(
-      new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
+      new CustomEvent<EventSearchResultsDetails>(EVENT_SEARCH_RESULTS, {
         bubbles: true,
-        detail: { query },
+        detail: { query, results },
       }),
     );
   }
@@ -376,7 +376,11 @@ export default class RSearchResults extends HTMLElement {
     }
     if (this.titleElement) {
       this.titleElement.setAttribute("query", query);
-      this.titleElement.setAttribute("count", results.products.length.toString());
+      this.titleElement.setAttribute(
+        "count",
+        results.count.toString(),
+      );
     }
+    this.sendSearchEvent(query, results);
   }
 }
