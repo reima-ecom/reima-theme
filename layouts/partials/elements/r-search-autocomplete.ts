@@ -1,8 +1,13 @@
 /// <reference lib="dom" />
 
-import { createAutocompleter } from "./search-loop54.ts";
+import { createAutocompleter, createSuggester } from "./search-loop54.ts";
 
 export default class RSearchAutocomplete extends HTMLElement {
+  constructor() {
+    super();
+    this.createLiElement = this.createLiElement.bind(this);
+  }
+
   get for(): HTMLElement {
     const forAttribute = this.getAttribute("for");
     if (!forAttribute) throw new Error("Please set `for` attribute");
@@ -11,47 +16,55 @@ export default class RSearchAutocomplete extends HTMLElement {
     return element;
   }
 
-  get show(): boolean {
-    return this.hasAttribute("show");
-  }
-
-  set show(show: boolean) {
-    if (show) this.setAttribute("show", "");
-    else this.removeAttribute("show");
-  }
-
   get baseUrl(): string {
     const attr = this.getAttribute("loop-url");
     if (!attr) throw new Error("Need to set base url");
     return attr;
   }
 
+  get headingElement(): HTMLElement {
+    return this.querySelector("h3")!;
+  }
+
+  get listElement(): HTMLElement {
+    return this.querySelector("ul")!;
+  }
+
+  createLiElement(query: string): HTMLLIElement {
+    const liElement = this.querySelector("template")!.content.cloneNode(
+      true,
+    ) as HTMLLIElement;
+    const linkElement = liElement.querySelector("a")!;
+    linkElement.innerText = query;
+    linkElement.href = `/search/?q=${query}`;
+    return liElement;
+  }
+
+  async showSuggestions() {
+    const suggest = createSuggester(this.baseUrl);
+    const suggestions = await suggest();
+    this.headingElement.textContent = "Suggestions";
+    this.listElement.innerHTML = "";
+    this.listElement.append(...suggestions.map(this.createLiElement));
+  }
+
   connectedCallback() {
+    // immediately show suggestions
+    this.showSuggestions();
     const autocomplete = createAutocompleter(this.baseUrl);
-    const liTemplate = this.querySelector("template");
-    if (!liTemplate) throw new Error("Could not find item template");
-    const createLiElement = (query: string): HTMLLIElement => {
-      const liElement = liTemplate.content.cloneNode(true) as HTMLLIElement;
-      const linkElement = liElement.querySelector("a")!;
-      linkElement.innerText = query;
-      linkElement.href = `/search/?q=${query}`;
-      return liElement;
-    };
-    const ulElement = this.querySelector("ul");
-    if (!ulElement) throw new Error("Could not find list element");
     this.for.addEventListener("input", async (ev) => {
       const inputElement = ev.currentTarget as HTMLInputElement;
       const query = inputElement.value;
       if (query) {
         const autocompletes = await autocomplete(query);
+        this.headingElement.textContent = "Top Hits";
         if (autocompletes.length) {
-          this.show = true;
-          ulElement.innerHTML = "";
-          ulElement.append(...autocompletes.map(createLiElement));
+          this.listElement.innerHTML = "";
+          this.listElement.append(...autocompletes.map(this.createLiElement));
           return;
         }
       }
-      this.show = false;
+      this.showSuggestions();
     });
   }
 }

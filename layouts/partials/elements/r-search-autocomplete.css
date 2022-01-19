@@ -1,11 +1,3 @@
-r-search-autocomplete {
-  display: none;
-}
-
-r-search-autocomplete[show] {
-  display: block;
-}
-
 r-search-autocomplete h3 {
 	font-size: 0.875rem;
 	text-transform: uppercase;

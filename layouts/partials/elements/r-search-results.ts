@@ -14,7 +14,7 @@ import {
   EVENT_SEARCH_PRODUCT_CLICK,
   EVENT_SEARCH_RESULTS,
 } from "./search-domain.ts";
-import { createSearcher, createSuggester } from "./search-loop54.ts";
+import { createSearcher,  } from "./search-loop54.ts";
 import type RSearchFilters from "./r-search-filters.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
@@ -48,16 +48,16 @@ const createProductItemFrom = (
     return productItem;
   };
 
-const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
-  (suggestion: string): HTMLElement => {
-    const suggestionItem = suggestionTemplate.content.cloneNode(
+const createRelatedFrom = (relatedTemplate: HTMLTemplateElement) =>
+  (related: string): HTMLElement => {
+    const relatedItem = relatedTemplate.content.cloneNode(
       true,
     ) as HTMLElement;
-    const suggestionLink = suggestionItem.querySelector("a");
-    if (!suggestionLink) throw new Error("Malformed suggestion template");
-    suggestionLink.textContent = suggestion;
-    suggestionLink.href = `/search/?q=${suggestion}`;
-    return suggestionItem;
+    const relatedLink = relatedItem.querySelector("a");
+    if (!relatedLink) throw new Error("Malformed related template");
+    relatedLink.textContent = related;
+    relatedLink.href = `/search/?q=${related}`;
+    return relatedItem;
   };
 
 const addFacets = (
@@ -88,7 +88,6 @@ const addFacets = (
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
-  suggestionsEnabled = false;
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -272,13 +271,10 @@ export default class RSearchResults extends HTMLElement {
   }
 
   renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
-    if (products.length) {
-      this.setResultVisible("suggested", false);
-      this.setResultVisible("no-results", false);
-    } else if (this.suggestionsEnabled) {
-      this.setResultVisible("suggested", true);
-    } else {
+    if (query && !products.length) {
       this.setResultVisible("no-results", true);
+    } else {
+      this.setResultVisible("no-results", false);
     }
 
     this.setResultVisible("products", !!products.length);
@@ -299,14 +295,14 @@ export default class RSearchResults extends HTMLElement {
     if (this.showRelated) {
       this.setResultVisible("related", !!relatedQueries.length);
       if (relatedQueries.length) {
-        const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
-          "template[suggestion]",
+        const relatedTemplate = this.querySelector<HTMLTemplateElement>(
+          "template[related]",
         );
-        if (!suggestionTemplate) {
-          throw new Error("Malformed suggestion template");
+        if (!relatedTemplate) {
+          throw new Error("Malformed related template");
         }
         this.relatedList.append(
-          ...relatedQueries.map(createSuggestionFrom(suggestionTemplate)),
+          ...relatedQueries.map(createRelatedFrom(relatedTemplate)),
         );
       }
     }
@@ -319,27 +315,6 @@ export default class RSearchResults extends HTMLElement {
       if (!moreLink) throw new Error("Show more link not found");
       moreLink.href = `/search/?q=${query}`;
     }
-  }
-
-  async showSuggestions() {
-    const suggestions = await createSuggester(this.loopUrl)();
-    if (suggestions.length) {
-      const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
-        "template[suggestion]",
-      );
-      const suggestionsElement = this.querySelector<HTMLElement>(
-        "[results=suggested]",
-      );
-      const suggestionsList = suggestionsElement!.querySelector("ul")!;
-      suggestionsList.innerHTML = "";
-      suggestionsList.append(
-        ...suggestions.map(
-          createSuggestionFrom(suggestionTemplate!),
-        ),
-      );
-    }
-    this.setResultVisible("suggested", true);
-    this.suggestionsEnabled = true;
   }
 
   clearResults() {

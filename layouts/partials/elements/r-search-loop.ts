@@ -61,8 +61,6 @@ export default class RSearchLoop extends HTMLElement {
     // search immediately if input has input, otherwise get suggestions
     if (input?.value) {
       this.search(input.value);
-    } else {
-      this.results.showSuggestions();
     }
   }
 }
