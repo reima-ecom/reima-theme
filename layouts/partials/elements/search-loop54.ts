@@ -110,6 +110,17 @@ type LoopSuggestionResponse = {
   };
 };
 
+type LoopAutocompleteRequest = {
+  query: string;
+};
+
+type LoopAutocompleteResponse = {
+  queries: {
+    count: number;
+    items: { query: string }[];
+  };
+};
+
 type LoopEventType = "click" | "addtocart" | "purchase";
 type LoopEventRequest = {
   events: {
@@ -223,6 +234,10 @@ type LoopRequestTypes<E> = E extends "/search" ? {
     Request: LoopEventRequest;
     Response: LoopEventResponse;
   }
+  : E extends "/autoComplete" ? {
+    Request: LoopAutocompleteRequest;
+    Response: LoopAutocompleteResponse;
+  }
   : never;
 
 const loopRequest = async <E extends string>(
@@ -250,8 +265,13 @@ const loopRequest = async <E extends string>(
   return await searchResponse.json();
 };
 
-const facetNameToLoop = (facetName: string): string => `Attributes_${facetName}`;
-const facetNameFromLoop = (facetName: string): string => facetName.replace("Attributes_", "");
+const startsWithCapital = (word: string) =>
+  word.charAt(0) === word.charAt(0).toUpperCase();
+
+const facetNameToLoop = (facetName: string): string =>
+  startsWithCapital(facetName) ? facetName : `Attributes_${facetName}`;
+const facetNameFromLoop = (facetName: string): string =>
+  facetName.replace("Attributes_", "");
 
 export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
   async (query, take, skip, instant, facetFilters) => {
@@ -262,6 +282,7 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
         relatedQueries: [],
         hasMore: false,
         query,
+        count: 0,
       };
     }
 
@@ -283,14 +304,15 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
         attributeName: facetNameToLoop(f),
       }));
       if (facetFilters) {
-        requestBody.resultsOptions.facets = requestBody.resultsOptions.facets.map((facet) => {
-          const filter = facetFilters[facetNameFromLoop(facet.attributeName)];
-          if (!filter) return facet;
-          return {
-            ...facet,
-            selected: filter,
-          };
-        });
+        requestBody.resultsOptions.facets = requestBody.resultsOptions.facets
+          .map((facet) => {
+            const filter = facetFilters[facetNameFromLoop(facet.attributeName)];
+            if (!filter) return facet;
+            return {
+              ...facet,
+              selected: filter,
+            };
+          });
       }
     }
 
@@ -307,7 +329,14 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
     ).filter(Boolean);
     const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
 
-    return { products, relatedQueries, facets: resultFacets, hasMore, query };
+    return {
+      products,
+      relatedQueries,
+      facets: resultFacets,
+      hasMore,
+      query,
+      count: response.results.count,
+    };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>
@@ -354,6 +383,17 @@ export const createEventSender = (baseUrl: string) =>
       { events: [{ type, entity: { type: "Product", id: productId } }] },
       true,
     );
+  };
+
+export const createAutocompleter = (baseUrl: string) =>
+  async (query: string): Promise<string[]> => {
+    const response = await loopRequest(
+      baseUrl,
+      "/autoComplete",
+      { query },
+      true,
+    );
+    return response.queries.items.map((loopQry) => loopQry.query);
   };
 
 /**

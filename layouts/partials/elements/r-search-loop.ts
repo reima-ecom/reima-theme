@@ -1,9 +1,14 @@
 /// <reference lib="dom" />
 
 import RSearchResults from "./r-search-results.ts";
-import { EventSearchDetails, EVENT_SEARCH } from "./search-domain.ts";
+import RSearchAutocomplete from "./r-search-autocomplete.ts";
+import RSearchCategories from "./r-search-categories.ts";
+import { EVENT_SEARCH, EventSearchDetails } from "./search-domain.ts";
 
-const debounce = (func: (query: string) => void, timeout = 300): (query: string) => void => {
+const debounce = (
+  func: (query: string) => void,
+  timeout = 300,
+): (query: string) => void => {
   let timer: number;
   return (query) => {
     clearTimeout(timer);
@@ -56,8 +61,6 @@ export default class RSearchLoop extends HTMLElement {
     // search immediately if input has input, otherwise get suggestions
     if (input?.value) {
       this.search(input.value);
-    } else {
-      this.results.showSuggestions();
     }
   }
 }
@@ -66,3 +69,5 @@ window.customElements.define("r-search-loop", RSearchLoop);
 if (!window.customElements.get("r-search-results")) {
   window.customElements.define("r-search-results", RSearchResults);
 }
+window.customElements.define("r-search-autocomplete", RSearchAutocomplete);
+window.customElements.define("r-search-categories", RSearchCategories);

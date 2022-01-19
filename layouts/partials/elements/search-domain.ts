@@ -29,6 +29,8 @@ export type SearchResults = {
   hasMore: boolean;
   /** Original search query. */
   query: string;
+  /** Total number of matched products */
+  count: number;
 };
 
 export type Searcher = (
@@ -43,6 +45,12 @@ export type Searcher = (
 export const EVENT_SEARCH = "search";
 export type EventSearchDetails = {
   query: string | undefined;
+};
+
+export const EVENT_SEARCH_RESULTS = "search-results";
+export type EventSearchResultsDetails = {
+  query: string | undefined;
+  results: SearchResults;
 };
 
 export const EVENT_SEARCH_PRODUCT_CLICK = "search-product-click";
@@ -74,9 +82,10 @@ export type Filterer = (
 export type Suggester = () => Promise<string[]>;
 
 interface CustomEventMap {
-  EVENT_SEARCH: CustomEvent<EventSearchDetails>;
-  EVENT_SEARCH_PRODUCT_CLICK: CustomEvent<EventSearchProductClickDetails>;
-  EVENT_FILTER_CHANGE: CustomEvent<EventSearchFilterChange>;
+  [EVENT_SEARCH]: CustomEvent<EventSearchDetails>;
+  [EVENT_SEARCH_PRODUCT_CLICK]: CustomEvent<EventSearchProductClickDetails>;
+  [EVENT_FILTER_CHANGE]: CustomEvent<EventSearchFilterChange>;
+  [EVENT_SEARCH_RESULTS]: CustomEvent<EventSearchResultsDetails>;
 }
 declare global {
   interface Document { //adds definition to Document, but you can do the same with HTMLElement
@@ -88,7 +97,7 @@ declare global {
   interface HTMLElement { //adds definition to Document, but you can do the same with HTMLElement
     addEventListener<K extends keyof CustomEventMap>(
       type: K,
-      listener: (this: Document, ev: CustomEventMap[K]) => void,
+      listener: (this: HTMLElement, ev: CustomEventMap[K]) => void,
     ): void;
   }
 }

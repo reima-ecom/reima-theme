@@ -1,9 +1,9 @@
 /// <reference lib="dom" />
 
 import type {
-  EventSearchDetails,
   EventSearchFilterChange,
   EventSearchProductClickDetails,
+  EventSearchResultsDetails,
   SearchResultFacet,
   SearchResultProduct,
   SearchResults,
@@ -11,10 +11,10 @@ import type {
 import {
   EVENT_FILTER_CHANGE,
   EVENT_FILTER_RESET,
-  EVENT_SEARCH,
   EVENT_SEARCH_PRODUCT_CLICK,
+  EVENT_SEARCH_RESULTS,
 } from "./search-domain.ts";
-import { createSearcher, createSuggester } from "./search-loop54.ts";
+import { createSearcher,  } from "./search-loop54.ts";
 import type RSearchFilters from "./r-search-filters.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
@@ -48,18 +48,6 @@ const createProductItemFrom = (
     return productItem;
   };
 
-const createSuggestionFrom = (suggestionTemplate: HTMLTemplateElement) =>
-  (suggestion: string): HTMLElement => {
-    const suggestionItem = suggestionTemplate.content.cloneNode(
-      true,
-    ) as HTMLElement;
-    const suggestionLink = suggestionItem.querySelector("a");
-    if (!suggestionLink) throw new Error("Malformed suggestion template");
-    suggestionLink.textContent = suggestion;
-    suggestionLink.href = `/search/?q=${suggestion}`;
-    return suggestionItem;
-  };
-
 const addFacets = (
   original: SearchResultFacet[],
   extra: SearchResultFacet[],
@@ -88,7 +76,6 @@ const addFacets = (
 
 export default class RSearchResults extends HTMLElement {
   lastQuery = "";
-  suggestionsEnabled = false;
 
   connectedCallback() {
     // add handling of button to load more results (if enabled)
@@ -147,7 +134,7 @@ export default class RSearchResults extends HTMLElement {
 
   get titleElement(): HTMLElement | undefined {
     const attr = this.getAttribute("show-title");
-    if (!attr) return undefined
+    if (!attr) return undefined;
     const elem = document.querySelector<HTMLElement>(attr);
     if (!elem) throw new Error("Could not find title element");
     return elem;
@@ -177,10 +164,6 @@ export default class RSearchResults extends HTMLElement {
     return Number.parseInt(attr);
   }
 
-  get showRelated(): boolean {
-    return this.hasAttribute("show-related");
-  }
-
   get loadMore(): boolean {
     return this.hasAttribute("load-more");
   }
@@ -198,14 +181,6 @@ export default class RSearchResults extends HTMLElement {
   get productList(): HTMLUListElement {
     const list = this.querySelector<HTMLUListElement>(
       "[results=products] ul",
-    );
-    if (!list) throw new Error("Element not found");
-    return list;
-  }
-
-  get relatedList(): HTMLUListElement {
-    const list = this.querySelector<HTMLUListElement>(
-      "[results=related] ul",
     );
     if (!list) throw new Error("Element not found");
     return list;
@@ -255,11 +230,11 @@ export default class RSearchResults extends HTMLElement {
     location.hash = qry.toString();
   }
 
-  sendSearchEvent(query: string) {
+  sendSearchEvent(query: string, results: SearchResults) {
     this.dispatchEvent(
-      new CustomEvent<EventSearchDetails>(EVENT_SEARCH, {
+      new CustomEvent<EventSearchResultsDetails>(EVENT_SEARCH_RESULTS, {
         bubbles: true,
-        detail: { query },
+        detail: { query, results },
       }),
     );
   }
@@ -271,14 +246,11 @@ export default class RSearchResults extends HTMLElement {
     else elem.removeAttribute("show");
   }
 
-  renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
-    if (products.length) {
-      this.setResultVisible("suggested", false);
-      this.setResultVisible("no-results", false);
-    } else if (this.suggestionsEnabled) {
-      this.setResultVisible("suggested", true);
-    } else {
+  renderMore({ products, hasMore, query }: SearchResults) {
+    if (query && !products.length) {
       this.setResultVisible("no-results", true);
+    } else {
+      this.setResultVisible("no-results", false);
     }
 
     this.setResultVisible("products", !!products.length);
@@ -296,21 +268,6 @@ export default class RSearchResults extends HTMLElement {
       );
     }
 
-    if (this.showRelated) {
-      this.setResultVisible("related", !!relatedQueries.length);
-      if (relatedQueries.length) {
-        const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
-          "template[suggestion]",
-        );
-        if (!suggestionTemplate) {
-          throw new Error("Malformed suggestion template");
-        }
-        this.relatedList.append(
-          ...relatedQueries.map(createSuggestionFrom(suggestionTemplate)),
-        );
-      }
-    }
-
     this.setResultVisible("more", hasMore);
     if (hasMore) {
       const moreLink = this.querySelector<HTMLAnchorElement>(
@@ -321,30 +278,8 @@ export default class RSearchResults extends HTMLElement {
     }
   }
 
-  async showSuggestions() {
-    const suggestions = await createSuggester(this.loopUrl)();
-    if (suggestions.length) {
-      const suggestionTemplate = this.querySelector<HTMLTemplateElement>(
-        "template[suggestion]",
-      );
-      const suggestionsElement = this.querySelector<HTMLElement>(
-        "[results=suggested]",
-      );
-      const suggestionsList = suggestionsElement!.querySelector("ul")!;
-      suggestionsList.innerHTML = "";
-      suggestionsList.append(
-        ...suggestions.map(
-          createSuggestionFrom(suggestionTemplate!),
-        ),
-      );
-    }
-    this.setResultVisible("suggested", true);
-    this.suggestionsEnabled = true;
-  }
-
   clearResults() {
     this.productList.innerHTML = "";
-    this.relatedList.innerHTML = "";
   }
 
   async searchAndRender(
@@ -376,7 +311,11 @@ export default class RSearchResults extends HTMLElement {
     }
     if (this.titleElement) {
       this.titleElement.setAttribute("query", query);
-      this.titleElement.setAttribute("count", results.products.length.toString());
+      this.titleElement.setAttribute(
+        "count",
+        results.count.toString(),
+      );
     }
+    this.sendSearchEvent(query, results);
   }
 }
