@@ -3,6 +3,8 @@
 import { createAutocompleter, createSuggester } from "./search-loop54.ts";
 
 export default class RSearchAutocomplete extends HTMLElement {
+  suggestions: string[] = [];
+
   constructor() {
     super();
     this.createLiElement = this.createLiElement.bind(this);
@@ -42,10 +44,12 @@ export default class RSearchAutocomplete extends HTMLElement {
 
   async showSuggestions() {
     const suggest = createSuggester(this.baseUrl);
-    const suggestions = await suggest();
+    if (!this.suggestions.length) {
+      this.suggestions = await suggest();
+    }
     this.headingElement.textContent = "Suggestions";
     this.listElement.innerHTML = "";
-    this.listElement.append(...suggestions.map(this.createLiElement));
+    this.listElement.append(...this.suggestions.map(this.createLiElement));
   }
 
   connectedCallback() {

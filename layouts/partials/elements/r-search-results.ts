@@ -48,18 +48,6 @@ const createProductItemFrom = (
     return productItem;
   };
 
-const createRelatedFrom = (relatedTemplate: HTMLTemplateElement) =>
-  (related: string): HTMLElement => {
-    const relatedItem = relatedTemplate.content.cloneNode(
-      true,
-    ) as HTMLElement;
-    const relatedLink = relatedItem.querySelector("a");
-    if (!relatedLink) throw new Error("Malformed related template");
-    relatedLink.textContent = related;
-    relatedLink.href = `/search/?q=${related}`;
-    return relatedItem;
-  };
-
 const addFacets = (
   original: SearchResultFacet[],
   extra: SearchResultFacet[],
@@ -176,10 +164,6 @@ export default class RSearchResults extends HTMLElement {
     return Number.parseInt(attr);
   }
 
-  get showRelated(): boolean {
-    return this.hasAttribute("show-related");
-  }
-
   get loadMore(): boolean {
     return this.hasAttribute("load-more");
   }
@@ -197,14 +181,6 @@ export default class RSearchResults extends HTMLElement {
   get productList(): HTMLUListElement {
     const list = this.querySelector<HTMLUListElement>(
       "[results=products] ul",
-    );
-    if (!list) throw new Error("Element not found");
-    return list;
-  }
-
-  get relatedList(): HTMLUListElement {
-    const list = this.querySelector<HTMLUListElement>(
-      "[results=related] ul",
     );
     if (!list) throw new Error("Element not found");
     return list;
@@ -270,7 +246,7 @@ export default class RSearchResults extends HTMLElement {
     else elem.removeAttribute("show");
   }
 
-  renderMore({ products, relatedQueries, hasMore, query }: SearchResults) {
+  renderMore({ products, hasMore, query }: SearchResults) {
     if (query && !products.length) {
       this.setResultVisible("no-results", true);
     } else {
@@ -292,21 +268,6 @@ export default class RSearchResults extends HTMLElement {
       );
     }
 
-    if (this.showRelated) {
-      this.setResultVisible("related", !!relatedQueries.length);
-      if (relatedQueries.length) {
-        const relatedTemplate = this.querySelector<HTMLTemplateElement>(
-          "template[related]",
-        );
-        if (!relatedTemplate) {
-          throw new Error("Malformed related template");
-        }
-        this.relatedList.append(
-          ...relatedQueries.map(createRelatedFrom(relatedTemplate)),
-        );
-      }
-    }
-
     this.setResultVisible("more", hasMore);
     if (hasMore) {
       const moreLink = this.querySelector<HTMLAnchorElement>(
@@ -319,7 +280,6 @@ export default class RSearchResults extends HTMLElement {
 
   clearResults() {
     this.productList.innerHTML = "";
-    this.relatedList.innerHTML = "";
   }
 
   async searchAndRender(

@@ -8,7 +8,6 @@ r-search-autocomplete h3 {
 r-search-autocomplete ul {
   list-style: none;
   padding: 0;
-  margin: var(--content-padding) 0 calc(var(--content-padding) * 2);
 }
 
 r-search-autocomplete ul a {

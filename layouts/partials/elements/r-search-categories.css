@@ -16,7 +16,6 @@ r-search-categories h3 {
 r-search-categories ul {
   list-style: none;
   padding: 0;
-  margin: var(--content-padding) 0 calc(var(--content-padding) * 2);
 }
 
 r-search-categories ul a {

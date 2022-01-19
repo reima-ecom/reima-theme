@@ -4,15 +4,10 @@
   {{ with .filters }}filters="{{.}}"{{ end }}
   {{ with .title }}show-title="{{.}}"{{ end }}
   {{ if .loadMore}}load-more{{ end }}
-  {{ if .showRelated}}show-related{{ end }}
   {{ with site.Data.features.order }}facets="Category,{{ delimit . "," }}"{{ end }}
 >
   <div results="no-results">
     <h3 class="search-results__list-title">No products found</h3>
-  </div>
-  <div results="related">
-    <h3 class="search-results__list-title">Related searches</h3>
-    <ul class="search-results__link-list"></ul>
   </div>
   <div results="products">
     <ul class="search-results__product-list"></ul>
@@ -28,8 +23,5 @@
         <span price></span>
       </a>
     </li>
-  </template>
-  <template related>
-    <li><a href="" class="silent-link"></a></li>
   </template>
 </r-search-results>
