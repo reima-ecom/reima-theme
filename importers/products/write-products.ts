@@ -54,6 +54,21 @@ const addHasOnlyDefaultVariant: Transformer = (product) => ({
   hasOnlyDefaultVariant: product.hasOnlyDefaultVariant,
 });
 
+const addProductVideos: Transformer = (product) => {
+  const videos: ProductVideoNode[] = [];
+  product.media.edges.map(({ node }) => {
+    if (node.sources) {
+      node.sources.map(( source: ProductVideoNode, i: number) => {
+        if (source.mimeType === 'video/mp4' && videos.length < 1) {
+          videos.push(node.sources[i]);
+        }
+      })
+    }
+  });
+
+  return videos;
+};
+
 export const writeProduct = (
   outDir: string,
   srcToFilename: (src: string) => string,
@@ -70,6 +85,7 @@ export const writeProduct = (
         productNode,
         product: {
           ...product,
+          videos: addProductVideos(productNode),
           variants: product.variants.map((v: any, i: number) => ({
             ...v,
             sku: productNode.variants.edges[i].node.sku,

@@ -150,6 +150,14 @@ export type ProductNode = {
     };
     edges: VariantEdge[];
   };
+  media: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
+    edges: {
+      node: ProductVideoNode;
+    }[];
+  };
 };
 
 export type VariantEdge = {
