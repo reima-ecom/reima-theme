@@ -16,6 +16,11 @@ const openButtonClick = (e) => {
     openElement.hasAttribute("modal-opener")
   ) {
     document.body.style.overflow = "hidden";
+    const videoElement = openElement.querySelector("video");
+    if (videoElement) {
+      videoElement.play();
+      videoElement.muted = false;
+    }
   }
 };
 
@@ -36,6 +41,11 @@ const overlayClick = (e) => {
     const overlayElement: HTMLElement = e.currentTarget.closest(".open");
     if (overlayElement) {
       overlayElement.classList.remove("open");
+      const videoElement = overlayElement.querySelector("video");
+      if (videoElement) {
+        videoElement.pause();
+        videoElement.currentTime = 0;
+      }
     }
     document.body.style.overflow = "";
   }
@@ -74,7 +84,8 @@ document.querySelectorAll("[load]").forEach((element) => {
 
 // load, i.e. trigger link click if we're inside a target that should have TS loaded
 if (document.location.hash) {
-  document.querySelector(`[load][href="${document.location.hash}"]`)
+  document
+    .querySelector(`[load][href="${document.location.hash}"]`)
     ?.dispatchEvent(new MouseEvent("click"));
 }
 
@@ -103,7 +114,7 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
     event.preventDefault();
     const elID = this.getAttribute("href");
     const el: HTMLElement = ele.querySelector(
-      '.carousel__item[data-id="' + elID.substr(1) + '"]',
+      '.carousel__item[data-id="' + elID.substr(1) + '"]'
     );
     ele.scrollLeft = el.offsetLeft;
 
@@ -194,11 +205,12 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
           }
         });
 
-        const bulletIndex = selectedIndex + visibleItems > bullets.length
-          ? 1
-          : selectedIndex + visibleItems;
+        const bulletIndex =
+          selectedIndex + visibleItems > bullets.length
+            ? 1
+            : selectedIndex + visibleItems;
         const nextBullet: HTMLElement = carousel.querySelector(
-          ".dots li:nth-child(" + bulletIndex + ") a",
+          ".dots li:nth-child(" + bulletIndex + ") a"
         );
         if (nextBullet) {
           nextBullet.click();
