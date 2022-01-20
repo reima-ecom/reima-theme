@@ -87,6 +87,19 @@ const query = (count: number, cursor?: string) =>
             }
           }
         }
+        media(first: 100) {
+          edges {
+            node {
+              ... on Video {
+                id
+                sources {
+                  mimeType
+                  url
+                }
+              }
+            }
+          }
+        }
         priceRange {
           minVariantPrice { amount, currencyCode }
           maxVariantPrice { amount }

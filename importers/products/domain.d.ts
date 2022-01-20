@@ -31,10 +31,27 @@ type ProductNode = {
       node: ProductImageNode;
     }[];
   };
+  media: {
+    pageInfo: {
+      hasNextPage: boolean;
+    };
+    edges: {
+      node: ProductMediaNode;
+    }[];
+  };
 };
 
 type VariantNode = any;
 
 type ProductImageNode = {
   originalSrc: string;
+};
+
+type ProductMediaNode = {
+  sources: ProductVideoNode[];
+};
+
+type ProductVideoNode = {
+  mimeType: string;
+  url: string;
 };
