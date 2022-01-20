@@ -12,7 +12,7 @@
         {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{ with index $imgs 0 }}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" />
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="" />
         {{ end }}
         {{ range $i, $img := after 1 $imgs }}
         {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "path" .Name))}}
