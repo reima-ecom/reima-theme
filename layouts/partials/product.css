@@ -99,10 +99,14 @@
 }
 
 .product__payment-logos img {
-  height: 24px;
+  height: 22px;
   width: auto;
   display: block;
   margin: 0 10px 10px 0;
+}
+
+.product__payment-logos img:last-child {
+  margin-right: 0;
 }
 
 .product-reviews .rating {
