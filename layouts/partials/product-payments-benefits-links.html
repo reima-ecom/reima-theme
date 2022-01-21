@@ -16,7 +16,7 @@ Expects the product page as context.
 <p><a class="link--no-color" href="#" openid="{{$id}}">{{.title}}</a></p>
 <div class="modal" id="{{$id}}">
   <div>
-    <button class="icon" close>
+    <button class="icon" onclick="event.preventDefault()" close>
       <svg>
         <use xlink:href="#icon-close"></use>
       </svg>
