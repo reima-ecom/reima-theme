@@ -25,6 +25,7 @@ export type SearchResults = {
   products: SearchResultProduct[];
   facets: SearchResultFacet[];
   relatedQueries: string[];
+  relatedResults: SearchResultProduct[];
   /** Search has more results to show, i.e. add link to search page. */
   hasMore: boolean;
   /** Original search query. */

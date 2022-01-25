@@ -14,7 +14,7 @@ import {
   EVENT_SEARCH_PRODUCT_CLICK,
   EVENT_SEARCH_RESULTS,
 } from "./search-domain.ts";
-import { createSearcher,  } from "./search-loop54.ts";
+import { createSearcher } from "./search-loop54.ts";
 import type RSearchFilters from "./r-search-filters.ts";
 
 const createCurrencyFormatter = (locale: string, currency: string) => {
@@ -210,6 +210,10 @@ export default class RSearchResults extends HTMLElement {
     return {};
   }
 
+  get showRelated(): boolean {
+    return this.hasAttribute("show-related");
+  }
+
   resetFacetFilters() {
     location.hash = "";
   }
@@ -315,6 +319,25 @@ export default class RSearchResults extends HTMLElement {
         "count",
         results.count.toString(),
       );
+    }
+    // show related results if configured and returned
+    if (this.showRelated && results.relatedResults.length) {
+      this.setResultVisible("related", true);
+      const productTemplate = this.querySelector<HTMLTemplateElement>(
+        "template[product]",
+      );
+      const relatedResults = this.querySelector("[results=related] ul")!;
+      relatedResults.innerHTML = "";
+      relatedResults.append(
+        ...results.relatedResults.map(
+          createProductItemFrom(
+            productTemplate!,
+            createCurrencyFormatter(this.locale, this.currency),
+          ),
+        ),
+      );
+    } else {
+      this.setResultVisible("related", false);
     }
     this.sendSearchEvent(query, results);
   }

@@ -32,6 +32,11 @@ type LoopSearchResponse = {
     items: LoopSearchResponseItem[];
     facets: LoopSearchResponseFacet[];
   };
+  relatedResults: {
+    count: number;
+    items: LoopSearchResponseItem[];
+    facets: LoopSearchResponseFacet[];
+  };
   relatedQueries: {
     count: number;
     items: { query: string }[];
@@ -280,6 +285,7 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
         products: [],
         facets: [],
         relatedQueries: [],
+        relatedResults: [],
         hasMore: false,
         query,
         count: 0,
@@ -324,6 +330,8 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
     const relatedQueries: string[] = response.relatedQueries.items.map((q) =>
       q.query
     );
+    const relatedResults: SearchResultProduct[] = response.relatedResults.items
+      .map(loopItemToProduct);
     const resultFacets: SearchResultFacet[] = response.results.facets.map(
       loopFacetToDomain,
     ).filter(Boolean);
@@ -332,6 +340,7 @@ export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
     return {
       products,
       relatedQueries,
+      relatedResults,
       facets: resultFacets,
       hasMore,
       query,

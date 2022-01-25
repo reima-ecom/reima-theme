@@ -3,6 +3,7 @@
   {{ with .take }}take="{{.}}"{{ end }}
   {{ with .filters }}filters="{{.}}"{{ end }}
   {{ with .title }}show-title="{{.}}"{{ end }}
+  {{ if .showRelated }}show-related{{ end }}
   {{ if .loadMore}}load-more{{ end }}
   {{ with site.Data.features.order }}facets="Category,{{ delimit . "," }}"{{ end }}
 >
@@ -14,6 +15,11 @@
   </div>
   <div results="more">
     <a href="" class="btn">Show more</a>
+  </div>
+  <div results="related">
+    <hr/>
+    <h3>Related results</h3>
+    <ul class="search-results__product-list"></ul>
   </div>
   <template product>
     <li>
