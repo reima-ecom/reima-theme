@@ -32,6 +32,7 @@ fields:
   - image-links-small
   - image-links
   - products
+  - testimonials
   config:
     min: 1
     max: 
