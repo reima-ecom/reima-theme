@@ -279,73 +279,82 @@ const facetNameFromLoop = (facetName: string): string =>
   facetName.replace("Attributes_", "");
 
 export const createSearcher = (baseUrl: string, facets?: string[]): Searcher =>
-  async (query, take, skip, instant, facetFilters) => {
-    if (!query) {
-      return {
-        products: [],
-        facets: [],
-        relatedQueries: [],
-        relatedResults: [],
-        hasMore: false,
-        query,
-        count: 0,
+  {
+    let latestQuery = "";
+    return async (query, take, skip, instant, facetFilters) => {
+        if(!query) {
+          return {
+            products: [],
+            facets: [],
+            relatedQueries: [],
+            relatedResults: [],
+            hasMore: false,
+            query,
+            count: 0,
+          };
+        }
+
+        const requestBody: LoopSearchRequest = {
+          query,
+          resultsOptions: { take, skip },
+        };
+
+        // set direct search flag, issue reima-ecom/reima-us#42
+        if(instant) {
+          requestBody.customData = {
+            directSearch: true,
+          };
+        }
+
+        if(facets) {
+          requestBody.resultsOptions ??= {};
+          requestBody.resultsOptions.facets = facets.map((f) => ({
+            attributeName: facetNameToLoop(f),
+          }));
+          if(facetFilters) {
+            requestBody.resultsOptions.facets = requestBody.resultsOptions.facets
+              .map((facet) => {
+                const filter = facetFilters[facetNameFromLoop(facet.attributeName)];
+                if(!filter)
+                  return facet;
+                return {
+                  ...facet,
+                  selected: filter,
+                };
+              });
+          }
+        }
+
+        latestQuery = query;
+
+        const response = await loopRequest(baseUrl, `/search`, requestBody);
+
+        if (query !== latestQuery) {
+          throw new Error(`Results for ${query} are no longer the most recent results`);
+        }
+
+        const products: SearchResultProduct[] = response.results.items.map(
+          loopItemToProduct
+        );
+        const relatedQueries: string[] = response.relatedQueries.items.map((q) => q.query
+        );
+        const relatedResults: SearchResultProduct[] = response.relatedResults.items
+          .map(loopItemToProduct);
+        const resultFacets: SearchResultFacet[] = response.results.facets.map(
+          loopFacetToDomain
+        ).filter(Boolean);
+        const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
+
+        return {
+          products,
+          relatedQueries,
+          relatedResults,
+          facets: resultFacets,
+          hasMore,
+          query,
+          count: response.results.count,
+        };
       };
-    }
-
-    const requestBody: LoopSearchRequest = {
-      query,
-      resultsOptions: { take, skip },
-    };
-
-    // set direct search flag, issue reima-ecom/reima-us#42
-    if (instant) {
-      requestBody.customData = {
-        directSearch: true,
-      };
-    }
-
-    if (facets) {
-      requestBody.resultsOptions ??= {};
-      requestBody.resultsOptions.facets = facets.map((f) => ({
-        attributeName: facetNameToLoop(f),
-      }));
-      if (facetFilters) {
-        requestBody.resultsOptions.facets = requestBody.resultsOptions.facets
-          .map((facet) => {
-            const filter = facetFilters[facetNameFromLoop(facet.attributeName)];
-            if (!filter) return facet;
-            return {
-              ...facet,
-              selected: filter,
-            };
-          });
-      }
-    }
-
-    const response = await loopRequest(baseUrl, "/search", requestBody);
-
-    const products: SearchResultProduct[] = response.results.items.map(
-      loopItemToProduct,
-    );
-    const relatedQueries: string[] = response.relatedQueries.items.map((q) =>
-      q.query
-    );
-    const relatedResults: SearchResultProduct[] = response.relatedResults.items
-      .map(loopItemToProduct);
-    const resultFacets: SearchResultFacet[] = response.results.facets.map(
-      loopFacetToDomain,
-    ).filter(Boolean);
-    const hasMore = response.results.count > (take ?? 0) + (skip ?? 0);
-
-    return {
-      products,
-      relatedQueries,
-      relatedResults,
-      facets: resultFacets,
-      hasMore,
-      query,
-      count: response.results.count,
-    };
   };
 
 export const createFilterer = (baseUrl: string): Filterer =>
