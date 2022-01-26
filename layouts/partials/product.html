@@ -4,6 +4,35 @@
 {{ with $product }}
 
 <div class="product">
+
+  <!-- find first available variant options -->
+  {{ if not .Params.variants }}
+  {{ errorf "%s has no variants" .File.ContentBaseName }}
+  {{ end }}
+  {{ $firstAvailableVariant := index (where .Params.variants "available" true | first 1) 0 }}
+  {{ $firstAvailableOptions := $firstAvailableVariant.options }}
+  
+  <div class="product__header">
+    <h1 class="g-h2" id="product-name">
+      {{.Title}}
+    </h1>
+    <div class="product-prices">
+      {{ with $firstAvailableVariant }}
+      {{partial "product-price" .}}
+      {{ else }}
+      {{partial "product-price" .Params}}
+      {{ end }}
+      {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
+      <div>
+        <a href="#reviews" class="product-reviews silent-link">
+          {{ range seq (math.Round .average) }}★{{ end }} <span class="rating">{{ div (math.Round (mul .average 10)) 10 }}
+            <span class="review-count">({{.count}})</span></span>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
   <div>
     {{ $imgs := .Resources.ByType "image" }}
     <r-carousel>
@@ -49,37 +78,32 @@
     </r-thumbnails>
     {{ end }}
   </div>
-
-  <!-- find first available variant options -->
-  {{ if not .Params.variants }}
-  {{ errorf "%s has no variants" .File.ContentBaseName }}
-  {{ end }}
-  {{ $firstAvailableVariant := index (where .Params.variants "available" true | first 1) 0 }}
-  {{ $firstAvailableOptions := $firstAvailableVariant.options }}
-
   <div>
 
     <form action="/cart" method="POST" data-variant="{{$firstAvailableVariant.id}}" id="product-form" data-product-images="r-carousel">
       <!-- TODO: DEPRECATED -->
       <input type="hidden" name="product-id"
         value="{{printf "gid://shopify/Product/%s" .Params.yotpoId | base64Encode}}">
-      <h1 class="g-h2" id="product-name">
-        {{.Title}}
-      </h1>
-      <div class="product-prices">
-        {{ with $firstAvailableVariant }}
-        {{partial "product-price" .}}
-        {{ else }}
-        {{partial "product-price" .Params}}
-        {{ end }}
-        {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
-        <div>
-          <a href="#reviews" class="product-reviews silent-link">
-            {{ range seq (math.Round .average) }}★{{ end }} <span class="rating">{{ div (math.Round (mul .average 10)) 10 }}
+
+      <div class="product__header--desktop">
+        <h1 class="g-h2" id="product-name">
+          {{.Title}}
+        </h1>
+        <div class="product-prices">
+          {{ with $firstAvailableVariant }}
+          {{partial "product-price" .}}
+          {{ else }}
+          {{partial "product-price" .Params}}
+          {{ end }}
+          {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
+          <div>
+            <a href="#reviews" class="product-reviews silent-link">
+              {{ range seq (math.Round .average) }}★{{ end }} <span class="rating">{{ div (math.Round (mul .average 10)) 10 }}
             <span class="review-count">({{.count}})</span></span>
-          </a>
+            </a>
+          </div>
+          {{ end }}
         </div>
-        {{ end }}
       </div>
 
       <hr>
