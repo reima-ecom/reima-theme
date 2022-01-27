@@ -94,11 +94,19 @@ const inputChange = (e: Event) => {
   document.getElementById(`selected-${name}`)!.innerText = value;
   if (variant) {
     // update prices
-    const priceElement = document.querySelector<HTMLElement>(".price--actual")!;
-    priceElement.innerText = renderPrice(variant.priceFormatted);
+    const priceElements = document.querySelectorAll<HTMLElement>(".price--actual")!;
+    priceElements.forEach((priceElement) => {
+      priceElement.innerText = renderPrice(variant.priceFormatted);
+    });
     if (variant.compareAtPrice > variant.price) {
-      priceElement.classList.add("price--sale");
-    } else priceElement.classList.remove("price--sale");
+      priceElements.forEach((priceElement) => {
+        priceElement.classList.add("price--sale");
+      });
+    } else {
+      priceElements.forEach((priceElement) => {
+        priceElement.classList.remove("price--sale");
+      });
+    }
     document.querySelector<HTMLElement>(".price--was")!.innerText =
       variant.compareAtPriceFormatted
         ? renderPrice(variant.compareAtPriceFormatted)
