@@ -54,6 +54,8 @@ body {
   text-rendering: optimizeSpeed;
   color: var(--color-text);
   -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body > header > div {
