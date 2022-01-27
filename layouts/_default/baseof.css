@@ -82,7 +82,7 @@ hr {
 }
 
 .price--sale {
-  color: var(--color-text-emphasis);
+  color: var(--color-text);
   font-weight: 700;
 }
 
