@@ -67,8 +67,8 @@ fields:
     template: image-links-small
     label: Additional Menu Entry
   config:
-    min:
-    max:
+    min: 
+    max: 
     labelField: name
 - name: footer
   type: field_group_list

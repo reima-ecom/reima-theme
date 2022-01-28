@@ -57,9 +57,9 @@ fields:
     - none
     source:
       type: simple
-      section:
-      file:
-      path:
+      section: 
+      file: 
+      path: 
   label: Hover effect
   description: Hover effect for Image card. Leave blank for the default "zoom" effect.
 - name: link

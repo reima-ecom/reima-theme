@@ -2,6 +2,18 @@
 label: SEO Properties
 hide_body: true
 fields:
+- name: title
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+    max: 60
+  label: Title
+  description: Title for SEO purposes. If left empty, the SEO title for the page will
+    be the default title set on the site level.
 - name: description
   type: textarea
   default: ''

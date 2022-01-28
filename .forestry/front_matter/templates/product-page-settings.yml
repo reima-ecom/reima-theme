@@ -231,9 +231,9 @@ fields:
       - modal
       source:
         type: simple
-        section:
-        file:
-        path:
+        section: 
+        file: 
+        path: 
     label: Link type
     description: Select `link` if you want a regular link to an existing page. The
       link opens up in a new tab.<br>Select `modal` if you want to specify content
