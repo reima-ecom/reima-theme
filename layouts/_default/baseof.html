@@ -82,7 +82,7 @@
   <meta property="og:title" content="{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
     {{.}}{{end}}{{else}}{{site.Title}}{{end}}">
   <meta property="og:description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
-  <meta property="og:image" content="/android-chrome-512x512.png">
+  <meta property="og:image" content="/og-image-1200x630.png">
   <!-- add hreflang for front page and only front page -->
   {{- block "canonical" . -}}
   <link rel="canonical" href="{{partial "link" .Permalink}}">
