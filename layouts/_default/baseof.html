@@ -10,8 +10,16 @@
   {{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
-    {{.}}{{end}}{{else}}{{site.Title}}{{end}}</title>
+  {{ $pageTitle := site.Title }}
+  {{ if .Params.seotitle }}
+  {{ $pageTitle = .Params.seotitle }}
+  {{ else if .Title }}
+  {{ $pageTitle = .Title }}
+  {{ else if eq .Params.type "products" }}
+  {{ $product := partial "helpers/get-product" . }}
+  {{ $pageTitle = printf "%s | %v" $product.Title site.Title }}
+  {{ end }}
+  <title>{{ $pageTitle }}</title>
   {{ partial "baseof/head-top.html" . }}
 
   <!-- create list of and for scripts -->
