@@ -70,9 +70,19 @@
   {{ partial "pixels/gtm" .}}
   {{ end }}
 
-  <link rel="shortcut icon" href="{{site.BaseURL}}favicon-32x32.png" type="image/png">
+  <link rel="icon" href="{{site.BaseURL}}favicon.ico" sizes="any">
+  <link rel="icon" href="{{site.BaseURL}}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{site.BaseURL}}apple-touch-icon.png">
+  <link rel="manifest" href="{{site.BaseURL}}manifest.webmanifest">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <meta name="description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:url" content="{{site.BaseURL}}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
+    {{.}}{{end}}{{else}}{{site.Title}}{{end}}">
+  <meta property="og:description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
+  <meta property="og:image" content="{{site.BaseURL}}og-image-1200x630.png">
   <!-- add hreflang for front page and only front page -->
   {{- block "canonical" . -}}
   <link rel="canonical" href="{{partial "link" .Permalink}}">
