@@ -32,8 +32,6 @@ fields:
   showOnly:
     field: ometria_enabled
     value: true
-  config:
-    required: true
 - type: boolean
   label: Google Analytics
   name: ga_enabled
