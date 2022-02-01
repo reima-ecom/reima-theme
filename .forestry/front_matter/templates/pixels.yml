@@ -25,6 +25,15 @@ fields:
     value: true
   config:
     required: true
+- type: text
+  name: ometria_pid_prefix
+  label: Ometria product id prefix
+  description: 'Prefix for product IDs sent to Ometria, e.g. "ca:" for the Canadian site.'
+  showOnly:
+    field: ometria_enabled
+    value: true
+  config:
+    required: true
 - type: boolean
   label: Google Analytics
   name: ga_enabled

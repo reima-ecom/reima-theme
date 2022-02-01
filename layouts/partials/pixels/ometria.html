@@ -28,7 +28,7 @@
  -->
 <script uses-cookies>
   ometria.init('product', {
-    pid: '{{(partial "helpers/get-product" $).Params.yotpoId}}'
+    pid: '{{.ometria_pid_prefix}}{{(partial "helpers/get-product" $).Params.yotpoId}}'
   }, '{{.ometria_store}}');
 
 </script>
@@ -43,7 +43,7 @@
     basket.setUrl(checkout.url);
     basket.setTotal(checkout.total, checkout.currency);
     checkout.items.forEach((item) => {
-      basket.addLineItem(item.productIdLegacy, item.quantity, item.price, item.variantIdLegacy);
+      basket.addLineItem('{{.ometria_pid_prefix}}' + item.productIdLegacy, item.quantity, item.price, item.variantIdLegacy);
     });
     ometria.setBasket(basket);
   });
