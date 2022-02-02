@@ -55,6 +55,16 @@ export default class RSearchLoop extends HTMLElement {
       "input",
       (e) => this.search((<HTMLInputElement> e.target).value),
     );
+    // add event listener for focusing input after opening search
+    const opener = document.getElementById("open-search");
+    if (opener) {
+      opener.addEventListener("change", () => {
+        input?.focus();
+      });
+    }
+    // on connect, always focus first thing anyway (since this element
+    // is loaded lazily when the search is opened)
+    input?.focus();
 
     // wait for the element to be defined first
     await window.customElements.whenDefined("r-search-results");
