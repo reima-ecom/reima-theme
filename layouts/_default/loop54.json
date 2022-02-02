@@ -13,6 +13,9 @@
   {{- with .Resources.ByType "image" -}}
   {{- $image = (index . 0).Resize "375x" -}}
   {{- end -}}
+  {{- $totalVariants := float (len .Params.variants) -}}
+  {{- $availableVariants := len (where .Params.variants "available" true) -}}
+  {{- $coverage := math.Round (mul (div $availableVariants $totalVariants) 100) -}}
     {
     "Id": "{{.Params.yotpoId}}",
     "Name": {{.Title | jsonify}},
@@ -34,6 +37,7 @@
     "CampaignPrice": {{ .Params.price }},
     "Campaign": {{ (and (.Params.compareAtPrice) (ne .Params.price .Params.compareAtPrice)) | jsonify }},
     "HasPriceRange": {{ .Params.hasPriceRange | jsonify }},
+    "Coverage": {{$coverage}},
     {{- $categories := slice -}}
     {{- $topCategories := slice -}}
     {{- range .Params.tags -}}
