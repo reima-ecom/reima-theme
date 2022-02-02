@@ -13,11 +13,11 @@
   {{ $pageTitle := site.Title }}
   {{ if .Params.seotitle }}
   {{ $pageTitle = .Params.seotitle }}
-  {{ else if in .RelPermalink "products" }}
-  {{ $product := partial "helpers/get-product" . }}
-  {{ $pageTitle = printf "%s | %v" $product.Title site.Title }}
   {{ else if .Title }}
   {{ $pageTitle = printf "%v | %v" .Title site.Title }}
+  {{ else if eq .Params.type "products" }}
+  {{ $product := partial "helpers/get-product" . }}
+  {{ $pageTitle = printf "%s | %v" $product.Title site.Title }}
   {{ end }}
   <title>{{ $pageTitle }}</title>
   {{ partial "baseof/head-top.html" . }}
