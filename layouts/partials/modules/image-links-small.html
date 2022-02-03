@@ -30,7 +30,7 @@
         fix image width to 120px
        -->
         {{ $sizes := "158px" }}
-        {{ partial "img" (dict "image" .image "widths" "158,316" "sizes" $sizes) }}
+        {{ partial "img" (dict "image" .image "widths" "158,316" "sizes" $sizes "alt" .image_alt) }}
       <span class="title">{{ .title }}</span>
       </a>
     </div>

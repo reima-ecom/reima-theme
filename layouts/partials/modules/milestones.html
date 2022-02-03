@@ -2,6 +2,7 @@
     <h3 class="h4">{{.heading}}</h3>
     <ol class="milestones__about-timeline">
         {{ range .milestones }}
+        {{ $image_alt := .image_alt}}
         <li>
             <div class="milestones__media">
                 <div class="milestones__media-left">
@@ -13,7 +14,7 @@
                             {{(.Fill "100x100").RelPermalink}} 100w,
                             {{(.Fill "200x200").RelPermalink}} 200w"
                             sizes="(min-width: 768px) 100px, 70px"
-                            data-src="{{(.Fill "100x100").RelPermalink}}" alt="" />
+                            data-src="{{(.Fill "100x100").RelPermalink}}" alt="{{$image_alt}}" />
                         {{ end }}
                     </div>
                 </div>
