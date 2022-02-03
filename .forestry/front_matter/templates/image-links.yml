@@ -32,6 +32,13 @@ fields:
       maxSize: 64
     label: Image for mobile
     description: Image for use on mobile. Recommended aspect ratio is 1:1.
+  - name: image_alt
+    type: text
+    config:
+      required: false
+    label: Image Alt Text
+    description: An alternative text field to images for SEO and accessibility purposes.
+      Should convey what the image is about.
   - name: link
     type: text
     config:
