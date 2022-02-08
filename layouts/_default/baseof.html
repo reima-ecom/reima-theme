@@ -131,7 +131,7 @@
               {{ partialCached "menu" (dict "menu" $menus.main "root" $) "main" }}
               {{ partialCached "menu" (dict "menu" $menus.highlight "root" $) "highlight" }}
               {{ range $menus.additional_content }}
-                {{ partial "modules/image-links-small" . }}
+                {{ partial "modules/image-links-mobile-menu" . }}
               {{ end }}
             </div>
           </div>
