@@ -64,7 +64,7 @@
 }
 
 .split-card > div header p {
-  font-size: var(--h6-font-size);
+  font: var(--h6-font);
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 0.375rem;
