@@ -76,6 +76,7 @@ export const collectionBulkQuery: BulkQuery = `
             node {
               id
               handle
+              title
               publishedOnCurrentPublication
               seo {
                 title
@@ -104,12 +105,16 @@ export type CollectionShopify = {
 export type CollectionProductShopify = {
   id: string;
   handle: string;
+  title: string;
   publishedOnCurrentPublication: boolean;
   __parentId: ID;
 };
 
-export type CollectionTypeShopify = CollectionShopify | CollectionProductShopify;
+export type CollectionTypeShopify =
+  | CollectionShopify
+  | CollectionProductShopify;
 
 export type Jsonl = string;
 
-export const toCollectionTypeShopify = (json: string) => JSON.parse(json) as CollectionTypeShopify;
+export const toCollectionTypeShopify = (json: string) =>
+  JSON.parse(json) as CollectionTypeShopify;
