@@ -12,21 +12,29 @@ export type Content<t, T, A = {}> = {
   content: T;
 } & A;
 
-export type CollectionContent = Content<"collection", {
-  layout: "collection";
-  handle: CollectionHandle;
-  title: string;
-  seotitle: string;
-  seodescription: string;
-  filters: boolean;
-  main: Array<ContentModule>;
-}>;
+export type CollectionContent = Content<
+  "collection",
+  {
+    layout: "collection";
+    handle: CollectionHandle;
+    title: string;
+    seotitle: string;
+    seodescription: string;
+    filters: boolean;
+    main: Array<ContentModule>;
+  }
+>;
 
-export type CollectionProductContent = Content<"product", {
-  type: "products";
-  noindex: true;
-  weight: number;
-}, { collection: CollectionHandle }>;
+export type CollectionProductContent = Content<
+  "product",
+  {
+    type: "products";
+    noindex: true;
+    weight: number;
+    title: string;
+  },
+  { collection: CollectionHandle }
+>;
 
 export type CollectionTypeContent =
   | CollectionContent
@@ -45,7 +53,7 @@ type ContentModuleProductList = ContentModuleBase<
 type ContentModule = ContentModuleProductList;
 
 export const toCollectionContent = (
-  collection: Collection,
+  collection: Collection
 ): CollectionContent => ({
   path: `${collection.handle}/_index.md`,
   type: "collection",
@@ -56,25 +64,27 @@ export const toCollectionContent = (
     seotitle: collection.seoTitle,
     seodescription: collection.seoDescription,
     filters: true,
-    main: [{
-      template: "products",
-      collection: collection.handle,
-    }],
+    main: [
+      {
+        template: "products",
+        collection: collection.handle,
+      },
+    ],
   },
 });
 
 export const toCollectionProductContent = (
   collectionProduct: CollectionProduct,
-  counter: number,
+  counter: number
 ): CollectionProductContent => ({
-  path:
-    `${collectionProduct.collection}/products/${collectionProduct.handle}.md`,
+  path: `${collectionProduct.collection}/products/${collectionProduct.handle}.md`,
   type: "product",
   collection: collectionProduct.collection,
   content: {
     noindex: true,
     type: "products",
     weight: counter,
+    title: collectionProduct.title,
   },
 });
 
@@ -82,24 +92,21 @@ export const toCollectionProductContent = (
  * This interface is needed to explicitly set the right overload in map calls etc.
  */
 export interface ToContentWithType<T> {
-  (
-    obj: T,
-    counter: number | undefined,
-  ): CollectionTypeContent;
+  (obj: T, counter: number | undefined): CollectionTypeContent;
 }
 
 export function toContent(
   obj: CollectionType,
-  counter: number | undefined,
+  counter: number | undefined
 ): CollectionTypeContent;
 export function toContent(
   obj: FileContent,
-  counter: number | undefined,
+  counter: number | undefined
 ): CollectionTypeContent;
 
 export function toContent(
   obj: CollectionType | FileContent,
-  counter: number | undefined = 0,
+  counter: number | undefined = 0
 ): CollectionTypeContent {
   if ("type" in obj) {
     switch (obj.type) {
