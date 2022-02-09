@@ -207,7 +207,7 @@ const getUserId = (): string => {
     // get user id from cookie
     const userId = document.cookie
       .split("; ")
-      ?.find((row) => row.startsWith("Loop54 UID="))
+      ?.find((row) => row.startsWith("Loop54User="))
       ?.split("=")[1];
     if (userId) {
       return userId;
@@ -216,7 +216,7 @@ const getUserId = (): string => {
     const newUserId = createUserId();
     // set cookie, 6 month max age
     document.cookie =
-      `Loop54 UID=${newUserId}; Path=/; Max-Age=15778800; SameSite=Lax;`;
+      `Loop54User=${newUserId}; Path=/; Max-Age=15778800; SameSite=Lax; Domain=${location.host}`;
     return newUserId;
   }
   // if no consent, just get a random id every time
