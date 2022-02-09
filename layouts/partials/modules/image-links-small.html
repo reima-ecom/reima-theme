@@ -9,6 +9,7 @@
 {{ $class = printf "%s module-image-links-small--desktop-%v" $class . }}
 {{ end }}
 
+{{- $menu := .menu}}
 <div class="{{$class}}">
   {{ if .heading }}
   <h2>
@@ -26,12 +27,16 @@
     {{ range .images }}
     <div>
       <a href="{{partial "helpers/get-link-module" (slice .link $)}}" class="silent-link text-sm">
-      <!--
-        fix image width to 120px
-       -->
+         <!-- Module images in mobile menu needs different sizes -->
+        {{ if $menu }}
+        {{ $sizes := "(min-width: 768px) 873px, (min-width: 480px) 512px, 316px" }}
+        {{ partial "img" (dict "image" .image "widths" "158,316,512,873" "sizes" $sizes) }}
+          <!-- Module images in body  -->
+        {{ else }}
         {{ $sizes := "158px" }}
         {{ partial "img" (dict "image" .image "widths" "158,316" "sizes" $sizes) }}
-      <span class="title">{{ .title }}</span>
+        {{ end }}
+       <span class="title">{{ .title }}</span>
       </a>
     </div>
     {{ end }}
