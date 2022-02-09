@@ -74,7 +74,7 @@
 
     <li>
       <a class="image-grid__container" href="#{{$modal_id}}" onclick="document.body.style.overflow = 'hidden'">
-        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
+        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes "alt" .image_alt) }}
       </a>
       <aside class="image-grid__modal" id="{{$modal_id}}">
         <a href="#/" tabindex="-1" onclick="document.body.style.overflow = ''"></a>
@@ -86,7 +86,7 @@
             </svg>
           </a>
           {{ $sizes_popup := "(min-width: 580px) 50vw, 100vw" }}
-          {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes_popup) }}
+          {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes_popup "alt" .image_alt) }}
           <div>
             {{- with .content }}
             {{. | $.pageobj.RenderString}}
@@ -101,7 +101,7 @@
       <a href="{{ .link }}">
       {{ end }}
       <div class="image-grid__container">
-        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes) }}
+        {{- partial "img" (dict "image" .image "widths" "300,600" "sizes" $sizes "alt" .image_alt) }}
       </div>
       {{- with .content }}
       {{. | $.pageobj.RenderString}}
