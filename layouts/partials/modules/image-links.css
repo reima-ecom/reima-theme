@@ -2,39 +2,22 @@
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--block-width);
-  text-align: center;
-}
-
-.image-links > div {
   color: var(--color-text);
 }
 
-.image-links p {
-  margin: 0.5rem auto;
+.image-links h2 {
+  text-align: center;
+  margin-bottom: calc(var(--content-padding) * 1.5);
 }
 
-.image-links--text-left {
-  text-align: left;
-}
-
-.image-links--text-right {
-  text-align: right;
-}
-
-.image-links--color-invert > div {
-  --color-text: var(--color-text-inverted);
-  --color-bg: var(--color-bg-inverted);
-}
-
-.image-links--small h3 {
+.image-links h3 {
   font: var(--h4-font);
   letter-spacing: var(--h4-letter-spacing);
   margin-bottom: 0.5rem;
 }
 
-.image-links--small .btn {
-  font-size: .875rem;
-  padding: .5rem 1rem;
+.image-links p {
+  margin: 0.5rem auto;
 }
 
 .image-links > div {
@@ -45,6 +28,15 @@
 /* this is the grid cell */
 .image-links > div > div {
   position: relative;
+  overflow: hidden;
+}
+
+.image-links > div > div img {
+  transition: transform .3s ease-out;
+}
+
+.image-links > div > div:hover img {
+  transform: scale(1.08);
 }
 
 .image-links__overlay {
@@ -54,9 +46,7 @@
   right: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  align-items: flex-end;
   color: inherit;
   text-decoration: none;
 }
@@ -67,34 +57,17 @@
   text-decoration: none;
 }
 
+.image-links__overlay > div {
+  width: 100%;
+  background: var(--color-bg);
+}
+
 .image-links__overlay > div > :first-child {
-  margin-top: 0;
+  margin-top: 1rem;
 }
 
 .image-links__overlay > div > :last-child {
   margin-bottom: 0;
-}
-
-.image-links--vertical-top .image-links__overlay {
-  align-items: flex-start;
-}
-
-.image-links--vertical-bottom .image-links__overlay {
-  align-items: flex-end;
-}
-
-.image-links--horizontal-left .image-links__overlay {
-  justify-content: flex-start;
-}
-
-.image-links--horizontal-right .image-links__overlay {
-  justify-content: flex-end;
-}
-
-.image-links--horizontal-left .image-links__overlay > div,
-.image-links--horizontal-right .image-links__overlay > div {
-  box-sizing: border-box;
-  max-width: 50%;
 }
 
 @media (min-width: 768px) {

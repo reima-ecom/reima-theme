@@ -12,19 +12,18 @@ modules:
     text: Meet our new colorful sneakers
     image: "/hot-sneakers.jpg"
     linktext: Buy now
-    link: "-static/status.html"
+    link: "/"
   - heading: SS20
     text: Meet our fresh new patterns
     image: "/whats-hot-01.jpg"
     linktext: Buy now
-    link: "-static/status.html"
+    link: "/"
 - template: image-links
   colorinvert: true
   cards:
   - heading: Infant outdoor clothing
     image: "/infants.jpg"
     imagemobile: "/infants-square.jpg"
-    link: "#"
   - heading: Toddler outdoor clothing
     image: "/toddlers.jpg"
     imagemobile: "/toddlers-square.jpg"

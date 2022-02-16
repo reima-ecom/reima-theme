@@ -136,6 +136,39 @@ a:hover,
   background-color: transparent;
 }
 
+.text-cta {
+	color: var(--color-text);
+	font-size: 1rem;
+	letter-spacing: .05em;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all .2s;
+  display: flex;
+  align-items: center;
+}
+
+.text-cta svg {
+  width: 24px;
+  height: 100%;
+  margin-left: 5px;
+	transition: all .2s;
+  transform: translateX(0);
+}
+
+.text-cta:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.text-cta:hover svg {
+  transform: translateX(5px);
+}
+
+.text-cta:hover svg path {
+  stroke: var(--color-primary);
+}
+
 /* #endregion */
 
 /* #region buttons */

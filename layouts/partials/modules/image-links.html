@@ -1,24 +1,9 @@
 {{ $class := "image-links" }}
-{{ with .horizontal }}
-{{ $class = printf "%s image-links--horizontal-%s" $class . }}
-{{ end }}
-{{ with .vertical }}
-{{ $class = printf "%s image-links--vertical-%s" $class . }}
-{{ end }}
-{{ with .align }}
-{{ $class = printf "%s image-links--text-%s" $class . }}
-{{ end }}
 {{ with .columnstablet }}
 {{ $class = printf "%s image-links--tablet-%v" $class . }}
 {{ end }}
 {{ with .columnsdesktop }}
 {{ $class = printf "%s image-links--desktop-%v" $class . }}
-{{ end }}
-{{ if .colorinvert }}
-{{ $class = printf "%s image-links--color-invert" $class }}
-{{ end }}
-{{ if .small }}
-{{ $class = printf "%s image-links--small" $class }}
 {{ end }}
 
 <div class="{{$class}}">
@@ -77,7 +62,14 @@
             {{ with .heading }}<h3>{{.}}</h3>{{ end }}
             {{ with .text }}<p>{{.}}</p>{{ end }}
             {{ if .linktext }}
-            <a class="btn" href="{{$linkresolved}}">{{.linktext}}</a>
+            <a class="text-cta stretched-link" href="{{$linkresolved}}">
+              {{.linktext}}
+              <svg viewBox="0 0 24 24" fill="none">
+								<path d="M15 18L21 12L15 6" stroke="#38383B" stroke-linecap="square"></path>
+								<path d="M3 12H20" stroke="#38383B" stroke-linecap="square"></path>
+								<path d="M21 12H20" stroke="#38383B" stroke-linecap="round"></path>
+							</svg>
+            </a>
             {{ end }}
           </div>
           {{ if not $stretched }}
