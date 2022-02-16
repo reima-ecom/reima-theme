@@ -115,9 +115,7 @@ footer input:checked ~ ul {
   .footer-logos {
     justify-content: center;
   }
-}
 
-@media (min-width: 1024px) {
   footer > ul {
     display: flex;
     justify-content: center;
@@ -143,6 +141,11 @@ footer input:checked ~ ul {
 
   footer label a {
     pointer-events: initial;
+  }
+
+  footer label::after {
+    display: none;
+    content: unset;
   }
 
   footer .icon {
