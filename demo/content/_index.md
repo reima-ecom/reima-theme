@@ -27,8 +27,6 @@ modules:
   center: true
   title: Shop tops
   collection: tops
-- template: article-grid
-  category: Tips
 - template: image-links
   carousel_dots: true
   carousel_autoplay_speed: "7000"
@@ -40,5 +38,7 @@ modules:
   - heading: Spring jackets
     image: "/light-jackets-3up_hu87437ff5c9a939781c2dc9283a2469cc_741994_1080x0_resize_q75_box.jpg"
   heading: Shop for the next season
+- template: article-grid
+  category: Tips
 
 ---
