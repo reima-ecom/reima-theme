@@ -8,8 +8,8 @@ fields:
     required: false
     max: 60
   label: Seo Title
-  description: Title for SEO purposes. If left empty, the SEO title for
-    the page will be the default title.
+  description: Title for SEO purposes. If left empty, the SEO title for the page will
+    be the default title.
 - name: description
   type: textarea
   default: ''
