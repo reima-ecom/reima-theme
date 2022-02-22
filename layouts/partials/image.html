@@ -29,7 +29,6 @@
 {{- $alt = .alt}}
 {{- end}}
 
- <script>console.log("$alt: ",{{$alt}})</script>
 {{- $width := index (split $.widths ",") 0 -}}
 {{- $default := .image.Resize (printf "%sx" $width) -}}
 {{- if not .sizes }}
