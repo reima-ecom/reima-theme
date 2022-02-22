@@ -1,0 +1,11 @@
+<!-- remove suffix & humanize image filename -->
+{{- $image_name := . }}
+{{- if strings.HasSuffix . "jpg" }}
+{{- $image_name = strings.TrimSuffix ".jpg" . }} 
+{{- else if strings.HasSuffix . "svg" }}
+{{- $image_name = strings.TrimSuffix ".svg" . }} 
+{{- else if strings.HasSuffix . "png" }}
+{{- $image_name = strings.TrimSuffix ".png" . }} 
+{{- end }}
+{{- $image_name = humanize $image_name}}
+{{- return $image_name }}
