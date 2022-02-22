@@ -15,6 +15,7 @@
 
   - [alt]
     Alternative text - HIGHLY RECOMMENDED
+    defaults to humanized image filename if no specified alt text
 
   - [class]
     Optionally add this class to the element
@@ -22,17 +23,25 @@
   - [dataset]
     Optional map of items to add to dataset
  -->
+
+{{- $alt := partial "helpers/humanize-image-filename.html" .image.Name}}
+{{- if .alt}}
+{{- $alt = .alt}}
+{{- end}}
+
+ <script>console.log("$alt: ",{{$alt}})</script>
 {{- $width := index (split $.widths ",") 0 -}}
 {{- $default := .image.Resize (printf "%sx" $width) -}}
 {{- if not .sizes }}
 {{- warnf "`sizes` attribute missing for image %s" .image.RelPermalink }}
 {{- end }}
+
 <img
   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{$default.Width}} {{$default.Height}}'%3E%3C/svg%3E"
   loading="lazy" data-srcset="{{partial "srcset" $}}" data-src="{{$default.RelPermalink}}" height="{{.image.Height}}"
-  width="{{.image.Width}}" class="lazyload {{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{.alt}}"
+  width="{{.image.Width}}" class="lazyload {{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{$alt}}"
   {{range $key, $val := .dataset}}data-{{$key}}="{{$val}}" {{end}} />
 <noscript>
   <img loading="lazy" srcset="{{partial "srcset" $}}" src="{{$default.RelPermalink}}" height="{{.image.Height}}"
-    width="{{.image.Width}}" class="{{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{.alt}}" />
+    width="{{.image.Width}}" class="{{.class}}" {{with .sizes}}sizes="{{.}}" {{end}} alt="{{$alt}}" />
 </noscript>
