@@ -25,7 +25,9 @@
  -->
 
 {{- $alt := partial "helpers/humanize-image-filename.html" .image.Name}}
-{{- if .alt}}
+{{- if .image.Title}}
+{{- $alt = partial "helpers/humanize-image-filename.html" .image.Title}}
+{{- else if .alt}}
 {{- $alt = .alt}}
 {{- end}}
 
