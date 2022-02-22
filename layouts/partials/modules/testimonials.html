@@ -6,7 +6,7 @@
     {{ range .testimonials }}
     <div>
       <blockquote{{with .link}} cite="{{.}}" {{end}}>
-        <img src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt='"'>
+        <img src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt="icon quote">
         <div>{{.text | $.pageobj.RenderString}}</div>
         <footer>
           {{.author}}
