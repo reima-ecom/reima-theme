@@ -43,6 +43,9 @@ fields:
   label: Image Alt Text
   description: An alternative text field to images for SEO and accessibility purposes.
     Should convey what the image is about.
+  showOnly:
+    field: type
+    value: Image
 - name: youtubeid
   type: text
   config:
@@ -84,6 +87,54 @@ fields:
     required: false
   label: Vimeo ID
   description: E.g. <code>448635405</code>, which can be found in the URL (https://vimeo.com/448635405)
+  showOnly:
+    field: type
+    value: Vimeo Video
+- name: vimeo_aspect_ratio
+  type: select
+  default: ''
+  config:
+    required: false
+    options:
+    - '3:2'
+    - '4:3'
+    - '5:4'
+    - '16:9'
+    - '1:1'
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Vimeo aspect ratio
+  showOnly:
+    field: type
+    value: Vimeo Video
+- name: vimeoid_mobile
+  type: text
+  config:
+    required: false
+  label: Vimeo ID mobile
+  description: This video overrides Vimeo ID on mobile
+  showOnly:
+    field: type
+    value: Vimeo Video
+- name: vimeo_aspect_ratio_mobile
+  type: select
+  default: ''
+  config:
+    required: false
+    options:
+    - '3:2'
+    - '16:10'
+    - '9:16'
+    - '1:1'
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Vimeo aspect ratio mobile
   showOnly:
     field: type
     value: Vimeo Video
