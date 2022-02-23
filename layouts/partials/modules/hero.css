@@ -93,8 +93,8 @@
   width:100%;
 }
 
+
 .hero__video-container::after {
-  padding-top: 56.25%;
   display: block;
   content: '';
 }
@@ -105,6 +105,16 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+@media (max-width: 767px) {
+  .hero__video-container.with-mobile {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .hero__video-container.mobile {
+    display: none;
+  }
 }
 
 .hero--overlay-mobile.hero--overlay-bg .hero__text {

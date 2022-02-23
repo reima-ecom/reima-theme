@@ -30,9 +30,10 @@
 {{ $class = printf "%s hero--yellow-emphasis" $class }}
 {{ end }}
 <div class="{{$class}}">
+  <!-- default padding-top for videos -->
+  {{- $padding_top := "56.25%" }}
   {{- if eq .type "Youtube Video" }}
-
-  <div class="hero__video-container">
+  <div class="hero__video-container" style="padding-top: {{$padding_top}};">
     {{- $src := printf "https://www.youtube.com/embed/%s" .youtubeid }}
     {{- $qry := slice }}
     {{- if .youtubeautoplay }}{{ $qry = $qry | append "autoplay=1" }}{{end}}
@@ -44,11 +45,27 @@
   </div>
 
   {{- else if eq .type "Vimeo Video" }}
+  {{- $vimeobg := .vimeobg}}
+  {{- $padding_top_mobile := $padding_top}}
+  <!-- if Vimeo mobile aspect ratio is defined -->
+  {{- with .vimeo_aspect_ratio_mobile }}
+  {{- $padding_top_mobile = partial "helpers/get-video-padding" .}}
+  {{- end }}
+  <!-- if Vimeo aspect ratio is defined -->
+  {{- with .vimeo_aspect_ratio }}
+  {{- $padding_top = partial "helpers/get-video-padding" .}}
+  {{- end }}
 
-  <div class="hero__video-container">
-    <iframe src="https://player.vimeo.com/video/{{.vimeoid}}{{if .vimeobg}}?background=1{{end}}" width="640"
-      height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <!-- Vimeo iframe desktop, default.  -->
+  <div class="hero__video-container vimeo {{with .vimeoid_mobile}}with-mobile{{end}}" style="padding-top: {{$padding_top}};">
+    <iframe src="https://player.vimeo.com/video/{{.vimeoid}}{{if .vimeobg}}?background=1{{end}}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
   </div>
+  <!-- Vimeo iframe mobile, renders only in devices under 768px width -->
+  {{- with .vimeoid_mobile}}
+  <div class="hero__video-container vimeo mobile" style="padding-top: {{$padding_top_mobile}};">
+    <iframe src="https://player.vimeo.com/video/{{.}}{{if $vimeobg}}?background=1{{end}}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+  {{- end}}
 
   {{- else }}
 
