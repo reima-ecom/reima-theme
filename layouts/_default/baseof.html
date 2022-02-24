@@ -84,10 +84,22 @@
   <!-- Open Graph Meta Tags -->
   <meta property="og:url" content="{{site.BaseURL}}">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{if .Params.seotitle}}{{.Params.seotitle}}{{else if .Title}}{{.Title}}{{with site.Title}} |
-    {{.}}{{end}}{{else}}{{site.Title}}{{end}}">
+  <meta property="og:title" content="{{$pageTitle}}">
   <meta property="og:description" content="{{with .Description}}{{. | truncate 300}}{{else}}{{T "SEO Description"}}{{end}}">
-  <meta property="og:image" content="{{site.BaseURL}}og-image-1200x630.png">
+  <!-- Open Graph image renders 1st image from .Resources but defaults to logo -->
+  {{- with (index (.Resources.ByType "image") 0)}}
+  {{- $image := . }}
+  {{- $image = $image.Fill "1200x630 q50" }}
+  <meta property="og:image" content="{{ $image.Permalink }}"/>
+  <meta property="og:image:secure_url" content="{{ $image.Permalink }}"/>
+  <meta property="og:image:width" content="{{ $image.Width }}"/>
+  <meta property="og:image:height" content="{{ $image.Height }}"/>
+  <meta name="twitter:image:src" content="{{ $image.Permalink }}"/> 
+  {{- else -}}
+  <meta property="og:image" content="{{ "og-image-1200x630.png" | relURL }}"/>
+  <meta property="og:image:secure_url" content="{{ "og-image-1200x630.png" | absURL }}"/>
+  <meta name="twitter:image:src" content="{{ "og-image-1200x630.png" | absURL }}"/>
+  {{- end }}
   <!-- add hreflang for front page and only front page -->
   {{- block "canonical" . -}}
   <link rel="canonical" href="{{partial "link" .Permalink}}">
