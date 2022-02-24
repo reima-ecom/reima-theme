@@ -1,36 +1,40 @@
 <section id="milestones" class="milestones content-container-mobile">
     <h3 class="h4">{{.heading}}</h3>
     <ol class="milestones__about-timeline">
-        {{ range .milestones }}
-        {{ $image_alt := .image_alt}}
+        {{- range .milestones }}
+        <!--  Create alt text, defaults to image filename if no specified alt text -->
+        {{- $alt := partial "helpers/humanize-image-filename.html" .image}}
+        {{- if .image_alt}}
+        {{- $alt = .image_alt}}
+        {{- end}}
         <li>
             <div class="milestones__media">
                 <div class="milestones__media-left">
                     <div class="milestones__about-timeline-img">
-                        {{ with partial "helpers/get-image" .image }}
+                        {{- with partial "helpers/get-image" .image }}
                             <img class="lazyload" loading="lazy"
                             data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
                             {{(.Fill "140x140").RelPermalink}} 140w,
                             {{(.Fill "100x100").RelPermalink}} 100w,
                             {{(.Fill "200x200").RelPermalink}} 200w"
                             sizes="(min-width: 768px) 100px, 70px"
-                            data-src="{{(.Fill "100x100").RelPermalink}}" alt="{{$image_alt}}" />
+                            data-src="{{(.Fill "100x100").RelPermalink}}" alt="{{$alt}}" />
                         {{ end }}
                     </div>
                 </div>
                 <div class="milestones__media-body milestones__media-middle">
                     <div class="milestones__about-timeline-year">{{.year}}</div>
-                    {{ with .heading }}
+                    {{- with .heading }}
                     <h5 class="milestones__about-timeline-heading">{{.}}</h5>
-                    {{ end }}
-                    {{ with .text }}
+                    {{- end }}
+                    {{- with .text }}
                     <p class="milestones__about-timeline-text">{{.}}</p>
-                    {{ end }}
-                    {{ if .link }}
+                    {{- end }}
+                    {{- if .link }}
                     <a href="{{partial "helpers/get-link-module" (slice .link $)}}" {{if .externalLink}}target="_blank" {{end}}
                         class="{{if .externalLink}}milestones__external-link{{end}} {{if .stretchedLink}}stretched-link{{end}}">
-                        {{.linktext}}
-                        {{ if .externalLink }}
+                        {{- .linktext }}
+                        {{- if .externalLink }}
                         <span class="milestones__external-link-icon">
                             <svg viewBox="0 0 32 32">
                                 <path
@@ -38,12 +42,12 @@
                                 </path>
                             </svg>
                         </span>
-                        {{ end }}
+                        {{- end }}
                     </a>
-                    {{ end }}
+                    {{- end }}
                 </div>
             </div>
         </li>
-        {{ end }}
+        {{- end }}
     </ol>
 </section>

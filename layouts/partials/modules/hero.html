@@ -59,8 +59,12 @@
   {{- with .imagemobile }}
   {{- $mobile = partial "helpers/get-image" . }}
   {{- end }}
+  <!--  Create alt text, defaults to image filename if no specified alt text -->
+  {{- $alt := partial "helpers/humanize-image-filename.html" .image}}
+  {{- if .image_alt}}
+  {{- $alt = .image_alt}}
+  {{- end}}
   <!-- get main image -->
-  {{- $image_alt := .image_alt }}
   {{- with .image }}
   {{- with partial "helpers/get-image" . }}
   {{- $params := (dict "image" . "widths" "2160,1080,768") }}
@@ -84,11 +88,11 @@
     {{- end }}
     <img class="lazyload" {{if $lazyload}} loading="lazy"
       srcset="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20{{$default.Width}}%20{{$default.Height}}'></svg>"
-      {{end}} src="{{$default.RelPermalink}}" width="{{.Width}}" height="{{.Height}}" alt="{{$image_alt}}" />
+      {{end}} src="{{$default.RelPermalink}}" width="{{.Width}}" height="{{.Height}}" alt="{{$alt}}" />
   </picture>
   <noscript>
     <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}"
-      height="{{.Height}}" width="{{.Width}}" alt="{{$image_alt}}" />
+      height="{{.Height}}" width="{{.Width}}" alt="{{$alt}}"/>
   </noscript>
   {{- end }}
   {{- else }}

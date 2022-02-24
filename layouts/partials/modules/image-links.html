@@ -40,8 +40,12 @@
       {{- with .imagemobile }}
       {{- $mobile = partial "helpers/get-image" . }}
       {{- end }}
+      <!--  Create alt text, defaults to image filename if no specified alt text -->
+      {{- $alt := partial "helpers/humanize-image-filename.html" .image}}
+      {{- if .image_alt}}
+      {{- $alt = .image_alt}}
+      {{- end}}
       <!-- get main image -->
-      {{- $image_alt := .image_alt }}
       {{- with .image }}
       {{- with partial "helpers/get-image" . }}
       {{- $params := (dict "image" . "widths" "375,768,1080") }}
@@ -55,12 +59,12 @@
         {{- end }}
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
-          class="lazyload" loading="lazy" alt="" data-srcset="{{partial "srcset" $params}}"
-          data-src="{{$default.RelPermalink}}" sizes="(min-width: 768px) {{$sizes}}, 100vw" alt="{{$image_alt}}" />
+          class="lazyload" loading="lazy" data-srcset="{{partial "srcset" $params}}"
+          data-src="{{$default.RelPermalink}}" sizes="(min-width: 768px) {{$sizes}}, 100vw" alt="{{$alt}}" />
       </picture>
       <noscript>
         <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
-          width="{{.Width}}" alt="{{$image_alt}}" />
+          width="{{.Width}}" alt="{{$alt}}" />
       </noscript>
       {{ end }}
       {{- else }}

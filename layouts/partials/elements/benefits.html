@@ -1,33 +1,35 @@
-{{ if .benefitsEnabled }}
-
-{{ with .benefits }}
+{{- if .benefitsEnabled }}
+{{- with .benefits }}
 <section class="benefits">
   <div class="container">
-    {{ range .links }}
+    {{- range .links }}
     <a href="{{partial "helpers/get-link" (dict "url" .url "context" "benefit bar links")}}" class="benefit">
       <div class="icon">
-        {{ if .icon }}
-        {{ $img := partial "helpers/get-image" .icon }}
+        {{- if .icon }}
+        <!-- Create alt text from image filename -->
+        {{- $alt := partial "helpers/humanize-image-filename.html" .icon}}
         <!-- check if this is png or jpeg and resize if it is -->
-        {{ if or (eq $img.MediaType.SubType "png") (eq $img.MediaType.SubType "jpeg")}}
-        {{ $onex := $img.Resize (printf "%dx" .width) }}
-        {{ $twox := $img.Resize (printf "%dx" (mul .width 2)) }}
-        <img srcset="{{$onex.RelPermalink}} 1x, {{$twox.RelPermalink}} 2x" src="{{$onex.RelPermalink}}" alt=""
+        {{- $img := partial "helpers/get-image" .icon }}
+        <!-- check if this is png or jpeg and resize if it is -->
+        {{- if or (eq $img.MediaType.SubType "png") (eq $img.MediaType.SubType "jpeg")}}
+        {{- $onex := $img.Resize (printf "%dx" .width) }}
+        {{- $twox := $img.Resize (printf "%dx" (mul .width 2)) }}
+        <img srcset="{{$onex.RelPermalink}} 1x, {{$twox.RelPermalink}} 2x" src="{{$onex.RelPermalink}}" alt="{{$alt}}"
              width="{{$onex.Width}}" height="{{$onex.Height}}">
         <!-- if some other type (like svg), just output directly -->
-        {{ else }}
-        <img src="{{$img.RelPermalink}}" alt="" width="{{.width}}"{{with .height}} height="{{.}}"{{end}}>
-        {{ end }}
-        {{ end }}
+        {{- else }}
+        <img src="{{$img.RelPermalink}}" alt="{{$alt}}" width="{{.width}}"{{with .height}} height="{{.}}"{{end}}>
+        {{- end }}
+        {{- end }}
       </div>
       <h3 class="heading">{{.heading}}</h3>
       <span class="cta">{{.text}}</span>
     </a>
-    {{ end }}
+    {{- end }}
   </div>
 </section>
-{{ else }}
-{{ warnf "Benefits not found for %s" site.Language }}
-{{ end }}
+{{- else }}
+{{- warnf "Benefits not found for %s" site.Language }}
+{{- end }}
 
-{{ end }}
+{{- end }}

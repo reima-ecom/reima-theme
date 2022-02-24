@@ -14,10 +14,11 @@
     Sizes attribute for the img
 
  -->
-{{$alt := .alt}}
+{{- $alt := .alt}}
+
 {{- with trim .image "/" }}
 {{- with partial "helpers/get-image" . }}
-{{- partial "image" (dict "image" . "widths" $.widths "sizes" $.sizes "alt" $alt ) }}
+{{- partial "image" (dict "image" . "widths" $.widths "sizes" $.sizes "alt" $alt) }}
 {{- else }}
 {{- warnf "Could not find image %s" . }}
 {{- end }}

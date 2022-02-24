@@ -18,9 +18,9 @@
     </h1>
     <div class="product-prices">
       {{ with $firstAvailableVariant }}
-      {{partial "product-price" .}}
+      {{ partial "product-price" . }}
       {{ else }}
-      {{partial "product-price" .Params}}
+      {{ partial "product-price" .Params }}
       {{ end }}
       {{ with partial "helpers/get-reviews-bottomline" $product.Params.yotpoId }}
       <div>
@@ -38,14 +38,15 @@
     <r-carousel>
       <div>
         <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
-        {{ $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
-        {{ with index $imgs 0 }}
+        {{- $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
+        {{- with index $imgs 0 }}
+        {{- $alt := partial "helpers/humanize-image-filename.html" .Title}}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
-          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="" />
-        {{ end }}
-        {{ range $i, $img := after 1 $imgs }}
-        {{partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "path" .Name))}}
-        {{ end }}
+          height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="{{$alt}}" />
+        {{- end }}
+        {{- range $i, $img := after 1 $imgs }}
+        {{- partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "path" .Name))}}
+        {{- end }}
       </div>
       {{ if gt (len $imgs) 1 }}
       <button prev></button>
