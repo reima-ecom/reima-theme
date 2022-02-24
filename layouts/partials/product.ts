@@ -60,8 +60,8 @@ const getVariant = (options: Options) =>
     return Object.keys(v.options).every((k) => options[k] === v.options[k]);
   });
 
-const inputChange = (e: Event) => {
-  const previousVariant = getVariant(selectedOptions);
+  const inputChange = (e: Event) => {
+    const previousVariant = getVariant(selectedOptions);
   const { name, value } = e.currentTarget as HTMLInputElement;
   selectedOptions[name] = value;
   // check if available
@@ -83,13 +83,13 @@ const inputChange = (e: Event) => {
       {},
       selectedOptions,
       { [radio.name]: radio.value },
-    );
-    const thisVariant = getVariant(thisSelection);
+      );
+      const thisVariant = getVariant(thisSelection);
     const thisLabel = document.querySelector(`label[for="${radio.id}"]`)!;
     if (thisVariant && thisVariant.available) {
       thisLabel.classList.remove("unavailable");
     } else thisLabel.classList.add("unavailable");
-  });
+  }); 
   // set selected span text
   document.getElementById(`selected-${name}`)!.innerText = value;
   if (variant) {
@@ -107,10 +107,11 @@ const inputChange = (e: Event) => {
         priceElement.classList.remove("price--sale");
       });
     }
-    document.querySelector<HTMLElement>(".price--was")!.innerText =
-      variant.compareAtPriceFormatted
-        ? renderPrice(variant.compareAtPriceFormatted)
-        : "";
+    const priceWasElements = document.querySelectorAll<HTMLElement>(".price--was")!;
+    priceWasElements.forEach((priceWasElement) => {
+      const priceWas = variant.compareAtPriceFormatted ? renderPrice(variant.compareAtPriceFormatted) : "";
+      return priceWasElement.innerText = priceWas;
+    });
     // change product image if needed
     if (previousVariant && previousVariant.imagePath !== variant.imagePath) {
       const carouselSelector = form.dataset.productImages;
