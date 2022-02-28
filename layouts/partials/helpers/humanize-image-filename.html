@@ -1,5 +1,5 @@
 <!-- remove suffix & humanize image filename -->
-{{- $image_name := . }}
+{{- $image_name := or . " "  }}
 {{- if strings.HasSuffix . "jpg" }}
 {{- $image_name = strings.TrimSuffix ".jpg" . }} 
 {{- else if strings.HasSuffix . "svg" }}
