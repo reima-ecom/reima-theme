@@ -3,10 +3,12 @@
         {{ range $index, $slide := .slides }}
         <li class="carousel__item" data-id="item-{{ add $index 1}}">
             <!--  Create alt text, defaults to image filename if no specified alt text -->
-            {{- $alt := partial "helpers/humanize-image-filename.html" $slide.image}}
-            {{- if .image_alt}}
-            {{- $alt = .image_alt}}
-            {{- end}}
+            {{- $alt := " " }}
+            {{- if .image_alt }}
+            {{- $alt = .image_alt }}
+            {{- else if .image }}
+            {{- $alt = partial "helpers/humanize-image-filename.html" .image }}
+            {{- end }}
             <!-- get mobile image if exists -->
             {{- $mobile := false }}
             {{- with .imagemobile }}
