@@ -40,7 +40,10 @@
         <!-- sizes: roughly 100vw up to 768px, 40vw but max 536px after that -->
         {{- $sizes := "(min-width: 768px) min(40vw, 536px), 100vw" }}
         {{- with index $imgs 0 }}
-        {{- $alt := partial "helpers/humanize-image-filename.html" .Title}}
+        {{- $alt := " " }}
+        {{- if .Title }}
+        {{- $alt = partial "helpers/humanize-image-filename.html" .Title}}
+         {{- end}}
         <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
           height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="{{$alt}}" />
         {{- end }}

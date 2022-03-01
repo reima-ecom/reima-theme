@@ -24,11 +24,13 @@
     Optional map of items to add to dataset
  -->
 
-{{- $alt := partial "helpers/humanize-image-filename.html" .image.Name}}
-{{- if .image.Title}}
-{{- $alt = partial "helpers/humanize-image-filename.html" .image.Title}}
-{{- else if .alt}}
+{{- $alt := " "}}
+{{- if .alt}}
 {{- $alt = .alt}}
+{{- else if .image.Title}}
+{{- $alt = partial "helpers/humanize-image-filename.html" .image.Title }}
+{{- else if .image.Name}}
+{{- $alt = partial "helpers/humanize-image-filename.html" .image.Name }}
 {{- end}}
 
 {{- $width := index (split $.widths ",") 0 -}}
