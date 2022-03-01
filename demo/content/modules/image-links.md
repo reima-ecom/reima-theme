@@ -10,7 +10,7 @@ modules:
   cards:
   - heading: One step ahead
     text: Meet our new colorful sneakers
-    image: "/hot-sneakers.jpg"
+    image: null
     linktext: Buy now
     link: "-static/status.html"
   - heading: SS20
