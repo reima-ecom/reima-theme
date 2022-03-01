@@ -120,7 +120,7 @@ footer input:checked ~ ul {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin: 1rem -1rem;
+    margin: 1rem 0;
   }
 
   footer > ul > li {
