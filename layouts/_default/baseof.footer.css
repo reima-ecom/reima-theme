@@ -1,12 +1,14 @@
 footer {
-  background-color: var(--color-bg-inverted);
-  color: var(--color-text-inverted);
-  padding: 1rem;
+  --color: var(--color-text);
+  background-color: var(--color-bg-accent);
+  color: var(--color);
+  padding: var(--content-padding) 0;
 }
 
 footer ul {
   list-style: none;
-  font-weight: 700;
+  font: 400 1rem/1.25 var(--font-family);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0;
   margin: 0;
@@ -23,7 +25,7 @@ footer > ul > li::after {
   content: " ";
   height: 1px;
   display: block;
-  background: white;
+  background: var(--color);
   position: absolute;
   left: 0;
   right: 0;
@@ -32,7 +34,7 @@ footer > ul > li::after {
 }
 
 footer li {
-  margin: 1rem 0;
+  margin: var(--content-padding);
 }
 
 footer ul ul li:last-child {
@@ -41,13 +43,13 @@ footer ul ul li:last-child {
 
 footer ul ul {
   display: none;
-  font-weight: 400;
+  letter-spacing: normal;
   text-transform: none;
   width: 100%;
 }
 
 footer a {
-  color: white;
+  color: var(--color);
   text-decoration: none;
   font-size: 0.875rem;
 }
@@ -56,17 +58,32 @@ footer a:hover {
   color: inherit;
 }
 
+
 footer > p {
+  margin: var(--content-padding);
   font-size: 0.75rem;
+  text-align: center;
 }
 
 footer label {
-  /* this is in order to make the arrow svg icon white */
-  fill: white;
+  margin: 0 var(--content-padding);
   flex: 1;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+}
+
+/* hide the arrow svg... */
+footer label svg {
+  display: none;
+}
+
+/* ...and replace with '+' */
+footer label::after {
+  content: '+';
+  font-size: 1.5rem;
+  line-height: 0.75;
 }
 
 footer input:focus + label {
@@ -74,15 +91,31 @@ footer input:focus + label {
   outline-offset: 2px;
 }
 
-footer input:checked + label svg {
-  transform: rotate(180deg);
+footer input:checked + label::after {
+  content: '-';
 }
 
 footer input:checked ~ ul {
   display: block;
 }
 
+.footer-logos {
+  margin: calc(var(--content-padding) * 1.5) calc(var(--content-padding) / 2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-logos img {
+  margin: calc(var(--content-padding) / 2);
+  max-width: calc(100% - var(--content-padding));
+}
+
 @media (min-width: 1024px) {
+  .footer-logos {
+    justify-content: center;
+  }
+
   footer > ul {
     display: flex;
     justify-content: center;
@@ -108,6 +141,11 @@ footer input:checked ~ ul {
 
   footer label a {
     pointer-events: initial;
+  }
+
+  footer label::after {
+    display: none;
+    content: unset;
   }
 
   footer .icon {

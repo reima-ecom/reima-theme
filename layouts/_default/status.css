@@ -1,5 +1,4 @@
 .status {
-  --h3-font-size: 1.25rem;
   padding: var(--block-padding);
   margin: var(--block-margin);
   max-width: var(--content-width);

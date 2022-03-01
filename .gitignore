@@ -2,3 +2,4 @@ public
 resources
 *.swp
 TODO.md
+.hugo_build.lock

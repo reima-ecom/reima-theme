@@ -1,4 +1,6 @@
 .hero {
+  --h1-font-size: 1.75rem;
+  --h1-font: 400 var(--h1-font-size)/1.2 var(--font-family);
   --overlay-bg: rgba(255,255,255,0.4);
   color: var(--color-text);
   font-size: var(--text-font-size);
@@ -6,6 +8,35 @@
   padding: 0;
   text-align: center;
   position: relative;
+}
+
+.hero.hero--overlay-small {
+  --h1-font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    --h1-font-size: 2.75rem;
+  }
+
+  .hero.hero--overlay-small {
+    --h1-font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    --h1-font-size: 3.25rem;
+  }
+
+  .hero.hero--overlay-small {
+    --h1-font-size: 2.75rem;
+  }
+}
+
+.hero h1 {
+  font: var(--h1-font);
+  letter-spacing: -0.01em;
 }
 
 .hero--yellow-emphasis em {
@@ -121,7 +152,6 @@
 
 @media (min-width: 768px) {
   .hero {
-    --h1-font-size: var(--h0-font-size);
     padding: var(--block-padding);
     margin: var(--block-margin);
   }
@@ -165,10 +195,6 @@
   .hero--overlay-align-center .hero__text-container {
     text-align: center;
   }
-}
-
-.hero.hero--overlay-small h1 {
-  font-size: var(--h4-font-size);
 }
 
 .hero--full-width {

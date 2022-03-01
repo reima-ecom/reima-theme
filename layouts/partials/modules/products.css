@@ -30,7 +30,8 @@
   align-items: center;
   margin-top: -0.5rem;
   margin-left: -2rem;
-  margin-bottom: var(--h4-margin-bottom);
+  margin-bottom: var(--content-padding);
+  text-align: center;
 }
 
 .product-list__heading h2 {

@@ -476,10 +476,7 @@ manually with CSS. The `[open]` attribute is still set on the
 }
 
 .features__heading {
-  display: inline-block;
   margin: 0 0 1rem;
-  font-weight: 700;
-  font-size: inherit;
 }
 
 .features__heading a {

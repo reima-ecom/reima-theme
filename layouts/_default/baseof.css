@@ -1,6 +1,7 @@
 :root {
   --content-max-width: 1280px;
   --content-padding: 1rem;
+  --content-padding-extra: calc(var(--content-padding) * 2);
   --border: 1px solid var(--color-border);
   --input-border: 1px solid var(--color-input-border);
   --focus-outline: 2px dotted var(--color-overlay-bg);
@@ -48,10 +49,6 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: var(--font-family);
-  letter-spacing: var(--text-letter-spacing);
-  line-height: var(--text-line-height);
-  text-rendering: optimizeSpeed;
   color: var(--color-text);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
@@ -83,7 +80,7 @@ hr {
 
 .price--sale {
   color: var(--color-text);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .price--was {
@@ -139,6 +136,39 @@ a:hover,
   background-color: transparent;
 }
 
+.text-cta {
+	color: var(--color-text);
+	font-size: 1rem;
+	letter-spacing: .05em;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all .2s;
+  display: flex;
+  align-items: center;
+}
+
+.text-cta svg {
+  width: 24px;
+  height: 100%;
+  margin-left: 5px;
+	transition: all .2s;
+  transform: translateX(0);
+}
+
+.text-cta:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.text-cta:hover svg {
+  transform: translateX(5px);
+}
+
+.text-cta:hover svg path {
+  stroke: var(--color-primary);
+}
+
 /* #endregion */
 
 /* #region buttons */
@@ -151,7 +181,7 @@ a:hover,
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: var(--text-line-height);
   padding: 0.6875rem 1.5rem;
   text-align: center;
@@ -264,22 +294,4 @@ textarea:focus {
 
 .margin-bottom-base {
   margin-bottom: 1rem;
-}
-
-.footer-logos {
-  margin: 3rem calc(var(--content-padding) / -2) 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.footer-logos img {
-  margin: calc(var(--content-padding) / 2);
-  max-width: calc(100% - var(--content-padding));
-}
-
-@media (min-width: 1024px) {
-  .footer-logos {
-    justify-content: center;
-  }
 }
