@@ -10,7 +10,7 @@ modules:
   cards:
   - heading: One step ahead
     text: Meet our new colorful sneakers
-    image: null
+    image: "/hot-sneakers.jpg"
     linktext: Buy now
     link: "-static/status.html"
   - heading: SS20
@@ -83,7 +83,7 @@ modules:
   carousel_dots: true
   carousel_arrows: false
   carousel_autoplay: true
-  carousel_autoplay_speed:
+  carousel_autoplay_speed: 
   cards:
   - heading: Infant outdoor clothing
     image: "/infants-square.jpg"
@@ -124,7 +124,7 @@ modules:
   carousel_dots: true
   carousel_arrows: false
   carousel_autoplay: true
-  carousel_autoplay_speed: 15000
+  carousel_autoplay_speed: "15000"
   cards:
   - heading: Infant outdoor clothing
     image: "/infants-square.jpg"
