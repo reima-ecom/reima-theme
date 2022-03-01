@@ -60,12 +60,7 @@
   {{- $mobile = partial "helpers/get-image" . }}
   {{- end }}
   <!--  Create alt text, defaults to image filename if no specified alt text -->
-  {{- $alt := " "}}
-  {{- if .image_alt}}
-  {{- $alt = .image_alt}}
-  {{- else if .image }}
-  {{- $alt = partial "helpers/humanize-image-filename.html" .image }}
-  {{- end}}
+  {{- $alt := ""}}
   <!-- get main image -->
   {{- with .image }}
   {{- with partial "helpers/get-image" . }}

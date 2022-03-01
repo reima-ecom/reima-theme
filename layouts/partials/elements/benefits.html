@@ -7,7 +7,7 @@
       <div class="icon">
         {{- if .icon }}
         <!-- Create alt text from image filename -->
-        {{- $alt := partial "helpers/humanize-image-filename.html" .icon}}
+        {{- $alt := ""}}
         <!-- check if this is png or jpeg and resize if it is -->
         {{- $img := partial "helpers/get-image" .icon }}
         <!-- check if this is png or jpeg and resize if it is -->
