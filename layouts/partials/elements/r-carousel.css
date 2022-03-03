@@ -38,7 +38,7 @@ r-carousel > button {
   padding: 0;
   border: none;
   margin: 1rem;
-  color: white;
+  color: var(--color-text);
   font-size: 2rem;
   line-height: 1;
   cursor: pointer;
