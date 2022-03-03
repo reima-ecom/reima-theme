@@ -231,6 +231,10 @@
   min-width: 0;
   color: inherit;
   z-index: unset;
+  /* hide text inside label, use for screen readers */
+  font-size: 0px;
+  line-height: 0px;
+  text-indent: -10000px;
 }
 
 .selections--Color label span {
