@@ -49,139 +49,6 @@
   </div>
   {{ end }}
 
-  <div class="grid__main">
-    {{ with .Title }}
-    <div class="grid__title">
-      <h1>{{.}}</h1>
-    </div>
-    {{ end }}
-
-    <div class="grid__modules">
-      {{ range $i, $v := .Params.main }}
-
-      <!-- add horizontal line before all modules except hero -->
-      {{ if and (ne .template "hero") (ne $i 0)}}
-      <hr>
-      {{ end }}
-
-      <!-- add filtering before products module -->
-      {{ if eq .template "products" }}
-      <!-- only add in case no limit is imposed (i.e limit not defined, or limit greater than or equal to number of products -->
-      {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
-      {{ if or (not .limit) (ge .limit (len $collectionPage.Pages)) }}
-
-      <div class="product-filters">
-        {{ if $hasfiltering }}
-        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" collection="{{.collection}}" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
-          <!-- get all available options in child (product) pages -->
-          {{ $collection := .collection }}
-          {{- range $.Pages }}
-          {{- $handle := "" }}
-          {{- with .File }}
-          {{- $handle = .ContentBaseName}}
-          {{- end }}
-          {{- with .GetPage (printf "/products/%s" $handle) }}
-          {{- range $key, $value := .Params.filtering }}
-          {{- if not ($.Scratch.Get "options") }}
-          {{- $.Scratch.Set "options" dict }}
-          {{- end }}
-          {{- $current := index ($.Scratch.Get "options") $key }}
-          {{- if not $current }}
-          {{- $current = slice }}
-          {{- end }}
-          {{- $.Scratch.SetInMap "options" $key ($current | append $value | uniq) }}
-          {{- end }}
-          {{- end }}
-          {{- end }}
-
-          {{- $options := $.Scratch.Get "options" }}
-          {{- if not $options }}
-          {{- $options = dict }}
-          {{- end }}
-
-          <label class="btn btn--secondary filter-list__open" for="open-modules-filters-{{.collection}}">
-            {{default "Filter selection" (T "Collection page filter selection")}}
-          </label>
-          <input type="checkbox" name="open-filters" id="open-modules-filters-{{.collection}}" class="filter-list__open-checkbox">
-
-          <div class="filters">
-            {{ range $.Site.Data.features.order }}
-            {{ $name := lower . }}
-            {{ with index $options . }}
-            {{ $values := . }}
-            <div class="filters__item">
-              <input type="checkbox" name="open-{{$name}}" id="open-modules-{{$i}}-{{$name}}" class="filter-list__name-checkbox">
-              <label for="open-modules-{{$i}}-{{$name}}" class="filter-list__name">
-                {{ with T (printf "Product feature: %s" $name) }}
-                {{.}}
-                {{ else }}
-                {{$name}}
-                {{ end }}
-              </label>
-              {{ $order := index $.Site.Data.features $name }}
-              {{ range partial "helpers/order" (dict "array" $values "order" $order) }}
-              <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="modules-{{$i}}-{{$name}}-{{.}}"
-                     class="filter-list__value-checkbox" data-collection="{{$collection}}">
-              <label for="modules-{{$i}}-{{$name}}-{{.}}" class="filter-list__value btn btn--secondary">
-                {{ if eq $name "color" }}
-                <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
-                {{ end }}
-                {{ with T (printf "Product feature description: %s" $name) . }}
-                {{.}}
-                {{ else }}
-                {{.}}
-                {{ end }}
-              </label>
-              {{ end }}
-            </div>
-            <hr>
-            {{ end }}
-            {{ end }}
-          </div>
-
-          <input type="reset" class="filter-list__clear" value="Clear filters">
-        </form>
-        {{ end }}
-
-        <div class="sort">
-          <label for="">
-            <select sort-collection="{{.collection}}">
-              <option value="COLLECTION_DEFAULT">{{default "Sort..." (T "Collection page sort default")}}</option>
-              <option value="PRICE:reverse">{{ default "Highest price" (T "Collection page sort highest price")}}</option>
-              <option value="PRICE">{{ default "Lowest price" (T "Collection page sort lowest price")}}</option>
-              <option value="BEST_SELLING">{{ default "Most popular" (T "Collection page sort most popular")}}</option>
-            </select>
-            <svg viewBox="0 0 32 32" class="icon">
-              {{ if not ($.Scratch.Get "icon-chevron-down") }}
-              {{ $.Scratch.Set "icon-chevron-down" true }}
-              <symbol id="icon-chevron-down">
-                <path
-                  d="M16 22q-0.313 0-0.594-0.125t-0.5-0.344v0l-8.5-9q-0.094-0.188-0.156-0.391t-0.063-0.422q0-0.625 0.438-1.063t1.063-0.438q0.25 0 0.484 0.078t0.422 0.234v0l7.406 7.781 7.406-7.844q0.188-0.125 0.438-0.219t0.5-0.094q0.625 0 1.063 0.438t0.438 1.063q0 0.25-0.063 0.453t-0.188 0.391v-0.031l-8.5 9q-0.188 0.25-0.469 0.391t-0.625 0.141v0 0z">
-                </path>
-              </symbol>
-              {{ end }}
-              <use xlink:href="#icon-chevron-down"></use>
-            </svg>
-          </label>
-        </div>
-
-      </div>
-      <div class="product-count">
-        {{ $numProducts := printf "<strong>%d</strong>" (len $collectionPage.Pages) }}
-        {{(default (printf "%s products" $numProducts) (T "Collection page number of products" $numProducts)) | safeHTML}}
-      </div>
-
-      {{ end }}
-      {{ end }}
-
-
-      {{ $params := merge . (dict "modulenr" $i "pageobj" $) }}
-      {{ partial (printf "modules/%s" .template) $params }}
-
-      {{ end }}
-    </div>
-  </div>
-
   {{ if $hassidebar }}
   <div class="grid__sidebar">
     {{ with .Params.sidebar }}
@@ -273,21 +140,25 @@
             {{$name}}
             {{ end }}
           </label>
+          <ul class="filter-list__value">
           {{ $order := index $.Site.Data.features $name }}
           {{ range partial "helpers/order" (dict "array" $values "order" $order) }}
-          <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="{{$name}}-{{.}}"
-                 class="filter-list__value-checkbox" data-collection="*">
-          <label for="{{$name}}-{{.}}" class="filter-list__value btn btn--secondary">
-            {{ if eq $name "color" }}
-            <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
-            {{ end }}
-            {{ with T (printf "Product feature description: %s" $name) . }}
-            {{.}}
-            {{ else }}
-            {{.}}
-            {{ end }}
-          </label>
+            <li class="filter-list__value-item">
+              <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="{{$name}}-{{.}}"
+                    class="filter-list__value-checkbox" data-collection="*">
+              <label for="{{$name}}-{{.}}" class="filter-list__value-label btn btn--secondary">
+                {{ if eq $name "color" }}
+                <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
+                {{ end }}
+                {{ with T (printf "Product feature description: %s" $name) . }}
+                {{.}}
+                {{ else }}
+                {{.}}
+                {{ end }}
+              </label>
+            </li>
           {{ end }}
+          </ul>
         </div>
         <hr>
         {{ end }}
@@ -299,6 +170,145 @@
     {{ end }}
   </div>
   {{ end }}
+  
+  <div class="grid__main">
+    {{ with .Title }}
+    <div class="grid__title">
+      <h1>{{.}}</h1>
+    </div>
+    {{ end }}
+
+    <div class="grid__modules">
+      {{ range $i, $v := .Params.main }}
+
+      <!-- add horizontal line before all modules except hero -->
+      {{ if and (ne .template "hero") (ne $i 0)}}
+      <hr>
+      {{ end }}
+
+      <!-- add filtering before products module -->
+      {{ if eq .template "products" }}
+      <!-- only add in case no limit is imposed (i.e limit not defined, or limit greater than or equal to number of products -->
+      {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
+      {{ if or (not .limit) (ge .limit (len $collectionPage.Pages)) }}
+
+      <div class="product-filters">
+        {{ if $hasfiltering }}
+        <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" collection="{{.collection}}" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
+          <!-- get all available options in child (product) pages -->
+          {{ $collection := .collection }}
+          {{- range $.Pages }}
+          {{- $handle := "" }}
+          {{- with .File }}
+          {{- $handle = .ContentBaseName}}
+          {{- end }}
+          {{- with .GetPage (printf "/products/%s" $handle) }}
+          {{- range $key, $value := .Params.filtering }}
+          {{- if not ($.Scratch.Get "options") }}
+          {{- $.Scratch.Set "options" dict }}
+          {{- end }}
+          {{- $current := index ($.Scratch.Get "options") $key }}
+          {{- if not $current }}
+          {{- $current = slice }}
+          {{- end }}
+          {{- $.Scratch.SetInMap "options" $key ($current | append $value | uniq) }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+
+          {{- $options := $.Scratch.Get "options" }}
+          {{- if not $options }}
+          {{- $options = dict }}
+          {{- end }}
+
+          <input type="checkbox" name="open-filters" id="open-modules-filters-{{.collection}}" class="filter-list__open-checkbox">
+          <label class="btn btn--secondary filter-list__open" for="open-modules-filters-{{.collection}}">
+            {{default "Filter selection" (T "Collection page filter selection")}}
+          </label>
+
+          <div class="filters">
+            {{ range $.Site.Data.features.order }}
+            {{ $name := lower . }}
+            {{ with index $options . }}
+            {{ $values := . }}
+            <div class="filters__item">
+              <input type="checkbox" name="open-{{$name}}" id="open-modules-{{$i}}-{{$name}}" class="filter-list__name-checkbox">
+              <label for="open-modules-{{$i}}-{{$name}}" class="filter-list__name">
+                {{ with T (printf "Product feature: %s" $name) }}
+                {{.}}
+                {{ else }}
+                {{$name}}
+                {{ end }}
+              </label>
+              <ul class="filter-list__value">
+                {{ $order := index $.Site.Data.features $name }}
+                {{ range partial "helpers/order" (dict "array" $values "order" $order) }}
+                <li class="filter-list__value-item">
+                <input type="checkbox" name="filtering.{{$name}}" value="{{.}}" id="modules-{{$i}}-{{$name}}-{{.}}"
+                      class="filter-list__value-checkbox" data-collection="{{$collection}}">
+                <label for="modules-{{$i}}-{{$name}}-{{.}}" class="filter-list__value-label btn btn--secondary">
+                  {{ if eq $name "color" }}
+                  <span style="background-color: {{index $.Site.Data.colors (. | lower)}};"></span>
+                  {{ end }}
+                  {{ with T (printf "Product feature description: %s" $name) . }}
+                  {{.}}
+                  {{ else }}
+                  {{.}}
+                  {{ end }}
+                </label>
+                </li>
+                {{ end }}
+               </ul>
+            </div>
+            <hr>
+            {{ end }}
+            {{ end }}
+          </div>
+
+          <input type="reset" class="filter-list__clear" value="Clear filters">
+        </form>
+        {{ end }}
+
+        <div class="sort">
+          <label for="">
+            <select sort-collection="{{.collection}}">
+              <option value="COLLECTION_DEFAULT">{{default "Sort..." (T "Collection page sort default")}}</option>
+              <option value="PRICE:reverse">{{ default "Highest price" (T "Collection page sort highest price")}}</option>
+              <option value="PRICE">{{ default "Lowest price" (T "Collection page sort lowest price")}}</option>
+              <option value="BEST_SELLING">{{ default "Most popular" (T "Collection page sort most popular")}}</option>
+            </select>
+            <svg viewBox="0 0 32 32" class="icon">
+              {{ if not ($.Scratch.Get "icon-chevron-down") }}
+              {{ $.Scratch.Set "icon-chevron-down" true }}
+              <symbol id="icon-chevron-down">
+                <path
+                  d="M16 22q-0.313 0-0.594-0.125t-0.5-0.344v0l-8.5-9q-0.094-0.188-0.156-0.391t-0.063-0.422q0-0.625 0.438-1.063t1.063-0.438q0.25 0 0.484 0.078t0.422 0.234v0l7.406 7.781 7.406-7.844q0.188-0.125 0.438-0.219t0.5-0.094q0.625 0 1.063 0.438t0.438 1.063q0 0.25-0.063 0.453t-0.188 0.391v-0.031l-8.5 9q-0.188 0.25-0.469 0.391t-0.625 0.141v0 0z">
+                </path>
+              </symbol>
+              {{ end }}
+              <use xlink:href="#icon-chevron-down"></use>
+            </svg>
+          </label>
+        </div>
+
+      </div>
+      <div class="product-count">
+        {{ $numProducts := printf "<strong>%d</strong>" (len $collectionPage.Pages) }}
+        {{(default (printf "%s products" $numProducts) (T "Collection page number of products" $numProducts)) | safeHTML}}
+      </div>
+
+      {{ end }}
+      {{ end }}
+
+
+      {{ $params := merge . (dict "modulenr" $i "pageobj" $) }}
+      {{ partial (printf "modules/%s" .template) $params }}
+
+      {{ end }}
+    </div>
+  </div>
+
+
 </div>
 
 {{ end }}
