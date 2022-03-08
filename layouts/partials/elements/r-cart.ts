@@ -50,23 +50,44 @@ export default class RCart extends HTMLElement {
     else this.removeAttribute("loading");
   }
 
+  get overlay(): HTMLElement {
+    const el = this.querySelector<HTMLElement>(".r-cart__overlay");
+    if (!el) throw new Error("Could not find overlay");
+    return el;
+  }
+
+  get dialog(): HTMLElement {
+    const el = this.querySelector<HTMLElement>("[role=dialog]");
+    if (!el) throw new Error("Could not find dialog");
+    return el;
+  }
+
   get open() {
-    return this.hasAttribute("open");
+    return !this.overlay.hidden;
   }
 
-  set open(val) {
-    if (val) this.setAttribute("open", "");
-    else this.removeAttribute("open");
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === "open") {
-      // set body overflow for scrolling
-      document.body.style.overflow = this.open ? "hidden" : "";
-      // load cart if not loaded
-      if (this.loading) {
-        this.loadCheckout();
+  set open(val: boolean) {
+    this.overlay.hidden = !val;
+    document.body.style.overflow = val ? "hidden" : "";
+    document.querySelectorAll("body > main").forEach((el) => {
+      if (val) {
+        el.setAttribute("aria-hidden", "true");
+        el.setAttribute("inert", "");
+      } else {
+        el.removeAttribute("aria-hidden");
+        el.removeAttribute("inert");
       }
+    });
+    if (val) {
+      // need timeout for focusing since visibility is delayed
+      setTimeout(() => {
+        this.dialog.focus();
+      }, 500);
+    } else {
+      this.querySelector<HTMLAnchorElement>("[href='/cart']")?.focus();
+    }
+    if (this.loading) {
+      this.loadCheckout();
     }
   }
 

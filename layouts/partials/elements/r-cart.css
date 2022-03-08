@@ -40,31 +40,22 @@ r-cart button[close]:focus {
 }
 
 .r-cart__overlay {
-  display: block;
+  display: flex;
   background: var(--color-overlay-bg);
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.1s, opacity 0.5s;
-  z-index: 10;
-}
-
-r-cart[open] .r-cart__overlay {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
   transition: all 0.5s;
-  z-index: +1;
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
 }
 
-r-cart[open] .r-cart__main {
-  opacity: 1;
-  transform: translateX(0);
-  z-index: +1;
+.r-cart__overlay[hidden] {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .r-cart__overlay > [close] {
@@ -78,21 +69,29 @@ r-cart[open] .r-cart__main {
   width: 90%;
   max-width: 400px;
   height: 100%;
-  transform: translateX(100%);
+  transform: translateX(0);
   margin-left: auto;
   transition: all 0.2s;
   transition-delay: 0.2s;
 }
 
-r-cart h2 {
+.r-cart__overlay[hidden] .r-cart__main {
+  transform: translateX(100%);
+}
+
+.r-cart__heading {
   border-bottom: var(--border);
   padding: 0 1rem;
   margin: 0;
-  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: var(--menu-height);
+}
+
+r-cart h2 {
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 r-cart .items {
