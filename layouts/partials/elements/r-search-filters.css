@@ -43,11 +43,20 @@ r-search-filters summary::marker {
   display: none;
   content: "";
 }
+r-search-filters summary:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
 
 r-search-filters fieldset input {
-  visibility: hidden;
+  height: 0;
+  overflow: hidden;
   opacity: 0;
   position: absolute;
+}
+r-search-filters fieldset input:focus-visible + label{
+  outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 r-search-filters fieldset label {
