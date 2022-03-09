@@ -132,8 +132,8 @@
 }
 
 .grid__sidebar h2 {
-  font-size: 0.875rem;
-  letter-spacing: 0.03rem;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
   line-height: var(--text-line-height);
   text-transform: uppercase;
 }
@@ -148,6 +148,7 @@
 /* make links discreet */
 .grid__sidebar ul a {
   color: var(--color-text);
+  font-size: 1rem;
   text-decoration: none;
   display: block;
   margin: 0.5rem 0;
