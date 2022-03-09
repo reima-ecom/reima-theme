@@ -3,7 +3,7 @@
   --bg: var(--color-bg);
 }
 
-input:checked + .search {
+input:checked ~ .search {
   --display: grid;
 }
 

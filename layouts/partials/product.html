@@ -165,7 +165,7 @@
 
             <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
               {{ if not .availableInitially }}class="unavailable" {{ end }}>
-              <span>{{.value}}</span>
+              {{.value}}
               {{ if $swatch }}
               <img src="{{$swatch}}" alt="{{.value}}">
               {{ end }}

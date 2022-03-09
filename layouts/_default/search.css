@@ -7,6 +7,7 @@ main {
   --z-index: 1;
   --filters-padding: var(--content-padding);
   --close-btn-show: block;
+  --filter-selection-btn-show: none;
 }
 
 @media (min-width: 1080px) {
@@ -18,7 +19,7 @@ main {
     --width: 30ch;
     --z-index: unset;
     --filters-padding: var(--content-padding) var(--content-padding) 0 0;
-    --close-btn-show: none;
+    --filter-selection-btn-show: block;
   }
 }
 
@@ -91,14 +92,29 @@ r-search-results.search-results {
 
 input[type=checkbox][id|=show] {
   position: absolute;
-  visibility: hidden;
+  left: -100vw;
   opacity: 0;
 }
 
-input[type=checkbox][id|=show] + * {
+input[type=checkbox][id|=show] ~ .filters {
   --toggle-display: none;
 }
 
-input[type=checkbox][id|=show]:checked + * {
+input[type=checkbox][id|=show]:checked ~ .filters {
   --toggle-display: var(--display);
+}
+
+input[type=checkbox][id|=show]:checked + header label.btn {
+  display: var(--filter-selection-btn-show);
+}
+
+input[type=checkbox][id|=show]:focus-visible + header label.btn {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+input[type=checkbox][id|=show]:focus-visible ~ .filters label.btn {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-bg);
+  text-decoration: none;
 }

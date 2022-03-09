@@ -20,6 +20,24 @@ window.customElements.whenDefined("r-search-results").then(() => {
   const resultsElement = document.querySelector<RSearchResults>(
     "main r-search-results",
   );
+
+  // focus on first category if filter selection is true 
+  const filterInput = document.querySelector<HTMLInputElement>("#show-filters");
+  
+  filterInput.addEventListener("click", (ev) => {
+    if (filterInput.checked === true) {
+      document.querySelector<HTMLInputElement>(".filters summary").focus()
+    }
+  });
+  
+  // add event listener for exit key when filters is open
+  document.querySelector<HTMLElement>(".filters").addEventListener("keydown", (e) => {
+    const input = document.querySelector<HTMLInputElement>("#show-filters")
+    if (e.key === "Escape") {
+      input.checked = false;
+    }
+  });
+
   // open filters if there are selected filters
   resultsElement?.addEventListener("search-results", (ev) => {
     const hasActiveFilters = ev.detail.results.facets.some((facet) =>
