@@ -38,7 +38,8 @@ body > header {
 }
 
 .menu #open-menu:focus ~ label[for="open-menu"],
-.menu #open-menu:focus ~ * label[for="open-menu"] {
+.menu #open-menu:focus ~ * label[for="open-menu"],
+.icons #open-search:focus + label[for="open-search"] {
   outline: var(--focus-outline);
   outline-offset: 2px;
 }
