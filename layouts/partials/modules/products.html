@@ -92,8 +92,8 @@
       <li><a href="#item-{{ add $pageIndex 1 }}"></a></li>
       {{ end }}
     </ol>
-    <div class="prev">&lsaquo;</div>
-    <div class="next">&rsaquo;</div>
+    <div aria-label="Previous image" class="prev">&lsaquo;</div>
+    <div aria-label="Next image" class="next">&rsaquo;</div>
   </div>
   {{ end }}
 
@@ -212,7 +212,7 @@
     {{ range $color_dots }}
     {{ with . }}
     {{ with partial "helpers/get-color" . }}
-    <a href="{{$url}}" {{with .color}}style="background-color: {{.}};" {{end}}
+    <a  href="{{$url}}" aria-label="{{.name}}" {{with .color}}style="background-color: {{.}};" {{end}}
       {{partial "modules/products-get-image-srcset-attr" (dict "color" .name "product" $product)}}
       class="product-list__swatch">
       {{ if .image }}

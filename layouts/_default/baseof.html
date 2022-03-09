@@ -211,6 +211,7 @@
           {{ else if site.Params.public.loop54 }}
           {{ $tsname := "partials/elements/r-search-loop.ts" }}
           {{ $.Scratch.Add "ts-lazy" $tsname }}
+          <input type="checkbox" id="open-search" autocomplete="off" />
           <label class="btn btn--icon icon" load="{{$tsname}}" for="open-search">
             <svg>
               <symbol id="icon-search" viewBox="0 0 32 32">
@@ -221,7 +222,6 @@
               <use xlink:href="#icon-search"></use>
             </svg>
           </label>
-          <input type="checkbox" id="open-search" autocomplete="off" />
           {{partialCached "elements/r-search-loop" $}}
           {{ end }}
           {{partial "elements/r-cart" $}}
