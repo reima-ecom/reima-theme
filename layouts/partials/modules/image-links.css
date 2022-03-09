@@ -31,14 +31,6 @@
   overflow: hidden;
 }
 
-.image-links > div > div img {
-  transition: transform .3s ease-out;
-}
-
-.image-links > div > div:hover img {
-  transform: scale(1.08);
-}
-
 .image-links__overlay {
   position: absolute;
   top: 0;
