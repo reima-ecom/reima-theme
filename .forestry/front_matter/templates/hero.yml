@@ -96,11 +96,10 @@ fields:
   config:
     required: false
     options:
-    - '3:2'
-    - '4:3'
-    - '5:4'
-    - '16:9'
     - '1:1'
+    - '4:5'
+    - '9:16'
+    - '16:9'
     source:
       type: simple
       section: 
@@ -125,10 +124,10 @@ fields:
   config:
     required: false
     options:
-    - '3:2'
-    - '16:10'
-    - '9:16'
     - '1:1'
+    - '4:5'
+    - '9:16'
+    - '16:9'
     source:
       type: simple
       section: 
