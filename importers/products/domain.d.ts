@@ -45,6 +45,7 @@ type VariantNode = any;
 
 type ProductImageNode = {
   originalSrc: string;
+  altText: string;
 };
 
 type ProductMediaNode = {

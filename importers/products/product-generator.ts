@@ -84,6 +84,7 @@ const query = (count: number, cursor?: string) =>
             node {
               id
               originalSrc
+              altText
             }
           }
         }
