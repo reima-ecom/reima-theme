@@ -37,6 +37,9 @@ const imagesToResources = (
     resources: productNode.images.edges.map((img, i) => ({
       name: i.toString().padStart(2, "0"),
       src: `imgs/${imgSrcToLocal(img.node.originalSrc)}`,
+      params: {
+        alt: img.node.altText,
+      },
     })),
   });
 
