@@ -1,0 +1,4 @@
+   <!-- Splits the given aspect ratio string and returns a string of the 2/1 * 100   -->
+  {{- $split := split . ":"}}
+  {{- $divided := mul (div (float (index ($split) 1)) (float (index ($split) 0))) 100 }}
+  {{- return printf "%s%%" (string ($divided)) }}
