@@ -20,6 +20,7 @@ main {
     --z-index: unset;
     --filters-padding: var(--content-padding) var(--content-padding) 0 0;
     --filter-selection-btn-show: block;
+    --close-btn-show: none;
   }
 }
 
