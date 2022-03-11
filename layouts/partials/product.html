@@ -47,6 +47,9 @@
           height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="{{$alt}}" />
         {{- end }}
         {{- range $i, $img := after 1 $imgs }}
+        {{- with .Params.alt }}
+        {{- $alt = . }}
+        {{- end }}
         {{- partial "image" (dict "image" . "widths" "375,750" "sizes" $sizes "dataset" (dict "path" .Name) "alt" $alt)}}
         {{- end }}
       </div>
