@@ -173,9 +173,13 @@
             {{ $swatch = .image }}
             {{ end }}
             {{ end }}
-
             <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
-              {{ if not (in $availableColors .value) }}class="unavailable" {{ end }}>
+              {{ if eq $name site.Params.coloroption }}
+              {{ if not (in $availableColors .value) }}class="unavailable" {{ end }}
+              {{ else}}
+              {{ if not .availableInitially }}class="unavailable" {{ end }}
+              {{ end }} 
+              >
               {{.value}}
               {{ if $swatch }}
               <img src="{{$swatch}}" alt="{{.value}}">
