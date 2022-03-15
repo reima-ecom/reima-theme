@@ -204,6 +204,7 @@
 
 .product-list .carousel ul {
   gap: 1rem;
+  margin-right: -1rem;
 }
 
 .product-list .carousel__item {
