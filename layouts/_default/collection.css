@@ -435,7 +435,7 @@
     --container-display: block;
     --inner-spacing: 1.5rem;
     --grid-padding: var(--block-padding);
-    --grid-template-columns: 25% 1fr;
+    --grid-template-columns: 25% minmax(500px, 1fr);
     --grid-template-areas: "banner banner" "sidebar main";
   }
 
