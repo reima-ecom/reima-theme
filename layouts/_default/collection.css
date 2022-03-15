@@ -10,7 +10,7 @@
   --container-display: contents;
   --grid-margin: 0;
   --grid-padding: 0;
-  --grid-template-columns: 1fr;
+  --grid-template-columns: minmax(350px, 1fr);
 
   display: grid;
   grid-template-areas: var(--grid-template-areas);
