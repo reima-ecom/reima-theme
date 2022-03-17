@@ -97,11 +97,13 @@
     <div aria-label="Previous image" class="prev">&lsaquo;</div>
     <div aria-label="Next image" class="next">&rsaquo;</div>
   </div>
-  <div class="product-list__bottom">
-    <a href="{{$collectionPage.RelPermalink}}" class="btn btn--sm">
-      {{default (T "Product list show all") $.show_all}}
-    </a>
-  </div>
+    {{ if gt $product_count (len $productPages)}}
+    <div class="product-list__bottom">
+      <a href="{{$collectionPage.RelPermalink}}" class="btn btn--sm">
+        {{default (T "Product list show all") $.show_all}}
+      </a>
+    </div>
+    {{ end }}
   {{ end }}
 
   {{ else }}
