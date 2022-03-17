@@ -77,12 +77,14 @@
     {{ warnf "Could not find product %s (%s %s %s)" .File.ContentBaseName .File.Dir .Kind .Type }}
     {{ end }}
     {{ end }}
+    {{ if (not $.carousel_enabled) }}
     {{ if gt $product_count (len $productPages)}}
     <li class="product-list__show-all">
       <a href="{{$collectionPage.RelPermalink}}" class="btn">
         {{default (T "Product list show all") $.show_all}}
       </a>
     </li>
+    {{ end }}
     {{ end }}
   </ul>
 
@@ -95,8 +97,12 @@
     <div aria-label="Previous image" class="prev">&lsaquo;</div>
     <div aria-label="Next image" class="next">&rsaquo;</div>
   </div>
+  <div class="product-list__bottom">
+    <a href="{{$collectionPage.RelPermalink}}" class="btn btn--sm">
+      {{default (T "Product list show all") $.show_all}}
+    </a>
+  </div>
   {{ end }}
-
 
   {{ else }}
   <p>No products found</p>
