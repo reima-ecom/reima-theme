@@ -47,6 +47,10 @@
 .product-list__heading a {
   display: none;
 }
+.product-list__bottom {
+  display: flex;
+  justify-content: center;
+}
 
 .product-list__show-all {
   display: flex;
@@ -174,6 +178,10 @@
   }
 
   .product-list__show-all {
+    display: none;
+  }
+  
+  .product-list__bottom {
     display: none;
   }
 }
