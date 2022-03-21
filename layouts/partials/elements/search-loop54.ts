@@ -166,6 +166,7 @@ const loopItemToProduct = (
     url: attributes["Url"] as string,
     title: attributes["Name"] as string,
     price: attributes["Price"] as number,
+    campaignPrice: attributes["CampaignPrice"] as number,
     imageUrl: attributes["ImageURL"] as string,
     imageDimensions: {
       width: Number.parseInt(attributes["ImageDimensionsWidth"] as string),
