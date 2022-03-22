@@ -24,17 +24,23 @@ const createCurrencyFormatter = (locale: string, currency: string) => {
   });
   return (amount: number) => formatter.format(amount);
 };
-
 const createProductItemFrom = (
   productTemplate: HTMLTemplateElement,
   formatCurrency: (amount: number) => string,
-) =>
+  ) =>
   (product: SearchResultProduct): HTMLElement => {
     const productItem = productTemplate.content.cloneNode(true) as HTMLElement;
     productItem.querySelector("[title]")!.textContent = product.title;
     productItem.querySelector("[price]")!.textContent = formatCurrency(
       product.price,
-    );
+      );
+    if (product.campaignPrice != product.price) {
+      productItem.querySelector("[campaignPrice]")!.textContent = formatCurrency(
+        product.campaignPrice,
+        );
+      productItem.querySelector("[price]").classList.add("price--was")
+    }
+    console.log('product', product)
     productItem.querySelector("img")!.src = product.imageUrl;
     if (product.imageDimensions?.width) {
       productItem.querySelector("img")!.width = product.imageDimensions.width;
