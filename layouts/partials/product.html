@@ -10,8 +10,22 @@
   {{ errorf "%s has no variants" .File.ContentBaseName }}
   {{ end }}
   {{ $firstAvailableVariant := index (where .Params.variants "available" true | first 1) 0 }}
+  {{- $anyAvailableVariants := where .Params.variants "available" true }}
+  <!-- create all colors array -->
+  {{- $availableColors := slice }}
+  {{- $colorOption := "Color" }}
+  {{- with site.Params.coloroption }}
+  {{- $colorOption = . }}
+  {{- end }}
+  {{- range $anyAvailableVariants }}
+  {{- range $key, $value := .options -}}
+  <!-- find where coloroption matches variant option key -->
+  {{- if in $key $colorOption }}
+  {{- $availableColors = $availableColors | append $value }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
   {{ $firstAvailableOptions := $firstAvailableVariant.options }}
-  
   <div class="product__header">
     <h1 class="g-h2" id="product-name">
       {{.Title}}
@@ -142,13 +156,13 @@
       {{ end }}
       {{ end }}
       {{ end }}
-
       <fieldset class="selections selections--{{$nameEnglish}}">
         <legend>{{.name}}<span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
         <ul>
           {{ range .values }}
           <li>
             {{ $id := printf "%s-%s" $name .value}}
+            
             <input type="radio" name="{{$name}}" id="{{$id}}" value="{{.value}}"
               {{ if .firstAvailable }}checked{{ end }} />
 
@@ -167,9 +181,13 @@
             {{ $swatch = .image }}
             {{ end }}
             {{ end }}
-
             <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
-              {{ if not .availableInitially }}class="unavailable" {{ end }}>
+              {{ if eq $name $colorOption }}
+              {{ if not (in $availableColors .value) }}class="unavailable" {{ end }}
+              {{ else}}
+              {{ if not .availableInitially }}class="unavailable" {{ end }}
+              {{ end }} 
+              >
               {{.value}}
               {{ if $swatch }}
               <img src="{{$swatch}}" alt="{{.value}}">
