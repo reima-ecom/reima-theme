@@ -13,10 +13,14 @@
   {{- $anyAvailableVariants := where .Params.variants "available" true }}
   <!-- create all colors array -->
   {{- $availableColors := slice }}
+  {{- $colorOption := "Color" }}
+  {{- with site.Params.coloroption }}
+  {{- $colorOption = . }}
+  {{- end }}
   {{- range $anyAvailableVariants }}
   {{- range $key, $value := .options -}}
-  <!-- find where coloroption matches option key -->
-  {{- if in $key site.Params.coloroption }}
+  <!-- find where coloroption matches variant option key -->
+  {{- if in $key $colorOption }}
   {{- $availableColors = $availableColors | append $value }}
   {{- end }}
   {{- end }}
@@ -147,7 +151,6 @@
       {{ end }}
       {{ end }}
       {{ end }}
-      
       <fieldset class="selections selections--{{$nameEnglish}}">
         <legend>{{.name}}<span id="selected-{{$name}}">{{.firstAvailable}}</span></legend>
         <ul>
@@ -174,7 +177,7 @@
             {{ end }}
             {{ end }}
             <label {{with $labelStyle}}{{. | safeHTMLAttr}}{{end}} for="{{$id}}"
-              {{ if eq $name site.Params.coloroption }}
+              {{ if eq $name $colorOption }}
               {{ if not (in $availableColors .value) }}class="unavailable" {{ end }}
               {{ else}}
               {{ if not .availableInitially }}class="unavailable" {{ end }}
