@@ -4,7 +4,6 @@
 {{ with $product }}
 
 <div class="product">
-
   <!-- find first available variant options -->
   {{ if not .Params.variants }}
   {{ errorf "%s has no variants" .File.ContentBaseName }}
@@ -474,7 +473,7 @@
     "availability": "https://schema.org/{{if .Params.available}}InStock{{else}}SoldOut{{end}}",
     "seller": {
       "@type": "Organization",
-      "name": "Reima USA"
+      "name": "{{site.Title}}"
     }
   }
 }
