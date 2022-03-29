@@ -1,0 +1,23 @@
+---
+label: Schema.org Markup
+hide_body: true
+fields:
+- name: schema_visible
+  type: boolean
+  label: Add Schema markup to page
+  description: Adding schema markup to your HTML improves the way your page displays
+    in Search Engine Results by enhancing the rich snippets that are displayed beneath
+    the page title.
+- name: schema
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Schema
+  showOnly:
+    field: schema_visible
+    value: true
+  description: Place schema markup here

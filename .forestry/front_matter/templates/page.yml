@@ -53,5 +53,10 @@ fields:
   type: boolean
   label: Hide Newsletter Sign up
   description: Hide Newsletter Sign up announcement.
+- name: schema
+  type: include
+  config: {}
+  template: schema-org-structured-data
+  label: Schema
 pages:
 - demo/content/bug.md
