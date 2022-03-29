@@ -33,5 +33,10 @@
   {{.}}
 </section>
 {{ end }}
-
+<!-- render Schema.org Markup as html -->
+{{ if .Params.schema_visible }}
+{{ with .Params.schema }}
+{{ . | safeHTML}}
+{{ end }}
+{{ end }}
 {{ end }}
