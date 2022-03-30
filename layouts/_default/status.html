@@ -33,6 +33,23 @@
   <p>
     <button class="btn btn--cta" id="publish">Refresh product data</button>
   </p>
+  <!-- Netlify Status badge -->
+  {{- $site_id := "id" }}
+  {{- $site_name := "site_name" }}
+  {{- if or (eq site.BaseURL "https://reima-demo.netlify.app/") (eq site.BaseURL "http://localhost:1313/") }} 
+  {{- $site_name = "reima-demo" }}
+  {{- $site_id = "820157d4-07ea-4204-a532-fa6f9f8e7b2d" }}
+  {{- else if eq site.BaseURL "https://us.reima.com/"}}
+  {{- $site_name = "reima-us" }}
+  {{- $site_id = "ecf3c957-712a-4690-ba78-6788d77b5fc7" }}
+  {{- else if eq site.BaseURL "https://www.reimajapan.com/"}}
+  {{- $site_name = "reima-jp" }}
+  {{- $site_id = "3dfe6d89-3586-4e7b-bd2d-8b1618c2a05c" }}
+  {{- else if eq site.BaseURL "https://www.reima.ca/"}}
+  {{- $site_name = "reima-canada" }}
+  {{- $site_id = "31c47cd3-2251-43ab-bea3-4cc0b19636a9" }}
+  {{- end }}
+  <a href="https://app.netlify.com/sites/{{$site_name}}/deploys"><img src="https://api.netlify.com/api/v1/badges/{{$site_id}}/deploy-status" alt="Netlify Status"></a>
   <p>
     Created at: <span id="created_at">...</span><br>
     Status: <span id="status">...</span><br>
