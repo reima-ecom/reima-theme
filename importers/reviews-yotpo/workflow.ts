@@ -57,7 +57,7 @@ const createProductReviewsMap = (
       reviews: [
         ...(productReviews[currentReview.sku]?.reviews || []),
         toDomain(currentReview),
-      ],
+      ].sort((a,b) => b.created_at.getTime() - a.created_at.getTime()),
     },
   }), {} as ProductReviewsMap);
 
