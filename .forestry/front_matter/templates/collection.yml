@@ -36,6 +36,11 @@ fields:
   config:
     min: 1
     max: 
+- name: filters
+  type: boolean
+  label: Filters
+  description: Show search filters for product lists on the collection page.
+  default: true
 - name: sidebar
   type: field_group_list
   fields:
