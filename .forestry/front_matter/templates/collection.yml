@@ -115,6 +115,11 @@ fields:
   config: {}
   template: seo-properties
   label: SEO
+- name: schema
+  type: include
+  config: {}
+  template: schema-org-structured-data
+  label: Schema
 pages:
 - demo/content/collection.html
 - demo/content/kids.md
