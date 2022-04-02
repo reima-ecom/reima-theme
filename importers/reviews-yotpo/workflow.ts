@@ -23,7 +23,6 @@ type Review = {
   title: string;
   content: string;
   created_at: Date;
-  id: number;
   images: string[];
 };
 
@@ -68,7 +67,6 @@ const toDomain = (yotpoReview: YotpoAllReviewsReview): Review => ({
   title: yotpoReview.title,
   content: yotpoReview.content,
   created_at: new Date(yotpoReview.created_at),
-  id: yotpoReview.id,
   images: yotpoReview.images,
 });
 
