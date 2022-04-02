@@ -1,6 +1,6 @@
 import getUToken from './get-utoken.ts';
 
-async function* getReviewsMediaNextPage(yotpoAppKey: string, yotpoUToken: string, pageSize = 100) {
+async function* getAllReviewsMediaNextPage(yotpoAppKey: string, yotpoUToken: string, pageSize = 100) {
   let page = 1;
   let isNextPage = true;
   while (isNextPage) {
@@ -28,10 +28,9 @@ const getAllReviewsMedia = async ({
   const yotpoUToken = await getUToken(yotpoAppKey, yotpoSecret);
   // get media
   const media = [];
-  for await (const mediaPage of getReviewsMediaNextPage(yotpoAppKey, yotpoUToken)) {
+  for await (const mediaPage of getAllReviewsMediaNextPage(yotpoAppKey, yotpoUToken)) {
     media.push(...mediaPage);
   }
-  console.log('media.length', media.length);
   return media;
 };
 
