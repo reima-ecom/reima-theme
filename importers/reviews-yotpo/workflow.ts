@@ -16,6 +16,11 @@ Steps  two are implemented in `get-reviews.ts` and `get-media.ts`
 import getAllReviews, { YotpoAllReviewsReview } from './get-reviews.ts';
 import getAllReviewsMedia from './get-media.ts';
 
+type Image = {
+  thumbnail: string;
+  image: string;
+};
+
 type Review = {
   name: string;
   score: number;
@@ -23,7 +28,7 @@ type Review = {
   title: string;
   content: string;
   created_at: Date;
-  images: string[];
+  images: Image[];
 };
 
 type ReviewsBottomLine = {
@@ -55,7 +60,7 @@ const mergeMediaWithReviews = async ({
   const media = await getAllReviewsMedia({ yotpoAppKey, yotpoSecret });
   return reviews.map(review => {
     const reviewMedia = media.filter(media => media.review_id === review.id);
-    const images = reviewMedia.map(media => media.original_image_url);
+    const images = reviewMedia.map(media => ({ thumbnail: media.thumbnail, image: media.original_image_url, }));
     return images.length > 0 ? { ...review, images } : review;
   });
 };

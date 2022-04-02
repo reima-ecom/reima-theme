@@ -2,6 +2,11 @@ import getUToken from './get-utoken.ts';
 
 type SerializedDate = string;
 
+type Image = {
+  thumbnail: string;
+  image: string;
+};
+
 export type YotpoAllReviewsReview = {
   id: 140796223;
   title: string;
@@ -20,7 +25,7 @@ export type YotpoAllReviewsReview = {
   archived: boolean;
   escalated: boolean;
   user_reference: string;
-  images: string[];
+  images: Image[];
 };
 
 type YotpoAllReviewsResponse = {
