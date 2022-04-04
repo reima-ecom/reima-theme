@@ -107,3 +107,41 @@
   line-height: 1;
   margin: 0.5rem auto;
 }
+
+.reviews .thumbnails {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.reviews .thumbnails button {
+  cursor: pointer;
+  padding: 0;
+  border-width: 0;
+}
+
+.reviews .thumbnails button:focus {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+.reviews .modal > div {
+  background-color: transparent;
+  padding: 2rem;
+}
+
+.reviews .modal.modal--image {
+  margin: 0;
+  padding: 0;
+}
+
+.reviews .modal.modal--image button[close] {
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.reviews .modal img {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+}

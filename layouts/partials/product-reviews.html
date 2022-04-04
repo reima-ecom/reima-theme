@@ -49,6 +49,26 @@
     <p>
       {{.content | safeHTML}}
     </p>
+    {{with .images}}
+    <div class="thumbnails">
+      {{ range $i := . }}
+       <script>console.log("image", {{.image}})</script>
+       <button tabindex="0" class="image-link" openid="image-{{$i}}">
+        <img loading="lazy" src="{{.thumbnail}}" alt="" height="auto" width="100px">
+       </button>
+      <div class="modal modal--image" id="image-{{$i}}">
+        <div>
+          <button class="icon" close>
+            <svg>
+              <use xlink:href="#icon-close"></use>
+            </svg>
+          </button>
+          <img loading="lazy" src="{{.image}}" alt="" height="1200px" width="auto">
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
   </blockquote>
   {{ else }}
   <p>
