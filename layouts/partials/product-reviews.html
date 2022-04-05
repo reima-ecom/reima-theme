@@ -52,7 +52,6 @@
     {{with .images}}
     <div class="thumbnails">
       {{ range $i := . }}
-       <script>console.log("image", {{.image}})</script>
        <button tabindex="0" class="image-link" openid="image-{{$i}}">
         <img loading="lazy" src="{{.thumbnail}}" alt="" height="auto" width="100px">
        </button>
