@@ -41,6 +41,11 @@ fields:
   label: Filters
   description: Show search filters for product lists on the collection page.
   default: true
+- name: productCount
+  type: boolean
+  description: Show product count for product lists on the collection page.
+  default: true
+  label: Product count
 - name: sidebar
   type: field_group_list
   fields:
