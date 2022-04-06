@@ -32,7 +32,7 @@
 
 {{ $hassidebar := false }}
 <!-- check if sidebar parameter exists and is not empty array -->
-{{ $hasSearchResults := .Params.searchResults }}
+{{ $hasProductCount := .Params.productCount }}
 {{ with .Params.sidebar }}
 {{ $hassidebar = len . }}
 {{ end }}
@@ -193,7 +193,7 @@
       {{ $collectionPage := site.GetPage (printf "/collections/%s" .collection) }}
       {{ if or (not .limit) (ge .limit (len $collectionPage.Pages)) }}
       <!-- render product filters only if filtering or search results are true -->
-      {{ if or ($hasfiltering) ($hasSearchResults)}}
+      {{ if or ($hasfiltering) ($hasProductCount)}}
       <div class="product-filters">
         {{ if $hasfiltering }}
         <form id="modules-filters-{{.collection}}" class="filter-list filter-list--mobile" collection="{{.collection}}" {{with site.Params.public.loop54}}loop-url="{{.url}}"{{end}}>
@@ -269,9 +269,7 @@
 
           <input type="reset" class="filter-list__clear" value="Clear filters">
         </form>
-        {{ end }}
 
-        {{ if $hasfiltering }}
         <div class="sort">
           <label for="">
             <select sort-collection="{{.collection}}">
@@ -296,7 +294,7 @@
         {{ end }}
 
       </div>
-      {{with $hasSearchResults}}
+      {{with $hasProductCount}}
       <div class="product-count">
         {{ $numProducts := printf "<strong>%d</strong>" (len $collectionPage.Pages) }}
         {{(default (printf "%s products" $numProducts) (T "Collection page number of products" $numProducts)) | safeHTML}}
