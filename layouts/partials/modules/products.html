@@ -57,9 +57,10 @@
   <ul data-collection="{{path.Base .File.Dir}}">
     <!-- loop through product pages -->
     {{ range $pageIndex, $page := $productPages  }}
-    {{ $linkresolved := partial "link" .RelPermalink }}
+
     {{ with site.GetPage (printf "/products/%s" .File.ContentBaseName) }}
     {{ $product := . }}
+    {{ $linkresolved := .RelPermalink }}
 
     {{ if $.split_colors }}
 
