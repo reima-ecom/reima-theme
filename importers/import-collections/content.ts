@@ -25,6 +25,11 @@ export type CollectionContent = Content<
   }
 >;
 
+export type buildOptions = {
+  list: boolean;
+  render: boolean;
+};
+
 export type CollectionProductContent = Content<
   "product",
   {
@@ -32,6 +37,7 @@ export type CollectionProductContent = Content<
     noindex: true;
     weight: number;
     title: string;
+    _build?: buildOptions | null;
   },
   { collection: CollectionHandle }
 >;
@@ -85,6 +91,10 @@ export const toCollectionProductContent = (
     type: "products",
     weight: counter,
     title: collectionProduct.title,
+    _build: {
+      list: true,
+      render: false
+    }
   },
 });
 

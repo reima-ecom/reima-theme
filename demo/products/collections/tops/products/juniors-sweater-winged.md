@@ -3,6 +3,10 @@
   "type": "products",
   "weight": 73,
   "noindex": true,
-  "description": null
+  "description": null,
+  "_build": {
+    "list": true,
+    "render": false
+  }
 }
 ---
