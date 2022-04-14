@@ -1,12 +1,11 @@
 ---
-{
-  "type": "products",
-  "weight": 75,
-  "noindex": true,
-  "description": null,
-  "_build": {
-    "list": true,
-    "render": false
-  }
-}
+noindex: true
+type: products
+weight: 75
+noindex: true
+title: Juniors sweater mahin
+_build:
+  list: 'always'
+  render: 'link'
+
 ---

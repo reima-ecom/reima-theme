@@ -26,8 +26,8 @@ export type CollectionContent = Content<
 >;
 
 export type buildOptions = {
-  list: boolean;
-  render: boolean;
+  list: string;
+  render: string;
 };
 
 export type CollectionProductContent = Content<
@@ -92,8 +92,8 @@ export const toCollectionProductContent = (
     weight: counter,
     title: collectionProduct.title,
     _build: {
-      list: true,
-      render: false
+      list: 'always',
+      render: 'link'
     }
   },
 });

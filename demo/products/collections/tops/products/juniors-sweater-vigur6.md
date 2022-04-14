@@ -1,12 +1,11 @@
 ---
-{
-  "type": "products",
-  "weight": 74,
-  "noindex": true,
-  "description": null,
-  "_build": {
-    "list": true,
-    "render": false
-  }
-}
+noindex: true
+type: products
+weight: 74
+noindex: true
+title: Juniors sweater vigur 6
+_build:
+  list: 'always'
+  render: 'link'
+
 ---
