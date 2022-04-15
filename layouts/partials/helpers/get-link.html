@@ -31,7 +31,9 @@ Returns an [URL structure](https://pkg.go.dev/net/url#URL)
 <!-- trim trailing slash to find content pages in root dir -->
 {{ with site.GetPage (strings.TrimSuffix "/" .) }}
 <!-- some sites want to have links without trailing slash, that's why the link partial is used -->
+{{ if .RelPermalink }}
 {{ $url = partial "link" .RelPermalink }}
+{{ end }}
 <!-- add possible query and fragment -->
 {{ with $urlp.RawQuery }}
 {{ $url = printf "%s?%s" $url . }}
