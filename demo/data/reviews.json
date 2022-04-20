@@ -39,7 +39,13 @@
         "verified": true,
         "title": "Warm and cozy",
         "content": "Jacket and color is exactly as pictured. It is light, thick as a fleece and has a sweater look/feel on the outside. It will work as a mid layer in winter and on it&#x27;s own at warmer time. Only complaint is that the zipper on ours is hard to get started for my five year old and even me. Ideally, I would like for the jacket to have a hood. But overall very good quality and sizing is spot on.",
-        "created_at": "2020-07-15T14:04:50.000Z"
+        "created_at": "2020-07-15T14:04:50.000Z",
+        "images": [
+          {
+            "thumbnail": "https://cdn-yotpo-images-production.yotpo.com/Review/325857320/226095935/square.jpg?1641047367",
+            "image": "https://cdn-yotpo-images-production.yotpo.com/Review/325857320/226095935/original.jpg?1641047367"
+          }
+        ]
       },
       {
         "name": "Amy B.",
@@ -47,7 +53,25 @@
         "verified": true,
         "title": "Great jacket, but...",
         "content": "Well made, looks good, nice and warm. However, as an outer layer for hiking this fabric is like Velcro, picking up every bit of grass, leaves, seeds, thorns. Takes a bit off effort to get all the stickers out of the fabric.",
-        "created_at": "2020-07-16T23:18:39.000Z"
+        "created_at": "2020-07-16T23:18:39.000Z",
+        "images": [
+          {
+            "thumbnail": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365147/square.jpg?1646235700",
+            "image": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365147/original.jpg?1646235700"
+          },
+          {
+            "thumbnail": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365167/square.jpg?1646235704",
+            "image": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365167/original.jpg?1646235704"
+          },
+          {
+            "thumbnail": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365184/square.jpg?1646235708",
+            "image": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365184/original.jpg?1646235708"
+          },
+          {
+            "thumbnail": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365207/square.jpg?1646235711",
+            "image": "https://cdn-yotpo-images-production.yotpo.com/Review/343480714/262365207/original.jpg?1646235711"
+          }
+        ]
       },
       {
         "name": "Wayne",
