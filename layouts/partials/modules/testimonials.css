@@ -24,7 +24,7 @@
   max-width: 450px;
 }
 
-.testimonials img {
+.testimonials #icon {
   width: 40px;
   height: 28px;
   margin: var(--content-padding);
@@ -56,12 +56,27 @@
 }
 
 .testimonials blockquote > footer {
+  display: flex;
+  justify-content: space-between;
   padding: var(--content-padding);
   background: none;
   color: inherit;
   border-top: var(--border);
   border-top-style: dashed;
   font-weight: 700;
+}
+
+.testimonials figure {
+  margin: 0;
+}
+.testimonials figure img {
+  border: var(--border);
+  padding: 3px;
+  width: 70px;
+  max-width: none;
+  box-shadow: inset 0px 0px 0px 2px white;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .testimonials blockquote > footer cite {
@@ -91,6 +106,13 @@
     margin: auto;
   }
 }
+
+@media (min-width: 768px) {
+  .testimonials figure img {
+    width: 100px;
+  }
+}
+
 
 @media (min-width: 992px) {
   /* make testimonials one-third or larger and increase max-width */
