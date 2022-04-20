@@ -6,19 +6,32 @@
     {{ range .testimonials }}
     <div>
       <blockquote{{with .link}} cite="{{.}}" {{end}}>
-        <img src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt="icon quote">
+        <img id="icon" src="{{(resources.Get "reima-friends-quote-gray.svg").RelPermalink}}" alt="icon quote">
         <div>{{.text | $.pageobj.RenderString}}</div>
         <footer>
-          {{.author}}
-          {{ if .linktext }}
-          <cite>
-            {{ if .link }}
-            <a href="{{partial "helpers/get-link-module" (slice .link $)}}">{{.linktext}}</a>
-            {{ else }}
-            {{.linktext}}
+          <div>
+            {{.author}}
+            {{ if .linktext }}
+            <cite>
+              {{ if .link }}
+              <a href="{{partial "helpers/get-link-module" (slice .link $)}}">{{.linktext}}</a>
+              {{ else }}
+              {{.linktext}}
+              {{ end }}
+            </cite>
             {{ end }}
-          </cite>
+          </div>
+          <figure>
+          {{- with partial "helpers/get-image" .image }}
+            <img class="lazyload" loading="lazy"
+            data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
+            {{(.Fill "140x140").RelPermalink}} 140w,
+            {{(.Fill "100x100").RelPermalink}} 100w,
+            {{(.Fill "200x200").RelPermalink}} 200w"
+            sizes="(min-width: 768px) 100px, 70px"
+            data-src="{{(.Fill "100x100").RelPermalink}}" alt="" />
           {{ end }}
+          </figure>
         </footer>
         </blockquote>
     </div>
