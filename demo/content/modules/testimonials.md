@@ -32,6 +32,7 @@ modules:
     linktext: Pura Vida Moms
     link: https://www.puravidamoms.com/ice-castles-visitors-tips/
     image: "/521569a-6670_front__1648509956_hudbbf0a83c75b03d5ec7871acd25b2d95_121659_750x0_resize_q75_box.jpg"
+    image_link: "/products/juniors-sweater-vigur6/"
 - template: testimonials
   heading: Three testimonials always ok
   testimonials:
