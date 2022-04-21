@@ -1,7 +1,21 @@
+
+{{- define "partials/testimonials-image" }}
+{{- with partial "helpers/get-image" . }}
+<figure>
+  <img class="lazyload testimonials-image" loading="lazy"
+    data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
+    {{(.Fill "140x140").RelPermalink}} 140w,
+    {{(.Fill "100x100").RelPermalink}} 100w,
+    {{(.Fill "200x200").RelPermalink}} 200w"
+    sizes="(min-width: 768px) 100px, 70px"
+    data-src="{{(.Fill "100x100").RelPermalink}}" alt="" />
+</figure>
+{{- end }}
+{{- end }}
 <section class="testimonials">
-  {{ with .heading }}
+  {{- with .heading }}
   <h2>{{.}}</h2>
-  {{ end }}
+  {{- end }}
   <div>
     {{ range .testimonials }}
     <div>
@@ -21,22 +35,17 @@
             </cite>
             {{ end }}
           </div>
-          <figure>
-          {{- with .image }}
-          {{- with partial "helpers/get-image" . }}
-            <img class="lazyload" loading="lazy"
-            data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
-            {{(.Fill "140x140").RelPermalink}} 140w,
-            {{(.Fill "100x100").RelPermalink}} 100w,
-            {{(.Fill "200x200").RelPermalink}} 200w"
-            sizes="(min-width: 768px) 100px, 70px"
-            data-src="{{(.Fill "100x100").RelPermalink}}" alt="" />
-          {{- end }}
-          {{- end }}
-          </figure>
+          {{- if and (.image_link) (.image) }}
+          <a href="{{partial "helpers/get-link-module" (slice .image_link)}}">
+          {{- partial "partials/testimonials-image" .image }}
+          </a>
+          {{- else if .image }}
+          {{- partial "partials/testimonials-image" .image }}
+          {{- end}}
         </footer>
         </blockquote>
     </div>
-    {{ end }}
+    {{- end }}
   </div>
 </section>
+
