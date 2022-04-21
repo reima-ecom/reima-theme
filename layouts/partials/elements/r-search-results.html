@@ -8,17 +8,17 @@
   {{ with site.Data.features.order }}facets="Category,{{ delimit . "," }}"{{ end }}
 >
   <div results="no-results">
-    <h3 class="search-results__list-title">No products found</h3>
+    <h3 class="search-results__list-title">{{ T "Search results no products found" | default "No products found" }}</h3>
   </div>
   <div results="products">
     <ul class="search-results__product-list"></ul>
   </div>
   <div results="more">
-    <a href="" class="btn">Show more</a>
+    <a href="" class="btn">{{ T "Search results show more" | default "Show more" }}</a>
   </div>
   <div results="related">
     <hr/>
-    <h3>Related results</h3>
+    <h3>{{ T "Search results related results" | default "Related results" }}</h3>
     <ul class="search-results__product-list"></ul>
   </div>
   <template product>

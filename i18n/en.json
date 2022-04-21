@@ -169,5 +169,20 @@
   },
   "Video": {
     "other": "Video"
+  },
+  "Search page title": {
+    "other": "Search results for"
+  },
+  "Search page results": {
+    "other": "results"
+  },
+  "Search results no products found": {
+    "other": "No products found"
+  },
+  "Search results show more": {
+    "other": "Show more"
+  },
+  "Search results related results": {
+    "other": "Related results"
   }
 }
