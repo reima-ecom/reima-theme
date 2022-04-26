@@ -184,5 +184,8 @@
   },
   "Search results related results": {
     "other": "Related results"
+  },
+  "Search input placeholder": {
+    "other": "Search for products"
   }
 }
