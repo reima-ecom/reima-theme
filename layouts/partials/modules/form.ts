@@ -2,9 +2,8 @@
  * Form submit events
  */
 const errorMsg = document.getElementById("phone_error") as HTMLElement;
-const submitButton = document.getElementById("submit") as HTMLButtonElement;
+const submitButton = document.getElementById("form-submit") as HTMLButtonElement;
 const formFields = document.querySelectorAll(".form-field");
-submitButton.disabled = true;
 
 const validatePhoneNumber = (phone) => {
   if (phone === "") return true;
