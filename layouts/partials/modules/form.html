@@ -8,11 +8,14 @@
   {{ range $index, $field := .fields }}
     {{ if eq $field.type "checkbox" }}
       <label>
-        <input type="{{ $field.type }}" name="{{ $field.name }}" {{ if $field.checked }}checked{{ end }} {{ if $field.required }}required{{ end }}>
+        <input type="{{ $field.type }}" class="form-field" name="{{ $field.name }}" {{ if $field.checked }}checked{{ end }} {{ if $field.required }}required{{ end }}>
         {{ $field.placeholder }}
       </label>
     {{ else }}
-      <input type="{{ $field.type }}" placeholder="{{ $field.placeholder }}" name="{{ $field.name }}" {{ if $field.required }}required{{ end }}>
+      <input type="{{ $field.type }}" class="form-field" placeholder="{{ $field.placeholder }}" name="{{ $field.name }}" {{ if $field.required }}required{{ end }}>
+      {{ if eq $field.type "tel" }}
+      <div id="phone_error" class="error hidden">{{ T "Form phone validation error" | default "Please enter a valid phone number" }}</div>
+      {{ end }}
     {{ end }}
   {{ end }}
 
@@ -24,7 +27,7 @@
     </label>
     <p failure></p>
     <div>
-      <button type="submit" class="button btn btn--cta">{{ .submitCta }}</button>
+      <button id="submit" type="submit" class="button btn btn--cta">{{ .submitCta }}</button>
     </div>
   </div>
 

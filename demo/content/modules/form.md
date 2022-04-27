@@ -53,7 +53,7 @@ modules:
     type: text
     required: true
     checked: false
-  - name: Newsletter
+  - name: Marketing
     placeholder: I would like to take part in the raffle and receive the Reima Japan newsletter.
     type: checkbox
     required: false

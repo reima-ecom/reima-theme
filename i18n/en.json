@@ -169,5 +169,8 @@
   },
   "Video": {
     "other": "Video"
+  },
+  "Form phone validation error": {
+    "other": "Please enter a valid phone number"
   }
 }
