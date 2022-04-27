@@ -439,3 +439,63 @@ fields:
     label: other
     default: Video
     description: E.g. "Video"
+- type: field_group
+  name: Search page title
+  label: Search page title
+  description: Text for the search results page title.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Search results for
+    description: E.g. "Search results for Product Name"
+- type: field_group
+  name: Search page results
+  label: Search page results
+  description: Text for the Search results page number.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: results
+    description: E.g. "42 results"
+- type: field_group
+  name: Search results no products found
+  label: Search results no products found
+  description: Text for the Search results page "No products found" message.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: No products found
+    description: E.g. "NO PRODUCTS FOUND"
+- type: field_group
+  name: Search results show more
+  label: Search results show more
+  description: Text for the Search results page "Show More" button.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Show more
+    description: E.g. "Show more"
+- type: field_group
+  name: Search results related results
+  label: Search results related results
+  description: Text for the Search results page "Related results" section.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Related results
+    description: E.g. "Related results"
+- type: field_group
+  name: Search input placeholder
+  label: Search input placeholder
+  description: Text for the Search input placeholder.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Search for products
+    description: E.g. "Search for products"
