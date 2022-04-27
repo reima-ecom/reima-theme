@@ -187,5 +187,17 @@
   },
   "Search input placeholder": {
     "other": "Search for products"
+  },
+  "Search autocomplete suggestions": {
+    "other": "Suggestions"
+  },
+  "Search autocomplete: Top hits": {
+    "other": "Top hits"
+  },
+  "Search autocomplete categories": {
+    "other": "Categories"
+  },
+  "Search autocomplete category in": {
+    "other": "in"
   }
 }

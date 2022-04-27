@@ -499,3 +499,43 @@ fields:
     label: other
     default: Search for products
     description: E.g. "Search for products"
+- type: field_group
+  name: Search autocomplete suggestions
+  label: Search autocomplete suggestions
+  description: Text for the Search autocomplete Suggestions.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Suggestions
+    description: E.g. "Suggestions"
+- type: field_group
+  name: Search autocomplete top hits
+  label: Search autocomplete top hits
+  description: Text for the Search autocomplete Top Hits.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Top hits
+    description: E.g. "Top hits"
+- type: field_group
+  name: Search autocomplete categories
+  label: Search autocomplete categories
+  description: Text for the Search autocomplete Categories.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Categories
+    description: E.g. "Categories"
+- type: field_group
+  name: Search autocomplete category in
+  label: Search autocomplete category in
+  description: Text for the Search autocomplete in.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: in
+    description: E.g. "Search Result in Category"
