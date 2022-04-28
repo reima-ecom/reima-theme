@@ -440,6 +440,16 @@ fields:
     default: Video
     description: E.g. "Video"
 - type: field_group
+  name: Form phone validation error
+  label: Form phone validation error
+  description: Error message if form phone number is not in international format.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Please enter a valid phone number in +XX XXX XXXX XXXX format.
+    description: E.g. "Please enter a valid phone number in +XX XXX XXXX XXXX format."
+- type: field_group
   name: Search page title
   label: Search page title
   description: Text for the search results page title.

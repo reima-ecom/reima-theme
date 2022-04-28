@@ -14,7 +14,7 @@
     {{ else }}
       <input type="{{ $field.type }}" class="form-field" placeholder="{{ $field.placeholder }}" name="{{ $field.name }}" {{ if $field.required }}required{{ end }}>
       {{ if eq $field.type "tel" }}
-      <div id="phone_error" class="error hidden">{{ T "Form phone validation error" | default "Please enter a valid phone number" }}</div>
+      <div id="phone_error" class="error hidden">{{ T "Form phone validation error" | default "Please enter a valid phone number in +XX XXX XXXX XXXX format" }}</div>
       {{ end }}
     {{ end }}
   {{ end }}

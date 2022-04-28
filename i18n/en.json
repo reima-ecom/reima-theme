@@ -171,7 +171,7 @@
     "other": "Video"
   },
   "Form phone validation error": {
-    "other": "Please enter a valid phone number"
+    "other": "Please enter a valid phone number in +XX XXX XXXX XXXX format."
   },
   "Search page title": {
     "other": "Search results for"
