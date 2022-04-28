@@ -147,7 +147,7 @@
     "other": "Show All"
   },
   "Collection page filter selection": {
-    "other": "Filter selection"
+    "other": "検索フィルター"
   },
   "Collection page number of products": {
     "other": "{{.}} products"
@@ -171,31 +171,31 @@
     "other": "Video"
   },
   "Search page title": {
-    "other": "Search results for"
+    "other": "の検索結果"
   },
   "Search page results": {
-    "other": "results"
+    "other": "件の検索結果"
   },
   "Search results no products found": {
-    "other": "No products found"
+    "other": "商品が見つかりません"
   },
   "Search results show more": {
-    "other": "Show more"
+    "other": "さらに表示"
   },
   "Search results related results": {
-    "other": "Related results"
+    "other": "関連のある検索結果"
   },
   "Search input placeholder": {
-    "other": "Search for products"
+    "other": "商品の検索"
   },
   "Search autocomplete suggestions": {
-    "other": "Suggestions"
+    "other": "検索候補"
   },
-  "Search autocomplete: Top hits": {
+  "Search autocomplete top hits": {
     "other": "Top hits"
   },
   "Search autocomplete categories": {
-    "other": "Categories"
+    "other": "カテゴリー"
   },
   "Search autocomplete category in": {
     "other": "in"
