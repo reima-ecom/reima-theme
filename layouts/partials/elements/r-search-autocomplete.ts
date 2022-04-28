@@ -2,9 +2,10 @@
 
 import { createAutocompleter, createSuggester } from "./search-loop54.ts";
 
+
 export default class RSearchAutocomplete extends HTMLElement {
   suggestions: string[] = [];
-
+  
   constructor() {
     super();
     this.createLiElement = this.createLiElement.bind(this);
@@ -22,6 +23,16 @@ export default class RSearchAutocomplete extends HTMLElement {
     const attr = this.getAttribute("loop-url");
     if (!attr) throw new Error("Need to set base url");
     return attr;
+  }
+
+  get suggestionsTranslation(): string {
+    // const attr = this.getAttribute("loop-suggestions");
+    return this.getAttribute("loop-suggestions");
+  }
+
+  get topHitsTranslation(): string {
+    // const attr = this.getAttribute("loop-top-hits");
+    return this.getAttribute("loop-top-hits");
   }
 
   get headingElement(): HTMLElement {
@@ -47,7 +58,7 @@ export default class RSearchAutocomplete extends HTMLElement {
     if (!this.suggestions.length) {
       this.suggestions = await suggest();
     }
-    this.headingElement.textContent = "Suggestions";
+    this.headingElement.textContent = (this.suggestionsTranslation);
     this.listElement.innerHTML = "";
     this.listElement.append(...this.suggestions.map(this.createLiElement));
   }
@@ -61,7 +72,7 @@ export default class RSearchAutocomplete extends HTMLElement {
       const query = inputElement.value;
       if (query) {
         const autocompletes = await autocomplete(query);
-        this.headingElement.textContent = "Top Hits";
+        this.headingElement.textContent = (this.topHitsTranslation);
         if (autocompletes.length) {
           this.listElement.innerHTML = "";
           this.listElement.append(...autocompletes.map(this.createLiElement));
