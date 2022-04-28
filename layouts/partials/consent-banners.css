@@ -3,7 +3,7 @@
   position: fixed;
   position: sticky;
   bottom: 0;
-  background: var(--color-secondary);
+  background: var(--color-bg-accent);
   color: var(--color-text-on-secondary);
   contain: layout;
   padding: 0 1rem;

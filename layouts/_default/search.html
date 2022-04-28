@@ -14,8 +14,8 @@
 <input id="show-filters" type="checkbox">
 <header>
   <r-search-title>
-    <h1>Search results for <span query><span></h1>
-    <div><span count></span> results</div>
+    <h1>{{ T "Search page title" | default "Search results for" }} <span query><span></h1>
+    <div><span count></span> {{ T "Search page results" | default "results" }}</div>
   </r-search-title>
   <label class="btn btn--secondary" for="show-filters">
     {{default "Filter selection" (T "Collection page filter selection")}}

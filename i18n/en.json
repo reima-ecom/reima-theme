@@ -172,5 +172,35 @@
   },
   "Form phone validation error": {
     "other": "Please enter a valid phone number"
+  },
+  "Search page title": {
+    "other": "Search results for"
+  },
+  "Search page results": {
+    "other": "results"
+  },
+  "Search results no products found": {
+    "other": "No products found"
+  },
+  "Search results show more": {
+    "other": "Show more"
+  },
+  "Search results related results": {
+    "other": "Related results"
+  },
+  "Search input placeholder": {
+    "other": "Search for products"
+  },
+  "Search autocomplete suggestions": {
+    "other": "Suggestions"
+  },
+  "Search autocomplete top hits": {
+    "other": "Top hits"
+  },
+  "Search autocomplete categories": {
+    "other": "Categories"
+  },
+  "Search autocomplete category in": {
+    "other": "in"
   }
 }
