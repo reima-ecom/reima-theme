@@ -2,6 +2,12 @@
   <h3>{{ T "Search autocomplete categories" | default "Categories" }}</h3>
   <ul></ul>
   <template>
-    <li><a href="" class="silent-link"><span query></span> {{ T "Search autocomplete category in" | default "in" }} <span category></span></a></li>
+    <li><a href="" class="silent-link">
+      {{- if and ( site.LanguageCode ) ( eq site.LanguageCode "ja-jp" ) }}
+      <span category></span>{{ T "Search autocomplete category in" | default "in" }}<span query></span>
+      {{- else }}
+      <span query></span> {{ T "Search autocomplete category in" | default "in" }} <span category></span>
+      {{- end }}
+    </a></li>
   </template>
 </r-search-categories>
