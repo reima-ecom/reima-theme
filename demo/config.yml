@@ -1,5 +1,6 @@
 baseURL: https://reima-demo.netlify.app/
 title: Reima Demo
+languageCode: ja-jp
 buildDrafts: true
 disableFastRender: true
 disableKinds:
