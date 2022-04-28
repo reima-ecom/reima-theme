@@ -59,3 +59,16 @@
 .module-form[success] input {
   display: none;
 }
+
+.error {
+  color: red;
+  font-size: var(--text-font-size-sm);
+  background-color: var(--color-input-focus);
+  border: var(--input-border); 
+  padding: calc(var(--content-padding) / 3);
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
