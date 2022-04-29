@@ -270,6 +270,9 @@ fields:
   showOnly:
     field: mailchimp_enabled
     value: true
+- name: adform_tracking_enabled
+  type: boolean
+  label: Adform tracking scripts 
 pages:
 - demo/data/pixels.yaml
 - demo/data/pixels.yaml
