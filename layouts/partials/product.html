@@ -478,5 +478,18 @@
   }
 }
 </script>
+{{- $productId := "" }}
+{{- $productName := "" }}
+
+{{- with .Params.yotpoId }}
+{{- $productId = . }}
+{{- end }}
+{{- with .Params.handle }}
+{{- $productName = . }}
+{{- end }}
+
+{{- if site.Data.pixels.adform_tracking_enabled }}
+{{- partial "pixels/adform/product-page-script.html" (dict "productName" $productName "productId" $productId) }}
+{{- end }}
 
 {{ end }}

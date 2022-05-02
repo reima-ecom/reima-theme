@@ -269,6 +269,15 @@
   </footer>
   {{partial "consent-banners" .}}
   {{partial "pixels/index" .}}
+  {{- if site.Data.pixels.adform_tracking_enabled }}
+  {{- if .IsHome}}
+  {{- partial "pixels/adform/homepage-script.html" . }}
+  {{- else if eq .Params.layout "page"  }}
+  {{- partial "pixels/adform/content-page-script.html" . }}
+  {{- else if eq .Params.layout "collection" }}
+  {{- partial "pixels/adform/collection-script.html" .Params.title }}
+  {{- end}}
+  {{- end}}
   {{ block "scripts" . }}{{ end }}
   <!-- inline js -->
   {{partial "ts-inline" "_default/baseof.inline.ts"}}

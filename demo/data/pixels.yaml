@@ -35,3 +35,4 @@ sizebay_id: "1234"
 mailchimp_enabled: true
 mailchimp_url: https://chimpstatic.com/mcjs-connected/js/users/db7b4ffa65e63166abb491a51/e57ede9a2a5b4c52b6f57709d.js
 ometria_pid_prefix: ''
+adform_tracking_enabled: true
