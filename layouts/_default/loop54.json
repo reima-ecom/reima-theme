@@ -16,7 +16,14 @@
   {{- $totalVariants := float (len .Params.variants) -}}
   {{- $availableVariants := len (where .Params.variants "available" true) -}}
   {{- $coverage := math.Round (mul (div $availableVariants $totalVariants) 100) -}}
+  {{- $sku := slice }}
+  {{- range .Params.variants }}
+  {{- if .sku }}
+  {{- $sku = $sku | append ( .sku  ) }}
+  {{- end}}
+  {{- end }}
     {
+    "Skus": {{ $sku | jsonify }},
     "Id": "{{.Params.yotpoId}}",
     "Name": {{.Title | jsonify}},
     "Url": "{{.Permalink}}",
