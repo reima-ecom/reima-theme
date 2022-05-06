@@ -89,12 +89,14 @@
   <!-- Open Graph image renders 1st image from .Resources but defaults to logo -->
   {{- with (index (.Resources.ByType "image") 0)}}
   {{- $image := . }}
-  {{- $image = $image.Fill "1200x630 q50" }}
-  <meta property="og:image" content="{{ $image.Permalink }}"/>
-  <meta property="og:image:secure_url" content="{{ $image.Permalink }}"/>
-  <meta property="og:image:width" content="{{ $image.Width }}"/>
-  <meta property="og:image:height" content="{{ $image.Height }}"/>
-  <meta name="twitter:image:src" content="{{ $image.Permalink }}"/> 
+  {{- $resize := "?nf_resize=fit&w=1200&h=630" }}
+  {{- $urlString := printf "%s%s" $image.Permalink $resize }}
+  
+  <meta property="og:image" content="{{ $urlString }}"/>
+  <meta property="og:image:secure_url" content="{{ $urlString }}"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image:src" content="{{ $urlString }}"/> 
   {{- else -}}
   <meta property="og:image" content="{{ "og-image-1200x630.png" | relURL }}"/>
   <meta property="og:image:secure_url" content="{{ "og-image-1200x630.png" | absURL }}"/>
