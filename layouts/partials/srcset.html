@@ -21,6 +21,6 @@
 {{- end -}}
 {{- $len := len $widths -}}
 {{- range $i, $w := $widths -}}
-{{($.image.Resize (printf "%sx%s" $w $params)).RelPermalink}} {{$w}}w{{if ne (add $i 1) $len}}, {{end}}
+{{$.image.RelPermalink}}?nf_resize=fit&w={{(printf "%s%s" $w $params)}} {{$w}}w{{if ne (add $i 1) $len}}, {{end}}
 {{- end -}}
 {{- end -}}
