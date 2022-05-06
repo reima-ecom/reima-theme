@@ -11,7 +11,7 @@
   {{- end -}}
   {{- $image := false -}}
   {{- with .Resources.ByType "image" -}}
-  {{- $image = (index . 0).Resize "375x" -}}
+  {{- $image = printf "%s%s" (index . 0) "?nf_resize=fit&w=375" -}}
   {{- end -}}
   {{- $totalVariants := float (len .Params.variants) -}}
   {{- $availableVariants := len (where .Params.variants "available" true) -}}
@@ -29,11 +29,11 @@
     "Url": "{{.Permalink}}",
     "Description": "{{.Params.description}}",
     "Brand": "Reima",
-    "ImageURL": "{{with $image}}{{.Permalink}}{{end}}",
+    "ImageURL": "{{if $image}}{{.Permalink}}{{$image}}{{end}}",
     {{- with $image }}
     "ImageDimensions": {
-      "Width": {{.Width}},
-      "Height": {{.Height}}
+      "Width": 375,
+      "Height": 540
     },
     {{- end }}
     "Attributes": {{ .Params.filtering | jsonify }},
