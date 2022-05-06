@@ -15,7 +15,7 @@
         <img srcset="
           {{$img.RelPermalink}}?nf_resize=fit&w={{.width}} 1x,
           {{$img.RelPermalink}}?nf_resize=fit&w={{(mul .width 2)}} 2x"
-          src="{{$onex.RelPermalink}}" alt="{{$alt}}"
+          src="{{$img.RelPermalink}}" alt="{{$alt}}"
           width="{{.width}}" {{with .height}} height="{{.}}"{{end}}>
         <!-- if some other type (like svg), just output directly -->
         {{- else }}
