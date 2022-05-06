@@ -56,7 +56,7 @@
         {{- with .Params.alt }}
         {{- $alt = . }}
         {{- end }}
-        <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{(.Resize "375x").RelPermalink}}"
+        <img srcset="{{partial "srcset" (dict "image" . "widths" "375,750")}}" src="{{.RelPermalink}}?nf_resize=fit&w=375"
           height="{{.Height}}" width="{{.Width}}" sizes="{{$sizes}}" data-path="{{.Name}}" alt="{{$alt}}" />
         {{- end }}
         {{- range $i, $img := after 1 $imgs }}
@@ -448,7 +448,7 @@
   {{- with .Resources.ByType "image" }}
   {{- with index . 0 }}
   "image": [
-    "{{(.Resize "800x").Permalink}}"
+    "{{.Permalink}}?nf_resize=fit&w=800"
   ],
   {{- end }}
   {{- end }}
