@@ -82,7 +82,7 @@
   {{- with .image }}
   {{- with partial "helpers/get-image" . }}
   {{- $params := (dict "image" . "widths" "2160,1080,768") }}
-  {{- $default := .Resize "1080x" -}}
+  {{- $default := . -}}
   <picture>
     <!--
       Regarding `sizes`:
@@ -95,17 +95,17 @@
     <source {{if $lazyload}}data-{{end -}}srcset="{{partial "srcset" (dict "image" . "widths" "1080,768")}}">
     {{- else }}
     <source {{if $lazyload}}data-{{end -}}srcset="
-      {{- (.Fill "375x375").RelPermalink}} 375w,
-      {{- (.Fill "750x750").RelPermalink}} 750w,
-      {{- (.Fill "1080x1080").RelPermalink}} 1080w,
-      {{- (.Fill "1500x1500").RelPermalink}} 1500w">
+      {{- .RelPermalink}}?nf_resize=fit&w=375&h=375 375w,
+      {{- .RelPermalink}}?nf_resize=fit&w=750&h=750 750w,
+      {{- .RelPermalink}}?nf_resize=fit&w=1080&h=1080 1080w,
+      {{- .RelPermalink}}?nf_resize=fit&w=1500&h=1500 1500w">
     {{- end }}
     <img class="lazyload" {{if $lazyload}} loading="lazy"
       srcset="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20{{$default.Width}}%20{{$default.Height}}'></svg>"
-      {{end}} src="{{$default.RelPermalink}}" width="{{.Width}}" height="{{.Height}}" alt="{{$alt}}" />
+      {{end}} src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" width="{{.Width}}" height="{{.Height}}" alt="{{$alt}}" />
   </picture>
   <noscript>
-    <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}"
+    <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}?nf_resize=fit&w=1080"
       height="{{.Height}}" width="{{.Width}}" alt="{{$alt}}"/>
   </noscript>
   {{- end }}
