@@ -11,7 +11,7 @@
   {{- end -}}
   {{- $image := false -}}
   {{- with .Resources.ByType "image" -}}
-  {{- $image = printf "%s%s" (index . 0) "?nf_resize=fit&w=375" -}}
+  {{- $image = printf "%s%s" (index . 0) "?nf_resize=fit&w=375&h=540" -}}
   {{- end -}}
   {{- $totalVariants := float (len .Params.variants) -}}
   {{- $availableVariants := len (where .Params.variants "available" true) -}}

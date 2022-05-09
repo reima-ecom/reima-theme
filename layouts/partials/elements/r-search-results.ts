@@ -34,13 +34,15 @@ const createProductItemFrom = (
     productItem.querySelector("[price]")!.textContent = formatCurrency(
       product.price,
       );
+      console.log(product)
     if (product.campaignPrice != product.price) {
       productItem.querySelector("[campaignPrice]")!.textContent = formatCurrency(
         product.campaignPrice,
         );
       productItem.querySelector("[price]").classList.add("price--was")
     }
-    productItem.querySelector("img")!.src = `${product.imageUrl}?nf_resize=fit&w=375&h=540`;
+    // productItem.querySelector("img")!.src = `${product.imageUrl}?nf_resize=fit&w=375&h=540`;
+    productItem.querySelector("img")!.src = product.imageUrl;
     if (product.imageDimensions?.width) {
       productItem.querySelector("img")!.width = product.imageDimensions.width;
     }
