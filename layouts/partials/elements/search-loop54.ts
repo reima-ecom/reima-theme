@@ -174,7 +174,6 @@ const loopItemToProduct = (
     },
   };
 };
-
 const loopFacetToDomain = (
   facet: LoopSearchResponseFacet,
 ): SearchResultFacet | undefined => {

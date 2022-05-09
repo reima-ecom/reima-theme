@@ -40,8 +40,7 @@ const createProductItemFrom = (
         );
       productItem.querySelector("[price]").classList.add("price--was")
     }
-    console.log('product', product)
-    productItem.querySelector("img")!.src = product.imageUrl;
+    productItem.querySelector("img")!.src = `${product.imageUrl}?nf_resize=fit&w=375&h=540`;
     if (product.imageDimensions?.width) {
       productItem.querySelector("img")!.width = product.imageDimensions.width;
     }
