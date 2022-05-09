@@ -45,8 +45,7 @@
           data-src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" sizes="(min-width: 768px) {{$sizes}}, 100vw" alt="{{$alt}}" />
       </picture>
       <noscript>
-        <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" height="{{.Height}}"
-          width="{{.Width}}" alt="{{$alt}}" />
+        <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" alt="{{$alt}}" />
       </noscript>
       {{ end }}
       {{- else }}

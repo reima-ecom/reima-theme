@@ -102,11 +102,11 @@
     {{- end }}
     <img class="lazyload" {{if $lazyload}} loading="lazy"
       srcset="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20{{$default.Width}}%20{{$default.Height}}'></svg>"
-      {{end}} src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" width="{{.Width}}" height="{{.Height}}" alt="{{$alt}}" />
+      {{end}} src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" alt="{{$alt}}" />
   </picture>
   <noscript>
     <img {{if $lazyload}}loading="lazy" {{end}} srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}?nf_resize=fit&w=1080"
-      height="{{.Height}}" width="{{.Width}}" alt="{{$alt}}"/>
+      alt="{{$alt}}"/>
   </noscript>
   {{- end }}
   {{- else }}
