@@ -31,7 +31,7 @@
       {{- with .image }}
       {{- with partial "helpers/get-image" . }}
       {{- $params := (dict "image" . "widths" "375,768,1080") }}
-      {{- $default := .Resize "1080x" -}}
+      {{- $default := . -}}
       <picture>
         <!-- difficult to work out sizes... -->
         {{ $sizes := "min(50vw, 650px)" }}
@@ -42,10 +42,10 @@
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{.Width}} {{.Height}}'%3E%3C/svg%3E"
           class="lazyload" loading="lazy" data-srcset="{{partial "srcset" $params}}"
-          data-src="{{$default.RelPermalink}}" sizes="(min-width: 768px) {{$sizes}}, 100vw" alt="{{$alt}}" />
+          data-src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" sizes="(min-width: 768px) {{$sizes}}, 100vw" alt="{{$alt}}" />
       </picture>
       <noscript>
-        <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}" height="{{.Height}}"
+        <img loading="lazy" srcset="{{partial "srcset" $params}}" src="{{$default.RelPermalink}}?nf_resize=fit&w=1080" height="{{.Height}}"
           width="{{.Width}}" alt="{{$alt}}" />
       </noscript>
       {{ end }}

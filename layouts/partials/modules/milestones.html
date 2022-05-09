@@ -9,13 +9,13 @@
                 <div class="milestones__media-left">
                     <div class="milestones__about-timeline-img">
                         {{- with partial "helpers/get-image" .image }}
-                            <img class="lazyload" loading="lazy"
-                            data-srcset="{{(.Fill "70x70").RelPermalink}} 70w,
-                            {{(.Fill "140x140").RelPermalink}} 140w,
-                            {{(.Fill "100x100").RelPermalink}} 100w,
-                            {{(.Fill "200x200").RelPermalink}} 200w"
-                            sizes="(min-width: 768px) 100px, 70px"
-                            data-src="{{(.Fill "100x100").RelPermalink}}" alt="{{$alt}}" />
+                            <img class="lazyload" loading="lazy" data-srcset="
+                                {{- .RelPermalink}}?nf_resize=smartcrop&w=70&h=70 70w,
+                                {{- .RelPermalink}}?nf_resize=smartcrop&w=140&h=140 140w,
+                                {{- .RelPermalink}}?nf_resize=smartcrop&w=100&h=100 100w,
+                                {{- .RelPermalink}}?nf_resize=smartcrop&w=200&h=200 200w"
+                                sizes="(min-width: 768px) 100px, 70px"
+                                data-src="{{.RelPermalink}}?nf_resize=smartcrop&w=100&h=100" alt="{{$alt}}" />
                         {{ end }}
                     </div>
                 </div>

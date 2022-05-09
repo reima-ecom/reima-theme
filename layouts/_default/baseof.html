@@ -89,12 +89,14 @@
   <!-- Open Graph image renders 1st image from .Resources but defaults to logo -->
   {{- with (index (.Resources.ByType "image") 0)}}
   {{- $image := . }}
-  {{- $image = $image.Fill "1200x630 q50" }}
-  <meta property="og:image" content="{{ $image.Permalink }}"/>
-  <meta property="og:image:secure_url" content="{{ $image.Permalink }}"/>
-  <meta property="og:image:width" content="{{ $image.Width }}"/>
-  <meta property="og:image:height" content="{{ $image.Height }}"/>
-  <meta name="twitter:image:src" content="{{ $image.Permalink }}"/> 
+  {{- $resize := "?nf_resize=fit&w=1200&h=630" }}
+  {{- $urlString := printf "%s%s" $image.Permalink $resize }}
+  
+  <meta property="og:image" content="{{ $urlString }}"/>
+  <meta property="og:image:secure_url" content="{{ $urlString }}"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image:src" content="{{ $urlString }}"/> 
   {{- else -}}
   <meta property="og:image" content="{{ "og-image-1200x630.png" | relURL }}"/>
   <meta property="og:image:secure_url" content="{{ "og-image-1200x630.png" | absURL }}"/>
@@ -250,10 +252,10 @@
       {{ $img := partial "helpers/get-image" .logo }}
       <!-- check if this is png or jpeg and resize if it is -->
       {{ if or (eq $img.MediaType.SubType "png") (eq $img.MediaType.SubType "jpeg")}}
-      {{ $onex := $img.Resize (printf "%dx" .width) }}
-      {{ $twox := $img.Resize (printf "%dx" (mul .width 2)) }}
-      <img srcset="{{$onex.RelPermalink}} 1x, {{$twox.RelPermalink}} 2x" src="{{$onex.RelPermalink}}" alt="{{.alt}}"
-        width="{{$onex.Width}}" height="{{$onex.Height}}">
+      <img srcset="
+        {{$img.RelPermalink}}?nf_resize=fit&w={{.width}} 1x,
+        {{$img.RelPermalink}}?nf_resize=fit&w={{(mul .width 2)}} 2x"
+        src="{{$img.RelPermalink}}" alt="{{.alt}}" width="{{.width}}" {{with .height}} height="{{.}}"{{end}}>
       <!-- if some other type (like svg), just output directly -->
       {{ else }}
       <img src="{{$img.RelPermalink}}" alt="{{.alt}}" width="{{.width}}"{{with .height}} height="{{.}}"{{end}}>
