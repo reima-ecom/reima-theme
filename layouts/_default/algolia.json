@@ -14,7 +14,7 @@
     "filtering": {{ .Params.filtering | jsonify }},
     "colors": {{ (apply (apply .Params.variants "index" "." "options") "index" "." "Color") | uniq | jsonify }},
     "sizes": {{ (apply (apply .Params.variants "index" "." "options") "index" "." "Size") | uniq | jsonify }},
-    "imageSrc": "{{with .Resources.ByType "image"}}{{((index . 0).Resize "375x").RelPermalink}}{{end}}",
+    "imageSrc": "{{with .Resources.ByType "image"}}{{((index . 0).RelPermalink}}{{end}}",
     "objectID": "{{.File.ContentBaseName}}"
   }{{ if ne $i $last }},{{ end }}
   {{- end -}}

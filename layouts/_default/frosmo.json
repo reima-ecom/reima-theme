@@ -6,7 +6,7 @@
 
 {{- $images := slice }}
 {{- range .Resources.ByType "image" }}
-{{- $images = $images | append (.Resize "750x").Permalink }}
+{{- $images = $images | append .Permalink }}
 {{- end }}
 
 {{- $priceOrig := .Params.price }}
