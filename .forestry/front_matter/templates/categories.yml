@@ -1,0 +1,24 @@
+---
+label: Categories
+hide_body: true
+fields:
+- name: category
+  type: field_group_list
+  fields:
+  - name: name
+    type: text
+    config:
+      required: false
+    label: Name
+  - name: translation
+    type: text
+    config:
+      required: false
+    label: Translation
+  config:
+    min: 
+    max: 
+    labelField: 
+  label: Category
+pages:
+- demo/data/categories.json

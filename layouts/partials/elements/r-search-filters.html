@@ -1,10 +1,16 @@
+{{- if and ( site.LanguageCode ) ( eq site.LanguageCode "ja-jp" ) }}
+{{- $categories := partial "helpers/get-locale-data" "categories" -}}
+<script>
+  const loop54Categories = {{$categories}};
+</script>
+{{- end }}
 <r-search-filters id="search-filters"
   results="{{ with .results }}{{.}}{{ else }}r-search-results{{ end }}"
 >
   <form>
     <header>
-      <h2>Filters</h2>
-      <input type="reset" class="link" />
+      <h2>{{T "Search Filters" | default "Filters"}}</h2>
+      <input type="reset" class="link" value="{{T "Search Reset" | default "Reset"}}" />
     </header>
     <div></div>
   </form>

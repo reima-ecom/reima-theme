@@ -1,6 +1,9 @@
 /// <reference lib="dom" />
 
-import { EVENT_SEARCH_RESULTS, EventSearchResultsDetails } from "./search-domain.ts";
+import {
+  EVENT_SEARCH_RESULTS,
+  EventSearchResultsDetails,
+} from "./search-domain.ts";
 
 export default class RSearchCategories extends HTMLElement {
   get for(): HTMLElement {
@@ -26,31 +29,50 @@ export default class RSearchCategories extends HTMLElement {
     return attr;
   }
 
+  findTranslation = (arr, string) => {
+    return arr.find((element) => element.name === string)?.translation;
+  };
+
   connectedCallback() {
     const liTemplate = this.querySelector("template");
     if (!liTemplate) throw new Error("Could not find item template");
-    const createLiElement = (query: string) => (category: string): HTMLLIElement => {
-      const liElement = liTemplate.content.cloneNode(true) as HTMLLIElement;
-      liElement.querySelector<HTMLElement>("[query]")!.innerText = query;
-      liElement.querySelector<HTMLElement>("[category]")!.innerText = category;
-      liElement.querySelector("a")!.href = `/search/?q=${query}#Category=${category}`;
-      return liElement;
-    };
+    const createLiElement =
+      (query: string) =>
+      (category: string): HTMLLIElement => {
+        const liElement = liTemplate.content.cloneNode(true) as HTMLLIElement;
+        liElement.querySelector<HTMLElement>("[query]")!.innerText = query;
+        typeof loop54Categories === "undefined"
+          ? (liElement.querySelector<HTMLElement>("[category]")!.innerText =
+              category)
+          : (liElement.querySelector<HTMLElement>("[category]")!.innerText =
+              this.findTranslation(loop54Categories?.category, category));
+
+        liElement.querySelector(
+          "a"
+        )!.href = `/search/?q=${query}#Category=${category}`;
+        return liElement;
+      };
     const ulElement = this.querySelector("ul");
     if (!ulElement) throw new Error("Could not find list element");
     this.for.addEventListener(EVENT_SEARCH_RESULTS, (ev) => {
-      const { results, query } = (ev as CustomEvent<EventSearchResultsDetails>).detail;
+      const { results, query } = (ev as CustomEvent<EventSearchResultsDetails>)
+        .detail;
       if (!query) {
         this.show = false;
         return;
       }
+
       const facets = results.facets;
-      const categories = facets.find(f => f.name === "Category")?.items.map(i => i.name).slice(0, 3);
+      const categories = facets
+        .find((f) => f.name === "Category")
+        ?.items.map((i) => i.name)
+        .slice(0, 3);
       if (!categories) {
         this.show = false;
         console.warn("No categories found");
         return;
       }
+
       ulElement.innerHTML = "";
       ulElement.append(...categories.map(createLiElement(query)));
       this.show = true;

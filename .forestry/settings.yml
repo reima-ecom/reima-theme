@@ -49,6 +49,11 @@ sections:
 - type: document
   path: demo/data/themesettings.yaml
   label: Settings
+- type: heading
+  label: Search
+- type: document
+  path: demo/data/categories.json
+  label: Categories
 upload_dir: demo/images
 public_path: ''
 front_matter_path: ''

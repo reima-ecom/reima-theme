@@ -1,0 +1,100 @@
+{
+  "category": [
+    {
+      "name": "Beach",
+      "translation": "ビーチ"
+    },
+    {
+      "name": "Camping",
+      "translation": "キャンプ"
+    },
+    {
+      "name": "Summer hats",
+      "translation": "夏の帽子"
+    },
+    {
+      "name": "Swimwear",
+      "translation": "水着"
+    },
+    {
+      "name": "Moomin",
+      "translation": "ムーミン"
+    },
+    {
+      "name": "Dresses",
+      "translation": "ワンピース"
+    },
+    {
+      "name": "Beanies",
+      "translation": "ニット帽"
+    },
+    {
+      "name": "Gloves",
+      "translation": "手袋"
+    },
+    {
+      "name": "Mittens",
+      "translation": "ミトン"
+    },
+    {
+      "name": "Sweaters",
+      "translation": "トレーナー"
+    },
+    {
+      "name": "Winter overalls",
+      "translation": "冬用オーバーオール"
+    },
+    {
+      "name": "Newborn",
+      "translation": "新生児"
+    },
+    {
+      "name": "Rain",
+      "translation": "雨具"
+    },
+    {
+      "name": "Sping jackets",
+      "translation": "ウィンドブレーカー/春ジャケット"
+    },
+    {
+      "name": "Sandals",
+      "translation": "サンダル"
+    },
+    {
+      "name": "Jackets",
+      "translation": "ジャケット"
+    },
+    {
+      "name": "Raincoats",
+      "translation": "レインコート"
+    },
+    {
+      "name": "Down jackets",
+      "translation": "ダウンジャケット"
+    },
+    {
+      "name": "Winter jackets",
+      "translation": "冬ジャケット"
+    },
+    {
+      "name": "Pants",
+      "translation": "パンツ"
+    },
+    {
+      "name": "Down vests",
+      "translation": "ダウンベスト"
+    },
+    {
+      "name": "Rain pants",
+      "translation": "レインパンツ"
+    },
+    {
+      "name": "Softshell jackets",
+      "translation": "ソフトシェルジャケット"
+    },
+    {
+      "name": "Softshell overalls",
+      "translation": "ソフトシェルオーバーオール"
+    }
+  ]
+}

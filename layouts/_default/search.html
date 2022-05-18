@@ -14,8 +14,13 @@
 <input id="show-filters" type="checkbox">
 <header>
   <r-search-title>
+    {{- if and ( site.LanguageCode ) ( eq site.LanguageCode "ja-jp" ) }}
+    <h1><span query></span> <span></span>{{ T "Search page title" | default "Search results for" }} </h1>
+    <div><span count></span> {{ T "Search page results" | default "results" }}</div>
+    {{- else }}
     <h1>{{ T "Search page title" | default "Search results for" }} <span query><span></h1>
     <div><span count></span> {{ T "Search page results" | default "results" }}</div>
+    {{- end }}
   </r-search-title>
   <label class="btn btn--secondary" for="show-filters">
     {{default "Filter selection" (T "Collection page filter selection")}}

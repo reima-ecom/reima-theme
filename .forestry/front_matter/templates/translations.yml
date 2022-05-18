@@ -549,3 +549,23 @@ fields:
     label: other
     default: in
     description: E.g. "Search Result in Category"
+- type: field_group
+  name: Search Filters
+  label: Search Filters
+  description: Text for the Search Filters title.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Filters
+    description: E.g. "Filters"
+- type: field_group
+  name: Search Reset
+  label: Search Reset
+  description: Text for Search Reset.
+  fields:
+  - type: text
+    name: other
+    label: other
+    default: Reset
+    description: E.g. "Reset"
