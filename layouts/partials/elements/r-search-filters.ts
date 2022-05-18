@@ -28,11 +28,20 @@ const createFacetFrom = (
   facetTitles: Record<string, string>,
 ) =>
   (facet: SearchResultFacet): HTMLElement | undefined => {
+    //hacky way of translating category to jp
+    // console.log('facet.items', facet.items)
+    // if (facet.name === 'Category') {
+    //   facet.items = facet.items.map(item => {
+    //     console.log(item)
+    //   })
+    //  }
+    
+    const categoryTranslate = facet.name === "Category" ? "カテゴリー"  : facet.name;
     // bail if no items in facet
-    if (!facet.items.length) return;
+    if (!facet.items.length) return; 
     const facetItem = facetTemplate.content.cloneNode(true) as HTMLElement;
     facetItem.querySelector("[title]")!.textContent = facetTitles[facet.name] ||
-      facet.name;
+      categoryTranslate;
     const createItem = createItemFrom(itemTemplate);
     const items = facet.items.map((i) => createItem(i));
     const detailsElement = facetItem.querySelector("details")!;
@@ -66,6 +75,8 @@ export default class RSearchFilters extends HTMLElement {
   }
 
   render(facets: SearchResultFacet[]) {
+    console.log("facets: ", facets)
+
     const facetCreator = createFacetFrom(
       this.querySelector("template[facet]")!,
       this.querySelector("template[item]")!,
