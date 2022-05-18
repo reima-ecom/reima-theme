@@ -28,7 +28,6 @@
     "Name": {{.Title | jsonify}},
     "Url": "{{.Permalink}}",
     "Description": "{{.Params.description}}",
-    "ImageTest": "{{$image}}",
     "Brand": "Reima",
     "ImageURL": "{{with $image}}{{.Permalink}}?nf_resize=fit&w=375{{end}}",
     {{- with $image }}
