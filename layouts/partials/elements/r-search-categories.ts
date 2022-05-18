@@ -28,13 +28,12 @@ export default class RSearchCategories extends HTMLElement {
     if (!attr) throw new Error("Need to set base url");
     return attr;
   }
-  
+
   findTranslation = (arr, string) => {
     return arr.find((element) => element.name === string)?.translation;
   };
-  
+
   connectedCallback() {
-    
     const liTemplate = this.querySelector("template");
     if (!liTemplate) throw new Error("Could not find item template");
     const createLiElement =
@@ -42,11 +41,12 @@ export default class RSearchCategories extends HTMLElement {
       (category: string): HTMLLIElement => {
         const liElement = liTemplate.content.cloneNode(true) as HTMLLIElement;
         liElement.querySelector<HTMLElement>("[query]")!.innerText = query;
-        // liElement.querySelector<HTMLElement>("[category]")!.innerText = category
-        liElement.querySelector<HTMLElement>("[category]")!.innerText =
-          this.findTranslation(loop54Categories.category, category)
-            ? this.findTranslation(loop54Categories.category, category)
-            : category;
+        typeof loop54Categories === "undefined"
+          ? (liElement.querySelector<HTMLElement>("[category]")!.innerText =
+              category)
+          : (liElement.querySelector<HTMLElement>("[category]")!.innerText =
+              this.findTranslation(loop54Categories?.category, category));
+
         liElement.querySelector(
           "a"
         )!.href = `/search/?q=${query}#Category=${category}`;
@@ -61,7 +61,7 @@ export default class RSearchCategories extends HTMLElement {
         this.show = false;
         return;
       }
-      
+
       const facets = results.facets;
       const categories = facets
         .find((f) => f.name === "Category")

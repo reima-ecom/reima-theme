@@ -1,7 +1,9 @@
+{{- if and ( site.LanguageCode ) ( eq site.LanguageCode "ja-jp" ) }}
 {{- $categories := partial "helpers/get-locale-data" "categories" -}}
 <script>
   const loop54Categories = {{$categories}};
 </script>
+{{- end }}
 <r-search-categories for="{{.for}}" loop-url="{{site.Params.public.loop54.url}}" >
   <h3>{{ T "Search autocomplete categories" | default "Categories" }}</h3>
   <ul></ul>
