@@ -199,5 +199,11 @@
   },
   "Search autocomplete category in": {
     "other": "の"
+  },
+  "Search Filters": {
+    "other": "フィルタ"
+  },
+  "Search Reset": {
+    "other": "リセット"
   }
 }
