@@ -1,3 +1,7 @@
+{{- $categories := partial "helpers/get-locale-data" "categories" -}}
+<script>
+  const loop54Categories = {{$categories}};
+</script>
 <r-search-filters id="search-filters"
   results="{{ with .results }}{{.}}{{ else }}r-search-results{{ end }}"
 >

@@ -10,10 +10,14 @@ import type RSearchResults from "./r-search-results.ts";
 
 const createItemFrom = (itemTemplate: HTMLTemplateElement) =>
   (item: SearchResultFacetItem): HTMLElement => {
+    const findTranslation = (arr, string) => {
+      return arr.find((element) => element.name === string)?.translation;
+    };
     const itemElement = itemTemplate.content.cloneNode(true) as HTMLElement;
     const id = `${item.facet}:${item.name}`;
     const label = itemElement.querySelector("label")!;
-    label.innerText = item.name;
+    // label.innerText = item.name;
+    label.innerText = findTranslation(loop54Categories.category, item.name) ? findTranslation(loop54Categories.category, item.name) : item.name;
     label.setAttribute("for", id);
     const checkbox = itemElement.querySelector("input")!;
     checkbox.id = id;
@@ -29,14 +33,7 @@ const createFacetFrom = (
 ) =>
   (facet: SearchResultFacet): HTMLElement | undefined => {
     //hacky way of translating category to jp
-    // console.log('facet.items', facet.items)
-    // if (facet.name === 'Category') {
-    //   facet.items = facet.items.map(item => {
-    //     console.log(item)
-    //   })
-    //  }
-    
-    const categoryTranslate = facet.name === "Category" ? "カテゴリー"  : facet.name;
+    const categoryTranslate = facet.name === "Category" ? "カテゴリー" : facet.name;
     // bail if no items in facet
     if (!facet.items.length) return; 
     const facetItem = facetTemplate.content.cloneNode(true) as HTMLElement;
