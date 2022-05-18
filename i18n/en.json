@@ -1,212 +1,206 @@
 {
   "Newsletter TOS Consent": {
-    "other": "[利用規約](/terms-and-conditions)と[プライバシーポリシー](/privacy-policy)を読み、同意しました。"
+    "other": "I have read and accept [terms of service](/pages/terms-of-service) and [privacy policy](/pages/privacy-policy)"
   },
   "Newsletter Marketing Consent": {
-    "other": "Reima Friends（レイマ・フレンド）ニュースレターのメール受信、およびreimajapan.comのアカウントへのアクセスを希望します。"
-  },
-  "Newsletter Email Placeholder": {
-    "other": "Eメールアドレス"
+    "other": "Yes, I would like to receive Reima Club newsletter to my email, and get access to my account on reima.com"
   },
   "Newsletter Subscribe Button": {
-    "other": "購読する"
+    "other": "Subscribe"
   },
-  "Product feature: category": {
-    "other": "TRANSLATED"
-  },
-  "Product feature: color": {
-    "other": "色"
-  },
-  "Product feature: size": {
-    "other": "サイズ"
-  },
-  "Product feature: sizeclothing": {
-    "other": "サイズ(CM)、洋服"
-  },
-  "Product feature: sizehand": {
-    "other": "サイズ、手"
-  },
-  "Product feature description: breathability": {
-    "other": "通気性は少なくとも{{.}}g/m2/24時間"
-  },
-  "Product feature description: durability": {
-    "other": "{{.}}サイクルの耐久性を持つマーティンデール"
-  },
-  "Product feature: uv-protection": {
-    "other": "UVプロテクション"
-  },
-  "Product feature description: waterproof": {
-    "other": "耐水圧{{.}}mm"
-  },
-  "Product feature: sizefeet": {
-    "other": "サイズ、足"
-  },
-  "Product feature: gender": {
-    "other": "性別"
-  },
-  "Product feature: sizeheadwear": {
-    "other": "サイズ(CM)、帽子"
-  },
-  "Product feature: durability": {
-    "other": "耐久性"
-  },
-  "Product feature: warmth": {
-    "other": "暖かさ "
-  },
-  "Product feature: waterproof": {
-    "other": "防水レベル"
-  },
-  "Product feature: breathability": {
-    "other": "通気性"
-  },
-  "SEO Description": {
-    "other": "Reimaはアウトドアでアクティブなキッズのためにデザインされた、年中を通して使える機能的で高品質な子供服の分野で世界をリードしているブランドです。フリースのコートからダウンジャケット、スキージャケットまで幅広いアウターが揃っています。アウトドアで思いっきり遊び回るお子様にぴったりの商品を見つけてください！ "
-  },
-  "Product feature description: uv-protection": {
-    "other": "UVカット{{.}}+"
-  },
-  "Product feature description: warmth": {
-    "other": "温度約{{.}}°C"
-  },
-  "Cart Loading Message": {
-    "other": "読み込み中"
-  },
-  "Cart Checkout Button": {
-    "other": "お会計"
-  },
-  "Cart Subtotal": {
-    "other": "小計"
-  },
-  "Cart Empty Message": {
-    "other": "ただいまカートは空です。"
-  },
-  "Cart Title": {
-    "other": "カート"
-  },
-  "Add to cart": {
-    "other": "カートに入れる"
-  },
-  "Sold out": {
-    "other": "売り切れ"
-  },
-  "Show More": {
-    "other": "詳細を表示 +"
-  },
-  "Show Less": {
-    "other": "詳細を隠す -"
-  },
-  "Reviews": {
-    "other": "レビュー"
-  },
-  "Write a review": {
-    "other": "レビューを書く"
-  },
-  "Review Score": {
-    "other": "スコア"
-  },
-  "Review Title": {
-    "other": "タイトル"
-  },
-  "Review Text": {
-    "other": "レビュー"
-  },
-  "Review Name": {
-    "other": "お名前"
-  },
-  "Review Email": {
-    "other": "メール"
-  },
-  "Review Submit": {
-    "other": "送信する"
-  },
-  "Review Thank you": {
-    "other": "レビューをお送りいただきありがとうございました！"
-  },
-  "Review Verified Buyer": {
-    "other": "購入者"
-  },
-  "No reviews": {
-    "other": "この製品のレビューはありません"
+  "Newsletter Email Placeholder": {
+    "other": "Enter your email"
   },
   "Product price": {
-    "other": "{{.price}} (税込)"
-  },
-  "Product price with price range": {
     "other": "{{.price}}"
   },
+  "Product price with price range": {
+    "other": "from {{.price}}"
+  },
+  "Product feature: color": {
+    "other": "Color"
+  },
+  "Product feature: size": {
+    "other": "Size"
+  },
+  "Product feature: sizeclothing": {
+    "other": "Size, Clothing"
+  },
+  "Product feature: sizehand": {
+    "other": "Size, Hand"
+  },
+  "Product feature description: breathability": {
+    "other": "Breathability at least {{.}} g/m2/24 h"
+  },
+  "Product feature description: durability": {
+    "other": "Durability over {{.}} cycles Martindale"
+  },
+  "Product feature: uv-protection": {
+    "other": "UV-Protection"
+  },
+  "Product feature description: waterproof": {
+    "other": "Water column at least {{.}} mm"
+  },
+  "Product feature: sizefeet": {
+    "other": "Size, Feet"
+  },
+  "Product feature: gender": {
+    "other": "Gender"
+  },
+  "Product feature: sizeheadwear": {
+    "other": "Size, Headwear"
+  },
+  "Product feature: durability": {
+    "other": "Durability"
+  },
+  "Product feature: warmth": {
+    "other": "Warmth"
+  },
+  "Product feature: waterproof": {
+    "other": "Waterproof levels"
+  },
+  "Product feature: breathability": {
+    "other": "Breathability"
+  },
+  "SEO Description": {
+    "other": "Reima is the globally leading brand in functional & outdoor kids clothing providing quality, year-around, clothes designed specifically for active children. Everything from fleece coats, to full down jackets, clothing for skiing and everything in between. Discover the joy of movement!"
+  },
+  "Product feature description: uv-protection": {
+    "other": "UV cut at least {{.}}+"
+  },
+  "Product feature description: warmth": {
+    "other": "Temperatures ca. {{.}} °F"
+  },
+  "Add to cart": {
+    "other": "Add to cart"
+  },
+  "Sold out": {
+    "other": "Sold out"
+  },
   "Not available": {
-    "other": "売り切れ"
+    "other": "Not available"
+  },
+  "Show More": {
+    "other": "Show More +"
+  },
+  "Show Less": {
+    "other": "Show Less -"
+  },
+  "Reviews": {
+    "other": "Reviews"
+  },
+  "Write a review": {
+    "other": "Write a review"
+  },
+  "Review Score": {
+    "other": "Score"
+  },
+  "Review Title": {
+    "other": "Title"
+  },
+  "Review Text": {
+    "other": "Review"
+  },
+  "Review Name": {
+    "other": "Use your name"
+  },
+  "Review Email": {
+    "other": "Email"
+  },
+  "Review Submit": {
+    "other": "Submit"
+  },
+  "Review Thank you": {
+    "other": "Thank you for your review!"
+  },
+  "Review Verified Buyer": {
+    "other": "Verified Buyer"
+  },
+  "No reviews": {
+    "other": "No reviews for this product yet."
+  },
+  "Cart Loading Message": {
+    "other": "Loading..."
+  },
+  "Cart Checkout Button": {
+    "other": "Checkout"
+  },
+  "Cart Subtotal": {
+    "other": "Subtotal"
+  },
+  "Cart Empty Message": {
+    "other": "Your cart is currently empty."
+  },
+  "Cart Title": {
+    "other": "Cart"
   },
   "404 page heading": {
-    "other": "すみません！:("
+    "other": "Oh no!"
   },
   "404 page content": {
-    "other": "お探しのページは見つかりませんでした。\n\nこちらのページの方をご覧ください。\n\n[すべてのキッズ向け洋服](/collections/all-kids-clothing/)\n\n[すべての幼児向け洋服](/collections/all-toddlers-clothing/)\n\n[春夏コレクション](/collections/spring-summer-collection/)"
+    "other": "The page you were looking for was *not* found."
   },
   "Product sold out tag": {
-    "other": "売り切れ"
+    "other": "Sold Out"
   },
   "Product list show all": {
-    "other": "さらに表示"
-  },
-  "Collection page number of products": {
-    "other": "{{.}} 件"
-  },
-  "Collection page sort default": {
-    "other": "並べ替え"
-  },
-  "Collection page sort highest price": {
-    "other": "価格：高い順"
-  },
-  "Collection page sort lowest price": {
-    "other": "価格：安い順"
-  },
-  "Collection page sort most popular": {
-    "other": "人気順"
+    "other": "Show All"
   },
   "Collection page filter selection": {
-    "other": "絞り込み"
+    "other": "Filter selection"
+  },
+  "Collection page number of products": {
+    "other": "{{.}} products"
+  },
+  "Collection page sort default": {
+    "other": "Sort..."
+  },
+  "Collection page sort highest price": {
+    "other": "Highest price"
+  },
+  "Collection page sort lowest price": {
+    "other": "Lowest price"
+  },
+  "Collection page sort most popular": {
+    "other": "Most popular"
+  },
+  "Account page title": {
+    "other": "My Account"
   },
   "Video": {
-    "other": "動画を見る"
+    "other": "Video"
   },
   "Form phone validation error": {
-    "other": "国番号を含めた電話番号をご記入ください。(例: +819012345678)"
+    "other": "Please enter a valid phone number in +XX XXX XXXX XXXX format."
   },
   "Search page title": {
-    "other": "の検索結果"
+    "other": "Search results for"
   },
   "Search page results": {
-    "other": "件の検索結果"
+    "other": "results"
   },
   "Search results no products found": {
-    "other": "商品が見つかりません"
+    "other": "No products found"
   },
   "Search results show more": {
-    "other": "さらに表示"
+    "other": "Show more"
   },
   "Search results related results": {
-    "other": "関連のある検索結果"
+    "other": "Related results"
   },
   "Search input placeholder": {
-    "other": "商品の検索"
+    "other": "Search for products"
   },
   "Search autocomplete suggestions": {
-    "other": "検索候補"
+    "other": "Suggestions"
   },
   "Search autocomplete top hits": {
-    "other": "トップヒット"
+    "other": "Top hits"
   },
   "Search autocomplete categories": {
-    "other": "カテゴリー"
+    "other": "Categories"
   },
   "Search autocomplete category in": {
-    "other": "の"
-  },
-  "Search Filters": {
-    "other": "フィルタ"
-  },
-  "Search Reset": {
-    "other": "リセット"
+    "other": "in"
   }
 }

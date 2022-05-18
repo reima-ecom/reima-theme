@@ -209,7 +209,6 @@ export default class RCart extends HTMLElement {
     if (response.status === 200) {
       checkout = await response.json();
     }
-    console.log(checkout);
     this.render(checkout);
     this.loading = false;
   }
