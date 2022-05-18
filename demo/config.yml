@@ -2,6 +2,7 @@ baseURL: https://reima-demo.netlify.app/
 title: Reima Demo
 buildDrafts: true
 disableFastRender: true
+languageCode: ja-jp
 disableKinds:
   - taxonomy
   - term
@@ -25,7 +26,7 @@ params:
   # note that hugo makes these lowercase, so best have all lowercase names
   public:
     loop54:
-      url: 'https://reima-us-dev.54proxy.com'
+      url: 'https://reima-jp-dev.54proxy.com'
     #algolia:
     #  indexname: 'reima-theme'
     #  appid: '6FDKJXBLR9'
