@@ -163,7 +163,6 @@ if (window.location.search) {
           `input[name="${key}"][value="${value}"]`,
         );
         if (input) {
-          console.log(input);
           input.checked = true;
           input.dispatchEvent(new InputEvent("change"));
         }

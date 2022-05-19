@@ -34,7 +34,6 @@ const createProductItemFrom = (
     productItem.querySelector("[price]")!.textContent = formatCurrency(
       product.price,
       );
-      console.log(product)
     if (product.campaignPrice != product.price) {
       productItem.querySelector("[campaignPrice]")!.textContent = formatCurrency(
         product.campaignPrice,
