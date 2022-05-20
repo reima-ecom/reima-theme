@@ -18,7 +18,7 @@ Output: link url
 {{ end }}
 {{ $context = printf "%s on page `%s`" $context $module.pageobj.File.Path }}
 {{ if not $module.pageobj.File.Path }}
-{{ warnf "no file path on %s" $module}}
+{{ warnf "no file path on %s with link %s" $context $url}}
 {{ end }}
 {{ $urlparams := dict "url" $url "context" $context }}
 {{ return (partialCached "helpers/get-link" $urlparams $urlparams) }}

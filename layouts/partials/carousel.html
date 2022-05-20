@@ -31,7 +31,7 @@
             </noscript>
             {{ end }}
             {{- else }}
-            {{- warnf "No image found for image links with heading \"%s\"" .heading }}
+            {{- warnf "No image found for image links with heading \"%s\" in carousel" .heading }}
             {{- end }}
 
             {{ $linkresolved := partial "helpers/get-link-module" (slice .link $) }}
