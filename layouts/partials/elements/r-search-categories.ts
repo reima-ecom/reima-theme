@@ -49,7 +49,7 @@ export default class RSearchCategories extends HTMLElement {
 
         liElement.querySelector(
           "a"
-        )!.href = `/search?q=${query}#Category=${category}`;
+        )!.href = `/search/?q=${query}#Category=${category}`;
         return liElement;
       };
     const ulElement = this.querySelector("ul");
