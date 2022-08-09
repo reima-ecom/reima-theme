@@ -19,39 +19,36 @@ export type ContentAction = {
   content: Content;
 };
 
-export const serializeContent = (
-  stringifier: (obj: unknown) => string,
-) =>
+export const serializeContent =
+  (stringifier: (obj: unknown) => string) =>
   (obj: Content): File => ({
     path: obj.path,
     data: `---\n${stringifier(obj.content)}\n---\n${obj.markdown || ""}`,
   });
 
-export const deserializeContent = (
-  parser: (str: string) => Record<string, unknown>,
-) =>
+export const deserializeContent =
+  (parser: (str: string) => Record<string, unknown>) =>
   (file: File): Content => {
-    const frontmatter = file.data.split("---")[1].trim();
+    const frontmatter = file.data.split("---")[1]
+      ? file.data.split("---")[1].trim()
+      : "";
+
     return {
       path: file.path,
       content: parser(frontmatter),
     };
   };
 
-export const writeFileToDir = (dir: string) =>
-  async (file: File) => {
-    const path = `${dir}/${file.path}`;
-    await Deno.mkdir(dirname(path), { recursive: true });
-    await Deno.writeFile(
-      path,
-      new TextEncoder().encode(file.data),
-    );
-  };
+export const writeFileToDir = (dir: string) => async (file: File) => {
+  const path = `${dir}/${file.path}`;
+  await Deno.mkdir(dirname(path), { recursive: true });
+  await Deno.writeFile(path, new TextEncoder().encode(file.data));
+};
 
 export const runContentAction = (
   dir: string,
-  stringifier: (obj: unknown) => string,
-): (contentAction: ContentAction) => Promise<unknown> => {
+  stringifier: (obj: unknown) => string
+): ((contentAction: ContentAction) => Promise<unknown>) => {
   const writer = writeFileToDir(dir);
   const serializer = serializeContent(stringifier);
   return async (contentAction) => {
@@ -97,16 +94,15 @@ const readFilesRecursive = async (dir: string): Promise<File[]> => {
   return files;
 };
 
-export const readFilesFromDir = (dir: string) =>
-  async (): Promise<File[]> => {
-    try {
-      const files = await readFilesRecursive(dir);
-      return files.map((file) => ({
-        // remove initial dir path
-        path: file.path.replace(`${dir}/`, ""),
-        data: file.data,
-      }));
-    } catch (_error) {
-      return [];
-    }
-  };
+export const readFilesFromDir = (dir: string) => async (): Promise<File[]> => {
+  try {
+    const files = await readFilesRecursive(dir);
+    return files.map((file) => ({
+      // remove initial dir path
+      path: file.path.replace(`${dir}/`, ""),
+      data: file.data,
+    }));
+  } catch (_error) {
+    return [];
+  }
+};
